@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OOP cheat sheet · python blue + obsidian</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0b0e14;  
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            line-height: 1.5;
+            color: #d8dee9;
+            padding: 2.2rem 1.8rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .sheet {
+            max-width: 1400px;
+            width: 100%;
+            background: #0c111b;        
+            border-radius: 32px;
+            box-shadow: 0 30px 50px -20px #030609, 0 0 0 1px #1e3241;
+            padding: 2.8rem 2.8rem;
+            border-left: 8px solid #306998;   /* python blue accent */
+        }
+
+        
+        h1 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            background: linear-gradient(135deg, #98c8ff, #63a5d6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.2rem;
+            border-left: 8px solid #ffd75f;   
+            padding-left: 1.8rem;
+            display: inline-block;
+        }
+
+        .sub {
+            font-size: 1rem;
+            color: #88b8d8;
+            margin-bottom: 2.2rem;
+            margin-top: 0.2rem;
+            padding-left: 2.6rem;
+            font-weight: 350;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+            gap: 2rem 1.8rem;
+            margin-top: 1.2rem;
+        }
+
+        .card {
+            background: #0f1822;           /* obsidian card - dark */
+            border-radius: 24px;
+            padding: 1.8rem 1.6rem 2rem 1.6rem;
+            box-shadow: 0 10px 22px rgba(0, 10, 20, 0.7);
+            border: 1px solid #1f3c52;
+            transition: 0.15s;
+            border-left: 6px solid #306998;   
+        }
+
+        .card:hover {
+            border-color: #4b8bb4;
+            box-shadow: 0 18px 30px -8px #0a1f2e;
+        }
+
+        .card h2 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #ffd75f;                
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #1e405b;
+            padding-bottom: 0.75rem;
+        }
+
+        .card h2 span {
+            background: #15344c;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #b0dcff;
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            margin-left: auto;
+            border: 1px solid #2f6185;
+        }
+
+        .snippet {
+            background: #0a111b;            
+            color: #c9e2ff;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 0.82rem;
+            padding: 1.2rem 1.4rem;
+            border-radius: 18px;
+            margin: 1.2rem 0 1rem 0;
+            border-left: 6px solid #306998;   /* python blue accent */
+            line-height: 1.7;
+            white-space: pre-wrap;
+            overflow-x: auto;
+            border-top: 1px solid #1f3f58;
+            border-right: 1px solid #1f3f58;
+            border-bottom: 1px solid #1f3f58;
+        }
+
+        .def {
+            font-size: 0.9rem;
+            color: #aac7e0;
+            margin-bottom: 0.75rem;
+            font-weight: 450;
+        }
+
+        ul {
+            list-style: none;
+            margin: 1rem 0 0.5rem 0;
+        }
+
+        li {
+            font-size: 0.88rem;
+            padding: 0.4rem 0 0.4rem 1.4rem;
+            position: relative;
+            color: #c1d9f0;
+            border-bottom: 1px dashed #264a66;
+        }
+
+        li::before {
+            content: "▹";
+            color: #ffd75f;                 /* python gold bullet */
+            font-weight: 600;
+            position: absolute;
+            left: 0;
+        }
+
+        .pill {
+            display: inline-block;
+            background: #102433;
+            color: #b4dcff;
+            border-radius: 30px;
+            padding: 0.3rem 1rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin-right: 0.6rem;
+            margin-bottom: 0.4rem;
+            border: 1px solid #306998;
+        }
+
+        .section-title {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #ffd75f;
+            margin: 2.5rem 0 1rem 0;
+            padding-bottom: 0.3rem;
+            border-bottom: 3px solid #306998;
+        }
+
+        .tip {
+            background: #0f1d2b;
+            border-radius: 18px;
+            padding: 1.2rem 2rem;
+            margin-top: 2.5rem;
+            font-size: 0.95rem;
+            border-left: 8px solid #306998;
+            color: #bdd9f2;
+            border-top: 1px solid #244f6e;
+            border-right: 1px solid #1d3c52;
+            border-bottom: 1px solid #1d3c52;
+        }
+
+        hr {
+            border: none;
+            height: 2px;
+            background: linear-gradient(90deg, #1e3f59, #306998, #88c0d0, #306998, #1e3f59);
+            margin: 2rem 0 1.5rem 0;
+            opacity: 0.4;
+        }
+
+        .footer {
+            margin-top: 2.5rem;
+            font-size: 0.9rem;
+            text-align: center;
+            color: #6599c7;
+            border-top: 1px dashed #1f4560;
+            padding-top: 2rem;
+        }
+
+        .download-area {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 2rem;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            background: #306998;
+            border: none;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            padding: 0.9rem 2.5rem;
+            border-radius: 40px;
+            cursor: pointer;
+            border-bottom: 4px solid #1b4c70;
+            transition: 0.1s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 10px rgba(0,30,50,0.5);
+            border-left: 2px solid #5f9ed0;
+            border-right: 2px solid #173f5c;
+        }
+
+        .btn:hover {
+            background: #3f7fb3;
+            transform: translateY(-2px);
+            border-bottom-width: 6px;
+        }
+
+        .btn:active {
+            transform: translateY(2px);
+            border-bottom-width: 2px;
+        }
+
+        .btn.download {
+            background: #1c3f5c;
+            border-bottom-color: #0e2638;
+            border-left-color: #417eae;
+        }
+
+        .btn.download:hover {
+            background: #25537a;
+        }
+
+        /* responsive */
+        @media (max-width: 700px) {
+            body { padding: 1rem; }
+            .sheet { padding: 1.5rem; }
+            h1 { font-size: 1.9rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="sheet" id="cheatSheetContainer">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 1rem;">
+            <div>
+                </h1>OOP cheat sheet · python blue</h1>
+                <div class="sub">obsidian theme · classes · inheritance · dunder · patterns</div>
+            </div>
+            <button class="btn download" id="downloadBtn" style="align-self: center;">⬇️ Download as HTML</button>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <h2>📦 class & instance <span>blueprint</span></h2>
+                <div class="def">`__init__` / `self` / attributes</div>
+                <div class="snippet">class Employee:
+    company = "OpenAI"          # class variable
+
+    def __init__(self, name, pay):
+        self.name = name         # instance variable
+        self.pay = pay
+
+    def raise_pay(self, factor):
+        self.pay *= factor
+
+e = Employee("Alice", 90000)
+e.raise_pay(1.1)</div>
+                <ul>
+                    <li><strong>self</strong> – reference to current instance</li>
+                    <li><strong>class var</strong> – shared across instances</li>
+                    <li><strong>instance var</strong> – unique per object</li>
+                </ul>
+                <div><span class="pill">#__init__</span><span class="pill">self</span><span class="pill">__dict__</span></div>
+            </div>
+
+            <div class="card">
+                <h2>🧬 inheritance <span>is-a</span></h2>
+                <div class="def">`super()` / MRO / method override</div>
+                <div class="snippet">class Vehicle:
+    def move(self):
+        return "moving.."
+
+class Car(Vehicle):
+    def __init__(self, brand):
+        self.brand = brand
+
+    def move(self):              # override
+        return f"{self.brand} drives"
+
+c = Car("Tesla")
+print(c.move())                  # Tesla drives</div>
+                <ul>
+                    <li><strong>super()</strong> – call parent method</li>
+                    <li><strong>MRO</strong> – method resolution order</li>
+                    <li><strong>isinstance()</strong>, <strong>issubclass()</strong></li>
+                </ul>
+                <div><span class="pill">super()</span><span class="pill">__mro__</span><span class="pill">override</span></div>
+            </div>
+
+            <!-- encapsulation -->
+            <div class="card">
+                <h2>🔒 encapsulation <span>name mangling</span></h2>
+                <div class="def">_protected / __private / properties</div>
+                <div class="snippet">class BankAccount:
+    def __init__(self, owner, balance):
+        self.owner = owner
+        self.__balance = balance      # private
+
+    @property
+    def balance(self):
+        return self.__balance
+
+    def withdraw(self, amount):
+        if amount <= self.__balance:
+            self.__balance -= amount
+
+acc = BankAccount("Bob", 1000)
+# acc.__balance  → error (mangled to _BankAccount__balance)</div>
+                <ul>
+                    <li><strong>_single</strong> – "protected" (convention)</li>
+                    <li><strong>__double</strong> – name mangling</li>
+                    <li><strong>@property</strong> – controlled access</li>
+                </ul>
+                <div><span class="pill">@property</span><span class="pill">@setter</span><span class="pill">__balance</span></div>
+            </div>
+
+            <div class="card">
+                <h2>🎭 polymorphism <span>many forms</span></h2>
+                <div class="def">duck typing / protocols / ABC</div>
+                <div class="snippet">from abc import ABC, abstractmethod
+
+class Animal(ABC):
+    @abstractmethod
+    def speak(self): pass
+
+class Dog(Animal):
+    def speak(self): return "woof"
+
+class Cat(Animal):
+    def speak(self): return "meow"
+
+def make_sound(animal):
+    print(animal.speak())      # works for any Animal</div>
+                <ul>
+                    <li><strong>duck typing</strong> – "if it walks like a duck"</li>
+                    <li><strong>ABC</strong> – enforce interface</li>
+                    <li><strong>@abstractmethod</strong> – must implement</li>
+                </ul>
+                <div><span class="pill">ABC</span><span class="pill">duck typing</span><span class="pill">protocol</span></div>
+            </div>
+        </div>
+
+        <div class="grid" style="margin-top: 1rem;">
+            <!-- dunder methods -->
+            <div class="card">
+                <h2>⚙️ dunder methods <span>__repr__, __len__ …</span></h2>
+                <div class="def">operator overloading, built‑ins</div>
+                <div class="snippet">class Book:
+    def __init__(self, title, pages):
+        self.title = title
+        self.pages = pages
+
+    def __repr__(self):
+        return f"Book({self.title})"
+
+    def __len__(self):
+        return self.pages
+
+    def __eq__(self, other):
+        return self.title == other.title
+
+b = Book("1984", 328)
+print(repr(b))     # Book(1984)
+print(len(b))      # 328</div>
+                <ul>
+                    <li><strong>__str__</strong> / <strong>__repr__</strong> – string representation</li>
+                    <li><strong>__add__, __len__, __getitem__</strong></li>
+                    <li><strong>__call__</strong> – object as function</li>
+                </ul>
+                <div><span class="pill">__repr__</span><span class="pill">__eq__</span><span class="pill">__lt__</span></div>
+            </div>
+
+            <div class="card">
+                <h2>🏷️ class & static methods</h2>
+                <div class="def">@classmethod / @staticmethod</div>
+                <div class="snippet">class Date:
+    def __init__(self, year, month, day):
+        self.year = year
+        self.month = month
+        self.day = day
+
+    @classmethod
+    def from_string(cls, s):      # factory
+        y, m, d = map(int, s.split('-'))
+        return cls(y, m, d)
+
+    @staticmethod
+    def is_valid(s):               # utility
+        y, m, d = map(int, s.split('-'))
+        return 1 <= m <= 12 and 1 <= d <= 31</div>
+                <ul>
+                    <li><strong>@classmethod</strong> – receives class (cls)</li>
+                    <li><strong>@staticmethod</strong> – no self/cls</li>
+                    <li>used for alternative constructors, helpers</li>
+                </ul>
+                <div><span class="pill">@classmethod</span><span class="pill">@staticmethod</span></div>
+            </div>
+
+            <div class="card">
+                <h2>🔗 composition & aggregation</h2>
+                <div class="def">"has‑a" vs "owns"</div>
+                <div class="snippet">class Engine:
+    pass
+
+class Car:
+    def __init__(self, engine):   # composition (engine injected)
+        self.engine = engine       # strong ownership
+
+class Wheel:
+    pass
+
+class CarAssembly:
+    def __init__(self):
+        self.wheels = [Wheel() for _ in range(4)]   # composition
+        # or aggregation: wheels passed from outside</div>
+                <ul>
+                    <li><strong>composition</strong> – part cannot exist without whole</li>
+                    <li><strong>aggregation</strong> – weaker, shared references</li>
+                    <li>favour composition over inheritance</li>
+                </ul>
+                <div><span class="pill">has‑a</span><span class="pill">loose coupling</span></div>
+            </div>
+
+            <!-- dataclasses & modern -->
+            <div class="card">
+                <h2>🧰 dataclasses (3.7+)</h2>
+                <div class="def">@dataclass / frozen / field</div>
+                <div class="snippet">from dataclasses import dataclass, field
+
+@dataclass(order=True)
+class Person:
+    name: str
+    age: int = 0
+    tags: list = field(default_factory=list)
+
+p = Person("Alice", 30)
+# __init__, __repr__, __eq__ auto generated</div>
+                <ul>
+                    <li>auto‑generated <strong>__init__</strong>, <strong>__repr__</strong></li>
+                    <li><strong>frozen=True</strong> – immutable</li>
+                    <li><strong>field(…)</strong> – default_factory for mutable defaults</li>
+                </ul>
+                <div><span class="pill">@dataclass</span><span class="pill">frozen</span><span class="pill">asdict()</span></div>
+            </div>
+        </div>
+
+        <div class="grid" style="margin-top: 1rem;">
+            <div class="card">
+                <h2>🧩 singleton (metaclass)</h2>
+                <div class="snippet">class SingletonMeta(type):
+    _instances = {}
+    def __call__(cls, *args, **kwargs):
+        if cls not in cls._instances:
+            cls._instances[cls] = super().__call__(*args, **kwargs)
+        return cls._instances[cls]
+
+class Logger(metaclass=SingletonMeta):
+    pass
+
+# every Logger() returns same instance</div>
+                <div class="pill">metaclass</div><div class="pill">__call__</div>
+            </div>
+            <div class="card">
+                <h2>🏭 simple factory</h2>
+                <div class="snippet">class AnimalFactory:
+    @staticmethod
+    def create(animal_type):
+        if animal_type == "dog":
+            return Dog()
+        elif animal_type == "cat":
+            return Cat()
+        raise ValueError()
+
+# usage: AnimalFactory.create("dog")</div>
+                <div class="pill">creational</div><div class="pill">static method</div>
+            </div>
+            <div class="card">
+                <h2>👀 observer (event)</h2>
+                <div class="snippet">class Observer:
+    def update(self, message): pass
+
+class Subject:
+    def __init__(self):
+        self._obs = []
+    def attach(self, o): self._obs.append(o)
+    def notify(self, msg):
+        for o in self._obs: o.update(msg)</div>
+                <div class="pill">loose coupling</div><div class="pill">pub/sub</div>
+            </div>
+            <div class="card">
+                <h2>📦 context manager</h2>
+                <div class="snippet">class ManagedFile:
+    def __init__(self, name):
+        self.name = name
+    def __enter__(self):
+        self.file = open(self.name, 'w')
+        return self.file
+    def __exit__(self, *args):
+        self.file.close()
+
+# with ManagedFile('hello.txt') as f:
+#     f.write('hi')</div>
+                <div class="pill">with</div><div class="pill">__exit__</div>
+            </div>
+        </div>
+
+        <hr>
+
+        <div style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: space-between; align-items: start;">
+            <div style="min-width: 200px;">
+                <h3 style="color: #ffd75f; margin-bottom: 0.8rem;">🔍 useful built‑ins</h3>
+                <ul style="list-style: none; margin:0;">
+                    <li style="border: none; padding: 0.2rem 0;"><code style="color:#b0d6ff;">isinstance(obj, Class)</code></li>
+                    <li style="border: none; padding: 0.2rem 0;"><code style="color:#b0d6ff;">issubclass(Derived, Base)</code></li>
+                    <li style="border: none; padding: 0.2rem 0;"><code style="color:#b0d6ff;">hasattr(obj, 'attr')</code></li>
+                    <li style="border: none; padding: 0.2rem 0;"><code style="color:#b0d6ff;">getattr(obj, 'attr', default)</code></li>
+                    <li style="border: none; padding: 0.2rem 0;"><code style="color:#b0d6ff;">setattr(obj, 'attr', val)</code></li>
+                </ul>
+            </div>
+            <div style="min-width: 200px;">
+                <h3 style="color: #ffd75f; margin-bottom: 0.8rem;">🧪 type checks</h3>
+                <ul style="list-style: none; margin:0;">
+                    <li style="border: none; padding: 0.2rem 0;"><code style="color:#b0d6ff;">type(obj) == Class</code> (not recommended)</li>
+                    <li style="border: none; padding: 0.2rem 0;"><code style="color:#b0d6ff;">isinstance(obj, (tuple, list))</code></li>
+                    <li style="border: none; padding: 0.2rem 0;"><code style="color:#b0d6ff;">callable(obj)</code> – has __call__</li>
+                </ul>
+            </div>
+            <div style="min-width: 220px;">
+                <h3 style="color: #ffd75f; margin-bottom: 0.8rem;">📘 principles</h3>
+                <span class="pill">DRY</span><span class="pill">KISS</span><span class="pill">composition > inheritance</span>
+                <span class="pill">single responsibility</span><span class="pill">open/closed</span>
+            </div>
+        </div>
+
+        <div class="tip">
+            ⚡ <strong>quick obsidian & python blue reminders:</strong>  <code>__new__</code> controls instance creation (before <code>__init__</code>).  
+            Use <code>super().__init_subclass__()</code> for class initialization.  
+            <code>@functools.total_ordering</code> fills missing comparison methods if you define <code>__eq__</code> and one other.
+        </div>
+
+        <div class="footer">OOP cheat sheet · classes · dunder · design patterns · 2025
+        </div>
+    </div> 
+
+    <script>
+        document.getElementById('downloadBtn').addEventListener('click', function() {
+            const sheet = document.getElementById('cheatSheetContainer');
+            const style = document.querySelector('style').innerHTML; 
+            const htmlContent = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OOP cheat sheet · python blue + obsidian</title>
+    <style>
+        /* exact same style, copied dynamically */
+        ${style}
+        /* small fix for standalone: body background already defined, ensure sheet uses same */
+    </style>
+</head>
+<body>
+    <!-- we re-serialize the inner sheet content but keep everything exactly as shown -->
+    ${sheet.outerHTML}
+    <script>
+        // remove download button from the downloaded version? but it's nice to keep.
+        // optionally we could remove it, but we keep as is — you can still download again? fine.
+        // make sure the download button inside doesn't cause conflict – it will work but we don't want nested event.
+        // we can keep it, but the user might click again. we keep for demonstration.
+    <\/script>
+</body>
+</html>`;
+
+            const blob = new Blob([htmlContent], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'python_blue_obsidian_oop_cheatsheet.html';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        });
+    </script>
+</body>
+</html>
