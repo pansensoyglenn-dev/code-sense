@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OOP Programming</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #12121a;  
+            font-family: 'Inter', 'Segoe UI', 'Roboto', system-ui, sans-serif;
+            line-height: 1.8;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 2.5rem 2rem;
+            color: #cfdbea;
+        }
+
+        .oop-fullwidth {
+            max-width: 1400px;
+            width: 100%;
+            background: transparent;      /* fully transparent, no card */
+            border: none;
+            box-shadow: none;
+            padding: 0;                   
+        }
+
+        
+        .title-12 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            text-transform: uppercase;
+            border-bottom: 3px solid #4b8bbe;    
+            padding-bottom: 1rem;
+            display: inline-block;
+            color: #e2ecff;
+            margin-bottom: 2.5rem;
+            font-family: 'Fira Code', 'Inter', monospace;
+            background: linear-gradient(145deg, #d6e6ff, #9bc0ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            border-image: none;
+        }
+
+        .subtitle-1 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #b8d4ff;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            border-left: 6px solid #4b8bbe;
+            padding-left: 1.8rem;
+            background: linear-gradient(90deg, #202033, transparent);
+            line-height: 1.7;
+        }
+
+        .paragraph-08 {
+            font-size: 0.8rem;
+            color: #d0dbff;
+            margin-bottom: 2.2rem;
+            text-align: justify;
+            font-weight: 350;
+            max-width: 100%;
+            line-height: 2.1;
+            letter-spacing: 0.015em;
+        }
+
+        .python-blue {
+            color: #6bb0ff;
+            font-weight: 550;
+            background: rgba(75, 139, 190, 0.15);
+            padding: 0.15rem 0.5rem;
+            border-radius: 8px;
+            border: 1px solid #3a6790;
+        }
+
+        .obsidian-meta {
+            color: #6f7d9c;
+            font-size: 0.7rem;
+            display: block;
+            margin-top: 4rem;
+            border-top: 1px solid #31415e;
+            padding-top: 2rem;
+            text-align: right;
+            letter-spacing: 0.03em;
+        }
+
+        code, .inline-code, .term {
+            font-family: 'Fira Code', 'JetBrains Mono', monospace;
+            background: #191f2b;
+            color: #95c8ff;
+            padding: 0.25rem 0.6rem;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            border: 1px solid #2f4562;
+        }
+
+      
+        .concept-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 2rem;
+            margin: 2.5rem 0;
+        }
+
+        .concept-block {
+            background: transparent;
+            border-radius: 0;
+            padding: 0.5rem 0 0.5rem 1.8rem;   
+            border-left: 5px solid #4b8bbe;   
+            box-shadow: none;
+            transition: 0.2s;
+        }
+
+        .concept-block:hover {
+            border-left-color: #8ac2ff;
+        }
+
+        .concept-title {
+            font-size: 1rem;
+            font-weight: 650;
+            color: #d0e3ff;
+            margin-bottom: 0.8rem;
+            font-family: 'Fira Code', monospace;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+
+        .concept-icon {
+            font-size: 1.5rem;
+        }
+
+        .concept-desc {
+            font-size: 0.8rem;
+            color: #cbd7fc;
+            margin-bottom: 1.2rem;
+            line-height: 2;
+        }
+
+        .concept-example {
+            background: #14141f;            /* subtle dark, but not a card */
+            padding: 1.2rem 1.5rem;
+            border-radius: 20px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.75rem;
+            color: #c0dbff;
+            border: 1px solid #2f4463;
+            margin-top: 0.8rem;
+            line-height: 1.9;
+        }
+
+        .concept-example pre {
+            margin: 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-family: 'Fira Code', monospace;
+        }
+
+        .code-block {
+            background: #14141f;    
+            border-left: 6px solid #4b8bbe;
+            padding: 2rem 2.5rem;
+            margin: 2.5rem 0;
+            border-radius: 28px;
+            overflow-x: auto;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.8rem;
+            color: #c3d6ff;
+            box-shadow: none;     
+            line-height: 2.1;
+        }
+
+        .code-block pre {
+            margin: 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-family: 'Fira Code', monospace;
+        }
+
+        .pillar-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin: 2rem 0 2.5rem 0;
+        }
+
+        .pillar-item {
+            background: transparent;
+            padding: 0.5rem 1.2rem 0.5rem 1rem;
+            border-radius: 0;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #b0d0ff;
+            border-left: 4px solid #4b8bbe;
+            font-family: 'Fira Code', monospace;
+            letter-spacing: 0.02em;
+            box-shadow: none;
+            background: none;
+        }
+
+        .intro-text {
+            font-size: 0.9rem;
+            line-height: 2.2;
+            margin-bottom: 2rem;
+            color: #e2ebff;
+        }
+
+        @media (max-width: 650px) {
+            body { padding: 1.5rem 1rem; }
+            .concept-block { padding-left: 1rem; }
+            .code-block { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="oop-fullwidth">
+        <h1 class="title-12">⚡ OBJECT-ORIENTED PROGRAMMING </h1>
+
+        <p class="paragraph-08">
+            <span class="python-blue">OOP</span> structures software around <strong class="python-blue">objects</strong> — units that combine data (attributes) and behaviors (methods). 
+            This mirrors real-world entities, making systems more modular, reusable, and maintainable. 
+            
+        </p>
+
+        <h2 class="subtitle-1">🏛️ THE FOUR PILLARS</h2>
+
+        <div class="pillar-list">
+            <span class="pillar-item">📦 ENCAPSULATION</span>
+            <span class="pillar-item">🧬 INHERITANCE</span>
+            <span class="pillar-item">🔄 POLYMORPHISM</span>
+            <span class="pillar-item">🎭 ABSTRACTION</span>
+        </div>
+
+        <div class="concept-grid">
+            <div class="concept-block">
+                <div class="concept-title"><span class="concept-icon">📦</span> ENCAPSULATION</div>
+                <div class="concept-desc">Bundle data and methods, restrict direct access. Protects internal state.</div>
+                <div class="concept-example"><pre>class BankVault:
+    def __init__(self):
+        self.__gold = 0
+    
+    def add_gold(self, amount):
+        if amount > 0:
+            self.__gold += amount
+    
+    def get_gold(self):
+        return self.__gold</pre></div>
+            </div>
+
+            <div class="concept-block">
+                <div class="concept-title"><span class="concept-icon">🧬</span> INHERITANCE</div>
+                <div class="concept-desc">Derive new classes from existing ones, forming hierarchies.</div>
+                <div class="concept-example"><pre>class Appliance:
+    def __init__(self, brand):
+        self.brand = brand
+
+class WashingMachine(Appliance):
+    def wash(self):
+        return f"{self.brand} washing..."</pre></div>
+            </div>
+
+            <div class="concept-block">
+                <div class="concept-title"><span class="concept-icon">🔄</span> POLYMORPHISM</div>
+                <div class="concept-desc">Same method name, many forms. Objects decide specific behavior.</div>
+                <div class="concept-example"><pre>def sound(animal):
+    print(animal.talk())
+
+class Duck:   def talk(self): return "Quack"
+class Frog:   def talk(self): return "Ribbit"</pre></div>
+            </div>
+
+            <div class="concept-block">
+                <div class="concept-title"><span class="concept-icon">🎭</span> ABSTRACTION</div>
+                <div class="concept-desc">Hide complex internals, present simple interface.</div>
+                <div class="concept-example"><pre>from abc import ABC, abstractmethod
+
+class Switch(ABC):
+    @abstractmethod
+    def flip(self): pass
+
+class LightSwitch(Switch):
+    def flip(self): return "💡 toggled"</pre></div>
+            </div>
+        </div>
+
+        <h2 class="subtitle-1">🧱 CORE CONCEPTS — FULL WIDTH, NO BOXES</h2>
+
+        <div class="concept-grid">
+            <div class="concept-block">
+                <div class="concept-title"><span class="concept-icon">📋</span> CLASS</div>
+                <div class="concept-desc">Blueprint describing attributes and methods.</div>
+                <div class="concept-example"><pre>class Robot:
+    def __init__(self, name):
+        self.name = name
+        self.battery = 100
+    
+    def work(self):
+        self.battery -= 10</pre></div>
+            </div>
+
+            <div class="concept-block">
+                <div class="concept-title"><span class="concept-icon">🔮</span> OBJECT (INSTANCE)</div>
+                <div class="concept-desc">Specific entity created from a class, with own state.</div>
+                <div class="concept-example"><pre>r2d2 = Robot("R2")
+c3po = Robot("C3PO")
+r2d2.work()</pre></div>
+            </div>
+
+            <div class="concept-block">
+                <div class="concept-title"><span class="concept-icon">📊</span> ATTRIBUTES</div>
+                <div class="concept-desc">Variables storing object data (instance or class level).</div>
+                <div class="concept-example"><pre>class Employee:
+    company = "OpenAI"   # class attribute
+    def __init__(self, name):
+        self.name = name   # instance attribute</pre></div>
+            </div>
+
+            <div class="concept-block">
+                <div class="concept-title"><span class="concept-icon">⚙️</span> METHODS</div>
+                <div class="concept-desc">Functions inside class; define behavior.</div>
+                <div class="concept-example"><pre>class Timer:
+    def __init__(self):
+        self.seconds = 0
+    def tick(self):
+        self.seconds += 1
+    @staticmethod
+    def info():
+        return "simple timer"</pre></div>
+            </div>
+        </div>
+
+        <h2 class="subtitle-1">🏦 EXTENDED OOP EXAMPLE — LIBRARY (NO CONTAINER)</h2>
+
+        <div class="code-block">
+            <pre>class LibraryItem:
+    def __init__(self, title, item_id):
+        self.title = title
+        self.item_id = item_id
+        self.__checked = False
+
+    def borrow(self):
+        if not self.__checked:
+            self.__checked = True
+            return f"✓ {self.title} borrowed"
+        return f"✗ {self.title} in use"
+
+    def give_back(self):
+        self.__checked = False
+        return f"✓ {self.title} returned"
+
+    def available(self):
+        return not self.__checked
+
+class Book(LibraryItem):
+    def __init__(self, title, item_id, author):
+        super().__init__(title, item_id)
+        self.author = author
+
+    def __str__(self):
+        return f"📖 {self.title} by {self.author}"
+
+class Member:
+    def __init__(self, name, mid):
+        self.name = name
+        self.mid = mid
+        self.holds = []
+
+    def take(self, item):
+        res = item.borrow()
+        if "✓" in res:
+            self.holds.append(item)
+        return res
+
+    def replace(self, item):
+        if item in self.holds:
+            res = item.give_back()
+            self.holds.remove(item)
+            return res
+        return f"{item.title} not held"
+
+    def current(self):
+        return "\n ".join(str(i) for i in self.holds) or "nothing borrowed"
+
+book1 = Book("Sapiens", "B101", "Harari")
+book2 = Book("Dune", "B102", "Herbert")
+member = Member("Lena", "L001")
+print(member.take(book1))
+print(member.take(book1))
+print(member.take(book2))
+print("\n📚 " + member.current())
+print(member.replace(book1))
+print(member.current())</pre>
+        </div>
+
+        <h2 class="subtitle-1">📈 WHY OOP? · KEY ADVANTAGES — BORDERLESS</h2>
+
+        <div class="concept-grid">
+            <div class="concept-block"><div class="concept-title"><span class="concept-icon">♻️</span> REUSABILITY</div><div class="concept-desc">Inheritance & composition avoid duplicate code.</div></div>
+            <div class="concept-block"><div class="concept-title"><span class="concept-icon">🔧</span> MAINTAINABILITY</div><div class="concept-desc">Isolated changes, easier debugging.</div></div>
+            <div class="concept-block"><div class="concept-title"><span class="concept-icon">🛡️</span> SECURITY</div><div class="concept-desc">Private fields + controlled access (encapsulation).</div></div>
+            <div class="concept-block"><div class="concept-title"><span class="concept-icon">🧩</span> MODULARITY</div><div class="concept-desc">Objects as independent units, team-friendly.</div></div>
+            <div class="concept-block"><div class="concept-title"><span class="concept-icon">🌍</span> REAL-WORLD MAPPING</div><div class="concept-desc">Design matches domain concepts.</div></div>
+            <div class="concept-block"><div class="concept-title"><span class="concept-icon">📱</span> FLEXIBILITY</div><div class="concept-desc">Polymorphism allows easy extension.</div></div>
+        </div>
+
+        <h2 class="subtitle-1">🌐 LANGUAGE COMPARISON (SYNTAX)</h2>
+
+        <div class="code-block">
+            <pre># Python
+class Greet:
+    def hello(self): return "Hello"
+
+// Java
+public class Greet {
+    public String hello() { return "Hello"; }
+}
+
+// C++
+class Greet {
+public:
+    std::string hello() { return "Hello"; }
+};
+
+// JavaScript
+class Greet {
+    hello() { return "Hello"; }
+}
+
+// C#
+public class Greet {
+    public string Hello() { return "Hello"; }
+}</pre>
+        </div>
+
+        <p class="paragraph-08">
+            <span class="python-blue">OOP</span> transcends syntax: it’s a mindset. By composing systems from discrete, collaborating objects, 
+            we achieve scalability and clarity. This page applies the <strong>python programming overview</strong>
+            with all types of  OOP pillars.<em>for the enthusiastic programmers.</em>
+        </p>
+
+        <div class="obsidian-meta">
+            <p>Created By;Glenn Junsay Pansensoy </p>
+        </div>
+    </div>
+</body>
+</html>
