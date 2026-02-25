@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OOP Python Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #1e1e2e;
+            font-family: 'Inter', 'Segoe UI', 'Roboto', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 1.5rem 1rem;
+            color: #d4d4dc;
+        }
+
+        .guide-card {
+            max-width: 1400px;
+            width: 100%;
+            background: #2a2a3a;
+            border-radius: 1.5rem;
+            padding: 1rem 2.5rem;
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(65, 105, 225, 0.25) inset;
+            backdrop-filter: blur(2px);
+            border: 1px solid #3a3a55;
+        }
+
+        @media (min-width: 1600px) {
+            .guide-card {
+                max-width: 1600px;
+                padding: 1rem 4rem;
+            }
+        }
+
+        .title-12 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            text-transform: uppercase;
+            border-bottom: 2px solid #4b8bbe;
+            padding-bottom: 0.4rem;
+            display: inline-block;
+            color: #b7c9e2;
+            margin-bottom: 1.2rem;
+            font-family: 'Fira Code', 'Inter', monospace;
+        }
+
+        .subtitle-1 {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #a0b9d6;
+            margin-top: 1.2rem;
+            margin-bottom: 0.3rem;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            border-left: 4px solid #4b8bbe;
+            padding-left: 0.7rem;
+            background: linear-gradient(90deg, #2f2f42, transparent);
+            line-height: 1.4;
+        }
+
+        .paragraph-08 {
+            font-size: 0.8rem;
+            color: #cfd7e6;
+            margin-bottom: 0.8rem;
+            text-align: justify;
+            font-weight: 350;
+            max-width: 100%;
+        }
+
+        .guide-card p:last-of-type {
+            margin-bottom: 0;
+        }
+
+        .python-blue {
+            color: #4b8bbe;
+            font-weight: 500;
+            background: rgba(75, 139, 190, 0.08);
+            padding: 0.1rem 0.2rem;
+            border-radius: 4px;
+        }
+
+        .obsidian-meta {
+            color: #7f8c9f;
+            font-size: 0.7rem;
+            display: block;
+            margin-top: 1.5rem;
+            border-top: 1px dashed #3a4a6b;
+            padding-top: 0.8rem;
+            text-align: right;
+        }
+
+        code, .term, .inline-code {
+            font-family: 'Fira Code', 'JetBrains Mono', monospace;
+            background: #1e293b;
+            color: #88c0ff;
+            padding: 0.15rem 0.3rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            border: 1px solid #2d4059;
+        }
+
+        .code-block {
+            background: #1a1a28;
+            border-left: 4px solid #4b8bbe;
+            padding: 0.8rem 1.8rem;
+            margin: 0.8rem 0;
+            border-radius: 12px;
+            overflow-x: auto;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.8rem;
+            color: #b4c8e8;
+            box-shadow: inset 0 0 0 1px #2d2d44, 0 4px 8px rgba(0,0,0,0.3);
+            line-height: 1.5;
+            width: 100%;
+        }
+
+        .code-block pre {
+            margin: 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .inline-code {
+            font-family: 'Fira Code', monospace;
+            background: #1e2a3a;
+            color: #90c0ff;
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            border: 1px solid #2d3f5a;
+        }
+
+        .content-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .guide-card {
+                padding: 1rem 1.5rem;
+            }
+            .code-block {
+                padding: 0.8rem 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="guide-card">
+        <h1 class="title-12">COMPLETE GUIDE TO OOP IN PYTHON</h1>
+
+        <p class="paragraph-08">
+            Python's object-oriented programming model is elegant, powerful, and <span class="python-blue">"Pythonic"</span>. 
+            Unlike languages that force OOP, Python lets you choose your paradigm, but its core — everything from integers to modules — is built on objects. 
+            This guide walks you through OOP in Python with clarity and practical examples.
+        </p>
+
+        <h2 class="subtitle-1">📌 CLASSES & OBJECTS — THE FOUNDATION</h2>
+
+        <p class="paragraph-08">
+            A <span class="inline-code">class</span> is a blueprint for creating objects. An <span class="inline-code">object</span> is an instance of a class, with its own data and behavior. Python's <span class="inline-code">class</span> statement defines both attributes (data) and methods (functions belonging to the class).
+        </p>
+
+        <div class="code-block">
+            <pre>class Dog:
+    """A simple Dog class"""
+    
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+    
+    def bark(self):
+        return f"{self.name} says Woof!"
+    
+    def get_human_years(self):
+        return self.age * 7
+
+my_dog = Dog("Rex", 3)
+your_dog = Dog("Bella", 5)
+
+print(my_dog.bark())
+print(f"{your_dog.name} is {your_dog.get_human_years()} in dog years")</pre>
+        </div>
+
+        <h2 class="subtitle-1">⚙️ THE __INIT__ METHOD & SELF</h2>
+
+        <p class="paragraph-08">
+            The <span class="inline-code">__init__</span> method is the constructor. The <span class="inline-code">self</span> parameter refers to the current instance. All instance methods must have <span class="inline-code">self</span> as the first parameter.
+        </p>
+
+        <h2 class="subtitle-1">🔐 ENCAPSULATION & NAME MANGLING</h2>
+
+        <p class="paragraph-08">
+            Python uses conventions rather than strict access control. A single underscore <span class="inline-code">_protected</span> means "internal use". Double underscore <span class="inline-code">__private</span> triggers name mangling. Properties with <span class="inline-code">@property</span> provide controlled access.
+        </p>
+
+        <div class="code-block">
+            <pre>class BankAccount:
+    def __init__(self, owner, balance):
+        self.owner = owner
+        self._balance = balance
+        self.__pin = "1234"
+    
+    @property
+    def balance(self):
+        return self._balance
+    
+    @balance.setter
+    def balance(self, amount):
+        if amount < 0:
+            raise ValueError("Balance cannot be negative")
+        self._balance = amount
+    
+    def deposit(self, amount):
+        if amount > 0:
+            self._balance += amount
+            return True
+        return False
+
+acc = BankAccount("Alice", 1000)
+print(acc.balance)
+acc.balance = 1500</pre>
+        </div>
+
+        <h2 class="subtitle-1">🧬  INHERITANCE & POLYMORPHISM</h2>
+
+        <p class="paragraph-08">
+            Inheritance creates hierarchies; polymorphism allows interchangeable objects. Python supports multiple inheritance with clean MRO.
+        </p>
+
+        <div class="code-block">
+            <pre>class Animal:
+    def __init__(self, name):
+        self.name = name
+    
+    def speak(self):
+        raise NotImplementedError("Subclass must implement")
+
+class Cat(Animal):
+    def speak(self):
+        return f"{self.name} says Meow!"
+
+class Dog(Animal):
+    def speak(self):
+        return f"{self.name} says Woof!"
+
+class RobotDog(Dog):
+    def speak(self):
+        return f"{self.name} beeps: W0️⃣F!"
+
+animals = [Cat("Whiskers"), Dog("Buddy"), RobotDog("R2D2")]
+for animal in animals:
+    print(animal.speak())</pre>
+        </div>
+
+        <h2 class="subtitle-1">🎭 MAGIC METHODS (DUNDERS)</h2>
+
+        <p class="paragraph-08">
+            Magic methods define behavior for built-in operations: <span class="inline-code">__str__</span>, <span class="inline-code">__len__</span>, <span class="inline-code">__add__</span>, etc.
+        </p>
+
+        <div class="code-block">
+            <pre>class Vector:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+    
+    def __str__(self):
+        return f"Vector({self.x}, {self.y})"
+    
+    def __add__(self, other):
+        return Vector(self.x + other.x, self.y + other.y)
+    
+    def __len__(self):
+        return 2
+    
+    def __eq__(self, other):
+        return self.x == other.x and self.y == other.y
+
+v1 = Vector(2, 3)
+v2 = Vector(1, 4)
+print(v1 + v2)
+print(len(v1))
+print(v1 == Vector(2, 3))</pre>
+        </div>
+
+        <h2 class="subtitle-1">🧩  CLASS VS INSTANCE ATTRIBUTES</h2>
+
+        <p class="paragraph-08">
+            Class attributes are shared; instance attributes belong to each object.
+        </p>
+
+        <div class="code-block">
+            <pre>class Employee:
+    company = "Python Corp"
+    employee_count = 0
+    
+    def __init__(self, name):
+        self.name = name
+        Employee.employee_count += 1
+
+e1 = Employee("Alice")
+e2 = Employee("Bob")
+print(e1.company)
+Employee.company = "New Corp"
+print(e1.company)</pre>
+        </div>
+
+        <h2 class="subtitle-1">🏗️ 1.0 rem · STATIC & CLASS METHODS</h2>
+
+        <p class="paragraph-08">
+            <span class="inline-code">@staticmethod</span> doesn't receive self/cls. <span class="inline-code">@classmethod</span> receives the class.
+        </p>
+
+        <div class="code-block">
+            <pre>class Date:
+    def __init__(self, year, month, day):
+        self.year = year
+        self.month = month
+        self.day = day
+    
+    @classmethod
+    def from_string(cls, date_string):
+        year, month, day = map(int, date_string.split('-'))
+        return cls(year, month, day)
+    
+    @staticmethod
+    def is_valid_date(year, month, day):
+        if month < 1 or month > 12:
+            return False
+        if day < 1 or day > 31:
+            return False
+        return True
+
+d = Date.from_string("2025-02-25")
+print(d.year)
+print(Date.is_valid_date(2025, 13, 1))</pre>
+        </div>
+
+        <h2 class="subtitle-1">💡  COMPOSITION OVER INHERITANCE</h2>
+
+        <p class="paragraph-08">
+            Composition builds complex objects by including other objects (<span class="inline-code">has-a</span> vs <span class="inline-code">is-a</span>).
+        </p>
+
+        <div class="code-block">
+            <pre>class Engine:
+    def start(self):
+        return "Engine running"
+
+class Wheels:
+    def rotate(self):
+        return "Wheels spinning"
+
+class Car:
+    def __init__(self):
+        self.engine = Engine()
+        self.wheels = Wheels()
+    
+    def drive(self):
+        return f"{self.engine.start()} and {self.wheels.rotate()}"
+
+my_car = Car()
+print(my_car.drive())</pre>
+        </div>
+
+        <h2 class="subtitle-1">🔍  ABSTRACT BASE CLASSES (ABC)</h2>
+
+        <p class="paragraph-08">
+            The <span class="inline-code">abc</span> module enforces method implementation in subclasses.
+        </p>
+
+        <div class="code-block">
+            <pre>from abc import ABC, abstractmethod
+
+class Shape(ABC):
+    @abstractmethod
+    def area(self):
+        pass
+    
+    @abstractmethod
+    def perimeter(self):
+        pass
+
+class Rectangle(Shape):
+    def __init__(self, width, height):
+        self.width = width
+        self.height = height
+    
+    def area(self):
+        return self.width * self.height
+    
+    def perimeter(self):
+        return 2 * (self.width + self.height)
+
+rect = Rectangle(5, 3)
+print(rect.area())</pre>
+        </div>
+
+        <h2 class="subtitle-1">🎯 BEST PRACTICES & PYTHONIC OOP</h2>
+
+        <p class="paragraph-08">
+            • Use <span class="inline-code">@property</span> instead of getter/setter methods<br>
+            • Favor composition over deep inheritance<br>
+            • Use <span class="inline-code">__slots__</span> to save memory<br>
+            • Keep hierarchies shallow<br>
+            • Prefer duck typing over <span class="inline-code">isinstance()</span><br>
+            • Follow PEP 8: <span class="inline-code">CamelCase</span> for classes, <span class="inline-code">snake_case</span> for methods
+        </p>
+
+        <div class="code-block">
+            <pre>class Point:
+    __slots__ = ('x', 'y')
+    
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y</pre>
+        </div>
+
+        <div class="obsidian-meta">
+            <span>PYTHON OOP GUIDE-By: Glenn Junsay Pansensoy</span>
+        </div>
+    </div>
+</body>
+</html>
