@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal Disclaimer - Comprehensive Terms</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #0B1024;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+        
+        .disclaimer-container {
+            max-width: 1200px;
+            width: 100%;
+            background: linear-gradient(145deg, #0B1024 0%, #1A1F35 100%);
+            border: 1px solid #0077B6;
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: 0 20px 40px rgba(0, 168, 232, 0.1);
+        }
+        
+        h1 {
+            font-size: 1.2rem;
+            color: #00A8E8;
+            text-align: center;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .title-underline {
+            width: 100px;
+            height: 2px;
+            background: #0077B6;
+            margin: 0 auto 1.5rem auto;
+        }
+        
+        .last-updated {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 0.75rem 1rem;
+            background: rgba(0, 168, 232, 0.05);
+            border-radius: 10px;
+        }
+        
+        .last-updated h2 {
+            font-size: 1rem;
+            color: #00A8E8;
+            font-weight: 600;
+        }
+        
+        .last-updated p {
+            font-size: 0.8rem;
+            color: #E6F3FF;
+        }
+        
+        .version-badge {
+            background: #0077B6;
+            color: #E6F3FF;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            margin-left: auto;
+        }
+        
+        .section {
+            margin-bottom: 1rem;
+            padding: 1rem 1.5rem;
+            background: rgba(26, 31, 53, 0.7);
+            border-left: 3px solid #0077B6;
+            border-radius: 0 10px 10px 0;
+        }
+        
+        .section h3 {
+            font-size: 1rem;
+            color: #00A8E8;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section h3 span {
+            background: #003459;
+            padding: 0.2rem 0.6rem;
+            border-radius: 5px;
+            font-size: 0.7rem;
+            color: #00A8E8;
+        }
+        
+        .section p {
+            font-size: 0.8rem;
+            color: #E6F3FF;
+            margin-bottom: 0.75rem;
+            opacity: 0.9;
+            text-align: justify;
+            text-justify: inter-word;
+        }
+        
+        .section ul, .section ol {
+            margin-left: 2rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .section li {
+            font-size: 0.8rem;
+            color: #E6F3FF;
+            margin-bottom: 0.4rem;
+            opacity: 0.9;
+            text-align: justify;
+            text-justify: inter-word;
+        }
+        
+        .highlight-box {
+            background: rgba(0, 119, 182, 0.1);
+            border: 1px solid #0077B6;
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            margin: 0.75rem 0;
+        }
+        
+        .highlight-box p {
+            margin-bottom: 0.25rem;
+            text-align: justify;
+            text-justify: inter-word;
+        }
+        
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 0.75rem 0;
+        }
+        
+        .info-card {
+            background: #0B1024;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            border: 1px solid #003459;
+        }
+        
+        .info-card h4 {
+            color: #00A8E8;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .info-card p {
+            font-size: 0.75rem;
+            margin-bottom: 0;
+            text-align: justify;
+            text-justify: inter-word;
+        }
+        
+        .warning-note {
+            background: rgba(255, 193, 7, 0.1);
+            border-left: 3px solid #FFC107;
+            padding: 0.75rem 1rem;
+            margin: 0.75rem 0;
+            border-radius: 5px;
+        }
+        
+        .warning-note p {
+            color: #FFE082;
+            margin-bottom: 0;
+            text-align: justify;
+            text-justify: inter-word;
+        }
+        
+        .contact-info {
+            margin-top: 1.5rem;
+            padding: 1.25rem;
+            background: linear-gradient(135deg, #003459 0%, #1A1F35 100%);
+            border-radius: 10px;
+            border: 1px solid #0077B6;
+        }
+        
+        .contact-info p {
+            text-align: justify;
+            text-justify: inter-word;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 0.75rem;
+        }
+        
+        .contact-item {
+            text-align: center;
+        }
+        
+        .contact-item p {
+            font-size: 0.8rem;
+            color: #E6F3FF;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+        
+        .contact-item a {
+            color: #00A8E8;
+            text-decoration: none;
+            font-size: 0.8rem;
+            border-bottom: 1px dotted #0077B6;
+        }
+        
+        .contact-item a:hover {
+            color: #0077B6;
+        }
+        
+        .footer-note {
+            margin-top: 1.5rem;
+            text-align: center;
+            font-size: 0.8rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid #0077B6;
+        }
+        
+        .footer-note p {
+            text-align: center;
+            color: #FFFFFF;
+        }
+        
+        .footer-note p:last-child {
+            color: #FFFFFF;
+            opacity: 0.9;
+        }
+        
+        .acceptance-bar {
+            margin-top: 1.5rem;
+            padding: 0.75rem 1rem;
+            background: #1A1F35;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+        
+        .acceptance-text {
+            font-size: 0.8rem;
+            color: #FFFFFF;
+            text-align: justify;
+            text-justify: inter-word;
+            flex: 1;
+        }
+        
+        .acceptance-button {
+            background: #0077B6;
+            color: #E6F3FF;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .acceptance-button:hover {
+            background: #00A8E8;
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 0.5rem;
+            }
+            
+            .disclaimer-container {
+                padding: 1rem;
+            }
+            
+            .section {
+                padding: 0.75rem 1rem;
+            }
+            
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .acceptance-bar {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .acceptance-text {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="disclaimer-container">
+        <h1>COMPREHENSIVE LEGAL DISCLAIMER</h1>
+        <div class="title-underline"></div>
+        
+        <div class="last-updated">
+            <h2>Last Updated:</h2>
+            <p>February 24, 2026 | Effective immediately</p>
+            <span class="version-badge">Version 2.4.0</span>
+        </div>
+        
+        <div class="section">
+            <h3>1. No Warranties <span>Legally Binding</span></h3>
+            <p>This website and all information, content, materials, products, and services included on or otherwise made available to you through this site are provided on an "as is" and "as available" basis, unless otherwise specified in writing. We make no representations or warranties of any kind, express or implied, as to the operation of this site or the information, content, materials, products, or services included on or otherwise made available to you through this site.</p>
+            
+            <div class="highlight-box">
+                <p><strong style="color: #00A8E8;">Important Notice:</strong> To the fullest extent permissible by applicable law, we disclaim all warranties, express or implied, including, but not limited to, implied warranties of merchantability, fitness for a particular purpose, and non-infringement. This limitation of liability applies to the maximum extent permitted by law in all jurisdictions.</p>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h3>2. Limitation of Liability <span>Jurisdiction Specific</span></h3>
+            <p>You expressly agree that your use of this site is at your sole risk. To the full extent permissible by applicable law, we disclaim all warranties, express or implied, including, but not limited to, implied warranties of merchantability and fitness for a particular purpose. Under no circumstances shall we be liable for any damages whatsoever, whether based on contract, tort, strict liability, or otherwise.</p>
+            
+            <div class="grid-2">
+                <div class="info-card">
+                    <h4>Direct Damages</h4>
+                    <p>We shall not be liable for any direct, indirect, incidental, special, consequential, or exemplary damages, including but not limited to, damages for loss of profits, goodwill, use, data, or other intangible losses resulting from the use of or inability to use this website.</p>
+                </div>
+                <div class="info-card">
+                    <h4>Indirect Damages</h4>
+                    <p>We do not warrant that this site; information, content, materials, products or services; their servers; or electronic communications sent from us are free of viruses or other harmful components. We assume no responsibility for any indirect damages.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h3>3. Professional Advice <span>Legal & Financial</span></h3>
+            <p>The information provided on this website does not constitute professional advice and should not be relied upon for making decisions without consulting qualified professionals. We recommend you seek specific advice from qualified professionals regarding your particular circumstances. Any reliance on the information provided is solely at your own risk.</p>
+            
+            <div class="warning-note">
+                <p><strong>⚠️ Critical:</strong> Nothing on this website constitutes legal, financial, medical, or professional advice. Always consult with a qualified professional before making any decisions that could affect your legal rights, financial status, or personal wellbeing.</p>
+            </div>
+            
+            <ul>
+                <li><strong>Legal Advice:</strong> Information is not a substitute for legal counsel from a licensed attorney in your jurisdiction</li>
+                <li><strong>Financial Advice:</strong> Past performance does not guarantee future results; consult a certified financial planner</li>
+                <li><strong>Medical Advice:</strong> Consult healthcare providers for medical concerns; information is for educational purposes only</li>
+                <li><strong>Investment Advice:</strong> All investments carry risk of loss; we do not guarantee any specific returns</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h3>4. External Links <span>Third-Party Content</span></h3>
+            <p>This site may contain links to external websites that are not provided or maintained by or in any way affiliated with us. Please note that we do not guarantee the accuracy, relevance, timeliness, or completeness of any information on these external websites. We do not endorse or assume any responsibility for any third-party content, products, or services.</p>
+            
+            <div class="highlight-box">
+                <p><strong style="color: #00A8E8;">Third-Party Disclaimer:</strong> Links to external sites are provided solely as a convenience to you. If you use these links, you will leave this website. We do not review or control these external websites and are not responsible for any of their content, privacy practices, or business practices.</p>
+            </div>
+            
+            <ul>
+                <li>We are not responsible for the content of external sites</li>
+                <li>External links are provided for convenience only and do not imply endorsement</li>
+                <li>Visiting external links is at your own risk</li>
+                <li>No endorsement of third-party products or services is expressed or implied</li>
+                <li>Different privacy policies may apply on external sites; review them before providing information</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h3>5. Intellectual Property <span>Copyright & Trademarks</span></h3>
+            <p>All content included on this site, such as text, graphics, logos, button icons, images, audio clips, digital downloads, data compilations, and software, is the property of our company or its content suppliers and protected by international copyright laws. The compilation of all content on this site is the exclusive property of our company and protected by international copyright laws.</p>
+            
+            <div class="grid-2">
+                <div class="info-card">
+                    <h4>Copyright Notice</h4>
+                    <p>© 2026 All Rights Reserved. Unauthorized use, reproduction, or distribution of any content is strictly prohibited and may result in civil and criminal penalties under applicable laws.</p>
+                </div>
+                <div class="info-card">
+                    <h4>Trademark Notice</h4>
+                    <p>All trademarks, service marks, and trade names are proprietary to our company or other respective owners. Unauthorized use of any trademark is strictly prohibited.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h3>6. User Conduct <span>Acceptable Use</span></h3>
+            <p>By using this website, you agree not to engage in any conduct that restricts or inhibits any other user from using or enjoying the website. You further agree not to use the website in any manner that could disable, overburden, damage, or impair the site or interfere with any other party's use of the website.</p>
+            <ul>
+                <li>Violate any applicable laws or regulations, including export control laws</li>
+                <li>Infringe upon intellectual property rights of any third party</li>
+                <li>Transmit harmful code, viruses, or malware of any kind</li>
+                <li>Attempt unauthorized access to our systems or user accounts</li>
+                <li>Engage in data mining, scraping, or unauthorized data collection</li>
+                <li>Harass, abuse, or harm others through any form of communication</li>
+                <li>Post false, misleading, or fraudulent information</li>
+                <li>Impersonate any person or entity, or misrepresent your affiliation</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h3>7. Privacy & Data Collection <span>GDPR & CCPA</span></h3>
+            <p>Your privacy is important to us. Please review our Privacy Policy, which also governs your visit to this website, to understand our practices regarding the collection and use of your personal information. By using this website, you consent to the data practices described in our Privacy Policy.</p>
+            
+            <div class="grid-2">
+                <div class="info-card">
+                    <h4>GDPR Compliance</h4>
+                    <p>For EU residents: You have the right to access, rectify, and erase your personal data under GDPR regulations. You may also object to processing or request data portability where applicable.</p>
+                </div>
+                <div class="info-card">
+                    <h4>CCPA Compliance</h4>
+                    <p>For California residents: You have the right to know what personal information is collected, request deletion, opt-out of sale of personal information, and non-discrimination for exercising your rights.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h3>8. Indemnification <span>Legal Protection</span></h3>
+            <p>You agree to indemnify, defend, and hold harmless our company, its officers, directors, employees, agents, licensors, and suppliers from and against all losses, expenses, damages, and costs, including reasonable attorneys' fees, resulting from any violation of these terms or any activity related to your account (including negligent or wrongful conduct) by you or any other person accessing the site using your account.</p>
+        </div>
+        
+        <div class="section">
+            <h3>9. Governing Law <span>Jurisdiction</span></h3>
+            <p>These terms and conditions are governed by and construed in accordance with the laws of the State of California, without regard to its conflict of law provisions, and you irrevocably submit to the exclusive jurisdiction of the courts in that State or location. Any disputes arising under or in connection with these terms shall be subject to the exclusive jurisdiction of the state and federal courts of San Francisco County, California.</p>
+        </div>
+        
+        <div class="section">
+            <h3>10. Changes to Terms <span>Modification Rights</span></h3>
+            <p>We reserve the right to modify this disclaimer at any time without prior notice. By continuing to use this site after changes are posted, you agree to be bound by the revised disclaimer. It is your responsibility to check this page periodically for updates. Material changes will be effective immediately upon posting.</p>
+            
+            <div class="warning-note">
+                <p><strong>📋 Notice:</strong> Material changes will be effective immediately upon posting. Your continued use of the website following the posting of changes constitutes acceptance of those changes. We recommend checking this page regularly for updates.</p>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h3>11. Severability <span>Legal Validity</span></h3>
+            <p>If any provision of these terms is found to be invalid or unenforceable by a court of competent jurisdiction, such provision shall be severed from these terms, and the remaining provisions shall remain in full force and effect. The failure to enforce any right or provision of these terms shall not constitute a waiver of such right or provision.</p>
+        </div>
+        
+        <div class="section">
+            <h3>12. Entire Agreement <span>Complete Terms</span></h3>
+            <p>These terms and conditions constitute the entire agreement between you and our company regarding the use of this website, superseding any prior agreements between you and our company relating to your use of this website. No joint venture, partnership, employment, or agency relationship exists between you and our company as a result of this agreement or use of this website. Any rights not expressly granted herein are reserved.</p>
+        </div>
+        
+        <div class="contact-info">
+            <p><strong style="color: #00A8E8; font-size: 1rem;">Contact Information & Legal Notices</strong></p>
+            <p style="font-size: 0.8rem; color: #E6F3FF; margin-bottom: 1rem;">For questions regarding this disclaimer or to submit legal notices, please contact our legal department using any of the following methods:</p>
+            
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <p><strong>Email</strong></p>
+                    <a href="mailto: pansensoyglenn@gmail.com">pansensoyglenn@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <p><strong>Contact</strong></p>
+                    <a href="oop-contact.html">Information</a>
+                </div>
+                <div class="contact-item">
+                    <p><strong>Legal Dept.</strong></p>
+                    <a href="mailto: pansensoyglenn@gmail.com">pansensoyglenn@gmail.com</a>
+                </div>
+            </div>
+            
+            <p style="font-size: 0.8rem; color: #E6F3FF; margin-top: 1rem; text-align: center;">
+                Tinongtungan,Diplahan, Zamboanga Sibugay Province, Philippines<br>
+                Legal Notices: Attention General Counsel | VALLEYS & BYTES: Copyright Compliance Department
+            </p>
+        </div>
+        
+        <div class="acceptance-bar">
+            <span class="acceptance-text">By continuing to use this website, you acknowledge that you have read, understood, and agree to be bound by all terms and conditions outlined in this disclaimer. This agreement constitutes a legally binding contract between you and our company.</span>
+            <button class="acceptance-button" onclick="acceptDisclaimer()">I Accept & Agree</button>
+        </div>
+        
+        <div class="footer-note">
+            <p>&copy; 2026 All Rights Reserved. This document is legally binding and constitutes a formal agreement between you and our company. Unauthorized reproduction or distribution of this document is prohibited.</p>
+            <p style="margin-top: 0.5rem; font-size: 0.7rem;">Last Review: February 2026 | Next Review: August 2026 | Created By: Glenn Junsay Pansensoy</p>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Comprehensive disclaimer loaded and ready');
+            
+            const sections = document.querySelectorAll('.section');
+            sections.forEach((section, index) => {
+                section.addEventListener('mouseenter', function() {
+                    this.style.transition = 'all 0.3s ease';
+                    this.style.transform = 'translateX(5px)';
+                    this.style.boxShadow = '0 5px 15px rgba(0, 168, 232, 0.2)';
+                    this.style.backgroundColor = 'rgba(26, 31, 53, 0.9)';
+                });
+                
+                section.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateX(0)';
+                    this.style.boxShadow = 'none';
+                    this.style.backgroundColor = 'rgba(26, 31, 53, 0.7)';
+                });
+            });
+            
+            const links = document.querySelectorAll('a');
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if(href.startsWith('mailto:')) {
+                        console.log('Email link clicked:', href);
+                    } else if(href.startsWith('tel:')) {
+                        console.log('Phone link clicked:', href);
+                    }
+                });
+            });
+            
+            const versionBadge = document.querySelector('.version-badge');
+            if(versionBadge) {
+                versionBadge.style.cursor = 'help';
+                versionBadge.addEventListener('click', function() {
+                    alert('Disclaimer Version 2.4.0\nEffective Date: February 24, 2026\nNext Review: August 2026\nDocument ID: DISC-2026-02-24');
+                });
+            }
+        });
+        
+        function acceptDisclaimer() {
+            const button = document.querySelector('.acceptance-button');
+            button.textContent = 'Accepted ✓';
+            button.style.background = '#28a745';
+            button.style.cursor = 'default';
+            button.disabled = true;
+            
+            const timestamp = new Date().toISOString();
+            console.log('Disclaimer accepted at:', timestamp);
+            
+            setTimeout(() => {
+                alert('Thank you for accepting our disclaimer. Your acceptance has been recorded and constitutes your legal agreement to these terms.');
+            }, 100);
+        }
+        
+        window.addEventListener('beforeunload', function(e) {
+            const accepted = document.querySelector('.acceptance-button').disabled;
+            if(!accepted) {
+                const message = 'You have not accepted the disclaimer. Are you sure you want to leave without accepting the terms?';
+                e.returnValue = message;
+                return message;
+            }
+        });
+    </script>
+</body>
+</html>
