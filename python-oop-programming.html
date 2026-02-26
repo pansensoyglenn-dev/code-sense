@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Python OOP Programming</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background-color: #0B1020;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      line-height: 1.5;
+      color: #e1e9f0;
+      padding: 1rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .document {
+      max-width: 680px;
+      width: 100%;
+      background-color: #10172b;
+      border-radius: 2rem;
+      padding: 2rem 1.5rem;
+      box-shadow: 0 20px 35px -10px rgba(0,0,0,0.8),
+                  inset 0 1px 1px rgba(255,255,255,0.03);
+      border: 1px solid #2a3a55;
+    }
+
+    .python-title {
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #ffde7a;
+      background: #1e2a44;
+      display: inline-block;
+      padding: 0.65rem 1.5rem;
+      border-radius: 40px;
+      margin-bottom: 0.5rem;
+      border: 1px solid #3f5280;
+      box-shadow: 0 4px 10px rgba(0,20,40,0.7);
+      word-break: break-word;
+    }
+
+    .tagline {
+      font-size: 0.75rem;
+      color: #6a8fc0;
+      margin-bottom: 1.6rem;
+      padding-left: 0.2rem;
+    }
+
+    .section-group {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #4584b6;
+      margin: 2.2rem 0 0.8rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .section-group::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, #2e4b7c, transparent);
+    }
+
+    .subtitle {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #b2cdff;
+      margin: 1.5rem 0 0.6rem 0;
+      padding-bottom: 0.3rem;
+      border-bottom: 2px solid #2e4b7c;
+      letter-spacing: 0.3px;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .subtitle::before {
+      content: "●";
+      color: #4584b6;
+      font-size: 1.2rem;
+      line-height: 1;
+      opacity: 0.9;
+    }
+
+    .text-block {
+      font-size: 0.8rem;
+      color: #cdddec;
+      margin-bottom: 1rem;
+      background: rgba(10,20,40,0.5);
+      padding: 0.9rem 1.2rem;
+      border-radius: 20px;
+      border-left: 4px solid #306998;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      word-break: break-word;
+    }
+    .text-block:hover {
+      background: #13213c;
+      border-left-color: #ffd43b;
+      transition: all 0.2s ease;
+    }
+    .text-block:last-child { margin-bottom: 0; }
+
+    .code-fragment {
+      background-color: #0b1425;
+      border: 1px solid #2e4b7c;
+      border-radius: 14px;
+      padding: 0.75rem 1rem;
+      font-family: 'Fira Code', 'Cascadia Code', 'Courier New', monospace;
+      font-size: 0.75rem;
+      color: #d4bfff;
+      margin: 0.5rem 0 1rem 0;
+      overflow-x: auto;
+      white-space: pre;
+      word-break: normal;
+      line-height: 1.75;
+    }
+
+    .kw  { color: #ff79c6; }
+    .fn  { color: #ffd43b; }
+    .st  { color: #8dc896; }
+    .nu  { color: #e8956d; }
+    .bi  { color: #8be9fd; }
+    .dec { color: #50fa7b; }
+
+    .python-dot {
+      display: inline-block;
+      width: 8px; height: 8px;
+      background: #4b8bbe;
+      border-radius: 50%;
+      margin-right: 6px;
+    }
+
+    .tip {
+      font-size: 0.75rem;
+      background: rgba(255,212,59,0.06);
+      border: 1px solid rgba(255,212,59,0.18);
+      border-radius: 12px;
+      padding: 0.6rem 1rem;
+      color: #e8d68a;
+      margin: 0.4rem 0 1rem;
+    }
+    .tip::before { content: "💡 "; }
+
+    .warn {
+      font-size: 0.75rem;
+      background: rgba(255,100,80,0.06);
+      border: 1px solid rgba(255,100,80,0.2);
+      border-radius: 12px;
+      padding: 0.6rem 1rem;
+      color: #f08080;
+      margin: 0.4rem 0 1rem;
+    }
+    .warn::before { content: "⚠️  "; }
+
+    .badge {
+      display: inline-block;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.15rem 0.5rem;
+      border-radius: 20px;
+      margin-left: 0.4rem;
+      vertical-align: middle;
+    }
+    .badge-new  { background: rgba(141,200,150,0.15); color: #8dc896; border: 1px solid rgba(141,200,150,0.3); }
+    .badge-core { background: rgba(75,139,190,0.15);  color: #6aaed6; border: 1px solid rgba(75,139,190,0.3); }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.75rem;
+      margin: 0.6rem 0 0.4rem;
+    }
+    th {
+      background: #1a2a44;
+      color: #7aafee;
+      padding: 0.45rem 0.7rem;
+      text-align: left;
+      font-weight: 600;
+    }
+    td {
+      padding: 0.4rem 0.7rem;
+      border-bottom: 1px solid #1e2d48;
+      color: #cdddec;
+      vertical-align: top;
+    }
+    tr:nth-child(even) td { background: rgba(30,45,72,0.3); }
+    code { color: #ffd43b; font-family: 'Fira Code', monospace; font-size: 0.72rem; }
+
+    h1, h2, h3, p, div, span, li { font-size: inherit; }
+
+    ul, ol { padding-left: 1.5rem; margin: 0.5rem 0; }
+    li { font-size: 0.8rem; margin: 0.3rem 0; color: #cdddec; }
+
+    .footnote {
+      font-size: 0.7rem;
+      text-align: center;
+      color: #6078a0;
+      margin-top: 2rem;
+      border-top: 1px dashed #2a3f60;
+      padding-top: 1rem;
+    }
+
+    @media (max-width: 380px) {
+      .document { padding: 1.5rem 1rem; }
+      .text-block { padding: 0.8rem 0.9rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="document">
+
+  <div class="python-title">
+    <span class="python-dot"></span> PYTHON OOP PROGRAMMING <span class="python-dot"></span>
+  </div>
+  <div class="tagline">The four pillars of Object-Oriented Programming — from classes to advanced design patterns</div>
+
+  <div class="section-group">01 · What Is OOP?</div>
+
+  <div class="subtitle">object-oriented programming overview</div>
+  <div class="text-block">
+    <strong>Object-Oriented Programming (OOP)</strong> is a programming paradigm that organises code around <em>objects</em> — bundles of data (attributes) and behaviour (methods) — rather than procedures or functions alone. Python is a multi-paradigm language that fully supports OOP. Every value in Python is an object, including integers, strings, functions, and even classes themselves.
+  </div>
+
+  <div class="subtitle">the four pillars</div>
+  <div class="text-block">
+    OOP rests on four core principles:
+    <ul>
+      <li><strong>Encapsulation</strong> — bundling data and the methods that operate on it into a single unit (class), hiding internal details.</li>
+      <li><strong>Abstraction</strong> — exposing only what is necessary; hiding complexity behind clean, simple interfaces.</li>
+      <li><strong>Inheritance</strong> — a child class acquiring properties and behaviour from a parent class, enabling code reuse.</li>
+      <li><strong>Polymorphism</strong> — different classes responding to the same interface in their own way, enabling flexible, interchangeable code.</li>
+    </ul>
+  </div>
+
+  <div class="section-group">02 · Classes &amp; Objects</div>
+
+  <div class="subtitle">defining a class</div>
+  <div class="text-block">
+    A <strong>class</strong> is the blueprint; an <strong>object</strong> (instance) is the concrete thing built from it. Define a class with the <code>class</code> keyword. The <code>__init__</code> method is the constructor — it runs automatically when a new object is created. <code>self</code> is the first parameter of every instance method and refers to the current object.
+  </div>
+<div class="code-fragment"><span class="kw">class</span> <span class="fn">Person</span>:
+    species = <span class="st">"Homo sapiens"</span>
+
+    <span class="kw">def</span> <span class="fn">__init__</span>(self, name: str, age: int):
+        self.name = name
+        self.age  = age
+
+    <span class="kw">def</span> <span class="fn">greet</span>(self) -> str:
+        <span class="kw">return</span> <span class="st">f"Hi, I am {self.name}, age {self.age}."</span>
+
+    <span class="kw">def</span> <span class="fn">__repr__</span>(self) -> str:
+        <span class="kw">return</span> <span class="st">f"Person('{self.name}', {self.age})"</span>
+
+alice = <span class="fn">Person</span>(<span class="st">"Alice"</span>, <span class="nu">30</span>)
+<span class="bi">print</span>(alice.greet())
+<span class="bi">print</span>(alice)</div>
+
+  <div class="subtitle">class vs instance attributes</div>
+  <div class="text-block">
+    <strong>Class attributes</strong> are shared across all instances (defined directly in the class body). <strong>Instance attributes</strong> are unique to each object (defined in <code>__init__</code> via <code>self</code>). If you assign to a class attribute on an instance, Python creates a new instance attribute that shadows the class one — the class attribute remains unchanged.
+  </div>
+<div class="code-fragment"><span class="kw">class</span> <span class="fn">Counter</span>:
+    total = <span class="nu">0</span>
+
+    <span class="kw">def</span> <span class="fn">__init__</span>(self, name: str):
+        self.name = name
+        <span class="fn">Counter</span>.total += <span class="nu">1</span>
+
+    @<span class="dec">classmethod</span>
+    <span class="kw">def</span> <span class="fn">get_total</span>(cls) -> int:
+        <span class="kw">return</span> cls.total
+
+<span class="fn">Counter</span>(<span class="st">"a"</span>)
+<span class="fn">Counter</span>(<span class="st">"b"</span>)
+<span class="fn">Counter</span>(<span class="st">"c"</span>)
+<span class="bi">print</span>(<span class="fn">Counter</span>.get_total())</div>
+
+  <div class="subtitle">instance, class &amp; static methods</div>
+  <div class="text-block">
+    Python classes support three kinds of methods. <strong>Instance methods</strong> receive <code>self</code> and can access or modify instance state. <strong>Class methods</strong> (decorated with <code>@classmethod</code>) receive <code>cls</code> and are used for factory constructors or operations affecting the class itself. <strong>Static methods</strong> (decorated with <code>@staticmethod</code>) receive neither — they are utility functions logically grouped inside a class.
+  </div>
+<div class="code-fragment"><span class="kw">class</span> <span class="fn">Temperature</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(self, celsius: float):
+        self.celsius = celsius
+
+    <span class="kw">def</span> <span class="fn">to_fahrenheit</span>(self) -> float:
+        <span class="kw">return</span> self.celsius * <span class="nu">9</span> / <span class="nu">5</span> + <span class="nu">32</span>
+
+    @<span class="dec">classmethod</span>
+    <span class="kw">def</span> <span class="fn">from_fahrenheit</span>(cls, f: float) -> <span class="st">"Temperature"</span>:
+        <span class="kw">return</span> cls((f - <span class="nu">32</span>) * <span class="nu">5</span> / <span class="nu">9</span>)
+
+    @<span class="dec">staticmethod</span>
+    <span class="kw">def</span> <span class="fn">is_freezing</span>(celsius: float) -> bool:
+        <span class="kw">return</span> celsius <= <span class="nu">0</span>
+
+t = <span class="fn">Temperature</span>.from_fahrenheit(<span class="nu">212</span>)
+<span class="bi">print</span>(t.celsius)
+<span class="bi">print</span>(<span class="fn">Temperature</span>.is_freezing(-<span class="nu">5</span>))</div>
+
+  <div class="section-group">03 · Encapsulation</div>
+
+  <div class="subtitle">access control conventions</div>
+  <div class="text-block">
+    Python does not enforce strict access modifiers like Java, but uses naming conventions that every professional developer respects. A single underscore prefix (<code>_attr</code>) signals "protected — internal use only." A double underscore prefix (<code>__attr</code>) triggers <strong>name mangling</strong>, making the attribute harder to access from outside the class. This is Python's version of "private."
+  </div>
+<div class="code-fragment"><span class="kw">class</span> <span class="fn">Wallet</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(self, owner: str, balance: float):
+        self.owner    = owner
+        self._log     = []
+        self.__balance = balance
+
+    <span class="kw">def</span> <span class="fn">deposit</span>(self, amount: float) -> <span class="kw">None</span>:
+        <span class="kw">if</span> amount <= <span class="nu">0</span>:
+            <span class="kw">raise</span> <span class="fn">ValueError</span>(<span class="st">"Deposit must be positive"</span>)
+        self.__balance += amount
+        self._log.append(<span class="st">f"+{amount}"</span>)
+
+    <span class="kw">def</span> <span class="fn">withdraw</span>(self, amount: float) -> <span class="kw">None</span>:
+        <span class="kw">if</span> amount > self.__balance:
+            <span class="kw">raise</span> <span class="fn">ValueError</span>(<span class="st">"Insufficient funds"</span>)
+        self.__balance -= amount
+        self._log.append(<span class="st">f"-{amount}"</span>)</div>
+
+  <div class="subtitle">properties — pythonic getters &amp; setters</div>
+  <div class="text-block">
+    The <code>@property</code> decorator exposes a method as a read-only attribute. Add a <code>@attr.setter</code> to allow validated writes. This is the Pythonic replacement for explicit <code>get_x()</code> and <code>set_x()</code> methods — the interface feels like a plain attribute but runs validation logic transparently.
+  </div>
+<div class="code-fragment"><span class="kw">class</span> <span class="fn">BankAccount</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(self, balance: float = <span class="nu">0</span>):
+        self.__balance = balance
+
+    @<span class="dec">property</span>
+    <span class="kw">def</span> <span class="fn">balance</span>(self) -> float:
+        <span class="kw">return</span> self.__balance
+
+    @balance.<span class="dec">setter</span>
+    <span class="kw">def</span> <span class="fn">balance</span>(self, value: float) -> <span class="kw">None</span>:
+        <span class="kw">if</span> value < <span class="nu">0</span>:
+            <span class="kw">raise</span> <span class="fn">ValueError</span>(<span class="st">"Balance cannot be negative"</span>)
+        self.__balance = value
+
+acc = <span class="fn">BankAccount</span>(<span class="nu">500</span>)
+acc.balance = <span class="nu">750</span>
+<span class="bi">print</span>(acc.balance)</div>
+
+  <div class="tip">Use <code>@property</code> when you want an attribute that feels simple to the caller but runs logic internally — validation, lazy computation, or logging on access.</div>
+
+  <div class="section-group">04 · Abstraction</div>
+
+  <div class="subtitle">abstract base classes (ABC)</div>
+  <div class="text-block">
+    Abstraction hides complex implementation behind a clean interface. Python's <code>abc</code> module provides <code>ABC</code> and <code>@abstractmethod</code>. Any class inheriting from an ABC that does not implement every abstract method <em>cannot be instantiated</em> — Python raises a <code>TypeError</code>. This enforces a contract: all subclasses must provide the required behaviour.
+  </div>
+<div class="code-fragment"><span class="kw">from</span> abc <span class="kw">import</span> ABC, abstractmethod
+
+<span class="kw">class</span> <span class="fn">Shape</span>(ABC):
+
+    @<span class="dec">abstractmethod</span>
+    <span class="kw">def</span> <span class="fn">area</span>(self) -> float: ...
+
+    @<span class="dec">abstractmethod</span>
+    <span class="kw">def</span> <span class="fn">perimeter</span>(self) -> float: ...
+
+    <span class="kw">def</span> <span class="fn">describe</span>(self) -> str:
+        <span class="kw">return</span> <span class="st">f"Area={self.area():.2f}, Perimeter={self.perimeter():.2f}"</span>
+
+<span class="kw">class</span> <span class="fn">Circle</span>(<span class="fn">Shape</span>):
+    <span class="kw">def</span> <span class="fn">__init__</span>(self, radius: float):
+        self.radius = radius
+    <span class="kw">def</span> <span class="fn">area</span>(self) -> float:      <span class="kw">return</span> <span class="nu">3.14159</span> * self.radius ** <span class="nu">2</span>
+    <span class="kw">def</span> <span class="fn">perimeter</span>(self) -> float: <span class="kw">return</span> <span class="nu">2</span> * <span class="nu">3.14159</span> * self.radius
+
+c = <span class="fn">Circle</span>(<span class="nu">5</span>)
+<span class="bi">print</span>(c.describe())</div>
+
+  <div class="subtitle">abstract properties</div>
+  <div class="text-block">
+    You can combine <code>@property</code> and <code>@abstractmethod</code> to require that subclasses expose a specific attribute via a property. Stack the decorators: <code>@property</code> on top, <code>@abstractmethod</code> below. This pattern is common in framework design where every subclass must declare, for example, a <code>name</code> or <code>endpoint</code> string.
+  </div>
+<div class="code-fragment"><span class="kw">from</span> abc <span class="kw">import</span> ABC, abstractmethod
+
+<span class="kw">class</span> <span class="fn">DataSource</span>(ABC):
+
+    @<span class="dec">property</span>
+    @<span class="dec">abstractmethod</span>
+    <span class="kw">def</span> <span class="fn">name</span>(self) -> str: ...
+
+    @<span class="dec">abstractmethod</span>
+    <span class="kw">def</span> <span class="fn">load</span>(self) -> list: ...
+
+<span class="kw">class</span> <span class="fn">CSVSource</span>(<span class="fn">DataSource</span>):
+    @<span class="dec">property</span>
+    <span class="kw">def</span> <span class="fn">name</span>(self) -> str: <span class="kw">return</span> <span class="st">"CSV"</span>
+    <span class="kw">def</span> <span class="fn">load</span>(self) -> list: <span class="kw">return</span> [<span class="st">"row1"</span>, <span class="st">"row2"</span>]
+
+src = <span class="fn">CSVSource</span>()
+<span class="bi">print</span>(src.name, src.load())</div>
+
+  <div class="section-group">05 · Inheritance</div>
+
+  <div class="subtitle">single inheritance</div>
+  <div class="text-block">
+    A child class inherits all attributes and methods from its parent. Call the parent's constructor with <code>super().__init__()</code>. Override methods in the child to specialise behaviour. The child class can also call the parent's version of an overridden method using <code>super().method()</code>, composing rather than replacing the parent logic.
+  </div>
+<div class="code-fragment"><span class="kw">class</span> <span class="fn">Animal</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(self, name: str):
+        self.name = name
+
+    <span class="kw">def</span> <span class="fn">speak</span>(self) -> str:
+        <span class="kw">return</span> <span class="st">f"{self.name} makes a sound."</span>
+
+    <span class="kw">def</span> <span class="fn">__repr__</span>(self) -> str:
+        <span class="kw">return</span> <span class="st">f"{self.__class__.__name__}('{self.name}')"</span>
+
+<span class="kw">class</span> <span class="fn">Dog</span>(<span class="fn">Animal</span>):
+    <span class="kw">def</span> <span class="fn">speak</span>(self) -> str:
+        <span class="kw">return</span> <span class="st">f"{self.name} says: Woof!"</span>
+
+<span class="kw">class</span> <span class="fn">Cat</span>(<span class="fn">Animal</span>):
+    <span class="kw">def</span> <span class="fn">speak</span>(self) -> str:
+        <span class="kw">return</span> <span class="st">f"{self.name} says: Meow!"</span>
+
+<span class="bi">print</span>(<span class="fn">Dog</span>(<span class="st">"Rex"</span>).speak())
+<span class="bi">print</span>(<span class="fn">Cat</span>(<span class="st">"Luna"</span>).speak())</div>
+
+  <div class="subtitle">super() &amp; extending parents</div>
+  <div class="text-block">
+    <code>super()</code> returns a proxy to the parent class, enabling cooperative calls up the inheritance chain. Use it to extend — not replace — parent behaviour. This is especially important when the parent's <code>__init__</code> sets up state your child class depends on. Always pass any parent-required arguments through when calling <code>super().__init__()</code>.
+  </div>
+<div class="code-fragment"><span class="kw">class</span> <span class="fn">Vehicle</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(self, make: str, speed: int):
+        self.make  = make
+        self.speed = speed
+
+    <span class="kw">def</span> <span class="fn">describe</span>(self) -> str:
+        <span class="kw">return</span> <span class="st">f"{self.make} at {self.speed} km/h"</span>
+
+<span class="kw">class</span> <span class="fn">ElectricCar</span>(<span class="fn">Vehicle</span>):
+    <span class="kw">def</span> <span class="fn">__init__</span>(self, make: str, speed: int, range_km: int):
+        <span class="bi">super</span>().__init__(make, speed)
+        self.range_km = range_km
+
+    <span class="kw">def</span> <span class="fn">describe</span>(self) -> str:
+        base = <span class="bi">super</span>().describe()
+        <span class="kw">return</span> <span class="st">f"{base}, range {self.range_km} km"</span>
+
+ev = <span class="fn">ElectricCar</span>(<span class="st">"Tesla"</span>, <span class="nu">250</span>, <span class="nu">600</span>)
+<span class="bi">print</span>(ev.describe())</div>
+
+  <div class="subtitle">multiple inheritance &amp; MRO</div>
+  <div class="text-block">
+    Python allows a class to inherit from multiple parents simultaneously. The <strong>Method Resolution Order (MRO)</strong> — computed by the C3 linearisation algorithm — defines the order Python searches classes for a method. Inspect it with <code>ClassName.__mro__</code>. MRO ensures consistent, predictable resolution even in complex diamond hierarchies. Use <code>super()</code> cooperatively for this to work correctly.
+  </div>
+<div class="code-fragment"><span class="kw">class</span> <span class="fn">Flyable</span>:
+    <span class="kw">def</span> <span class="fn">fly</span>(self) -> str: <span class="kw">return</span> <span class="st">"I can fly!"</span>
+
+<span class="kw">class</span> <span class="fn">Swimmable</span>:
+    <span class="kw">def</span> <span class="fn">swim</span>(self) -> str: <span class="kw">return</span> <span class="st">"I can swim!"</span>
+
+<span class="kw">class</span> <span class="fn">Duck</span>(<span class="fn">Flyable</span>, <span class="fn">Swimmable</span>):
+    <span class="kw">def</span> <span class="fn">quack</span>(self) -> str: <span class="kw">return</span> <span class="st">"Quack!"</span>
+
+donald = <span class="fn">Duck</span>()
+<span class="bi">print</span>(donald.fly())
+<span class="bi">print</span>(donald.swim())
+<span class="bi">print</span>(<span class="fn">Duck</span>.__mro__)</div>
+
+  <div class="warn">Prefer <strong>composition over deep inheritance chains</strong>. Deep hierarchies create tight coupling — a change in the parent ripples unexpectedly through all children. If the relationship is "has-a" rather than "is-a", use composition instead.</div>
+
+  <div class="section-group">06 · Polymorphism</div>
+
+  <div class="subtitle">duck typing</div>
+  <div class="text-block">
+    Python's approach to polymorphism is <strong>duck typing</strong>: if an object has the expected methods, it works — regardless of its class. Named after the principle "if it walks like a duck and quacks like a duck, it's a duck." This makes Python code flexible and compositional without requiring explicit interfaces or type declarations.
+  </div>
+<div class="code-fragment"><span class="kw">class</span> <span class="fn">HTMLRenderer</span>:
+    <span class="kw">def</span> <span class="fn">render</span>(self, content: str) -> str:
+        <span class="kw">return</span> <span class="st">f"&lt;p&gt;{content}&lt;/p&gt;"</span>
+
+<span class="kw">class</span> <span class="fn">PDFRenderer</span>:
+    <span class="kw">def</span> <span class="fn">render</span>(self, content: str) -> str:
+        <span class="kw">return</span> <span class="st">f"[PDF] {content}"</span>
+
+<span class="kw">class</span> <span class="fn">TerminalRenderer</span>:
+    <span class="kw">def</span> <span class="fn">render</span>(self, content: str) -> str:
+        <span class="kw">return</span> <span class="st">f">> {content}"</span>
+
+<span class="kw">def</span> <span class="fn">publish</span>(renderer, content: str) -> <span class="kw">None</span>:
+    <span class="bi">print</span>(renderer.render(content))
+
+<span class="kw">for</span> r <span class="kw">in</span> [<span class="fn">HTMLRenderer</span>(), <span class="fn">PDFRenderer</span>(), <span class="fn">TerminalRenderer</span>()]:
+    <span class="fn">publish</span>(r, <span class="st">"Python OOP is elegant"</span>)</div>
+
+  <div class="subtitle">method overriding &amp; operator overloading</div>
+  <div class="text-block">
+    <strong>Method overriding</strong> allows a subclass to replace a parent method with its own version. <strong>Operator overloading</strong> uses <em>dunder methods</em> to give custom objects behaviour with Python's built-in operators (<code>+</code>, <code>==</code>, <code>&lt;</code>, <code>len()</code>, etc.). This makes your classes feel like native Python types.
+  </div>
+<div class="code-fragment"><span class="kw">class</span> <span class="fn">Vector</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(self, x: float, y: float):
+        self.x = x
+        self.y = y
+
+    <span class="kw">def</span> <span class="fn">__add__</span>(self, other: <span class="st">"Vector"</span>) -> <span class="st">"Vector"</span>:
+        <span class="kw">return</span> <span class="fn">Vector</span>(self.x + other.x, self.y + other.y)
+
+    <span class="kw">def</span> <span class="fn">__eq__</span>(self, other: <span class="st">"Vector"</span>) -> bool:
+        <span class="kw">return</span> self.x == other.x <span class="kw">and</span> self.y == other.y
+
+    <span class="kw">def</span> <span class="fn">__repr__</span>(self) -> str:
+        <span class="kw">return</span> <span class="st">f"Vector({self.x}, {self.y})"</span>
+
+v1 = <span class="fn">Vector</span>(<span class="nu">1</span>, <span class="nu">2</span>)
+v2 = <span class="fn">Vector</span>(<span class="nu">3</span>, <span class="nu">4</span>)
+<span class="bi">print</span>(v1 + v2)
+<span class="bi">print</span>(v1 == <span class="fn">Vector</span>(<span class="nu">1</span>, <span class="nu">2</span>))</div>
+
+  <div class="section-group">07 · Dunder / Magic Methods</div>
+
+  <div class="subtitle">essential dunder methods</div>
+  <div class="text-block">
+    Dunder (double-underscore) methods let your objects integrate with Python's built-in machinery. They are called implicitly — you never call <code>obj.__len__()</code> directly; you call <code>len(obj)</code> and Python does the rest.
+    <table>
+      <thead>
+        <tr><th>Dunder</th><th>Triggered by</th><th>Purpose</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>__init__</code></td><td><code>MyClass()</code></td><td>Constructor — initialise object state</td></tr>
+        <tr><td><code>__repr__</code></td><td><code>repr(obj)</code></td><td>Developer-facing string, ideally eval-able</td></tr>
+        <tr><td><code>__str__</code></td><td><code>print(obj)</code></td><td>User-facing readable string</td></tr>
+        <tr><td><code>__len__</code></td><td><code>len(obj)</code></td><td>Return the size of the container</td></tr>
+        <tr><td><code>__getitem__</code></td><td><code>obj[key]</code></td><td>Index or key access</td></tr>
+        <tr><td><code>__contains__</code></td><td><code>x in obj</code></td><td>Membership test</td></tr>
+        <tr><td><code>__iter__</code></td><td><code>for x in obj</code></td><td>Return an iterator</td></tr>
+        <tr><td><code>__eq__</code></td><td><code>obj == other</code></td><td>Equality comparison</td></tr>
+        <tr><td><code>__lt__</code></td><td><code>obj &lt; other</code></td><td>Less-than (enables sorting)</td></tr>
+        <tr><td><code>__hash__</code></td><td><code>hash(obj)</code></td><td>Dict key / set member support</td></tr>
+        <tr><td><code>__call__</code></td><td><code>obj()</code></td><td>Make instance callable like a function</td></tr>
+        <tr><td><code>__enter__</code></td><td><code>with obj</code></td><td>Context manager entry</td></tr>
+        <tr><td><code>__exit__</code></td><td>leaving <code>with</code></td><td>Context manager cleanup</td></tr>
+        <tr><td><code>__del__</code></td><td>garbage collected</td><td>Destructor (use sparingly)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="subtitle">container &amp; callable dunders in practice</div>
+  <div class="text-block">
+    Once you implement <code>__len__</code> and <code>__getitem__</code>, your object works with <code>for</code> loops, <code>list()</code>, <code>in</code> checks, and <code>reversed()</code> automatically. Implementing <code>__call__</code> makes an instance behave like a function — the pattern used by PyTorch's <code>nn.Module</code> and stateful transforms.
+  </div>
+<div class="code-fragment"><span class="kw">class</span> <span class="fn">Pipeline</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(self, steps: list):
+        self._steps = steps
+
+    <span class="kw">def</span> <span class="fn">__len__</span>(self) -> int:
+        <span class="kw">return</span> <span class="bi">len</span>(self._steps)
+
+    <span class="kw">def</span> <span class="fn">__getitem__</span>(self, idx):
+        <span class="kw">return</span> self._steps[idx]
+
+    <span class="kw">def</span> <span class="fn">__contains__</span>(self, item) -> bool:
+        <span class="kw">return</span> item <span class="kw">in</span> self._steps
+
+    <span class="kw">def</span> <span class="fn">__call__</span>(self, data):
+        <span class="kw">for</span> step <span class="kw">in</span> self._steps:
+            data = step(data)
+        <span class="kw">return</span> data
+
+p = <span class="fn">Pipeline</span>([str.strip, str.lower])
+<span class="bi">print</span>(p(<span class="st">"  HELLO  "</span>))
+<span class="bi">print</span>(<span class="bi">len</span>(p), <span class="st">"steps"</span>)</div>
+
+  <div class="section-group">08 · Dataclasses &amp; Protocols</div>
+
+  <div class="subtitle">dataclasses <span class="badge badge-new">3.7+</span></div>
+  <div class="text-block">
+    The <code>@dataclass</code> decorator auto-generates <code>__init__</code>, <code>__repr__</code>, and <code>__eq__</code> from annotated fields. Add <code>frozen=True</code> to make instances immutable and hashable. Add <code>order=True</code> to auto-generate comparison methods. Add <code>slots=True</code> (Python 3.10+) for memory-efficient slot-based storage. Dataclasses are ideal for data containers — they are not a replacement for full OOP classes with rich behaviour.
+  </div>
+<div class="code-fragment"><span class="kw">from</span> dataclasses <span class="kw">import</span> dataclass, field
+
+@<span class="dec">dataclass</span>
+<span class="kw">class</span> <span class="fn">Student</span>:
+    name:   str
+    grade:  int
+    scores: list[int] = field(default_factory=list)
+
+    <span class="kw">def</span> <span class="fn">average</span>(self) -> float:
+        <span class="kw">return</span> <span class="bi">sum</span>(self.scores) / <span class="bi">len</span>(self.scores) <span class="kw">if</span> self.scores <span class="kw">else</span> <span class="nu">0.0</span>
+
+s = <span class="fn">Student</span>(<span class="st">"Glenn"</span>, <span class="nu">10</span>, [<span class="nu">90</span>, <span class="nu">85</span>, <span class="nu">92</span>])
+<span class="bi">print</span>(s)
+<span class="bi">print</span>(s.average())</div>
+
+  <div class="subtitle">protocols — structural typing <span class="badge badge-new">3.8+</span></div>
+  <div class="text-block">
+    A <code>Protocol</code> defines a structural interface: any class that has the required methods <em>automatically</em> satisfies it — no explicit inheritance needed. This is Python's formal version of duck typing, enabling static type checkers (<code>mypy</code>) to verify interface compliance without coupling classes together. Import from <code>typing</code>.
+  </div>
+<div class="code-fragment"><span class="kw">from</span> typing <span class="kw">import</span> Protocol
+
+<span class="kw">class</span> <span class="fn">Drawable</span>(Protocol):
+    <span class="kw">def</span> <span class="fn">draw</span>(self) -> str: ...
+
+<span class="kw">class</span> <span class="fn">Circle</span>:
+    <span class="kw">def</span> <span class="fn">draw</span>(self) -> str: <span class="kw">return</span> <span class="st">"Drawing a circle"</span>
+
+<span class="kw">class</span> <span class="fn">Square</span>:
+    <span class="kw">def</span> <span class="fn">draw</span>(self) -> str: <span class="kw">return</span> <span class="st">"Drawing a square"</span>
+
+<span class="kw">def</span> <span class="fn">render</span>(shape: <span class="fn">Drawable</span>) -> <span class="kw">None</span>:
+    <span class="bi">print</span>(shape.draw())
+
+<span class="fn">render</span>(<span class="fn">Circle</span>())
+<span class="fn">render</span>(<span class="fn">Square</span>())</div>
+
+  <div class="section-group">09 · Design Patterns</div>
+
+  <div class="subtitle">singleton pattern</div>
+  <div class="text-block">
+    The <strong>Singleton</strong> pattern ensures only one instance of a class can ever exist. It is used for shared resources like configuration objects, database connection pools, or logging singletons. Override <code>__new__</code> — the method Python calls before <code>__init__</code> to actually create the object.
+  </div>
+<div class="code-fragment"><span class="kw">class</span> <span class="fn">Config</span>:
+    _instance = <span class="kw">None</span>
+
+    <span class="kw">def</span> <span class="fn">__new__</span>(cls):
+        <span class="kw">if</span> cls._instance <span class="kw">is</span> <span class="kw">None</span>:
+            cls._instance = <span class="bi">super</span>().__new__(cls)
+            cls._instance.debug = <span class="kw">False</span>
+            cls._instance.version = <span class="st">"1.0"</span>
+        <span class="kw">return</span> cls._instance
+
+a = <span class="fn">Config</span>()
+b = <span class="fn">Config</span>()
+a.debug = <span class="kw">True</span>
+<span class="bi">print</span>(b.debug)
+<span class="bi">print</span>(a <span class="kw">is</span> b)</div>
+
+  <div class="subtitle">factory pattern</div>
+  <div class="text-block">
+    A <strong>Factory</strong> creates objects without the caller needing to know the concrete class. Use a class method or standalone function that takes a type string and returns the correct subclass. This pattern enables extensible, configurable object creation and is used throughout Django, SQLAlchemy, and Pillow.
+  </div>
+<div class="code-fragment"><span class="kw">class</span> <span class="fn">Animal</span>:
+    <span class="kw">def</span> <span class="fn">speak</span>(self) -> str: ...
+
+<span class="kw">class</span> <span class="fn">Dog</span>(<span class="fn">Animal</span>):
+    <span class="kw">def</span> <span class="fn">speak</span>(self) -> str: <span class="kw">return</span> <span class="st">"Woof!"</span>
+
+<span class="kw">class</span> <span class="fn">Cat</span>(<span class="fn">Animal</span>):
+    <span class="kw">def</span> <span class="fn">speak</span>(self) -> str: <span class="kw">return</span> <span class="st">"Meow!"</span>
+
+<span class="kw">class</span> <span class="fn">Bird</span>(<span class="fn">Animal</span>):
+    <span class="kw">def</span> <span class="fn">speak</span>(self) -> str: <span class="kw">return</span> <span class="st">"Tweet!"</span>
+
+<span class="kw">def</span> <span class="fn">animal_factory</span>(kind: str) -> <span class="fn">Animal</span>:
+    registry = {<span class="st">"dog"</span>: <span class="fn">Dog</span>, <span class="st">"cat"</span>: <span class="fn">Cat</span>, <span class="st">"bird"</span>: <span class="fn">Bird</span>}
+    <span class="kw">if</span> kind <span class="kw">not in</span> registry:
+        <span class="kw">raise</span> <span class="fn">ValueError</span>(<span class="st">f"Unknown animal: {kind}"</span>)
+    <span class="kw">return</span> registry[kind]()
+
+<span class="bi">print</span>(<span class="fn">animal_factory</span>(<span class="st">"dog"</span>).speak())
+<span class="bi">print</span>(<span class="fn">animal_factory</span>(<span class="st">"bird"</span>).speak())</div>
+
+  <div class="subtitle">observer pattern</div>
+  <div class="text-block">
+    The <strong>Observer</strong> pattern (also called pub/sub) allows objects to subscribe to events emitted by another object. When the subject's state changes, it notifies all registered observers automatically. This pattern is the backbone of event systems, UI frameworks, and reactive data pipelines.
+  </div>
+<div class="code-fragment"><span class="kw">class</span> <span class="fn">EventEmitter</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(self):
+        self._listeners: dict[str, list] = {}
+
+    <span class="kw">def</span> <span class="fn">on</span>(self, event: str, callback) -> <span class="kw">None</span>:
+        self._listeners.setdefault(event, []).append(callback)
+
+    <span class="kw">def</span> <span class="fn">emit</span>(self, event: str, *args) -> <span class="kw">None</span>:
+        <span class="kw">for</span> cb <span class="kw">in</span> self._listeners.get(event, []):
+            cb(*args)
+
+emitter = <span class="fn">EventEmitter</span>()
+emitter.on(<span class="st">"login"</span>, <span class="kw">lambda</span> u: <span class="bi">print</span>(<span class="st">f"User logged in: {u}"</span>))
+emitter.on(<span class="st">"login"</span>, <span class="kw">lambda</span> u: <span class="bi">print</span>(<span class="st">f"Sending welcome email to {u}"</span>))
+emitter.emit(<span class="st">"login"</span>, <span class="st">"Glenn"</span>)</div>
+
+  <div class="section-group">10 · OOP Best Practices</div>
+
+  <div class="subtitle">SOLID principles in Python</div>
+  <div class="text-block">
+    The <strong>SOLID</strong> principles guide writing maintainable, extensible OOP code:
+    <ul>
+      <li><strong>S — Single Responsibility:</strong> Each class has one reason to change. A <code>UserService</code> handles user logic; a separate <code>EmailService</code> sends email.</li>
+      <li><strong>O — Open/Closed:</strong> Open for extension, closed for modification. Add behaviour via new subclasses, not by editing existing code.</li>
+      <li><strong>L — Liskov Substitution:</strong> Subclasses must be usable wherever the parent is expected without breaking correctness.</li>
+      <li><strong>I — Interface Segregation:</strong> Prefer small, focused interfaces. A class should not be forced to implement methods it does not need.</li>
+      <li><strong>D — Dependency Inversion:</strong> Depend on abstractions, not concretions. Inject dependencies rather than hard-coding them inside classes.</li>
+    </ul>
+  </div>
+
+  <div class="subtitle">composition over inheritance</div>
+  <div class="text-block">
+    Inheritance expresses "is-a" relationships. <strong>Composition</strong> expresses "has-a" — building objects by combining smaller, focused collaborators instead of extending deep class trees. Composition produces looser coupling, easier testing, and more flexible designs. As a rule: if you find yourself building hierarchies deeper than two or three levels, prefer composition.
+  </div>
+<div class="code-fragment"><span class="kw">class</span> <span class="fn">Logger</span>:
+    <span class="kw">def</span> <span class="fn">log</span>(self, msg: str) -> <span class="kw">None</span>:
+        <span class="bi">print</span>(<span class="st">f"[LOG] {msg}"</span>)
+
+<span class="kw">class</span> <span class="fn">Validator</span>:
+    <span class="kw">def</span> <span class="fn">validate</span>(self, data: dict) -> bool:
+        <span class="kw">return</span> <span class="bi">bool</span>(data.get(<span class="st">"name"</span>))
+
+<span class="kw">class</span> <span class="fn">UserService</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(self):
+        self.logger    = <span class="fn">Logger</span>()
+        self.validator = <span class="fn">Validator</span>()
+
+    <span class="kw">def</span> <span class="fn">create</span>(self, data: dict) -> str:
+        <span class="kw">if not</span> self.validator.validate(data):
+            <span class="kw">raise</span> <span class="fn">ValueError</span>(<span class="st">"Invalid data"</span>)
+        self.logger.log(<span class="st">f"Creating user: {data['name']}"</span>)
+        <span class="kw">return</span> <span class="st">f"User {data['name']} created."</span></div>
+
+  <div class="subtitle">OOP anti-patterns to avoid</div>
+  <div class="text-block">
+    <ul>
+      <li><strong>God Class</strong> — one class that does everything. Split it into focused collaborators.</li>
+      <li><strong>Mutable default arguments</strong> — <code>def __init__(self, items=[])</code> shares the list across all instances. Use <code>None</code> as sentinel instead.</li>
+      <li><strong>Missing <code>__repr__</code></strong> — classes without it print useless <code>&lt;MyClass at 0x7f...&gt;</code>. Always implement it.</li>
+      <li><strong>Breaking LSP</strong> — a <code>Square</code> that inherits from <code>Rectangle</code> but breaks area semantics violates the Liskov Substitution Principle.</li>
+      <li><strong>Deep inheritance chains</strong> — hierarchies deeper than 3 levels become fragile. Favour composition.</li>
+      <li><strong>Class as namespace</strong> — a class with only <code>@staticmethod</code>s and no state is better written as a module.</li>
+    </ul>
+  </div>
+  <div class="tip">Use <code>dataclasses</code> for data containers, <code>ABC</code> for enforced interfaces, <code>@property</code> instead of getters/setters, and <code>Protocol</code> for structural duck-typing with static analysis support.</div>
+
+  <div class="footnote">
+    <span class="python-dot"></span> Created by Glenn Junsay Pansensoy &nbsp;·&nbsp; Python #306998 · Obsidian #0B1020 &nbsp;·&nbsp; 1rem titles · 0.8rem paragraphs
+  </div>
+</div>
+
+<div style="font-size:0.7rem; color:#3a5470; margin-top:0.8rem; text-align:center;">
+  ⚡ pure rem sizing · mobile first · python oop programming · 10 sections
+</div>
+</body>
+</html>
