@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Privacy Policy · CODE SENSE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: linear-gradient(145deg, #0a1117 0%, #1a2630 100%);
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: #e1e9f0;
+            padding: 2rem 1.5rem;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .privacy-document {
+            max-width: 960px;
+            width: 100%;
+            background: linear-gradient(165deg, #0f1c26 0%, #13232f 100%);
+            border-radius: 28px;
+            box-shadow:
+                0 25px 50px -12px rgba(0, 0, 0, 0.8),
+                0 0 0 1px rgba(52, 118, 176, 0.2),
+                0 0 20px rgba(0, 100, 200, 0.2);
+            padding: 2.5rem;
+            border: 1px solid #2a4055;
+            backdrop-filter: blur(2px);
+            align-self: flex-start;
+        }
+
+        header {
+            margin-bottom: 0.5rem;
+        }
+
+        h1 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.4rem;
+            background: linear-gradient(135deg, #78b9ff, #306998, #ffd43b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+            font-family: 'JetBrains Mono', monospace;
+            line-height: 1.4;
+        }
+
+        .subhead {
+            font-size: 0.9rem;
+            color: #a0c1d9;
+            border-left: 4px solid #306998;
+            padding-left: 1rem;
+            margin: 0.5rem 0 1.5rem 0.2rem;
+            font-weight: 400;
+            line-height: 1.55;
+        }
+
+        .last-updated {
+            display: inline-block;
+            background: #1e3347;
+            padding: 0.3rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.72rem;
+            font-weight: 500;
+            color: #ffd43b;
+            margin-bottom: 2rem;
+            border: 1px solid #306998;
+            box-shadow: 0 0 10px rgba(48, 105, 152, 0.3);
+            font-family: 'JetBrains Mono', monospace;
+            word-break: break-word;
+        }
+
+        h2 {
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            margin: 2rem 0 1rem 0;
+            color: #ffd43b;
+            border-bottom: 2px solid #306998;
+            padding-bottom: 0.4rem;
+            text-shadow: 0 0 8px rgba(255, 212, 59, 0.2);
+        }
+
+        h3 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin: 1.5rem 0 0.8rem 0;
+            color: #78b9ff;
+        }
+
+        p {
+            color: #cbd5e1;
+            margin-bottom: 0.9rem;
+            font-size: 0.8rem;
+            line-height: 1.75;
+            text-align: justify;
+            hyphens: auto;
+            -webkit-hyphens: auto;
+        }
+
+        li {
+            color: #cbd5e1;
+            font-size: 0.8rem;
+            margin-bottom: 0.45rem;
+            line-height: 1.65;
+        }
+
+        ul, ol {
+            margin: 0.8rem 0 1.5rem 1.5rem;
+        }
+
+        a {
+            color: #78b9ff;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dotted #306998;
+            transition: all 0.2s ease;
+            word-break: break-word;
+        }
+
+        a:hover {
+            color: #ffd43b;
+            border-bottom: 2px solid #ffd43b;
+            text-shadow: 0 0 8px rgba(255, 212, 59, 0.3);
+        }
+
+        strong {
+            color: #ddeaf5;
+            font-weight: 600;
+        }
+
+        .highlight-box {
+            background: #102330;
+            border-left: 5px solid #ffd43b;
+            padding: 1.2rem 1.4rem;
+            border-radius: 0 20px 20px 0;
+            margin: 1.8rem 0;
+            font-size: 0.8rem;
+            box-shadow: inset 0 0 0 1px #306998, 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .highlight-box p {
+            margin: 0;
+            text-align: left;
+        }
+
+        .highlight-box strong {
+            color: #ffd43b;
+        }
+
+        .grid-points {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.2rem;
+            margin: 1.5rem 0 1.2rem;
+        }
+
+        .card-trait {
+            background: #0e1f2c;
+            border-radius: 16px;
+            padding: 1.2rem;
+            border: 1px solid #2a4055;
+            transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .card-trait:hover {
+            border-color: #78b9ff;
+            background: #132b3a;
+            box-shadow: 0 0 20px rgba(48, 105, 152, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .card-trait h4 {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #78b9ff;
+            margin-bottom: 0.2rem;
+        }
+
+        .card-trait p {
+            font-size: 0.78rem;
+            margin-bottom: 0.3rem;
+            color: #b0c7da;
+            line-height: 1.5;
+            text-align: left;
+        }
+
+        .data-badge {
+            background: #1e3347;
+            border-radius: 40px;
+            padding: 0.2rem 0.8rem;
+            font-size: 0.65rem;
+            font-weight: 500;
+            display: inline-block;
+            margin: 0.2rem 0.1rem 0 0;
+            color: #ffd43b;
+            border: 1px solid #306998;
+            font-family: 'JetBrains Mono', monospace;
+            box-shadow: 0 0 8px rgba(48, 105, 152, 0.3);
+            align-self: flex-start;
+            white-space: nowrap;
+        }
+
+        .code-inline {
+            font-family: 'JetBrains Mono', monospace;
+            color: #ffd43b;
+            background: #1a2f40;
+            padding: 0.2rem 0.4rem;
+            border-radius: 6px;
+            border: 1px solid #306998;
+            font-size: 0.72rem;
+            word-break: break-word;
+        }
+
+        .law-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin: 0.6rem 0 1.2rem;
+        }
+
+        .law-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            background: #0e2030;
+            border: 1px solid rgba(86, 212, 160, 0.35);
+            border-radius: 20px;
+            padding: 0.22rem 0.7rem;
+            font-size: 0.65rem;
+            color: #56d4a0;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .toc {
+            background: #0b1a24;
+            border: 1px solid #2a4055;
+            border-radius: 16px;
+            padding: 1.2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .toc-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            color: #ffd43b;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 0.8rem;
+            display: block;
+        }
+
+        .toc ol {
+            margin: 0;
+            padding-left: 1.2rem;
+            column-count: 2;
+            column-gap: 1.5rem;
+        }
+
+        .toc li {
+            margin-bottom: 0.3rem;
+            color: #8fa9c2;
+            font-size: 0.72rem;
+            break-inside: avoid;
+        }
+
+        .toc a {
+            color: #78b9ff;
+            font-weight: 400;
+            border-bottom: none;
+        }
+
+        .toc a:hover {
+            color: #ffd43b;
+            border-bottom: none;
+        }
+
+        .sp-table-wrap {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            border-radius: 12px;
+            border: 1px solid #2a4055;
+            margin: 1.5rem 0;
+        }
+
+        .subprocessor-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.75rem;
+            white-space: nowrap;
+        }
+
+        .subprocessor-table thead tr {
+            background: #0e2030;
+        }
+
+        .subprocessor-table th {
+            color: #ffd43b;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            font-weight: 500;
+            text-align: left;
+            padding: 0.7rem 0.9rem;
+            letter-spacing: 0.05em;
+            border-bottom: 2px solid #306998;
+        }
+
+        .subprocessor-table td {
+            padding: 0.6rem 0.9rem;
+            color: #b0c7da;
+            vertical-align: top;
+            border-bottom: 1px solid #1e3347;
+            line-height: 1.45;
+            white-space: normal;
+        }
+
+        .subprocessor-table tbody tr:nth-child(odd) {
+            background: #0c1d2a;
+        }
+
+        .subprocessor-table tbody tr:nth-child(even) {
+            background: #0f2131;
+        }
+
+        .subprocessor-table tbody tr:hover td {
+            background: #132b3a;
+        }
+
+        .sp-badge {
+            display: inline-block;
+            font-size: 0.6rem;
+            padding: 0.1rem 0.45rem;
+            border-radius: 20px;
+            font-family: 'JetBrains Mono', monospace;
+            border: 1px solid;
+            white-space: nowrap;
+        }
+
+        .sp-badge.ph  { color: #56d4a0; border-color: #56d4a0; background: rgba(86, 212, 160, 0.07); }
+        .sp-badge.us  { color: #78b9ff; border-color: #78b9ff; background: rgba(120, 185, 255, 0.07); }
+        .sp-badge.scc { color: #ffd43b; border-color: #ffd43b; background: rgba(255, 212, 59, 0.07); }
+
+        .ai-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            background: #102230;
+            border: 1px solid #306998;
+            border-radius: 20px;
+            padding: 0.2rem 0.65rem;
+            font-size: 0.63rem;
+            color: #78b9ff;
+            font-family: 'JetBrains Mono', monospace;
+            margin: 0.3rem 0.15rem 0 0;
+        }
+
+        .ai-badge.yes {
+            color: #56d4a0;
+            border-color: #56d4a0;
+        }
+
+        .faq-item {
+            border: 1px solid #2a4055;
+            border-radius: 12px;
+            margin-bottom: 0.7rem;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            width: 100%;
+            background: #0e1f2c;
+            border: none;
+            color: #a0c1d9;
+            font-size: 0.8rem;
+            font-family: 'Inter', sans-serif;
+            padding: 0.9rem 1rem;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.8rem;
+            transition: background 0.2s;
+        }
+
+        .faq-question:hover {
+            background: #132b3a;
+            color: #e1e9f0;
+        }
+
+        .faq-question[aria-expanded="true"] {
+            color: #ffd43b;
+            background: #102030;
+        }
+
+        .faq-chevron {
+            font-style: normal;
+            font-size: 0.65rem;
+            transition: transform 0.25s;
+            color: #306998;
+            flex-shrink: 0;
+        }
+
+        .faq-question[aria-expanded="true"] .faq-chevron {
+            transform: rotate(180deg);
+            color: #ffd43b;
+        }
+
+        .faq-body {
+            padding: 0.8rem 1rem 1rem;
+            font-size: 0.77rem;
+            color: #9fb8cc;
+            background: #0c1b27;
+            line-height: 1.65;
+        }
+
+        .faq-body p {
+            margin: 0;
+            font-size: 0.77rem;
+            text-align: left;
+        }
+
+        .cookie-panel {
+            background: #0b1a24;
+            border: 1px solid #2a4055;
+            border-radius: 16px;
+            overflow: hidden;
+            margin: 1.2rem 0;
+        }
+
+        .cookie-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.8rem 1.2rem;
+            border-bottom: 1px solid #1e3347;
+            gap: 1rem;
+            transition: background 0.15s;
+        }
+
+        .cookie-row:last-of-type {
+            border-bottom: none;
+        }
+
+        .cookie-row:hover {
+            background: #0e1f2c;
+        }
+
+        .cookie-label {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .cookie-label strong {
+            display: block;
+            font-size: 0.78rem;
+            color: #a0c1d9;
+            margin-bottom: 0.15rem;
+        }
+
+        .cookie-label span {
+            font-size: 0.68rem;
+            color: #5f8399;
+            line-height: 1.4;
+            display: block;
+        }
+
+        .toggle-wrap {
+            flex-shrink: 0;
+        }
+
+        .toggle {
+            position: relative;
+            width: 44px;
+            height: 24px;
+            display: inline-block;
+        }
+
+        .toggle input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            inset: 0;
+            background: #1e3347;
+            border-radius: 24px;
+            cursor: pointer;
+            border: 1px solid #2a4055;
+            transition: background 0.2s, border-color 0.2s;
+        }
+
+        .slider::before {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            left: 3px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #4a6a80;
+            border-radius: 50%;
+            transition: left 0.2s, background 0.2s;
+        }
+
+        .toggle input:checked + .slider {
+            background: #306998;
+            border-color: #78b9ff;
+        }
+
+        .toggle input:checked + .slider::before {
+            left: 23px;
+            background: #ffd43b;
+        }
+
+        .toggle input:disabled + .slider {
+            cursor: not-allowed;
+            opacity: 0.55;
+        }
+
+        .cookie-footer {
+            padding: 0.9rem 1.2rem;
+            background: #0e1f2c;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .save-prefs {
+            background: #306998;
+            color: #ffd43b;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            padding: 0.45rem 1.1rem;
+            border-radius: 8px;
+            border: 1px solid #78b9ff;
+            cursor: pointer;
+            transition: background 0.2s, box-shadow 0.2s;
+        }
+
+        .save-prefs:hover {
+            background: #3a7fbb;
+            box-shadow: 0 0 12px rgba(48, 105, 152, 0.4);
+        }
+
+        #save-confirm {
+            font-size: 0.7rem;
+            color: #56d4a0;
+            font-family: 'JetBrains Mono', monospace;
+            display: none;
+        }
+
+        .score-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .score-card {
+            background: #0e1f2c;
+            border: 1px solid #2a4055;
+            border-radius: 14px;
+            padding: 1rem 0.8rem;
+            text-align: center;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .score-card:hover {
+            border-color: #78b9ff;
+            box-shadow: 0 0 16px rgba(48, 105, 152, 0.25);
+        }
+
+        .score-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.7rem;
+            font-weight: 500;
+            color: #ffd43b;
+            line-height: 1;
+            margin-bottom: 0.3rem;
+        }
+
+        .score-label {
+            font-size: 0.62rem;
+            color: #5f8399;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .score-desc {
+            font-size: 0.67rem;
+            color: #7fa8c0;
+            margin-top: 0.35rem;
+        }
+
+        .timeline {
+            position: relative;
+            margin: 1.5rem 0 1rem;
+            padding-left: 1.6rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #306998, #1e3347);
+            border-radius: 2px;
+        }
+
+        .tl-item {
+            position: relative;
+            margin-bottom: 1.3rem;
+        }
+
+        .tl-item::before {
+            content: '';
+            position: absolute;
+            left: -1.28rem;
+            top: 0.38rem;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #306998;
+            border: 2px solid #78b9ff;
+        }
+
+        .tl-heading {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #78b9ff;
+            margin-bottom: 0.15rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .tl-body {
+            font-size: 0.73rem;
+            color: #8fa9c2;
+            line-height: 1.6;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 0.9rem;
+            margin: 1.2rem 0;
+        }
+
+        .contact-card {
+            background: #0e1f2c;
+            border: 1px solid #2a4055;
+            border-radius: 13px;
+            padding: 1rem 1.1rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.65rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .contact-card:hover {
+            border-color: #78b9ff;
+            box-shadow: 0 0 14px rgba(48, 105, 152, 0.25);
+        }
+
+        .cc-icon {
+            font-size: 1rem;
+            flex-shrink: 0;
+            margin-top: 0.05rem;
+        }
+
+        .cc-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.63rem;
+            color: #78b9ff;
+            margin-bottom: 0.2rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .cc-val {
+            font-size: 0.78rem;
+            color: #a0c1d9;
+            line-height: 1.55;
+        }
+
+        .cc-val a {
+            color: #78b9ff;
+            border-bottom: none;
+        }
+
+        .footer-note {
+            margin-top: 2.5rem;
+            padding-top: 1.5rem;
+            text-align: center;
+            border-top: 1px solid #2a4055;
+            font-size: 0.78rem;
+            color: #8fa9c2;
+        }
+
+        .footer-note p {
+            font-size: 0.78rem;
+            text-align: center;
+            margin-bottom: 0.4rem;
+        }
+
+        .footer-note a {
+            border-bottom: none;
+            font-weight: 400;
+        }
+
+        .hash-line {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem;
+            color: #1e3347;
+            margin-top: 0.8rem;
+        }
+
+        .back-top {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            width: 38px;
+            height: 38px;
+            background: #0e1f2c;
+            border: 1px solid #2a4055;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            color: #78b9ff;
+            text-decoration: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            z-index: 100;
+        }
+
+        .back-top:hover {
+            border-color: #78b9ff;
+            box-shadow: 0 0 12px rgba(48, 105, 152, 0.35);
+            color: #ffd43b;
+            border-bottom: 1px solid #2a4055;
+        }
+
+        :focus-visible {
+            outline: 3px solid #ffd43b;
+            outline-offset: 4px;
+            border-radius: 4px;
+        }
+
+        ::selection {
+            background: #306998;
+            color: #ffd43b;
+        }
+
+        @media (max-width: 720px) {
+            body {
+                padding: 1rem 0.75rem;
+            }
+
+            .privacy-document {
+                padding: 1.5rem 1.1rem;
+                border-radius: 20px;
+            }
+
+            h1 {
+                font-size: 1rem;
+            }
+
+            h2 {
+                font-size: 0.9rem;
+            }
+
+            h3 {
+                font-size: 0.85rem;
+            }
+
+            p, li {
+                font-size: 0.77rem;
+            }
+
+            .subhead {
+                font-size: 0.82rem;
+            }
+
+            .last-updated {
+                font-size: 0.65rem;
+                padding: 0.25rem 0.9rem;
+            }
+
+            .grid-points {
+                grid-template-columns: 1fr;
+                gap: 0.85rem;
+            }
+
+            .toc ol {
+                column-count: 1;
+            }
+
+            .score-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .faq-question {
+                font-size: 0.77rem;
+                padding: 0.8rem 0.9rem;
+            }
+
+            .cookie-row {
+                padding: 0.75rem 1rem;
+            }
+
+            .highlight-box {
+                padding: 1rem 1rem;
+                border-radius: 0 12px 12px 0;
+            }
+
+            ul, ol {
+                margin-left: 1.2rem;
+            }
+
+            .back-top {
+                bottom: 1rem;
+                right: 1rem;
+                width: 34px;
+                height: 34px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            body {
+                padding: 0.6rem 0.5rem;
+            }
+
+            .privacy-document {
+                padding: 1.2rem 0.9rem;
+                border-radius: 16px;
+            }
+
+            .score-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .code-inline {
+                font-size: 0.65rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="privacy-document" role="document" aria-label="Privacy policy">
+
+        <header>
+            <h1>Privacy Policy</h1>
+            <div class="subhead">CODE SENSE— transparent by design, secure by default.</div>
+            <div class="last-updated" aria-label="Effective date">📅 __version__ = "2026.2.26" · build 3.1</div>
+        </header>
+
+        <nav class="toc" aria-label="Table of contents">
+            <span class="toc-title">📋 # contents</span>
+            <ol>
+                <li><a href="#intro-heading">Scope &amp; Approach</a></li>
+                <li><a href="#collect-heading">Data Collection</a></li>
+                <li><a href="#legal-heading">Legal Bases</a></li>
+                <li><a href="#share-heading">Data Sharing</a></li>
+                <li><a href="#subprocessors-heading">Subprocessor List</a></li>
+                <li><a href="#ai-heading">AI &amp; Automated Decisions</a></li>
+                <li><a href="#rights-heading">Your Rights</a></li>
+                <li><a href="#cookie-heading">Cookies &amp; Tracking</a></li>
+                <li><a href="#pbyd-heading">Privacy by Design</a></li>
+                <li><a href="#security-heading">Security Protocol</a></li>
+                <li><a href="#snapshot-heading">Privacy Snapshot</a></li>
+                <li><a href="#children-heading">Children's Privacy</a></li>
+                <li><a href="#changes-heading">Policy Updates</a></li>
+                <li><a href="#contact-heading">Contact</a></li>
+            </ol>
+        </nav>
+
+        <section aria-labelledby="intro-heading">
+            <h2 id="intro-heading"><span class="code-inline">def scope_approach():</span></h2>
+            <p>This privacy statement applies to all services, websites and products of <strong>CODE SENSE</strong> where this document is referenced. We process your personal data in a lawful, fair and minimised way — designed to protect your rights while delivering intelligent functionality.</p>
+            <p>I act as a <strong>data controller</strong> for the information collected from you. This policy is governed by the <strong>Philippines Data Privacy Act of 2012 (Republic Act No. 10173)</strong> and its Implementing Rules and Regulations. For questions or to exercise your rights, see the Contact section at the bottom of this page.</p>
+            <div class="law-row">
+                <span class="law-badge">📋 RA 10173 — Data Privacy Act of 2012</span>
+                <span class="law-badge">📋 RA 8792 — E-Commerce Act</span>
+                <span class="law-badge">📋 RA 10175 — Cybercrime Prevention Act</span>
+            </div>
+        </section>
+
+        <section aria-labelledby="collect-heading">
+            <h2 id="collect-heading"><span class="code-inline">class DataCollection:</span></h2>
+            <p>I collect only what is necessary for the purposes described. The categories below reflect our current data map — intelligent by design, not by excess.</p>
+            <div class="grid-points" role="list">
+                <div class="card-trait" role="listitem">
+                    <h4>📇 Identity &amp; contact</h4>
+                    <p>Name, email, phone, organisation — to communicate, authenticate and provide support.</p>
+                    <span class="data-badge">retention: 24 mo</span>
+                </div>
+                <div class="card-trait" role="listitem">
+                    <h4>⚙️ Usage &amp; device</h4>
+                    <p>IP address, browser data, session interactions, anonymised analytics to improve our services.</p>
+                    <span class="data-badge">retention: 13 mo</span>
+                </div>
+                <div class="card-trait" role="listitem">
+                    <h4>💳 Payment / billing</h4>
+                    <p>Billing address, transaction ID — never raw payment details, processed by PCI-DSS compliant partners.</p>
+                    <span class="data-badge">retention: 7 yrs (legal)</span>
+                </div>
+                <div class="card-trait" role="listitem">
+                    <h4>📬 Communications</h4>
+                    <p>Records of correspondence, preferences, and opt-in choices — to respect your inbox.</p>
+                    <span class="data-badge">retention: active + 2y</span>
+                </div>
+            </div>
+            <h3><span class="code-inline">def sensitive_data():</span></h3>
+            <p>I <strong>do not</strong> request or process sensitive personal data (racial origin, political opinions, health, biometrics) unless you voluntarily provide it within a support ticket — in which case we ask you to avoid sharing it, and if received, we will delete or anonymise it within 7 days in accordance with RA 10173 Section 13.</p>
+        </section>
+
+        <section aria-labelledby="legal-heading">
+            <h2 id="legal-heading"><span class="code-inline">class LegalBases:</span></h2>
+            <p>Under the Philippines Data Privacy Act of 2012 and its Implementing Rules and Regulations, we rely on the following criteria for lawful processing:</p>
+            <ul>
+                <li><strong>contract_performance:</strong> to deliver our services according to our Terms of Service.</li>
+                <li><strong>legitimate_interests:</strong> improve products, prevent fraud, maintain network security — always balanced with your rights and freedoms.</li>
+                <li><strong>consent:</strong> for optional cookies, marketing emails, or precise location. Withdraw at any time via the preference centre.</li>
+                <li><strong>legal_obligation:</strong> e.g. financial records, or responding to lawful requests from Philippine authorities.</li>
+            </ul>
+        </section>
+
+        <section aria-labelledby="share-heading">
+            <h2 id="share-heading"><span class="code-inline">def data_sharing():</span></h2>
+            <p>I do not sell your personal data. We share only with trusted subprocessors under strict data processing agreements. Categories of recipients:</p>
+            <ul>
+                <li><strong>Cloud infrastructure:</strong> AWS (Singapore &amp; Sydney regions) — encrypted at rest and in transit.</li>
+                <li><strong>Customer support &amp; communication:</strong> Zendesk, SendGrid — governed by NPC-aligned contractual frameworks.</li>
+                <li><strong>Professional advisors:</strong> legal counsel and auditors, where required, under confidentiality.</li>
+                <li><strong>Authorities:</strong> only if legally compelled under Philippine law (e.g. NPC, law enforcement), and we will notify you unless prohibited.</li>
+            </ul>
+            <div class="highlight-box">
+                <p><strong>🌍 international_transfers:</strong> Data may be processed outside the Philippines but always under National Privacy Commission (NPC) guidelines, contractual safeguards, or equivalent protections. You may request a copy of the applicable transfer mechanism by contacting us.</p>
+            </div>
+        </section>
+
+        <section aria-labelledby="subprocessors-heading">
+            <h2 id="subprocessors-heading"><span class="code-inline">subprocessors = [...]</span></h2>
+            <p>Full transparency: below is our current list of third-party subprocessors. All are bound by a Data Processing Agreement (DPA) and must meet our security and privacy standards. We update this list whenever a subprocessor is added or removed.</p>
+            <div class="sp-table-wrap">
+                <table class="subprocessor-table" aria-label="Subprocessor list">
+                    <thead>
+                        <tr>
+                            <th>Processor</th>
+                            <th>Purpose</th>
+                            <th>Country</th>
+                            <th>Safeguard</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Amazon Web Services</strong></td>
+                            <td>Cloud hosting, storage, compute</td>
+                            <td>Singapore / Sydney</td>
+                            <td><span class="sp-badge ph">NPC-aligned DPA</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Zendesk</strong></td>
+                            <td>Customer support ticketing</td>
+                            <td>United States</td>
+                            <td><span class="sp-badge scc">Contractual Safeguards</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>SendGrid (Twilio)</strong></td>
+                            <td>Transactional &amp; marketing email</td>
+                            <td>United States</td>
+                            <td><span class="sp-badge scc">Contractual Safeguards</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Stripe</strong></td>
+                            <td>Payment processing (PCI-DSS L1)</td>
+                            <td>United States</td>
+                            <td><span class="sp-badge scc">Contractual Safeguards</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Plausible Analytics</strong></td>
+                            <td>Privacy-first web analytics (self-hosted)</td>
+                            <td>Philippines (self-hosted)</td>
+                            <td><span class="sp-badge ph">Local Instance</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>PagerDuty</strong></td>
+                            <td>Incident response &amp; on-call alerting</td>
+                            <td>United States</td>
+                            <td><span class="sp-badge scc">Contractual Safeguards</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>1Password</strong></td>
+                            <td>Secrets &amp; credential management</td>
+                            <td>Canada</td>
+                            <td><span class="sp-badge us">DPA + Encryption</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="font-size: 0.67rem; color: #5f8399; margin-top: -0.2rem;">Last reviewed: 26 Feb 2026. To be notified of subprocessor changes, contact us via the Contact section.</p>
+        </section>
+
+        <section aria-labelledby="ai-heading">
+            <h2 id="ai-heading"><span class="code-inline">class AIDecisionMaking:</span></h2>
+            <p>I believe in <strong>explainable, human-supervised AI</strong>. This section details how automated processing and profiling operates within our platform — and where humans always remain in the loop.</p>
+            <div class="grid-points" role="list">
+                <div class="card-trait" role="listitem">
+                    <h4>🤖 Anomaly detection</h4>
+                    <p>Automated signals flag unusual login patterns or potential fraud. <strong>No account is suspended solely by algorithm</strong> — a human agent reviews all flags.</p>
+                    <span class="ai-badge yes">✓ Human review</span>
+                </div>
+                <div class="card-trait" role="listitem">
+                    <h4>📊 Usage personalisation</h4>
+                    <p>Feature recommendations are generated from aggregated usage patterns, not individual profiling. You can opt out in account settings.</p>
+                    <span class="ai-badge yes">✓ Opt-out available</span>
+                </div>
+                <div class="card-trait" role="listitem">
+                    <h4>🔍 Content classification</h4>
+                    <p>Automated classifiers scan uploaded content for policy violations. Decisions triggering access restrictions are always reviewed by a human within 24 h.</p>
+                    <span class="ai-badge yes">✓ 24 h review SLA</span>
+                </div>
+                <div class="card-trait" role="listitem">
+                    <h4>🧮 Pricing models</h4>
+                    <p>Subscription tier recommendations use usage volume only. <strong>No profiling</strong> based on demographics, location, or identity attributes is used for pricing.</p>
+                    <span class="ai-badge yes">✓ No demographic data</span>
+                </div>
+            </div>
+            <div class="highlight-box">
+                <p><strong>⚖️ RA 10173 — Automated Decision Rights:</strong> You have the right to object to decisions made solely on the basis of automated processing that significantly affect you. Contact us and we will conduct a manual review within 5 business days.</p>
+            </div>
+        </section>
+
+        <section aria-labelledby="rights-heading">
+            <h2 id="rights-heading"><span class="code-inline">class YourRights:</span></h2>
+            <p>Under the Philippines Data Privacy Act of 2012 (RA 10173), you have the following rights as a data subject:</p>
+            <ul>
+                <li>✅ <strong>right_to_be_informed</strong> — know how your data is collected, processed, and used.</li>
+                <li>✅ <strong>right_to_access</strong> — request a copy of personal data we hold about you.</li>
+                <li>✅ <strong>right_to_object</strong> — object to processing, including for direct marketing.</li>
+                <li>✅ <strong>right_to_erasure</strong> — have inaccurate, incomplete, or unlawfully processed data deleted.</li>
+                <li>✅ <strong>right_to_rectification</strong> — correct inaccurate or incomplete personal data.</li>
+                <li>✅ <strong>right_to_portability</strong> — receive a structured, machine-readable copy of your data.</li>
+                <li>✅ <strong>right_to_damages</strong> — claim compensation for any damage caused by inaccurate or unlawfully processed data.</li>
+                <li>✅ <strong>right_to_file_complaint</strong> — lodge a complaint with the National Privacy Commission (NPC) of the Philippines.</li>
+            </ul>
+            <p>To exercise your rights, use the contact details in the Contact section. We respond within <strong>15 business days</strong> as required under RA 10173.</p>
+            <h3><span class="code-inline">def response_timeline():</span></h3>
+            <div class="timeline">
+                <div class="tl-item">
+                    <div class="tl-heading">Day 0 — Request received</div>
+                    <div class="tl-body">I send an acknowledgement and begin identity verification. No unnecessary hoops required.</div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-heading">Day 1–3 — Identity confirmed</div>
+                    <div class="tl-body">I verify your identity using information already on file. We may ask one clarifying question for complex requests.</div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-heading">Day 3–12 — Processing</div>
+                    <div class="tl-body">My page locates, retrieves, or acts on relevant records. You will receive interim updates for complex requests.</div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-heading">Day 12–15 — Response delivered</div>
+                    <div class="tl-body">I deliver the outcome in plain language with supporting documentation. If we cannot comply, we explain why and outline your next steps.</div>
+                </div>
+            </div>
+        </section>
+
+        <section aria-labelledby="cookie-heading">
+            <h2 id="cookie-heading"><span class="code-inline">def cookies_tracker():</span></h2>
+            <p>I use cookies and local storage to make our sites work, analyse traffic, and personalise content. You can manage your preferences using the panel below. Categories:</p>
+            <ul>
+                <li><strong>Essential:</strong> authentication, security, load balancing — cannot be disabled.</li>
+                <li><strong>Functional:</strong> remember language and region preferences, optional.</li>
+                <li><strong>Analytics:</strong> aggregated, anonymised — self-hosted Plausible, no cross-site tracking.</li>
+                <li><strong>Marketing:</strong> only with explicit opt-in.</li>
+            </ul>
+            <h3><span class="code-inline">cookie_preferences.update()</span></h3>
+            <div class="cookie-panel" aria-label="Cookie preference manager">
+                <div class="cookie-row">
+                    <div class="cookie-label">
+                        <strong>🔒 Essential cookies</strong>
+                        <span>Required for authentication, security, and core site function. Cannot be disabled.</span>
+                    </div>
+                    <div class="toggle-wrap">
+                        <label class="toggle" aria-label="Essential cookies always on">
+                            <input type="checkbox" checked disabled>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="cookie-row">
+                    <div class="cookie-label">
+                        <strong>⚙️ Functional cookies</strong>
+                        <span>Remember your language, region, and UI preferences between sessions.</span>
+                    </div>
+                    <div class="toggle-wrap">
+                        <label class="toggle" aria-label="Toggle functional cookies">
+                            <input type="checkbox" checked id="functional-toggle">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="cookie-row">
+                    <div class="cookie-label">
+                        <strong>📈 Analytics cookies</strong>
+                        <span>Aggregated, anonymised usage via self-hosted Plausible. No cross-site tracking or fingerprinting.</span>
+                    </div>
+                    <div class="toggle-wrap">
+                        <label class="toggle" aria-label="Toggle analytics cookies">
+                            <input type="checkbox" checked id="analytics-toggle">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="cookie-row">
+                    <div class="cookie-label">
+                        <strong>📣 Marketing cookies</strong>
+                        <span>Opt-in only. No retargeting without explicit consent.</span>
+                    </div>
+                    <div class="toggle-wrap">
+                        <label class="toggle" aria-label="Toggle marketing cookies">
+                            <input type="checkbox" id="marketing-toggle">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="cookie-footer">
+                    <button class="save-prefs" onclick="saveCookiePrefs()" aria-label="Save cookie preferences">$ save_preferences()</button>
+                    <span id="save-confirm">✓ Saved.</span>
+                </div>
+            </div>
+        </section>
+
+        <section aria-labelledby="pbyd-heading">
+            <h2 id="pbyd-heading"><span class="code-inline">def privacy_by_design():</span></h2>
+            <p>Privacy is not an afterthought — it is baked into our engineering and organisational culture from day one. Below are the concrete technical and organisational measures (TOMs) we operate.</p>
+            <div class="grid-points" role="list">
+                <div class="card-trait" role="listitem">
+                    <h4>🔐 Encryption everywhere</h4>
+                    <p>TLS 1.3 in transit. AES-256 at rest. Keys managed with annual rotation and per-key access auditing.</p>
+                    <span class="data-badge">FIPS 140-2</span>
+                </div>
+                <div class="card-trait" role="listitem">
+                    <h4>🏗️ Zero-trust architecture</h4>
+                    <p>No implicit trust for any internal service. Every request is authenticated, authorised, and logged — regardless of network origin.</p>
+                    <span class="data-badge">mTLS + SPIFFE</span>
+                </div>
+                <div class="card-trait" role="listitem">
+                    <h4>🔍 Least privilege access</h4>
+                    <p>Customer data is accessed only via audited, time-limited procedures. All access is logged and reviewed quarterly.</p>
+                    <span class="data-badge">SOC 2 Type II</span>
+                </div>
+                <div class="card-trait" role="listitem">
+                    <h4>🧪 Pen tests &amp; DAST</h4>
+                    <p>Annual third-party penetration tests plus continuous Dynamic Application Security Testing. Critical findings are patched within 48 h.</p>
+                    <span class="data-badge">OWASP Top 10</span>
+                </div>
+                <div class="card-trait" role="listitem">
+                    <h4>🗑️ Automated deletion</h4>
+                    <p>My data lifecycle engine auto-deletes or pseudonymises records when retention windows close — no manual intervention required.</p>
+                    <span class="data-badge">Cron-verified</span>
+                </div>
+                <div class="card-trait" role="listitem">
+                    <h4>📋 Privacy impact reviews</h4>
+                    <p>Every new feature or vendor that touches personal data undergoes a Privacy Impact Assessment (PIA) before release, per NPC guidelines.</p>
+                    <span class="data-badge">NPC PIA</span>
+                </div>
+            </div>
+            <h3><span class="code-inline">def breach_response_sla():</span></h3>
+            <p>I operate a documented incident response plan. In the event of a personal data breach:</p>
+            <div class="timeline">
+                <div class="tl-item">
+                    <div class="tl-heading">0–1 h — Triage</div>
+                    <div class="tl-body">On-call engineer assesses scope and severity using our pre-defined playbook.</div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-heading">1–24 h — Containment</div>
+                    <div class="tl-body">Affected services isolated, evidence preserved. Data Privacy Officer briefed. Legal counsel engaged if required.</div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-heading">24–72 h — Notification</div>
+                    <div class="tl-body">If notifiable, the National Privacy Commission (NPC) is informed within 72 h of awareness per NPC Circular 16-03. Affected individuals notified without undue delay.</div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-heading">Post-incident — Remediation</div>
+                    <div class="tl-body">Root-cause analysis completed within 14 days. Corrective measures implemented and transparency report updated if significant.</div>
+                </div>
+            </div>
+        </section>
+
+        <section aria-labelledby="security-heading">
+            <h2 id="security-heading"><span class="code-inline">class SecurityProtocol:</span></h2>
+            <p>I apply modern cryptographic controls (TLS 1.3, AES-256 at rest), regular access audits, and penetration tests. Our retention policy deletes or anonymises data when the purpose ends — unless Philippine law requires longer retention.</p>
+            <p>In the event of a notifiable breach, we will inform affected individuals and the NPC within 72 h as required by NPC Circular 16-03. See the Privacy by Design section above for the full SLA.</p>
+            <div class="score-grid" role="list">
+                <div class="score-card">
+                    <div class="score-number">A+</div>
+                    <div class="score-label">SSL Labs Rating</div>
+                    <div class="score-desc">TLS 1.3 only, HSTS preloaded</div>
+                </div>
+                <div class="score-card">
+                    <div class="score-number">99.9%</div>
+                    <div class="score-label">Uptime SLA</div>
+                    <div class="score-desc">Multi-region failover</div>
+                </div>
+                <div class="score-card">
+                    <div class="score-number">48 h</div>
+                    <div class="score-label">Critical patch SLA</div>
+                    <div class="score-desc">OWASP Critical severity</div>
+                </div>
+                <div class="score-card">
+                    <div class="score-number">0</div>
+                    <div class="score-label">Data sales</div>
+                    <div class="score-desc">We never sell personal data</div>
+                </div>
+            </div>
+        </section>
+
+        <section aria-labelledby="snapshot-heading">
+            <h2 id="snapshot-heading"><span class="code-inline">class PrivacySnapshot: # tl;dr</span></h2>
+            <p>Too long to read right now? Here's the short version — tap any question to expand.</p>
+
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+                    Do you sell my data?
+                    <i class="faq-chevron">▼</i>
+                </button>
+                <div class="faq-body" hidden>
+                    <p><strong>No. Never.</strong> We do not sell, rent, or share personal data with third parties for their own commercial use. Our business model does not depend on your data.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+                    What data do you actually store about me?
+                    <i class="faq-chevron">▼</i>
+                </button>
+                <div class="faq-body" hidden>
+                    <p>Primarily your name, email, and usage patterns needed to run the service. Payment details are handled entirely by Stripe (PCI-DSS Level 1) — we never see or store your card number. Request a full export via the Contact section.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+                    Can I delete my account and all my data?
+                    <i class="faq-chevron">▼</i>
+                </button>
+                <div class="faq-body" hidden>
+                    <p>Yes. Go to <strong>Settings → Account → Delete account</strong>. All personal data is purged within 30 days. We retain anonymised billing records for 7 years as required by Philippine tax law — these cannot be linked back to you.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+                    Do you use AI to make decisions about me?
+                    <i class="faq-chevron">▼</i>
+                </button>
+                <div class="faq-body" hidden>
+                    <p>Automated systems flag anomalies (e.g., suspicious logins), but <strong>no significant decision is made by algorithm alone</strong>. A human reviews all flags before any action is taken. You have the right to request human review under RA 10173.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+                    Where is my data stored and is it safe?
+                    <i class="faq-chevron">▼</i>
+                </button>
+                <div class="faq-body" hidden>
+                    <p>Primary storage is on AWS servers in the <strong>Singapore (ap-southeast-1)</strong> region, with failover to <strong>Sydney (ap-southeast-2)</strong>. All data is encrypted at rest (AES-256) and in transit (TLS 1.3). We operate a zero-trust network and conduct annual penetration tests.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+                    How do I opt out of marketing emails?
+                    <i class="faq-chevron">▼</i>
+                </button>
+                <div class="faq-body" hidden>
+                    <p>Every marketing email has a one-click <strong>Unsubscribe</strong> link in the footer. You can also manage preferences at any time in <strong>Settings → Notifications</strong>. Transactional emails (receipts, security alerts) cannot be disabled as they are required for service delivery.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+                    What are my rights under Philippine law?
+                    <i class="faq-chevron">▼</i>
+                </button>
+                <div class="faq-body" hidden>
+                    <p>Under RA 10173, you have the right to be informed, access, object, erase, rectify, port your data, claim damages, and file a complaint with the <strong>National Privacy Commission (NPC)</strong> at <a href="https://www.privacy.gov.ph" target="_blank" rel="noopener">privacy.gov.ph</a>. See the Your Rights section above for the full list.</p>
+                </div>
+            </div>
+        </section>
+
+        <section aria-labelledby="children-heading">
+            <h2 id="children-heading"><span class="code-inline">def children_privacy():</span></h2>
+            <p>My services are not directed to individuals under 18 years of age. Under Philippine law, minors cannot give valid consent to data processing without parental or guardian authority. If we become aware that we have collected data from a minor without verifiable parental consent, we will delete it promptly — typically within 48 hours of discovery — and notify the NPC if required. Parents or guardians may contact us via the Contact section to request deletion.</p>
+        </section>
+
+        <section aria-labelledby="changes-heading">
+            <h2 id="changes-heading"><span class="code-inline">def policy_updates():</span></h2>
+            <p>I may revise this page to reflect legal or product changes. Material updates will be notified via email or prominent website notice at least 14 days before they take effect. The <span class="code-inline">__version__</span> date at the top reflects the latest revision. We keep an archived changelog of past versions — request it from us via the Contact section.</p>
+        </section>
+
+        <section aria-labelledby="contact-heading">
+            <h2 id="contact-heading"><span class="code-inline">class Contact:</span></h2>
+            <p>If you have any concerns, wish to exercise your data subject rights, or need to speak with our Data Privacy Officer, reach out through any of the following channels. We aim to respond within 15 business days.</p>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <span class="cc-icon">🌐</span>
+                    <div>
+                        <div class="cc-label">website</div>
+                        <div class="cc-val"><a href="oop-contact.html">Contact page</a></div>
+                    </div>
+                </div>
+                <div class="contact-card">
+                    <span class="cc-icon">📮</span>
+                    <div>
+                        <div class="cc-label">postal address</div>
+                        <div class="cc-val">CODE SENSE<br>Tinongtongan, Diplahan<br>Zamboanga Sibugay Province<br>Philippines</div>
+                    </div>
+                </div>
+                <div class="contact-card">
+                    <span class="cc-icon">🏛️</span>
+                    <div>
+                        <div class="cc-label">supervisory authority</div>
+                        <div class="cc-val"><a href="https://www.privacy.gov.ph" target="_blank" rel="noopener">National Privacy Commission</a><br>privacy.gov.ph</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="highlight-box" style="margin-top: 2rem; background-color: #0f1f2b;">
+            <p><strong>⚡ try: intelligent_design() except: transparency</strong> — This notice is governed by the <strong>Philippines Data Privacy Act of 2012 (RA 10173)</strong>. I am committed to protecting your personal information as a fundamental right. We minimise collection at the source — the best privacy control is one you never had to grant in the first place. If anything here is unclear, <a href="oop-contact.html">contact us</a> and we will always respond.</p>
+        </div>
+
+        <footer class="footer-note" role="contentinfo">
+            <p style="color:white;">© 2026 Poetic Bytes · Tinongtongan, Diplahan, Zamboanga Sibugay Province, Philippines</p>
+            <p>
+                <a href="terms-of-service.html">Terms of Service</a> &nbsp;·&nbsp;
+                <a href="cookie-policy.html">Cookie Policy</a> &nbsp;·&nbsp;
+                <a href="oop-contact.html">Contact</a>
+            </p>
+            <p class="hash-line">Privacy Policy:By:Glenn Junsay Pansensoy</p>
+        </footer>
+
+    </div>
+
+    <a href="#" class="back-top" aria-label="Back to top">↑</a>
+
+    <script>
+        function toggleFaq(btn) {
+            var expanded = btn.getAttribute('aria-expanded') === 'true';
+            btn.setAttribute('aria-expanded', String(!expanded));
+            btn.nextElementSibling.hidden = expanded;
+        }
+
+        function saveCookiePrefs() {
+            var el = document.getElementById('save-confirm');
+            el.style.display = 'inline';
+            setTimeout(function() { el.style.display = 'none'; }, 2800);
+        }
+
+        document.querySelector('.back-top').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
