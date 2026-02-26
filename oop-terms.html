@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms of Service</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --obs-0: #050a0e;
+  --obs-1: #080f15;
+  --obs-2: #0c161f;
+  --obs-3: #111e2a;
+  --obs-4: #172435;
+  --obs-5: #1e2f40;
+  --obs-6: #243749;
+  --py-deep: #1b3a52;
+  --py-core: #306998;
+  --py-mid:  #4b8bbe;
+  --py-bright: #6aaed6;
+  --py-light: #9ecae1;
+  --py-pale:  #c6dbef;
+  --gold: #ffd43b;
+  --gold-soft: #e8bf2a;
+  --green: #56d4a0;
+  --amber: #ffb347;
+  --red-soft: #f08080;
+  --text-1: #ddeaf5;
+  --text-2: #8fb3cc;
+  --text-3: #4d7a96;
+  --text-4: #2a4f66;
+  --border: rgba(48,105,152,0.2);
+  --border-lit: rgba(75,139,190,0.45);
+  --glow: rgba(48,105,152,0.25);
+  --fs-h1: 1rem;
+  --fs-h2: 1rem;
+  --fs-body: 0.8rem;
+  --fs-mono: 0.72rem;
+  --fs-tag: 0.65rem;
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--obs-0);
+  color: var(--text-1);
+  font-family: 'Outfit', system-ui, sans-serif;
+  font-size: var(--fs-body);
+  line-height: 1.75;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(48,105,152,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(48,105,152,0.025) 1px, transparent 1px);
+  background-size: 36px 36px;
+  pointer-events: none;
+  z-index: 0;
+}
+body::after {
+  content: '';
+  position: fixed;
+  top: -250px; right: -250px;
+  width: 650px; height: 650px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(48,105,152,0.07) 0%, transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+}
+.wrap {
+  position: relative;
+  z-index: 1;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem 5rem;
+}
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 1.4rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 3rem;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+}
+.brand-icon {
+  width: 30px; height: 30px;
+  border-radius: 7px;
+  background: linear-gradient(135deg, var(--py-core), var(--py-deep));
+  border: 1px solid var(--py-mid);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  color: var(--gold);
+  font-weight: 600;
+  box-shadow: 0 0 10px var(--glow);
+  flex-shrink: 0;
+}
+.brand-name {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--py-pale);
+  letter-spacing: 0.04em;
+}
+.topbar-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  color: var(--text-3);
+  background: var(--obs-3);
+  border: 1px solid var(--border);
+  padding: 0.2rem 0.7rem;
+  border-radius: 20px;
+}
+.hero { margin-bottom: 2.8rem; }
+.eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--fs-tag);
+  color: var(--py-bright);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 18px; height: 1px;
+  background: var(--py-bright);
+}
+h1 {
+  font-family: 'Outfit', sans-serif;
+  font-size: var(--fs-h1);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  background: linear-gradient(120deg, var(--py-pale), var(--py-bright), var(--gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.8rem;
+}
+.hero-desc {
+  font-size: var(--fs-body);
+  color: var(--text-2);
+  max-width: 540px;
+  line-height: 1.72;
+  padding-left: 0.9rem;
+  border-left: 2px solid var(--py-core);
+  margin-bottom: 1.2rem;
+}
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.chip {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--fs-tag);
+  padding: 0.18rem 0.65rem;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: var(--obs-3);
+  color: var(--text-3);
+}
+.chip.hl  { border-color: rgba(255,212,59,0.3); color: var(--gold); background: rgba(255,212,59,0.05); }
+.chip.blue{ border-color: rgba(75,139,190,0.4); color: var(--py-bright); background: rgba(75,139,190,0.06); }
+.chip.grn { border-color: rgba(86,212,160,0.4); color: var(--green); background: rgba(86,212,160,0.06); }
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
+  gap: 0.85rem;
+  margin-bottom: 2.8rem;
+}
+.sg-card {
+  background: var(--obs-3);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem 1.1rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.sg-card:hover { border-color: var(--border-lit); box-shadow: 0 0 14px var(--glow); }
+.sg-icon { font-size: 1.05rem; flex-shrink: 0; margin-top: 0.05rem; }
+.sg-body {}
+.sg-title { font-size: var(--fs-body); font-weight: 700; color: var(--text-1); margin-bottom: 0.12rem; }
+.sg-desc  { font-size: calc(var(--fs-body) - 0.01rem); color: var(--text-2); line-height: 1.5; }
+.toc-block {
+  background: var(--obs-2);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.3rem 1.7rem;
+  margin-bottom: 2.8rem;
+  position: relative;
+  overflow: hidden;
+}
+.toc-block::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px; height: 100%;
+  background: linear-gradient(to bottom, var(--py-mid), var(--py-deep));
+}
+.toc-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--fs-tag);
+  color: var(--py-mid);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.8rem;
+}
+.toc-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.25rem 2rem;
+  counter-reset: toc;
+}
+.toc-list li {
+  counter-increment: toc;
+  font-size: var(--fs-body);
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+.toc-list li::before {
+  content: counter(toc, decimal-leading-zero);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  color: var(--py-core);
+  flex-shrink: 0;
+}
+.toc-list a { color: var(--text-2); text-decoration: none; transition: color 0.2s; }
+.toc-list a:hover { color: var(--py-bright); }
+.sec {
+  margin-bottom: 2.8rem;
+  opacity: 0;
+  transform: translateY(14px);
+  animation: up 0.45s forwards;
+}
+.sec:nth-child(1)  { animation-delay: 0.04s; }
+.sec:nth-child(2)  { animation-delay: 0.08s; }
+.sec:nth-child(3)  { animation-delay: 0.12s; }
+.sec:nth-child(4)  { animation-delay: 0.16s; }
+.sec:nth-child(5)  { animation-delay: 0.20s; }
+.sec:nth-child(6)  { animation-delay: 0.24s; }
+.sec:nth-child(7)  { animation-delay: 0.28s; }
+.sec:nth-child(8)  { animation-delay: 0.32s; }
+.sec:nth-child(9)  { animation-delay: 0.36s; }
+.sec:nth-child(10) { animation-delay: 0.40s; }
+.sec:nth-child(11) { animation-delay: 0.44s; }
+.sec:nth-child(12) { animation-delay: 0.48s; }
+.sec:nth-child(13) { animation-delay: 0.52s; }
+.sec:nth-child(14) { animation-delay: 0.56s; }
+@keyframes up { to { opacity: 1; transform: translateY(0); } }
+.sec-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+  margin-bottom: 1rem;
+}
+.sec-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--fs-tag);
+  color: var(--py-core);
+  background: var(--obs-3);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 0.12rem 0.45rem;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+.sec-title-group { flex: 1; }
+h2 {
+  font-family: 'Outfit', sans-serif;
+  font-size: var(--fs-h2);
+  font-weight: 700;
+  color: var(--text-1);
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+.sec-mono {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--fs-mono);
+  color: var(--py-bright);
+  opacity: 0.65;
+  margin-top: 0.18rem;
+}
+.sec-body { padding-left: calc(0.9rem + 2.2rem); }
+p {
+  font-size: var(--fs-body);
+  color: var(--text-2);
+  margin-bottom: 0.85rem;
+  line-height: 1.75;
+}
+p strong { color: var(--text-1); font-weight: 600; }
+p a { color: var(--py-bright); text-decoration: none; border-bottom: 1px dotted var(--py-core); transition: color 0.2s; }
+p a:hover { color: var(--gold); border-bottom-color: var(--gold); }
+ul.doc-list {
+  list-style: none;
+  margin: 0.6rem 0 1rem 0;
+}
+ul.doc-list li {
+  font-size: var(--fs-body);
+  color: var(--text-2);
+  padding: 0.3rem 0 0.3rem 1.4rem;
+  position: relative;
+  line-height: 1.65;
+}
+ul.doc-list li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--py-core);
+  font-size: 0.7rem;
+  top: 0.38rem;
+}
+ul.doc-list li strong { color: var(--text-1); font-weight: 600; }
+.rule { height: 1px; background: linear-gradient(to right, var(--py-deep), var(--border), transparent); margin: 2.2rem 0; }
+.note {
+  background: var(--obs-3);
+  border: 1px solid var(--border);
+  border-radius: 11px;
+  padding: 1rem 1.3rem;
+  margin: 1rem 0;
+  position: relative;
+  overflow: hidden;
+}
+.note::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px; height: 100%;
+  background: var(--gold);
+  border-radius: 3px 0 0 3px;
+}
+.note.blue::before  { background: var(--py-bright); }
+.note.green::before { background: var(--green); }
+.note.amber::before { background: var(--amber); }
+.note.red::before   { background: var(--red-soft); }
+.note-lbl {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--fs-tag);
+  color: var(--gold);
+  margin-bottom: 0.35rem;
+  letter-spacing: 0.07em;
+}
+.note.blue .note-lbl  { color: var(--py-bright); }
+.note.green .note-lbl { color: var(--green); }
+.note.amber .note-lbl { color: var(--amber); }
+.note.red .note-lbl   { color: var(--red-soft); }
+.note p { margin: 0; font-size: var(--fs-body); }
+.rights-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 0.75rem;
+  margin: 1rem 0;
+}
+.rg-card {
+  background: var(--obs-3);
+  border: 1px solid var(--border);
+  border-radius: 11px;
+  padding: 0.9rem 1.1rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.rg-card:hover { border-color: var(--border-lit); box-shadow: 0 0 12px var(--glow); }
+.rg-icon { font-size: 0.95rem; flex-shrink: 0; margin-top: 0.05rem; }
+.rg-title { font-size: var(--fs-body); font-weight: 700; color: var(--text-1); margin-bottom: 0.1rem; }
+.rg-desc  { font-size: calc(var(--fs-body) - 0.01rem); color: var(--text-2); line-height: 1.5; }
+.contact-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(195px, 1fr));
+  gap: 0.75rem;
+  margin: 1rem 0;
+}
+.cc {
+  background: var(--obs-3);
+  border: 1px solid var(--border);
+  border-radius: 11px;
+  padding: 0.9rem 1.1rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  transition: border-color 0.2s;
+}
+.cc:hover { border-color: var(--border-lit); }
+.cc-icon { font-size: 1rem; flex-shrink: 0; margin-top: 0.05rem; }
+.cc-lbl { font-family: 'JetBrains Mono', monospace; font-size: var(--fs-tag); color: var(--py-bright); margin-bottom: 0.18rem; }
+.cc-val { font-size: var(--fs-body); color: var(--text-2); line-height: 1.55; }
+.cc-val a { color: var(--py-bright); text-decoration: none; transition: color 0.2s; }
+.cc-val a:hover { color: var(--gold); }
+.foot {
+  margin-top: 3.5rem;
+  padding-top: 1.8rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.2rem;
+}
+.foot-left {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  color: var(--text-4);
+  line-height: 1.9;
+}
+.foot-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 0.9rem;
+}
+.foot-links a {
+  font-size: var(--fs-tag);
+  color: var(--text-3);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.foot-links a:hover { color: var(--py-bright); }
+.hash { width: 100%; font-family: 'JetBrains Mono', monospace; font-size: 0.58rem; color: var(--obs-5); margin-top: 0.5rem; }
+.back-top {
+  position: fixed;
+  bottom: 1.8rem; right: 1.8rem;
+  width: 38px; height: 38px;
+  background: var(--obs-3);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.78rem;
+  color: var(--py-bright);
+  cursor: pointer;
+  text-decoration: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  z-index: 100;
+}
+.back-top:hover { border-color: var(--py-mid); box-shadow: 0 0 14px var(--glow); }
+::selection { background: var(--py-core); color: var(--gold); }
+:focus-visible { outline: 2px solid var(--py-mid); outline-offset: 3px; border-radius: 4px; }
+@media (max-width: 620px) {
+  .wrap { padding: 1.8rem 1.1rem 4rem; }
+  .topbar { flex-direction: column; align-items: flex-start; gap: 0.8rem; }
+  .sec-body { padding-left: 0; }
+  .summary-grid, .rights-grid, .contact-row { grid-template-columns: 1fr; }
+  .toc-list { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="topbar">
+    <a href="https://pansensoyglenn-dev.github.io/code-sense/" class="brand">
+      <div class="brand-icon">CS</div>
+      <span class="brand-name">CODE SENSE</span>
+    </a>
+    <span class="topbar-pill">Trust Policy</span>
+  </header>
+
+  <div class="hero">
+    <div class="eyebrow">Legal &amp; Trust</div>
+    <h1>Terms of Service</h1>
+    <p class="hero-desc">These Terms govern your use of Code Sense. Please read them carefully. By accessing or using the site, you agree to be bound by these Terms. If you do not agree, please do not use Code Sense.</p>
+    <div class="chips">
+      <span class="chip hl">📅 Effective: 26 February 2026</span>
+      <span class="chip blue">pansensoyglenn-dev.github.io/code-sense</span>
+      <span class="chip grn">Republic of the Philippines</span>
+    </div>
+  </div>
+
+  <div class="summary-grid" aria-label="Key points summary">
+    <div class="sg-card">
+      <span class="sg-icon">✅</span>
+      <div class="sg-body">
+        <div class="sg-title">Free to use</div>
+        <div class="sg-desc">Code Sense is provided at no charge for personal and educational use.</div>
+      </div>
+    </div>
+    <div class="sg-card">
+      <span class="sg-icon">🚫</span>
+      <div class="sg-body">
+        <div class="sg-title">No harmful use</div>
+        <div class="sg-desc">You may not use the site for illegal, harmful, or abusive purposes.</div>
+      </div>
+    </div>
+    <div class="sg-card">
+      <span class="sg-icon">©️</span>
+      <div class="sg-body">
+        <div class="sg-title">Your content is yours</div>
+        <div class="sg-desc">Content you submit remains yours. You grant us a limited licence to display it.</div>
+      </div>
+    </div>
+    <div class="sg-card">
+      <span class="sg-icon">🔒</span>
+      <div class="sg-body">
+        <div class="sg-title">Privacy respected</div>
+        <div class="sg-desc">Data handling is governed by our separate Privacy and Cookie Policies.</div>
+      </div>
+    </div>
+    <div class="sg-card">
+      <span class="sg-icon">⚖️</span>
+      <div class="sg-body">
+        <div class="sg-title">Philippine law applies</div>
+        <div class="sg-desc">These Terms are governed by the laws of the Republic of the Philippines.</div>
+      </div>
+    </div>
+    <div class="sg-card">
+      <span class="sg-icon">📩</span>
+      <div class="sg-body">
+        <div class="sg-title">Questions welcome</div>
+        <div class="sg-desc">Contact us anytime via the site. We aim to respond within 5 business days.</div>
+      </div>
+    </div>
+  </div>
+
+  <nav class="toc-block" aria-label="Contents">
+    <div class="toc-label"># table_of_contents</div>
+    <ol class="toc-list">
+      <li><a href="#s1">Acceptance of Terms</a></li>
+      <li><a href="#s2">Who We Are</a></li>
+      <li><a href="#s3">Use of the Service</a></li>
+      <li><a href="#s4">Prohibited Conduct</a></li>
+      <li><a href="#s5">Intellectual Property</a></li>
+      <li><a href="#s6">User-Submitted Content</a></li>
+      <li><a href="#s7">Privacy &amp; Cookies</a></li>
+      <li><a href="#s8">Third-Party Links</a></li>
+      <li><a href="#s9">Disclaimers</a></li>
+      <li><a href="#s10">Limitation of Liability</a></li>
+      <li><a href="#s11">Indemnification</a></li>
+      <li><a href="#s12">Termination</a></li>
+      <li><a href="#s13">Governing Law</a></li>
+      <li><a href="#s14">Changes to Terms</a></li>
+      <li><a href="#s15">Contact</a></li>
+    </ol>
+  </nav>
+
+  <section class="sec" id="s1">
+    <div class="sec-head">
+      <span class="sec-num">01</span>
+      <div class="sec-title-group">
+        <h2>Acceptance of Terms</h2>
+        <div class="sec-mono">def acceptance():</div>
+      </div>
+    </div>
+    <div class="sec-body">
+      <p>By accessing or using Code Sense at <a href="https://pansensoyglenn-dev.github.io/code-sense/">pansensoyglenn-dev.github.io/code-sense/</a> (the "Site"), you confirm that you have read, understood, and agree to be bound by these Terms of Service ("Terms") and all applicable laws and regulations.</p>
+      <p>If you are using the Site on behalf of an organisation, you represent that you have the authority to bind that organisation to these Terms. If you do not agree to these Terms, you must stop using the Site immediately.</p>
+      <div class="note blue">
+        <div class="note-lbl"># note</div>
+        <p>These Terms apply to all visitors, users, and others who access or use the Site. They are effective as of the date shown above and supersede any prior versions.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <section class="sec" id="s2">
+    <div class="sec-head">
+      <span class="sec-num">02</span>
+      <div class="sec-title-group">
+        <h2>Who We Are</h2>
+        <div class="sec-mono">class ServiceProvider:</div>
+      </div>
+    </div>
+    <div class="sec-body">
+      <p>Code Sense is an independent web project created and maintained by an individual developer based in the Philippines. The Site provides coding-related content, tools, and resources intended for developers, learners, and enthusiasts.</p>
+      <p><strong>Operator:</strong> Code Sense<br>
+      <strong>Address:</strong> Tinongtongan, Diplahan, Zamboanga Sibugay Province, Philippines<br>
+      <strong>Website:</strong> <a href="https://pansensoyglenn-dev.github.io/code-sense/">pansensoyglenn-dev.github.io/code-sense/</a></p>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <section class="sec" id="s3">
+    <div class="sec-head">
+      <span class="sec-num">03</span>
+      <div class="sec-title-group">
+        <h2>Use of the Service</h2>
+        <div class="sec-mono">def permitted_use():</div>
+      </div>
+    </div>
+    <div class="sec-body">
+      <p>Subject to these Terms, you are granted a limited, non-exclusive, non-transferable, revocable licence to access and use the Site for personal, non-commercial, and educational purposes.</p>
+      <p>You agree to use the Site only in accordance with these Terms, our Cookie Policy, and all applicable local, national, and international laws and regulations, including the laws of the Republic of the Philippines.</p>
+      <div class="note green">
+        <div class="note-lbl">✓ permitted uses</div>
+        <p>Browsing content · Using interactive tools for learning · Sharing links to pages on the Site · Referencing content for educational purposes with attribution.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <section class="sec" id="s4">
+    <div class="sec-head">
+      <span class="sec-num">04</span>
+      <div class="sec-title-group">
+        <h2>Prohibited Conduct</h2>
+        <div class="sec-mono">class ProhibitedActions:</div>
+      </div>
+    </div>
+    <div class="sec-body">
+      <p>When using Code Sense, you must not:</p>
+      <ul class="doc-list">
+        <li><strong>Reverse-engineer or scrape</strong> — Systematically scrape, crawl, or extract data from the Site without prior written permission.</li>
+        <li><strong>Introduce malware</strong> — Upload, transmit, or distribute viruses, malware, or any other harmful code or software.</li>
+        <li><strong>Infringe intellectual property</strong> — Copy, reproduce, or distribute Site content in a manner that infringes copyright, trademark, or other intellectual property rights.</li>
+        <li><strong>Impersonate</strong> — Represent yourself as another person, entity, or the operator of Code Sense.</li>
+        <li><strong>Harass or harm</strong> — Engage in conduct that harasses, threatens, abuses, or harms any person.</li>
+        <li><strong>Circumvent security</strong> — Attempt to bypass, disable, or interfere with any security feature of the Site.</li>
+        <li><strong>Spam or manipulate</strong> — Send unsolicited communications or attempt to manipulate the Site's metrics, rankings, or feedback systems.</li>
+        <li><strong>Violate law</strong> — Use the Site for any purpose that is illegal under the laws of the Philippines or the laws of your jurisdiction.</li>
+      </ul>
+      <div class="note amber">
+        <div class="note-lbl">⚠ enforcement</div>
+        <p>Violation of these prohibitions may result in immediate suspension of your access and, where appropriate, referral to relevant authorities under Philippine law.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <section class="sec" id="s5">
+    <div class="sec-head">
+      <span class="sec-num">05</span>
+      <div class="sec-title-group">
+        <h2>Intellectual Property</h2>
+        <div class="sec-mono">class IntellectualProperty:</div>
+      </div>
+    </div>
+    <div class="sec-body">
+      <p>All content on Code Sense — including but not limited to text, code samples, graphics, logos, user interface design, and documentation — is the property of the Site operator or its licensors and is protected by applicable copyright, trademark, and other intellectual property laws.</p>
+      <p>You may view and use content on the Site for personal and educational purposes. You must not reproduce, redistribute, or commercially exploit any content without express written permission. Code samples labelled with an open-source licence may be used in accordance with the terms of that licence.</p>
+      <p>The Code Sense name, logo, and associated branding are proprietary. Nothing in these Terms grants you any right to use them.</p>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <section class="sec" id="s6">
+    <div class="sec-head">
+      <span class="sec-num">06</span>
+      <div class="sec-title-group">
+        <h2>User-Submitted Content</h2>
+        <div class="sec-mono">def user_content():</div>
+      </div>
+    </div>
+    <div class="sec-body">
+      <p>Where the Site allows you to submit, post, or share content (such as comments, code snippets, or feedback), you retain ownership of any intellectual property rights in that content.</p>
+      <p>By submitting content, you grant Code Sense a worldwide, royalty-free, non-exclusive licence to use, display, reproduce, and distribute your submission solely for the purpose of operating and improving the Site.</p>
+      <p>You represent and warrant that:</p>
+      <ul class="doc-list">
+        <li>You own or have the necessary rights to submit the content.</li>
+        <li>The content does not infringe any third-party rights.</li>
+        <li>The content is not unlawful, defamatory, obscene, or otherwise objectionable.</li>
+        <li>The content does not contain malicious code or personal data of third parties without their consent.</li>
+      </ul>
+      <p>We reserve the right to remove any user-submitted content that violates these Terms or that we determine, in our sole discretion, to be inappropriate.</p>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <section class="sec" id="s7">
+    <div class="sec-head">
+      <span class="sec-num">07</span>
+      <div class="sec-title-group">
+        <h2>Privacy &amp; Cookies</h2>
+        <div class="sec-mono">def privacy_and_cookies():</div>
+      </div>
+    </div>
+    <div class="sec-body">
+      <p>Your use of Code Sense is also governed by our <a href="cookie-policy.html">Cookie Policy</a>, which is incorporated into these Terms by reference. By using the Site, you consent to the data practices described in those documents.</p>
+      <p>We handle personal data in accordance with the <strong>Philippines Data Privacy Act of 2012 (Republic Act No. 10173)</strong> and its Implementing Rules and Regulations. We collect only the data that is necessary to operate and improve the Site and do not sell your personal data to third parties.</p>
+      <div class="note blue">
+        <div class="note-lbl"># data protection</div>
+        <p>For full details on what data we collect, how it is used, and your rights, please read our <a href="cookie-policy.html">Cookie Policy</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <section class="sec" id="s8">
+    <div class="sec-head">
+      <span class="sec-num">08</span>
+      <div class="sec-title-group">
+        <h2>Third-Party Links</h2>
+        <div class="sec-mono">def third_party_links():</div>
+      </div>
+    </div>
+    <div class="sec-body">
+      <p>Code Sense may contain links to external websites, repositories, tools, or resources that are not owned or controlled by us. These links are provided for convenience and informational purposes only.</p>
+      <p>We have no control over the content, privacy policies, or practices of any third-party sites and expressly disclaim all liability arising from your use of them. We encourage you to review the terms and privacy policies of any external site you visit.</p>
+      <p>The inclusion of any link on Code Sense does not imply endorsement by us of the linked site or its content.</p>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <section class="sec" id="s9">
+    <div class="sec-head">
+      <span class="sec-num">09</span>
+      <div class="sec-title-group">
+        <h2>Disclaimers</h2>
+        <div class="sec-mono">class Disclaimers:</div>
+      </div>
+    </div>
+    <div class="sec-body">
+      <p>The Site and its content are provided on an <strong>"as is" and "as available"</strong> basis without warranties of any kind, either express or implied. To the fullest extent permitted by applicable law, we disclaim all warranties including but not limited to:</p>
+      <ul class="doc-list">
+        <li>Implied warranties of merchantability, fitness for a particular purpose, and non-infringement.</li>
+        <li>Any warranty that the Site will be uninterrupted, error-free, or free of viruses or other harmful components.</li>
+        <li>Any warranty regarding the accuracy, completeness, reliability, or timeliness of any content on the Site.</li>
+      </ul>
+      <p>Code samples and technical content are provided for educational purposes. You are solely responsible for testing and validating any code before using it in a production environment. We make no guarantee that any code or advice on the Site is suitable for your specific use case.</p>
+      <div class="note amber">
+        <div class="note-lbl">⚠ important</div>
+        <p>Code Sense is an independent project maintained by a single developer. Availability may be subject to interruptions for maintenance, updates, or circumstances beyond our control.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <section class="sec" id="s10">
+    <div class="sec-head">
+      <span class="sec-num">10</span>
+      <div class="sec-title-group">
+        <h2>Limitation of Liability</h2>
+        <div class="sec-mono">def limit_liability():</div>
+      </div>
+    </div>
+    <div class="sec-body">
+      <p>To the maximum extent permitted by applicable law, Code Sense and its operator shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including but not limited to loss of profits, data, goodwill, or other intangible losses, arising out of or in connection with:</p>
+      <ul class="doc-list">
+        <li>Your access to or use of (or inability to access or use) the Site.</li>
+        <li>Any content obtained from the Site.</li>
+        <li>Unauthorised access to or alteration of your data.</li>
+        <li>Any third-party conduct on or through the Site.</li>
+      </ul>
+      <p>In jurisdictions that do not allow the exclusion or limitation of liability for certain damages, our liability is limited to the greatest extent permitted by law. Nothing in these Terms excludes or limits liability that cannot be excluded under Philippine law.</p>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <section class="sec" id="s11">
+    <div class="sec-head">
+      <span class="sec-num">11</span>
+      <div class="sec-title-group">
+        <h2>Indemnification</h2>
+        <div class="sec-mono">def indemnification():</div>
+      </div>
+    </div>
+    <div class="sec-body">
+      <p>You agree to indemnify, defend, and hold harmless Code Sense and its operator from and against any claims, liabilities, damages, losses, costs, or expenses (including reasonable legal fees) arising out of or in connection with:</p>
+      <ul class="doc-list">
+        <li>Your use of or access to the Site.</li>
+        <li>Your violation of these Terms.</li>
+        <li>Your violation of any third-party rights, including intellectual property or privacy rights.</li>
+        <li>Any content you submit to the Site.</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <section class="sec" id="s12">
+    <div class="sec-head">
+      <span class="sec-num">12</span>
+      <div class="sec-title-group">
+        <h2>Termination</h2>
+        <div class="sec-mono">def terminate_access():</div>
+      </div>
+    </div>
+    <div class="sec-body">
+      <p>We reserve the right to suspend or terminate your access to the Site at any time, without notice or liability, for any reason, including if we reasonably believe you have violated these Terms.</p>
+      <p>Upon termination, the following sections of these Terms survive: Intellectual Property, Disclaimers, Limitation of Liability, Indemnification, and Governing Law.</p>
+      <p>You may stop using the Site at any time. If you have submitted content to the Site, you may contact us to request its removal, subject to our data retention obligations.</p>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <section class="sec" id="s13">
+    <div class="sec-head">
+      <span class="sec-num">13</span>
+      <div class="sec-title-group">
+        <h2>Governing Law &amp; Disputes</h2>
+        <div class="sec-mono">def governing_law():</div>
+      </div>
+    </div>
+    <div class="sec-body">
+      <p>These Terms shall be governed by and construed in accordance with the laws of the <strong>Republic of the Philippines</strong>, without regard to its conflict of law provisions.</p>
+      <p>Any dispute arising out of or relating to these Terms or your use of the Site shall first be attempted to be resolved through good-faith negotiation. If negotiation fails, disputes shall be subject to the exclusive jurisdiction of the competent courts of <strong>Zamboanga Sibugay Province, Philippines</strong>.</p>
+      <div class="note blue">
+        <div class="note-lbl"># applicable laws</div>
+        <p>Including but not limited to: the Electronic Commerce Act (RA 8792), the Cybercrime Prevention Act (RA 10175), the Data Privacy Act (RA 10173), and the Intellectual Property Code of the Philippines (RA 8293).</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <section class="sec" id="s14">
+    <div class="sec-head">
+      <span class="sec-num">14</span>
+      <div class="sec-title-group">
+        <h2>Changes to These Terms</h2>
+        <div class="sec-mono">def policy_updates():</div>
+      </div>
+    </div>
+    <div class="sec-body">
+      <p>We reserve the right to modify these Terms at any time. When we make material changes, we will update the effective date at the top of this page and, where appropriate, display a notice on the Site.</p>
+      <p>Your continued use of Code Sense after any changes to these Terms constitutes your acceptance of the revised Terms. If you do not agree to the revised Terms, you must stop using the Site.</p>
+      <p>We encourage you to review this page periodically. The version string in the header is always the authoritative effective date.</p>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <section class="sec" id="s15">
+    <div class="sec-head">
+      <span class="sec-num">15</span>
+      <div class="sec-title-group">
+        <h2>Contact</h2>
+        <div class="sec-mono">class Contact:</div>
+      </div>
+    </div>
+    <div class="sec-body">
+      <p>If you have any questions, concerns, or requests regarding these Terms of Service, please reach out through the following channels. We aim to respond to all enquiries within 5 business days.</p>
+      <div class="contact-row">
+        <div class="cc">
+          <span class="cc-icon">🌐</span>
+          <div>
+            <div class="cc-lbl">website</div>
+            <div class="cc-val"><a href="https://pansensoyglenn-dev.github.io/code-sense/">pansensoyglenn-dev.github.io<br>/code-sense/</a></div>
+          </div>
+        </div>
+        <div class="cc">
+          <span class="cc-icon">📮</span>
+          <div>
+            <div class="cc-lbl">postal address</div>
+            <div class="cc-val">Tinongtongan, Diplahan<br>Zamboanga Sibugay Province<br>Philippines</div>
+          </div>
+        </div>
+      </div>
+      <div class="note green">
+        <div class="note-lbl">✓ good faith</div>
+        <p>I am a small independent project and I take every message seriously. If something in these Terms seems unclear or unfair, please tell us — we will do our best to explain or improve it.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot" role="contentinfo">
+    <div class="foot-left" style="color:white;">
+      © 2026 Code Sense · pansensoyglenn-dev.github.io/code-sense/<br>
+      Tinongtongan, Diplahan, Zamboanga Sibugay Province, Philippines
+    </div>
+    <nav class="foot-links" aria-label="Legal links">
+      <a href="oop-terms.html">Terms of Service</a>
+      <a href="oop-cookie.html">Cookie Policy</a>
+      <a href="https://pansensoyglenn-dev.github.io/code-sense/">Home</a>
+    </nav>
+    <div class="hash"># oop-terms.html · Code Sense</div>
+  </footer>
+
+</div>
+
+<a href="#" class="back-top" aria-label="Back to top">↑</a>
+
+<script>
+document.querySelector('.back-top').addEventListener('click', e => {
+  e.preventDefault();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+</script>
+</body>
+</html>
