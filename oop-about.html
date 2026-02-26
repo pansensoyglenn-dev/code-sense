@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>OOP in Python</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #0a1117 0%, #1a2630 100%);
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            line-height: 1.5;
+            color: #e1e9f0;
+            padding: 1rem;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .document {
+            max-width: 960px;
+            width: 100%;
+            background: linear-gradient(165deg, #0f1c26 0%, #13232f 100%);
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(52, 118, 176, 0.2);
+            padding: 1.8rem 1.5rem;
+            border: 1px solid #2a4055;
+        }
+
+        h1 {
+            font-size: clamp(1.1rem, 5vw, 1.2rem);
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #78b9ff, #306998, #ffd43b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+            font-family: 'JetBrains Mono', monospace;
+            text-align: left;
+            word-break: break-word;
+        }
+
+        .subhead {
+            font-size: clamp(0.9rem, 4vw, 1rem);
+            color: #a0c1d9;
+            border-left: 4px solid #306998;
+            padding-left: 0.8rem;
+            margin: 0.5rem 0 1.5rem 0;
+            font-weight: 400;
+            text-align: left;
+            word-break: break-word;
+        }
+
+        .version-badge {
+            display: inline-block;
+            background: #1e3347;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-size: clamp(0.7rem, 3.5vw, 0.8rem);
+            font-weight: 500;
+            color: #ffd43b;
+            margin-bottom: 1.8rem;
+            border: 1px solid #306998;
+            font-family: 'JetBrains Mono', monospace;
+            text-align: left;
+            word-break: break-word;
+        }
+
+        h2 {
+            font-size: clamp(1.1rem, 5vw, 1.2rem);
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            margin: 1.5rem 0 0.8rem 0;
+            color: #ffd43b;
+            border-bottom: 2px solid #306998;
+            padding-bottom: 0.4rem;
+            text-align: left;
+            word-break: break-word;
+        }
+
+        h3 {
+            font-size: clamp(0.95rem, 4.5vw, 1rem);
+            font-weight: 600;
+            margin: 1.2rem 0 0.6rem 0;
+            color: #78b9ff;
+            text-align: left;
+            word-break: break-word;
+        }
+
+        p, li {
+            color: #cbd5e1;
+            margin-bottom: 0.8rem;
+            font-size: clamp(0.75rem, 3.8vw, 0.8rem);
+            text-align: left;
+            word-break: break-word;
+        }
+
+        ul, ol {
+            margin: 0.6rem 0 1.2rem 1.2rem;
+        }
+
+        li {
+            margin-bottom: 0.25rem;
+        }
+
+        a {
+            color: #78b9ff;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dotted #306998;
+            transition: all 0.2s ease;
+            word-break: break-word;
+        }
+
+        a:hover {
+            color: #ffd43b;
+            border-bottom: 2px solid #ffd43b;
+        }
+
+        .code-block {
+            background: #0a1620;
+            border-left: 5px solid #ffd43b;
+            padding: 1rem;
+            border-radius: 0 16px 16px 0;
+            margin: 1.2rem 0;
+            font-size: clamp(0.7rem, 3.5vw, 0.8rem);
+            box-shadow: inset 0 0 0 1px #306998;
+            font-family: 'JetBrains Mono', monospace;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            color: #e6dbbc;
+            max-width: 100%;
+        }
+
+        .code-block strong {
+            color: #ffd43b;
+            font-weight: 600;
+        }
+
+        
+        .grid-cards {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin: 1.2rem 0 1rem;
+        }
+
+        @media (min-width: 480px) {
+            .grid-cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 768px) {
+            .grid-cards {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .card {
+            background: #0e1f2c;
+            border-radius: 18px;
+            padding: 1.2rem;
+            border: 1px solid #2a4055;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            height: fit-content;
+        }
+
+        .card:hover {
+            border-color: #78b9ff;
+            background: #132b3a;
+        }
+
+        .card h4 {
+            font-weight: 600;
+            font-size: clamp(0.9rem, 4vw, 1rem);
+            color: #78b9ff;
+            margin-bottom: 0.2rem;
+            text-align: left;
+            font-family: 'JetBrains Mono', monospace;
+            word-break: break-word;
+        }
+
+        .card p {
+            font-size: clamp(0.7rem, 3.5vw, 0.8rem);
+            margin-bottom: 0.2rem;
+            color: #b0c7da;
+            text-align: left;
+            line-height: 1.4;
+        }
+
+        .footer-note {
+            margin-top: 2rem;
+            padding-top: 1.2rem;
+            text-align: center;
+            border-top: 1px solid #2a4055;
+            font-size: clamp(0.7rem, 3.5vw, 0.8rem);
+            color: #8fa9c2;
+        }
+
+        .footer-note p {
+            font-size: clamp(0.7rem, 3.5vw, 0.8rem);
+            text-align: center;
+            margin-bottom: 0.3rem;
+        }
+
+        .footer-note a {
+            border-bottom: none;
+            font-weight: 400;
+            display: inline-block;
+            margin: 0.2rem;
+        }
+
+        .pill {
+            background: #1e3347;
+            border-radius: 40px;
+            padding: 0.2rem 0.7rem;
+            font-size: clamp(0.65rem, 3vw, 0.7rem);
+            font-weight: 500;
+            display: inline-block;
+            margin: 0.1rem 0.1rem 0 0;
+            color: #ffd43b;
+            border: 1px solid #306998;
+            font-family: 'JetBrains Mono', monospace;
+            align-self: flex-start;
+            word-break: break-word;
+        }
+
+        .inline-code {
+            font-family: 'JetBrains Mono', monospace;
+            color: #ffd43b;
+            background: #1a2f40;
+            padding: 0.15rem 0.3rem;
+            border-radius: 6px;
+            border: 1px solid #306998;
+            font-size: clamp(0.7rem, 3.5vw, 0.8rem);
+            word-break: break-word;
+            display: inline-block;
+            max-width: 100%;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.2rem 0;
+            font-size: clamp(0.7rem, 3.5vw, 0.8rem);
+            display: block;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            white-space: nowrap;
+        }
+        
+        @media (min-width: 600px) {
+            table {
+                display: table;
+                white-space: normal;
+            }
+        }
+        
+        th {
+            background: #1e3347;
+            color: #ffd43b;
+            padding: 0.5rem;
+            border: 1px solid #306998;
+            font-weight: 600;
+            text-align: left;
+        }
+        
+        td {
+            padding: 0.5rem;
+            border: 1px solid #2a4055;
+            color: #cbd5e1;
+            text-align: left;
+        }
+
+        :focus-visible {
+            outline: 3px solid #ffd43b;
+            outline-offset: 4px;
+            border-radius: 4px;
+        }
+
+        a, button, .card, .pill {
+            touch-action: manipulation;
+        }
+
+        .card {
+            cursor: pointer;
+        }
+
+        ::selection {
+            background: #306998;
+            color: #ffd43b;
+        }
+
+        @media (max-width: 380px) {
+            .document {
+                padding: 1.2rem 1rem;
+            }
+            
+            .code-block {
+                padding: 0.8rem;
+            }
+            
+            .card {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="document" role="document" aria-label="OOP in Python tutorial">
+        <header>
+            <h1>All about Object Oriented Programming</h1>
+            <div class="subhead">Further details below.</div>
+            <div class="version-badge" aria-label="Python version">🐍 Python 3.12+ · OOP deep dive</div>
+        </header>
+
+        <section aria-labelledby="intro-heading">
+            <h2 id="intro-heading"><span class="inline-code">def what_is_oop():</span></h2>
+            <p style="text-align: justify;">Object-Oriented Programming (OOP) is a paradigm that organizes software design around objects rather than functions and logic. An object is a self-contained entity that contains both data (attributes) and behavior (methods). This approach makes code more modular, reusable, and easier to maintain — especially for large-scale applications.</p>
+            <p>Python supports OOP with a clean, intuitive syntax. Everything in Python is an object, which means you're already using OOP concepts even when you don't realize it. Let's explore the core pillars.</p>
+        </section>
+
+        <section aria-labelledby="classes-heading">
+            <h2 id="classes-heading"><span class="inline-code">class CoreConcepts:</span></h2>
+            <p style="text-align: justify;">The four fundamental principles of OOP in Python work together to create robust, scalable code.</p>
+
+            <div class="grid-cards" role="list">
+                <div class="card" role="listitem">
+                    <h4>🔷 Encapsulation</h4>
+                    <p style="text-align: justify;">Bundling data and methods within a single unit (class), and controlling access through public/private conventions. Python uses naming conventions like _protected and __private.</p>
+                    <span class="pill">_single_leading_underscore</span>
+                    <span class="pill">__double_underscore</span>
+                </div>
+                <div class="card" role="listitem">
+                    <h4>⬆️ Inheritance</h4>
+                    <p style="text-align:justify;">Creating new classes based on existing ones, reusing and extending functionality. Python supports multiple inheritance through a sophisticated MRO (Method Resolution Order).</p>
+                    <span class="pill">class Child(Parent):</span>
+                    <span class="pill">super().__init__()</span>
+                </div>
+                <div class="card" role="listitem">
+                    <h4>🔄 Polymorphism</h4>
+                    <p style="text-align:justify;">Objects of different classes can be treated as objects of a common superclass. Python implements this through duck typing: "If it walks like a duck and quacks like a duck, it's a duck."</p>
+                    <span class="pill">method overriding</span>
+                    <span class="pill">duck typing</span>
+                </div>
+                <div class="card" role="listitem">
+                    <h4>🎭 Abstraction</h4>
+                    <p style="text-align: justify;">Hiding complex implementation details and showing only essential features. Achieved through abstract base classes (ABC) and well-designed interfaces.</p>
+                    <span class="pill">from abc import ABC</span>
+                    <span class="pill">@abstractmethod</span>
+                </div>
+            </div>
+        </section>
+
+        <section aria-labelledby="class-syntax-heading">
+            <h2 id="class-syntax-heading"><span class="inline-code">class ClassSyntax:</span></h2>
+            <p style="text-align:justify;">Here's the basic structure of a Python class with all the essential components:</p>
+            
+            <div class="code-block">
+<strong>class</strong> <span style="color:#78b9ff">BankAccount</span>:
+    <span style="color:#78b9ff">"""A simple bank account class demonstrating OOP basics"""</span>
+    
+    <span style="color:#78b9ff"># Class attribute (shared across all instances)</span>
+    interest_rate = 0.03
+    _total_accounts = 0  <span style="color:#78b9ff"># Protected class variable</span>
+    
+    <strong>def</strong> <span style="color:#ffd43b">__init__</span>(self, owner: str, initial_balance: float = 0):
+        <span style="color:#78b9ff">"""Constructor - initializes instance attributes"""</span>
+        self.owner = owner              <span style="color:#78b9ff"># Public attribute</span>
+        self._balance = initial_balance  <span style="color:#78b9ff"># Protected attribute (convention)</span>
+        self.__account_id = id(self)     <span style="color:#78b9ff"># Private attribute (name mangling)</span>
+        BankAccount._total_accounts += 1
+    
+    <span style="color:#78b9ff"># Instance method</span>
+    <strong>def</strong> <span style="color:#ffd43b">deposit</span>(self, amount: float) -> float:
+        <span style="color:#78b9ff">"""Add money to the account"""</span>
+        <strong>if</strong> amount > 0:
+            self._balance += amount
+        <strong>return</strong> self._balance
+    
+    <span style="color:#78b9ff"># Property decorator - getter (encapsulation)</span>
+    @property
+    <strong>def</strong> <span style="color:#ffd43b">balance</span>(self) -> float:
+        <span style="color:#78b9ff">"""Read-only balance access"""</span>
+        <strong>return</strong> self._balance
+    
+    <span style="color:#78b9ff"># Class method</span>
+    @classmethod
+    <strong>def</strong> <span style="color:#ffd43b">from_string</span>(cls, account_data: str):
+        <span style="color:#78b9ff">"""Alternative constructor"""</span>
+        owner, balance = account_data.split(',')
+        <strong>return</strong> cls(owner.strip(), float(balance))
+    
+    <span style="color:#78b9ff"># Static method</span>
+    @staticmethod
+    <strong>def</strong> <span style="color:#ffd43b">validate_amount</span>(amount: float) -> bool:
+        <span style="color:#78b9ff">"""Utility method - doesn't need class or instance"""</span>
+        <strong>return</strong> amount > 0 and amount < 1000000
+    
+    <span style="color:#78b9ff"># Magic method for string representation</span>
+    <strong>def</strong> <span style="color:#ffd43b">__str__</span>(self) -> str:
+        <strong>return</strong> f"BankAccount(owner={self.owner}, balance=${self._balance:.2f})"
+            </div>
+        </section>
+
+        <section aria-labelledby="inheritance-heading">
+            <h2 id="inheritance-heading"><span class="inline-code">class InheritanceDemo(SavingsAccount):</span></h2>
+            <p style="text-align:justify;">Inheritance allows you to create specialized versions of classes. Here's how it works in practice:</p>
+            
+            <div class="code-block">
+<strong>class</strong> <span style="color:#78b9ff">SavingsAccount</span>(BankAccount):  <span style="color:#78b9ff"># Inheritance</span>
+    <span style="color:#78b9ff">"""Specialized bank account with interest"""</span>
+    
+    <strong>def</strong> <span style="color:#ffd43b">__init__</span>(self, owner: str, initial_balance: float = 0, min_balance: float = 100):
+        <strong>super</strong>().<strong>__init__</strong>(owner, initial_balance)  <span style="color:#78b9ff"># Call parent constructor</span>
+        self.min_balance = min_balance
+        self.interest_rate = BankAccount.interest_rate + 0.01  <span style="color:#78b9ff"># Better rate</span>
+    
+    <span style="color:#78b9ff"># Method overriding (polymorphism)</span>
+    <strong>def</strong> <span style="color:#ffd43b">withdraw</span>(self, amount: float) -> float:
+        <span style="color:#78b9ff">"""Override with minimum balance check"""</span>
+        <strong>if</strong> self._balance - amount >= self.min_balance:
+            self._balance -= amount
+        <strong>else</strong>:
+            <strong>raise</strong> ValueError(f"Cannot go below minimum balance ${self.min_balance}")
+        <strong>return</strong> self._balance
+    
+    <strong>def</strong> <span style="color:#ffd43b">apply_interest</span>(self) -> float:
+        <span style="color:#78b9ff">"""New method specific to savings accounts"""</span>
+        self._balance *= (1 + self.interest_rate)
+        <strong>return</strong> self._balance
+
+<span style="color:#78b9ff"># Multiple inheritance example</span>
+<strong>class</strong> <span style="color:#78b9ff">PremiumAccount</span>(SavingsAccount, LoanMixin):  <span style="color:#78b9ff"># Multiple inheritance</span>
+    <span style="color:#78b9ff">"""Combines features from multiple parents"""</span>
+    <strong>pass</strong>
+            </div>
+        </section>
+
+        <section aria-labelledby="magic-methods-heading">
+            <h2 id="magic-methods-heading"><span class="inline-code">class MagicMethods:</span></h2>
+            <p>Python's magic methods (dunder methods) let you define how objects behave with built-in operations. They're the key to writing intuitive, Pythonic classes.</p>
+            
+            <div class="code-block" style="overflow-x: auto;">
+                <table style="display: table; white-space: normal; min-width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Purpose</th>
+                            <th>Example Usage</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="inline-code">__init__(self, ...)</span></td>
+                            <td>Constructor - initializes new instances</td>
+                            <td><span class="inline-code">obj = MyClass()</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="inline-code">__str__(self)</span></td>
+                            <td>Human-readable string representation</td>
+                            <td><span class="inline-code">print(obj)</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="inline-code">__repr__(self)</span></td>
+                            <td>Developer-friendly representation</td>
+                            <td><span class="inline-code">repr(obj)</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="inline-code">__len__(self)</span></td>
+                            <td>Length of container</td>
+                            <td><span class="inline-code">len(obj)</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="inline-code">__getitem__(self, key)</span></td>
+                            <td>Indexing/slicing support</td>
+                            <td><span class="inline-code">obj[key]</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="inline-code">__eq__(self, other)</span></td>
+                            <td>Equality comparison (==)</td>
+                            <td><span class="inline-code">obj1 == obj2</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="inline-code">__lt__(self, other)</span></td>
+                            <td>Less than comparison (<)</td>
+                            <td><span class="inline-code">obj1 < obj2</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="inline-code">__enter__/__exit__</span></td>
+                            <td>Context manager support</td>
+                            <td><span class="inline-code">with obj:</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="code-block">
+<strong>class</strong> <span style="color:#78b9ff">Vector</span>:
+    <strong>def</strong> <span style="color:#ffd43b">__init__</span>(self, x, y):
+        self.x = x
+        self.y = y
+    
+    <span style="color:#78b9ff"># Operator overloading</span>
+    <strong>def</strong> <span style="color:#ffd43b">__add__</span>(self, other):
+        <strong>return</strong> Vector(self.x + other.x, self.y + other.y)
+    
+    <strong>def</strong> <span style="color:#ffd43b">__sub__</span>(self, other):
+        <strong>return</strong> Vector(self.x - other.x, self.y - other.y)
+    
+    <strong>def</strong> <span style="color:#ffd43b">__mul__</span>(self, scalar):
+        <strong>return</strong> Vector(self.x * scalar, self.y * scalar)
+    
+    <strong>def</strong> <span style="color:#ffd43b">__abs__</span>(self):
+        <strong>return</strong> (self.x ** 2 + self.y ** 2) ** 0.5
+    
+    <strong>def</strong> <span style="color:#ffd43b">__bool__</span>(self):
+        <strong>return</strong> abs(self) > 0
+
+<span style="color:#78b9ff"># Usage</span>
+v1 = Vector(2, 3)
+v2 = Vector(1, 4)
+v3 = v1 + v2  <span style="color:#78b9ff"># Vector(3, 7) via __add__</span>
+            </div>
+        </section>
+
+        <section aria-labelledby="best-practices-heading">
+            <h2 id="best-practices-heading"><span class="inline-code">class BestPractices:</span></h2>
+            <p style="text-align:justify;">Writing clean, maintainable OOP code in Python requires following established patterns and conventions.</p>
+            
+            <ul style="text-align:justify;">
+                <li><strong>Use composition over inheritance</strong> — Favor combining simple objects rather than deep inheritance hierarchies.</li>
+                <li><strong>Follow the Single Responsibility Principle</strong> — Each class should have one clear purpose.</li>
+                <li><strong>Leverage properties</strong> — Use @property to add logic to attribute access without breaking the interface.</li>
+                <li><strong>Use dataclasses for simple containers</strong> — Python 3.7+ dataclasses reduce boilerplate.</li>
+                <li><strong>Document with docstrings</strong> — Classes and methods should have clear documentation.</li>
+                <li><strong>Prefer small, focused methods</strong> — Methods should do one thing well.</li>
+            </ul>
+            
+            <div class="code-block">
+<span style="color:#78b9ff"># Modern Python OOP with dataclasses</span>
+<strong>from</strong> dataclasses <strong>import</strong> dataclass, field
+<strong>from</strong> typing <strong>import</strong> List
+
+@dataclass
+<strong>class</strong> <span style="color:#78b9ff">TodoItem</span>:
+    title: str
+    completed: bool = False
+    priority: int = 1
+
+@dataclass
+<strong>class</strong> <span style="color:#78b9ff">TodoList</span>:
+    name: str
+    items: List[TodoItem] = field(default_factory=list)
+    
+    <strong>def</strong> <span style="color:#ffd43b">add_item</span>(self, title: str, priority: int = 1):
+        self.items.append(TodoItem(title=title, priority=priority))
+    
+    <strong>def</strong> <span style="color:#ffd43b">completed_items</span>(self):
+        <strong>return</strong> [item <strong>for</strong> item <strong>in</strong> self.items <strong>if</strong> item.completed]
+            </div>
+        </section>
+
+        <section aria-labelledby="advanced-heading">
+            <h2 id="advanced-heading"><span class="inline-code">class AdvancedPatterns:</span></h2>
+            <p>Advanced OOP patterns in Python enable sophisticated designs while maintaining readability.</p>
+            
+            <div class="grid-cards" role="list">
+                <div class="card" role="listitem">
+                    <h4>🏭 Factory Pattern</h4>
+                    <p>Creating objects without specifying the exact class. Useful when object creation logic is complex.</p>
+                    <span class="pill">@classmethod</span>
+                    <span class="pill">factory methods</span>
+                </div>
+                <div class="card" role="listitem">
+                    <h4>📦 Singleton</h4>
+                    <p>Ensuring a class has only one instance. Implement via metaclass or module-level variable.</p>
+                    <span class="pill">__new__ override</span>
+                    <span class="pill">metaclass</span>
+                </div>
+                <div class="card" role="listitem">
+                    <h4>🔌 Adapter Pattern</h4>
+                    <p>Making incompatible interfaces work together. Python's duck typing makes this elegantly simple.</p>
+                    <span class="pill">composition</span>
+                    <span class="pill">wrapper classes</span>
+                </div>
+                <div class="card" role="listitem">
+                    <h4>📝 Observer Pattern</h4>
+                    <p>Notifying dependent objects of state changes. Great for event-driven systems.</p>
+                    <span class="pill">callbacks</span>
+                    <span class="pill">property observers</span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+<span style="color:#78b9ff"># Singleton pattern using metaclass</span>
+<strong>class</strong> <span style="color:#78b9ff">SingletonMeta</span>(type):
+    _instances = {}
+    
+    <strong>def</strong> <span style="color:#ffd43b">__call__</span>(cls, *args, **kwargs):
+        <strong>if</strong> cls <strong>not</strong> <strong>in</strong> cls._instances:
+            cls._instances[cls] = <strong>super</strong>().<strong>__call__</strong>(*args, **kwargs)
+        <strong>return</strong> cls._instances[cls]
+
+<strong>class</strong> <span style="color:#78b9ff">DatabaseConnection</span>(metaclass=SingletonMeta):
+    <strong>def</strong> <span style="color:#ffd43b">__init__</span>(self):
+        self.connected = False
+    
+    <strong>def</strong> <span style="color:#ffd43b">connect</span>(self):
+        <span style="color:#78b9ff"># Connection logic</span>
+        self.connected = True
+            </div>
+        </section>
+
+        <div class="code-block" style="margin-top: 2rem; background-color: #0f1f2b;">
+            <strong>🎯 try: master_oop() except: keep_practicing()</strong> This guide covers the essential OOP concepts in Python. Remember that OOP is a tool, not a goal — use it when it makes your code clearer and more maintainable. The best design is the one that solves your problem simply.
+        </div>
+
+        <footer class="footer-note">
+            <p>🐍 Python OOP Guide <a href="https://pansensoyglenn-dev.github.io/code-sense/" aria-label="Code repository>GitHub</a></p>
+            <p style="margin-top: 0.5rem;">Built and Designed By: Glenn Junsay Pansensoy</p>
+        </footer>
+    </div>
+</body>
+</html>
