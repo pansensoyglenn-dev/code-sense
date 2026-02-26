@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Object-Oriented Programming in Python — Core Concepts</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0f1a;
+            --surface: #0f172a;
+            --text: #e0e9f5;
+            --text-light: #c9d8f0;
+            --accent: #60a5fa;
+            --accent-dark: #3b82f6;
+            --border: #2e4a7a;
+            --code-bg: #0b1220;
+            --keyword: #ffad7c;
+            --func: #7cc3ff;
+            --class: #70ffd9;
+            --string: #c3e88d;
+            --comment: #7a96b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 100%;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.65;
+            min-height: 100vh;
+            padding: clamp(0.5rem, 2vw, 1.5rem);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: clamp(1.5rem, 5vw, 3.5rem) clamp(1rem, 4vw, 3.2rem);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+        }
+
+        h1 {
+            font-size: clamp(1.2rem, 6vw, 2.2rem);
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 2rem;
+            padding-left: 1.2rem;
+            border-left: 6px solid var(--accent);
+            line-height: 1.2;
+            letter-spacing: -0.01em;
+            word-break: break-word;
+        }
+
+        h2 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #c6d9ff;
+            margin: 2.5rem 0 1rem 0;
+            padding-bottom: 0.7rem;
+            border-bottom: 2px solid var(--border);
+            letter-spacing: 0.5px;
+        }
+
+        h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #c6d9ff;
+            margin: 2rem 0 0.8rem 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px dashed var(--border);
+            text-transform: none;
+            font-weight: 500;
+            color: #b4c9f0;
+        }
+
+        p, li {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-bottom: 1.15rem;
+            line-height: 1.7;
+        }
+
+        strong {
+            color: #a5c6ff;
+            font-weight: 600;
+        }
+
+        code:not(pre code) {
+            font-family: 'JetBrains Mono', monospace;
+            background: #1e293b;
+            padding: 0.18em 0.5em;
+            border-radius: 6px;
+            color: #e2e8f0;
+            font-size: 0.75rem;
+            white-space: nowrap;
+        }
+
+        .code-block {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--code-bg);
+            border-left: 4px solid var(--accent);
+            border-radius: 12px;
+            padding: 1.5rem 1.8rem;
+            margin: 1.6rem 0 2.2rem;
+            font-size: 0.8rem;
+            line-height: 1.6;
+            overflow-x: auto;
+            color: #d1e0ff;
+            white-space: pre;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.7);
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .code-block .keyword  { color: var(--keyword); font-weight: 500; }
+        .code-block .def      { color: var(--func); }
+        .code-block .class    { color: var(--class); }
+        .code-block .string   { color: var(--string); }
+        .code-block .comment  { color: var(--comment); font-style: italic; }
+
+        ul, ol {
+            margin: 0.9rem 0 1.8rem 2rem;
+            font-size: 0.8rem;
+        }
+
+        li {
+            margin-bottom: 0.65rem;
+        }
+
+        hr {
+            border: none;
+            height: 1px;
+            background: var(--border);
+            margin: 4rem 0 2rem;
+        }
+
+        .footer-note {
+            font-size: 0.75rem;
+            color: #8da6d0;
+            text-align: center;
+            margin-top: 4.5rem;
+            padding-bottom: 1rem;
+        }
+
+        .insight {
+            background: #1a2538;
+            border-radius: 10px;
+            padding: 1.2rem 1.5rem;
+            margin: 1.8rem 0;
+            border-left: 5px solid var(--accent);
+            font-size: 0.8rem;
+        }
+        .insight p {
+            margin-bottom: 0.2rem;
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                border-radius: 18px;
+                padding: 1.5rem 1.2rem;
+            }
+            h1 {
+                padding-left: 0.8rem;
+                border-left-width: 4px;
+            }
+            h2 {
+                margin-top: 2rem;
+            }
+            .code-block {
+                padding: 1.2rem 1.4rem;
+                margin: 1.3rem -0.3rem;
+                border-radius: 10px;
+                border-left-width: 3px;
+                font-size: 0.75rem;
+            }
+            ul, ol {
+                margin-left: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 0.2rem;
+            }
+            .container {
+                border-radius: 16px;
+                padding: 1.2rem 0.9rem;
+            }
+            .code-block {
+                padding: 0.9rem 1rem;
+                font-size: 0.7rem;
+            }
+            code:not(pre code) {
+                white-space: normal;
+                word-break: break-word;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <h3>Object-Oriented Programming in Python — Core Concepts</h3>
+
+    <p style="text-align: justify;">This guide presents Python’s object model with emphasis on rationale and practical application rather than syntax alone. Each concept is illustrated using a consistent mining and drilling equipment theme to demonstrate real-world utility.</p>
+
+    <h3>1. Classes & Instances — Blueprints vs. Concrete Objects</h3>
+    <p style="text-align:justify;">A class serves as a blueprint that defines structure and behavior. An instance is a specific object created from that blueprint, with its own unique state. Class attributes are shared across all instances, while instance attributes are unique to each object. This design promotes memory efficiency and enables flexible per-instance customization.</p>
+
+    <pre class="code-block"><span class="keyword">class</span> <span class="class">MiningDrill</span>:
+    <span class="comment"># Shared across all drills</span>
+    category = <span class="string">"rotary"</span>
+
+    <span class="keyword">def</span> <span class="def">__init__</span>(self, model: str, power_kw: int):
+        self.model = model
+        self.power_kw = power_kw
+        self.is_running = <span class="keyword">False</span>
+
+    <span class="keyword">def</span> <span class="def">start</span>(self) -> str:
+        self.is_running = <span class="keyword">True</span>
+        <span class="keyword">return</span> <span class="string">f"{self.model} started — {self.power_kw} kW"</span>
+
+drill1 = MiningDrill(<span class="string">"X900"</span>, 450)
+drill2 = MiningDrill(<span class="string">"Z1100"</span>, 620)
+
+print(drill1.start())                 <span class="comment"># X900 started — 450 kW</span>
+print(drill2.category)                <span class="comment"># rotary</span>
+
+MiningDrill.category = <span class="string">"hybrid"</span>
+print(drill1.category)                <span class="comment"># hybrid</span>
+print(drill2.category)                <span class="comment"># hybrid</span></pre>
+
+    <p style="text-align:justify;">The <code>self</code> parameter refers to the current instance and is essential for accessing or modifying instance-specific data.</p>
+
+    <h3>2. Inheritance — Reuse and Specialization</h3>
+    <p style="text-align:justify;">Inheritance allows a child class to inherit attributes and methods from a parent class while adding or modifying behavior. The <code>super()</code> function provides clean access to parent implementations, supporting the open/closed principle: classes should be open for extension but closed for modification.</p>
+
+    <pre class="code-block"><span class="keyword">class</span> <span class="class">Tool</span>:
+    <span class="keyword">def</span> <span class="def">__init__</span>(self, name: str):
+        self.name = name
+
+    <span class="keyword">def</span> <span class="def">use</span>(self) -> str:
+        <span class="keyword">return</span> <span class="string">f"using {self.name}"</span>
+
+<span class="keyword">class</span> <span class="class">Drill</span>(Tool):
+    <span class="keyword">def</span> <span class="def">__init__</span>(self, name: str, power_kw: int):
+        <span class="keyword">super</span>().__init__(name)
+        self.power_kw = power_kw
+
+    <span class="keyword">def</span> <span class="def">use</span>(self) -> str:
+        parent_use = <span class="keyword">super</span>().use()
+        <span class="keyword">return</span> parent_use + <span class="string">f" with {self.power_kw} kW power"</span>
+
+hammer_drill = Drill(<span class="string">"HammerDrill"</span>, 300)
+print(hammer_drill.use())</pre>
+
+    <p style="text-align:justify;">Inheritance enables code reuse, but excessive depth can lead to rigidity. Composition is often preferred when flexibility is more important than an is-a relationship.</p>
+
+    <div class="insight">
+        <p style="text-align: justify;"><strong>🔹 Design tip:</strong> Prefer mixins or composition when behavior is shared across unrelated classes. Inheritance excels for incremental refinement.</p>
+    </div>
+
+    <h3>3. Encapsulation & Properties — Controlled Access</h3>
+    <p>Encapsulation protects internal state by controlling access. Python uses naming conventions (<code>_</code> for protected, <code>__</code> for name mangling) rather than strict access modifiers. Properties provide a clean interface for getter/setter logic without changing the public API.</p>
+
+    <pre class="code-block"><span class="keyword">class</span> <span class="class">TemperatureSensor</span>:
+    <span class="keyword">def</span> <span class="def">__init__</span>(self):
+        self._celsius = 20.0
+
+    @property
+    <span class="keyword">def</span> <span class="def">celsius</span>(self) -> float:
+        <span class="keyword">return</span> self._celsius
+
+    @celsius.setter
+    <span class="keyword">def</span> <span class="def">celsius</span>(self, value: float):
+        <span class="keyword">if</span> not (-50 <= value <= 150):
+            <span class="keyword">raise</span> ValueError(<span class="string">"Temperature outside safe range"</span>)
+        self._celsius = value
+
+    @property
+    <span class="keyword">def</span> <span class="def">fahrenheit</span>(self) -> float:
+        <span class="keyword">return</span> self._celsius * 9/5 + 32
+
+sensor = TemperatureSensor()
+sensor.celsius = 85.0
+print(sensor.celsius)      <span class="comment"># 85.0</span>
+print(sensor.fahrenheit)   <span class="comment"># 185.0</span></pre>
+
+    <p>Properties preserve a simple attribute-like syntax while allowing validation, computation, or lazy evaluation.</p>
+
+    <h3>4. Polymorphism & Duck Typing — Behavior over Explicit Type</h3>
+    <p>Polymorphism allows objects of different classes to be treated uniformly if they implement the expected interface. Python relies on duck typing: if an object has the required methods, it is accepted — no formal interface declaration is needed.</p>
+
+    <pre class="code-block"><span class="keyword">class</span> <span class="class">Drill</span>:
+    <span class="keyword">def</span> <span class="def">action</span>(self): <span class="keyword">return</span> <span class="string">"drilling rock"</span>
+
+<span class="keyword">class</span> <span class="class">BlastingTeam</span>:
+    <span class="keyword">def</span> <span class="def">action</span>(self): <span class="keyword">return</span> <span class="string">"setting explosives"</span>
+
+<span class="keyword">class</span> <span class="class">Hauler</span>:
+    <span class="keyword">def</span> <span class="def">action</span>(self): <span class="keyword">return</span> <span class="string">"transporting ore"</span>
+
+<span class="keyword">def</span> <span class="def">perform_actions</span>(equipment):
+    <span class="keyword">for</span> eq <span class="keyword">in</span> equipment:
+        print(eq.action())
+
+team = [Drill(), BlastingTeam(), Hauler()]
+perform_actions(team)</pre>
+
+    <p>Duck typing provides exceptional flexibility and is the foundation of many Python idioms and standard library functions.</p>
+
+    <h3>5. Magic Methods (Dunder Methods) — Pythonic Behavior</h3>
+    <p>Magic methods allow custom classes to integrate naturally with Python syntax and built-in operations (<code>len()</code>, <code>str()</code>, operators, etc.).</p>
+
+    <pre class="code-block"><span class="keyword">class</span> <span class="class">OreVein</span>:
+    <span class="keyword">def</span> <span class="def">__init__</span>(self, mineral: str, grade: float):
+        self.mineral = mineral
+        self.grade = grade
+
+    <span class="keyword">def</span> <span class="def">__str__</span>(self) -> str:
+        <span class="keyword">return</span> <span class="string">f"{self.mineral} ({self.grade}% grade)"</span>
+
+    <span class="keyword">def</span> <span class="def">__repr__</span>(self) -> str:
+        <span class="keyword">return</span> <span class="string">f"OreVein('{self.mineral}', {self.grade})"</span>
+
+    <span class="keyword">def</span> <span class="def">__len__</span>(self) -> int:
+        <span class="keyword">return</span> <span class="keyword">int</span>(self.grade * 10)
+
+    <span class="keyword">def</span> <span class="def">__lt__</span>(self, other) -> bool:
+        <span class="keyword">return</span> self.grade < other.grade
+
+    <span class="keyword">def</span> <span class="def">__add__</span>(self, other):
+        avg = (self.grade + other.grade) / 2
+        <span class="keyword">return</span> OreVein(<span class="string">"mixed"</span>, avg)
+
+v1 = OreVein(<span class="string">"gold"</span>, 5.2)
+v2 = OreVein(<span class="string">"silver"</span>, 3.8)
+
+print(v1)              <span class="comment"># gold (5.2% grade)</span>
+print(repr(v1))        <span class="comment"># OreVein('gold', 5.2)</span>
+print(len(v1))         <span class="comment"># 52</span>
+print(v1 > v2)         <span class="comment"># True</span>
+print(v1 + v2)         <span class="comment"># OreVein('mixed', 4.5)</span></pre>
+
+    <h3>6. Class Methods and Static Methods — Alternative Perspectives</h3>
+    <p>Class methods receive the class as the first argument (<code>cls</code>) and are often used for alternative constructors. Static methods receive no implicit first argument and serve as utility functions logically grouped with the class.</p>
+
+    <pre class="code-block"><span class="keyword">class</span> <span class="class">Survey</span>:
+    total_surveys = 0
+
+    <span class="keyword">def</span> <span class="def">__init__</span>(self, area: str):
+        self.area = area
+        Survey.total_surveys += 1
+
+    @classmethod
+    <span class="keyword">def</span> <span class="def">from_string</span>(cls, data: str):
+        area = data.split(<span class="string">":"</span>)[0]
+        <span class="keyword">return</span> cls(area)
+
+    @classmethod
+    <span class="keyword">def</span> <span class="def">count</span>(cls) -> str:
+        <span class="keyword">return</span> <span class="string">f"Total surveys: {cls.total_surveys}"</span>
+
+    @staticmethod
+    <span class="keyword">def</span> <span class="def">is_valid_area</span>(name: str) -> bool:
+        cleaned = name.replace(<span class="string">"_"</span>, <span class="string">""</span>)
+        <span class="keyword">return</span> len(name) > 3 and cleaned.isalnum()
+
+s1 = Survey(<span class="string">"NorthPit"</span>)
+s2 = Survey.from_string(<span class="string">"SouthPit:gold"</span>)
+print(Survey.count())
+print(Survey.is_valid_area(<span class="string">"West_Zone"</span>))</pre>
+
+    <h3>7. Composition — Flexible Object Construction</h3>
+    <p>Composition builds complex objects by combining simpler ones (“has-a” relationship), offering greater flexibility and testability than deep inheritance hierarchies.</p>
+
+    <pre class="code-block"><span class="keyword">class</span> <span class="class">Engine</span>:
+    <span class="keyword">def</span> <span class="def">start</span>(self): <span class="keyword">return</span> <span class="string">"engine running"</span>
+    <span class="keyword">def</span> <span class="def">stop</span>(self): <span class="keyword">return</span> <span class="string">"engine stopped"</span>
+
+<span class="keyword">class</span> <span class="class">DrillBit</span>:
+    <span class="keyword">def</span> <span class="def">__init__</span>(self, material: str):
+        self.material = material
+
+    <span class="keyword">def</span> <span class="def">spin</span>(self):
+        <span class="keyword">return</span> <span class="string">f"{self.material} bit spinning"</span>
+
+<span class="keyword">class</span> <span class="class">DrillingRig</span>:
+    <span class="keyword">def</span> <span class="def">__init__</span>(self, bit_material: str):
+        self.engine = Engine()
+        self.bit = DrillBit(bit_material)
+
+    <span class="keyword">def</span> <span class="def">start_operation</span>(self):
+        <span class="keyword">return</span> <span class="string">f"{self.engine.start()} — {self.bit.spin()}"</span>
+
+    <span class="keyword">def</span> <span class="def">stop_operation</span>(self):
+        <span class="keyword">return</span> self.engine.stop()
+
+rig = DrillingRig(<span class="string">"diamond"</span>)
+print(rig.start_operation())
+print(rig.stop_operation())</pre>
+
+    <h3>8. Abstract Base Classes — Enforcing Interfaces</h3>
+    <p>Abstract base classes (ABCs) define a contract that concrete subclasses must fulfill. Attempting to instantiate an abstract class or a subclass missing required methods raises an error.</p>
+
+    <pre class="code-block"><span class="keyword">from</span> abc <span class="keyword">import</span> ABC, abstractmethod
+
+<span class="keyword">class</span> <span class="class">MiningEquipment</span>(ABC):
+    <span class="keyword">def</span> <span class="def">__init__</span>(self, name: str):
+        self.name = name
+
+    @abstractmethod
+    <span class="keyword">def</span> <span class="def">operate</span>(self) -> str:
+        <span class="keyword">pass</span>
+
+    <span class="keyword">def</span> <span class="def">info</span>(self) -> str:
+        <span class="keyword">return</span> <span class="string">f"Equipment: {self.name}"</span>
+
+<span class="keyword">class</span> <span class="class">Excavator</span>(MiningEquipment):
+    <span class="keyword">def</span> <span class="def">operate</span>(self) -> str:
+        <span class="keyword">return</span> <span class="string">f"{self.name} is excavating"</span>
+
+e = Excavator(<span class="string">"CAT 320"</span>)
+print(e.operate())
+print(e.info())</pre>
+
+    <h4>9. Dataclasses — Reduced Boilerplate for Data Containers</h3>
+    <p>Introduced in Python 3.7, dataclasses automatically generate <code>__init__</code>, <code>__repr__</code>, <code>__eq__</code>, and other methods, making them ideal for data-oriented classes.</p>
+
+    <pre class="code-block"><span class="keyword">from</span> dataclasses <span class="keyword">import</span> dataclass, field
+
+@dataclass
+<span class="keyword">class</span> <span class="class">MineralDeposit</span>:
+    name: str
+    depth: float
+    grade: float
+    active: bool = <span class="keyword">True</span>
+    tags: list[str] = field(default_factory=list)
+
+    <span class="keyword">def</span> <span class="def">extractable</span>(self) -> bool:
+        <span class="keyword">return</span> self.grade > 1.5 and self.depth < 1000
+
+d1 = MineralDeposit(<span class="string">"copper"</span>, 350.2, 2.3)
+d2 = MineralDeposit(<span class="string">"gold"</span>, 820.0, 5.1, tags=[<span class="string">"high-grade"</span>])
+
+print(d1)
+print(d1.extractable())
+print(d1 == d2)</pre>
+
+    <h3>10. Builder Pattern — Fluent Complex Object Construction</h3>
+    <p>The builder pattern provides a readable, chainable interface for constructing objects with many optional parameters.</p>
+
+    <pre class="code-block"><span class="keyword">class</span> <span class="class">DrillConfiguration</span>:
+    <span class="keyword">def</span> <span class="def">__init__</span>(self, model: str, power_kw: int):
+        self.model = model
+        self.power_kw = power_kw
+        self.depth_capacity = 1000
+        self.bit_type = <span class="string">"standard"</span>
+        self.automatic_lubrication = <span class="keyword">False</span>
+
+<span class="keyword">class</span> <span class="class">DrillBuilder</span>:
+    <span class="keyword">def</span> <span class="def">__init__</span>(self, model: str, power_kw: int):
+        self._config = DrillConfiguration(model, power_kw)
+
+    <span class="keyword">def</span> <span class="def">set_depth_capacity</span>(self, depth: int):
+        self._config.depth_capacity = depth
+        <span class="keyword">return</span> self
+
+    <span class="keyword">def</span> <span class="def">set_bit_type</span>(self, bit: str):
+        self._config.bit_type = bit
+        <span class="keyword">return</span> self
+
+    <span class="keyword">def</span> <span class="def">enable_autolube</span>(self):
+        self._config.automatic_lubrication = <span class="keyword">True</span>
+        <span class="keyword">return</span> self
+
+    <span class="keyword">def</span> <span class="def">build</span>(self):
+        <span class="keyword">return</span> self._config
+
+config = (DrillBuilder(<span class="string">"MegaDrill"</span>, 800)
+          .set_depth_capacity(2500)
+          .set_bit_type(<span class="string">"diamond"</span>)
+          .enable_autolube()
+          .build())
+
+print(config.bit_type)
+print(config.automatic_lubrication)</pre>
+
+    <hr>
+
+    <h2>🧠 Core Principles Recap</h2>
+    <p><strong>encapsulation</strong> · hide implementation, expose properties<br>
+    <strong>polymorphism</strong> · same interface, different behaviours<br>
+    <strong>inheritance vs composition</strong> · “is‑a” vs “has‑a” – choose composition for flexibility<br>
+    <strong>magic methods</strong> · make your classes feel native<br>
+    <strong>dataclasses + builders</strong> · reduce boilerplate, increase readability</p>
+    <p style="margin-top: 2rem;">— all examples use the mining domain to ground abstract ideas in tangible equipment.</p>
+
+    <p class="footer-note">
+         Python OOP concepts · Created by Glenn Junsay Pansensoy
+    </p>
+
+</div>
+
+</body>
+</html>
