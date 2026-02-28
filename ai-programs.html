@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Programs & Python AI Examples | LLM, Transformers, NLP</title>
+    <meta name="description" content="Practical AI programs and Python examples: LLM integration, transformers, NLP pipelines, computer vision with YOLO, sentiment analysis, and generative AI patterns. Code included.">
+    <meta name="keywords" content="AI programs, Python AI examples, LLM Python, transformers library, NLP pipelines, sentiment analysis, computer vision, YOLO Python, generative AI, machine learning examples, poetic-lion">
+    <meta name="author" content="Glenn Junsay Pansensoy">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://poetic-lion.netlify.app/ai-programs.html">
+    <meta property="og:title" content="AI Programs & Python Examples — LLM, Transformers, Computer Vision">
+    <meta property="og:description" content="Real-world AI code examples: Hugging Face pipelines, YOLO object detection, chatbot snippets, and generative AI patterns for developers.">
+    <meta property="og:url" content="https://poetic-lion.netlify.app/ai-programs.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Poetic Lion AI Lab">
+    <meta property="og:image" content="https://poetic-lion.netlify.app/og-ai-programs.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AI Programs in Python – Hands-On Examples">
+    <meta name="twitter:description" content="Explore practical AI scripts: LLM prompts, NLP, transformers, and vision models with ready-to-run code.">
+    <link rel="icon" type="image/x-icon" href="https://poetic-lion.netlify.app/favicon.ico">
+    <meta name="theme-color" content="#1e1e2e">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0d1117;
+            font-family: 'Inter', 'Segoe UI', 'Roboto', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 1.5rem 1rem;
+            color: #e6edf3;
+        }
+
+        .guide-card {
+            max-width: 1400px;
+            width: 100%;
+            background: #161b22;
+            border-radius: 1.5rem;
+            padding: 1rem 2.5rem;
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.9), 0 0 0 1px #30363d inset;
+            backdrop-filter: blur(2px);
+            border: 1px solid #30363d;
+        }
+
+        @media (min-width: 1600px) {
+            .guide-card {
+                max-width: 1600px;
+                padding: 1rem 4rem;
+            }
+        }
+
+        .title-12 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            text-transform: uppercase;
+            border-bottom: 2px solid #58a6ff;
+            padding-bottom: 0.4rem;
+            display: inline-block;
+            color: #b7c9e2;
+            margin-bottom: 1.2rem;
+            font-family: 'Fira Code', 'Inter', monospace;
+        }
+
+        .subtitle-1 {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #b1c9f0;
+            margin-top: 1.2rem;
+            margin-bottom: 0.3rem;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            border-left: 4px solid #58a6ff;
+            padding-left: 0.7rem;
+            background: linear-gradient(90deg, #1f262e, transparent);
+            line-height: 1.4;
+        }
+
+        .paragraph-08 {
+            font-size: 0.8rem;
+            color: #d0d9e8;
+            margin-bottom: 0.8rem;
+            text-align: justify;
+            font-weight: 350;
+            max-width: 100%;
+        }
+
+        .guide-card p:last-of-type {
+            margin-bottom: 0;
+        }
+
+        .python-blue {
+            color: #58a6ff;
+            font-weight: 500;
+            background: rgba(88, 166, 255, 0.08);
+            padding: 0.1rem 0.2rem;
+            border-radius: 4px;
+        }
+
+        .obsidian-meta {
+            color: #8b949e;
+            font-size: 0.7rem;
+            display: block;
+            margin-top: 1.5rem;
+            border-top: 1px dashed #3d444d;
+            padding-top: 0.8rem;
+            text-align: right;
+        }
+
+        code, .term, .inline-code {
+            font-family: 'Fira Code', 'JetBrains Mono', monospace;
+            background: #1f2a3f;
+            color: #79c0ff;
+            padding: 0.15rem 0.3rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            border: 1px solid #2d4059;
+        }
+
+        .code-block {
+            background: #0a0e14;
+            border-left: 4px solid #58a6ff;
+            padding: 0.8rem 1.8rem;
+            margin: 0.8rem 0;
+            border-radius: 12px;
+            overflow-x: auto;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.8rem;
+            color: #b4c8e8;
+            box-shadow: inset 0 0 0 1px #2d2d44, 0 4px 8px rgba(0,0,0,0.5);
+            line-height: 1.5;
+            width: 100%;
+        }
+
+        .code-block pre {
+            margin: 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            color: #d2e0f5;
+        }
+
+        .inline-code {
+            font-family: 'Fira Code', monospace;
+            background: #1e2a3a;
+            color: #90c0ff;
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            border: 1px solid #2d3f5a;
+        }
+
+        .content-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .guide-card {
+                padding: 1rem 1.5rem;
+            }
+            .code-block {
+                padding: 0.8rem 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="guide-card">
+        <h1 class="title-12">AI PROGRAMS & PRACTICAL PYTHON EXAMPLES</h1>
+
+        <p class="paragraph-08">
+            Explore a collection of <span class="python-blue">AI programs and Python snippets</span> demonstrating modern machine learning, large language models (LLMs), computer vision, and natural language processing. From <strong>Hugging Face transformers</strong> to <strong>YOLO object detection</strong>, these examples are designed for learning and adaptation. All code is ready to run with common AI/ML libraries.
+        </p>
+
+        <h2 class="subtitle-1">🤖 LLM & TRANSFORMERS (HUGGING FACE)</h2>
+        <p class="paragraph-08">
+            Use state-of-the-art language models via the <span class="inline-code">transformers</span> library. Below: text generation with GPT-2, sentiment analysis, and zero-shot classification.
+        </p>
+        <div class="code-block">
+            <pre># Example 1: Text generation with GPT-2
+from transformers import pipeline
+
+generator = pipeline('text-generation', model='gpt2')
+prompt = "Once upon a time in an AI lab,"
+output = generator(prompt, max_length=50, num_return_sequences=1)
+print(output[0]['generated_text'])
+
+# Example 2: Sentiment analysis (transformers pipeline)
+classifier = pipeline('sentiment-analysis')
+result = classifier("I love building AI programs with Python!")
+print(result)  # [{'label': 'POSITIVE', 'score': 0.999...}]
+
+# Example 3: Zero-shot classification
+classifier_zs = pipeline("zero-shot-classification")
+candidate_labels = ["technology", "sports", "finance"]
+text = "NVIDIA just launched a new GPU for deep learning."
+print(classifier_zs(text, candidate_labels))</pre>
+        </div>
+
+        <h2 class="subtitle-1">🧠 NLP PIPELINES: NER, QUESTION ANSWERING, SUMMARIZATION</h2>
+        <p class="paragraph-08">
+            Perform named entity recognition (NER), extractive QA, and text summarization with minimal code using Hugging Face pipelines.
+        </p>
+        <div class="code-block">
+            <pre># Named Entity Recognition
+ner = pipeline("ner", grouped_entities=True)
+text = "Elon Musk founded SpaceX in Hawthorne, California."
+entities = ner(text)
+for ent in entities:
+    print(f"{ent['word']} -> {ent['entity_group']}")
+
+# Question Answering
+qa = pipeline("question-answering")
+context = "The Python programming language was created by Guido van Rossum and released in 1991."
+question = "Who created Python?"
+answer = qa(question=question, context=context)
+print(f"Answer: {answer['answer']} (confidence: {answer['score']:.2f})")
+
+# Summarization
+summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
+long_text = "Artificial intelligence (AI) refers to the simulation of human intelligence in machines that are programmed to think like humans and mimic their actions. The term may also be applied to any machine that exhibits traits associated with a human mind such as learning and problem-solving. The ideal characteristic of artificial intelligence is its ability to rationalize and take actions that have the best chance of achieving a specific goal."
+summary = summarizer(long_text, max_length=50, min_length=25)
+print(summary[0]['summary_text'])</pre>
+        </div>
+
+        <h2 class="subtitle-1">📷 COMPUTER VISION: YOLO OBJECT DETECTION (ULTRALYTICS)</h2>
+        <p class="paragraph-08">
+            Real-time object detection using YOLOv8. The example shows inference on an image; requires <span class="inline-code">ultralytics</span> and <span class="inline-code">PIL</span>.
+        </p>
+        <div class="code-block">
+            <pre>from ultralytics import YOLO
+from PIL import Image
+import requests
+
+# Load a pretrained YOLOv8 model
+model = YOLO('yolov8n.pt')  # nano version for speed
+
+# Run inference on an image from URL
+image_url = 'https://ultralytics.com/images/bus.jpg'
+img = Image.open(requests.get(image_url, stream=True).raw)
+results = model(img)  # returns list of Results
+
+# View detections
+for r in results:
+    for box in r.boxes:
+        cls = int(box.cls[0])
+        conf = float(box.conf[0])
+        print(f"Class: {model.names[cls]}, Confidence: {conf:.2f}")</pre>
+        </div>
+
+        <h2 class="subtitle-1">🗣️ SPEECH-TO-TEXT WITH WHISPER (OPENAI)</h2>
+        <p class="paragraph-08">
+            Transcribe audio files using OpenAI's Whisper model via Hugging Face or the openai library.
+        </p>
+        <div class="code-block">
+            <pre>import torch
+from transformers import AutoModelForSpeechSeq2Seq, AutoProcessor, pipeline
+
+device = "cuda:0" if torch.cuda.is_available() else "cpu"
+model_id = "openai/whisper-small"
+
+model = AutoModelForSpeechSeq2Seq.from_pretrained(model_id).to(device)
+processor = AutoProcessor.from_pretrained(model_id)
+
+pipe = pipeline(
+    "automatic-speech-recognition",
+    model=model,
+    tokenizer=processor.tokenizer,
+    feature_extractor=processor.feature_extractor,
+    device=device,
+)
+
+result = pipe("path/to/audio.wav")  # replace with your audio file
+print(result["text"])</pre>
+        </div>
+
+        <h2 class="subtitle-1">🧮 GENERATIVE AI: SIMPLE LLM CHATBOT (MOCK)</h2>
+        <p class="paragraph-08">
+            A minimal example demonstrating a chat loop with a language model. Uses <span class="inline-code">transformers</span> with a conversational pipeline.
+        </p>
+        <div class="code-block">
+            <pre>from transformers import pipeline, Conversation
+
+chatbot = pipeline("conversational", model="microsoft/DialoGPT-medium")
+conversation = Conversation("What is the future of AI?")
+conversation = chatbot(conversation)
+print(conversation.generated_responses[-1])
+
+# Continue conversation
+conversation.add_user_input("Will AI replace programmers?")
+conversation = chatbot(conversation)
+print(conversation.generated_responses[-1])</pre>
+        </div>
+
+        <h2 class="subtitle-1">📊 CLASSIC ML: SENTIMENT ANALYSIS WITH SCIKIT-LEARN</h2>
+        <p class="paragraph-08">
+            Bag-of-words + logistic regression for sentiment classification (toy example).
+        </p>
+        <div class="code-block">
+            <pre>from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.linear_model import LogisticRegression
+from sklearn.pipeline import make_pipeline
+
+# Tiny dataset
+texts = ["I love this!", "This is terrible", "Amazing product", "Worst purchase ever"]
+labels = [1, 0, 1, 0]  # 1 positive, 0 negative
+
+model = make_pipeline(CountVectorizer(), LogisticRegression())
+model.fit(texts, labels)
+
+print(model.predict(["Fantastic quality"]))  # [1]
+print(model.predict(["Very disappointing"])) # [0]</pre>
+        </div>
+
+        <h2 class="subtitle-1">🚀 RAG PATTERN (RETRIEVAL-AUGMENTED GENERATION) SKETCH</h2>
+        <p class="paragraph-08">
+            Conceptual example of RAG: retrieve relevant context from documents, then feed to LLM. Uses <span class="inline-code">sentence-transformers</span> and <span class="inline-code">transformers</span>.
+        </p>
+        <div class="code-block">
+            <pre>from sentence_transformers import SentenceTransformer, util
+from transformers import pipeline
+
+# 1. Embedding documents
+docs = [
+    "Python is a high-level programming language.",
+    "AI programs often use PyTorch or TensorFlow.",
+    "Transformers revolutionized NLP in 2017."
+]
+encoder = SentenceTransformer('all-MiniLM-L6-v2')
+doc_emb = encoder.encode(docs, convert_to_tensor=True)
+
+# 2. Retrieve relevant doc for a query
+query = "What framework is used for deep learning?"
+query_emb = encoder.encode(query, convert_to_tensor=True)
+scores = util.cos_sim(query_emb, doc_emb)[0]
+best_idx = scores.argmax().item()
+context = docs[best_idx]
+
+# 3. Generate answer with LLM (mock)
+generator = pipeline('text-generation', model='gpt2')
+prompt = f"Context: {context}\nQuestion: {query}\nAnswer:"
+print(generator(prompt, max_length=50)[0]['generated_text'])</pre>
+        </div>
+
+        <h2 class="subtitle-1">🧪 AI SAFETY & PROMPT ENGINEERING EXAMPLE</h2>
+        <p class="paragraph-08">
+            Demonstrates a simple prompt engineering technique for structured output (JSON).
+        </p>
+        <div class="code-block">
+            <pre>import json
+from transformers import pipeline
+
+generator = pipeline('text-generation', model='gpt2')
+
+prompt = """
+You are an AI assistant that outputs valid JSON.
+User: Extract the name, age, and city from: "John is 25 and lives in New York"
+AI: 
+{
+  "name": "John",
+  "age": 25,
+  "city": "New York"
+}
+User: Extract from: "Maria, age 32, from Barcelona"
+AI:
+"""
+
+output = generator(prompt, max_length=150, temperature=0.3)[0]['generated_text']
+print(output)</pre>
+        </div>
+
+        <h2 class="subtitle-1">📦 DEPENDENCIES & SETUP (TYPICAL)</h2>
+        <p class="paragraph-08">
+            Most examples require: <span class="inline-code">transformers</span>, <span class="inline-code">torch</span>, <span class="inline-code">ultralytics</span>, <span class="inline-code">sentence-transformers</span>, <span class="inline-code">scikit-learn</span>, <span class="inline-code">pillow</span>, <span class="inline-code">requests</span>. Install via pip.
+        </p>
+
+        <div class="obsidian-meta">
+            <span>AI Programs Collection — By: Glenn Junsay Pansensoy | domain: poetic-lion.netlify.app | updated: 2026-03-01</span>
+        </div>
+    </div>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "AI Programs & Python Examples – LLM, Transformers, Computer Vision",
+      "description": "Practical AI programs and Python snippets: Hugging Face pipelines, YOLO object detection, Whisper speech-to-text, RAG pattern, and classic ML examples. Code included.",
+      "author": {
+        "@type": "Person",
+        "name": "Glenn Junsay Pansensoy"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Poetic Lion AI Lab",
+        "url": "https://poetic-lion.netlify.app"
+      },
+      "datePublished": "2026-03-01",
+      "dateModified": "2026-03-01",
+      "mainEntityOfPage": "https://poetic-lion.netlify.app/ai-programs.html",
+      "keywords": "AI programs, Python AI, LLM examples, transformers, NLP, YOLO, computer vision, generative AI, machine learning"
+    }
+    </script>
+</body>
+</html>
