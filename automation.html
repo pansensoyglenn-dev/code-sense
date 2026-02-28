@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+  <title>Python Automation: 20 Practical Scripts for File, Web & Task Automation</title>
+  <meta name="description" content="20 ready-to-use Python automation scripts: organize downloads, bulk rename, email sending, folder backup, CSV summary, web scraping, QR codes, image processing, scheduling, and more.">
+  <meta name="keywords" content="Python automation, automate with Python, file management Python, web scraping Python, email automation, backup script Python, bulk rename, CSV processing, image to PDF, QR code generator, watchdog, scheduler Python">
+  <meta name="author" content="Glenn Junsay Pansensoy">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://poetic-lion.netlify.app/automation.html">
+  <meta property="og:title" content="Python Automation – 20 Practical Scripts for Everyday Tasks">
+  <meta property="og:description" content="Learn Python automation with real-world examples: file organizer, email sender, backup, CSV reports, web scraper, image resizer, and more. Code included.">
+  <meta property="og:url" content="https://poetic-lion.netlify.app/automation.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Poetic Lion Automation Hub">
+  <meta property="og:image" content="https://poetic-lion.netlify.app/og-automation.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Python Automation Scripts (20 Examples)">
+  <meta name="twitter:description" content="Practical automation with Python: files, web, email, images, scheduling. Copy-paste ready.">
+  <link rel="icon" type="image/x-icon" href="https://poetic-lion.netlify.app/favicon.ico">
+  <meta name="theme-color" content="#0a0e17">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      background: #0a0e17;
+      color: #e2ecff;
+      line-height: 1.5;
+      padding: 1.2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #6ea8fe;
+      text-align: center;
+      margin: 0.5rem 0 2rem 0;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid #1e3144;
+      text-transform: uppercase;
+    }
+    .program-header {
+      font-size: 1rem;
+      font-weight: 600;
+      background: #101a28;
+      color: #7cb2ff;
+      padding: 1rem 1.2rem;
+      border-bottom: 1px solid #253e58;
+    }
+    p, .program-note p {
+      font-size: 0.8rem;
+      color: #b4c8e5;
+    }
+    .intro-card {
+      background: #0f1a26;
+      border-radius: 20px;
+      padding: 1.4rem 1.2rem;
+      margin-bottom: 2rem;
+      border: 1px solid #264b6b;
+    }
+    .intro-card p {
+      font-size: 0.8rem;
+      margin-bottom: 0.8rem;
+    }
+    .intro-card strong {
+      color: #7cb2ff;
+    }
+    .program {
+      background: #0f1b28;
+      border: 1px solid #264b6b;
+      border-radius: 22px;
+      margin-bottom: 2rem;
+      overflow: hidden;
+    }
+    .code-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      background: #0d1c2c;
+    }
+    pre[class*="language-"] {
+      margin: 0;
+      padding: 1.2rem 0.8rem;
+      font-size: 0.75rem;
+      line-height: 1.4;
+      background: transparent;
+      border: none;
+      min-width: 100%;
+      width: max-content;
+      float: left;
+    }
+    code[class*="language-"] {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.75rem;
+      white-space: pre;
+      color: #d4e6ff;
+    }
+    .program-note {
+      background: #0c1d30;
+      padding: 0.9rem 1.2rem 1rem;
+      border-top: 1px dashed #2f5580;
+    }
+    .program-note p {
+      font-size: 0.8rem;
+      margin: 0.2rem 0 0;
+      color: #b4d0f5;
+    }
+    .emoji-bullet {
+      color: #7bb3ff;
+      margin-right: 0.5rem;
+    }
+    .inline-code {
+      background: #1b3147;
+      color: #b3d9ff;
+      padding: 0.2rem 0.4rem;
+      border-radius: 6px;
+      font-family: monospace;
+      font-size: 0.75rem;
+      border: 1px solid #3d6088;
+    }
+    @media (max-width: 480px) {
+      body { padding: 0.7rem; }
+      h1 { font-size: 1.2rem; }
+      .program-header { padding: 0.9rem 1rem; }
+    }
+    .code-wrap::-webkit-scrollbar {
+      height: 6px;
+      background: #112d42;
+    }
+    .code-wrap::-webkit-scrollbar-thumb {
+      background: #2b5f96;
+      border-radius: 12px;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js" defer></script>
+</head>
+<body>
+
+<h1>⚙️ PYTHON AUTOMATION: 20 PRACTICAL SCRIPTS</h1>
+
+<div class="intro-card">
+  <p><strong>Why automate with Python?</strong> Python's readable syntax and huge library ecosystem make it ideal for automating repetitive tasks — from file management to web scraping, email reports, and data processing. The examples below are concise, ready to test, and focus on everyday automation. Each snippet is explained in plain language, and the code blocks are horizontally scrollable on narrow phones.</p>
+  <p><span class="inline-code">📱 Pythonic Standard</span> All the information provided are for educational purposes: <strong>This is</strong> the best <strong>possible way</strong> to learn <strong>programming</strong> in Python.</p>
+  <p style="margin-top:0.8rem;"><span style="color:#7cb2ff;">Automation Data</span> — Everything and <code style="background:#1e3148;">all</code> the information provided passed through intensive research.</p>
+</div>
+
+<!-- 1 -->
+<div class="program">
+  <div class="program-header">📁 1. Organise Downloads by file type</div>
+  <div class="code-wrap">
+    <pre><code class="language-python">import os
+import shutil
+from pathlib import Path
+
+def organise_downloads(download_path: str = str(Path.home() / "Downloads")):
+    extensions = {
+        "Images": [".jpg", ".jpeg", ".png", ".gif", ".webp"],
+        "Documents": [".pdf", ".docx", ".xlsx", ".txt", ".csv"],
+        "Archives": [".zip", ".rar", ".7z"],
+        "Videos": [".mp4", ".mkv", ".avi"],
+    }
+    for file in os.listdir(download_path):
+        file_path = os.path.join(download_path, file)
+        if os.path.isfile(file_path):
+            ext = Path(file).suffix.lower()
+            for folder, exts in extensions.items():
+                if ext in exts:
+                    target = os.path.join(download_path, folder)
+                    os.makedirs(target, exist_ok=True)
+                    shutil.move(file_path, os.path.join(target, file))
+                    print(f"Moved {file} → {folder}")
+                    break</code></pre>
+  </div>
+  <div class="program-note"><p><span class="emoji-bullet">🗂️</span> Scans Downloads and moves files into subfolders by extension.</p></div>
+</div>
+
+<!-- 2 -->
+<div class="program">
+  <div class="program-header">🔢 2. Bulk rename with sequential numbers</div>
+  <div class="code-wrap">
+    <pre><code class="language-python">import os
+from pathlib import Path
+
+def sequential_rename(folder: str, prefix: str = "photo_", start: int = 1):
+    path = Path(folder)
+    files = sorted([f for f in path.iterdir() if f.is_file()])
+    for i, file_path in enumerate(files, start=start):
+        new_name = f"{prefix}{i:04d}{file_path.suffix}"
+        file_path.rename(path / new_name)
+        print(f"Renamed → {new_name}")</code></pre>
+  </div>
+  <div class="program-note"><p><span class="emoji-bullet">🏷️</span> Renames all files in a folder with numeric pattern.</p></div>
+</div>
+
+<!-- 3 -->
+<div class="program">
+  <div class="program-header">📧 3. Send email via Gmail (SMTP)</div>
+  <div class="code-wrap">
+    <pre><code class="language-python">import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+
+def send_gmail(to: str, subject: str, body: str, from_email: str, password: str):
+    msg = MIMEMultipart()
+    msg["From"], msg["To"], msg["Subject"] = from_email, to, subject
+    msg.attach(MIMEText(body, "plain"))
+    with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
+        server.login(from_email, password)
+        server.sendmail(from_email, to, msg.as_string())
+    print("Email sent")</code></pre>
+  </div>
+  <div class="program-note"><p><span class="emoji-bullet">🔐</span> Uses Gmail SMTP. For 2FA, use an app password.</p></div>
+</div>
+
+<!-- 4 -->
+<div class="program">
+  <div class="program-header">💾 4. Daily folder backup (dated)</div>
+  <div class="code-wrap">
+    <pre><code class="language-python">import shutil
+from datetime import datetime
+from pathlib import Path
+
+def daily_backup(source: str, backup_root: str):
+    today = datetime.now().strftime("%Y-%m-%d")
+    backup_dir = Path(backup_root) / f"backup_{today}"
+    backup_dir.mkdir(parents=True, exist_ok=True)
+    shutil.copytree(source, backup_dir, dirs_exist_ok=True)
+    print(f"Backup → {backup_dir}")</code></pre>
+  </div>
+  <div class="program-note"><p><span class="emoji-bullet">⏱️</span> Copies folder into timestamped subfolder. Use with scheduler.</p></div>
+</div>
+
+<!-- 5 -->
+<div class="program">
+  <div class="program-header">📊 5. CSV sales summary (pandas)</div>
+  <div class="code-wrap">
+    <pre><code class="language-python">import pandas as pd
+
+def sales_summary(csv_path: str, out: str = "region_summary.csv"):
+    df = pd.read_csv(csv_path)
+    summary = df.groupby("Region")["Amount"].agg(["sum", "mean", "count"]).round(2)
+    summary["sum"] = summary["sum"].map("₱{:,.2f}".format)
+    summary.to_csv(out)
+    print(summary)</code></pre>
+  </div>
+  <div class="program-note"><p><span class="emoji-bullet">📈</span> Groups CSV by Region, saves summary. Needs pandas.</p></div>
+</div>
+
+<!-- 6 -->
+<div class="program">
+  <div class="program-header">🕷️ 6. Simple price scraper</div>
+  <div class="code-wrap">
+    <pre><code class="language-python">import requests
+from bs4 import BeautifulSoup
+
+def get_price(url: str):
+    headers = {"User-Agent": "Mozilla/5.0"}
+    resp = requests.get(url, headers=headers, timeout=10)
+    soup = BeautifulSoup(resp.text, "html.parser")
+    title = soup.find("h1").get_text(strip=True) if soup.find("h1") else "N/A"
+    price = soup.select_one("[data-price], .price, .amount")
+    price_text = price.get_text(strip=True) if price else "N/A"
+    return {"title": title, "price": price_text}</code></pre>
+  </div>
+  <div class="program-note"><p><span class="emoji-bullet">🏷️</span> Extracts product title and price. Adjust selectors as needed.</p></div>
+</div>
+
+<!-- 7 -->
+<div class="program">
+  <div class="program-header">📲 7. Generate QR code</div>
+  <div class="code-wrap">
+    <pre><code class="language-python">import qrcode
+
+def make_qr(data: str, out: str = "qr.png"):
+    qr = qrcode.QRCode(version=1, box_size=10, border=4)
+    qr.add_data(data)
+    qr.make(fit=True)
+    img = qr.make_image(fill_color="black", back_color="white")
+    img.save(out)
+    print(f"QR saved as {out}")</code></pre>
+  </div>
+  <div class="program-note"><p><span class="emoji-bullet">📌</span> Creates QR from text/URL. Needs qrcode[pil].</p></div>
+</div>
+
+<!-- 8 -->
+<div class="program">
+  <div class="program-header">👀 8. Watch folder for new files</div>
+  <div class="code-wrap">
+    <pre><code class="language-python">from watchdog.observers import Observer
+from watchdog.events import FileSystemEventHandler
+import time
+
+class Handler(FileSystemEventHandler):
+    def on_created(self, event):
+        if not event.is_directory:
+            print(f"New: {event.src_path}")
+
+def watch(path: str):
+    obs = Observer()
+    obs.schedule(Handler(), path, recursive=False)
+    obs.start()
+    try:
+        while True: time.sleep(1)
+    except KeyboardInterrupt: obs.stop()
+    obs.join()</code></pre>
+  </div>
+  <div class="program-note"><p><span class="emoji-bullet">🔍</span> Monitors folder and prints new files. Install watchdog.</p></div>
+</div>
+
+<!-- 9 -->
+<div class="program">
+  <div class="program-header">🖼️ 9. Images → single PDF</div>
+  <div class="code-wrap">
+    <pre><code class="language-python">import img2pdf
+import os
+
+def images_to_pdf(folder: str, output: str = "combined.pdf"):
+    images = [os.path.join(folder, f) for f in sorted(os.listdir(folder))
+              if f.lower().endswith((".png", ".jpg", ".jpeg"))]
+    if images:
+        with open(output, "wb") as f:
+            f.write(img2pdf.convert(images))
+        print(f"PDF created: {output}")</code></pre>
+  </div>
+  <div class="program-note"><p><span class="emoji-bullet">🖨️</span> Combines images into one PDF. Needs img2pdf and Pillow.</p></div>
+</div>
+
+<!-- 10 -->
+<div class="program">
+  <div class="program-header">⏰ 10. Simple scheduler (daily 7:30)</div>
+  <div class="code-wrap">
+    <pre><code class="language-python">import schedule
+import time
+
+def job():
+    print("daily task: backup, report, cleanup...")
+
+schedule.every().day.at("07:30").do(job)
+while True:
+    schedule.run_pending()
+    time.sleep(60)</code></pre>
+  </div>
+  <div class="program-note"><p><span class="emoji-bullet">🕢</span> Uses schedule library. Lightweight in-process scheduler.</p></div>
+</div>
+
+<!-- 11 -->
+<div class="program">
+  <div class="program-header">🧹 11. Delete files older than X days</div>
+  <div class="code-wrap">
+    <pre><code class="language-python">import os
+from datetime import datetime, timedelta
+from pathlib import Path
+
+def clean_old(dir: str, days: int = 30):
+    cutoff = datetime.now() - timedelta(days=days)
+    removed = 0
+    for f in Path(dir).rglob("*"):
+        if f.is_file() and datetime.fromtimestamp(f.stat().st_mtime) < cutoff:
+            f.unlink(); removed += 1
+    print(f"Removed {removed} old files")</code></pre>
+  </div>
+  <div class="program-note"><p><span class="emoji-bullet">⏳</span> Deletes files older than `days`. Use with caution.</p></div>
+</div>
+
+<!-- 12 -->
+<div class="program">
+  <div class="program-header">📅 12. Create monthly archive folders</div>
+  <div class="code-wrap">
+    <pre><code class="language-python">import calendar
+from pathlib import Path
+from datetime import datetime
+
+def create_monthly(base: str, year: int = None):
+    year = year or datetime.now().year
+    base = Path(base) / str(year)
+    base.mkdir(parents=True, exist_ok=True)
+    for m in range(1, 13):
+        (base / f"{m:02d}_{calendar.month_name[m]}").mkdir(exist_ok=True)</code></pre>
+  </div>
+  <div class="program-note"><p><span class="emoji-bullet">🗂️</span> Creates year/month folder structure.</p></div>
+</div>
+
+<!-- 13 -->
+<div class="program">
+  <div class="program-header">📐 13. Batch resize images</div>
+  <div class="code-wrap">
+    <pre><code class="language-python">from PIL import Image
+from pathlib import Path
+
+def resize_all(folder: str, max_size=(800,800), suffix="_resized"):
+    for f in Path(folder).glob("*.[jJ][pP]*"):
+        img = Image.open(f)
+        img.thumbnail(max_size)
+        new = f.with_stem(f.stem + suffix)
+        img.save(new, optimize=True, quality=85)
+        print(f"Resized: {new.name}")</code></pre>
+  </div>
+  <div class="program-note"><p><span class="emoji-bullet">🖼️</span> Resizes images, keeps aspect ratio, adds suffix.</p></div>
+</div>
+
+<!-- 14 -->
+<div class="program">
+  <div class="program-header">🌐 14. Check multiple URLs (parallel)</div>
+  <div class="code-wrap">
+    <pre><code class="language-python">import requests
+from concurrent.futures import ThreadPoolExecutor
+
+def check_urls(urls, timeout=5):
+    def get(url):
+        try:
+            r = requests.head(url, timeout=timeout, allow_redirects=True)
+            return (url, r.status_code, r.elapsed.total_seconds())
+        except: return (url, "error", 0)
+    with ThreadPoolExecutor(max_workers=10) as ex:
+        for res in ex.map(get, urls):
+            print(f"{res[0]} → {res[1]} ({res[2]:.2f}s)")</code></pre>
+  </div>
+  <div class="program-note"><p><span class="emoji-bullet">⚡</span> Checks HTTP status & response time in parallel.</p></div>
+</div>
+
+<!-- 15 -->
+<div class="program">
+  <div class="program-header">🧩 15. Merge multiple CSV files</div>
+  <div class="code-wrap">
+    <pre><code class="language-python">import pandas as pd
+from pathlib import Path
+
+def merge_csv(folder: str, out: str = "merged.csv"):
+    all_df = [pd.read_csv(f) for f in Path(folder).glob("*.csv")]
+    if all_df:
+        merged = pd.concat(all_df, ignore_index=True)
+        merged.to_csv(out, index=False)
+        print(f"Merged {len(all_df)} files -> {out}")</code></pre>
+  </div>
+  <div class="program-note"><p><span class="emoji-bullet">📂</span> Stacks CSVs with same columns. Needs pandas.</p></div>
+</div>
+
+<!-- 16 -->
+<div class="program">
+  <div class="program-header">🔤 16. OCR text from images</div>
+  <div class="code-wrap">
+    <pre><code class="language-python">import pytesseract
+from PIL import Image
+from pathlib import Path
+
+def ocr_images(folder: str, out_txt: str = "extracted.txt"):
+    with open(out_txt, "w") as out:
+        for img_file in Path(folder).glob("*.[pP][nN][gG]"):
+            text = pytesseract.image_to_string(Image.open(img_file))
+            out.write(f"\n--- {img_file.name} ---\n{text}\n")
+            print(f"OCR done: {img_file.name}")</code></pre>
+  </div>
+  <div class="program-note"><p><span class="emoji-bullet">📃</span> Extracts text from images. Needs Tesseract OCR.</p></div>
+</div>
+
+<!-- 17 -->
+<div class="program">
+  <div class="program-header">🔐 17. Password strength checker</div>
+  <div class="code-wrap">
+    <pre><code class="language-python">import re
+
+def strength_check(file):
+    weak, med, strong = [], [], []
+    with open(file) as f:
+        for pwd in f:
+            p = pwd.strip()
+            if not p: continue
+            s = sum([len(p)>=12, bool(re.search(r"[A-Z]",p)),
+                     bool(re.search(r"[a-z]",p)), bool(re.search(r"\d",p)),
+                     bool(re.search(r"[!@#$%^&*()_+{}|:<>?]",p))])
+            (weak if s<3 else med if s<5 else strong).append(p)
+    print(f"Weak:{len(weak)} Medium:{len(med)} Strong:{len(strong)}")</code></pre>
+  </div>
+  <div class="program-note"><p><span class="emoji-bullet">⚖️</span> Rates password complexity from a file.</p></div>
+</div>
+
+<!-- 18 -->
+<div class="program">
+  <div class="program-header">📥 18. Download all images from a web page</div>
+  <div class="code-wrap">
+    <pre><code class="language-python">import requests
+import os
+from bs4 import BeautifulSoup
+from urllib.parse import urljoin
+
+def dl_page_images(url, folder="downloaded"):
+    os.makedirs(folder, exist_ok=True)
+    soup = BeautifulSoup(requests.get(url).text, "html.parser")
+    for i, img in enumerate(soup.find_all("img")):
+        src = img.get("src")
+        if src:
+            img_url = urljoin(url, src)
+            ext = os.path.splitext(img_url)[1] or ".jpg"
+            data = requests.get(img_url).content
+            with open(os.path.join(folder, f"img_{i}{ext}"), "wb") as f:
+                f.write(data)</code></pre>
+  </div>
+  <div class="program-note"><p><span class="emoji-bullet">🖼️</span> Saves all images from a webpage.</p></div>
+</div>
+
+<!-- 19 -->
+<div class="program">
+  <div class="program-header">🔎 19. Compare two folders (missing files)</div>
+  <div class="code-wrap">
+    <pre><code class="language-python">import filecmp
+from pathlib import Path
+
+def compare_folders(a, b):
+    dcmp = filecmp.dircmp(a, b)
+    for name in dcmp.left_only:
+        print(f"Only in A: {Path(a)/name}")
+    for name in dcmp.right_only:
+        print(f"Only in B: {Path(b)/name}")
+    for sub in dcmp.subdirs.values():
+        compare_folders(sub.left, sub.right)</code></pre>
+  </div>
+  <div class="program-note"><p><span class="emoji-bullet">📁</span> Lists files present in one folder but not the other.</p></div>
+</div>
+
+<!-- 20 -->
+<div class="program">
+  <div class="program-header">✨ 20. Daily quote to desktop</div>
+  <div class="code-wrap">
+    <pre><code class="language-python">import requests
+from datetime import datetime
+from pathlib import Path
+
+def daily_quote():
+    q = requests.get("https://zenquotes.io/api/random").json()[0]
+    quote = f"“{q['q']}” — {q['a']}"
+    path = Path.home() / "Desktop" / f"quote_{datetime.now():%Y-%m-%d}.txt"
+    path.write_text(quote, encoding="utf-8")
+    print(f"Quote saved: {path}")</code></pre>
+  </div>
+  <div class="program-note"><p><span class="emoji-bullet">📜</span> Fetches random quote and saves to desktop.</p></div>
+</div>
+
+<p style="text-align:center; color:#6d8eb0; margin-top:2rem; font-size:0.8rem;">Built with precise data and created through thorough research. By: Glenn Junsay Pansensoy</p>
+
+<script>
+  window.addEventListener('load', function() {
+    if (typeof Prism !== 'undefined') Prism.highlightAll();
+  });
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "Python Automation: 20 Practical Scripts for File, Web & Task Automation",
+  "description": "20 ready-to-use Python automation scripts: organize downloads, bulk rename, email sending, folder backup, CSV summary, web scraping, QR codes, image processing, scheduling, and more.",
+  "author": {
+    "@type": "Person",
+    "name": "Glenn Junsay Pansensoy"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Poetic Lion Automation Hub",
+    "url": "https://poetic-lion.netlify.app"
+  },
+  "datePublished": "2026-03-01",
+  "dateModified": "2026-03-01",
+  "mainEntityOfPage": "https://poetic-lion.netlify.app/automation.html",
+  "keywords": "Python automation, file management Python, web scraping, email automation, backup script, CSV processing, image to PDF, QR code generator, watchdog, scheduler"
+}
+</script>
+</body>
+</html>
