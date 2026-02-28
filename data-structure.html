@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Data Structures & OOP: Complete Task Manager Example</title>
+    <meta name="description" content="Learn Python data structures and OOP through a complete task manager project. Includes enums, dataclasses, encapsulation, inheritance, composition, and type hints. Full code examples.">
+    <meta name="keywords" content="Python data structures, Python OOP example, task manager Python, encapsulation Python, inheritance, composition, dataclass, enum Python, type hints, uuid, property decorator">
+    <meta name="author" content="Glenn Junsay Pansensoy">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://poetic-lion.netlify.app/data-structure.html">
+    <meta property="og:title" content="Python Data Structures & OOP – Complete Task Manager Project">
+    <meta property="og:description" content="A full object-oriented data structure for task management. Implements enums, dataclasses, inheritance, composition, and clean Python patterns.">
+    <meta property="og:url" content="https://poetic-lion.netlify.app/data-structure.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Poetic Lion Code Lab">
+    <meta property="og:image" content="https://poetic-lion.netlify.app/og-datastructure.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Python OOP Data Structures – Task Manager Example">
+    <meta name="twitter:description" content="Learn OOP with a complete task manager: enums, dataclasses, encapsulation, and more. Clean code included.">
+    <link rel="icon" type="image/x-icon" href="https://poetic-lion.netlify.app/favicon.ico">
+    <meta name="theme-color" content="#030405">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #030405;
+            font-family: 'Inter', 'SF Mono', 'Fira Code', 'Monaco', monospace;
+            line-height: 1.8;
+            padding: 3rem 2rem;
+            color: #b8c7e0;
+        }
+
+        .content {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #e2e9ff;
+            border-bottom: 2px solid #1e2a3a;
+            padding-bottom: 1.2rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 120px;
+            height: 2px;
+            background: #d4af37;
+            box-shadow: 0 0 15px #996515;
+        }
+
+        h2 {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #88a9c4;
+            margin: 2.5rem 0 1rem 0;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        h2 i {
+            color: #d4af37;
+            font-style: normal;
+            font-size: 1.1rem;
+        }
+
+        p, li, .text-block {
+            font-size: 0.8rem;
+            color: #a8c0d0;
+            margin-bottom: 0.8rem;
+            line-height: 1.8;
+        }
+
+        .code-block {
+            background: #0a0c14;
+            border-left: 3px solid #4a6b8a;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            font-family: 'Fira Code', 'Monaco', monospace;
+            font-size: 0.8rem;
+            color: #c1d0e0;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-break: break-word;
+            line-height: 1.7;
+            border-radius: 0;
+        }
+
+        .code-block .keyword { color: #d4af37; }
+        .code-block .class { color: #88a9c4; }
+        .code-block .string { color: #6b8e6b; }
+        .code-block .decorator { color: #996515; }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 1.5rem 0;
+        }
+
+        .demo-text {
+            background: #0a0c14;
+            border-left: 3px solid #4a6b8a;
+            padding: 1.5rem;
+            font-size: 0.8rem;
+            line-height: 1.8;
+            margin: 1rem 0;
+        }
+
+        .badge {
+            background: transparent;
+            border: 1px solid #2c3e50;
+            color: #88a9c4;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.65rem;
+            font-weight: 400;
+            display: inline-block;
+        }
+
+        .enum-badge {
+            display: inline-block;
+            background: transparent;
+            border: 1px solid #4a6b8a;
+            color: #b8c7e0;
+            padding: 0.15rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.65rem;
+            margin-right: 0.4rem;
+        }
+
+        .hr-crystal {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #4a6b8a, #88a9c4, #4a6b8a, transparent);
+            margin: 3rem 0;
+            border: none;
+        }
+
+        .footer-note {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #1e2a3a;
+            font-size: 0.7rem;
+            color: #4a6b8a;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        ul {
+            list-style: none;
+            font-size: 0.8rem;
+        }
+
+        ul li {
+            margin-bottom: 0.6rem;
+            padding-left: 1.2rem;
+            position: relative;
+        }
+
+        ul li::before {
+            content: '◆';
+            color: #d4af37;
+            position: absolute;
+            left: 0;
+            font-size: 0.6rem;
+        }
+
+        .tag {
+            background: transparent;
+            border: 1px solid #2c3e50;
+            border-radius: 12px;
+            padding: 0.2rem 0.8rem;
+            font-size: 0.7rem;
+            display: inline-block;
+            margin: 0.2rem 0.1rem;
+        }
+
+        .stats-row {
+            display: flex;
+            gap: 1.8rem;
+            flex-wrap: wrap;
+            margin: 1.5rem 0;
+        }
+
+        .stat {
+            background: transparent;
+            border-left: 2px solid #4a6b8a;
+            padding: 0.2rem 0 0.2rem 1rem;
+            font-size: 0.75rem;
+            color: #b8c7e0;
+        }
+
+        .output-block {
+            background: #0a0c14;
+            border-left: 3px solid #d4af37;
+            padding: 1.5rem;
+            font-family: monospace;
+            font-size: 0.8rem;
+            line-height: 1.8;
+            margin: 1.5rem 0;
+            color: #a8c0d0;
+        }
+
+        @media (max-width: 700px) {
+            body { padding: 1.5rem; }
+            .grid-2 { grid-template-columns: 1fr; gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="content">
+
+    <h1>✦ DATA STRUCTURE· PYTHON OOP</h1>
+
+    <p style="margin-bottom: 1.8rem; text-align: justify;">A complete object-oriented data structure for task management. Implements encapsulation, inheritance, composition, and type-safe enums. Midnight blue and obsidian theme.</p>
+
+    <div class="stats-row">
+        <span class="stat">5 classes</span>
+        <span class="stat">3 enums</span>
+        <span class="stat">dataclass</span>
+        <span class="stat">uuid</span>
+        <span class="stat">type hints</span>
+        <span class="stat">property decorators</span>
+    </div>
+
+    <h2><i>📦</i> CORE ENUMS</h2>
+    <div class="code-block">
+<span class="keyword">from</span> enum <span class="keyword">import</span> Enum
+
+<span class="keyword">class</span> <span class="class">Priority</span>(Enum):
+    LOW = 1
+    MEDIUM = 2
+    HIGH = 3
+    CRITICAL = 4
+
+<span class="keyword">class</span> <span class="class">TaskStatus</span>(Enum):
+    PENDING = <span class="string">"pending"</span>
+    IN_PROGRESS = <span class="string">"in_progress"</span>
+    COMPLETED = <span class="string">"completed"</span>
+    ARCHIVED = <span class="string">"archived"</span>
+    </div>
+
+    <h2><i>💬</i> DATA CLASS · COMMENT</h2>
+    <div class="code-block">
+<span class="keyword">from</span> dataclasses <span class="keyword">import</span> dataclass
+<span class="keyword">from</span> datetime <span class="keyword">import</span> datetime
+<span class="keyword">import</span> uuid
+
+<span class="decorator">@dataclass</span>
+<span class="keyword">class</span> <span class="class">Comment</span>:
+    author: str
+    content: str
+    timestamp: datetime
+    comment_id: str = <span class="keyword">None</span>
+
+    <span class="keyword">def</span> <span class="class">__post_init__</span>(self):
+        <span class="keyword">if</span> self.comment_id <span class="keyword">is</span> <span class="keyword">None</span>:
+            self.comment_id = str(uuid.uuid4())[:8]
+    </div>
+
+    <h2><i>📋</i> TASK CLASS</h2>
+    <div class="code-block">
+<span class="keyword">class</span> <span class="class">Task</span>:
+    <span class="keyword">def</span> <span class="class">__init__</span>(self, title: str, description: str = <span class="string">""</span>, priority: Priority = Priority.MEDIUM):
+        self.id = str(uuid.uuid4())[:8]
+        self.title = title
+        self.description = description
+        self.priority = priority
+        self.status = TaskStatus.PENDING
+        self.created_at = datetime.now()
+        self.updated_at = datetime.now()
+        self.completed_at = <span class="keyword">None</span>
+        self.tags = <span class="class">set</span>()
+        self.comments = []
+        self.assigned_to = <span class="keyword">None</span>
+        self.estimated_hours = <span class="keyword">None</span>
+    
+    <span class="keyword">def</span> <span class="class">update_status</span>(self, status: TaskStatus):
+        self.status = status
+        self.updated_at = datetime.now()
+        <span class="keyword">if</span> status == TaskStatus.COMPLETED:
+            self.completed_at = datetime.now()
+    
+    <span class="keyword">def</span> <span class="class">add_tag</span>(self, tag: str):
+        self.tags.add(tag.lower())
+        self.updated_at = datetime.now()
+    
+    <span class="keyword">def</span> <span class="class">add_comment</span>(self, author: str, content: str):
+        self.comments.append(Comment(author, content, datetime.now()))
+    
+    <span class="keyword">def</span> <span class="class">assign_to</span>(self, user_id: str):
+        self.assigned_to = user_id
+        self.updated_at = datetime.now()
+    
+    <span class="decorator">@property</span>
+    <span class="keyword">def</span> <span class="class">is_overdue</span>(self) -> bool:
+        <span class="keyword">if</span> self.status == TaskStatus.COMPLETED:
+            <span class="keyword">return</span> <span class="keyword">False</span>
+        <span class="keyword">if</span> hasattr(self, <span class="string">'due_date'</span>) <span class="keyword">and</span> self.due_date:
+            <span class="keyword">return</span> datetime.now() > self.due_date
+        <span class="keyword">return</span> <span class="keyword">False</span>
+    
+    <span class="keyword">def</span> <span class="class">__str__</span>(self):
+        symbols = {TaskStatus.COMPLETED: <span class="string">'✅'</span>, TaskStatus.IN_PROGRESS: <span class="string">'⚡'</span>, TaskStatus.PENDING: <span class="string">'⏳'</span>}
+        symbol = symbols.get(self.status, <span class="string">'📌'</span>)
+        <span class="keyword">return</span> <span class="string">f"</span><span class="string">{symbol}</span><span class="string"> [{self.priority.name}] {self.title}</span><span class="string">"</span>
+    </div>
+
+    <h2><i>📁</i> PROJECT CLASS</h2>
+    <div class="code-block">
+<span class="keyword">class</span> <span class="class">Project</span>:
+    <span class="keyword">def</span> <span class="class">__init__</span>(self, name: str, description: str = <span class="string">""</span>):
+        self.id = str(uuid.uuid4())[:8]
+        self.name = name
+        self.description = description
+        self.tasks = {}
+        self.created_at = datetime.now()
+        self.updated_at = datetime.now()
+        self.owner = <span class="keyword">None</span>
+        self.members = <span class="class">set</span>()
+    
+    <span class="keyword">def</span> <span class="class">add_task</span>(self, task: Task) -> str:
+        self.tasks[task.id] = task
+        self.updated_at = datetime.now()
+        <span class="keyword">return</span> task.id
+    
+    <span class="keyword">def</span> <span class="class">get_tasks_by_priority</span>(self, priority: Priority):
+        <span class="keyword">return</span> [t <span class="keyword">for</span> t <span class="keyword">in</span> self.tasks.values() <span class="keyword">if</span> t.priority == priority]
+    
+    <span class="keyword">def</span> <span class="class">get_tasks_by_status</span>(self, status: TaskStatus):
+        <span class="keyword">return</span> [t <span class="keyword">for</span> t <span class="keyword">in</span> self.tasks.values() <span class="keyword">if</span> t.status == status]
+    
+    <span class="keyword">def</span> <span class="class">get_tasks_by_tag</span>(self, tag: str):
+        tag = tag.lower()
+        <span class="keyword">return</span> [t <span class="keyword">for</span> t <span class="keyword">in</span> self.tasks.values() <span class="keyword">if</span> tag <span class="keyword">in</span> t.tags]
+    
+    <span class="keyword">def</span> <span class="class">add_member</span>(self, user_id: str):
+        self.members.add(user_id)
+    
+    <span class="decorator">@property</span>
+    <span class="keyword">def</span> <span class="class">progress</span>(self):
+        total = len(self.tasks)
+        <span class="keyword">if</span> total == 0:
+            <span class="keyword">return</span> {<span class="string">'percentage'</span>: 0}
+        completed = len(self.get_tasks_by_status(TaskStatus.COMPLETED))
+        <span class="keyword">return</span> {<span class="string">'completed'</span>: completed, <span class="string">'percentage'</span>: (completed/total)*100}
+    
+    <span class="keyword">def</span> <span class="class">__str__</span>(self):
+        <span class="keyword">return</span> <span class="string">f"📁 {self.name} ({len(self.tasks)} tasks) - {self.progress['percentage']:.1f}% complete"</span>
+    </div>
+
+    <h2><i>👤</i> USER CLASS</h2>
+    <div class="code-block">
+<span class="keyword">class</span> <span class="class">User</span>:
+    <span class="keyword">def</span> <span class="class">__init__</span>(self, username: str, email: str, full_name: str = <span class="string">""</span>):
+        self.id = str(uuid.uuid4())[:8]
+        self.username = username
+        self.email = email
+        self.full_name = full_name <span class="keyword">or</span> username
+        self.created_at = datetime.now()
+        self.last_active = datetime.now()
+        self.projects = {}
+        self.notifications = []
+    
+    <span class="keyword">def</span> <span class="class">create_project</span>(self, name: str, description: str = <span class="string">""</span>) -> Project:
+        project = Project(name, description)
+        project.owner = self.id
+        project.add_member(self.id)
+        self.projects[project.id] = project
+        <span class="keyword">return</span> project
+    
+    <span class="keyword">def</span> <span class="class">join_project</span>(self, project: Project):
+        self.projects[project.id] = project
+        project.add_member(self.id)
+        self.last_active = datetime.now()
+    
+    <span class="keyword">def</span> <span class="class">leave_project</span>(self, project_id: str):
+        <span class="keyword">if</span> project_id <span class="keyword">in</span> self.projects:
+            project = self.projects[project_id]
+            project.remove_member(self.id)
+            <span class="keyword">del</span> self.projects[project_id]
+    
+    <span class="keyword">def</span> <span class="class">get_assigned_tasks</span>(self):
+        tasks = []
+        <span class="keyword">for</span> p <span class="keyword">in</span> self.projects.values():
+            tasks.extend(p.get_tasks_assigned_to(self.id))
+        <span class="keyword">return</span> tasks
+    
+    <span class="decorator">@property</span>
+    <span class="keyword">def</span> <span class="class">is_active</span>(self) -> bool:
+        <span class="keyword">return</span> (datetime.now() - self.last_active).total_seconds() < 300
+    
+    <span class="keyword">def</span> <span class="class">__str__</span>(self):
+        status = <span class="string">"🟢"</span> <span class="keyword">if</span> self.is_active <span class="keyword">else</span> <span class="string">"⚪"</span>
+        <span class="keyword">return</span> <span class="string">f"</span><span class="string">{status}</span><span class="string"> {self.full_name} (@{self.username})"</span>
+    </div>
+
+    <h2><i>⚙️</i> TASK MANAGER (FACADE)</h2>
+    <div class="code-block">
+<span class="keyword">class</span> <span class="class">TaskManager</span>:
+    <span class="keyword">def</span> <span class="class">__init__</span>(self, name: str = <span class="string">"Task Manager"</span>):
+        self.name = name
+        self.users = {}
+        self.projects = {}
+        self.tasks = {}
+        self.activity_log = []
+    
+    <span class="keyword">def</span> <span class="class">create_user</span>(self, username: str, email: str, full_name: str = <span class="string">""</span>) -> User:
+        <span class="keyword">if</span> username <span class="keyword">in</span> [u.username <span class="keyword">for</span> u <span class="keyword">in</span> self.users.values()]:
+            <span class="keyword">raise</span> ValueError(<span class="string">f"User {username} exists"</span>)
+        user = User(username, email, full_name)
+        self.users[user.id] = user
+        self._log(<span class="string">f"User created: {username}"</span>)
+        <span class="keyword">return</span> user
+    
+    <span class="keyword">def</span> <span class="class">register_project</span>(self, project: Project):
+        self.projects[project.id] = project
+        <span class="keyword">for</span> task <span class="keyword">in</span> project.tasks.values():
+            self.tasks[task.id] = task
+        self._log(<span class="string">f"Project registered: {project.name}"</span>)
+    
+    <span class="keyword">def</span> <span class="class">search_tasks</span>(self, query: str):
+        query = query.lower()
+        <span class="keyword">return</span> [t <span class="keyword">for</span> t <span class="keyword">in</span> self.tasks.values() 
+                <span class="keyword">if</span> query <span class="keyword">in</span> t.title.lower() <span class="keyword">or</span> query <span class="keyword">in</span> [tag <span class="keyword">for</span> tag <span class="keyword">in</span> t.tags]]
+    
+    <span class="keyword">def</span> <span class="class">get_statistics</span>(self):
+        total_tasks = len(self.tasks)
+        completed = len([t <span class="keyword">for</span> t <span class="keyword">in</span> self.tasks.values() <span class="keyword">if</span> t.status == TaskStatus.COMPLETED])
+        active_users = len([u <span class="keyword">for</span> u <span class="keyword">in</span> self.users.values() <span class="keyword">if</span> u.is_active])
+        <span class="keyword">return</span> {
+            <span class="string">'total_users'</span>: len(self.users),
+            <span class="string">'active_users'</span>: active_users,
+            <span class="string">'total_projects'</span>: len(self.projects),
+            <span class="string">'total_tasks'</span>: total_tasks,
+            <span class="string">'completed_tasks'</span>: completed,
+            <span class="string">'completion_rate'</span>: (completed/total_tasks*100) <span class="keyword">if</span> total_tasks <span class="keyword">else</span> 0
+        }
+    
+    <span class="keyword">def</span> <span class="class">_log</span>(self, message: str):
+        self.activity_log.append(<span class="string">f"[{datetime.now().strftime('%H:%M')}] {message}"</span>)
+    
+    <span class="keyword">def</span> <span class="class">__str__</span>(self):
+        s = self.get_statistics()
+        <span class="keyword">return</span> <span class="string">f"{self.name} · {s['total_users']} users · {s['total_projects']} projects · {s['total_tasks']} tasks"</span>
+    </div>
+
+    <hr class="hr-crystal">
+
+    <h2><i>🧪</i> EXAMPLE USAGE</h2>
+    
+    <div class="grid-2">
+        <div>
+            <h2 style="margin-top:0;">INSTANTIATION</h2>
+            <div class="demo-text">
+                manager = TaskManager("OBSIDIAN")<br>
+                alice = manager.create_user("alice", "a@x.com", "Alice Johnson")<br>
+                bob = manager.create_user("bob", "b@x.com", "Bob Smith")<br>
+                web = alice.create_project("Web Redesign")<br>
+                task1 = Task("fix auth", priority=Priority.CRITICAL)<br>
+                task1.add_tag("security")<br>
+                task1.assign_to(bob.id)<br>
+                web.add_task(task1)<br>
+                manager.register_project(web)
+            </div>
+        </div>
+        <div>
+            <h2 style="margin-top:0;">OPERATIONS</h2>
+            <div class="demo-text">
+                web.get_tasks_by_priority(Priority.HIGH)<br>
+                web.get_tasks_by_tag("security")<br>
+                task1.update_status(TaskStatus.IN_PROGRESS)<br>
+                task1.add_comment("bob", "started debugging")<br>
+                print(web.progress)<br>
+                manager.search_tasks("auth")
+            </div>
+        </div>
+    </div>
+
+    <h2>OUTPUT</h2>
+    <div class="output-block">
+        >>> print(manager)<br>
+        OBSIDIAN · 2 users · 1 projects · 3 tasks<br>
+        <br>
+        >>> print(alice)<br>
+        🟢 Alice Johnson (@alice)<br>
+        <br>
+        >>> print(web)<br>
+        📁 Web Redesign (3 tasks) - 33.3% complete<br>
+        <br>
+        >>> for t in web.get_tasks_by_priority(Priority.CRITICAL): print(t)<br>
+        ✅ [CRITICAL] fix auth<br>
+        <br>
+        >>> manager.get_statistics()<br>
+        {'total_users': 2, 'active_users': 2, 'total_tasks': 3, 'completion_rate': 33.3}
+    </div>
+
+    <h2><i>🔷</i> OOP CONCEPTS</h2>
+    <div style="margin: 1.5rem 0;">
+        <span class="tag">encapsulation</span>
+        <span class="tag">inheritance (Enum)</span>
+        <span class="tag">composition</span>
+        <span class="tag">dataclass</span>
+        <span class="tag">property decorator</span>
+        <span class="tag">type hints</span>
+        <span class="tag">uuid identifiers</span>
+        <span class="tag">magic __str__</span>
+        <span class="tag">factory methods</span>
+        <span class="tag">set/dict collections</span>
+    </div>
+
+    <div class="grid-2">
+        <div>
+            <h2>TASK LIFECYCLE</h2>
+            <ul>
+                <li>Task() → PENDING</li>
+                <li>update_status(IN_PROGRESS)</li>
+                <li>add_comment() / add_tag()</li>
+                <li>assign_to(user)</li>
+                <li>update_status(COMPLETED)</li>
+                <li>auto timestamp & history</li>
+            </ul>
+        </div>
+        <div>
+            <h2>MANAGER QUERIES</h2>
+            <ul>
+                <li>search_tasks("keyword")</li>
+                <li>get_tasks_by_priority()</li>
+                <li>get_tasks_by_tag()</li>
+                <li>get_assigned_tasks()</li>
+                <li>progress / statistics</li>
+                <li>activity log</li>
+            </ul>
+        </div>
+    </div>
+
+    <hr class="hr-crystal">
+
+    <div class="footer-note">
+        <span>Built with logical precision and Created with authentic information.- By: Glenn Junsay Pansensoy -</span>
+    </div>
+
+    <p style="text-align:right; margin-top:2rem; font-size:0.7rem; color:#2c3e50;">✦ Complete OOP data structure · clean layout ✦</p>
+
+</div>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "Python Data Structures & OOP: Complete Task Manager Example",
+  "description": "Learn Python data structures and OOP through a complete task manager project. Includes enums, dataclasses, encapsulation, inheritance, composition, and type hints. Full code examples.",
+  "author": {
+    "@type": "Person",
+    "name": "Glenn Junsay Pansensoy"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Poetic Lion Code Lab",
+    "url": "https://poetic-lion.netlify.app"
+  },
+  "datePublished": "2026-03-01",
+  "dateModified": "2026-03-01",
+  "mainEntityOfPage": "https://poetic-lion.netlify.app/data-structure.html",
+  "keywords": "Python data structures, Python OOP, task manager, encapsulation, inheritance, composition, dataclass, enum, type hints, uuid"
+}
+</script>
+</body>
+</html>
