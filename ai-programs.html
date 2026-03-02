@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: https://ogp.me/ns#">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Complete AI Programs Guide – Python Machine Learning & AI Examples | Valleys & Bytes</title>
+  <meta name="description" content="Explore practical AI programs in Python: machine learning, neural networks, NLP, computer vision, reinforcement learning, generative AI, RAG, fine-tuning, model deployment, chatbots, anomaly detection, and best practices. Step-by-step examples with explanations.">
+  <meta name="keywords" content="AI programs, Python AI, machine learning examples, neural networks Python, NLP Python, computer vision Python, reinforcement learning Python, generative AI, RAG, fine-tuning, AI projects, deep learning examples, TensorFlow, PyTorch, scikit-learn, transformers, FastAPI, chatbot, anomaly detection, autoencoder">
+  <link rel="canonical" href="https://code-sense.pansensoyglenn.workers.dev/ai-programs.html">
+  <meta property="og:title" content="Complete AI Programs Guide – Python Machine Learning & AI Examples">
+  <meta property="og:description" content="Practical AI programs in Python: machine learning, neural networks, NLP, computer vision, reinforcement learning, generative AI, RAG, fine-tuning, model deployment, chatbots, anomaly detection, and best practices. Perfect for beginners and intermediates.">
+  <meta property="og:url" content="https://code-sense.pansensoyglenn.workers.dev/ai-programs.html">
+  <meta property="og:image" content="https://code-sense.pansensoyglenn.workers.dev/assets/ai-programs-og.jpg">
+  <meta property="og:image:alt" content="Python AI programs featured image — Valleys & Bytes">
+  <meta name="twitter:title" content="Complete AI Programs Guide – Python Machine Learning & AI Examples | Valleys & Bytes">
+  <meta name="twitter:description" content="Step-by-step AI programs in Python: ML, NLP, computer vision, reinforcement learning, generative AI, RAG, fine-tuning, model deployment, chatbots, anomaly detection, and more with clean code.">
+  <meta name="twitter:image" content="https://code-sense.pansensoyglenn.workers.dev/assets/ai-programs-og.jpg">
+  <meta name="twitter:image:alt" content="Python AI programs guide">
+  <meta property="article:published_time" content="2026-03-02T00:00:00+00:00">
+  <meta property="article:modified_time" content="2026-03-02T00:00:00+00:00">
+  <meta property="article:tag" content="AI">
+  <meta property="article:tag" content="Machine Learning">
+  <meta property="article:tag" content="Python">
+  <meta property="article:tag" content="Deep Learning">
+  <meta property="article:tag" content="Reinforcement Learning">
+  <meta property="article:tag" content="Generative AI">
+  <meta property="article:tag" content="Model Deployment">
+  <meta property="article:tag" content="Chatbot">
+  <meta property="article:tag" content="Anomaly Detection">
+  <meta name="author" content="Valleys & Bytes">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow">
+  <meta name="theme-color" content="#0a0c14">
+  <meta name="language" content="English">
+  <meta name="revisit-after" content="7 days">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Valleys & Bytes">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:locale" content="en_US">
+  <meta property="article:author" content="https://code-sense.pansensoyglenn.workers.dev">
+  <meta property="article:publisher" content="https://code-sense.pansensoyglenn.workers.dev">
+  <meta property="article:section" content="AI Programming">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@ValleysBytes">
+  <meta name="twitter:creator" content="@ValleysBytes">
+
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Complete AI Programs Guide – Python Machine Learning & AI Examples",
+    "description": "Explore practical AI programs in Python: machine learning models, neural networks, NLP, computer vision, reinforcement learning, generative AI, RAG, fine-tuning, model deployment, chatbots, anomaly detection, and more. Step-by-step examples with explanations.",
+    "image": "https://code-sense.pansensoyglenn.workers.dev/assets/ai-programs-og.jpg",
+    "author": {
+      "@type": "Organization",
+      "name": "Valleys & Bytes",
+      "url": "https://code-sense.pansensoyglenn.workers.dev",
+      "email": "pansensoyglenn@gmail.com"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Valleys & Bytes",
+      "url": "https://code-sense.pansensoyglenn.workers.dev",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://code-sense.pansensoyglenn.workers.dev/assets/logo.png",
+        "width": 200,
+        "height": 60
+      }
+    },
+    "datePublished": "2026-03-02",
+    "dateModified": "2026-03-02",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://code-sense.pansensoyglenn.workers.dev/ai-programs.html"
+    },
+    "url": "https://code-sense.pansensoyglenn.workers.dev/ai-programs.html",
+    "keywords": "AI programs, Python AI, machine learning examples, neural networks Python, NLP Python, computer vision Python, reinforcement learning Python, generative AI, RAG, fine-tuning, AI projects, deep learning examples, model deployment, chatbot, anomaly detection, autoencoder",
+    "articleSection": "AI Programming",
+    "inLanguage": "en-US",
+    "learningResourceType": "Tutorial",
+    "educationalLevel": "Beginner to Intermediate",
+    "isAccessibleForFree": true,
+    "timeRequired": "PT40M"
+  }</script>
+
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://code-sense.pansensoyglenn.workers.dev/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "AI Tutorials",
+        "item": "https://code-sense.pansensoyglenn.workers.dev/ai-programs.html"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "AI Programs Guide",
+        "item": "https://code-sense.pansensoyglenn.workers.dev/ai-programs.html"
+      }
+    ]
+  }</script>
+
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the difference between AI, machine learning, and deep learning?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "AI is the broad field of making machines intelligent. Machine learning is a subset of AI where systems learn from data. Deep learning is a subset of machine learning using neural networks with many layers."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which Python libraries are best for AI programming?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Popular libraries include TensorFlow, PyTorch, scikit-learn for machine learning; NLTK, spaCy for NLP; OpenCV for computer vision; and NumPy, Pandas for data manipulation. For reinforcement learning: Gymnasium, Stable-Baselines3. For generative AI: Hugging Face Transformers, LangChain."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I start learning AI programming?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Start with Python basics, then learn data handling with NumPy/Pandas. Move to classical ML with scikit-learn, then explore deep learning with TensorFlow/PyTorch. Practice with real datasets from Kaggle. For cutting-edge topics, study transformers, RAG, and reinforcement learning."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is reinforcement learning?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Reinforcement learning is an area of machine learning where an agent learns to make decisions by taking actions in an environment to maximize cumulative reward. It's used in robotics, game playing, and autonomous systems."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is RAG (Retrieval-Augmented Generation)?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "RAG combines retrieval of relevant documents with a generative model to produce more accurate and context-aware answers. It's widely used in question-answering systems and chatbots."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How can I deploy an AI model?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You can deploy models using frameworks like FastAPI, Flask, or TensorFlow Serving. Containerize with Docker and deploy on cloud platforms (AWS, GCP, Azure) or serverless functions."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is an autoencoder used for?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Autoencoders are neural networks used for unsupervised learning, dimensionality reduction, and anomaly detection. They learn to reconstruct input data, and anomalies are detected by high reconstruction error."
+        }
+      }
+    ]
+  }</script>
+
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Valleys & Bytes",
+    "url": "https://code-sense.pansensoyglenn.workers.dev/",
+    "description": "Deep, accessible programming education covering Python, OOP, AI, and data science.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Valleys & Bytes"
+    }
+  }</script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4575646748966866" crossorigin="anonymous"></script>
+
+  <style>
+    .ad-slot{display:block;text-align:center;margin:2.5rem auto;max-width:970px;width:100%;overflow:hidden;padding:0 1rem}
+    .ad-label{font-family:'JetBrains Mono',monospace;font-size:.55rem;color:var(--subtle);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.3rem;opacity:.6}
+  </style>
+
+  <style>
+    :root {
+      --bg:         #0a0c14;
+      --bg2:        #0e101a;
+      --surface:    #12141e;
+      --surface2:   #181c28;
+      --surface3:   #1e2432;
+      --blue-dk:    #1a2a3a;
+      --blue-mid:   #2a4a6a;
+      --blue:       #3a6a9a;
+      --blue-lt:    #5a8aba;
+      --blue-xlt:   #8ab0da;
+      --yellow:     #e0b040;
+      --yellow-dim: rgba(224,176,64,0.1);
+      --text:       #e8ecf2;
+      --muted:      #c0c8d4;
+      --subtle:     #9098a8;
+      --border:     rgba(58,106,154,0.15);
+      --border-hov: rgba(58,106,154,0.35);
+      --r:          12px;
+      --r-lg:       18px;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;overflow-x:hidden;max-width:100%}
+    body{
+      background:var(--bg);color:var(--text);
+      font-family:'Space Grotesk',sans-serif;
+      font-size:1rem;line-height:1.8;overflow-x:hidden;
+      max-width:100%;position:relative;
+    }
+    body::before{
+      content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+      background-image:
+        linear-gradient(rgba(58,106,154,0.02) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(58,106,154,0.02) 1px,transparent 1px);
+      background-size:44px 44px;
+    }
+    ::-webkit-scrollbar{width:5px}
+    ::-webkit-scrollbar-track{background:var(--bg)}
+    ::-webkit-scrollbar-thumb{background:var(--blue-mid);border-radius:3px}
+
+    #prog{position:fixed;top:0;left:0;height:2px;z-index:2000;
+      background:linear-gradient(90deg,var(--blue-mid),var(--yellow));width:0%}
+
+    #btt{position:fixed;bottom:1.8rem;right:1.8rem;z-index:900;
+      width:38px;height:38px;border-radius:9px;
+      background:var(--surface2);border:1px solid var(--border);
+      color:var(--blue-lt);font-size:.9rem;cursor:pointer;
+      display:flex;align-items:center;justify-content:center;
+      opacity:0;pointer-events:none;transition:all .3s}
+    #btt.vis{opacity:1;pointer-events:all}
+    #btt:hover{background:var(--blue-mid);color:#fff;transform:translateY(-2px)}
+
+    nav.main-nav{
+      position:fixed;top:0;left:0;right:0;z-index:1000;
+      display:flex;align-items:center;justify-content:space-between;
+      padding:.85rem 2.5rem;
+      background:rgba(10,12,20,.95);
+      backdrop-filter:blur(24px) saturate(1.5);
+      border-bottom:1px solid var(--border);
+    }
+    .logo{
+      font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.05rem;
+      color:var(--blue);letter-spacing:-.02em;text-decoration:none;
+      display:inline-flex;align-items:center;gap:.35rem;
+    }
+    .logo .amp{color:var(--yellow)}
+    .logo .w2{color:var(--text)}
+    .ham{
+      display:flex;flex-direction:column;gap:5px;
+      cursor:pointer;padding:5px;z-index:1100;background:none;border:none;
+    }
+    .ham span{
+      display:block;width:23px;height:2px;background:var(--text);
+      border-radius:2px;transition:all .35s cubic-bezier(.77,0,.18,1);
+      transform-origin:center;
+    }
+    .ham.open span:nth-child(1){transform:translateY(7px) rotate(45deg);background:var(--blue)}
+    .ham.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+    .ham.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);background:var(--blue)}
+    .drawer{
+      position:fixed;top:0;right:-310px;bottom:0;width:285px;
+      background:var(--surface);border-left:1px solid var(--border);
+      padding:5.5rem 1.8rem 2rem;overflow-y:auto;
+      transition:right .4s cubic-bezier(.77,0,.18,1);z-index:1050;
+    }
+    .drawer.open{right:0}
+    .drawer-lbl{
+      font-family:'JetBrains Mono',monospace;font-size:.6rem;
+      color:var(--blue-lt);letter-spacing:.14em;text-transform:uppercase;
+      margin-bottom:.75rem;opacity:.7;
+    }
+    .drawer-btn-group{display:flex;flex-direction:column;gap:.45rem;margin-bottom:.6rem}
+    .drawer a{
+      display:flex;align-items:center;gap:.55rem;
+      padding:.62rem 1rem;border-radius:9px;
+      border:1px solid var(--border);background:var(--surface2);
+      color:var(--muted);text-decoration:none;
+      font-weight:500;font-size:.8rem;
+      transition:all .22s cubic-bezier(.23,1,.32,1);
+      position:relative;overflow:hidden;
+    }
+    .drawer a::before{
+      content:'';position:absolute;inset:0;
+      background:linear-gradient(90deg,rgba(58,106,154,.08),transparent);
+      opacity:0;transition:opacity .22s;
+    }
+    .drawer a:hover{color:var(--text);border-color:var(--border-hov);background:var(--surface3);transform:translateX(3px);box-shadow:0 4px 16px rgba(0,0,0,.28)}
+    .drawer a:hover::before{opacity:1}
+    .overlay{
+      position:fixed;inset:0;background:rgba(0,0,0,.8);
+      opacity:0;pointer-events:none;transition:opacity .35s;z-index:1040;
+      backdrop-filter:blur(3px);
+    }
+    .overlay.open{opacity:1;pointer-events:all}
+
+    .hero{
+      min-height:60vh;display:flex;flex-direction:column;justify-content:center;
+      padding:9rem 2.5rem 4rem;
+      position:relative;overflow:hidden;
+      max-width:1100px;margin:0 auto;width:100%;
+    }
+    .g1,.g2{position:absolute;border-radius:50%;pointer-events:none;overflow:hidden}
+    .g1{top:-180px;right:-120px;width:520px;height:520px;
+      background:radial-gradient(circle,rgba(58,106,154,.1) 0%,transparent 65%);
+      max-width:80vw;max-height:80vw}
+    .g2{bottom:-100px;left:-100px;width:380px;height:380px;
+      background:radial-gradient(circle,rgba(224,176,64,.04) 0%,transparent 65%);
+      max-width:70vw;max-height:70vw}
+    .breadcrumb-wrap{
+      width:100%;max-width:1100px;margin:0 auto;
+      padding:6rem 2.5rem 0;position:relative;z-index:1;
+    }
+    .breadcrumb{
+      display:flex;flex-direction:column;align-items:flex-start;gap:.3rem;
+      font-family:'JetBrains Mono',monospace;font-size:.62rem;
+      color:var(--muted);margin-bottom:1.4rem;
+      animation:fu .5s ease both;
+    }
+    .breadcrumb a{
+      color:var(--muted);text-decoration:none;
+      display:inline-flex;align-items:center;gap:.45rem;
+      padding:.32rem .85rem;border-radius:8px;
+      background:var(--surface2);border:1px solid var(--border);
+      transition:all .22s cubic-bezier(.23,1,.32,1);
+      white-space:nowrap;min-width:160px;
+    }
+    .breadcrumb a:hover{
+      color:var(--blue-lt);border-color:var(--border-hov);
+      background:var(--surface3);transform:translateX(3px);
+      box-shadow:0 4px 14px rgba(0,0,0,.3);
+    }
+    .breadcrumb span[aria-current="page"]{
+      color:var(--blue-lt);
+      display:inline-flex;align-items:center;gap:.45rem;
+      padding:.32rem .85rem;border-radius:8px;
+      background:rgba(58,106,154,.12);border:1px solid rgba(58,106,154,.28);
+      white-space:nowrap;min-width:160px;
+    }
+    .breadcrumb .bc-sep{
+      color:var(--blue-mid);font-size:.65rem;
+      padding-left:.5rem;opacity:.6;
+    }
+    .hero-badge{
+      display:inline-flex;align-items:center;gap:.5rem;
+      background:rgba(58,106,154,.09);border:1px solid rgba(58,106,154,.22);
+      color:var(--blue-lt);padding:.28rem .95rem;border-radius:100px;
+      font-family:'JetBrains Mono',monospace;font-size:.65rem;
+      margin-bottom:1.1rem;width:fit-content;
+      animation:fu .6s .04s ease both;
+    }
+    .bdot{width:6px;height:6px;border-radius:50%;background:var(--blue);animation:pulse 2.5s infinite}
+    @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.8)}}
+    h1{
+      font-family:'Playfair Display',serif;
+      font-size:1rem;font-weight:800;line-height:1.13;
+      max-width:680px;animation:fu .7s .1s ease both;
+    }
+    h1 .bl{color:var(--blue)}
+    h1 .yl{color:var(--yellow)}
+    .hero-desc{
+      font-size:.7rem;color:var(--muted);max-width:540px;
+      margin-top:1rem;line-height:1.85;animation:fu .7s .18s ease both;
+      text-align:justify;letter-spacing:.01em;
+    }
+    @keyframes fu{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+    .meta-row{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1.3rem;animation:fu .7s .24s ease both}
+    .chip{
+      display:inline-flex;align-items:center;gap:.35rem;
+      background:var(--surface);border:1px solid var(--border);
+      border-radius:6px;padding:.28rem .7rem;
+      font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--muted);
+    }
+
+    section{padding:4rem 2.5rem;max-width:1100px;margin:0 auto;position:relative;z-index:1;width:100%}
+    h2{
+      font-family:'Playfair Display',serif;
+      font-size:.9rem;font-weight:700;line-height:1.2;margin-bottom:.4rem;letter-spacing:-.01em;
+    }
+    h3{
+      font-family:'Space Grotesk',sans-serif;
+      font-size:.8rem;font-weight:600;letter-spacing:-.01em;
+    }
+    .slbl{
+      display:inline-flex;align-items:center;gap:.45rem;
+      font-family:'JetBrains Mono',monospace;font-size:.6rem;
+      color:var(--blue-lt);letter-spacing:.14em;text-transform:uppercase;
+      margin-bottom:.55rem;
+    }
+    .slbl::before{content:'';display:block;width:16px;height:1px;background:var(--blue)}
+    .div{width:32px;height:2px;background:var(--blue-mid);margin:.8rem 0 1.5rem;border-radius:1px}
+    p{
+      font-size:.7rem;color:var(--muted);margin-bottom:1rem;text-align:justify;line-height:1.85;letter-spacing:.01em;
+    }
+    p strong{color:var(--text);font-weight:600}
+    code{
+      font-family:'JetBrains Mono',monospace;font-size:.72em;
+      background:rgba(58,106,154,.1);border:1px solid var(--border);
+      padding:.05em .35em;border-radius:4px;color:var(--blue-lt);
+    }
+
+    .content-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:1rem;margin-top:2rem}
+    .content-card{
+      background:var(--surface);border:1px solid var(--border);
+      border-radius:var(--r);padding:1.35rem;
+      transition:transform .3s,border-color .3s,box-shadow .3s;
+      position:relative;overflow:hidden;
+    }
+    .content-card::after{
+      content:'';position:absolute;top:0;left:0;right:0;height:2px;
+      background:linear-gradient(90deg,var(--blue-mid),var(--blue-lt));
+      opacity:0;transition:opacity .3s;
+    }
+    .content-card:hover{transform:translateY(-4px);border-color:var(--border-hov);box-shadow:0 16px 40px rgba(0,0,0,.35)}
+    .content-card:hover::after{opacity:1}
+    .card-icon{font-size:1.3rem;margin-bottom:.6rem}
+    .content-card h3{font-size:.75rem;margin-bottom:.4rem;color:var(--text);letter-spacing:-.01em}
+    .content-card p{font-size:.7rem;margin:0;line-height:1.75;text-align:justify;letter-spacing:.01em;}
+
+    .code-block{
+      background:var(--bg2);border:1px solid var(--border);
+      border-radius:var(--r);padding:1.3rem;
+      font-family:'JetBrains Mono',monospace;font-size:clamp(.75rem,1.8vw,.85rem);
+      color:var(--text);overflow-x:auto;line-height:1.72;white-space:pre;
+      position:relative;
+    }
+    .code-block::before{
+      content:'Python';position:absolute;top:.55rem;right:.75rem;
+      font-size:.56rem;color:var(--subtle);letter-spacing:.1em;
+    }
+    .kw{color:var(--blue-lt)} .fn{color:var(--yellow)} .st{color:#8db08d}
+    .cm{color:var(--subtle);font-style:italic} .nu{color:#d89c6d} .cl{color:#b09ad0}
+
+    .faq-list{display:flex;flex-direction:column;gap:.6rem;margin-top:1.5rem}
+    .faq-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+    .faq-q{
+      width:100%;display:flex;align-items:center;justify-content:space-between;
+      padding:.95rem 1.15rem;background:none;border:none;cursor:pointer;
+      font-family:'Space Grotesk',sans-serif;font-size:.75rem;font-weight:600;
+      color:var(--text);text-align:left;gap:1rem;transition:color .2s;
+    }
+    .faq-q:hover{color:var(--blue-lt)}
+    .faq-ico{
+      width:20px;height:20px;border-radius:50%;
+      background:rgba(58,106,154,.12);border:1px solid var(--border);
+      display:flex;align-items:center;justify-content:center;
+      font-size:.8rem;color:var(--blue-lt);flex-shrink:0;transition:all .3s;
+    }
+    .faq-ans{max-height:0;overflow:hidden;transition:max-height .35s ease}
+    .faq-ans p{padding:.1rem 1.15rem 1rem;margin:0}
+    .faq-item.open .faq-ico{background:rgba(58,106,154,.2);border-color:rgba(58,106,154,.4)}
+
+    .sub-wrap{
+      background:linear-gradient(135deg,var(--surface) 0%,var(--surface2) 100%);
+      border:1px solid var(--border);border-radius:var(--r-lg);
+      padding:3.2rem 2.5rem;text-align:center;position:relative;overflow:hidden;
+    }
+    .sub-wrap h2{font-size:.9rem;margin-bottom:.45rem}
+    .perks{display:flex;justify-content:center;gap:1.4rem;flex-wrap:wrap;margin:1rem 0 1.4rem}
+    .perk{display:inline-flex;align-items:center;gap:.35rem;font-size:.7rem;color:var(--muted)}
+    .perk::before{content:'✓';color:var(--blue-lt);font-weight:700}
+    .sub-form{display:flex;gap:.55rem;max-width:440px;margin:0 auto;flex-wrap:wrap;justify-content:center}
+    .sub-form input{flex:1;min-width:min(180px,100%)}
+    .snote{font-size:.62rem;color:var(--subtle);margin-top:.7rem;text-align:center;}
+    .subMsg{margin-top:.6rem;font-size:.7rem;font-family:'JetBrains Mono',monospace;color:var(--blue-lt);min-height:1rem;transition:opacity .4s}
+
+    .fg{display:flex;flex-direction:column;gap:.32rem}
+    .fg label{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--muted);letter-spacing:.05em}
+    input,textarea{
+      background:var(--bg2);border:1px solid var(--border);
+      border-radius:8px;padding:.6rem .85rem;
+      color:var(--text);font-family:'Space Grotesk',sans-serif;font-size:.75rem;
+      width:100%;outline:none;transition:border-color .2s,box-shadow .2s;
+    }
+    input:focus,textarea:focus{border-color:var(--blue-mid);box-shadow:0 0 0 3px rgba(58,106,154,.11)}
+    .btn-p{
+      background:linear-gradient(135deg,var(--blue-mid),var(--blue));
+      color:#fff;border:none;border-radius:100px;
+      padding:.65rem 1.75rem;
+      font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.7rem;
+      cursor:pointer;transition:all .25s;
+    }
+    .btn-p:hover{filter:brightness(1.12);transform:translateY(-1px);box-shadow:0 8px 24px rgba(58,106,154,.28)}
+
+    footer{
+      background:var(--bg2);border-top:1px solid var(--border);
+      margin-top:5rem;padding:4rem 2.5rem 2rem;position:relative;z-index:1;
+      width:100%;overflow-x:hidden;
+    }
+    .fg-grid{
+      display:grid;grid-template-columns:2.2fr 1fr 1fr 1fr;
+      gap:2.5rem;max-width:1100px;margin:0 auto;width:100%;
+    }
+    @media(max-width:820px){.fg-grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:480px){.fg-grid{grid-template-columns:1fr}}
+    .fbrand .logo{display:inline-flex;margin-bottom:.75rem}
+    .fbrand>p{font-size:.7rem;line-height:1.8;max-width:310px;color:var(--muted);text-align:justify;letter-spacing:.01em;}
+    .fcol h4{
+      font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.6rem;
+      color:var(--blue-lt);margin-bottom:.75rem;letter-spacing:.14em;text-transform:uppercase;
+      opacity:.85;display:flex;align-items:center;gap:.5rem;
+    }
+    .fcol h4::before{content:'';display:block;width:14px;height:1px;background:var(--blue-mid)}
+    .fcol-btns{display:flex;flex-direction:column;gap:.3rem}
+    .fcol a{
+      display:flex;align-items:center;gap:.6rem;
+      color:var(--muted);text-decoration:none;
+      font-size:.7rem;font-weight:500;
+      padding:.5rem .85rem;border-radius:8px;
+      border:1px solid var(--border);background:var(--surface);
+      transition:all .2s cubic-bezier(.23,1,.32,1);
+      position:relative;overflow:hidden;
+    }
+    .fcol a .flink-icon{font-size:.75rem;flex-shrink:0;width:20px;text-align:center;}
+    .fcol a .flink-arrow{margin-left:auto;font-size:.6rem;color:var(--blue);opacity:0;transform:translateX(-5px);transition:all .2s;flex-shrink:0;}
+    .fcol a:hover{color:var(--text);background:var(--surface2);border-color:var(--border-hov);box-shadow:0 3px 12px rgba(0,0,0,.25);transform:translateX(2px);}
+    .fcol a:hover .flink-arrow{opacity:1;transform:translateX(0)}
+    .fbot{max-width:1100px;margin:2.5rem auto 0;padding-top:1.4rem;border-top:1px solid var(--border);display:flex;flex-direction:column;align-items:stretch;gap:1rem;}
+    .fbot-top{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;}
+    .fcopy{font-size:.65rem;color:var(--subtle);font-family:'JetBrains Mono',monospace}
+    .fbot-label{font-family:'JetBrains Mono',monospace;font-size:.58rem;color:var(--blue-lt);letter-spacing:.14em;text-transform:uppercase;opacity:.7;margin-bottom:.5rem;display:flex;align-items:center;gap:.5rem;}
+    .fbot-label::before{content:'';display:block;width:14px;height:1px;background:var(--blue-mid)}
+    .flegal{display:flex;flex-direction:column;gap:.3rem;align-items:stretch;}
+    .flegal a{display:flex;align-items:center;gap:.65rem;font-size:.7rem;font-weight:500;color:var(--muted);text-decoration:none;padding:.5rem .9rem;border-radius:8px;border:1px solid var(--border);background:var(--surface);transition:all .2s cubic-bezier(.23,1,.32,1);}
+    .flegal a .fleg-arrow{margin-left:auto;font-size:.6rem;color:var(--blue);opacity:0;transform:translateX(-5px);transition:all .2s;flex-shrink:0;}
+    .flegal a:hover{color:var(--text);background:var(--surface2);border-color:var(--border-hov);box-shadow:0 3px 12px rgba(0,0,0,.25);transform:translateX(3px);}
+    .flegal a:hover .fleg-arrow{opacity:1;transform:translateX(0)}
+    .tag{display:inline-block;background:rgba(58,106,154,.09);border:1px solid rgba(58,106,154,.18);color:var(--blue-lt);font-family:'JetBrains Mono',monospace;font-size:.6rem;padding:.1rem .5rem;border-radius:4px;margin:0 .15rem .15rem 0;}
+    .ftags{display:flex;flex-wrap:wrap;gap:.2rem;margin-top:.8rem}
+  </style>
+</head>
+<body>
+
+<div id="prog" role="progressbar" aria-hidden="true"></div>
+
+<nav class="main-nav" role="navigation" aria-label="Main navigation">
+  <a href="./index.html" class="logo" aria-label="Valleys and Bytes Home">
+    <span aria-hidden="true">💻</span>VALLEYS <span class="amp">&amp;</span> <span class="w2">BYTES</span>
+  </a>
+  <button class="ham" id="ham" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="drawer">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="drawer" id="drawer" role="dialog" aria-label="Navigation menu">
+  <p class="drawer-lbl">Navigation</p>
+  <div class="drawer-btn-group">
+    <a href="./index.html">🏠 Home</a>
+    <a href="./python-fundamentals.html">🖥️ Python Fundamentals</a>
+    <a href="./oop-cheatsheet.html">📋 Cheatsheets</a>
+    <a href="./ai-programs.html">🤖 AI Programs</a>
+  </div>
+</div>
+<div class="overlay" id="overlay" aria-hidden="true"></div>
+
+<header role="banner">
+  <div class="breadcrumb-wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="./index.html">🏠 Home</a>
+      <span class="bc-sep" aria-hidden="true">↓</span>
+      <a href="./ai-tutorials.html">🤖 AI Tutorials</a>
+      <span class="bc-sep" aria-hidden="true">↓</span>
+      <span aria-current="page">🧠 AI Programs Guide</span>
+    </nav>
+  </div>
+  <div class="hero">
+    <div class="g1" aria-hidden="true"></div>
+    <div class="g2" aria-hidden="true"></div>
+
+    <div class="hero-badge">
+      <span class="bdot" aria-hidden="true"></span>
+      AI · MACHINE LEARNING · 2026
+    </div>
+
+    <h1>Complete <span class="bl">AI Programs</span> <span class="yl">Guide</span></h1>
+
+    <p class="hero-desc">Explore practical AI programs in Python: machine learning models, neural networks, NLP, computer vision, reinforcement learning, generative AI, RAG, fine‑tuning, model deployment, chatbots, anomaly detection, and best practices. Step‑by‑step examples with clear explanations.</p>
+
+    <div class="meta-row" aria-label="Article metadata">
+      <span class="chip">⏱ 40 min read</span>
+      <span class="chip">📅 Mar 2026</span>
+      <span class="chip">🎓 Beginner–Intermediate</span>
+      <span class="chip">💻 Python · AI</span>
+    </div>
+  </div>
+</header>
+
+<div class="ad-slot" aria-label="Advertisement">
+  <p class="ad-label">Advertisement</p>
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-4575646748966866"
+       data-ad-slot="4226674403"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<section id="intro" aria-labelledby="h-intro">
+  <p class="slbl">01 — AI PROGRAMMING BASICS</p>
+  <h2 id="h-intro">Why Python for AI?</h2>
+  <div class="div"></div>
+
+  <p>Python is the lingua franca of AI and machine learning. Its rich ecosystem of libraries—<strong>NumPy, Pandas, scikit‑learn, TensorFlow, PyTorch, NLTK, OpenCV, Gymnasium, Transformers, FastAPI</strong>—makes it the first choice for building intelligent systems. This guide walks you through real‑world AI programs, from classical ML to cutting‑edge generative AI and reinforcement learning, with clean, executable Python code.</p>
+
+  <p>Understanding these examples will give you a solid foundation to build your own AI projects, whether you're interested in predictive modeling, natural language processing, computer vision, autonomous agents, or deploying models to production.</p>
+
+  <div class="content-grid">
+    <article class="content-card">
+      <div class="card-icon">📈</div>
+      <h3>Machine Learning</h3>
+      <p>Linear regression, classification, clustering—implement core algorithms with scikit‑learn and understand the math behind them.</p>
+    </article>
+    <article class="content-card">
+      <div class="card-icon">🧠</div>
+      <h3>Neural Networks</h3>
+      <p>Build and train feedforward networks, CNNs, and RNNs using TensorFlow/Keras and PyTorch.</p>
+    </article>
+    <article class="content-card">
+      <div class="card-icon">🗣️</div>
+      <h3>NLP & Computer Vision</h3>
+      <p>Process text with NLTK/spaCy, and images with OpenCV. Combine with deep learning for advanced applications.</p>
+    </article>
+    <article class="content-card">
+      <div class="card-icon">🎮</div>
+      <h3>Reinforcement Learning</h3>
+      <p>Train agents to play games or control systems using Gymnasium and Stable‑Baselines3.</p>
+    </article>
+    <article class="content-card">
+      <div class="card-icon">🤖</div>
+      <h3>Generative AI & RAG</h3>
+      <p>Use transformers for text generation and build retrieval‑augmented generation pipelines.</p>
+    </article>
+    <article class="content-card">
+      <div class="card-icon">🚀</div>
+      <h3>Model Deployment</h3>
+      <p>Serve models via APIs with FastAPI, containerize with Docker, and monitor in production.</p>
+    </article>
+  </div>
+</section>
+
+<div class="ad-slot" aria-label="Advertisement">
+  <p class="ad-label">Advertisement</p>
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-4575646748966866"
+       data-ad-slot="4226674403"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<section id="main-content" aria-labelledby="h-main">
+  <p class="slbl">02 — MACHINE LEARNING BASICS</p>
+  <h2 id="h-main">Linear Regression with scikit‑learn</h2>
+  <div class="div"></div>
+
+  <p>Linear regression predicts a continuous target variable. Here’s a minimal example using the Boston housing dataset (or synthetic data).</p>
+
+  <div class="code-block" role="figure" aria-label="Linear regression example">
+<span class="cm"># Linear regression with scikit-learn</span>
+<span class="kw">import</span> <span class="fn">numpy</span> <span class="kw">as</span> <span class="fn">np</span>
+<span class="kw">from</span> <span class="fn">sklearn.model_selection</span> <span class="kw">import</span> train_test_split
+<span class="kw">from</span> <span class="fn">sklearn.linear_model</span> <span class="kw">import</span> <span class="cl">LinearRegression</span>
+<span class="kw">from</span> <span class="fn">sklearn.metrics</span> <span class="kw">import</span> mean_squared_error
+
+<span class="cm"># Generate synthetic data</span>
+np.random.seed(<span class="nu">42</span>)
+X = np.random.rand(<span class="nu">100</span>, <span class="nu">1</span>) * <span class="nu">10</span>
+y = <span class="nu">2.5</span> * X.squeeze() + np.random.randn(<span class="nu">100</span>) * <span class="nu">2</span>
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="nu">0.2</span>)
+
+model = <span class="cl">LinearRegression</span>()
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+
+<span class="fn">print</span>(<span class="st">f"RMSE: {mean_squared_error(y_test, y_pred, squared=False):.2f}"</span>)
+  </div>
+
+  <p class="slbl" style="margin-top:2rem">03 — NEURAL NETWORKS WITH KERAS</p>
+  <h2>Feedforward Network for Classification</h2>
+  <div class="div"></div>
+  <p>Build a simple neural network to classify handwritten digits (MNIST).</p>
+
+  <div class="code-block" role="figure" aria-label="Neural network with Keras">
+<span class="cm"># Feedforward network on MNIST</span>
+<span class="kw">import</span> <span class="fn">tensorflow</span> <span class="kw">as</span> <span class="fn">tf</span>
+<span class="kw">from</span> <span class="fn">tensorflow</span> <span class="kw">import</span> keras
+
+(x_train, y_train), (x_test, y_test) = keras.datasets.mnist.load_data()
+x_train, x_test = x_train / <span class="nu">255.0</span>, x_test / <span class="nu">255.0</span>  <span class="cm"># normalize</span>
+
+model = keras.Sequential([
+    keras.layers.Flatten(input_shape=(<span class="nu">28</span>, <span class="nu">28</span>)),
+    keras.layers.Dense(<span class="nu">128</span>, activation=<span class="st">'relu'</span>),
+    keras.layers.Dense(<span class="nu">10</span>, activation=<span class="st">'softmax'</span>)
+])
+
+model.compile(optimizer=<span class="st">'adam'</span>,
+              loss=<span class="st">'sparse_categorical_crossentropy'</span>,
+              metrics=[<span class="st">'accuracy'</span>])
+
+model.fit(x_train, y_train, epochs=<span class="nu">5</span>)
+test_loss, test_acc = model.evaluate(x_test, y_test)
+<span class="fn">print</span>(<span class="st">f"Test accuracy: {test_acc:.4f}"</span>)
+  </div>
+
+  <p class="slbl" style="margin-top:2rem">04 — NATURAL LANGUAGE PROCESSING</p>
+  <h2>Sentiment Analysis with NLTK</h2>
+  <div class="div"></div>
+  <p>Use NLTK's VADER lexicon for simple sentiment analysis.</p>
+
+  <div class="code-block" role="figure" aria-label="Sentiment analysis with NLTK">
+<span class="cm"># Sentiment analysis with NLTK</span>
+<span class="kw">import</span> <span class="fn">nltk</span>
+<span class="kw">from</span> <span class="fn">nltk.sentiment</span> <span class="kw">import</span> SentimentIntensityAnalyzer
+
+nltk.download(<span class="st">'vader_lexicon'</span>)
+
+analyzer = <span class="cl">SentimentIntensityAnalyzer</span>()
+texts = [
+    <span class="st">"I love this product! It's amazing."</span>,
+    <span class="st">"This is the worst experience ever."</span>,
+    <span class="st">"It's okay, nothing special."</span>
+]
+
+<span class="kw">for</span> text <span class="kw">in</span> texts:
+    scores = analyzer.polarity_scores(text)
+    <span class="fn">print</span>(<span class="st">f"Text: {text}</span><span class="se">\n</span><span class="st">Sentiment: {scores}</span><span class="se">\n</span><span class="st">"</span>)
+  </div>
+
+  <p class="slbl" style="margin-top:2rem">05 — COMPUTER VISION WITH OPENCV</p>
+  <h2>Face Detection using Haar Cascades</h2>
+  <div class="div"></div>
+  <p>Detect faces in an image with OpenCV's pre‑trained classifier.</p>
+
+  <div class="code-block" role="figure" aria-label="Face detection with OpenCV">
+<span class="cm"># Face detection with OpenCV</span>
+<span class="kw">import</span> <span class="fn">cv2</span>
+
+<span class="cm"># Load the cascade</span>
+face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + <span class="st">'haarcascade_frontalface_default.xml'</span>)
+
+<span class="cm"># Read image</span>
+img = cv2.imread(<span class="st">'friends.jpg'</span>)
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+<span class="cm"># Detect faces</span>
+faces = face_cascade.detectMultiScale(gray, scaleFactor=<span class="nu">1.1</span>, minNeighbors=<span class="nu">5</span>)
+
+<span class="kw">for</span> (x, y, w, h) <span class="kw">in</span> faces:
+    cv2.rectangle(img, (x, y), (x+w, y+h), (<span class="nu">255</span>, <span class="nu">0</span>, <span class="nu">0</span>), <span class="nu">2</span>)
+
+cv2.imshow(<span class="st">'Detected Faces'</span>, img)
+cv2.waitKey(<span class="nu">0</span>)
+  </div>
+
+  <p class="slbl" style="margin-top:2rem">06 — REINFORCEMENT LEARNING</p>
+  <h2>Q‑Learning for a Simple Environment</h2>
+  <div class="div"></div>
+  <p>Reinforcement learning trains an agent by rewarding desired behaviors. Here’s a classic Q‑learning example on the FrozenLake environment (OpenAI Gym).</p>
+
+  <div class="code-block" role="figure" aria-label="Q-learning example">
+<span class="cm"># Q-learning on FrozenLake</span>
+<span class="kw">import</span> <span class="fn">gymnasium</span> <span class="kw">as</span> <span class="fn">gym</span>
+<span class="kw">import</span> <span class="fn">numpy</span> <span class="kw">as</span> <span class="fn">np</span>
+
+env = gym.make(<span class="st">"FrozenLake-v1"</span>, is_slippery=<span class="kw">False</span>)
+Q = np.zeros([env.observation_space.n, env.action_space.n])
+
+alpha = <span class="nu">0.8</span>      <span class="cm"># learning rate</span>
+gamma = <span class="nu">0.95</span>     <span class="cm"># discount factor</span>
+episodes = <span class="nu">5000</span>
+
+<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(episodes):
+    state, _ = env.reset()
+    done = <span class="kw">False</span>
+    <span class="kw">while</span> <span class="kw">not</span> done:
+        action = np.argmax(Q[state, :] + np.random.randn(<span class="nu">1</span>, env.action_space.n) * (<span class="nu">1.0</span>/(i+<span class="nu">1</span>)))
+        new_state, reward, done, _, _ = env.step(action)
+        Q[state, action] = Q[state, action] + alpha * (reward + gamma * np.max(Q[new_state, :]) - Q[state, action])
+        state = new_state
+
+<span class="fn">print</span>(<span class="st">"Trained Q-table:"</span>)
+<span class="fn">print</span>(Q)
+  </div>
+
+  <p class="slbl" style="margin-top:2rem">07 — GENERATIVE AI: TEXT GENERATION</p>
+  <h2>Using Transformers for Text Generation</h2>
+  <div class="div"></div>
+  <p>With the Hugging Face <code>transformers</code> library, you can load a pre‑trained GPT‑2 model and generate text.</p>
+
+  <div class="code-block" role="figure" aria-label="Text generation with transformers">
+<span class="cm"># Text generation with GPT-2</span>
+<span class="kw">from</span> <span class="fn">transformers</span> <span class="kw">import</span> pipeline
+
+generator = pipeline(<span class="st">'text-generation'</span>, model=<span class="st">'gpt2'</span>)
+prompt = <span class="st">"Once upon a time, a young programmer"</span>
+result = generator(prompt, max_length=<span class="nu">50</span>, num_return_sequences=<span class="nu">1</span>)
+
+<span class="fn">print</span>(result[<span class="nu">0</span>][<span class="st">'generated_text'</span>])
+  </div>
+
+  <p class="slbl" style="margin-top:2rem">08 — RETRIEVAL‑AUGMENTED GENERATION (RAG)</p>
+  <h2>Simple RAG Pipeline with LangChain</h2>
+  <div class="div"></div>
+  <p>RAG combines retrieval of relevant documents with a generative model to answer questions. Below is a minimal example using LangChain (conceptual).</p>
+
+  <div class="code-block" role="figure" aria-label="RAG with LangChain">
+<span class="cm"># RAG pipeline (simplified)</span>
+<span class="kw">from</span> <span class="fn">langchain.embeddings</span> <span class="kw">import</span> OpenAIEmbeddings
+<span class="kw">from</span> <span class="fn">langchain.vectorstores</span> <span class="kw">import</span> FAISS
+<span class="kw">from</span> <span class="fn">langchain.llms</span> <span class="kw">import</span> OpenAI
+<span class="kw">from</span> <span class="fn">langchain.chains</span> <span class="kw">import</span> RetrievalQA
+
+<span class="cm"># Assume documents are loaded and split</span>
+vectorstore = FAISS.from_documents(documents, OpenAIEmbeddings())
+retriever = vectorstore.as_retriever()
+qa_chain = RetrievalQA.from_chain_type(llm=OpenAI(), retriever=retriever)
+
+query = <span class="st">"What is the capital of France?"</span>
+answer = qa_chain.run(query)
+<span class="fn">print</span>(answer)
+  </div>
+
+  <p class="slbl" style="margin-top:2rem">09 — FINE‑TUNING A PRE‑TRAINED MODEL</p>
+  <h2>Fine‑tuning BERT for Sentiment Analysis</h2>
+  <div class="div"></div>
+  <p>Fine‑tune a transformer model on a custom dataset using Hugging Face <code>Trainer</code>.</p>
+
+  <div class="code-block" role="figure" aria-label="Fine-tuning BERT">
+<span class="cm"># Fine-tune BERT for sentiment</span>
+<span class="kw">from</span> <span class="fn">transformers</span> <span class="kw">import</span> BertForSequenceClassification, Trainer, TrainingArguments
+<span class="kw">from</span> <span class="fn">datasets</span> <span class="kw">import</span> load_dataset
+
+dataset = load_dataset(<span class="st">'imdb'</span>)
+model = BertForSequenceClassification.from_pretrained(<span class="st">'bert-base-uncased'</span>)
+
+training_args = TrainingArguments(output_dir=<span class="st">'./results'</span>, num_train_epochs=<span class="nu">3</span>)
+trainer = Trainer(model=model, args=training_args, train_dataset=dataset[<span class="st">'train'</span>])
+trainer.train()
+  </div>
+
+  <p class="slbl" style="margin-top:2rem">10 — TIME SERIES FORECASTING WITH LSTM</p>
+  <h2>Predicting Stock Prices using LSTM</h2>
+  <div class="div"></div>
+  <p>Long Short‑Term Memory networks are great for sequential data like time series.</p>
+
+  <div class="code-block" role="figure" aria-label="LSTM time series">
+<span class="cm"># LSTM for time series (simplified)</span>
+<span class="kw">import</span> <span class="fn">numpy</span> <span class="kw">as</span> <span class="fn">np</span>
+<span class="kw">from</span> <span class="fn">tensorflow.keras.models</span> <span class="kw">import</span> Sequential
+<span class="kw">from</span> <span class="fn">tensorflow.keras.layers</span> <span class="kw">import</span> LSTM, Dense
+
+<span class="cm"># Generate dummy data</span>
+data = np.sin(np.linspace(<span class="nu">0</span>, <span class="nu">100</span>, <span class="nu">1000</span>))
+X, y = [], []
+<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="nu">10</span>, len(data)):
+    X.append(data[i-<span class="nu">10</span>:i])
+    y.append(data[i])
+X, y = np.array(X), np.array(y)
+X = X.reshape((X.shape[<span class="nu">0</span>], X.shape[<span class="nu">1</span>], <span class="nu">1</span>))
+
+model = Sequential()
+model.add(LSTM(<span class="nu">50</span>, activation=<span class="st">'relu'</span>, input_shape=(<span class="nu">10</span>, <span class="nu">1</span>)))
+model.add(Dense(<span class="nu">1</span>))
+model.compile(optimizer=<span class="st">'adam'</span>, loss=<span class="st">'mse'</span>)
+model.fit(X, y, epochs=<span class="nu">10</span>, verbose=<span class="nu">0</span>)
+  </div>
+
+  <p class="slbl" style="margin-top:2rem">11 — MODEL DEPLOYMENT WITH FASTAPI</p>
+  <h2>Serving a Scikit‑learn Model via REST API</h2>
+  <div class="div"></div>
+  <p>FastAPI is a modern web framework for building APIs. Below is an example of serving a trained classifier.</p>
+
+  <div class="code-block" role="figure" aria-label="FastAPI deployment">
+<span class="cm"># app.py – deploy model with FastAPI</span>
+<span class="kw">from</span> <span class="fn">fastapi</span> <span class="kw">import</span> FastAPI
+<span class="kw">from</span> <span class="fn">pydantic</span> <span class="kw">import</span> BaseModel
+<span class="kw">import</span> <span class="fn">joblib</span>
+<span class="kw">import</span> <span class="fn">numpy</span> <span class="kw">as</span> <span class="fn">np</span>
+
+app = FastAPI()
+model = joblib.load(<span class="st">'model.pkl'</span>)
+
+<span class="kw">class</span> <span class="cl">InputData</span>(<span class="cl">BaseModel</span>):
+    features: list
+
+@app.post(<span class="st">"/predict"</span>)
+<span class="kw">def</span> <span class="fn">predict</span>(data: <span class="cl">InputData</span>):
+    X = np.array(data.features).reshape(<span class="nu">1</span>, -<span class="nu">1</span>)
+    prediction = model.predict(X)
+    <span class="kw">return</span> {<span class="st">"prediction"</span>: prediction.tolist()}
+  </div>
+
+  <p class="slbl" style="margin-top:2rem">12 — BUILDING A CHATBOT WITH TRANSFORMERS</p>
+  <h2>Simple Conversational Agent</h2>
+  <div class="div"></div>
+  <p>Using the <code>transformers</code> library, we can create a chatbot with a conversational pipeline.</p>
+
+  <div class="code-block" role="figure" aria-label="Chatbot with transformers">
+<span class="cm"># Chatbot using Hugging Face conversational pipeline</span>
+<span class="kw">from</span> <span class="fn">transformers</span> <span class="kw">import</span> pipeline
+
+chatbot = pipeline(<span class="st">"conversational"</span>, model=<span class="st">"microsoft/DialoGPT-medium"</span>)
+user_input = <span class="st">"Hello, how are you?"</span>
+response = chatbot(user_input)
+<span class="fn">print</span>(response)
+  </div>
+
+  <p class="slbl" style="margin-top:2rem">13 — ANOMALY DETECTION WITH AUTOENCODERS</p>
+  <h2>Detecting Outliers Using Reconstruction Error</h2>
+  <div class="div"></div>
+  <p>Autoencoders learn to reconstruct normal data; anomalies yield high reconstruction error.</p>
+
+  <div class="code-block" role="figure" aria-label="Autoencoder for anomaly detection">
+<span class="cm"># Autoencoder for anomaly detection</span>
+<span class="kw">import</span> <span class="fn">numpy</span> <span class="kw">as</span> <span class="fn">np</span>
+<span class="kw">from</span> <span class="fn">tensorflow.keras.models</span> <span class="kw">import</span> Model
+<span class="kw">from</span> <span class="fn">tensorflow.keras.layers</span> <span class="kw">import</span> Input, Dense
+
+<span class="cm"># Normal data (e.g., 1000 samples, 10 features)</span>
+normal_data = np.random.randn(<span class="nu">1000</span>, <span class="nu">10</span>)
+
+input_layer = Input(shape=(<span class="nu">10</span>,))
+encoded = Dense(<span class="nu">5</span>, activation=<span class="st">'relu'</span>)(input_layer)
+decoded = Dense(<span class="nu">10</span>, activation=<span class="st">'linear'</span>)(encoded)
+autoencoder = Model(input_layer, decoded)
+autoencoder.compile(optimizer=<span class="st">'adam'</span>, loss=<span class="st">'mse'</span>)
+autoencoder.fit(normal_data, normal_data, epochs=<span class="nu">20</span>, verbose=<span class="nu">0</span>)
+
+<span class="cm"># New sample (could be anomaly)</span>
+sample = np.random.randn(<span class="nu">1</span>, <span class="nu">10</span>) * <span class="nu">5</span>   <span class="cm"># large deviation</span>
+reconstructed = autoencoder.predict(sample)
+error = np.mean((sample - reconstructed)**<span class="nu">2</span>)
+<span class="fn">print</span>(<span class="st">f"Reconstruction error: {error:.4f}"</span>)
+  </div>
+
+  <p class="slbl" style="margin-top:2rem">14 — AI ETHICS AND BIAS</p>
+  <h2>Considerations for Responsible AI</h2>
+  <div class="div"></div>
+  <p>Building AI systems comes with responsibility. Key considerations include:</p>
+  <p>• <strong>Bias and fairness:</strong> Evaluate your data and model for demographic biases using tools like AI Fairness 360.<br>
+  • <strong>Explainability:</strong> Use SHAP or LIME to interpret model predictions.<br>
+  • <strong>Privacy:</strong> Ensure data anonymization and compliance with regulations (GDPR).<br>
+  • <strong>Robustness:</strong> Test against adversarial examples and distribution shifts.<br>
+  • <strong>Transparency:</strong> Document model limitations and intended use.</p>
+  <p>Integrate these practices early to build trustworthy AI.</p>
+
+  <p class="slbl" style="margin-top:2rem">15 — BEST PRACTICES IN AI DEVELOPMENT</p>
+  <h2>Writing Maintainable AI Code</h2>
+  <div class="div"></div>
+  <p>• Use virtual environments and <code>requirements.txt</code><br>
+  • Version control your data and experiments (DVC, Git‑LFS)<br>
+  • Document data preprocessing steps<br>
+  • Split data into train/validation/test sets<br>
+  • Monitor for data leakage<br>
+  • Log experiments with MLflow or TensorBoard<br>
+  • Write unit tests for data transformations<br>
+  • Use type hints for clarity<br>
+  • Optimize with vectorization (NumPy) and GPU when possible<br>
+  • Keep models simple before scaling complexity</p>
+</section>
+
+<div class="ad-slot" aria-label="Advertisement">
+  <p class="ad-label">Advertisement</p>
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-4575646748966866"
+       data-ad-slot="4226674403"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<section id="faq" aria-labelledby="h-faq" style="max-width:860px">
+  <p class="slbl">FAQ</p>
+  <h2 id="h-faq">Frequently Asked Questions</h2>
+  <div class="div"></div>
+
+  <div class="faq-list">
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+        What is the difference between AI, machine learning, and deep learning?
+        <span class="faq-ico" aria-hidden="true">+</span>
+      </button>
+      <div class="faq-ans" role="region">
+        <p>AI is the broad field of making machines intelligent. Machine learning is a subset of AI where systems learn from data. Deep learning is a subset of machine learning using neural networks with many layers.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+        Which Python libraries are best for AI programming?
+        <span class="faq-ico" aria-hidden="true">+</span>
+      </button>
+      <div class="faq-ans" role="region">
+        <p>Popular libraries include TensorFlow, PyTorch, scikit-learn for machine learning; NLTK, spaCy for NLP; OpenCV for computer vision; and NumPy, Pandas for data manipulation. For reinforcement learning: Gymnasium, Stable-Baselines3. For generative AI: Hugging Face Transformers, LangChain.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+        How do I start learning AI programming?
+        <span class="faq-ico" aria-hidden="true">+</span>
+      </button>
+      <div class="faq-ans" role="region">
+        <p>Start with Python basics, then learn data handling with NumPy/Pandas. Move to classical ML with scikit-learn, then explore deep learning with TensorFlow/PyTorch. Practice with real datasets from Kaggle. For cutting-edge topics, study transformers, RAG, and reinforcement learning.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+        What is reinforcement learning?
+        <span class="faq-ico" aria-hidden="true">+</span>
+      </button>
+      <div class="faq-ans" role="region">
+        <p>Reinforcement learning is an area of machine learning where an agent learns to make decisions by taking actions in an environment to maximize cumulative reward. It's used in robotics, game playing, and autonomous systems.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+        What is RAG (Retrieval-Augmented Generation)?
+        <span class="faq-ico" aria-hidden="true">+</span>
+      </button>
+      <div class="faq-ans" role="region">
+        <p>RAG combines retrieval of relevant documents with a generative model to produce more accurate and context-aware answers. It's widely used in question-answering systems and chatbots.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+        How can I deploy an AI model?
+        <span class="faq-ico" aria-hidden="true">+</span>
+      </button>
+      <div class="faq-ans" role="region">
+        <p>You can deploy models using frameworks like FastAPI, Flask, or TensorFlow Serving. Containerize with Docker and deploy on cloud platforms (AWS, GCP, Azure) or serverless functions.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+        What is an autoencoder used for?
+        <span class="faq-ico" aria-hidden="true">+</span>
+      </button>
+      <div class="faq-ans" role="region">
+        <p>Autoencoders are neural networks used for unsupervised learning, dimensionality reduction, and anomaly detection. They learn to reconstruct input data, and anomalies are detected by high reconstruction error.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="subscribe" aria-labelledby="h-sub">
+  <div class="sub-wrap">
+    <h2 id="h-sub">Stay in the Loop</h2>
+    <div class="div" style="margin-left:auto;margin-right:auto"></div>
+    <p style="text-align:center;max-width:400px;margin:0 auto .5rem">Get new guides, code deep-dives, and AI insights delivered to your inbox.</p>
+    <div class="perks">
+      <span class="perk">No spam</span>
+      <span class="perk">Free forever</span>
+      <span class="perk">Unsubscribe anytime</span>
+    </div>
+    <div class="sub-form">
+      <input type="email" id="subEmail" placeholder="your@email.com" autocomplete="email" aria-label="Email address">
+      <button class="btn-p" onclick="subscribe()" type="button">Subscribe →</button>
+    </div>
+    <p class="snote">Join readers learning Python &amp; AI.</p>
+    <p id="subMsg" class="subMsg" aria-live="polite"></p>
+  </div>
+</section>
+
+<footer role="contentinfo">
+  <div class="fg-grid">
+    <div class="fbrand">
+      <a href="./index.html" class="logo" aria-label="Valleys and Bytes Home">
+        <span aria-hidden="true">🖥️</span>VALLEYS <span class="amp">&amp;</span> <span class="w2">BYTES</span>
+      </a>
+      <p>Deep, accessible programming education covering Python, OOP, AI, and data science. Built with thorough research and logical precision.</p>
+      <div class="ftags" aria-label="Topics">
+        <span class="tag">Python</span>
+        <span class="tag">OOP</span>
+        <span class="tag">AI</span>
+        <span class="tag">Machine Learning</span>
+        <span class="tag">Data Science</span>
+      </div>
+    </div>
+
+    <div class="fcol">
+      <h4>Learn</h4>
+      <div class="fcol-btns">
+        <a href="./index.html"><span class="flink-icon">🌠</span>Python OOP Guide<span class="flink-arrow">→</span></a>
+        <a href="./python-fundamentals.html"><span class="flink-icon">📖</span>Python Fundamentals<span class="flink-arrow">→</span></a>
+        <a href="./oop-cheatsheet.html"><span class="flink-icon">📋</span>Cheatsheets<span class="flink-arrow">→</span></a>
+        <a href="./ai-programs.html"><span class="flink-icon">🤖</span>AI Programs<span class="flink-arrow">→</span></a>
+      </div>
+    </div>
+
+    <div class="fcol">
+      <h4>Legal</h4>
+      <div class="fcol-btns">
+        <a href="./oop-privacy.html"><span class="flink-icon">🔏</span>Privacy Policy<span class="flink-arrow">→</span></a>
+        <a href="./oop-terms.html"><span class="flink-icon">📜</span>Terms of Service<span class="flink-arrow">→</span></a>
+        <a href="./oop-cookie.html"><span class="flink-icon">🍪</span>Cookie Policy<span class="flink-arrow">→</span></a>
+        <a href="./oop-disclaimer.html"><span class="flink-icon">⚠️</span>Disclaimer<span class="flink-arrow">→</span></a>
+      </div>
+      <h4 style="margin-top:1.1rem">Support</h4>
+      <div class="fcol-btns">
+        <a href="./oop-contact.html"><span class="flink-icon">✉️</span>Contact<span class="flink-arrow">→</span></a>
+        <a href="./oop-sitemap.html"><span class="flink-icon">🗺️</span>Sitemap<span class="flink-arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="fbot">
+    <div class="fbot-top">
+      <p class="fcopy">© 2026 VALLEYS &amp; BYTES — All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<button id="btt" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+const prog = document.getElementById('prog');
+const btt  = document.getElementById('btt');
+document.addEventListener('DOMContentLoaded', () => {
+  const prog = document.getElementById('prog');
+  const btt  = document.getElementById('btt');
+  window.addEventListener('scroll', () => {
+    const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100;
+    if (prog) prog.style.width = pct + '%';
+    if (btt) btt.classList.toggle('vis', window.scrollY > 400);
+  }, {passive:true});
+
+  const ham     = document.getElementById('ham');
+  const drawer  = document.getElementById('drawer');
+  const overlay = document.getElementById('overlay');
+  if (ham && drawer && overlay) {
+    const toggle = open => {
+      drawer.classList.toggle('open', open);
+      overlay.classList.toggle('open', open);
+      ham.classList.toggle('open', open);
+      ham.setAttribute('aria-expanded', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    };
+    ham.addEventListener('click', () => toggle(!drawer.classList.contains('open')));
+    overlay.addEventListener('click', () => toggle(false));
+    document.addEventListener('keydown', e => { if(e.key==='Escape') toggle(false); });
+    drawer.querySelectorAll('a').forEach(link => link.addEventListener('click', () => toggle(false)));
+  }
+});
+
+function toggleFaq(btn) {
+  const item   = btn.closest('.faq-item');
+  const ans    = item.querySelector('.faq-ans');
+  const icon   = btn.querySelector('.faq-ico');
+  const isOpen = item.classList.toggle('open');
+  ans.style.maxHeight = isOpen ? ans.scrollHeight + 'px' : '0';
+  icon.textContent    = isOpen ? '−' : '+';
+  btn.setAttribute('aria-expanded', isOpen);
+}
+
+function subscribe() {
+  const email = document.getElementById('subEmail').value.trim();
+  const msg   = document.getElementById('subMsg');
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    msg.textContent = '✗ Please enter a valid email.';
+    msg.style.opacity = '1';
+    setTimeout(() => msg.style.opacity = '0', 4000);
+    return;
+  }
+  msg.textContent = '✓ You\'re subscribed! Welcome aboard.';
+  msg.style.opacity = '1';
+  setTimeout(() => msg.style.opacity = '0', 5000);
+  document.getElementById('subEmail').value = '';
+}
+</script>
+
+<div style="text-align:right; padding:1rem 2.5rem; font-size:0.65rem; color:var(--subtle); border-top:1px solid var(--border); max-width:1100px; margin:0 auto; width:100%;">
+  <span>AI Programs Guide — By: Glenn Junsay Pansensoy | domain: code-sense.pansensoyglenn.workers.dev | © 2026</span>
+</div>
+</body>
+</html>
