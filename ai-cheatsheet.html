@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Cheatsheet</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:       #07090f;
+  --s0:       #0b0e18;
+  --s1:       #0f1320;
+  --s2:       #141928;
+  --s3:       #1a2135;
+  --b0:       #1e3a8a;
+  --b1:       #2563eb;
+  --b2:       #3b82f6;
+  --b3:       #60a5fa;
+  --b4:       #93c5fd;
+  --b5:       #bfdbfe;
+  --ice:      #dbeafe;
+  --teal:     #67e8f9;
+  --gold:     #fbbf24;
+  --rose:     #fb7185;
+  --emerald:  #34d399;
+  --violet:   #a78bfa;
+  --text:     #cbd5e1;
+  --dim:      #64748b;
+  --faint:    #334155;
+  --border:   rgba(37,99,235,0.15);
+  --border-b: rgba(37,99,235,0.35);
+  --kw:   #60a5fa;
+  --fn:   #67e8f9;
+  --str:  #86efac;
+  --num:  #fcd34d;
+  --cls:  #c4b5fd;
+  --cmt:  #334155;
+  --op:   #94a3b8;
+  --dec:  #fbbf24;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'IBM Plex Sans',sans-serif;
+  font-size:13px;
+  line-height:1.5;
+  overflow-x:hidden;
+}
+
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  background:
+    radial-gradient(ellipse 1000px 600px at 20% 0%,rgba(37,99,235,0.07) 0%,transparent 60%),
+    radial-gradient(ellipse 700px 500px at 80% 100%,rgba(30,58,138,0.09) 0%,transparent 60%);
+  pointer-events:none;z-index:0;
+}
+
+.dot-grid{
+  position:fixed;inset:0;
+  background-image:radial-gradient(rgba(37,99,235,0.12) 1px,transparent 1px);
+  background-size:24px 24px;
+  pointer-events:none;z-index:0;
+  opacity:0.6;
+}
+
+header{
+  position:relative;z-index:10;
+  background:var(--s0);
+  border-bottom:1px solid var(--border-b);
+  padding:1.1rem 1.5rem;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.75rem;
+}
+
+.logo{
+  display:flex;align-items:center;gap:0.6rem;
+}
+.logo-mark{
+  width:32px;height:32px;
+  background:linear-gradient(135deg,var(--b1),var(--b3));
+  border-radius:6px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:0.75rem;font-weight:600;
+  color:#fff;
+  flex-shrink:0;
+}
+.logo-text{
+  font-size:1rem;font-weight:700;
+  color:var(--ice);letter-spacing:-0.02em;
+}
+.logo-text span{color:var(--b3);}
+
+.header-meta{
+  display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;
+}
+.pill{
+  font-size:0.62rem;font-weight:600;
+  letter-spacing:0.1em;text-transform:uppercase;
+  padding:0.2rem 0.6rem;border-radius:3px;
+  border:1px solid var(--border-b);
+  color:var(--b4);background:rgba(37,99,235,0.08);
+}
+.pill.gold{border-color:rgba(251,191,36,0.3);color:var(--gold);background:rgba(251,191,36,0.06);}
+.pill.teal{border-color:rgba(103,232,249,0.3);color:var(--teal);background:rgba(103,232,249,0.06);}
+
+.tab-bar{
+  position:sticky;top:0;z-index:20;
+  background:rgba(7,9,15,0.92);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  padding:0 1.5rem;
+  display:flex;gap:0;overflow-x:auto;
+  scrollbar-width:none;
+}
+.tab-bar::-webkit-scrollbar{display:none;}
+.tab{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:0.65rem;font-weight:500;
+  letter-spacing:0.06em;text-transform:uppercase;
+  padding:0.7rem 1rem;
+  border:none;background:none;
+  color:var(--dim);cursor:pointer;
+  border-bottom:2px solid transparent;
+  white-space:nowrap;
+  transition:color 0.15s,border-color 0.15s;
+}
+.tab:hover{color:var(--b4);}
+.tab.active{color:var(--b3);border-bottom-color:var(--b2);}
+
+.page{display:none;}
+.page.active{display:block;}
+
+.grid{
+  position:relative;z-index:10;
+  max-width:1400px;margin:0 auto;
+  padding:1.25rem 1.5rem 3rem;
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
+  gap:1rem;
+  align-items:start;
+}
+.grid.wide{grid-template-columns:repeat(auto-fill,minmax(420px,1fr));}
+.grid.full{grid-template-columns:1fr;}
+
+.card{
+  background:var(--s1);
+  border:1px solid var(--border);
+  border-radius:8px;
+  overflow:hidden;
+}
+.card:hover{border-color:var(--border-b);}
+
+.card-head{
+  padding:0.6rem 0.9rem;
+  background:var(--s2);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;gap:0.5rem;
+}
+.card-head-left{display:flex;align-items:center;gap:0.5rem;}
+.card-icon{font-size:0.95rem;}
+.card-title{
+  font-size:0.72rem;font-weight:600;
+  color:var(--ice);letter-spacing:0.01em;
+}
+.card-tag{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:0.55rem;font-weight:600;
+  letter-spacing:0.12em;text-transform:uppercase;
+  padding:0.15rem 0.45rem;border-radius:2px;
+}
+.ct-blue  {color:var(--b3); background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.25);}
+.ct-teal  {color:var(--teal);background:rgba(103,232,249,0.08);border:1px solid rgba(103,232,249,0.2);}
+.ct-gold  {color:var(--gold);background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.2);}
+.ct-rose  {color:var(--rose);background:rgba(251,113,133,0.08);border:1px solid rgba(251,113,133,0.2);}
+.ct-em    {color:var(--emerald);background:rgba(52,211,153,0.08);border:1px solid rgba(52,211,153,0.2);}
+.ct-violet{color:var(--violet);background:rgba(167,139,250,0.08);border:1px solid rgba(167,139,250,0.2);}
+
+.card-body{padding:0.75rem 0.9rem;}
+
+pre,code{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:0.7rem;line-height:1.65;
+  tab-size:2;
+}
+.code-block{
+  background:rgba(0,0,0,0.35);
+  border:1px solid rgba(37,99,235,0.12);
+  border-radius:5px;
+  padding:0.7rem 0.85rem;
+  overflow-x:auto;
+  margin-bottom:0.5rem;
+}
+.code-block:last-child{margin-bottom:0;}
+
+.kw    {color:var(--kw);}
+.fn    {color:var(--fn);}
+.str   {color:var(--str);}
+.num   {color:var(--num);}
+.cls   {color:var(--cls);}
+.cmt   {color:var(--cmt);font-style:italic;}
+.op    {color:var(--op);}
+.dec   {color:var(--dec);}
+.param {color:#c4b5fd;}
+
+.table-wrap{overflow-x:auto;}
+table{width:100%;border-collapse:collapse;}
+th{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:0.58rem;font-weight:600;
+  letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--dim);
+  padding:0.4rem 0.6rem;
+  border-bottom:1px solid var(--border);
+  text-align:left;
+}
+td{
+  font-size:0.68rem;
+  padding:0.38rem 0.6rem;
+  border-bottom:1px solid rgba(37,99,235,0.07);
+  color:var(--text);
+  vertical-align:top;
+}
+tr:last-child td{border-bottom:none;}
+td:first-child{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:0.65rem;
+  color:var(--b4);
+  white-space:nowrap;
+}
+td code{
+  background:rgba(37,99,235,0.1);
+  border:1px solid rgba(37,99,235,0.2);
+  border-radius:3px;
+  padding:0.05rem 0.35rem;
+  font-size:0.65rem;
+  color:var(--b4);
+}
+
+.kv-list{display:flex;flex-direction:column;gap:0.3rem;}
+.kv{display:flex;align-items:flex-start;gap:0.5rem;}
+.kv-key{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:0.65rem;font-weight:500;
+  color:var(--b3);white-space:nowrap;
+  min-width:90px;padding-top:0.05rem;
+}
+.kv-val{font-size:0.68rem;color:var(--dim);}
+
+.chip-row{display:flex;flex-wrap:wrap;gap:0.35rem;margin-bottom:0.5rem;}
+.chip{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:0.62rem;font-weight:500;
+  padding:0.2rem 0.55rem;border-radius:3px;
+  background:rgba(37,99,235,0.1);
+  border:1px solid rgba(37,99,235,0.22);
+  color:var(--b4);
+}
+.chip.teal  {background:rgba(103,232,249,0.08);border-color:rgba(103,232,249,0.2);color:var(--teal);}
+.chip.gold  {background:rgba(251,191,36,0.08); border-color:rgba(251,191,36,0.2); color:var(--gold);}
+.chip.rose  {background:rgba(251,113,133,0.08);border-color:rgba(251,113,133,0.2);color:var(--rose);}
+.chip.em    {background:rgba(52,211,153,0.08); border-color:rgba(52,211,153,0.2); color:var(--emerald);}
+.chip.violet{background:rgba(167,139,250,0.08);border-color:rgba(167,139,250,0.2);color:var(--violet);}
+
+.note{
+  font-size:0.65rem;color:var(--dim);
+  background:rgba(37,99,235,0.05);
+  border-left:2px solid var(--b1);
+  padding:0.4rem 0.6rem;
+  border-radius:0 4px 4px 0;
+  margin-top:0.5rem;
+}
+.note b{color:var(--b4);}
+
+.formula{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:0.72rem;
+  background:rgba(0,0,0,0.4);
+  border:1px solid rgba(103,232,249,0.15);
+  border-radius:5px;
+  padding:0.55rem 0.75rem;
+  color:var(--teal);
+  margin-bottom:0.4rem;
+  letter-spacing:0.01em;
+}
+.formula:last-child{margin-bottom:0;}
+.formula span{color:var(--dim);}
+.formula .fv{color:var(--b4);}
+
+.flow{display:flex;align-items:center;gap:0.35rem;flex-wrap:wrap;padding:0.35rem 0;}
+.flow-step{
+  font-size:0.65rem;font-weight:600;
+  padding:0.25rem 0.6rem;border-radius:4px;
+  background:var(--s3);border:1px solid var(--border-b);
+  color:var(--ice);
+}
+.arrow{color:var(--b2);font-size:0.7rem;}
+
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;}
+
+.section-label{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:0.6rem;font-weight:600;
+  letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--faint);
+  padding:0.5rem 1.5rem 0.25rem;
+  position:relative;z-index:10;
+  grid-column:1/-1;
+}
+
+footer{
+  position:relative;z-index:10;
+  text-align:center;
+  padding:1.5rem;
+  border-top:1px solid var(--border);
+  font-family:'IBM Plex Mono',monospace;
+  font-size:0.62rem;
+  color:var(--faint);
+  letter-spacing:0.05em;
+}
+
+@media(max-width:640px){
+  .grid{grid-template-columns:1fr;padding:1rem;}
+  .two-col{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<div class="dot-grid"></div>
+
+<header>
+  <div class="logo">
+    <div class="logo-mark">AI</div>
+    <div class="logo-text">AI <span>Cheatsheet</span></div>
+  </div>
+  <div class="header-meta">
+    <span class="pill">Python 3.11+</span>
+    <span class="pill teal">Deep Learning</span>
+    <span class="pill gold">LLMs · Agents · CV · RL</span>
+  </div>
+</header>
+
+<div class="tab-bar">
+  <button class="tab active" onclick="showTab('ml')">ML Foundations</button>
+  <button class="tab" onclick="showTab('dl')">Deep Learning</button>
+  <button class="tab" onclick="showTab('nlp')">NLP / LLMs</button>
+  <button class="tab" onclick="showTab('cv')">Computer Vision</button>
+  <button class="tab" onclick="showTab('rl')">Reinforcement Learning</button>
+  <button class="tab" onclick="showTab('math')">Math &amp; Theory</button>
+  <button class="tab" onclick="showTab('tools')">Tools &amp; Libs</button>
+</div>
+
+<div id="tab-ml" class="page active">
+<div class="grid">
+
+  <div class="section-label">Supervised Learning</div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-left"><span class="card-icon">📊</span><span class="card-title">Core sklearn Pipeline</span></div>
+      <span class="card-tag ct-blue">sklearn</span>
+    </div>
+    <div class="card-body">
+      <div class="code-block"><pre><span class="kw">from</span> sklearn.pipeline <span class="kw">import</span> Pipeline
+<span class="kw">from</span> sklearn.preprocessing <span class="kw">import</span> StandardScaler
+<span class="kw">from</span> sklearn.ensemble <span class="kw">import</span> <span class="cls">GradientBoostingClassifier</span>
+
+pipe = Pipeline([
+    (<span class="str">"scaler"</span>, StandardScaler()),
+    (<span class="str">"clf"</span>,    <span class="cls">GradientBoostingClassifier</span>(
+                  n_estimators=<span class="num">200</span>, learning_rate=<span class="num">0.05</span>
+               ))
+])
+pipe.fit(X_train, y_train)
+score = pipe.score(X_test, y_test)</pre></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-left"><span class="card-icon">🔍</span><span class="card-title">Cross-Validation &amp; Grid Search</span></div>
+      <span class="card-tag ct-blue">sklearn</span>
+    </div>
+    <div class="card-body">
+      <div class="code-block"><pre><span class="kw">from</span> sklearn.model_selection <span class="kw">import</span> GridSearchCV
+
+params = {
+    <span class="str">"clf__n_estimators"</span>:   [<span class="num">100</span>, <span class="num">200</span>, <span class="num">300</span>],
+    <span class="str">"clf__learning_rate"</span>: [<span class="num">0.01</span>, <span class="num">0.05</span>, <span class="num">0.1</span>],
+    <span class="str">"clf__max_depth"</span>:      [<span class="num">3</span>, <span class="num">5</span>, <span class="num">7</span>],
+}
+gs = GridSearchCV(pipe, params, cv=<span class="num">5</span>, scoring=<span class="str">"f1_macro"</span>, n_jobs=<span class="num">-1</span>)
+gs.fit(X_train, y_train)
+<span class="bi">print</span>(gs.best_params_, gs.best_score_)</pre></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-left"><span class="card-icon">📈</span><span class="card-title">Evaluation Metrics</span></div>
+      <span class="card-tag ct-teal">metrics</span>
+    </div>
+    <div class="card-body">
+      <div class="table-wrap"><table>
+        <tr><th>Metric</th><th>Function</th><th>Use When</th></tr>
+        <tr><td>Accuracy</td><td><code>accuracy_score</code></td><td>Balanced classes</td></tr>
+        <tr><td>F1 Score</td><td><code>f1_score</code></td><td>Imbalanced classes</td></tr>
+        <tr><td>ROC-AUC</td><td><code>roc_auc_score</code></td><td>Ranking quality</td></tr>
+        <tr><td>MSE/RMSE</td><td><code>mean_squared_error</code></td><td>Regression</td></tr>
+        <tr><td>R²</td><td><code>r2_score</code></td><td>Regression fit</td></tr>
+        <tr><td>Log Loss</td><td><code>log_loss</code></td><td>Probability output</td></tr>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-left"><span class="card-icon">🌲</span><span class="card-title">Algorithm Quick Reference</span></div>
+      <span class="card-tag ct-gold">algos</span>
+    </div>
+    <div class="card-body">
+      <div class="table-wrap"><table>
+        <tr><th>Algorithm</th><th>Best For</th><th>Key Params</th></tr>
+        <tr><td>LinearRegression</td><td>Continuous, linear</td><td>fit_intercept</td></tr>
+        <tr><td>LogisticRegression</td><td>Binary/multi clf</td><td>C, solver</td></tr>
+        <tr><td>RandomForest</td><td>Tabular, robust</td><td>n_estimators, max_depth</td></tr>
+        <tr><td>XGBoost</td><td>Kaggle, tabular</td><td>lr, subsample, colsample</td></tr>
+        <tr><td>SVM</td><td>High-dim, small data</td><td>C, kernel, gamma</td></tr>
+        <tr><td>KNN</td><td>Simple baseline</td><td>n_neighbors, metric</td></tr>
+        <tr><td>K-Means</td><td>Clustering</td><td>n_clusters, init</td></tr>
+        <tr><td>DBSCAN</td><td>Density clustering</td><td>eps, min_samples</td></tr>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-left"><span class="card-icon">⚖️</span><span class="card-title">Bias-Variance Tradeoff</span></div>
+      <span class="card-tag ct-rose">theory</span>
+    </div>
+    <div class="card-body">
+      <div class="formula">Error = Bias² <span>+</span> <fv class="fv">Variance</fv> <span>+</span> Irreducible Noise</div>
+      <div class="kv-list">
+        <div class="kv"><span class="kv-key">High Bias</span><span class="kv-val">Underfitting — model too simple. Fix: more features, complex model</span></div>
+        <div class="kv"><span class="kv-key">High Variance</span><span class="kv-val">Overfitting — memorizing noise. Fix: regularization, more data, pruning</span></div>
+        <div class="kv"><span class="kv-key">Regularization</span><span class="kv-val">L1 (Lasso) → sparsity. L2 (Ridge) → shrinkage. ElasticNet → both</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-left"><span class="card-icon">🧹</span><span class="card-title">Feature Engineering</span></div>
+      <span class="card-tag ct-em">features</span>
+    </div>
+    <div class="card-body">
+      <div class="code-block"><pre><span class="kw">import</span> pandas <span class="kw">as</span> pd
+<span class="kw">from</span> sklearn.preprocessing <span class="kw">import</span> (
+    StandardScaler, MinMaxScaler,
+    LabelEncoder, OneHotEncoder
+)
+
+df[<span class="str">"log_feat"</span>] = np.log1p(df[<span class="str">"skewed_col"</span>])
+df[<span class="str">"interact"</span>] = df[<span class="str">"a"</span>] <span class="op">*</span> df[<span class="str">"b"</span>]
+df[<span class="str">"binned"</span>]  = pd.cut(df[<span class="str">"age"</span>], bins=<span class="num">5</span>, labels=<span class="kw">False</span>)
+df = pd.get_dummies(df, columns=[<span class="str">"category"</span>], drop_first=<span class="kw">True</span>)</pre></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-left"><span class="card-icon">🔀</span><span class="card-title">Train/Val/Test Split Strategy</span></div>
+      <span class="card-tag ct-teal">data</span>
+    </div>
+    <div class="card-body">
+      <div class="code-block"><pre><span class="kw">from</span> sklearn.model_selection <span class="kw">import</span> (
+    train_test_split, StratifiedKFold, TimeSeriesSplit
+)
+X_tv, X_test, y_tv, y_test = train_test_split(
+    X, y, test_size=<span class="num">0.15</span>, stratify=y, random_state=<span class="num">42</span>
+)
+X_train, X_val, y_train, y_val = train_test_split(
+    X_tv, y_tv, test_size=<span class="num">0.18</span>, stratify=y_tv
+)</pre></div>
+      <div class="note">For time-series use <b>TimeSeriesSplit</b>. For imbalanced use <b>StratifiedKFold</b>.</div>
+    </div>
+  </div>
+
+  <div class="section-label">Unsupervised &amp; Dimensionality Reduction</div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-left"><span class="card-icon">🗜️</span><span class="card-title">PCA &amp; t-SNE</span></div>
+      <span class="card-tag ct-violet">dim-red</span>
+    </div>
+    <div class="card-body">
+      <div class="code-block"><pre><span class="kw">from</span> sklearn.decomposition <span class="kw">import</span> PCA
+<span class="kw">from</span> sklearn.manifold <span class="kw">import</span> TSNE
+
+pca = PCA(n_components=<span class="num">0.95</span>)
+X_pca = pca.fit_transform(X_scaled)
+<span class="bi">print</span>(<span class="str">f"Dims: {X_pca.shape[1]}, var: {pca.explained_variance_ratio_.sum():.2%}"</span>)
+
+tsne = TSNE(n_components=<span class="num">2</span>, perplexity=<span class="num">30</span>, random_state=<span class="num">42</span>)
+X_2d = tsne.fit_transform(X_pca)</pre></div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<div id="tab-dl" class="page">
+<div class="grid">
+
+  <div class="section-label">PyTorch Core Patterns</div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-left"><span class="card-icon">🔥</span><span class="card-title">Model Anatomy</span></div>
+      <span class="card-tag ct-blue">torch</span>
+    </div>
+    <div class="card-body">
+      <div class="code-block"><pre><span class="kw">import</span> torch.nn <span class="kw">as</span> nn
+
+<span class="kw">class</span> <span class="cls">Net</span>(nn.Module):
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="param">self</span>):
+        <span class="bi">super</span>().__init__()
+        <span class="param">self</span>.layers = nn.Sequential(
+            nn.Linear(<span class="num">128</span>, <span class="num">256</span>),
+            nn.LayerNorm(<span class="num">256</span>),
+            nn.GELU(),
+            nn.Dropout(<span class="num">0.1</span>),
+            nn.Linear(<span class="num">256</span>, <span class="num">10</span>)
+        )
+    <span class="kw">def</span> <span class="fn">forward</span>(<span class="param">self</span>, x):
+        <span class="kw">return</span> <span class="param">self</span>.layers(x)</pre></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-left"><span class="card-icon">🔄</span><span class="card-title">Training Loop Template</span></div>
+      <span class="card-tag ct-blue">torch</span>
+    </div>
+    <div class="card-body">
+      <div class="code-block"><pre><span class="kw">for</span> epoch <span class="kw">in</span> <span class="bi">range</span>(epochs):
+    model.train()
+    <span class="kw">for</span> xb, yb <span class="kw">in</span> train_loader:
+        xb, yb = xb.to(device), yb.to(device)
+        pred = model(xb)
+        loss = criterion(pred, yb)
+        opt.zero_grad()
+        loss.backward()
+        nn.utils.clip_grad_norm_(model.parameters(), <span class="num">1.0</span>)
+        opt.step()
+        scheduler.step()
+
+    model.eval()
+    <span class="kw">with</span> torch.no_grad():
+        val_loss = <span class="bi">sum</span>(criterion(model(xb.to(device)), yb.to(device))
+                       <span class="kw">for</span> xb, yb <span class="kw">in</span> val_loader)</pre></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-left"><span class="card-icon">⚡</span><span class="card-title">Optimizers &amp; Schedulers</span></div>
+      <span class="card-tag ct-gold">optim</span>
+    </div>
+    <div class="card-body">
+      <div class="table-wrap"><table>
+        <tr><th>Optimizer</th><th>Best For</th></tr>
+        <tr><td>Adam</td><td>General default, fast convergence</td></tr>
+        <tr><td>AdamW</td><td>Transformers, proper weight decay</td></tr>
+        <tr><td>SGD + momentum</td><td>Vision, fine-tuning, sharp minima</td></tr>
+        <tr><td>Lion</td><td>Large models, memory efficient</td></tr>
+      </table></div>
+      <div class="code-block" style="margin-top:0.5rem"><pre>opt = torch.optim.AdamW(model.parameters(), lr=<span class="num">3e-4</span>, weight_decay=<span class="num">0.01</span>)
+sched = torch.optim.lr_scheduler.CosineAnnealingLR(opt, T_max=epochs)</pre></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-left"><span class="card-icon">📉</span><span class="card-title">Loss Functions</span></div>
+      <span class="card-tag ct-rose">loss</span>
+    </div>
+    <div class="card-body">
+      <div class="table-wrap"><table>
+        <tr><th>Loss</th><th>Task</th></tr>
+        <tr><td>CrossEntropyLoss</td><td>Multi-class classification</td></tr>
+        <tr><td>BCEWithLogitsLoss</td><td>Binary / multi-label</td></tr>
+        <tr><td>MSELoss</td><td>Regression</td></tr>
+        <tr><td>HuberLoss</td><td>Robust regression</td></tr>
+        <tr><td>NLLLoss</td><td>Log-prob outputs</td></tr>
+        <tr><td>CTCLoss</td><td>Sequence-to-sequence (ASR)</td></tr>
+        <tr><td>TripletMarginLoss</td><td>Metric learning</td></tr>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-left"><span class="card-icon">🏗️</span><span class="card-title">Activation Functions</span></div>
+      <span class="card-tag ct-teal">activations</span>
+    </div>
+    <div class="card-body">
+      <div class="table-wrap"><table>
+        <tr><th>Function</th><th>Formula</th><th>Use</th></tr>
+        <tr><td>ReLU</td><td>max(0,x)</td><td>Hidden layers (default)</td></tr>
+        <tr><td>GELU</td><td>x·Φ(x)</td><td>Transformers, BERT</td></tr>
+        <tr><td>SiLU/Swish</td><td>x·σ(x)</td><td>LLaMA, modern nets</td></tr>
+        <tr><td>Sigmoid</td><td>1/(1+e⁻ˣ)</td><td>Binary output</td></tr>
+        <tr><td>Tanh</td><td>(eˣ−e⁻ˣ)/(eˣ+e⁻ˣ)</td><td>RNNs, normalised</td></tr>
+        <tr><td>Softmax</td><td>eˣᵢ/Σeˣⱼ</td><td>Final classification</td></tr>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-left"><span class="card-icon">🧱</span><span class="card-title">Normalization Layers</span></div>
+      <span class="card-tag ct-em">norm</span>
+    </div>
+    <div class="card-body">
+      <div class="kv-list">
+        <div class="kv"><span class="kv-key">BatchNorm</span><span class="kv-val">Normalize over batch dim. Great for CNNs. Batch-size dependent.</span></div>
+        <div class="kv"><span class="kv-key">LayerNorm</span><span class="kv-val">Normalize over feature dim. Standard for Transformers & RNNs.</span></div>
+        <div class="kv"><span class="kv-key">GroupNorm</span><span class="kv-val">Normalize over groups. Works with small batches. Good for CV.</span></div>
+        <div class="kv"><span class="kv-key">RMSNorm</span><span class="kv-val">Simplified LayerNorm (no mean shift). Used in LLaMA, Mistral.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-left"><span class="card-icon">💾</span><span class="card-title">Save / Load / Checkpoint</span></div>
+      <span class="card-tag ct-blue">torch</span>
+    </div>
+    <div class="card-body">
+      <div class="code-block"><pre>torch.save({
+    <span class="str">"epoch"</span>:      epoch,
+    <span class="str">"model"</span>:      model.state_dict(),
+    <span class="str">"optimizer"</span>:  opt.state_dict(),
+    <span class="str">"scheduler"</span>: sched.state_dict(),
+    <span class="str">"loss"</span>:       loss.item(),
+}, <span class="str">"checkpoint.pt"</span>)
+
+ckpt = torch.load(<span class="str">"checkpoint.pt"</span>, map_location=device)
+model.load_state_dict(ckpt[<span class="str">"model"</span>])</pre></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-left"><span class="card-icon">🎛️</span><span class="card-title">Regularization Techniques</span></div>
+      <span class="card-tag ct-violet">reg</span>
+    </div>
+    <div class="card-body">
+      <div class="chip-row">
+        <span class="chip">Dropout</span><span class="chip teal">Weight Decay</span><span class="chip gold">Label Smoothing</span>
+        <span class="chip violet">Grad Clipping</span><span class="chip em">Early Stopping</span><span class="chip rose">Data Augment</span>
+        <span class="chip">Mixup</span><span class="chip teal">CutMix</span>
+      </div>
+      <div class="code-block"><pre>nn.Dropout(<span class="num">0.3</span>)
+nn.Dropout2d(<span class="num">0.2</span>)
+nn.utils.clip_grad_norm_(model.parameters(), max_norm=<span class="num">1.0</span>)
+criterion = nn.CrossEntropyLoss(label_smoothing=<span class="num">0.1</span>)</pre></div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<div id="tab-nlp" class="page">
+<div class="grid">
+
+  <div class="section-label">Transformers &amp; Language Models</div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-left"><span class="card-icon">🔤</span><span class="card-title">Self-Attention Mechanism</span></div>
+      <span class="card-tag ct-rose">theory</span>
+    </div>
+    <div class="card-body">
+      <div class="formula">Attention(Q,K,V) = softmax( QKᵀ / √<span class="fv">d_k</span> ) · V</div>
+      <div class="code-block"><pre><span class="kw">import</span> torch, torch.nn.functional <span class="kw">as</span> F
+
+<span class="kw">def</span> <span class="fn">scaled_dot_attention</span>(Q, K, V, mask=<span class="kw">None</span>):
+    d_k = Q.size(-<span class="num">1</span>)
+    scores = (Q @ K.transpose(-<span class="num">2</span>, -<span class="num">1</span>)) / d_k ** <span class="num">0.5</span>
+    <span class="kw">if</span> mask <span class="kw">is not None</span>:
+        scores = scores.masked_fill(mask == <span class="num">0</span>, <span class="num">-1e9</span>)
+    attn = F.softmax(scores, dim=-<span class="num">1</span>)
+    <span class="kw">return</span> attn @ V, attn</pre></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-left"><span class="card-icon">🤗</span><span class="card-title">HuggingFace Pipelines</span></div>
+      <span class="card-tag ct-blue">transformers</span>
+    </div>
+    <div class="card-body">
+      <div class="code-block"><pre><span class="kw">from</span> transformers <span class="kw">import</span> pipeline
+
+<span class="kw">tasks</span> = {
+  <span class="str">"sentiment"</span>:    pipeline(<span class="str">"sentiment-analysis"</span>),
+  <span class="str">"ner"</span>:           pipeline(<span class="str">"ner"</span>, aggregation_strategy=<span class="str">"simple"</span>),
+  <span class="str">"summarize"</span>:     pipeline(<span class="str">"summarization"</span>, model=<span class="str">"facebook/bart-large-cnn"</span>),
+  <span class="str">"qa"</span>:            pipeline(<span class="str">"question-answering"</span>),
+  <span class="str">"translate"</span>:     pipeline(<span class="str">"translation_en_to_fr"</span>),
+  <span class="str">"zero-shot"</span>:     pipeline(<span class="str">"zero-shot-classification"</span>),
+  <span class="str">"fill-mask"</span>:     pipeline(<span class="str">"fill-mask"</span>, model=<span class="str">"bert-base-uncased"</span>),
+  <span class="str">"text-gen"</span>:      pipeline(<span class="str">"text-generation"</span>, model=<span class="str">"gpt2"</span>),
+}</pre></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-left"><span class="card-icon">⚙️</span><span class="card-title">Fine-Tuning with Trainer API</span></div>
+      <span class="card-tag ct-blue">transformers</span>
+    </div>
+    <div class="card-body">
+      <div class="code-block"><pre><span class="kw">from</span> transformers <span class="kw">import</span> (
+    AutoModelForSequenceClassification,
+    AutoTokenizer, Trainer, TrainingArguments
+)
+model = AutoModelForSequenceClassification.from_pretrained(
+    <span class="str">"bert-base-uncased"</span>, num_labels=<span class="num">3</span>
+)
+args = TrainingArguments(
+    output_dir=<span class="str">"./out"</span>, num_train_epochs=<span class="num">3</span>,
+    per_device_train_batch_size=<span class="num">16</span>,
+    learning_rate=<span class="num">2e-5</span>, weight_decay=<span class="num">0.01</span>,
+    evaluation_strategy=<span class="str">"epoch"</span>, load_best_model_at_end=<span class="kw">True</span>
+)
+trainer = Trainer(model=model, args=args,
+                  train_dataset=train_ds, eval_dataset=val_ds)
+trainer.train()</pre></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-left"><span class="card-icon">🧩</span><span class="card-title">LoRA / PEFT Fine-Tuning</span></div>
+      <span class="card-tag ct-violet">PEFT</span>
+    </div>
+    <div class="card-body">
+      <div class="code-block"><pre><span class="kw">from</span> peft <span class="kw">import</span> get_peft_model, LoraConfig, TaskType
+
+config = LoraConfig(
+    task_type=TaskType.CAUSAL_LM,
+    r=<span class="num">16</span>, lora_alpha=<span class="num">32</span>,
+    target_modules=[<span class="str">"q_proj"</span>, <span class="str">"v_proj"</span>],
+    lora_dropout=<span class="num">0.05</span>,
+    bias=<span class="str">"none"</span>
+)
+model = get_peft_model(base_model, config)
+model.print_trainable_parameters()
+<span class="cmt"># trainable: 0.1% of total params</span></pre></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-left"><span class="card-icon">🔗</span><span class="card-title">RAG — Retrieval Augmented Generation</span></div>
+      <span class="card-tag ct-teal">RAG</span>
+    </div>
+    <div class="card-body">
+      <div class="flow">
+        <span class="flow-step">Query</span><span class="arrow">→</span>
+        <span class="flow-step">Embed</span><span class="arrow">→</span>
+        <span class="flow-step">Vector Search</span><span class="arrow">→</span>
+        <span class="flow-step">Top-K Docs</span><span class="arrow">→</span>
+        <span class="flow-step">LLM + Context</span><span class="arrow">→</span>
+        <span class="flow-step">Answer</span>
+      </div>
+      <div class="code-block"><pre><span class="kw">from</span> langchain_community.vectorstores <span class="kw">import</span> FAISS
+<span class="kw">from</span> langchain_openai <span class="kw">import</span> OpenAIEmbeddings, ChatOpenAI
+<span class="kw">from</span> langchain.chains <span class="kw">import</span> RetrievalQA
+
+embeddings = OpenAIEmbeddings()
+db = FAISS.from_documents(docs, embeddings)
+retriever = db.as_retriever(search_kwargs={<span class="str">"k"</span>: <span class="num">4</span>})
+chain = RetrievalQA.from_chain_type(
+    llm=ChatOpenAI(model=<span class="str">"gpt-4o-mini"</span>),
+    retriever=retriever
+)
+result = chain.invoke({<span class="str">"query"</span>: question})</pre></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-left"><span class="card-icon">💬</span><span class="card-title">Prompt Engineering Patterns</span></div>
+      <span class="card-tag ct-gold">prompts</span>
+    </div>
+    <div class="card-body">
+      <div class="table-wrap"><table>
+        <tr><th>Technique</th><th>When to Use</th></tr>
+        <tr><td>Zero-shot</td><td>Simple tasks, capable models</td></tr>
+        <tr><td>Few-shot</td><td>Format/style matters, examples help</td></tr>
+        <tr><td>Chain-of-Thought</td><td>Reasoning, math, multi-step logic</td></tr>
+        <tr><td>Tree-of-Thought</td><td>Complex decisions, branching</td></tr>
+        <tr><td>ReAct</td><td>Tool use, agents, search</td></tr>
+        <tr><td>Self-Consistency</td><td>Reduce variance, vote on answers</td></tr>
+        <tr><td>Role Prompting</td><td>Persona, domain expertise</td></tr>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-left"><span class="card-icon">🌡️</span><span class="card-title">LLM Sampling Parameters</span></div>
+      <span class="card-tag ct-blue">LLM</span>
+    </div>
+    <div class="card-body">
+      <div class="table-wrap"><table>
+        <tr><th>Param</th><th>Range</th><th>Effect</th></tr>
+        <tr><td>temperature</td><td>0–2</td><td>0=deterministic, high=creative</td></tr>
+        <tr><td>top_p</td><td>0–1</td><td>Nucleus sampling mass</td></tr>
+        <tr><td>top_k</td><td>1–∞</td><td>Restrict to top k tokens</td></tr>
+        <tr><td>frequency_penalty</td><td>-2–2</td><td>Reduce repetition</td></tr>
+        <tr><td>presence_penalty</td><td>-2–2</td><td>Encourage new topics</td></tr>
+        <tr><td>max_tokens</td><td>1–ctx</td><td>Output length cap</td></tr>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-left"><span class="card-icon">📐</span><span class="card-title">Tokenization Quick Facts</span></div>
+      <span class="card-tag ct-teal">tokens</span>
+    </div>
+    <div class="card-body">
+      <div class="kv-list">
+        <div class="kv"><span class="kv-key">GPT-4o</span><span class="kv-val">~4 chars ≈ 1 token · 128K context window</span></div>
+        <div class="kv"><span class="kv-key">Claude 3.5</span><span class="kv-val">~3.5 chars ≈ 1 token · 200K context window</span></div>
+        <div class="kv"><span class="kv-key">Gemini 1.5</span><span class="kv-val">1M context · video, audio, code, images</span></div>
+        <div class="kv"><span class="kv-key">BPE</span><span class="kv-val">Byte-Pair Encoding — used by GPT, Llama, Mistral</span></div>
+        <div class="kv"><span class="kv-key">WordPiece</span><span class="kv-val">Used by BERT, DistilBERT</span></div>
+        <div class="kv"><span class="kv-key">SentencePiece</span><span class="kv-val">Used by T5, Gemma, multilingual models</span></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<div id="tab-cv" class="page">
+<div class="grid">
+
+  <div class="section-label">Convolutional Networks</div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-left"><span class="card-icon">🔲</span><span class="card-title">Conv Layer Output Size</span></div>
+      <span class="card-tag ct-rose">math</span>
+    </div>
+    <div class="card-body">
+      <div class="formula">W_out = (<span class="fv">W_in</span> − <span class="fv">K</span> + 2<span class="fv">P</span>) / <span class="fv">S</span> + 1</div>
+      <div class="kv-list">
+        <div class="kv"><span class="kv-key">W_in</span><span class="kv-val">Input width/height</span></div>
+        <div class="kv"><span class="kv-key">K</span><span class="kv-val">Kernel size</span></div>
+        <div class="kv"><span class="kv-key">P</span><span class="kv-val">Padding (same padding: P = (K-1)/2)</span></div>
+        <div class="kv"><span class="kv-key">S</span><span class="kv-val">Stride</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-left"><span class="card-icon">🏛️</span><span class="card-title">CNN Architecture Families</span></div>
+      <span class="card-tag ct-gold">architectures</span>
+    </div>
+    <div class="card-body">
+      <div class="table-wrap"><table>
+        <tr><th>Model</th><th>Year</th><th>Key Innovation</th></tr>
+        <tr><td>AlexNet</td><td>2012</td><td>Deep CNN on GPU, ReLU, Dropout</td></tr>
+        <tr><td>VGG-16/19</td><td>2014</td><td>Uniform 3×3 convs, depth</td></tr>
+        <tr><td>ResNet-50</td><td>2015</td><td>Residual skip connections</td></tr>
+        <tr><td>EfficientNet</td><td>2019</td><td>Compound scaling (W×D×R)</td></tr>
+        <tr><td>ViT</td><td>2020</td><td>Patch-based transformer</td></tr>
+        <tr><td>ConvNeXt</td><td>2022</td><td>CNN with transformer design</td></tr>
+        <tr><td>SAM 2</td><td>2024</td><td>Segment anything, video</td></tr>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-left"><span class="card-icon">🖼️</span><span class="card-title">torchvision Transforms</span></div>
+      <span class="card-tag ct-blue">torchvision</span>
+    </div>
+    <div class="card-body">
+      <div class="code-block"><pre><span class="kw">from</span> torchvision <span class="kw">import</span> transforms <span class="kw">as</span> T
+
+train_tfm = T.Compose([
+    T.RandomResizedCrop(<span class="num">224</span>),
+    T.RandomHorizontalFlip(),
+    T.ColorJitter(<span class="num">0.4</span>, <span class="num">0.4</span>, <span class="num">0.4</span>, <span class="num">0.1</span>),
+    T.RandomGrayscale(p=<span class="num">0.2</span>),
+    T.ToTensor(),
+    T.Normalize([<span class="num">0.485</span>,<span class="num">0.456</span>,<span class="num">0.406</span>],
+                [<span class="num">0.229</span>,<span class="num">0.224</span>,<span class="num">0.225</span>]),
+])
+val_tfm = T.Compose([
+    T.Resize(<span class="num">256</span>), T.CenterCrop(<span class="num">224</span>),
+    T.ToTensor(),
+    T.Normalize([<span class="num">0.485</span>,<span class="num">0.456</span>,<span class="num">0.406</span>],
+                [<span class="num">0.229</span>,<span class="num">0.224</span>,<span class="num">0.225</span>])
+])</pre></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-left"><span class="card-icon">🎯</span><span class="card-title">Object Detection Metrics</span></div>
+      <span class="card-tag ct-teal">metrics</span>
+    </div>
+    <div class="card-body">
+      <div class="formula">IoU = <span>Area(A∩B)</span> / <span class="fv">Area(A∪B)</span></div>
+      <div class="formula">mAP@0.5 = <span>mean AP across classes at IoU 0.5</span></div>
+      <div class="kv-list" style="margin-top:0.5rem">
+        <div class="kv"><span class="kv-key">TP</span><span class="kv-val">IoU ≥ threshold (typically 0.5)</span></div>
+        <div class="kv"><span class="kv-key">FP</span><span class="kv-val">Prediction with IoU &lt; threshold</span></div>
+        <div class="kv"><span class="kv-key">FN</span><span class="kv-val">Ground truth not detected</span></div>
+        <div class="kv"><span class="kv-key">NMS</span><span class="kv-val">Non-max suppression removes duplicate boxes</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-left"><span class="card-icon">🔄</span><span class="card-title">Transfer Learning</span></div>
+      <span class="card-tag ct-em">transfer</span>
+    </div>
+    <div class="card-body">
+      <div class="code-block"><pre><span class="kw">from</span> torchvision.models <span class="kw">import</span> resnet50, ResNet50_Weights
+
+model = resnet50(weights=ResNet50_Weights.IMAGENET1K_V2)
+
+<span class="kw">for</span> param <span class="kw">in</span> model.parameters():
+    param.requires_grad = <span class="kw">False</span>
+
+model.fc = nn.Sequential(
+    nn.Linear(model.fc.in_features, <span class="num">256</span>),
+    nn.ReLU(), nn.Dropout(<span class="num">0.3</span>),
+    nn.Linear(<span class="num">256</span>, num_classes)
+)
+opt = torch.optim.Adam(model.fc.parameters(), lr=<span class="num">1e-3</span>)</pre></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-left"><span class="card-icon">🌐</span><span class="card-title">Segmentation Methods</span></div>
+      <span class="card-tag ct-violet">segmentation</span>
+    </div>
+    <div class="card-body">
+      <div class="table-wrap"><table>
+        <tr><th>Method</th><th>Type</th><th>Model</th></tr>
+        <tr><td>Semantic</td><td>Class per pixel</td><td>DeepLabV3, SegFormer</td></tr>
+        <tr><td>Instance</td><td>Individual objects</td><td>Mask R-CNN, YOLACT</td></tr>
+        <tr><td>Panoptic</td><td>Semantic+Instance</td><td>Panoptic-FPN, DETR</td></tr>
+        <tr><td>Promptable</td><td>Any object</td><td>SAM, SAM 2</td></tr>
+      </table></div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<div id="tab-rl" class="page">
+<div class="grid">
+
+  <div class="section-label">Core RL Concepts</div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-left"><span class="card-icon">🎯</span><span class="card-title">Bellman Equations</span></div>
+      <span class="card-tag ct-rose">theory</span>
+    </div>
+    <div class="card-body">
+      <div class="formula">V(s) = <span>max_a</span> Σ P(s'|s,a) [R(s,a,s') + <span class="fv">γ</span>·V(s')]</div>
+      <div class="formula">Q(s,a) = R + <span class="fv">γ</span>·max_a' Q(s',a') <span>[Bellman Optimality]</span></div>
+      <div class="formula">TD Error = R + <span class="fv">γ</span>·V(s') − V(s)</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-left"><span class="card-icon">🗺️</span><span class="card-title">RL Algorithm Map</span></div>
+      <span class="card-tag ct-gold">algos</span>
+    </div>
+    <div class="card-body">
+      <div class="table-wrap"><table>
+        <tr><th>Algorithm</th><th>Type</th><th>Best For</th></tr>
+        <tr><td>Q-Learning</td><td>Model-free, off-policy</td><td>Discrete tabular</td></tr>
+        <tr><td>DQN</td><td>Deep, off-policy</td><td>Discrete, Atari</td></tr>
+        <tr><td>DDQN</td><td>Deep, off-policy</td><td>Overestimation fix</td></tr>
+        <tr><td>A3C/A2C</td><td>Policy gradient</td><td>Parallel envs</td></tr>
+        <tr><td>PPO</td><td>On-policy, clip</td><td>Continuous actions</td></tr>
+        <tr><td>SAC</td><td>Off-policy, entropy</td><td>Continuous, robust</td></tr>
+        <tr><td>TD3</td><td>Deterministic PG</td><td>Robotics, continuous</td></tr>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-left"><span class="card-icon">🏋️</span><span class="card-title">Gymnasium Environment Loop</span></div>
+      <span class="card-tag ct-blue">gymnasium</span>
+    </div>
+    <div class="card-body">
+      <div class="code-block"><pre><span class="kw">import</span> gymnasium <span class="kw">as</span> gym
+
+env = gym.make(<span class="str">"CartPole-v1"</span>, render_mode=<span class="str">"rgb_array"</span>)
+obs, info = env.reset(seed=<span class="num">42</span>)
+
+<span class="kw">for</span> _ <span class="kw">in</span> <span class="bi">range</span>(<span class="num">500</span>):
+    action = env.action_space.sample()
+    obs, reward, terminated, truncated, info = env.step(action)
+    <span class="kw">if</span> terminated <span class="kw">or</span> truncated:
+        obs, info = env.reset()
+
+env.close()</pre></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-left"><span class="card-icon">📦</span><span class="card-title">Stable-Baselines3 Quick Start</span></div>
+      <span class="card-tag ct-teal">SB3</span>
+    </div>
+    <div class="card-body">
+      <div class="code-block"><pre><span class="kw">from</span> stable_baselines3 <span class="kw">import</span> PPO, SAC
+<span class="kw">from</span> stable_baselines3.common.env_util <span class="kw">import</span> make_vec_env
+
+env = make_vec_env(<span class="str">"LunarLander-v2"</span>, n_envs=<span class="num">4</span>)
+
+model = PPO(<span class="str">"MlpPolicy"</span>, env,
+            n_steps=<span class="num">2048</span>, batch_size=<span class="num">64</span>,
+            learning_rate=<span class="num">3e-4</span>, verbose=<span class="num">1</span>)
+model.learn(total_timesteps=<span class="num">500_000</span>)
+model.save(<span class="str">"ppo_lunar"</span>)</pre></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-left"><span class="card-icon">🧭</span><span class="card-title">Exploration Strategies</span></div>
+      <span class="card-tag ct-em">exploration</span>
+    </div>
+    <div class="card-body">
+      <div class="kv-list">
+        <div class="kv"><span class="kv-key">ε-greedy</span><span class="kv-val">Random action with prob ε, decay over time</span></div>
+        <div class="kv"><span class="kv-key">Boltzmann</span><span class="kv-val">Sample actions with prob ∝ exp(Q/τ)</span></div>
+        <div class="kv"><span class="kv-key">UCB</span><span class="kv-val">Upper Confidence Bound — explore uncertain states</span></div>
+        <div class="kv"><span class="kv-key">Entropy Bonus</span><span class="kv-val">Add entropy term to reward (SAC, A2C)</span></div>
+        <div class="kv"><span class="kv-key">RND</span><span class="kv-val">Random Network Distillation — curiosity driven</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-left"><span class="card-icon">🔁</span><span class="card-title">RLHF Pipeline</span></div>
+      <span class="card-tag ct-violet">RLHF</span>
+    </div>
+    <div class="card-body">
+      <div class="flow">
+        <span class="flow-step">Pretrain LLM</span><span class="arrow">→</span>
+        <span class="flow-step">SFT</span><span class="arrow">→</span>
+        <span class="flow-step">Reward Model</span><span class="arrow">→</span>
+        <span class="flow-step">PPO / DPO</span><span class="arrow">→</span>
+        <span class="flow-step">Aligned Model</span>
+      </div>
+      <div class="kv-list" style="margin-top:0.5rem">
+        <div class="kv"><span class="kv-key">SFT</span><span class="kv-val">Supervised fine-tune on demonstration data</span></div>
+        <div class="kv"><span class="kv-key">RM</span><span class="kv-val">Train reward model on human preference pairs</span></div>
+        <div class="kv"><span class="kv-key">PPO</span><span class="kv-val">Optimize LLM policy against reward model</span></div>
+        <div class="kv"><span class="kv-key">DPO</span><span class="kv-val">Direct Preference Optimization — no explicit RM</span></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<div id="tab-math" class="page">
+<div class="grid">
+
+  <div class="section-label">Probability &amp; Statistics</div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-left"><span class="card-icon">📐</span><span class="card-title">Key Probability Distributions</span></div>
+      <span class="card-tag ct-rose">stats</span>
+    </div>
+    <div class="card-body">
+      <div class="table-wrap"><table>
+        <tr><th>Distribution</th><th>Params</th><th>Use in AI</th></tr>
+        <tr><td>Gaussian N(μ,σ²)</td><td>μ, σ</td><td>Weight init, VAE latent</td></div></tr>
+        <tr><td>Bernoulli</td><td>p</td><td>Binary classification</td></tr>
+        <tr><td>Categorical</td><td>p₁..pₖ</td><td>Token sampling, Softmax</td></tr>
+        <tr><td>Dirichlet</td><td>α</td><td>Topic models, LDA</td></tr>
+        <tr><td>Poisson</td><td>λ</td><td>Count data modeling</td></tr>
+        <tr><td>Beta</td><td>α, β</td><td>Bayesian priors, Thompson</td></tr>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-left"><span class="card-icon">∇</span><span class="card-title">Gradient Descent Variants</span></div>
+      <span class="card-tag ct-blue">optimization</span>
+    </div>
+    <div class="card-body">
+      <div class="formula">SGD: θ = θ − <span class="fv">η</span>·∇L(θ)</div>
+      <div class="formula">Momentum: v = <span class="fv">β</span>v + <span class="fv">η</span>∇L  ;  θ = θ − v</div>
+      <div class="formula">Adam: m̂ = m/(1−<span class="fv">β₁</span>ᵗ)  ;  v̂ = v/(1−<span class="fv">β₂</span>ᵗ)  ;  θ = θ − <span class="fv">η</span>m̂/(√v̂+<span class="fv">ε</span>)</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-left"><span class="card-icon">📏</span><span class="card-title">Distance &amp; Similarity Metrics</span></div>
+      <span class="card-tag ct-teal">metrics</span>
+    </div>
+    <div class="card-body">
+      <div class="table-wrap"><table>
+        <tr><th>Metric</th><th>Formula</th><th>Use</th></tr>
+        <tr><td>Euclidean</td><td>√Σ(aᵢ−bᵢ)²</td><td>KNN, KMeans</td></tr>
+        <tr><td>Cosine</td><td>a·b / (‖a‖‖b‖)</td><td>Embeddings, NLP</td></tr>
+        <tr><td>Manhattan</td><td>Σ|aᵢ−bᵢ|</td><td>Sparse, robust</td></tr>
+        <tr><td>KL Divergence</td><td>Σ P log(P/Q)</td><td>VAE, distributions</td></tr>
+        <tr><td>Mahalanobis</td><td>√(a-b)ᵀΣ⁻¹(a-b)</td><td>Anomaly detection</td></tr>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-left"><span class="card-icon">🧮</span><span class="card-title">Information Theory Essentials</span></div>
+      <span class="card-tag ct-violet">info theory</span>
+    </div>
+    <div class="card-body">
+      <div class="formula">Entropy: H(X) = −Σ P(x) log P(x)</div>
+      <div class="formula">Cross-Entropy: H(P,Q) = −Σ P(x) log Q(x)</div>
+      <div class="formula">KL: D_KL(P‖Q) = H(P,Q) − H(P)</div>
+      <div class="formula">Mutual Info: I(X;Y) = H(X) + H(Y) − H(X,Y)</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-left"><span class="card-icon">🔢</span><span class="card-title">Linear Algebra for ML</span></div>
+      <span class="card-tag ct-gold">linear algebra</span>
+    </div>
+    <div class="card-body">
+      <div class="code-block"><pre><span class="kw">import</span> numpy <span class="kw">as</span> np
+
+A = np.random.randn(<span class="num">4</span>, <span class="num">4</span>)
+U, S, Vt = np.linalg.svd(A)
+eigenvals = np.linalg.eigvals(A)
+rank = np.linalg.matrix_rank(A)
+
+x = np.linalg.solve(A, b)
+inv_A = np.linalg.inv(A)
+det_A = np.linalg.det(A)
+norm_A = np.linalg.norm(A, ord=<span class="str">"fro"</span>)</pre></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-left"><span class="card-icon">🔗</span><span class="card-title">Bayes' Theorem &amp; MAP</span></div>
+      <span class="card-tag ct-em">Bayesian</span>
+    </div>
+    <div class="card-body">
+      <div class="formula">P(θ|X) = P(X|θ) · P(θ) / P(X)</div>
+      <div class="formula">Posterior ∝ Likelihood · Prior</div>
+      <div class="formula">MAP: θ* = argmax P(X|θ) · P(θ)</div>
+      <div class="formula">MLE: θ* = argmax P(X|θ)  <span>[flat prior]</span></div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<div id="tab-tools" class="page">
+<div class="grid">
+
+  <div class="section-label">Core Libraries</div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-left"><span class="card-icon">📦</span><span class="card-title">Python AI Ecosystem</span></div>
+      <span class="card-tag ct-blue">ecosystem</span>
+    </div>
+    <div class="card-body">
+      <div class="table-wrap"><table>
+        <tr><th>Library</th><th>Purpose</th><th>Install</th></tr>
+        <tr><td>numpy</td><td>Array math, linear algebra</td><td><code>pip install numpy</code></td></tr>
+        <tr><td>pandas</td><td>DataFrames, data wrangling</td><td><code>pip install pandas</code></td></tr>
+        <tr><td>torch</td><td>Deep learning framework</td><td><code>pip install torch</code></td></tr>
+        <tr><td>transformers</td><td>Pretrained models, NLP</td><td><code>pip install transformers</code></td></tr>
+        <tr><td>scikit-learn</td><td>Classical ML, preprocessing</td><td><code>pip install scikit-learn</code></td></tr>
+        <tr><td>xgboost</td><td>Gradient boosting</td><td><code>pip install xgboost</code></td></tr>
+        <tr><td>langchain</td><td>LLM pipelines, agents</td><td><code>pip install langchain</code></td></tr>
+        <tr><td>gymnasium</td><td>RL environments</td><td><code>pip install gymnasium</code></td></tr>
+        <tr><td>diffusers</td><td>Diffusion models (HF)</td><td><code>pip install diffusers</code></td></tr>
+        <tr><td>faiss-cpu</td><td>Vector similarity search</td><td><code>pip install faiss-cpu</code></td></tr>
+        <tr><td>einops</td><td>Tensor rearranging</td><td><code>pip install einops</code></td></tr>
+        <tr><td>accelerate</td><td>Multi-GPU, mixed precision</td><td><code>pip install accelerate</code></td></tr>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-left"><span class="card-icon">⚡</span><span class="card-title">Accelerate &amp; Mixed Precision</span></div>
+      <span class="card-tag ct-teal">training</span>
+    </div>
+    <div class="card-body">
+      <div class="code-block"><pre><span class="kw">from</span> accelerate <span class="kw">import</span> Accelerator
+
+accelerator = Accelerator(mixed_precision=<span class="str">"bf16"</span>)
+model, optimizer, train_loader = accelerator.prepare(
+    model, optimizer, train_loader
+)
+<span class="kw">with</span> accelerator.autocast():
+    outputs = model(batch)
+    loss = criterion(outputs, targets)
+accelerator.backward(loss)
+optimizer.step()</pre></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-left"><span class="card-icon">📊</span><span class="card-title">Weights &amp; Biases (W&amp;B)</span></div>
+      <span class="card-tag ct-gold">experiment</span>
+    </div>
+    <div class="card-body">
+      <div class="code-block"><pre><span class="kw">import</span> wandb
+
+wandb.init(project=<span class="str">"my-model"</span>, config={
+    <span class="str">"lr"</span>: <span class="num">3e-4</span>, <span class="str">"epochs"</span>: <span class="num">20</span>,
+    <span class="str">"batch_size"</span>: <span class="num">64</span>, <span class="str">"arch"</span>: <span class="str">"resnet50"</span>
+})
+
+wandb.log({<span class="str">"loss"</span>: loss, <span class="str">"acc"</span>: acc, <span class="str">"epoch"</span>: epoch})
+wandb.watch(model, log=<span class="str">"all"</span>, log_freq=<span class="num">100</span>)
+wandb.finish()</pre></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-left"><span class="card-icon">🔍</span><span class="card-title">FAISS Vector Search</span></div>
+      <span class="card-tag ct-em">vector-db</span>
+    </div>
+    <div class="card-body">
+      <div class="code-block"><pre><span class="kw">import</span> faiss, numpy <span class="kw">as</span> np
+
+d = <span class="num">768</span>
+index = faiss.IndexFlatIP(d)
+faiss.normalize_L2(vectors)
+index.add(vectors)
+
+query = embed_text(<span class="str">"What is attention?"</span>)
+faiss.normalize_L2(query)
+D, I = index.search(query, k=<span class="num">5</span>)
+<span class="bi">print</span>(f<span class="str">"Top-5 ids: {I[0]}, scores: {D[0]}"</span>)</pre></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-left"><span class="card-icon">🔧</span><span class="card-title">GPU Memory Tips</span></div>
+      <span class="card-tag ct-rose">GPU</span>
+    </div>
+    <div class="card-body">
+      <div class="code-block"><pre>torch.cuda.empty_cache()
+torch.backends.cuda.matmul.allow_tf32 = <span class="kw">True</span>
+
+model = model.half()
+
+<span class="kw">with</span> torch.autocast(device_type=<span class="str">"cuda"</span>, dtype=torch.bfloat16):
+    output = model(input)
+
+torch.utils.checkpoint.checkpoint(fn, *args)</pre></div>
+      <div class="note"><b>Gradient checkpointing</b> trades compute for memory — saves ~60% VRAM at 30% slowdown.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-left"><span class="card-icon">🤖</span><span class="card-title">LLM API Providers</span></div>
+      <span class="card-tag ct-violet">LLMs</span>
+    </div>
+    <div class="card-body">
+      <div class="table-wrap"><table>
+        <tr><th>Provider</th><th>Top Models</th><th>Context</th></tr>
+        <tr><td>OpenAI</td><td>GPT-4o, o3, o4-mini</td><td>128K</td></tr>
+        <tr><td>Anthropic</td><td>Claude 3.5, Claude 3 Opus</td><td>200K</td></tr>
+        <tr><td>Google</td><td>Gemini 2.0, Gemini 1.5 Pro</td><td>1M</td></tr>
+        <tr><td>Meta (OSS)</td><td>LLaMA 3.1, 3.3 (405B)</td><td>128K</td></tr>
+        <tr><td>Mistral</td><td>Mistral Large, Mixtral 8x22B</td><td>64K</td></tr>
+        <tr><td>Groq</td><td>LLaMA 3 (fast inference)</td><td>128K</td></tr>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-left"><span class="card-icon">🐳</span><span class="card-title">Docker + CUDA Setup</span></div>
+      <span class="card-tag ct-teal">infra</span>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<footer style="color:white;">AI Cheatsheet · Python 3.11+ · PyTorch · HuggingFace · scikit-learn · Built with data precision and authenticated information.@Glenn Junsay Pansensoy.All rights reserved 2026</footer>
+
+<script>
+function showTab(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  event.currentTarget.classList.add('active');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+</script>
+</body>
+</html>
