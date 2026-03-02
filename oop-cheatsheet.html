@@ -1,0 +1,1984 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Python OOP Cheat Sheet 2025: Classes, Inheritance, Dunder Methods, Design Patterns</title>
+    <meta name="description" content="Complete Python OOP cheat sheet with 50+ examples. Covers classes, inheritance, dunder methods, SOLID, design patterns, dataclasses, descriptors, and modern Python 3.12+ features.">
+    <meta name="keywords" content="Python OOP cheat sheet, Python classes tutorial, inheritance Python, encapsulation Python, polymorphism, dunder methods list, Python design patterns, SOLID Python, dataclass example, Python metaclass, descriptor protocol, Python __slots__, MRO Python, Python 3.12 OOP">
+    <meta name="author" content="Python OOP Reference">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="revisit-after" content="7 days">
+    
+    <link rel="canonical" href="https://www.python-oop-cheatsheet.com">
+    
+    <meta property="og:title" content="Python OOP Mastery: Complete Cheat Sheet with 50+ Code Examples">
+    <meta property="og:description" content="The ultimate Python OOP reference: from __init__ to metaclasses. Includes inheritance, polymorphism, SOLID principles, and 10+ design patterns with real code.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.python-oop-cheatsheet.com">
+    <meta property="og:image" content="https://i.ibb.co/7C9VWzH/python-obsidian-oop.png">
+    <meta property="og:image:alt" content="Python OOP Cheat Sheet Visual Guide">
+    <meta property="og:site_name" content="Python OOP Reference">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Python OOP Cheat Sheet 2025">
+    <meta name="twitter:description" content="Master Python OOP with this comprehensive cheat sheet. 50+ examples, 10+ design patterns, SOLID principles, and modern Python features.">
+    <meta name="twitter:image" content="https://i.ibb.co/7C9VWzH/python-obsidian-oop.png">
+    
+    <meta name="google-site-verification" content="your-verification-code">
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4575646748966866" crossorigin="anonymous"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0b0e14;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: #d8dee9;
+            padding: 1.5rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .sheet {
+            max-width: 1400px;
+            width: 100%;
+            background: #0c111b;
+            border-radius: 32px;
+            box-shadow: 0 30px 50px -20px #030609;
+            padding: 2rem;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #98c8ff, #63a5d6, #ffd75f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+
+        .sub {
+            font-size: 1.2rem;
+            color: #88b8d8;
+            margin-bottom: 2rem;
+            font-weight: 350;
+            border-left: 4px solid #ffd75f;
+            padding-left: 1.5rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .card {
+            background: #0f1822;
+            border-radius: 24px;
+            padding: 1.8rem;
+            box-shadow: 0 10px 22px rgba(0, 10, 20, 0.7);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 30px -8px #0a1f2e;
+        }
+
+        .card h2 {
+            font-size: 1 rem;
+            font-weight: 600;
+            color: #ffd75f;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #2a4055;
+        }
+
+        .card h2 span {
+            background: #1e3a4f;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #b0dcff;
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            margin-left: 1rem;
+            vertical-align: middle;
+        }
+
+        .snippet {
+            background: #0a111b;
+            color: #e2f0ff;
+            font-family: 'Fira Code', 'JetBrains Mono', 'Cascadia Code', monospace;
+            font-size: 0.9rem;
+            padding: 1.4rem;
+            border-radius: 18px;
+            margin: 1.2rem 0;
+            line-height: 1.8;
+            white-space: pre-wrap;
+            overflow-x: auto;
+            border-left: 4px solid #ffd75f;
+            box-shadow: inset 0 0 0 1px #1f3c52;
+        }
+
+        .def {
+            font-size: 1rem;
+            color: #b8d4f0;
+            margin-bottom: 0.8rem;
+            font-weight: 500;
+        }
+
+        ul {
+            list-style: none;
+            margin: 1.2rem 0;
+        }
+
+        li {
+            font-size: 0.95rem;
+            padding: 0.3rem 0 0.3rem 1.6rem;
+            position: relative;
+            color: #d0e2f5;
+        }
+
+        li::before {
+            content: "→";
+            color: #ffd75f;
+            font-weight: 600;
+            position: absolute;
+            left: 0;
+        }
+
+        .pill {
+            display: inline-block;
+            background: #1a3042;
+            color: #c4e1ff;
+            border-radius: 30px;
+            padding: 0.3rem 1.2rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin: 0.2rem 0.4rem;
+            letter-spacing: 0.3px;
+        }
+
+        .section-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #ffd75f;
+            margin: 2.5rem 0 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #2f5270;
+        }
+
+        .tip {
+            background: #142635;
+            border-radius: 20px;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+            font-size: 1rem;
+            border-left: 6px solid #ffd75f;
+            color: #d1e6ff;
+        }
+
+        hr {
+            border: none;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #2f5270, #88c0d0, #2f5270, transparent);
+            margin: 2.5rem 0;
+        }
+
+        .footer {
+            margin-top: 3rem;
+            font-size: 0.95rem;
+            text-align: center;
+            color: #78a9cc;
+            padding-top: 1.5rem;
+            border-top: 1px solid #253e54;
+        }
+
+        .btn {
+            background: #306998;
+            border: none;
+            color: white;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 0.8rem 2.2rem;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 12px rgba(0,100,200,0.3);
+        }
+
+        .btn:hover {
+            background: #3f7fb3;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 18px rgba(0,120,220,0.4);
+        }
+
+        .btn.download {
+            background: #244c6b;
+        }
+
+        .btn.download:hover {
+            background: #2f6085;
+        }
+
+        .header-flex {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .ad-container {
+            margin: 2rem 0;
+            padding: 1rem;
+            background: #0a121c;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid #2a4055;
+        }
+
+        .ad-label {
+            font-size: 0.7rem;
+            color: #5f819d;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 700px) {
+            body { padding: 0.8rem; }
+            .sheet { padding: 1.2rem; }
+            h1 { font-size: 1.8rem; }
+            .card { padding: 1.4rem; }
+            .grid { grid-template-columns: 1fr; }
+        }
+
+        code {
+            background: #1d3447;
+            padding: 0.2rem 0.4rem;
+            border-radius: 6px;
+            color: #ffd75f;
+            font-size: 0.9em;
+        }
+
+        strong {
+            color: #b8dcff;
+        }
+
+        a {
+            color: #88c0ff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="sheet" id="cheatSheetContainer">
+        <div class="header-flex">
+            <div>
+                <h4>🖥️ PYTHON  OOP • 2026 Edition</h4>
+                <div class="sub">classes • inheritance • dunder • SOLID • design patterns • modern Python 3.12+</div>
+            </div>
+            <button class="btn download" id="downloadBtn">⬇️ Download HTML</button>
+        </div>
+
+        <!-- AdSense Ad Unit - Top Banner -->
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-4575646748966866"
+                 data-ad-slot="YOUR_AD_SLOT_ID"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <h2>📦 Classes & Instances <span>fundamentals</span></h2>
+                <div class="def"><code>__init__</code> • <code>self</code> • class vs instance attributes</div>
+                <div class="snippet">class Employee:
+    company = "TechCorp"           # class variable - shared
+
+    def __init__(self, name, salary):
+        self.name = name            # instance variable - unique
+        self.salary = salary
+
+    def give_raise(self, percent):
+        self.salary *= (1 + percent/100)
+
+    def __repr__(self):
+        return f"Employee({self.name}, ${self.salary:,.0f})"
+
+alice = Employee("Alice Chen", 95000)
+bob = Employee("Bob Smith", 82000)
+alice.give_raise(10)
+print(alice)  # Employee(Alice Chen, $104,500)</div>
+                <ul>
+                    <li><code>self</code> – explicit instance reference</li>
+                    <li>Class variables shared across instances</li>
+                    <li>Instance variables stored in <code>__dict__</code></li>
+                    <li><code>__repr__</code> for developer-friendly output</li>
+                </ul>
+                <div><span class="pill">#python</span><span class="pill">__init__</span><span class="pill">self</span><span class="pill">__dict__</span></div>
+            </div>
+
+            <div class="card">
+                <h4>🧬 Inheritance & MRO <span>is-a relationships</span></h4>
+                <div class="def"><code>super()</code> • method overriding • C3 linearization</div>
+                <div class="snippet">class Vehicle:
+    def __init__(self, brand):
+        self.brand = brand
+    
+    def move(self):
+        return f"{self.brand} moves"
+
+class Car(Vehicle):
+    def __init__(self, brand, model):
+        super().__init__(brand)      # call parent constructor
+        self.model = model
+    
+    def move(self):                   # override
+        return f"{self.brand} {self.model} drives"
+
+class Boat(Vehicle):
+    def move(self):
+        return f"{self.brand} sails"
+
+vehicles = [Car("Tesla", "Model 3"), Boat("Yamaha")]
+for v in vehicles:
+    print(v.move())</div>
+                <ul>
+                    <li><code>super()</code> follows MRO, not just parent</li>
+                    <li><code>isinstance()</code>, <code>issubclass()</code> checks</li>
+                    <li><code>ClassName.__mro__</code> shows resolution order</li>
+                </ul>
+                <div><span class="pill">super()</span><span class="pill">MRO</span><span class="pill">polymorphism</span></div>
+            </div>
+
+            <div class="card">
+                <h4>🔒 Encapsulation <span>name mangling</span></h4>
+                <div class="def">protected <code>_single</code> • private <code>__double</code> • properties</div>
+                <div class="snippet">class BankAccount:
+    def __init__(self, owner, balance):
+        self.owner = owner
+        self.__balance = balance      # name mangled to _BankAccount__balance
+    
+    @property
+    def balance(self):                 # getter
+        return self.__balance
+    
+    @balance.setter
+    def balance(self, amount):         # setter with validation
+        if amount < 0:
+            raise ValueError("Balance cannot be negative")
+        self.__balance = amount
+    
+    def withdraw(self, amount):
+        if amount <= self.__balance:
+            self.__balance -= amount
+            return amount
+        raise ValueError("Insufficient funds")
+
+acc = BankAccount("Bob", 5000)
+print(acc.balance)    # 5000 (uses getter)
+acc.balance = 6000    # uses setter</div>
+                <ul>
+                    <li><code>_single</code> – protected by convention</li>
+                    <li><code>__double</code> – name mangling prevents accidental override</li>
+                    <li><code>@property</code> – controlled attribute access</li>
+                </ul>
+                <div><span class="pill">@property</span><span class="pill">@setter</span><span class="pill">encapsulation</span></div>
+            </div>
+
+            <div class="card">
+                <h4>🎭 Polymorphism <span>duck typing + ABC</span></h4>
+                <div class="def">abstract base classes • protocols • duck typing</div>
+                <div class="snippet">from abc import ABC, abstractmethod
+
+class Drawable(ABC):
+    @abstractmethod
+    def draw(self): pass
+    
+    @abstractmethod
+    def area(self): pass
+
+class Circle(Drawable):
+    def __init__(self, radius):
+        self.radius = radius
+    
+    def draw(self):
+        return "○"
+    
+    def area(self):
+        return 3.14159 * self.radius ** 2
+
+class Square(Drawable):
+    def __init__(self, side):
+        self.side = side
+    
+    def draw(self):
+        return "□"
+    
+    def area(self):
+        return self.side ** 2
+
+# Duck typing example - any object with .draw() works
+def render(shape):
+    print(shape.draw())  # doesn't care about type
+
+render(Circle(5))    # ○
+render(Square(4))    # □</div>
+                <ul>
+                    <li>Duck typing: "if it walks like a duck"</li>
+                    <li>ABCs enforce interface contracts</li>
+                    <li><code>@abstractmethod</code> requires implementation</li>
+                </ul>
+                <div><span class="pill">ABC</span><span class="pill">duck typing</span><span class="pill">protocol</span></div>
+            </div>
+        </div>
+
+        <!-- AdSense Ad Unit - After First Grid -->
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-4575646748966866"
+                 data-ad-slot="YOUR_AD_SLOT_ID"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <h4>⚙️ Dunder Methods <span>operator overloading</span></h4>
+                <div class="def"><code>__repr__</code> • <code>__len__</code> • <code>__eq__</code> • <code>__call__</code></div>
+                <div class="snippet">class Book:
+    def __init__(self, title, author, pages):
+        self.title = title
+        self.author = author
+        self.pages = pages
+    
+    def __repr__(self):              # unambiguous representation
+        return f"Book('{self.title}', '{self.author}')"
+    
+    def __str__(self):                # user-friendly string
+        return f"'{self.title}' by {self.author}"
+    
+    def __len__(self):                # enable len()
+        return self.pages
+    
+    def __eq__(self, other):          # enable ==
+        return self.title == other.title and self.author == other.author
+    
+    def __lt__(self, other):          # enable sorting
+        return self.pages < other.pages
+    
+    def __call__(self):                # object as function
+        return f"Reading {self.title}"
+
+book = Book("1984", "Orwell", 328)
+print(book())          # Reading 1984 (__call__)
+print(len(book))       # 328 (__len__)</div>
+                <ul>
+                    <li><code>__str__</code> for users, <code>__repr__</code> for devs</li>
+                    <li><code>__add__</code>, <code>__sub__</code> for arithmetic</li>
+                    <li><code>__getitem__</code> for container behavior</li>
+                </ul>
+                <div><span class="pill">__repr__</span><span class="pill">__eq__</span><span class="pill">__call__</span></div>
+            </div>
+
+            <div class="card">
+                <h4>🏷️ Class & Static Methods</h4>
+                <div class="def"><code>@classmethod</code> • <code>@staticmethod</code> • factories</div>
+                <div class="snippet">from datetime import datetime
+
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+    
+    @classmethod
+    def from_birth_year(cls, name, birth_year):
+        """Alternative constructor - creates Person from birth year"""
+        age = datetime.now().year - birth_year
+        return cls(name, age)
+    
+    @classmethod
+    def from_string(cls, data_string):
+        """Factory: 'name,age' -> Person"""
+        name, age = data_string.split(',')
+        return cls(name.strip(), int(age))
+    
+    @staticmethod
+    def is_adult(age):
+        """Utility function - no self or cls needed"""
+        return age >= 18
+    
+    def __repr__(self):
+        return f"Person('{self.name}', {self.age})"
+
+p1 = Person.from_birth_year("Alice", 1995)
+p2 = Person.from_string("Bob, 25")
+print(Person.is_adult(20))  # True</div>
+                <ul>
+                    <li><code>@classmethod</code> receives class (cls)</li>
+                    <li><code>@staticmethod</code> no self/cls – like regular function</li>
+                    <li>Classmethods for alternative constructors</li>
+                </ul>
+                <div><span class="pill">@classmethod</span><span class="pill">@staticmethod</span><span class="pill">factory</span></div>
+            </div>
+
+            <div class="card">
+                <h4>🔗 Composition vs Inheritance</h4>
+                <div class="def">"has-a" • "uses-a" • loose coupling</div>
+                <div class="snippet">class Engine:
+    def start(self):
+        return "Engine started"
+    
+    def stop(self):
+        return "Engine stopped"
+
+class Wheels:
+    def __init__(self, count=4):
+        self.count = count
+    
+    def rotate(self):
+        return f"{self.count} wheels rotating"
+
+class Car:
+    """Composition: Car has an Engine and Wheels"""
+    def __init__(self):
+        self.engine = Engine()      # composition - strong ownership
+        self.wheels = Wheels()       # parts created with car
+    
+    def drive(self):
+        return f"{self.engine.start()}, {self.wheels.rotate()}"
+
+class MusicPlayer:
+    def play(self):
+        return "Playing music"
+
+class ModernCar(Car):
+    """Inheritance: ModernCar is a Car with extra features"""
+    def __init__(self):
+        super().__init__()
+        self.player = MusicPlayer()  # composition within inheritance
+    
+    def drive_with_music(self):
+        return f"{self.drive()} while {self.player.play()}"
+
+my_car = ModernCar()
+print(my_car.drive_with_music())</div>
+                <ul>
+                    <li>Favor composition over inheritance</li>
+                    <li>Composition: flexible, loose coupling</li>
+                    <li>Inheritance: use for true is-a relationships</li>
+                </ul>
+                <div><span class="pill">has-a</span><span class="pill">composition</span><span class="pill">loose coupling</span></div>
+            </div>
+
+            <div class="card">
+                <h4>🧰 Dataclasses (3.7+) <span>modern Python</span></h4>
+                <div class="def"><code>@dataclass</code> • <code>frozen</code> • <code>field</code></div>
+                <div class="snippet">from dataclasses import dataclass, field
+from typing import List
+
+@dataclass(order=True, frozen=False)
+class InventoryItem:
+    name: str
+    unit_price: float
+    quantity: int = 0
+    
+    @property
+    def total_cost(self):
+        return self.unit_price * self.quantity
+
+@dataclass(frozen=True)  # immutable
+class Point:
+    x: float
+    y: float
+    z: float = 0.0
+    
+    def distance_from_origin(self):
+        return (self.x**2 + self.y**2 + self.z**2) ** 0.5
+
+@dataclass
+class ShoppingCart:
+    items: List[InventoryItem] = field(default_factory=list)
+    customer: str = "Guest"
+    
+    def add_item(self, item):
+        self.items.append(item)
+    
+    @property
+    def total(self):
+        return sum(item.total_cost for item in self.items)
+
+item = InventoryItem("Laptop", 999.99, 2)
+print(item.total_cost)  # 1999.98</div>
+                <ul>
+                    <li>Auto-generates <code>__init__</code>, <code>__repr__</code>, <code>__eq__</code></li>
+                    <li><code>frozen=True</code> for immutability</li>
+                    <li><code>default_factory</code> for mutable defaults</li>
+                </ul>
+                <div><span class="pill">@dataclass</span><span class="pill">frozen</span><span class="pill">type hints</span></div>
+            </div>
+        </div>
+
+        <!-- AdSense Ad Unit - After Second Grid -->
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-4575646748966866"
+                 data-ad-slot="YOUR_AD_SLOT_ID"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+
+        <hr>
+
+        <div class="section-title">🧠 Advanced OOP Concepts</div>
+
+        <div class="grid">
+            <div class="card">
+                <h4>🔁 Multiple Inheritance <span>C3 linearization</span></h4>
+                <div class="def">MRO • diamond problem • mixins</div>
+                <div class="snippet">class LoggerMixin:
+    """Mixin adding logging capabilities"""
+    def log(self, message):
+        print(f"[{self.__class__.__name__}] {message}")
+
+class SerializableMixin:
+    """Mixin for JSON serialization"""
+    def to_dict(self):
+        return self.__dict__
+    
+    def to_json(self):
+        import json
+        return json.dumps(self.to_dict())
+
+class ValidatorMixin:
+    """Mixin for data validation"""
+    def validate_positive(self, value, name):
+        if value < 0:
+            raise ValueError(f"{name} must be positive")
+        return value
+
+class Product(LoggerMixin, SerializableMixin, ValidatorMixin):
+    def __init__(self, name, price):
+        self.name = name
+        self.price = self.validate_positive(price, "price")
+        self.log(f"Created product: {name}")
+    
+    def __repr__(self):
+        return f"Product({self.name}, ${self.price})"
+
+# Method Resolution Order demonstration
+class A: pass
+class B(A): pass
+class C(A): pass
+class D(B, C): pass  # MRO: D -> B -> C -> A -> object
+
+print(D.__mro__)  # Shows resolution order</div>
+                <ul>
+                    <li>Mixins add focused, reusable behavior</li>
+                    <li><code>super()</code> follows MRO cooperatively</li>
+                    <li><code>__mro__</code> attribute shows order</li>
+                </ul>
+                <div><span class="pill">mixin</span><span class="pill">MRO</span><span class="pill">diamond</span></div>
+            </div>
+
+            <div class="card">
+                <h4>🎨 Descriptors <span>__get__ / __set__</span></h4>
+                <div class="def">Power behind <code>@property</code>, <code>@classmethod</code>, <code>@staticmethod</code></div>
+                <div class="snippet">class PositiveNumber:
+    """Descriptor that only allows positive values"""
+    def __set_name__(self, owner, name):
+        self.name = name
+    
+    def __get__(self, obj, objtype=None):
+        if obj is None:
+            return self
+        return obj.__dict__.get(self.name, 0)
+    
+    def __set__(self, obj, value):
+        if value < 0:
+            raise ValueError(f"{self.name} must be >= 0")
+        obj.__dict__[self.name] = value
+    
+    def __delete__(self, obj):
+        del obj.__dict__[self.name]
+
+class Temperature:
+    celsius = PositiveNumber()
+    fahrenheit = PositiveNumber()
+    
+    def __init__(self, celsius=0, fahrenheit=32):
+        self.celsius = celsius
+        self.fahrenheit = fahrenheit
+    
+    @property
+    def kelvin(self):
+        return self.celsius + 273.15
+
+temp = Temperature(25, 77)
+print(temp.celsius)  # 25
+# temp.celsius = -10  # ValueError: celsius must be >= 0</div>
+                <ul>
+                    <li>Data descriptor: defines <code>__get__</code> + <code>__set__</code></li>
+                    <li>Non-data descriptor: only <code>__get__</code></li>
+                    <li><code>__set_name__</code> gets attribute name (3.6+)</li>
+                </ul>
+                <div><span class="pill">__get__</span><span class="pill">__set__</span><span class="pill">descriptor</span></div>
+            </div>
+
+            <div class="card">
+                <h4>🗃️ __slots__ <span>memory optimization</span></h4>
+                <div class="def">Replace <code>__dict__</code> with fixed array – 40-60% less memory</div>
+                <div class="snippet">class PointSlots:
+    """Memory-efficient point class"""
+    __slots__ = ('x', 'y')  # No __dict__ created
+    
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+    
+    def distance(self, other):
+        return ((self.x - other.x)**2 + (self.y - other.y)**2) ** 0.5
+
+class PointDict:
+    """Traditional point with __dict__ overhead"""
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+# Memory comparison
+import sys
+ps = PointSlots(10, 20)
+pd = PointDict(10, 20)
+print(f"__slots__ size: {sys.getsizeof(ps)} bytes")
+print(f"__dict__ size: {sys.getsizeof(pd)} bytes")
+# ps.z = 30  # AttributeError - can't add new attributes
+
+# For data-heavy applications (millions of objects)
+class Vector3D:
+    __slots__ = ('x', 'y', 'z', '_length')
+    def __init__(self, x, y, z):
+        self.x, self.y, self.z = x, y, z
+        self._length = None
+    
+    @property
+    def length(self):
+        if self._length is None:
+            self._length = (self.x**2 + self.y**2 + self.z**2) ** 0.5
+        return self._length</div>
+                <ul>
+                    <li>~3x faster attribute access</li>
+                    <li>Prevents dynamic attribute creation</li>
+                    <li>Child classes need their own <code>__slots__</code></li>
+                </ul>
+                <div><span class="pill">__slots__</span><span class="pill">memory</span><span class="pill">performance</span></div>
+            </div>
+
+            <div class="card">
+                <h4>🔄 __iter__ & __next__ <span>custom iterators</span></h4>
+                <div class="def">Make any object iterable • generators • lazy evaluation</div>
+                <div class="snippet">class Fibonacci:
+    """Iterator that generates Fibonacci numbers"""
+    def __init__(self, max_count):
+        self.max_count = max_count
+        self.count = 0
+        self.a, self.b = 0, 1
+    
+    def __iter__(self):
+        return self  # iterator returns itself
+    
+    def __next__(self):
+        if self.count >= self.max_count:
+            raise StopIteration
+        self.count += 1
+        self.a, self.b = self.b, self.a + self.b
+        return self.a
+    
+    def __repr__(self):
+        return f"Fibonacci({self.max_count})"
+
+# Using the iterator
+fib = Fibonacci(10)
+for num in fib:
+    print(num, end=' ')  # 1 1 2 3 5 8 13 21 34 55
+
+# Generator version (simpler)
+def fibonacci_gen(max_count):
+    a, b = 0, 1
+    for _ in range(max_count):
+        a, b = b, a + b
+        yield a
+
+# Reversible iterable
+class Range:
+    def __init__(self, start, end):
+        self.start = start
+        self.end = end
+    
+    def __iter__(self):
+        return (i for i in range(self.start, self.end))
+    
+    def __reversed__(self):
+        return (i for i in range(self.end-1, self.start-1, -1))</div>
+                <ul>
+                    <li><code>__iter__</code> returns iterator object</li>
+                    <li><code>__next__</code> returns next value</li>
+                    <li><code>StopIteration</code> ends iteration</li>
+                </ul>
+                <div><span class="pill">__iter__</span><span class="pill">__next__</span><span class="pill">generator</span></div>
+            </div>
+        </div>
+
+        <!-- AdSense Ad Unit - After Advanced Grid -->
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-4575646748966866"
+                 data-ad-slot="YOUR_AD_SLOT_ID"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <h4>🧵 Metaclasses <span>class factories</span></h4>
+                <div class="def"><code>type</code> • <code>__new__</code> • class creation control</div>
+                <div class="snippet">class SingletonMeta(type):
+    """Metaclass that creates singleton classes"""
+    _instances = {}
+    
+    def __call__(cls, *args, **kwargs):
+        if cls not in cls._instances:
+            cls._instances[cls] = super().__call__(*args, **kwargs)
+        return cls._instances[cls]
+
+class AutoPropertyMeta(type):
+    """Metaclass that auto-adds properties"""
+    def __new__(mcs, name, bases, namespace):
+        # Auto-create properties for attributes starting with '_'
+        for key, value in list(namespace.items()):
+            if key.startswith('_') and not key.startswith('__'):
+                prop_name = key[1:]  # remove leading underscore
+                namespace[prop_name] = property(
+                    lambda self, k=key: getattr(self, k),
+                    lambda self, val, k=key: setattr(self, k, val)
+                )
+        return super().__new__(mcs, name, bases, namespace)
+
+class Logger(metaclass=SingletonMeta):
+    """Only one instance ever created"""
+    def __init__(self):
+        self.logs = []
+    
+    def log(self, msg):
+        self.logs.append(msg)
+        print(f"LOG: {msg}")
+
+class Person(metaclass=AutoPropertyMeta):
+    def __init__(self, name):
+        self._name = name  # automatically gets .name property
+
+p = Person("Alice")
+print(p.name)  # Alice (auto-generated property)</div>
+                <ul>
+                    <li>Metaclasses control class creation</li>
+                    <li><code>type</code> is default metaclass</li>
+                    <li>Use <code>__init_subclass__</code> for simpler cases</li>
+                </ul>
+                <div><span class="pill">metaclass</span><span class="pill">type</span><span class="pill">singleton</span></div>
+            </div>
+
+            <div class="card">
+                <h4>🪝 __getattr__ & __getattribute__</h4>
+                <div class="def">Dynamic attribute handling • proxies • fallbacks</div>
+                <div class="snippet">class DynamicAttributes:
+    """Returns default for missing attributes"""
+    def __init__(self):
+        self._data = {}
+    
+    def __getattr__(self, name):
+        """Called only when normal lookup fails"""
+        if name.startswith('get_'):
+            key = name[4:]  # remove 'get_' prefix
+            return lambda: self._data.get(key, None)
+        return f"Attribute '{name}' not found"
+    
+    def __setattr__(self, name, value):
+        """Intercepts all attribute setting"""
+        if name.startswith('_'):
+            super().__setattr__(name, value)  # bypass for internal
+        else:
+            self._data[name] = value
+    
+    def __getattribute__(self, name):
+        """Called for EVERY attribute access - use carefully!"""
+        print(f"Accessing: {name}")
+        return super().__getattribute__(name)
+
+class Proxy:
+    """Proxy pattern with __getattr__"""
+    def __init__(self, target):
+        self._target = target
+    
+    def __getattr__(self, name):
+        """Delegate to target object"""
+        print(f"Proxy: delegating {name}")
+        return getattr(self._target, name)
+    
+    def __setattr__(self, name, value):
+        if name == '_target':
+            super().__setattr__(name, value)
+        else:
+            print(f"Proxy: setting {name} on target")
+            setattr(self._target, name, value)
+
+obj = DynamicAttributes()
+obj.name = "test"
+print(obj.name)  # test (via __setattr__ and __getattribute__)</div>
+                <ul>
+                    <li><code>__getattr__</code> – fallback for missing attrs</li>
+                    <li><code>__getattribute__</code> – intercepts all access</li>
+                    <li>Use <code>object.__getattribute__</code> to avoid recursion</li>
+                </ul>
+                <div><span class="pill">__getattr__</span><span class="pill">__setattr__</span><span class="pill">proxy</span></div>
+            </div>
+
+            <div class="card">
+                <h4>⚡ __new__ vs __init__ <span>creation pipeline</span></h4>
+                <div class="def"><code>__new__</code> creates • <code>__init__</code> initializes</div>
+                <div class="snippet">class ImmutablePoint:
+    """Immutable point using __new__"""
+    def __new__(cls, x, y):
+        # Create instance
+        instance = super().__new__(cls)
+        # Initialize once and make immutable
+        instance._x = x
+        instance._y = y
+        return instance
+    
+    def __init__(self, x, y):
+        # This won't be called if __new__ doesn't call it
+        # But if it is, we need to handle it
+        pass
+    
+    @property
+    def x(self):
+        return self._x
+    
+    @property
+    def y(self):
+        return self._y
+    
+    def __setattr__(self, name, value):
+        if hasattr(self, '_x'):  # Already initialized
+            raise AttributeError("ImmutablePoint is immutable")
+        super().__setattr__(name, value)
+
+class DatabaseConnection:
+    """Connection pool with __new__"""
+    _pool = {}
+    
+    def __new__(cls, db_name):
+        if db_name not in cls._pool:
+            instance = super().__new__(cls)
+            cls._pool[db_name] = instance
+            return instance
+        return cls._pool[db_name]
+    
+    def __init__(self, db_name):
+        self.db_name = db_name
+        # This runs every time, even if returning cached
+
+# Usage
+p1 = ImmutablePoint(3, 4)
+p2 = ImmutablePoint(3, 4)
+print(p1.x, p1.y)  # 3 4
+# p1.x = 5  # AttributeError</div>
+                <ul>
+                    <li><code>__new__</code> is class method, returns instance</li>
+                    <li><code>__init__</code> initializes existing instance</li>
+                    <li>Use <code>__new__</code> for immutable types, singletons</li>
+                </ul>
+                <div><span class="pill">__new__</span><span class="pill">__init__</span><span class="pill">immutable</span></div>
+            </div>
+
+            <div class="card">
+                <h4>🔑 __init_subclass__ <span>subclass hooks</span></h4>
+                <div class="def">Simpler alternative to metaclasses for subclass registration</div>
+                <div class="snippet">class PluginBase:
+    """Base class that auto-registers all plugins"""
+    _registry = {}
+    
+    def __init_subclass__(cls, name=None, **kwargs):
+        """Called when a subclass is created"""
+        super().__init_subclass__(**kwargs)
+        plugin_name = name or cls.__name__
+        cls.name = plugin_name
+        PluginBase._registry[plugin_name] = cls
+        print(f"Registered plugin: {plugin_name}")
+    
+    def process(self, data):
+        raise NotImplementedError
+
+class JSONPlugin(PluginBase, name="json"):
+    def process(self, data):
+        import json
+        return json.dumps(data)
+
+class CSVPlugin(PluginBase, name="csv"):
+    def process(self, data):
+        return ",".join(str(x) for x in data)
+
+class XMLPlugin(PluginBase):
+    def process(self, data):
+        return f"<data>{data}</data>"
+
+# All plugins auto-registered
+print(PluginBase._registry)
+# {'json': JSONPlugin, 'csv': CSVPlugin, 'XMLPlugin': XMLPlugin}
+
+# Plugin factory
+def process_data(data, format_name):
+    plugin_cls = PluginBase._registry.get(format_name)
+    if not plugin_cls:
+        raise ValueError(f"Unknown format: {format_name}")
+    return plugin_cls().process(data)</div>
+                <ul>
+                    <li>Called automatically on subclass creation</li>
+                    <li>Receives keyword arguments from class definition</li>
+                    <li>Perfect for plugin systems, registries</li>
+                </ul>
+                <div><span class="pill">__init_subclass__</span><span class="pill">registry</span><span class="pill">plugin</span></div>
+            </div>
+        </div>
+
+        <!-- AdSense Ad Unit - After Advanced Grid 2 -->
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-4575646748966866"
+                 data-ad-slot="YOUR_AD_SLOT_ID"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+
+        <hr>
+
+        <div class="section-title">🏗️ Design Patterns with Python</div>
+
+        <div class="grid">
+            <div class="card">
+                <h4>🏭 Factory Pattern <span>creational</span></h4>
+                <div class="def">Abstract factory • factory method • dependency injection</div>
+                <div class="snippet">from abc import ABC, abstractmethod
+
+class Button(ABC):
+    @abstractmethod
+    def render(self): pass
+    
+    @abstractmethod
+    def on_click(self): pass
+
+class WindowsButton(Button):
+    def render(self):
+        return "Windows style button"
+    
+    def on_click(self):
+        return "Windows click sound"
+
+class MacButton(Button):
+    def render(self):
+        return "Mac style button"
+    
+    def on_click(self):
+        return "Mac click sound"
+
+class Checkbox(ABC):
+    @abstractmethod
+    def render(self): pass
+
+class WindowsCheckbox(Checkbox):
+    def render(self):
+        return "Windows style checkbox"
+
+class MacCheckbox(Checkbox):
+    def render(self):
+        return "Mac style checkbox"
+
+class GUIFactory(ABC):
+    @abstractmethod
+    def create_button(self) -> Button: pass
+    
+    @abstractmethod
+    def create_checkbox(self) -> Checkbox: pass
+
+class WindowsFactory(GUIFactory):
+    def create_button(self):
+        return WindowsButton()
+    
+    def create_checkbox(self):
+        return WindowsCheckbox()
+
+class MacFactory(GUIFactory):
+    def create_button(self):
+        return MacButton()
+    
+    def create_checkbox(self):
+        return MacCheckbox()
+
+# Factory function (simpler approach)
+def get_factory(os_type):
+    factories = {
+        'windows': WindowsFactory,
+        'mac': MacFactory
+    }
+    return factories.get(os_type, WindowsFactory)()
+
+# Usage
+factory = get_factory('mac')
+button = factory.create_button()
+checkbox = factory.create_checkbox()
+print(button.render())  # Mac style button</div>
+                <ul>
+                    <li>Encapsulates object creation logic</li>
+                    <li>Lets subclasses decide which class to instantiate</li>
+                    <li>Promotes loose coupling</li>
+                </ul>
+                <div><span class="pill">factory</span><span class="pill">creational</span><span class="pill">DI</span></div>
+            </div>
+
+            <div class="card">
+                <h4>📦 Builder Pattern <span>complex construction</span></h4>
+                <div class="def">Step-by-step • fluent interface • immutable result</div>
+                <div class="snippet">class Computer:
+    def __init__(self):
+        self.cpu = None
+        self.ram = None
+        self.storage = None
+        self.gpu = None
+        self.os = None
+    
+    def __repr__(self):
+        parts = []
+        if self.cpu: parts.append(f"CPU:{self.cpu}")
+        if self.ram: parts.append(f"RAM:{self.ram}GB")
+        if self.storage: parts.append(f"Storage:{self.storage}")
+        if self.gpu: parts.append(f"GPU:{self.gpu}")
+        if self.os: parts.append(f"OS:{self.os}")
+        return "Computer(" + ", ".join(parts) + ")"
+
+class ComputerBuilder:
+    def __init__(self):
+        self.computer = Computer()
+    
+    def add_cpu(self, cpu):
+        self.computer.cpu = cpu
+        return self
+    
+    def add_ram(self, ram_gb):
+        self.computer.ram = ram_gb
+        return self
+    
+    def add_storage(self, storage):
+        self.computer.storage = storage
+        return self
+    
+    def add_gpu(self, gpu):
+        self.computer.gpu = gpu
+        return self
+    
+    def install_os(self, os):
+        self.computer.os = os
+        return self
+    
+    def build(self):
+        return self.computer
+
+# Usage with method chaining
+gaming_pc = (ComputerBuilder()
+    .add_cpu("Intel i9-13900K")
+    .add_ram(64)
+    .add_storage("2TB NVMe SSD")
+    .add_gpu("NVIDIA RTX 4090")
+    .install_os("Windows 11")
+    .build())
+
+print(gaming_pc)
+# Computer(CPU:Intel i9-13900K, RAM:64GB, Storage:2TB NVMe SSD, GPU:NVIDIA RTX 4090, OS:Windows 11)
+
+workstation = (ComputerBuilder()
+    .add_cpu("AMD Threadripper")
+    .add_ram(128)
+    .add_storage("4TB NVMe + 8TB HDD")
+    .install_os("Ubuntu 22.04")
+    .build())</div>
+                <ul>
+                    <li>Each method returns self for chaining</li>
+                    <li>Build method returns final product</li>
+                    <li>Separates construction from representation</li>
+                </ul>
+                <div><span class="pill">fluent</span><span class="pill">builder</span><span class="pill">chaining</span></div>
+            </div>
+
+            <div class="card">
+                <h4>🎯 Strategy Pattern <span>behavioral</span></h4>
+                <div class="def">Encapsulate algorithms • runtime selection • dependency injection</div>
+                <div class="snippet">from typing import List, Callable
+import math
+
+# Strategy as interface
+class SortingStrategy:
+    def sort(self, data: List[int]) -> List[int]:
+        raise NotImplementedError
+
+class BubbleSort(SortingStrategy):
+    def sort(self, data):
+        arr = data[:]
+        n = len(arr)
+        for i in range(n):
+            for j in range(0, n-i-1):
+                if arr[j] > arr[j+1]:
+                    arr[j], arr[j+1] = arr[j+1], arr[j]
+        return arr
+
+class QuickSort(SortingStrategy):
+    def sort(self, data):
+        if len(data) <= 1:
+            return data
+        pivot = data[len(data)//2]
+        left = [x for x in data if x < pivot]
+        middle = [x for x in data if x == pivot]
+        right = [x for x in data if x > pivot]
+        return self.sort(left) + middle + self.sort(right)
+
+class PythonSort(SortingStrategy):
+    def sort(self, data):
+        return sorted(data)
+
+# Strategy as function (Pythonic approach)
+def bubble_sort(data):
+    arr = data[:]
+    n = len(arr)
+    for i in range(n):
+        for j in range(0, n-i-1):
+            if arr[j] > arr[j+1]:
+                arr[j], arr[j+1] = arr[j+1], arr[j]
+    return arr
+
+class Sorter:
+    def __init__(self, strategy: SortingStrategy):
+        self._strategy = strategy
+    
+    def set_strategy(self, strategy: SortingStrategy):
+        self._strategy = strategy
+    
+    def sort(self, data):
+        return self._strategy.sort(data)
+    
+    def benchmark(self, data):
+        import time
+        start = time.time()
+        result = self.sort(data)
+        elapsed = time.time() - start
+        return result, elapsed
+
+data = [64, 34, 25, 12, 22, 11, 90]
+sorter = Sorter(PythonSort())
+print(sorter.sort(data))
+sorter.set_strategy(BubbleSort())
+result, time_taken = sorter.benchmark(data)
+print(f"Bubble sort took {time_taken:.6f}s")</div>
+                <ul>
+                    <li>Strategy injected via constructor or setter</li>
+                    <li>Algorithms interchangeable at runtime</li>
+                    <li>Functions can replace strategy classes in Python</li>
+                </ul>
+                <div><span class="pill">strategy</span><span class="pill">DI</span><span class="pill">open/closed</span></div>
+            </div>
+
+            <div class="card">
+                <h4>👀 Observer Pattern <span>pub-sub</span></h4>
+                <div class="def">Event handling • loose coupling • notifications</div>
+                <div class="snippet">from abc import ABC, abstractmethod
+from typing import List, Any
+
+class Observer(ABC):
+    @abstractmethod
+    def update(self, subject: 'Subject', event: str, data: Any):
+        pass
+
+class Subject:
+    def __init__(self):
+        self._observers: List[Observer] = []
+        self._state = {}
+    
+    def attach(self, observer: Observer):
+        if observer not in self._observers:
+            self._observers.append(observer)
+    
+    def detach(self, observer: Observer):
+        self._observers.remove(observer)
+    
+    def notify(self, event: str, data: Any = None):
+        for observer in self._observers:
+            observer.update(self, event, data)
+    
+    @property
+    def state(self):
+        return self._state.copy()
+    
+    def update_state(self, key, value):
+        self._state[key] = value
+        self.notify("state_changed", {key: value})
+
+class Logger(Observer):
+    def update(self, subject, event, data):
+        print(f"[Logger] Event: {event}, Data: {data}")
+
+class EmailNotifier(Observer):
+    def __init__(self, email):
+        self.email = email
+    
+    def update(self, subject, event, data):
+        if event == "state_changed":
+            print(f"Sending email to {self.email}: State changed to {data}")
+
+class Analytics(Observer):
+    def __init__(self):
+        self.events = []
+    
+    def update(self, subject, event, data):
+        self.events.append((event, data))
+        print(f"[Analytics] Total events: {len(self.events)}")
+    
+    def report(self):
+        from collections import Counter
+        event_counts = Counter(e[0] for e in self.events)
+        return dict(event_counts)
+
+# Usage
+subject = Subject()
+logger = Logger()
+notifier = EmailNotifier("admin@example.com")
+analytics = Analytics()
+
+subject.attach(logger)
+subject.attach(notifier)
+subject.attach(analytics)
+
+subject.update_state("temperature", 22)
+subject.update_state("humidity", 65)
+subject.detach(notifier)
+subject.update_state("pressure", 1013)
+
+print(analytics.report())  # {'state_changed': 3}</div>
+                <ul>
+                    <li>Subject maintains observer list</li>
+                    <li>Observers notified of state changes</li>
+                    <li>Loose coupling between components</li>
+                </ul>
+                <div><span class="pill">observer</span><span class="pill">pub-sub</span><span class="pill">events</span></div>
+            </div>
+        </div>
+
+        <!-- AdSense Ad Unit - After Design Patterns -->
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-4575646748966866"
+                 data-ad-slot="YOUR_AD_SLOT_ID"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+
+        <hr>
+
+        <div class="section-title">🔬 Modern Python OOP (3.10-3.12)</div>
+
+        <div class="grid">
+            <div class="card">
+                <h2>📐 Protocol (Structural Typing)</h2>
+                <div class="def">PEP 544 • static duck typing • runtime_checkable</div>
+                <div class="snippet">from typing import Protocol, runtime_checkable, List
+from dataclasses import dataclass
+
+@runtime_checkable
+class Drawable(Protocol):
+    def draw(self) -> str: ...
+    
+    @property
+    def area(self) -> float: ...
+
+@runtime_checkable
+class Comparable(Protocol):
+    def __lt__(self, other) -> bool: ...
+
+@dataclass
+class Circle:
+    radius: float
+    
+    def draw(self) -> str:
+        return "○"
+    
+    @property
+    def area(self) -> float:
+        return 3.14159 * self.radius ** 2
+
+@dataclass
+class Square:
+    side: float
+    
+    def draw(self) -> str:
+        return "□"
+    
+    @property
+    def area(self) -> float:
+        return self.side ** 2
+
+class TextDrawable:
+    """No inheritance, just implements required methods"""
+    def __init__(self, text):
+        self.text = text
+        self.area = len(text)  # duck typing - area property
+    
+    def draw(self):
+        return f"'{self.text}'"
+
+def render_all(shapes: List[Drawable]):
+    for shape in shapes:
+        print(f"{shape.draw()} (area: {shape.area:.1f})")
+
+shapes = [
+    Circle(5),
+    Square(4),
+    TextDrawable("Hello")
+]
+render_all(shapes)  # Works for any Drawable-compatible object
+
+# Runtime check
+print(isinstance(Circle(3), Drawable))  # True (with runtime_checkable)
+print(isinstance(TextDrawable("test"), Drawable))  # True
+
+# Generic Protocol
+class SupportsSum(Protocol):
+    def __add__(self, other): ...
+
+def double[T: SupportsSum](x: T) -> T:
+    return x + x
+
+print(double(5))        # 10
+print(double(3.14))     # 6.28
+print(double("abc"))    # abcabc</div>
+                <ul>
+                    <li>Structural typing - no inheritance needed</li>
+                    <li><code>@runtime_checkable</code> enables <code>isinstance()</code></li>
+                    <li>Perfect for adapting external code</li>
+                </ul>
+                <div><span class="pill">Protocol</span><span class="pill">structural</span><span class="pill">type hints</span></div>
+            </div>
+
+            <div class="card">
+                <h4>❄️ Frozen Dataclasses & NamedTuple</h4>
+                <div class="def">Immutable data • hashing • memory efficiency</div>
+                <div class="snippet">from dataclasses import dataclass, field
+from typing import NamedTuple
+from enum import Enum
+
+class Color(Enum):
+    RED = "red"
+    GREEN = "green"
+    BLUE = "blue"
+
+@dataclass(frozen=True, slots=True)  # Python 3.10+ slots with dataclass
+class Point3D:
+    """Immutable 3D point with automatic hashing"""
+    x: float
+    y: float
+    z: float = 0.0
+    
+    def __post_init__(self):
+        # Can't modify frozen instance in __post_init__
+        # Use object.__setattr__ if needed
+        pass
+    
+    def distance_to(self, other: 'Point3D') -> float:
+        return ((self.x-other.x)**2 + (self.y-other.y)**2 + (self.z-other.z)**2) ** 0.5
+    
+    def as_tuple(self):
+        return (self.x, self.y, self.z)
+
+@dataclass(frozen=True)
+class ColorPoint:
+    point: Point3D
+    color: Color
+    name: str = field(compare=False)  # exclude from equality
+    
+    def __hash__(self):
+        return hash((self.point, self.color))
+
+class City(NamedTuple):
+    """NamedTuple - even lighter than dataclass"""
+    name: str
+    population: int
+    country: str
+    coordinates: tuple[float, float]
+    
+    @property
+    def population_density(self):
+        # Can add properties to NamedTuple
+        area = 100  # dummy area
+        return self.population / area
+
+# Usage
+p1 = Point3D(1, 2, 3)
+p2 = Point3D(1, 2, 3)
+print(p1 == p2)  # True (automatic __eq__)
+print(hash(p1))  # Works (frozen=True enables __hash__)
+
+cp = ColorPoint(p1, Color.RED, "start")
+points = {cp}  # Can be used in sets/dict keys
+
+city = City("Tokyo", 37400068, "Japan", (35.6762, 139.6503))
+print(city.name)  # Tokyo
+print(city[0])    # Tokyo (tuple indexing works)</div>
+                <ul>
+                    <li><code>frozen=True</code> creates immutable objects</li>
+                    <li><code>slots=True</code> (3.10+) reduces memory</li>
+                    <li>NamedTuple for simple, lightweight data</li>
+                </ul>
+                <div><span class="pill">frozen</span><span class="pill">immutable</span><span class="pill">NamedTuple</span></div>
+            </div>
+
+            <div class="card">
+                <h4>🔑 TypeVar & Generics <span>type-safe containers</span></h4>
+                <div class="def">PEP 695 (3.12) • TypeVar • Generic types</div>
+                <div class="snippet">from typing import TypeVar, Generic, Iterator, Optional
+from collections.abc import Sequence
+
+# Python 3.11 and earlier
+T = TypeVar('T')
+K = TypeVar('K')
+V = TypeVar('V')
+
+class Stack(Generic[T]):
+    """Generic stack with type safety"""
+    def __init__(self, initial: Optional[list[T]] = None):
+        self._items: list[T] = initial or []
+    
+    def push(self, item: T) -> None:
+        self._items.append(item)
+    
+    def pop(self) -> T:
+        if not self._items:
+            raise IndexError("pop from empty stack")
+        return self._items.pop()
+    
+    def peek(self) -> T:
+        if not self._items:
+            raise IndexError("peek from empty stack")
+        return self._items[-1]
+    
+    def __len__(self) -> int:
+        return len(self._items)
+    
+    def __iter__(self) -> Iterator[T]:
+        return reversed(self._items)
+
+# Python 3.12+ simplified syntax
+class Pair[T, U]:
+    def __init__(self, first: T, second: U):
+        self.first = first
+        self.second = second
+    
+    def __repr__(self):
+        return f"Pair({self.first!r}, {self.second!r})"
+    
+    def swap(self) -> 'Pair[U, T]':
+        return Pair(self.second, self.first)
+
+# Usage
+stack_int: Stack[int] = Stack()
+stack_int.push(1)
+stack_int.push(2)
+print(stack_int.pop())  # 2
+
+stack_str = Stack[str]()
+stack_str.push("hello")
+# stack_str.push(1)  # Type checker would error
+
+pair = Pair(1, "one")
+print(pair)  # Pair(1, 'one')
+swapped = pair.swap()
+print(swapped)  # Pair('one', 1)
+
+# Multiple type variables
+class Dictionary[K, V]:
+    def __init__(self):
+        self._data: dict[K, V] = {}
+    
+    def set(self, key: K, value: V) -> None:
+        self._data[key] = value
+    
+    def get(self, key: K) -> Optional[V]:
+        return self._data.get(key)
+
+d = Dictionary[str, int]()
+d.set("age", 30)
+print(d.get("age"))  # 30</div>
+                <ul>
+                    <li>Type-safe containers with generics</li>
+                    <li>Python 3.12 simplified generic syntax</li>
+                    <li>Better IDE support and type checking</li>
+                </ul>
+                <div><span class="pill">Generic</span><span class="pill">TypeVar</span><span class="pill">type hints</span></div>
+            </div>
+
+            <div class="card">
+                <h4>🧩 Match Statement with Classes</h4>
+                <div class="def">Python 3.10+ • structural pattern matching</div>
+                <div class="snippet">from dataclasses import dataclass
+from typing import Any
+import math
+
+@dataclass
+class Point:
+    x: float
+    y: float
+
+@dataclass
+class Circle:
+    center: Point
+    radius: float
+
+@dataclass
+class Rectangle:
+    top_left: Point
+    bottom_right: Point
+
+@dataclass
+class Line:
+    start: Point
+    end: Point
+
+def describe_shape(shape: Any) -> str:
+    match shape:
+        case Point(x, y):
+            return f"Point at ({x}, {y})"
+        
+        case Circle(Point(x, y), r) if r > 0:
+            area = math.pi * r * r
+            return f"Circle at ({x},{y}) radius={r}, area={area:.1f}"
+        
+        case Circle(_, r):
+            return f"Invalid circle with radius {r}"
+        
+        case Rectangle(Point(x1, y1), Point(x2, y2)):
+            width = abs(x2 - x1)
+            height = abs(y2 - y1)
+            return f"Rectangle {width}×{height}, area={width*height}"
+        
+        case Line(Point(x1, y1), Point(x2, y2)):
+            length = math.hypot(x2-x1, y2-y1)
+            return f"Line from ({x1},{y1}) to ({x2},{y2}), length={length:.1f}"
+        
+        case _:
+            return f"Unknown shape: {shape}"
+
+shapes = [
+    Point(3, 4),
+    Circle(Point(0, 0), 5),
+    Rectangle(Point(1, 1), Point(4, 5)),
+    Line(Point(0, 0), Point(3, 4))
+]
+
+for shape in shapes:
+    print(describe_shape(shape))
+
+# Match with guards and conditions
+def process_command(cmd):
+    match cmd.split():
+        case ["quit"]:
+            return "Goodbye!"
+        case ["load", filename] if filename.endswith(('.txt', '.md')):
+            return f"Loading text file: {filename}"
+        case ["load", filename]:
+            return f"Unknown file type: {filename}"
+        case ["save", filename, *rest] if rest:
+            return f"Save with extra args: {rest}"
+        case ["save", filename]:
+            return f"Saving to {filename}"
+        case _:
+            return "Unknown command"</div>
+                <ul>
+                    <li>Pattern matching with class structures</li>
+                    <li>Guards (<code>if</code>) for additional conditions</li>
+                    <li>Clean alternative to if-elif chains</li>
+                </ul>
+                <div><span class="pill">match</span><span class="pill">pattern matching</span><span class="pill">3.10+</span></div>
+            </div>
+        </div>
+
+        <!-- AdSense Ad Unit - After Modern Python -->
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-4575646748966866"
+                 data-ad-slot="YOUR_AD_SLOT_ID"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+
+        <hr>
+
+        <div class="section-title">⚡ Quick Reference</div>
+
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin: 1.5rem 0;">
+            <div class="card">
+                <h4>📋 Dunder Methods Cheat Sheet</h4>
+                <ul style="margin:0;">
+                    <li><code>__init__(self, ...)</code> – constructor</li>
+                    <li><code>__new__(cls, ...)</code> – instance creator</li>
+                    <li><code>__del__(self)</code> – destructor</li>
+                    <li><code>__repr__(self)</code> – debug representation</li>
+                    <li><code>__str__(self)</code> – user-friendly string</li>
+                    <li><code>__format__(self, spec)</code> – formatting</li>
+                    <li><code>__bytes__(self)</code> – bytes conversion</li>
+                    <li><code>__hash__(self)</code> – hash for dict keys</li>
+                    <li><code>__bool__(self)</code> – truthiness</li>
+                    <li><code>__len__(self)</code> – container length</li>
+                    <li><code>__getitem__(self, key)</code> – indexing</li>
+                    <li><code>__setitem__(self, key, val)</code> – assignment</li>
+                    <li><code>__delitem__(self, key)</code> – deletion</li>
+                    <li><code>__iter__(self)</code> – iterator</li>
+                    <li><code>__next__(self)</code> – next value</li>
+                    <li><code>__contains__(self, item)</code> – membership</li>
+                    <li><code>__call__(self, ...)</code> – callable object</li>
+                    <li><code>__enter__ / __exit__</code> – context manager</li>
+                    <li><code>__add__, __sub__, __mul__</code> – arithmetic</li>
+                    <li><code>__eq__, __ne__, __lt__, __gt__</code> – comparisons</li>
+                    <li><code>__getattr__, __setattr__</code> – dynamic attrs</li>
+                    <li><code>__getattribute__</code> – all attribute access</li>
+                    <li><code>__dir__(self)</code> – dir() listing</li>
+                    <li><code>__slots__</code> – memory optimization</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h4>🧪 SOLID Principles</h4>
+                <ul>
+                    <li><strong>S</strong>ingle Responsibility: One class, one job</li>
+                    <li><strong>O</strong>pen/Closed: Open for extension, closed for modification</li>
+                    <li><strong>L</strong>iskov Substitution: Subtypes must be substitutable for base types</li>
+                    <li><strong>I</strong>nterface Segregation: Many specific interfaces better than one general</li>
+                    <li><strong>D</strong>ependency Inversion: Depend on abstractions, not concretions</li>
+                </ul>
+                <div style="margin-top:1rem;">
+                    <span class="pill">SRP</span>
+                    <span class="pill">OCP</span>
+                    <span class="pill">LSP</span>
+                    <span class="pill">ISP</span>
+                    <span class="pill">DIP</span>
+                </div>
+                <h4 style="color:#ffd75f; margin:1.5rem 0 0.5rem;">📏 Design Principles</h4>
+                <ul>
+                    <li><strong>DRY</strong> – Don't Repeat Yourself</li>
+                    <li><strong>KISS</strong> – Keep It Simple, Stupid</li>
+                    <li><strong>YAGNI</strong> – You Ain't Gonna Need It</li>
+                    <li><strong>Composition over Inheritance</strong></li>
+                    <li><strong>Program to an Interface</strong></li>
+                    <li><strong>Tell, Don't Ask</strong></li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h4>🔧 Useful Built-in Functions</h4>
+                <ul>
+                    <li><code>isinstance(obj, Class)</code> – type check</li>
+                    <li><code>issubclass(Derived, Base)</code> – subclass check</li>
+                    <li><code>hasattr(obj, 'attr')</code> – attribute exists</li>
+                    <li><code>getattr(obj, 'attr', default)</code> – safe get</li>
+                    <li><code>setattr(obj, 'attr', val)</code> – set attribute</li>
+                    <li><code>delattr(obj, 'attr')</code> – delete attribute</li>
+                    <li><code>dir(obj)</code> – list attributes</li>
+                    <li><code>vars(obj)</code> – instance __dict__</li>
+                    <li><code>type(obj)</code> – get class</li>
+                    <li><code>id(obj)</code> – unique identifier</li>
+                    <li><code>callable(obj)</code> – check if callable</li>
+                    <li><code>super()</code> – proxy to parent</li>
+                    <li><code>@property</code> – getter/setter</li>
+                    <li><code>@classmethod</code> – class methods</li>
+                    <li><code>@staticmethod</code> – static methods</li>
+                    <li><code>@functools.total_ordering</code> – fill comparisons</li>
+                </ul>
+                <h3 style="color:#ffd75f; margin:1.5rem 0 0.5rem;">🧰 Standard Library Helpers</h3>
+                <ul>
+                    <li><code>dataclasses.dataclass</code></li>
+                    <li><code>abc.ABC, @abstractmethod</code></li>
+                    <li><code>typing.Protocol</code></li>
+                    <li><code>enum.Enum</code></li>
+                    <li><code>functools.wraps</code></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- AdSense Ad Unit - Before Footer -->
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-4575646748966866"
+                 data-ad-slot="YOUR_AD_SLOT_ID"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+
+        <hr>
+
+        <div style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: space-between; align-items: start; margin: 2rem 0;">
+            <div style="min-width: 200px;">
+                <h4 style="color: #ffd75f; margin-bottom: 1rem;">📘 Best Practices</h4>
+                <ul style="list-style: none;">
+                    <li style="border: none; padding: 0.3rem 0;">✓ Use dataclasses for data containers</li>
+                    <li style="border: none; padding: 0.3rem 0;">✓ Prefer composition over inheritance</li>
+                    <li style="border: none; padding: 0.3rem 0;">✓ Use @property for computed attributes</li>
+                    <li style="border: none; padding: 0.3rem 0;">✓ Keep classes focused (SRP)</li>
+                    <li style="border: none; padding: 0.3rem 0;">✓ Use __slots__ for millions of objects</li>
+                    <li style="border: none; padding: 0.3rem 0;">✓ Write type hints for better IDE support</li>
+                </ul>
+            </div>
+            <div style="min-width: 200px;">
+                <h4 style="color: #ffd75f; margin-bottom: 1rem;">⚠️ Common Pitfalls</h4>
+                <ul style="list-style: none;">
+                    <li style="border: none; padding: 0.3rem 0;">✗ Mutable default arguments</li>
+                    <li style="border: none; padding: 0.3rem 0;">✗ Forgetting super() in inheritance</li>
+                    <li style="border: none; padding: 0.3rem 0;">✗ Deep inheritance hierarchies</li>
+                    <li style="border: none; padding: 0.3rem 0;">✗ Overusing __getattribute__</li>
+                    <li style="border: none; padding: 0.3rem 0;">✗ Not using @wraps in decorators</li>
+                </ul>
+            </div>
+            <div style="min-width: 250px;">
+                <h4 style="color: #ffd75f; margin-bottom: 1rem;">📚 Recommended Resources</h4>
+                <ul style="list-style: none;">
+                    <li style="border: none; padding: 0.3rem 0;">📖 Fluent Python – Luciano Ramalho</li>
+                    <li style="border: none; padding: 0.3rem 0;">📖 Python Cookbook – David Beazley</li>
+                    <li style="border: none; padding: 0.3rem 0;">📖 Design Patterns – Gamma et al.</li>
+                    <li style="border: none; padding: 0.3rem 0;">🔗 docs.python.org/3/tutorial/classes</li>
+                    <li style="border: none; padding: 0.3rem 0;">🔗 mypy.readthedocs.io</li>
+                </ul>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="tip">
+            <strong>🚀 Pro Tips:</strong>
+            <ul style="margin-top:0.8rem; list-style:none;">
+                <li style="border:none; padding:0.2rem 0;">• <code>__new__</code> runs before <code>__init__</code> – use for immutable types</li>
+                <li style="border:none; padding:0.2rem 0;">• <code>super()</code> follows MRO – essential for multiple inheritance</li>
+                <li style="border:none; padding:0.2rem 0;">• Use <code>@functools.total_ordering</code> to fill missing comparisons</li>
+                <li style="border:none; padding:0.2rem 0;">• <code>__slots__</code> can reduce memory usage by 40-60%</li>
+                <li style="border:none; padding:0.2rem 0;">• Dataclasses + <code>frozen=True</code> = immutable, hashable objects</li>
+                <li style="border:none; padding:0.2rem 0;">• Protocols enable structural typing without inheritance</li>
+            </ul>
+        </div>
+
+        <div class="footer">
+            <p>🖥️ PYTHON OOP Cheat Sheet • 2026 Edition • With Examples • And Design Patterns • Modern Python 3.12+</p>
+            <p style="font-size:0.9rem; margin-top:0.5rem;">MIT License • Built with data precision and autheticated information.--By: Glenn Junsay Pansensoy</p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('downloadBtn').addEventListener('click', function() {
+            const sheet = document.getElementById('cheatSheetContainer');
+            const style = document.querySelector('style').innerHTML;
+            const htmlContent = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python OOP Mastery 2025 - Complete Cheat Sheet</title>
+    <meta name="description" content="Complete Python OOP cheat sheet with 50+ examples, 15+ design patterns, SOLID principles, and modern Python 3.12+ features.">
+    <meta name="keywords" content="Python OOP, classes, inheritance, dunder methods, design patterns, SOLID Python, dataclasses, descriptors, metaclasses">
+    <style>
+        ${style}
+    </style>
+</head>
+<body>
+    ${sheet.outerHTML}
+</body>
+</html>`;
+
+            const blob = new Blob([htmlContent], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'python_oop_mastery_cheat_sheet_2025.html';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        });
+    </script>
+</body>
+</html>
