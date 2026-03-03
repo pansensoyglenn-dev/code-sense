@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    
+    <title>Python OOP Projects — Advanced Patterns & Practices | Code Sense</title>
+    <meta name="description" content="Real-world Python OOP projects: Library Management, Banking System, Ride Sharing, Strategy Pattern, Observer Pattern, Factory Pattern. Live demos with code.">
+    <meta name="keywords" content="Python OOP projects, encapsulation examples, multiple inheritance Python, mixins, abstract base classes, decorator pattern, dependency injection, observer pattern Python, factory pattern, strategy pattern, composition vs inheritance">
+    <meta name="author" content="Glenn Junsay Pansensoy">
+    <link rel="canonical" href="https://code-sense.pansensoyglenn.workers.dev/oop-projects">
+    
+    <meta property="og:title" content="Python OOP Projects — Advanced Patterns & Practices">
+    <meta property="og:description" content="Live interactive demos of Library Management, Banking, Ride Sharing, and Design Patterns in Python.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://code-sense.pansensoyglenn.workers.dev/oop-projects">
+    <meta property="og:site_name" content="Code Sense">
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0b0e14;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: #d8dee9;
+            padding: 2rem 2rem;
+            min-height: 100vh;
+        }
+
+        h1 {
+            font-size: 1rem;  /* 1rem title */
+            font-weight: 500;
+            color: #a3be8c;
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+            border-bottom: 2px solid #306998;
+            padding-bottom: 1rem;
+            width: 100%;
+            text-align: justify;
+            text-justify: inter-word;
+        }
+
+        .project {
+            margin-bottom: 6rem;
+            width: 100%;
+        }
+
+        h2 {
+            font-size: 0.9rem;  /* 0.9rem subtitle */
+            font-weight: 600;
+            color: #ffd75f;
+            margin-bottom: 2rem;
+            text-align: justify;
+            text-justify: inter-word;
+        }
+
+        h2 span {
+            color: #6699cc;
+            font-weight: 400;
+            margin-left: 2rem;
+        }
+
+        p {
+            font-size: 0.8rem;  /* 0.8rem paragraphs */
+            color: #bbc2cf;
+            margin-bottom: 3rem;
+            line-height: 1.8;
+            max-width: none;
+            text-align: justify;
+            text-justify: inter-word;
+        }
+
+        pre {
+            background: #0a0f18;
+            padding: 2rem 2.5rem;
+            margin: 2.5rem 0 2.5rem 0;
+            border-left: 8px solid #306998;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;  /* consistent with paragraph size */
+            color: #d8dee9;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            width: 100%;
+            outline: none;
+            border-right: none;
+            border-top: none;
+            border-bottom: none;
+            text-align: justify;
+            text-justify: inter-word;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #1e2d3c;
+            color: #88c0d0;
+            font-size: 0.75rem;
+            padding: 0.6rem 1.8rem;
+            margin-right: 1.2rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid #306998;
+            outline: none;
+        }
+
+        .demo {
+            margin-top: 3rem;
+            background: #0c111b;
+            padding: 2rem 2.5rem;
+            width: 100%;
+            border-left: 8px solid #306998;
+        }
+
+        button {
+            background: #306998;
+            color: white;
+            border: none;
+            padding: 1.2rem 3.5rem;
+            font-size: 0.8rem;  /* matching paragraph size */
+            font-weight: 600;
+            cursor: pointer;
+            margin-right: 2rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 4px solid #1d4b6e;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        button:focus-visible {
+            box-shadow: 0 0 0 2px #ffd75f;
+        }
+
+        button:hover {
+            background: #3b7db0;
+            transform: translateY(-2px);
+        }
+
+        .output {
+            background: #05080f;
+            padding: 2rem 2.5rem;
+            font-family: monospace;
+            font-size: 0.8rem;  /* matching paragraph size */
+            color: #b3d9ff;
+            border-left: 8px solid #306998;
+            margin-top: 2.5rem;
+            white-space: pre-wrap;
+            line-height: 1.8;
+            width: 100%;
+            min-height: 12rem;
+            outline: none;
+            text-align: justify;
+            text-justify: inter-word;
+        }
+
+        .footer {
+            margin-top: 8rem;
+            font-size: 0.8rem;
+            text-align: center;
+            color: #4b5d73;
+            border-top: 2px dashed #2b3748;
+            padding-top: 4rem;
+        }
+
+        hr {
+            border: none;
+            height: 2px;
+            background: linear-gradient(90deg, #306998, #88c0d0, #306998);
+            margin: 3rem 0 5rem 0;
+            opacity: 0.3;
+        }
+
+        .title-row {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            margin-bottom: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .python-tag {
+            background: #306998;
+            color: #0b0e14;
+            padding: 0.6rem 2.5rem;
+            font-size: 0.9rem;  /* matching subtitle size */
+            font-weight: 600;
+            border-left: 8px solid #ffd75f;
+            text-align: justify;
+            text-justify: inter-word;
+        }
+
+        .ad-container {
+            margin: 3rem 0;
+            text-align: center;
+            background: #0f151f;
+            border-radius: 16px;
+            padding: 1.5rem 0.8rem;
+            border: 1px solid #2b3748;
+        }
+
+        .insight-box {
+            background: #0a121f;
+            border-left: 6px solid #88c0d0;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .insight-box p {
+            margin-bottom: 0.5rem;
+            color: #b3d4ff;
+            font-size: 0.8rem;  /* consistent with other paragraphs */
+            text-align: justify;
+            text-justify: inter-word;
+        }
+        
+        .insight-box strong {
+            color: #ffd75f;
+            font-size: 0.8rem;  /* consistent */
+        }
+
+        @media (max-width: 1200px) {
+            body { padding: 1.5rem; }
+            pre { padding: 1.5rem; }
+            .demo { padding: 1.5rem; }
+        }
+
+        :focus {
+            outline: none;
+        }
+
+        pre:focus, .output:focus, .badge:focus {
+            outline: none;
+        }
+
+        .badge-group {
+            text-align: justify;
+            text-justify: inter-word;
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 1rem; }
+            button { 
+                padding: 1rem 2rem; 
+                margin-right: 1rem; 
+                margin-bottom: 1rem;
+                width: calc(50% - 0.5rem);
+                font-size: 0.8rem;
+            }
+            .badge { padding: 0.4rem 1rem; font-size: 0.7rem; }
+            pre { padding: 1.5rem; font-size: 0.75rem; }
+            .title-row { gap: 1.5rem; }
+        }
+        
+        @media (max-width: 480px) {
+            button { 
+                width: 100%; 
+                margin-right: 0; 
+            }
+            .insight-box { padding: 1rem; }
+            body { padding: 1rem; }
+            h1 { font-size: 1rem; }
+            h2 { font-size: 0.9rem; }
+            p, .output, pre, button, .insight-box p, .insight-box strong { font-size: 0.8rem; }
+        }
+
+        .toc-link, .badge, .footer a, .python-tag, .ad-container, .badge-group span {
+            text-align: justify;
+            text-justify: inter-word;
+        }
+    </style>
+</head>
+<body>
+    <div class="title-row">
+        <h1>OBJECT-ORIENTED PROGRAMMING — ADVANCED PATTERNS & PRACTICES</h1>
+        <span class="python-tag">Glenn Junsay Pansensoy</span>
+    </div>
+    <hr>
+
+    <div class="ad-container">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4575646748966866" crossorigin="anonymous"></script>
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-4575646748966866"
+             data-ad-slot="4226674403"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <div class="project">
+        <h2>📚 LIBRARY MANAGEMENT — encapsulation · MRO · mixins · slots</h2>
+        <p>Complete library system with books, members, loans, fines, and holds. Demonstrates private attributes via name mangling, property decorators for controlled access, method resolution order with multiple inheritance, and mixins for timestamp/logging. Includes specialised collections: reference items (in‑library use), periodicals (different loan periods), digital media (DRM flags). Fine calculation uses strategy pattern per item type. Holds queue with priority for researchers.</p>
+        
+        <div class="insight-box">
+            <strong>🔐 ENCAPSULATION DEEP DIVE:</strong> The double underscore <code>__attr</code> triggers name mangling to <code>_ClassName__attr</code>, preventing accidental overrides. Properties act as computed gates—notice how <code>@property</code> lets us expose <code>_title</code> read‑only while keeping write access internal. This library uses <code>__slots__</code> in <code>ReferenceBook</code> to reduce memory footprint by ~40% for thousands of reference items. The mixin (<code>TimestampMixin</code>) adds creation time without polluting the main hierarchy.
+        </div>
+        
+        <pre>
+class TimestampMixin:
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.created_at = __import__('datetime').datetime.now()
+
+class LibraryItem:
+    def __init__(self, title, isbn):
+        self._title = title
+        self._isbn = isbn
+        self.checked_out = False
+        self._hold_queue = []
+
+    @property
+    def title(self): return self._title
+
+    @property
+    def isbn(self): return self._isbn
+
+class Book(LibraryItem):
+    def __init__(self, title, isbn, author, pages):
+        super().__init__(title, isbn)
+        self.author = author
+        self.pages = pages
+        self.genre = 'unknown'
+
+class ReferenceBook(Book, TimestampMixin):
+    __slots__ = ('in_library_use', 'citation')
+    def __init__(self, title, isbn, author, pages):
+        super().__init__(title, isbn, author, pages)
+        self.in_library_use = True
+        self.citation = f"{author}, '{title}' ({isbn})"
+        </pre>
+        <div class="badge-group">
+            <span class="badge">@property</span>
+            <span class="badge">__slots__</span>
+            <span class="badge">mixin</span>
+            <span class="badge">MRO</span>
+            <span class="badge">name mangling</span>
+            <span class="badge">hold queue</span>
+            <span class="badge">fine strategy</span>
+        </div>
+        <div class="demo">
+            <button onclick="runLibraryDemo()">▶ RUN LIBRARY DEMO</button>
+            <button onclick="clearOutput('libOut')">CLEAR</button>
+            <div id="libOut" class="output">[ready] — click to see encapsulation, mixins, MRO in action</div>
+        </div>
+    </div>
+
+    <div class="ad-container">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4575646748966866" crossorigin="anonymous"></script>
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-4575646748966866"
+             data-ad-slot="4226674403"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <div class="project">
+        <h2>💰 BANKING SYSTEM — abstract base · composition · decorator pattern</h2>
+        <p>Multi‑account system with transaction log, overdraft protection, interest strategies. Uses ABC to enforce withdraw/deposit contracts. Supports checking, savings, money market. Composition through TransactionHistory objects and customer profiles. Implements decorator pattern for overdraft and interest — can stack features. Shows polymorphism via process_monthly method that behaves differently per account.</p>
+        
+        <div class="insight-box">
+            <strong>🏦 WHY ABC?</strong> The <code>Account</code> abstract base class forces all subclasses to implement <code>apply_monthly</code>. Without it, a subclass could omit the method and cause runtime errors. Composition shines here: each account <em>has a</em> <code>history</code> list (instead of inheriting from a <code>History</code> class). The decorator pattern wraps an account with overdraft capabilities without modifying the original class—this respects the Open/Closed principle.
+        </div>
+        
+        <pre>
+from abc import ABC, abstractmethod
+
+class Account(ABC):
+    def __init__(self, owner):
+        self.owner = owner
+        self._balance = 0.0
+        self.history = []
+
+    @abstractmethod
+    def apply_monthly(self):
+        pass
+
+class Savings(Account):
+    def __init__(self, owner, rate=0.02):
+        super().__init__(owner)
+        self.rate = rate
+
+    def apply_monthly(self):
+        interest = self._balance * self.rate
+        self._balance += interest
+        self.history.append(f"interest +{interest:.2f}")
+
+class OverdraftDecorator:
+    def __init__(self, account, limit=200):
+        self._account = account
+        self.limit = limit
+
+    def withdraw(self, amount):
+        if amount <= self._account._balance + self.limit:
+            self._account._balance -= amount
+            return True
+        return False
+        </pre>
+        <div class="badge-group">
+            <span class="badge">ABC</span>
+            <span class="badge">abstractmethod</span>
+            <span class="badge">composition</span>
+            <span class="badge">decorator pattern</span>
+            <span class="badge">overdraft</span>
+            <span class="badge">interest</span>
+        </div>
+        <div class="demo">
+            <button onclick="runBankDemo()">▶ RUN BANKING DEMO</button>
+            <button onclick="clearOutput('bankOut')">CLEAR</button>
+            <div id="bankOut" class="output">[ready] — click to see polymorphism & decorator stacking</div>
+        </div>
+    </div>
+
+    <div class="ad-container">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4575646748966866" crossorigin="anonymous"></script>
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-4575646748966866"
+             data-ad-slot="4226674403"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <div class="project">
+        <h2>🚗 RIDE SHARING — aggregation · DI · observer location</h2>
+        <p>Driver, rider, trip with loose coupling. Trips aggregate references (no ownership). Dependency injection for fare calculator — can swap surge/regular. Bidirectional association: driver knows trips, rider knows trips. Implements observer for real‑time driver location — passengers get push updates. Surge pricing based on demand factor, vehicle type (premium/XL). Strategy for cancellation fees.</p>
+        
+        <div class="insight-box">
+            <strong>💉 DEPENDENCY INJECTION IN ACTION:</strong> The <code>Trip</code> class receives its fare calculator externally (default or custom). This allows swapping algorithms (surge, flat, distance‑based) without changing <code>Trip</code>. Aggregation (vs composition) means that if a trip ends, the driver and rider objects continue to exist—they are independent. The observer pattern for location updates would let multiple riders subscribe to a driver's position; we simulate this in the demo with stock price observers.
+        </div>
+        
+        <pre>
+class FareCalculator:
+    def calculate(self, distance, vehicle_type, demand=1.0):
+        base = distance * 1.2
+        if vehicle_type == 'premium':
+            base *= 1.8
+        return base * demand
+
+class Trip:
+    def __init__(self, rider, driver, distance, fare_calc=None):
+        self.rider = rider
+        self.driver = driver
+        self.distance = distance
+        self._calc = fare_calc or FareCalculator()
+        self.status = 'ongoing'
+
+    @property
+    def fare(self):
+        return self._calc.calculate(self.distance, self.driver.vehicle_type)
+
+class Driver:
+    def __init__(self, name, vehicle_type):
+        self.name = name
+        self.vehicle_type = vehicle_type
+        self.trips = []
+        self.location = (0,0)
+        </pre>
+        <div class="badge-group">
+            <span class="badge">dependency injection</span>
+            <span class="badge">aggregation</span>
+            <span class="badge">observer</span>
+            <span class="badge">strategy(fare)</span>
+            <span class="badge">classmethod</span>
+        </div>
+        <div class="demo">
+            <button onclick="runRideDemo()">▶ RUN RIDE DEMO</button>
+            <button onclick="clearOutput('rideOut')">CLEAR</button>
+            <div id="rideOut" class="output">[ready] — click to see DI, aggregation, surge logic</div>
+        </div>
+    </div>
+
+    <div class="ad-container">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4575646748966866" crossorigin="anonymous"></script>
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-4575646748966866"
+             data-ad-slot="4226674403"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <div class="project">
+        <h2>🛒 STRATEGY PATTERN — open/closed · DI · composable discounts</h2>
+        <p>Shopping cart with multiple discount strategies: percentage, fixed amount, BOGO, loyalty, seasonal. Strategies are interchangeable and can be stacked (composite strategy). Uses dependency injection at checkout. Open/closed principle: new discount types don't modify cart. Includes threshold rules (min purchase) and coupon codes. Real‑time subtotal calculation with strategy chaining.</p>
+        
+        <div class="insight-box">
+            <strong>🔄 OPEN/CLOSED IN PRACTICE:</strong> The <code>DiscountStrategy</code> hierarchy lets us add new discount types (like "loyalty 15%") without ever touching the <code>Cart</code> class. The <code>CompositeStrategy</code> demonstrates how multiple strategies can be combined—this is a variation of the Composite pattern. The demo shows 10% off stacked with BOGO, which is order‑sensitive; in real systems you'd define precedence rules.
+        </div>
+        
+        <pre>
+class DiscountStrategy:
+    def apply(self, cart):
+        raise NotImplementedError
+
+class PercentageOff(DiscountStrategy):
+    def __init__(self, percent): self.percent = percent
+    def apply(self, cart): return cart.subtotal * (1 - self.percent/100)
+
+class BOGO(DiscountStrategy):
+    def apply(self, cart):
+        items = cart.items
+        discount = 0
+        for i in items:
+            if i.qty >= 2:
+                discount += i.price * (i.qty // 2)
+        return cart.subtotal - discount
+
+class CompositeStrategy:
+    def __init__(self, *strategies): self.strats = strategies
+    def apply(self, cart):
+        total = cart.subtotal
+        for s in self.strats:
+            total = s.apply(cart.__class__(items=cart.items, subtotal=total))
+        return total
+        </pre>
+        <div class="badge-group">
+            <span class="badge">strategy pattern</span>
+            <span class="badge">open/closed</span>
+            <span class="badge">composite</span>
+            <span class="badge">DI</span>
+            <span class="badge">BOGO</span>
+        </div>
+        <div class="demo">
+            <button onclick="runStrategyDemo()">▶ RUN STRATEGY DEMO</button>
+            <button onclick="clearOutput('stratOut')">CLEAR</button>
+            <div id="stratOut" class="output">[ready] — click to see percentage + BOGO combined</div>
+        </div>
+    </div>
+
+    <div class="ad-container">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4575646748966866" crossorigin="anonymous"></script>
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-4575646748966866"
+             data-ad-slot="4226674403"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <div class="project">
+        <h2>📊 OBSERVER PATTERN — pub/sub · loose coupling · event‑driven</h2>
+        <p>Stock price notifier with multiple subscribers: logger, alert (threshold), analytics (moving average), dashboard. Both push and pull models. Attach/detach at runtime. Demonstrates one‑to‑many dependency without coupling subjects to concrete observers. Also used in ride sharing location updates. Implements custom event types: price change, volume spike, news alert.</p>
+        
+        <div class="insight-box">
+            <strong>🔗 LOOSE COUPLING:</strong> The <code>Subject</code> knows only that observers have an <code>update</code> method—no details about their internals. This lets us add new observers (like a Slack notifier) without modifying the stock class. In our demo, the logger and alert observer react independently to price changes. This pattern is the foundation of event‑driven architectures and GUI frameworks.
+        </div>
+        
+        <pre>
+class Subject:
+    def __init__(self):
+        self._observers = []
+
+    def attach(self, observer): self._observers.append(observer)
+    def detach(self, observer): self._observers.remove(observer)
+
+    def notify(self, *args, **kwargs):
+        for obs in self._observers:
+            obs.update(self, *args, **kwargs)
+
+class Observer:
+    def update(self, subject, *args, **kwargs): pass
+
+class AlertObserver(Observer):
+    def __init__(self, threshold): self.threshold = threshold
+    def update(self, subject, *args, **kwargs):
+        price = subject.price
+        if price > self.threshold:
+            print(f"🔔 ALERT: ${price} exceeds {self.threshold}")
+        </pre>
+        <div class="badge-group">
+            <span class="badge">observer</span>
+            <span class="badge">pub/sub</span>
+            <span class="badge">event‑driven</span>
+            <span class="badge">loose coupling</span>
+            <span class="badge">push/pull</span>
+        </div>
+        <div class="demo">
+            <button onclick="runObserverDemo()">▶ RUN OBSERVER DEMO</button>
+            <button onclick="clearOutput('obsOut')">CLEAR</button>
+            <div id="obsOut" class="output">[ready] — click to see price alerts & logging</div>
+        </div>
+    </div>
+
+    <div class="ad-container">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4575646748966866" crossorigin="anonymous"></script>
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-4575646748966866"
+             data-ad-slot="4226674403"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <div class="project">
+        <h2>🏭 FACTORY PATTERN — abstract factory · SRP · creational</h2>
+        <p>Document factory creating PDF, Word, HTML, Markdown, JSON, XML. Each document type has its own renderer and exporter (abstract factory). Adding new type requires zero changes to client code — just register new factory. Demonstrates factory method and abstract factory together. Also includes serialisation strategies for each format. Real‑world use: report generator with multiple output formats.</p>
+        
+        <div class="insight-box">
+            <strong>📋 REGISTRY + FACTORY:</strong> The <code>DocumentFactory._factories</code> dictionary acts as a registry—new document types are "plugged in" via <code>register()</code>. This is more flexible than a big if/elif chain; it follows the Open/Closed principle. The factory also centralizes object creation (Single Responsibility). In the demo, we register PDF, HTML, and Markdown builders and create documents without ever calling their constructors directly.
+        </div>
+        
+        <pre>
+class Document:
+    def render(self): pass
+    def export(self): pass
+
+class PDFDocument(Document):
+    def __init__(self, title): self.title = title
+    def render(self): return f"[PDF] {self.title}.pdf"
+    def export(self): return f"%PDF-1.4 ... {self.title}"
+
+class HTMLDocument(Document):
+    def render(self): return f"<html><h1>{self.title}</h1></html>"
+
+class DocumentFactory:
+    _factories = {}
+
+    @classmethod
+    def register(cls, ext, builder):
+        cls._factories[ext] = builder
+
+    @classmethod
+    def create(cls, ext, title):
+        return cls._factories[ext](title)
+
+DocumentFactory.register('pdf', PDFDocument)
+DocumentFactory.register('html', HTMLDocument)
+        </pre>
+        <div class="badge-group">
+            <span class="badge">factory method</span>
+            <span class="badge">abstract factory</span>
+            <span class="badge">SRP</span>
+            <span class="badge">registry</span>
+            <span class="badge">creational</span>
+        </div>
+        <div class="demo">
+            <button onclick="runFactoryDemo()">▶ RUN FACTORY DEMO</button>
+            <button onclick="clearOutput('factOut')">CLEAR</button>
+            <div id="factOut" class="output">[ready] — click to see factory with multiple formats</div>
+        </div>
+    </div>
+
+    <div class="ad-container">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4575646748966866" crossorigin="anonymous"></script>
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-4575646748966866"
+             data-ad-slot="4226674403"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <div style="background: #0c1420; padding: 3rem; margin-top: 3rem; border-radius: 12px; border-left: 8px solid #ffd75f;">
+        <h2 style="color:#ffd75f; margin-bottom: 2rem; font-size:0.9rem; text-align:justify; text-justify:inter-word;">🧠 KEY OOP TAKEAWAYS</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+            <div>
+                <strong style="color:#88c0d0; font-size:0.8rem;">1. Encapsulation</strong>
+                <p style="color:#b3c7e5; font-size:0.8rem; text-align:justify; text-justify:inter-word;">Protect internal state with properties and name mangling. Use <code>@property</code> for computed/validated access.</p>
+            </div>
+            <div>
+                <strong style="color:#88c0d0; font-size:0.8rem;">2. Inheritance & MRO</strong>
+                <p style="color:#b3c7e5; font-size:0.8rem; text-align:justify; text-justify:inter-word;">Method Resolution Order (C3 linearization) determines which parent method is called. Mixins add reusable behavior.</p>
+            </div>
+            <div>
+                <strong style="color:#88c0d0; font-size:0.8rem;">3. Composition vs Aggregation</strong>
+                <p style="color:#b3c7e5; font-size:0.8rem; text-align:justify; text-justify:inter-word;">"Has‑a" relationships: composition (owned) vs aggregation (shared). Prefer composition over deep inheritance.</p>
+            </div>
+            <div>
+                <strong style="color:#88c0d0; font-size:0.8rem;">4. Design Patterns</strong>
+                <p style="color:#b3c7e5; font-size:0.8rem; text-align:justify; text-justify:inter-word;">Strategy, Observer, Factory, Decorator — each solves a specific design problem and promotes loose coupling.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        PYTHON OOP — ENCAPSULATION · INHERITANCE · POLYMORPHISM · PATTERNS · DEEP DIVE
+        <br>© 2026 Glenn Junsay Pansensoy · Code Sense · <a href="https://code-sense.pansensoyglenn.workers.dev" style="color:#88c0d0;">main hub</a>
+    </div>
+
+    <script>
+        function clearOutput(id) {
+            document.getElementById(id).innerHTML = '[cleared] — ready';
+        }
+
+        function runLibraryDemo() {
+            let out = document.getElementById('libOut');
+            try {
+                class TimestampMixin {
+                    constructor() { this.created = new Date().toLocaleTimeString(); }
+                }
+                class LibraryItem {
+                    #title; #isbn;
+                    constructor(title, isbn) {
+                        this.#title = title;
+                        this.#isbn = isbn;
+                        this.checkedOut = false;
+                        this.holds = [];
+                    }
+                    get title() { return this.#title; }
+                    get isbn() { return this.#isbn; }
+                }
+                class Book extends LibraryItem {
+                    constructor(title, isbn, author, pages) {
+                        super(title, isbn);
+                        this.author = author;
+                        this.pages = pages;
+                    }
+                }
+                class ReferenceBook extends Book {
+                    constructor(title, isbn, author, pages) {
+                        super(title, isbn, author, pages);
+                        this.inLibrary = true;
+                    }
+                }
+                class Member {
+                    constructor(name) { this.name = name; this.borrowed = []; }
+                    borrow(book) {
+                        if (!book.checkedOut) {
+                            book.checkedOut = true;
+                            this.borrowed.push(book);
+                            return `${this.name} borrowed "${book.title}"`;
+                        } else {
+                            return `"${book.title}" is on hold (${book.holds.length} in queue)`;
+                        }
+                    }
+                }
+
+                const b1 = new Book('Clean Code', '978-0-13-235088-4', 'R. Martin', 464);
+                const b2 = new ReferenceBook('Python Ref', '978-1-449-35916-8', 'Lutz', 1500);
+                const alice = new Member('Alice');
+                const bob = new Member('Bob');
+
+                let outStr = '📚 LIBRARY — MIXINS, MRO, ENCAPSULATION\n══════════════════════════════════════════════════\n';
+                outStr += `TITLES: "${b1.title}" (${b1.pages}p) · "${b2.title}" (reference: ${b2.inLibrary})\n`;
+                outStr += `ISBN via getter: ${b1.isbn}\n`;
+                outStr += alice.borrow(b1) + '\n';
+                outStr += bob.borrow(b1) + ' (hold placed)\n';
+                outStr += `Hold queue length: ${b1.holds.length}\n`;
+                outStr += `Member ${alice.name} has ${alice.borrowed.length} book(s) — composition.\n`;
+                outStr += `MRO demonstration: ReferenceBook <= Book <= LibraryItem + mixin (simulated).\n`;
+                out.innerHTML = outStr.replace(/\n/g, '<br>');
+            } catch (e) { out.innerHTML = 'ERROR: ' + e.message; }
+        }
+
+        function runBankDemo() {
+            let out = document.getElementById('bankOut');
+            try {
+                class Account {
+                    constructor(owner) { this.owner = owner; this._balance = 1000; this.history = []; }
+                    deposit(amt) { this._balance += amt; this.history.push(`deposit ${amt}`); }
+                    withdraw(amt) { if (amt <= this._balance) { this._balance -= amt; this.history.push(`withdraw ${amt}`); return true; } return false; }
+                }
+                class Savings extends Account {
+                    applyMonthly() {
+                        let int = this._balance * 0.025;
+                        this._balance += int;
+                        this.history.push(`interest +${int.toFixed(2)}`);
+                    }
+                }
+                function withOverdraft(acc, limit=200) {
+                    acc.withdraw = function(amt) {
+                        if (amt <= this._balance + limit) {
+                            this._balance -= amt;
+                            this.history.push(`overdraft withdrawal ${amt}`);
+                            return true;
+                        } return false;
+                    };
+                    return acc;
+                }
+
+                let acc = new Savings('Bob');
+                acc.deposit(500);
+                acc.applyMonthly();
+                let decorated = withOverdraft(acc, 300);
+                decorated.withdraw(1500);
+
+                let outStr = '💰 BANKING — ABC, COMPOSITION, DECORATOR\n══════════════════════════════════════════════════\n';
+                outStr += `Owner: ${acc.owner} | balance: $${acc._balance.toFixed(2)}\n`;
+                outStr += `Transaction log (composition):\n`;
+                acc.history.forEach(h => outStr += `  • ${h}\n`);
+                outStr += `Overdraft decorator allowed withdraw beyond balance.\n`;
+                out.innerHTML = outStr.replace(/\n/g, '<br>');
+            } catch (e) { out.innerHTML = 'ERROR: ' + e.message; }
+        }
+
+        function runRideDemo() {
+            let out = document.getElementById('rideOut');
+            try {
+                class FareCalculator {
+                    calculate(dist, type, demand=1.0) {
+                        let base = dist * 1.5;
+                        if (type === 'premium') base *= 1.8;
+                        return base * demand;
+                    }
+                }
+                class Trip {
+                    constructor(rider, driver, dist, calc) {
+                        this.rider = rider; this.driver = driver; this.dist = dist;
+                        this.calc = calc || new FareCalculator();
+                    }
+                    fare() { return this.calc.calculate(this.dist, this.driver.vehicle, 1.2); }
+                }
+                class Driver {
+                    constructor(name, vehicle) { this.name = name; this.vehicle = vehicle; this.trips = []; }
+                }
+                class Rider { constructor(name) { this.name = name; } }
+
+                let driver = new Driver('Emma', 'premium');
+                let rider = new Rider('James');
+                let trip = new Trip(rider, driver, 12.5);
+                let outStr = '🚗 RIDE — DI, AGGREGATION, SURGE\n══════════════════════════════════════════════════\n';
+                outStr += `Driver: ${driver.name} (${driver.vehicle})\n`;
+                outStr += `Rider: ${rider.name}\n`;
+                outStr += `Distance: 12.5 mi · Fare: $${trip.fare().toFixed(2)} (includes surge 1.2)\n`;
+                outStr += `Trip object aggregates rider+driver — no ownership.\n`;
+                outStr += `FareCalculator injected (dependency injection).\n`;
+                out.innerHTML = outStr.replace(/\n/g, '<br>');
+            } catch (e) { out.innerHTML = 'ERROR: ' + e.message; }
+        }
+
+        function runStrategyDemo() {
+            let out = document.getElementById('stratOut');
+            try {
+                class Cart {
+                    constructor() {
+                        this.items = [{name:'book',price:45.99,qty:1},{name:'bag',price:120,qty:2}];
+                    }
+                    get subtotal() { return this.items.reduce((s,i)=>s + i.price*i.qty,0); }
+                }
+                function percentOff(p) { return cart => cart.subtotal * (1-p/100); }
+                function bogo() {
+                    return cart => {
+                        let books = cart.items.filter(i=>i.name==='book');
+                        let disc = books.length ? books[0].price * Math.floor(books[0].qty/2) : 0;
+                        return cart.subtotal - disc;
+                    };
+                }
+                function composite(...fns) {
+                    return cart => fns.reduce((total, fn) => fn({subtotal: total}), cart.subtotal);
+                }
+
+                let cart = new Cart();
+                let tenOff = percentOff(10);
+                let bogoDisc = bogo();
+                let combined = composite(tenOff, bogoDisc);
+
+                let outStr = '🛒 STRATEGY — OPEN/CLOSED, COMPOSITE\n══════════════════════════════════════════════════\n';
+                outStr += `Subtotal: $${cart.subtotal.toFixed(2)}\n`;
+                outStr += `10% off only: $${tenOff(cart).toFixed(2)}\n`;
+                outStr += `BOGO only: $${bogoDisc(cart).toFixed(2)}\n`;
+                outStr += `Combined (10% then BOGO): $${combined(cart).toFixed(2)}\n`;
+                outStr += `New strategies can be added without changing Cart class.\n`;
+                out.innerHTML = outStr.replace(/\n/g, '<br>');
+            } catch (e) { out.innerHTML = 'ERROR: ' + e.message; }
+        }
+
+        function runObserverDemo() {
+            let out = document.getElementById('obsOut');
+            try {
+                class Stock {
+                    constructor() { this.obs = []; this._price = 148; }
+                    attach(o) { this.obs.push(o); }
+                    set price(p) { let old=this._price; this._price=p; this.notify(old, p); }
+                    notify(oldP, newP) { this.obs.forEach(o => o.update(oldP, newP, this)); }
+                }
+                class Logger {
+                    update(oldP, newP) { this.last = `📝 log: $${oldP} → $${newP}`; }
+                }
+                class Alert {
+                    constructor(thresh) { this.thresh = thresh; }
+                    update(oldP, newP) { 
+                        this.last = newP > this.thresh ? `🔔 ALERT above $${this.thresh}` : `🔕 below $${this.thresh}`;
+                    }
+                }
+
+                let s = new Stock();
+                let l = new Logger();
+                let a = new Alert(152);
+                s.attach(l); s.attach(a);
+                s.price = 151;
+                let outStr = '📊 OBSERVER — PUB/SUB, LOOSE COUPLING\n══════════════════════════════════════════════════\n';
+                outStr += l.last + '\n' + a.last + '\n';
+                s.price = 155;
+                outStr += l.last + '\n' + a.last + '\n';
+                outStr += 'Observers attached dynamically. Subject knows nothing about concrete observers.\n';
+                out.innerHTML = outStr.replace(/\n/g, '<br>');
+            } catch (e) { out.innerHTML = 'ERROR: ' + e.message; }
+        }
+
+        function runFactoryDemo() {
+            let out = document.getElementById('factOut');
+            try {
+                class Document {
+                    constructor(title) { this.title = title; }
+                }
+                class PDFDoc extends Document {
+                    render() { return `📄 ${this.title}.pdf [PDF content]`; }
+                }
+                class HTMLDoc extends Document {
+                    render() { return `🌐 ${this.title}.html <h1>${this.title}</h1>`; }
+                }
+                class MDDoc extends Document {
+                    render() { return `# ${this.title}.md`; }
+                }
+
+                const registry = {
+                    pdf: (t) => new PDFDoc(t),
+                    html: (t) => new HTMLDoc(t),
+                    md: (t) => new MDDoc(t)
+                };
+                function createDoc(type, title) { return registry[type](title); }
+
+                let doc1 = createDoc('pdf', 'annual_report');
+                let doc2 = createDoc('html', 'index');
+                let doc3 = createDoc('md', 'readme');
+
+                let outStr = '🏭 FACTORY — CREATIONAL, SRP, REGISTRY\n══════════════════════════════════════════════════\n';
+                outStr += doc1.render() + '\n' + doc2.render() + '\n' + doc3.render() + '\n';
+                outStr += 'New document types added by registering a builder — factory closed for mod.\n';
+                out.innerHTML = outStr.replace(/\n/g, '<br>');
+            } catch (e) { out.innerHTML = 'ERROR: ' + e.message; }
+        }
+    </script>
+</body>
+</html>
