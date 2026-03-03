@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    
+    <meta name="description" content="Learn Python OOP with real mining analogies: classes, inheritance, encapsulation, polymorphism, magic methods, dataclasses, builder pattern, plus advanced topics: metaclasses, context managers, descriptors. Practical code + domain storytelling.">
+    <meta name="keywords" content="Python OOP, object-oriented programming, Python classes, inheritance example, encapsulation, polymorphism, magic methods, dataclasses, builder pattern, metaclasses, context managers, descriptors, mining software">
+    <meta name="author" content="Glenn Junsay Pansensoy">
+    <link rel="canonical" href="https://code-sense.pansensoyglenn.workers.dev/oop-blog.html">
+    
+    <meta property="og:title" content="Python OOP — Core & advanced concepts through mining equipment">
+    <meta property="og:description" content="Drills, ore veins, sensors: understand OOP with tangible code examples. Now with metaclasses, context managers, and descriptors.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://code-sense.pansensoyglenn.workers.dev/oop-blog.html">
+    <meta property="og:site_name" content="Code Sense">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Python OOP — Core & advanced concepts with mining analogies">
+    <meta name="twitter:description" content="13 essential OOP topics explained with drilling rigs, sensors and ore deposits.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0f1a;
+            --surface: #0f172a;
+            --text: #e0e9f5;
+            --text-light: #c9d8f0;
+            --accent: #60a5fa;
+            --accent-dark: #3b82f6;
+            --border: #2e4a7a;
+            --code-bg: #0b1220;
+            --keyword: #ffad7c;
+            --func: #7cc3ff;
+            --class: #70ffd9;
+            --string: #c3e88d;
+            --comment: #7a96b8;
+            --ad-bg: #131f33;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { font-size: 100%; scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.65;
+            min-height: 100vh;
+            padding: clamp(0.5rem, 2vw, 1.5rem);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            margin: 0 auto;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 28px;
+            padding: clamp(1.5rem, 5vw, 3.8rem) clamp(1rem, 4vw, 3.5rem);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+        }
+
+        h1 {
+            font-size: clamp(1.3rem, 6vw, 2.4rem);
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            padding-left: 1.2rem;
+            border-left: 6px solid var(--accent);
+            line-height: 1.2;
+            letter-spacing: -0.01em;
+            word-break: break-word;
+        }
+
+        h2 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #c6d9ff;
+            margin: 2.8rem 0 1.2rem 0;
+            padding-bottom: 0.6rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #b4c9f0;
+            margin: 2rem 0 0.8rem 0;
+            padding-bottom: 0.3rem;
+            border-bottom: 1px dashed var(--border);
+        }
+
+        p, li { font-size: 0.9rem; color: var(--text-light); margin-bottom: 1.2rem; line-height: 1.7; }
+        strong { color: #a5c6ff; font-weight: 600; }
+
+        code:not(pre code) {
+            font-family: 'JetBrains Mono', monospace;
+            background: #1e293b;
+            padding: 0.2em 0.6em;
+            border-radius: 8px;
+            color: #e2e8f0;
+            font-size: 0.8rem;
+            white-space: nowrap;
+        }
+
+        .code-block {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--code-bg);
+            border-left: 4px solid var(--accent);
+            border-radius: 14px;
+            padding: 1.6rem 2rem;
+            margin: 1.8rem 0 2.4rem;
+            font-size: 0.85rem;
+            line-height: 1.7;
+            overflow-x: auto;
+            color: #d1e0ff;
+            white-space: pre;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.8);
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .code-block .keyword  { color: var(--keyword); font-weight: 500; }
+        .code-block .def      { color: var(--func); }
+        .code-block .class    { color: var(--class); }
+        .code-block .string   { color: var(--string); }
+        .code-block .comment  { color: var(--comment); font-style: italic; }
+
+        ul, ol { margin: 0.9rem 0 2rem 2rem; font-size: 0.9rem; }
+        li { margin-bottom: 0.6rem; }
+
+        hr {
+            border: none;
+            height: 1px;
+            background: var(--border);
+            margin: 4rem 0 2rem;
+        }
+
+        .footer-note {
+            font-size: 0.8rem;
+            color: #8da6d0;
+            text-align: center;
+            margin-top: 4rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #2a3d5e;
+        }
+
+        .insight {
+            background: #1a2538;
+            border-radius: 12px;
+            padding: 1.3rem 1.8rem;
+            margin: 2rem 0;
+            border-left: 5px solid var(--accent);
+            font-size: 0.9rem;
+        }
+
+        .ad-container {
+            margin: 2.5rem 0;
+            padding: 1.2rem 0;
+            display: flex;
+            justify-content: center;
+            background: var(--ad-bg);
+            border-radius: 20px;
+            border: 1px solid #2e4a7a;
+            transition: box-shadow 0.2s;
+        }
+        .ad-container ins {
+            background: transparent;
+        }
+
+        @media (max-width: 640px) {
+            .container { border-radius: 20px; padding: 1.5rem 1.2rem; }
+            h1 { padding-left: 0.8rem; border-left-width: 4px; }
+            .code-block { padding: 1.2rem 1.4rem; margin: 1.3rem 0; font-size: 0.75rem; }
+            ul, ol { margin-left: 1.2rem; }
+        }
+        @media (max-width: 480px) {
+            body { padding: 0.2rem; }
+            .container { border-radius: 16px; padding: 1.2rem 0.9rem; }
+            .code-block { padding: 0.9rem 1rem; font-size: 0.7rem; }
+            code:not(pre code) { white-space: normal; word-break: break-word; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <h1>⛏️ Object‑Oriented Programming in Python <br> (mining & drilling edition)</h1>
+    <p style="font-size: 1rem; margin-bottom: 2rem;">Understand OOP through <strong>real industrial equipment</strong> — drills, sensors, ore veins, and blasting teams. No abstract animals or shapes. Every concept includes a practical, domain‑driven example. <strong>Now with three advanced topics:</strong> metaclasses, context managers, and descriptors.</p>
+
+    <div class="ad-container">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-4575646748966866"
+             data-ad-slot="4226674403"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+    </div>
+
+    <!-- existing 10 sections (condensed but all present) -->
+    <h2>1. Classes & Instances — blueprint vs. real drill</h2>
+    <p>A <strong>class</strong> defines shared structure; an <strong>instance</strong> holds its own state. Here <code>MiningDrill</code> has a class attribute <code>category</code> and per‑drill attributes. The <code>self</code> parameter gives access to the concrete object.</p>
+    <pre class="code-block"><span class="keyword">class</span> <span class="class">MiningDrill</span>:
+    category = <span class="string">"rotary"</span>
+
+    <span class="keyword">def</span> <span class="def">__init__</span>(self, model: str, power_kw: int):
+        self.model = model
+        self.power_kw = power_kw
+        self.is_running = <span class="keyword">False</span>
+
+    <span class="keyword">def</span> <span class="def">start</span>(self) -> str:
+        self.is_running = <span class="keyword">True</span>
+        <span class="keyword">return</span> <span class="string">f"{self.model} started — {self.power_kw} kW"</span>
+
+drill_a = MiningDrill(<span class="string">"X900"</span>, 450)
+drill_b = MiningDrill(<span class="string">"Z1100"</span>, 620)
+print(drill_a.start())
+print(drill_b.category)</pre>
+
+    <h2>2. Inheritance — extending tools for specialization</h2>
+    <p><code>Drill</code> inherits from <code>Tool</code>, reusing <code>__init__</code> and <code>use()</code> while adding <code>power_kw</code>. <code>super()</code> calls the parent method – perfect for the <strong>open/closed principle</strong>.</p>
+    <pre class="code-block"><span class="keyword">class</span> <span class="class">Tool</span>:
+    <span class="keyword">def</span> <span class="def">__init__</span>(self, name: str): self.name = name
+    <span class="keyword">def</span> <span class="def">use</span>(self) -> str: <span class="keyword">return</span> <span class="string">f"using {self.name}"</span>
+
+<span class="keyword">class</span> <span class="class">Drill</span>(Tool):
+    <span class="keyword">def</span> <span class="def">__init__</span>(self, name: str, power_kw: int):
+        <span class="keyword">super</span>().__init__(name)
+        self.power_kw = power_kw
+    <span class="keyword">def</span> <span class="def">use</span>(self) -> str:
+        <span class="keyword">return</span> <span class="keyword">super</span>().use() + <span class="string">f" with {self.power_kw} kW"</span>
+
+hd = Drill(<span class="string">"HammerDrill"</span>, 300)
+print(hd.use())</pre>
+
+    <div class="insight">
+        <p><strong>🧠 Design tip:</strong> Prefer composition over deep inheritance when behavior varies widely. Mixins can share small pieces of functionality.</p>
+    </div>
+
+    <h2>3. Encapsulation & properties — protect the sensor</h2>
+    <p>Use underscored names (“protected”) and <code>@property</code> to add validation without breaking existing code. Here <code>_celsius</code> is hidden behind a property that rejects unsafe values.</p>
+    <pre class="code-block"><span class="keyword">class</span> <span class="class">TemperatureSensor</span>:
+    <span class="keyword">def</span> <span class="def">__init__</span>(self):
+        self._celsius = 20.0
+
+    @property
+    <span class="keyword">def</span> <span class="def">celsius</span>(self) -> float: <span class="keyword">return</span> self._celsius
+
+    @celsius.setter
+    <span class="keyword">def</span> <span class="def">celsius</span>(self, value: float):
+        <span class="keyword">if</span> not (-50 <= value <= 150):
+            <span class="keyword">raise</span> ValueError(<span class="string">"Out of safe range"</span>)
+        self._celsius = value
+
+    @property
+    <span class="keyword">def</span> <span class="def">fahrenheit</span>(self) -> float: <span class="keyword">return</span> self._celsius * 9/5 + 32
+
+s = TemperatureSensor()
+s.celsius = 85.0
+print(s.fahrenheit)</pre>
+
+    <div class="ad-container">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-4575646748966866"
+             data-ad-slot="4226674403"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+    </div>
+
+    <h2>4. Polymorphism & duck typing — just implement <code>.action()</code></h2>
+    <p>Python doesn’t need interfaces; any object with an <code>action()</code> method works. This <strong>duck typing</strong> enables flexible, decoupled code.</p>
+    <pre class="code-block"><span class="keyword">class</span> <span class="class">Drill</span>:
+    <span class="keyword">def</span> <span class="def">action</span>(self): <span class="keyword">return</span> <span class="string">"drilling rock"</span>
+<span class="keyword">class</span> <span class="class">BlastingTeam</span>:
+    <span class="keyword">def</span> <span class="def">action</span>(self): <span class="keyword">return</span> <span class="string">"setting explosives"</span>
+<span class="keyword">class</span> <span class="class">Hauler</span>:
+    <span class="keyword">def</span> <span class="def">action</span>(self): <span class="keyword">return</span> <span class="string">"transporting ore"</span>
+
+<span class="keyword">def</span> <span class="def">perform_actions</span>(equipment_list):
+    <span class="keyword">for</span> eq <span class="keyword">in</span> equipment_list: print(eq.action())
+
+team = [Drill(), BlastingTeam(), Hauler()]
+perform_actions(team)</pre>
+
+    <h2>5. Magic methods — make ore veins behave like built‑ins</h2>
+    <p>Implement <code>__str__</code>, <code>__len__</code>, <code>__lt__</code>, <code>__add__</code> so custom objects work with <code>print()</code>, <code>len()</code>, comparison, and even <code>+</code>.</p>
+    <pre class="code-block"><span class="keyword">class</span> <span class="class">OreVein</span>:
+    <span class="keyword">def</span> <span class="def">__init__</span>(self, mineral: str, grade: float):
+        self.mineral = mineral; self.grade = grade
+    <span class="keyword">def</span> <span class="def">__str__</span>(self): <span class="keyword">return</span> <span class="string">f"{self.mineral} ({self.grade}%)"</span>
+    <span class="keyword">def</span> <span class="def">__len__</span>(self): <span class="keyword">return</span> <span class="keyword">int</span>(self.grade * 10)
+    <span class="keyword">def</span> <span class="def">__lt__</span>(self, other): <span class="keyword">return</span> self.grade < other.grade
+    <span class="keyword">def</span> <span class="def">__add__</span>(self, other):
+        <span class="keyword">return</span> OreVein(<span class="string">"mixed"</span>, (self.grade + other.grade)/2)
+
+v1 = OreVein(<span class="string">"gold"</span>, 5.2); v2 = OreVein(<span class="string">"silver"</span>, 3.8)
+print(v1, len(v1), v1 > v2, v1 + v2)</pre>
+
+    <h2>6. Class & static methods — alternative constructors, utilities</h2>
+    <p><code>@classmethod</code> receives the class (<code>cls</code>) and can create instances differently. <code>@staticmethod</code> is just a function attached to the class for organisation.</p>
+    <pre class="code-block"><span class="keyword">class</span> <span class="class">Survey</span>:
+    total = 0
+    <span class="keyword">def</span> <span class="def">__init__</span>(self, area): self.area = area; Survey.total += 1
+
+    @classmethod
+    <span class="keyword">def</span> <span class="def">from_string</span>(cls, data): <span class="keyword">return</span> cls(data.split(<span class="string">":"</span>)[0])
+
+    @classmethod
+    <span class="keyword">def</span> <span class="def">count</span>(cls): <span class="keyword">return</span> <span class="string">f"Surveys: {cls.total}"</span>
+
+    @staticmethod
+    <span class="keyword">def</span> <span class="def">is_valid_area</span>(name): <span class="keyword">return</span> len(name) > 3 and name.replace(<span class="string">"_"</span>,<span class="string">""</span>).isalnum()
+
+s2 = Survey.from_string(<span class="string">"SouthPit:gold"</span>)
+print(Survey.count(), Survey.is_valid_area(<span class="string">"West_Zone"</span>))</pre>
+
+    <h2>7. Composition — “has‑a” over “is‑a”</h2>
+    <p>A <code>DrillingRig</code> contains an <code>Engine</code> and a <code>DrillBit</code>. This makes testing and swapping parts easy.</p>
+    <pre class="code-block"><span class="keyword">class</span> <span class="class">Engine</span>:
+    <span class="keyword">def</span> <span class="def">start</span>(self): <span class="keyword">return</span> <span class="string">"engine running"</span>
+<span class="keyword">class</span> <span class="class">DrillBit</span>:
+    <span class="keyword">def</span> <span class="def">__init__</span>(self, mat): self.material = mat
+    <span class="keyword">def</span> <span class="def">spin</span>(self): <span class="keyword">return</span> <span class="string">f"{self.material} bit spinning"</span>
+
+<span class="keyword">class</span> <span class="class">DrillingRig</span>:
+    <span class="keyword">def</span> <span class="def">__init__</span>(self, bit_mat):
+        self.engine = Engine(); self.bit = DrillBit(bit_mat)
+    <span class="keyword">def</span> <span class="def">start_op</span>(self):
+        <span class="keyword">return</span> <span class="string">f"{self.engine.start()} — {self.bit.spin()}"</span>
+
+rig = DrillingRig(<span class="string">"diamond"</span>)
+print(rig.start_op())</pre>
+
+    <h2>8. Abstract base classes — enforce a contract</h2>
+    <p>Using <code>ABC</code> and <code>@abstractmethod</code> you force subclasses to implement <code>operate()</code>. Great for frameworks.</p>
+    <pre class="code-block"><span class="keyword">from</span> abc <span class="keyword">import</span> ABC, abstractmethod
+<span class="keyword">class</span> <span class="class">MiningEquipment</span>(ABC):
+    <span class="keyword">def</span> <span class="def">__init__</span>(self, name): self.name = name
+    @abstractmethod
+    <span class="keyword">def</span> <span class="def">operate</span>(self): <span class="keyword">pass</span>
+
+<span class="keyword">class</span> <span class="class">Excavator</span>(MiningEquipment):
+    <span class="keyword">def</span> <span class="def">operate</span>(self): <span class="keyword">return</span> <span class="string">f"{self.name} excavating"</span>
+
+e = Excavator(<span class="string">"CAT 320"</span>); print(e.operate())</pre>
+
+    <div class="ad-container">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-4575646748966866"
+             data-ad-slot="4226674403"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+    </div>
+
+    <h2>9. Dataclasses — minimal boilerplate for ore deposits</h2>
+    <p><code>@dataclass</code> generates <code>__init__</code>, <code>__repr__</code>, <code>__eq__</code> automatically. Perfect for data‑centric classes.</p>
+    <pre class="code-block"><span class="keyword">from</span> dataclasses <span class="keyword">import</span> dataclass, field
+
+@dataclass
+<span class="keyword">class</span> <span class="class">MineralDeposit</span>:
+    name: str
+    depth: float
+    grade: float
+    active: bool = <span class="keyword">True</span>
+    tags: list = field(default_factory=list)
+
+    <span class="keyword">def</span> <span class="def">extractable</span>(self) -> bool:
+        <span class="keyword">return</span> self.grade > 1.5 and self.depth < 1000
+
+d1 = MineralDeposit(<span class="string">"copper"</span>, 350.2, 2.3)
+d2 = MineralDeposit(<span class="string">"gold"</span>, 820.0, 5.1, tags=[<span class="string">"high-grade"</span>])
+print(d1, d1.extractable())</pre>
+
+    <h2>10. Builder pattern — fluent configuration of a drill</h2>
+    <p>When an object has many optional parameters, a builder provides a readable, chainable API.</p>
+    <pre class="code-block"><span class="keyword">class</span> <span class="class">DrillConfiguration</span>:
+    <span class="keyword">def</span> <span class="def">__init__</span>(self, model, power):
+        self.model = model; self.power = power
+        self.depth_cap = 1000; self.bit_type = <span class="string">"standard"</span>; self.autolube = <span class="keyword">False</span>
+
+<span class="keyword">class</span> <span class="class">DrillBuilder</span>:
+    <span class="keyword">def</span> <span class="def">__init__</span>(self, model, power):
+        self._config = DrillConfiguration(model, power)
+    <span class="keyword">def</span> <span class="def">set_depth</span>(self, depth): self._config.depth_cap = depth; <span class="keyword">return</span> self
+    <span class="keyword">def</span> <span class="def">set_bit</span>(self, bit): self._config.bit_type = bit; <span class="keyword">return</span> self
+    <span class="keyword">def</span> <span class="def">enable_autolube</span>(self): self._config.autolube = <span class="keyword">True</span>; <span class="keyword">return</span> self
+    <span class="keyword">def</span> <span class="def">build</span>(self): <span class="keyword">return</span> self._config
+
+cfg = (DrillBuilder(<span class="string">"MegaDrill"</span>,800)
+       .set_depth(2500).set_bit(<span class="string">"diamond"</span>).enable_autolube().build())
+print(cfg.bit_type, cfg.autolube)</pre>
+
+    <!-- ========== NEW VALUABLE CONTENT : 3 ADVANCED TOPICS ========== -->
+    <h2>11. Metaclasses — the class of a class</h2>
+    <p>Metaclasses are the "classes of classes" — they control how classes are built. You can use them to enforce conventions, register subclasses, or add methods automatically. In mining, a metaclass could ensure every piece of equipment has a safety checklist.</p>
+    <pre class="code-block"><span class="keyword">class</span> <span class="class">EquipmentMeta</span>(type):
+    <span class="keyword">def</span> <span class="def">__new__</span>(cls, name, bases, namespace):
+        <span class="comment"># Automatically add a safety_inspection method if missing</span>
+        <span class="keyword">if</span> <span class="string">'safety_inspection'</span> not <span class="keyword">in</span> namespace:
+            <span class="keyword">def</span> <span class="def">safety_inspection</span>(self):
+                <span class="keyword">return</span> <span class="string">f"⚠️ Basic safety check passed for {self.name}"</span>
+            namespace[<span class="string">'safety_inspection'</span>] = safety_inspection
+        <span class="keyword">return</span> <span class="keyword">super</span>().__new__(cls, name, bases, namespace)
+
+<span class="keyword">class</span> <span class="class">Drill</span>(metaclass=EquipmentMeta):
+    <span class="keyword">def</span> <span class="def">__init__</span>(self, name): self.name = name
+
+d = Drill(<span class="string">"Rotary 77"</span>)
+print(d.safety_inspection())</pre>
+    <p>Metaclasses are powerful but rare — use them when you need to modify classes systematically.</p>
+
+    <h2>12. Context managers — setup & teardown with <code>with</code></h2>
+    <p>Context managers handle resource acquisition and release automatically. In a mining operation, opening a tunnel might require ventilation startup and later shutdown. Implement via <code>__enter__</code>/<code>__exit__</code>.</p>
+    <pre class="code-block"><span class="keyword">class</span> <span class="class">TunnelVentilation</span>:
+    <span class="keyword">def</span> <span class="def">__init__</span>(self, tunnel_id):
+        self.tunnel_id = tunnel_id
+
+    <span class="keyword">def</span> <span class="def">__enter__</span>(self):
+        print(<span class="string">f"🌀 Ventilation ON for tunnel {self.tunnel_id}"</span>)
+        <span class="keyword">return</span> self   <span class="comment"># object to use in 'as'</span>
+
+    <span class="keyword">def</span> <span class="def">__exit__</span>(self, exc_type, exc_val, exc_tb):
+        print(<span class="string">f"🌀 Ventilation OFF for tunnel {self.tunnel_id}"</span>)
+        <span class="keyword">return</span> <span class="keyword">False</span>   <span class="comment"># propagate exceptions if any</span>
+
+    <span class="keyword">def</span> <span class="def">read_air_quality</span>(self):
+        <span class="keyword">return</span> <span class="string">"Air quality: good"</span>
+
+<span class="keyword">with</span> TunnelVentilation(<span class="string">"T-12"</span>) <span class="keyword">as</span> tv:
+    print(tv.read_air_quality())</pre>
+    <p>The <code>with</code> statement guarantees cleanup even if an error occurs — essential for safety-critical systems.</p>
+
+    <h2>13. Descriptors — reusable attribute logic</h2>
+    <p>Descriptors let you define reusable attribute access (get/set/delete) and share it across classes. Perfect for validated fields like pressure or temperature in mining sensors.</p>
+    <pre class="code-block"><span class="keyword">class</span> <span class="class">ValidatedAttribute</span>:
+    <span class="keyword">def</span> <span class="def">__init__</span>(self, min_val, max_val):
+        self.min = min_val
+        self.max = max_val
+        self.data = <span class="string">"_internal"</span>   <span class="comment"># name mangled later</span>
+
+    <span class="keyword">def</span> <span class="def">__set_name__</span>(self, owner, name):
+        self.private_name = <span class="string">'_'</span> + name   <span class="comment"># avoid collisions</span>
+
+    <span class="keyword">def</span> <span class="def">__get__</span>(self, obj, objtype=<span class="keyword">None</span>):
+        <span class="keyword">return</span> getattr(obj, self.private_name)
+
+    <span class="keyword">def</span> <span class="def">__set__</span>(self, obj, value):
+        <span class="keyword">if</span> not (self.min <= value <= self.max):
+            <span class="keyword">raise</span> ValueError(<span class="string">f"Value {value} out of range [{self.min}, {self.max}]"</span>)
+        setattr(obj, self.private_name, value)
+
+<span class="keyword">class</span> <span class="class">HighPressureSensor</span>:
+    pressure = ValidatedAttribute(0, 500)   <span class="comment"># psi range</span>
+    <span class="keyword">def</span> <span class="def">__init__</span>(self, pressure):
+        self.pressure = pressure
+
+sensor = HighPressureSensor(350)
+print(sensor.pressure)
+<span class="comment"># sensor.pressure = 600  # would raise ValueError</span></pre>
+    <p>Descriptors are the machinery behind <code>@property</code>, <code>@staticmethod</code>, and <code>@classmethod</code>.</p>
+
+    <hr>
+
+    <h2>📌 Core + Advanced OOP principles — recap</h2>
+    <ul style="columns: 2; column-gap: 2rem; list-style-type: square;">
+        <li><strong>Encapsulation</strong> — hide internals, expose properties</li>
+        <li><strong>Inheritance</strong> — reuse + specialize</li>
+        <li><strong>Polymorphism</strong> — same method, many forms</li>
+        <li><strong>Duck typing</strong> — “if it walks like a drill…”</li>
+        <li><strong>Composition</strong> — flexible “has‑a” assemblies</li>
+        <li><strong>Magic methods</strong> — pythonic integration</li>
+        <li><strong>Dataclasses</strong> — less boilerplate</li>
+        <li><strong>Builders</strong> — readable object creation</li>
+        <li><strong>Metaclasses</strong> — classes that build classes</li>
+        <li><strong>Context managers</strong> — automatic setup/teardown</li>
+        <li><strong>Descriptors</strong> — reusable attribute logic</li>
+    </ul>
+
+    <p style="margin-top: 2rem; font-style: italic;">All examples use mining equipment to make OOP tangible. Reusable, testable, and directly applicable to simulation, control, or data processing in industrial software.</p>
+
+    <div class="footer-note">
+        Python OOP deep dive · Created by Glenn Junsay Pansensoy<br>
+        Domain: <code>code-sense.pansensoyglenn.workers.dev/oop-blog.html</code>
+    </div>
+</div>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4575646748966866" crossorigin="anonymous"></script>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<script>
+    setTimeout(function() {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    }, 500);
+</script>
+
+</body>
+</html>
