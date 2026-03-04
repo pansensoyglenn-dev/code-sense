@@ -1,0 +1,1947 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: https://ogp.me/ns#">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Python Fundamentals: Complete Beginner to Intermediate Guide 2026 — Variables, OOP, Decorators & More | Valleys & Bytes</title>
+  <meta name="description" content="Master Python fundamentals in 2026. Complete guide covering variables, data types, control flow, functions, OOP, modules, error handling, generators, decorators, type hints, and Pythonic best practices. Updated for Python 3.12+.">
+  <meta name="keywords" content="Python fundamentals, Python tutorial 2026, Python variables, Python data types, Python OOP, Python functions, Python decorators, Python generators, Python type hints, Python error handling, learn Python, Python for beginners, Python best practices, Python 3.12">
+  <link rel="canonical" href="https://code-sense.pansensoyglenn.workers.dev/python-fundamentals.html">
+  <meta name="author" content="Glenn Junsay Pansensoy — Valleys & Bytes">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow">
+  <meta name="theme-color" content="#0B1020">
+  <meta name="language" content="English">
+  <meta name="revisit-after" content="7 days">
+
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://code-sense.pansensoyglenn.workers.dev/python-fundamentals.html">
+  <meta property="og:title" content="Python Fundamentals: Complete Guide 2026 — Variables, OOP, Decorators & More">
+  <meta property="og:description" content="Master Python fundamentals. Covers data types, control flow, functions, OOP, modules, error handling, generators, decorators, and Pythonic best practices. Python 3.12+.">
+  <meta property="og:image" content="https://code-sense.pansensoyglenn.workers.dev/assets/python-fundamentals-og.jpg">
+  <meta property="og:image:alt" content="Python Fundamentals Complete Guide — Valleys & Bytes">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:site_name" content="Valleys & Bytes">
+  <meta property="og:locale" content="en_US">
+  <meta property="article:published_time" content="2026-03-05T00:00:00+00:00">
+  <meta property="article:modified_time" content="2026-03-05T00:00:00+00:00">
+  <meta property="article:author" content="https://code-sense.pansensoyglenn.workers.dev">
+  <meta property="article:section" content="Python Programming">
+  <meta property="article:tag" content="Python">
+  <meta property="article:tag" content="Programming">
+  <meta property="article:tag" content="Beginners">
+  <meta property="article:tag" content="OOP">
+  <meta property="article:tag" content="Tutorial">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@ValleysBytes">
+  <meta name="twitter:creator" content="@ValleysBytes">
+  <meta name="twitter:title" content="Python Fundamentals: Complete Guide 2026">
+  <meta name="twitter:description" content="Master Python from first principles. Variables, OOP, decorators, generators, type hints & Pythonic best practices. Python 3.12+.">
+  <meta name="twitter:image" content="https://code-sense.pansensoyglenn.workers.dev/assets/python-fundamentals-og.jpg">
+  <meta name="twitter:image:alt" content="Python Fundamentals — Valleys & Bytes">
+
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Python Fundamentals: Complete Beginner to Intermediate Guide 2026",
+    "description": "Master Python fundamentals in 2026. Covers variables, data types, control flow, functions, OOP, modules, error handling, generators, decorators, type hints, and Pythonic best practices.",
+    "image": "https://code-sense.pansensoyglenn.workers.dev/assets/python-fundamentals-og.jpg",
+    "author": {
+      "@type": "Person",
+      "name": "Glenn Junsay Pansensoy",
+      "url": "https://code-sense.pansensoyglenn.workers.dev"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Valleys & Bytes",
+      "url": "https://code-sense.pansensoyglenn.workers.dev",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://code-sense.pansensoyglenn.workers.dev/assets/logo.png",
+        "width": 200,
+        "height": 60
+      }
+    },
+    "datePublished": "2026-03-05",
+    "dateModified": "2026-03-05",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://code-sense.pansensoyglenn.workers.dev/python-fundamentals.html"
+    },
+    "url": "https://code-sense.pansensoyglenn.workers.dev/python-fundamentals.html",
+    "keywords": "Python fundamentals, Python tutorial, variables, OOP, decorators, generators, type hints, error handling",
+    "articleSection": "Python Programming",
+    "inLanguage": "en-US",
+    "learningResourceType": "Tutorial",
+    "educationalLevel": "Beginner",
+    "isAccessibleForFree": true,
+    "timeRequired": "PT30M",
+    "hasPart": [
+      {"@type":"TechArticle","headline":"Core Language: Types, Variables & Scope"},
+      {"@type":"TechArticle","headline":"Data Types: Numbers, Strings & Collections"},
+      {"@type":"TechArticle","headline":"Control Flow: if, for, while & match"},
+      {"@type":"TechArticle","headline":"Functions: args, kwargs, lambdas & comprehensions"},
+      {"@type":"TechArticle","headline":"Object-Oriented Programming in Python"},
+      {"@type":"TechArticle","headline":"Modules, Packages & the Standard Library"},
+      {"@type":"TechArticle","headline":"Error Handling & File I/O"},
+      {"@type":"TechArticle","headline":"Advanced Patterns: Generators, Decorators & Type Hints"},
+      {"@type":"TechArticle","headline":"Operators Quick Reference"},
+      {"@type":"TechArticle","headline":"Pythonic Style & Best Practices"}
+    ]
+  }</script>
+
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type":"ListItem","position":1,"name":"Home","item":"https://code-sense.pansensoyglenn.workers.dev/"},
+      {"@type":"ListItem","position":2,"name":"Python Tutorials","item":"https://code-sense.pansensoyglenn.workers.dev/python-tutorials.html"},
+      {"@type":"ListItem","position":3,"name":"Python Fundamentals","item":"https://code-sense.pansensoyglenn.workers.dev/python-fundamentals.html"}
+    ]
+  }</script>
+
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is Python dynamically or statically typed?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Python is dynamically and strongly typed. Dynamic typing means types are resolved at runtime — you don't declare types when creating variables. Strong typing means Python won't silently coerce incompatible types; adding a string to an integer raises a TypeError. Python 3.5+ supports optional type hints for documentation and static analysis tools like mypy, but these are not enforced at runtime."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between a list and a tuple in Python?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A list is mutable — you can add, remove, or change elements after creation. A tuple is immutable — once created, its elements cannot be changed. Use tuples for fixed records, dictionary keys, and returning multiple values from functions. Lists are for ordered collections that need modification. Tuples are slightly faster and use less memory than lists."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is a Python decorator and when should I use one?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A decorator is a function that wraps another function to add behaviour without modifying the original. The @syntax is shorthand for func = decorator(func). Use decorators for cross-cutting concerns that apply to many functions: logging, timing, caching (@functools.lru_cache), authentication, retry logic, and input validation. The standard library uses decorators heavily: @property, @staticmethod, @classmethod, @functools.wraps."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is a generator in Python and why is it memory-efficient?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A generator is a function that uses yield to produce values one at a time instead of building the entire sequence in memory. When a generator hits yield, it pauses execution and returns the value — resuming from that point on the next call to next(). This makes generators ideal for large datasets, infinite sequences, and streaming pipelines where loading everything at once would exhaust memory."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What does the LEGB rule mean in Python?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "LEGB describes Python's variable name resolution order: Local (inside current function), Enclosing (any enclosing function scopes, for closures), Global (module-level names), Built-in (Python's built-in names like print, len, range). Python searches each scope in this order until the name is found or a NameError is raised. Use the global keyword to write to global scope from inside a function, and nonlocal to write to an enclosing (but non-global) scope."
+        }
+      }
+    ]
+  }</script>
+
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Valleys & Bytes",
+    "url": "https://code-sense.pansensoyglenn.workers.dev/",
+    "description": "Deep, accessible programming education covering Python, OOP, AI, web development, and data science.",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://code-sense.pansensoyglenn.workers.dev/search?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }</script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+  <link rel="alternate" type="application/rss+xml" title="Valleys & Bytes" href="/rss.xml">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4575646748966866" crossorigin="anonymous"></script>
+
+  <style>
+    :root {
+      --bg:        #0B1020;
+      --bg2:       #0d1428;
+      --surface:   #10172b;
+      --surface2:  #141e33;
+      --surface3:  #1a2540;
+      --blue:      #306998;
+      --blue-lt:   #4b8bbe;
+      --blue-xlt:  #7aafee;
+      --gold:      #ffd43b;
+      --gold-dim:  rgba(255,212,59,0.07);
+      --teal:      #4ec9b0;
+      --teal-dim:  rgba(78,201,176,0.1);
+      --text:      #e1e9f0;
+      --muted:     #cdddec;
+      --subtle:    #6a8fc0;
+      --border:    #2a3a55;
+      --border-hov:#3f5280;
+      --code-bg:   #080e1c;
+      --r:         12px;
+      --r-lg:      20px;
+      --kw:        #ff79c6;
+      --fn:        #ffd43b;
+      --st:        #8dc896;
+      --cm:        #5a7a9a;
+      --nu:        #e8956d;
+      --bi:        #8be9fd;
+    }
+
+    *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      font-size: 1rem;
+      line-height: 1.75;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(48,105,152,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(48,105,152,.025) 1px, transparent 1px);
+      background-size: 44px 44px;
+    }
+
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--blue); border-radius: 3px; }
+
+    #prog {
+      position: fixed; top: 0; left: 0; height: 3px; z-index: 2000;
+      background: linear-gradient(90deg, var(--blue), var(--teal), var(--gold));
+      width: 0%;
+    }
+    #btt {
+      position: fixed; bottom: 1.8rem; right: 1.8rem; z-index: 900;
+      width: 40px; height: 40px; border-radius: 10px;
+      background: var(--surface2); border: 1px solid var(--border);
+      color: var(--blue-lt); font-size: .9rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none; transition: all .3s;
+    }
+    #btt.vis { opacity: 1; pointer-events: all; }
+    #btt:hover { background: var(--blue); color: #fff; transform: translateY(-2px); }
+
+    nav.main-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: .85rem 2.5rem;
+      background: rgba(11,16,32,.97);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .logo {
+      font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 1rem;
+      color: var(--blue-lt); text-decoration: none;
+      display: inline-flex; align-items: center; gap: .35rem; letter-spacing: -.01em;
+    }
+    .logo .amp { color: var(--gold); }
+    .logo .w2  { color: var(--text); }
+
+    .ham {
+      display: flex; flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 5px; background: none; border: none; z-index: 1100;
+    }
+    .ham span {
+      display: block; width: 22px; height: 2px; background: var(--text);
+      border-radius: 2px; transition: all .3s cubic-bezier(.77,0,.18,1); transform-origin: center;
+    }
+    .ham.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); background: var(--gold); }
+    .ham.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .ham.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); background: var(--gold); }
+
+    .drawer {
+      position: fixed; top: 0; right: -300px; bottom: 0; width: 278px;
+      background: var(--surface); border-left: 1px solid var(--border);
+      padding: 5.5rem 1.8rem 2rem; overflow-y: auto;
+      transition: right .4s cubic-bezier(.77,0,.18,1); z-index: 1050;
+    }
+    .drawer.open { right: 0; }
+    .drawer-lbl {
+      font-family: 'Fira Code', monospace; font-size: .6rem;
+      color: var(--gold); letter-spacing: .14em; text-transform: uppercase;
+      margin-bottom: .75rem; opacity: .85;
+    }
+    .drawer-group { display: flex; flex-direction: column; gap: .4rem; margin-bottom: .75rem; }
+    .drawer a {
+      display: flex; align-items: center; gap: .5rem;
+      padding: .6rem .9rem; border-radius: 8px;
+      border: 1px solid var(--border); background: var(--surface2);
+      color: var(--muted); text-decoration: none; font-size: .82rem; font-weight: 500;
+      transition: all .2s;
+    }
+    .drawer a:hover { color: var(--text); border-color: var(--border-hov); background: var(--surface3); transform: translateX(3px); }
+
+    .overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,.75);
+      opacity: 0; pointer-events: none; transition: opacity .3s; z-index: 1040;
+      backdrop-filter: blur(3px);
+    }
+    .overlay.open { opacity: 1; pointer-events: all; }
+
+    .breadcrumb-wrap {
+      max-width: 1100px; margin: 0 auto;
+      padding: 6rem 2.5rem 0; position: relative; z-index: 1;
+    }
+    nav.breadcrumb {
+      display: flex; align-items: center; gap: .4rem; flex-wrap: wrap;
+      font-family: 'Fira Code', monospace; font-size: .62rem; margin-bottom: .75rem;
+    }
+    nav.breadcrumb a {
+      color: var(--muted); text-decoration: none;
+      display: inline-flex; align-items: center; gap: .35rem;
+      padding: .25rem .75rem; border-radius: 6px;
+      background: var(--surface2); border: 1px solid var(--border);
+      transition: all .2s;
+    }
+    nav.breadcrumb a:hover { color: var(--blue-lt); border-color: var(--border-hov); }
+    nav.breadcrumb .bc-sep { color: var(--subtle); opacity: .6; }
+    nav.breadcrumb .bc-cur {
+      color: var(--gold); display: inline-flex; align-items: center; gap: .35rem;
+      padding: .25rem .75rem; border-radius: 6px;
+      background: var(--gold-dim); border: 1px solid rgba(255,212,59,.2);
+    }
+
+    .hero {
+      max-width: 1100px; margin: 0 auto;
+      padding: 2.5rem 2.5rem 3rem;
+      position: relative; z-index: 1;
+      border-bottom: 2px solid var(--border);
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: .45rem;
+      background: var(--gold-dim); border: 1px solid rgba(255,212,59,.25);
+      color: var(--gold); padding: .25rem .9rem; border-radius: 100px;
+      font-family: 'Fira Code', monospace; font-size: .62rem;
+      margin-bottom: 1rem; width: fit-content;
+    }
+    .bdot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); display: inline-block; animation: pulse 2.5s infinite; }
+    @keyframes pulse  { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.3;transform:scale(.75)} }
+    @keyframes fu     { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+
+    h1 {
+      font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1rem; font-weight: 800;
+      line-height: 1.18; max-width: 820px; color: var(--blue-lt);
+      letter-spacing: -.02em; text-align: justify;
+    }
+    h1 .hl-g { color: var(--gold); }
+    h1 .hl-t { color: var(--teal); }
+
+    .hero-desc {
+      font-size: .8rem; color: var(--muted); max-width: 640px;
+      margin-top: .9rem; line-height: 1.85; text-align: justify;
+    }
+    .hero-meta {
+      display: flex; align-items: center; gap: .5rem; margin-top: 1rem; flex-wrap: wrap;
+    }
+    .author-chip {
+      font-family: 'Fira Code', monospace; font-size: .62rem;
+      color: var(--gold); background: var(--gold-dim);
+      border: 1px solid rgba(255,212,59,.22);
+      padding: .22rem .75rem; border-radius: 100px;
+    }
+    .chip {
+      display: inline-flex; align-items: center; gap: .3rem;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 6px; padding: .22rem .65rem;
+      font-family: 'Fira Code', monospace; font-size: .6rem; color: var(--subtle);
+    }
+
+    .ad-slot { display: block; text-align: center; margin: 2rem auto; max-width: 970px; padding: 0 1rem; overflow: hidden; }
+    .ad-label { font-family: 'Fira Code', monospace; font-size: .55rem; color: var(--subtle); letter-spacing: .1em; text-transform: uppercase; margin-bottom: .3rem; opacity: .5; }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 2.5rem 2.5rem; position: relative; z-index: 1; }
+
+    .toc-block {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--r-lg); padding: 2rem 2.2rem; margin: 0 0 3rem;
+      box-shadow: 0 20px 50px -20px rgba(0,0,0,.7);
+    }
+    .toc-h {
+      font-family: 'Fira Code', monospace; font-size: .68rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .14em; color: var(--gold);
+      margin-bottom: 1.2rem; display: flex; align-items: center; gap: .5rem;
+    }
+    .toc-h::before { content:''; display:block; width:16px; height:2px; background:var(--gold); border-radius:1px; }
+    .toc-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+      gap: .55rem 2rem;
+    }
+    .toc-item { border-bottom: 1px dashed rgba(42,58,85,.7); padding: .45rem .2rem; }
+    .toc-item:last-child { border-bottom: none; }
+    .toc-link {
+      display: flex; align-items: center; gap: .65rem;
+      color: var(--muted); text-decoration: none; font-size: .8rem; transition: all .2s;
+    }
+    .toc-num {
+      font-family: 'Fira Code', monospace; font-size: .6rem; color: var(--blue-lt);
+      background: rgba(75,139,190,.1); border: 1px solid rgba(75,139,190,.2);
+      padding: .1rem .45rem; border-radius: 4px; flex-shrink: 0; min-width: 30px; text-align: center;
+    }
+    .toc-link:hover { color: var(--gold); transform: translateX(4px); }
+
+    section.art-sec {
+      margin-bottom: 4.5rem;
+      scroll-margin-top: 72px;
+    }
+    .sec-lbl {
+      font-family: 'Fira Code', monospace; font-size: .62rem;
+      letter-spacing: .14em; text-transform: uppercase; color: var(--gold);
+      margin-bottom: .5rem; display: flex; align-items: center; gap: .5rem;
+    }
+    .sec-lbl::before { content:''; display:block; width:16px; height:1px; background:var(--gold); }
+
+    h2.art-h2 {
+      font-family: 'Plus Jakarta Sans', sans-serif; font-size: .9rem; font-weight: 800;
+      color: var(--blue-lt); margin-bottom: .35rem;
+      border-left: 4px solid var(--gold); padding-left: .9rem;
+      text-align: justify;
+    }
+    .div-bar { width: 32px; height: 2px; background: var(--blue); margin: .75rem 0 1.4rem; border-radius: 1px; }
+    .sub-tag {
+      font-family: 'Fira Code', monospace; font-size: .65rem;
+      color: var(--subtle); margin-bottom: .8rem; letter-spacing: .04em;
+    }
+
+    h3 {
+      font-family: 'Plus Jakarta Sans', sans-serif; font-size: .8rem; font-weight: 700;
+      color: var(--gold); margin: 1.8rem 0 .8rem; text-align: justify;
+    }
+    h4.subsec {
+      font-family: 'Plus Jakarta Sans', sans-serif; font-size: .78rem; font-weight: 700;
+      color: var(--blue-xlt); margin: 1.4rem 0 .6rem;
+      display: flex; align-items: center; gap: .45rem;
+      padding-bottom: .3rem; border-bottom: 1px solid var(--border);
+    }
+    h4.subsec::before { content: "●"; color: var(--blue-lt); font-size: 1rem; opacity: .85; }
+
+    p {
+      color: var(--muted); margin-bottom: 1rem; font-size: .8rem;
+      line-height: 1.85; text-align: justify; letter-spacing: .01em;
+    }
+    p strong, p b { color: var(--text); font-weight: 600; }
+    ul, ol {
+      color: var(--muted); margin-left: 1.5rem; margin-bottom: 1.2rem;
+      font-size: .8rem; line-height: 1.85;
+    }
+    li { margin: .35rem 0; }
+    code {
+      font-family: 'Fira Code', monospace; font-size: .76em;
+      color: var(--gold); background: rgba(255,212,59,.07);
+      border: 1px solid rgba(255,212,59,.15);
+      padding: .05em .35em; border-radius: 4px;
+    }
+    hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+
+    .grid-2 {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+      gap: 1rem; margin: 1.8rem 0;
+    }
+    .card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--r); padding: 1.3rem;
+      transition: all .25s; position: relative; overflow: hidden;
+    }
+    .card::after {
+      content:''; position:absolute; top:0; left:0; right:0; height:2px;
+      background: linear-gradient(90deg, var(--blue), var(--gold));
+      opacity: 0; transition: opacity .25s;
+    }
+    .card:hover { border-color: var(--border-hov); transform: translateY(-3px); box-shadow: 0 14px 35px -12px rgba(0,0,0,.7); }
+    .card:hover::after { opacity: 1; }
+    .card-title { font-size: .9rem; font-weight: 700; display: block; margin-bottom: .55rem; color: var(--gold); font-family: 'Plus Jakarta Sans', sans-serif; }
+    .card p { font-size: .8rem; margin-bottom: 0; }
+
+    .text-block {
+      font-size: .8rem; color: var(--muted); margin-bottom: 1rem;
+      background: rgba(10,20,40,.55); padding: .9rem 1.2rem;
+      border-radius: var(--r); border-left: 4px solid var(--blue);
+      line-height: 1.85; text-align: justify;
+      transition: all .2s;
+    }
+    .text-block:hover { background: var(--surface2); border-left-color: var(--gold); }
+
+    .code-bar {
+      background: rgba(8,14,28,.9); border: 1px solid var(--border);
+      border-bottom: none; border-radius: var(--r) var(--r) 0 0;
+      padding: .5rem 1.2rem; display: flex; align-items: center; justify-content: space-between;
+      margin-top: 1.5rem;
+    }
+    .lang-tag {
+      font-family: 'Fira Code', monospace; font-size: .62rem; color: var(--teal);
+      background: var(--teal-dim); border: 1px solid rgba(78,201,176,.25);
+      padding: .18rem .65rem; border-radius: 100px;
+    }
+    .copy-btn {
+      font-family: 'Fira Code', monospace; font-size: .62rem;
+      color: var(--subtle); background: var(--surface2); border: 1px solid var(--border);
+      padding: .18rem .65rem; border-radius: 6px; cursor: pointer; transition: all .2s;
+    }
+    .copy-btn:hover { color: var(--text); border-color: var(--border-hov); }
+
+    .code-fragment {
+      background: var(--code-bg); border: 1px solid var(--border);
+      border-left: 3px solid var(--blue-lt);
+      border-radius: var(--r); overflow-x: auto;
+      font-family: 'Fira Code', monospace; font-size: .78rem;
+      padding: 1.3rem 1.4rem; margin: 0 0 1.4rem; line-height: 1.75;
+      box-shadow: 0 10px 28px -14px rgba(0,0,0,.9);
+    }
+    .code-bar + .code-fragment {
+      border-radius: 0 0 var(--r) var(--r); margin-top: 0;
+      border-left-color: var(--teal);
+    }
+
+    .kw   { color: var(--kw); }
+    .fn   { color: var(--fn); }
+    .st   { color: var(--st); }
+    .cm   { color: var(--cm); font-style: italic; }
+    .nu   { color: var(--nu); }
+    .bi   { color: var(--bi); }
+    .dc   { color: #8dc896; }
+    .deco { color: #ce9178; }
+
+    .badge {
+      display: inline-block; font-size: .58rem; font-weight: 700;
+      letter-spacing: .06em; text-transform: uppercase;
+      padding: .12rem .45rem; border-radius: 20px; margin-left: .35rem; vertical-align: middle;
+    }
+    .badge-new  { background: rgba(141,200,150,.12); color: #8dc896; border: 1px solid rgba(141,200,150,.28); }
+    .badge-core { background: rgba(75,139,190,.12);  color: #6aaed6; border: 1px solid rgba(75,139,190,.28); }
+
+    .insight {
+      background: rgba(26,37,64,.8); border-left: 4px solid var(--gold);
+      border: 1px solid rgba(255,212,59,.12); border-left-width: 4px; border-left-color: var(--gold);
+      padding: 1.1rem 1.4rem; border-radius: 0 var(--r) var(--r) 0; margin: 1.8rem 0;
+    }
+    .insight p { margin: 0; font-style: italic; color: var(--text); font-size: .8rem; }
+    .tip-box {
+      font-size: .78rem; background: rgba(255,212,59,.06);
+      border: 1px solid rgba(255,212,59,.18);
+      border-radius: var(--r); padding: .7rem 1rem;
+      color: #e8d68a; margin: .4rem 0 1.2rem;
+      line-height: 1.7;
+    }
+    .tip-box::before { content: "💡 "; }
+    .warn-box {
+      background: rgba(255,121,198,.05); border: 1px solid rgba(255,121,198,.18);
+      border-left: 4px solid var(--kw);
+      padding: 1rem 1.3rem; border-radius: 0 var(--r) var(--r) 0; margin: 1.4rem 0;
+    }
+    .warn-box p { margin: 0; color: var(--text); font-size: .8rem; }
+
+    table.ref-table { width: 100%; border-collapse: collapse; font-size: .78rem; margin: 1rem 0 1.5rem; }
+    .ref-table th {
+      background: var(--surface2); color: var(--gold); font-family: 'Fira Code', monospace;
+      font-size: .62rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+      padding: .7rem 1rem; text-align: left; border-bottom: 2px solid var(--border);
+    }
+    .ref-table td { padding: .65rem 1rem; border-bottom: 1px solid rgba(42,58,85,.5); color: var(--muted); vertical-align: top; }
+    .ref-table tr:nth-child(even) td { background: rgba(20,30,50,.3); }
+    .ref-table tr:hover td { background: rgba(75,139,190,.05); }
+    .ref-table td:first-child { color: var(--blue-xlt); font-weight: 600; }
+    .ref-table td code { background: none; border: none; padding: 0; color: var(--gold); }
+
+    .faq-list { display: flex; flex-direction: column; gap: .6rem; margin-top: 1.5rem; }
+    .faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; }
+    .faq-q {
+      width: 100%; display: flex; align-items: center; justify-content: space-between;
+      padding: .95rem 1.15rem; background: none; border: none; cursor: pointer;
+      font-family: 'Plus Jakarta Sans', sans-serif; font-size: .8rem; font-weight: 600;
+      color: var(--text); text-align: left; gap: 1rem; transition: color .2s;
+    }
+    .faq-q:hover { color: var(--gold); }
+    .faq-ico {
+      width: 20px; height: 20px; border-radius: 50%;
+      background: rgba(255,212,59,.1); border: 1px solid rgba(255,212,59,.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .8rem; color: var(--gold); flex-shrink: 0; transition: all .3s;
+    }
+    .faq-ans { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
+    .faq-ans p { padding: .1rem 1.15rem 1rem; margin: 0; font-size: .8rem; }
+    .faq-item.open .faq-ico { background: rgba(255,212,59,.18); border-color: rgba(255,212,59,.4); }
+
+    .share-box {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--r-lg); padding: 2rem; margin-bottom: 2rem;
+    }
+    .sec-lbl2 {
+      font-family: 'Fira Code', monospace; font-size: .6rem; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--blue-lt); margin-bottom: 1rem;
+      display: flex; align-items: center; gap: .5rem;
+    }
+    .sec-lbl2::before { content:''; display:block; width:14px; height:1px; background:var(--blue-lt); }
+    .share-btns { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 1.1rem; }
+    .share-btn {
+      display: inline-flex; align-items: center; gap: .4rem;
+      padding: .48rem 1.05rem; border-radius: 8px;
+      border: 1px solid var(--border); background: var(--surface2);
+      color: var(--muted); font-size: .78rem; font-weight: 600;
+      cursor: pointer; transition: all .2s; font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .share-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,.5); }
+    .share-btn.fb { border-color: rgba(24,119,242,.3); color: #4a9af4; }
+    .share-btn.fb:hover { background: rgba(24,119,242,.08); }
+    .share-btn.li { border-color: rgba(10,102,194,.3); color: #4a8cd4; }
+    .share-btn.li:hover { background: rgba(10,102,194,.08); }
+    .share-btn.x  { border-color: rgba(200,220,255,.15); color: var(--text); }
+    .share-btn.x:hover  { background: rgba(255,255,255,.05); }
+    .caption-box {
+      background: var(--bg2); border: 1px solid var(--border); border-radius: 9px;
+      padding: 1rem 1.2rem; font-size: .8rem; color: var(--muted);
+      line-height: 1.8; min-height: 78px; white-space: pre-wrap; margin-bottom: .7rem;
+    }
+    .caption-box.loading {
+      background: linear-gradient(90deg, var(--surface) 25%, var(--surface2) 50%, var(--surface) 75%);
+      background-size: 400% 100%; animation: shimmer 1.4s infinite; color: transparent;
+    }
+    @keyframes shimmer { 0%{background-position:100% 0} 100%{background-position:-100% 0} }
+    .cap-actions { display: flex; gap: .5rem; align-items: center; flex-wrap: wrap; }
+    .btn-sm {
+      padding: .38rem .9rem; border-radius: 7px; font-size: .72rem; font-weight: 600;
+      cursor: pointer; transition: all .2s; border: 1px solid var(--border);
+      background: var(--surface2); color: var(--muted); font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .btn-sm:hover { color: var(--text); border-color: var(--border-hov); }
+    .btn-sm.pri { background: linear-gradient(135deg, var(--blue), var(--blue-lt)); border: none; color: #fff; }
+    .btn-sm.pri:hover { filter: brightness(1.12); transform: translateY(-1px); }
+    .ai-badge {
+      font-family: 'Fira Code', monospace; font-size: .55rem;
+      color: var(--gold); background: var(--gold-dim);
+      border: 1px solid rgba(255,212,59,.2);
+      padding: .15rem .5rem; border-radius: 4px; margin-left: auto;
+    }
+
+    .cmt-wrap {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--r-lg); padding: 2rem; margin-bottom: 2rem;
+    }
+    .cmt-hdr { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; flex-wrap: wrap; gap: .5rem; }
+    .cmt-badge {
+      font-family: 'Fira Code', monospace; font-size: .62rem; color: var(--blue-lt);
+      background: rgba(75,139,190,.1); padding: .25rem .65rem;
+      border-radius: 100px; border: 1px solid rgba(75,139,190,.2);
+    }
+    .cmt-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; margin-bottom: .5rem; }
+    @media(max-width:500px) { .cmt-form-row { grid-template-columns: 1fr; } }
+    .cmt-form textarea { resize: vertical; min-height: 95px; margin-bottom: .55rem; font-size: .8rem; line-height: 1.7; width: 100%; }
+    .cmt-actions { display: flex; align-items: center; gap: .6rem; flex-wrap: wrap; margin-top: .4rem; }
+    .cmt-msg { font-family: 'Fira Code', monospace; font-size: .65rem; opacity: 0; transition: opacity .4s; }
+    hr.cdiv { border: none; border-top: 1px solid var(--border); margin: 1.2rem 0; }
+    .cmt-list { display: flex; flex-direction: column; gap: 1rem; }
+    .cmt-item {
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: var(--r); padding: 1rem 1.2rem;
+    }
+    .cmt-meta { display: flex; align-items: center; gap: .55rem; margin-bottom: .45rem; flex-wrap: wrap; }
+    .cmt-av {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue), var(--teal));
+      display: flex; align-items: center; justify-content: center;
+      font-size: .7rem; font-weight: 700; color: #fff;
+      font-family: 'Fira Code', monospace; flex-shrink: 0;
+    }
+    .cmt-name { font-weight: 600; font-size: .8rem; color: var(--text); }
+    .cmt-date { font-family: 'Fira Code', monospace; font-size: .6rem; color: var(--subtle); }
+    .cmt-body { font-size: .8rem; color: var(--muted); line-height: 1.75; margin-bottom: .45rem; text-align: justify; }
+    .cmt-like {
+      display: inline-flex; align-items: center; gap: .3rem;
+      padding: .22rem .6rem; border-radius: 6px; border: 1px solid var(--border);
+      background: none; color: var(--subtle); font-size: .65rem; cursor: pointer;
+      transition: all .2s;
+    }
+    .cmt-like:hover { color: var(--blue-lt); border-color: rgba(75,139,190,.3); }
+    .cmt-like.active { color: #ff6b8a; border-color: rgba(255,107,138,.3); background: rgba(255,107,138,.06); }
+    .no-cmt { text-align: center; padding: 2rem; color: var(--subtle); font-size: .8rem; }
+
+    input, textarea {
+      background: var(--bg2); border: 1px solid var(--border); border-radius: 8px;
+      padding: .6rem .9rem; color: var(--text);
+      font-family: 'Plus Jakarta Sans', sans-serif; font-size: .8rem;
+      width: 100%; outline: none; transition: border-color .2s, box-shadow .2s;
+    }
+    input:focus, textarea:focus { border-color: var(--blue-lt); box-shadow: 0 0 0 3px rgba(75,139,190,.12); }
+    .btn-p {
+      background: linear-gradient(135deg, var(--blue), var(--blue-lt));
+      color: #fff; border: none; border-radius: 100px;
+      padding: .65rem 1.75rem; font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700; font-size: .8rem; cursor: pointer; transition: all .25s; white-space: nowrap;
+    }
+    .btn-p:hover { filter: brightness(1.12); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(48,105,152,.4); }
+
+    .sub-wrap {
+      background: linear-gradient(135deg, var(--surface) 0%, var(--surface2) 100%);
+      border: 1px solid var(--border); border-radius: var(--r-lg);
+      padding: 3rem 2.5rem; text-align: center; position: relative; overflow: hidden;
+    }
+    .sub-wrap::before {
+      content:''; position:absolute; top:-80px; right:-80px; width:320px; height:320px; border-radius:50%;
+      background:radial-gradient(circle,rgba(255,212,59,.04) 0%,transparent 65%); pointer-events:none;
+    }
+    .sub-wrap h2 { font-family:'Plus Jakarta Sans',sans-serif; font-size:.9rem; font-weight:800; margin-bottom:.4rem; }
+    .sub-desc { font-size:.8rem; color:var(--muted); max-width:440px; margin:0 auto .8rem; text-align:center; }
+    .sub-tags { display:flex; justify-content:center; gap:.4rem; flex-wrap:wrap; margin:.75rem 0 1.2rem; }
+    .sub-chk { display:none; }
+    .sub-lbl {
+      display:inline-flex; align-items:center; gap:.3rem; padding:.25rem .65rem; border-radius:100px;
+      border:1px solid var(--border); background:var(--surface3); color:var(--subtle);
+      font-size:.65rem; cursor:pointer; transition:all .2s; font-family:'Fira Code',monospace;
+    }
+    .sub-chk:checked+.sub-lbl { border-color:rgba(255,212,59,.4); background:rgba(255,212,59,.08); color:var(--gold); }
+    .sub-grid { display:grid; grid-template-columns:1fr 1fr; gap:.5rem; max-width:480px; margin:0 auto 1rem; }
+    @media(max-width:500px){.sub-grid{grid-template-columns:1fr}}
+    .snote { font-size:.72rem; color:var(--subtle); margin-top:.7rem; }
+    .subMsg { margin-top:.6rem; font-size:.78rem; font-family:'Fira Code',monospace; color:var(--gold); min-height:1rem; transition:opacity .4s; }
+    .perks { display:flex; justify-content:center; gap:1.2rem; flex-wrap:wrap; margin:.6rem 0 1rem; }
+    .perk { display:inline-flex; align-items:center; gap:.3rem; font-size:.75rem; color:var(--muted); }
+    .perk::before { content:'✓'; color:var(--gold); font-weight:700; }
+
+    footer {
+      background: var(--bg2); border-top: 1px solid var(--border);
+      margin-top: 5rem; padding: 3rem 2.5rem 2rem; position: relative; z-index: 1;
+    }
+    .fg { display:grid; grid-template-columns:2fr 1fr 1fr; gap:2.5rem; max-width:1100px; margin:0 auto; }
+    @media(max-width:768px){.fg{grid-template-columns:1fr 1fr}}
+    @media(max-width:480px){.fg{grid-template-columns:1fr}}
+    .fbrand p { font-size:.8rem; color:var(--muted); max-width:290px; text-align:justify; line-height:1.75; margin-top:.6rem; }
+    .fcol h4 {
+      font-family:'Fira Code',monospace; font-size:.6rem; font-weight:700;
+      color:var(--gold); margin-bottom:.75rem; letter-spacing:.14em; text-transform:uppercase;
+      display:flex; align-items:center; gap:.4rem;
+    }
+    .fcol h4::before { content:''; display:block; width:12px; height:1px; background:var(--gold); }
+    .fcol-links { display:flex; flex-direction:column; gap:.35rem; }
+    .fcol a {
+      display:flex; align-items:center; gap:.5rem; color:var(--muted); text-decoration:none;
+      font-size:.8rem; padding:.45rem .8rem; border-radius:8px;
+      border:1px solid var(--border); background:var(--surface); transition:all .2s;
+    }
+    .fcol a:hover { color:var(--text); background:var(--surface2); border-color:var(--border-hov); transform:translateX(2px); }
+    .fbot { max-width:1100px; margin:2rem auto 0; padding-top:1.2rem; border-top:1px solid var(--border); }
+    .fcopy { font-size:.65rem; color:var(--subtle); font-family:'Fira Code',monospace; text-align:center; }
+    .ftags { display:flex; flex-wrap:wrap; gap:.2rem; margin-top:.75rem; }
+    .ftag {
+      display:inline-block; background:rgba(255,212,59,.06); border:1px solid rgba(255,212,59,.18);
+      color:var(--gold); font-family:'Fira Code',monospace; font-size:.6rem;
+      padding:.1rem .5rem; border-radius:4px;
+    }
+
+    @media(max-width:768px){
+      nav.main-nav{padding:.75rem 1.2rem}
+      .hero,.container,.breadcrumb-wrap{padding-left:1.2rem;padding-right:1.2rem}
+      .breadcrumb-wrap{padding-top:5.5rem}
+      .toc-grid{grid-template-columns:1fr}
+      .grid-2{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+
+<div id="prog" role="progressbar" aria-hidden="true"></div>
+
+<nav class="main-nav" role="navigation" aria-label="Main navigation">
+  <a href="./index.html" class="logo" aria-label="Valleys and Bytes Home">
+    <span aria-hidden="true">💻</span>VALLEYS <span class="amp">&amp;</span> <span class="w2">BYTES</span>
+  </a>
+  <button class="ham" id="ham" aria-label="Toggle navigation" aria-expanded="false" aria-controls="drawer">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="drawer" id="drawer" role="dialog" aria-label="Navigation menu">
+  <p class="drawer-lbl">Navigation</p>
+  <div class="drawer-group">
+    <a href="./index.html">🏠 Home</a>
+    <a href="./python-tutorials.html">🐍 Python Tutorials</a>
+    <a href="./python-fundamentals.html">💻 Python Fundamentals</a>
+    <a href="./data-structure.html">📚 Data Structures &amp; OOP</a>
+    <a href="./web-development.html">🌐 Web Development</a>
+    <a href="./machine-learning.html">🤖 Machine Learning</a>
+    <a href="./oop-cheatsheet.html">📋 Cheatsheets</a>
+  </div>
+</div>
+<div class="overlay" id="overlay" aria-hidden="true"></div>
+
+<header role="banner">
+  <div class="breadcrumb-wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="./index.html">🏠 Home</a>
+      <span class="bc-sep">›</span>
+      <a href="./python-tutorials.html">🐍 Python Tutorials</a>
+      <span class="bc-sep">›</span>
+      <span class="bc-cur" aria-current="page">💻 Python Fundamentals</span>
+    </nav>
+  </div>
+  <div class="hero">
+    <div class="hero-badge"><span class="bdot"></span> PYTHON 3.12+ · 2026</div>
+    <h1>Python Fundamentals:<br><span class="hl-g">From First Principles</span> to <span class="hl-t">Practical Patterns</span></h1>
+    <p class="hero-desc">A complete, densely-packed reference for Python 3.12+. Covers the full language from the ground up — dynamic typing, all built-in data structures, control flow, functions, object-oriented programming, modules, error handling, iterators, generators, decorators, type hints, and Pythonic best practices. Every section includes annotated code examples.</p>
+    <div class="hero-meta">
+      <span class="author-chip">✍️ Glenn Junsay Pansensoy</span>
+      <span class="chip">⏱ 30 min read</span>
+      <span class="chip">📅 Mar 2026</span>
+      <span class="chip">🎓 Beginner → Intermediate</span>
+      <span class="chip">🐍 Python 3.12+</span>
+    </div>
+  </div>
+</header>
+
+<div class="ad-slot" aria-label="Advertisement">
+  <p class="ad-label">Advertisement</p>
+  <ins class="adsbygoogle" style="display:block"
+    data-ad-client="ca-pub-4575646748966866"
+    data-ad-slot="4226674403"
+    data-ad-format="auto"
+    data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<div class="container">
+
+  <nav class="toc-block" aria-label="Table of contents">
+    <p class="toc-h">Python Fundamentals — 10 Core Sections</p>
+    <div class="toc-grid">
+      <div class="toc-item"><a class="toc-link" href="#s01"><span class="toc-num">01</span> Core Language</a></div>
+      <div class="toc-item"><a class="toc-link" href="#s02"><span class="toc-num">02</span> Data Types</a></div>
+      <div class="toc-item"><a class="toc-link" href="#s03"><span class="toc-num">03</span> Control Flow</a></div>
+      <div class="toc-item"><a class="toc-link" href="#s04"><span class="toc-num">04</span> Functions</a></div>
+      <div class="toc-item"><a class="toc-link" href="#s05"><span class="toc-num">05</span> Object-Oriented Programming</a></div>
+      <div class="toc-item"><a class="toc-link" href="#s06"><span class="toc-num">06</span> Modules &amp; Packages</a></div>
+      <div class="toc-item"><a class="toc-link" href="#s07"><span class="toc-num">07</span> Error Handling &amp; File I/O</a></div>
+      <div class="toc-item"><a class="toc-link" href="#s08"><span class="toc-num">08</span> Advanced Patterns</a></div>
+      <div class="toc-item"><a class="toc-link" href="#s09"><span class="toc-num">09</span> Operators Quick Reference</a></div>
+      <div class="toc-item"><a class="toc-link" href="#s10"><span class="toc-num">10</span> Pythonic Style &amp; Best Practices</a></div>
+      <div class="toc-item"><a class="toc-link" href="#faq"><span class="toc-num">FAQ</span> Common Questions</a></div>
+    </div>
+  </nav>
+
+  <section class="art-sec" id="s01" aria-labelledby="h01">
+    <p class="sec-lbl">01 — Core Language</p>
+    <h2 class="art-h2" id="h01">Core Language: Types, Variables &amp; Scope</h2>
+    <div class="div-bar"></div>
+    <p class="sub-tag">what is Python · dynamic &amp; strong typing · variables · LEGB scope</p>
+
+    <h4 class="subsec">What is Python?</h4>
+    <div class="text-block">Python is a <strong>high-level, interpreted, general-purpose</strong> language created by Guido van Rossum (1991). It emphasises readability — developers express ideas in fewer lines than Java or C++. Python runs cross-platform (Windows, macOS, Linux) and powers web backends, data science, AI/ML, automation, and scripting. Its motto: <em>"batteries included"</em> — a vast standard library ships with every install.</div>
+
+    <h4 class="subsec">Dynamic &amp; Strongly Typed</h4>
+    <div class="text-block">Python uses <strong>dynamic typing</strong> — types are inferred at runtime, no declarations needed. But it is <strong>strongly typed</strong>: mixing incompatible types (like <code>"2" + 2</code>) raises a <code>TypeError</code> instead of silently coercing. This gives prototyping speed without hidden bugs. Inspect types at runtime with <code>type(x)</code> or <code>isinstance(x, int)</code>.</div>
+    <div class="code-bar"><span class="lang-tag">python · typing</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+    <div class="code-fragment"><span class="cm"># Type inspection</span>
+x = <span class="nu">42</span>
+<span class="bi">print</span>(<span class="bi">type</span>(x))             <span class="cm"># &lt;class 'int'&gt;</span>
+<span class="bi">print</span>(<span class="bi">isinstance</span>(x, int))  <span class="cm"># True</span>
+<span class="bi">print</span>(<span class="bi">isinstance</span>(x, (int, float)))  <span class="cm"># True — multi-type check</span>
+<span class="cm"># print(x + " apples")    # TypeError!</span></div>
+
+    <h4 class="subsec">Variables &amp; Assignment</h4>
+    <div class="text-block">Variables are created on first assignment. Python supports <strong>multiple assignment</strong>, <strong>tuple unpacking</strong>, and <strong>augmented assignment</strong> (<code>+=</code>, <code>-=</code>, <code>*=</code>, etc.). Names are case-sensitive and use <code>snake_case</code> by convention. Constants are written in <code>ALL_CAPS</code> (convention only — Python doesn't enforce immutability).</div>
+    <div class="code-bar"><span class="lang-tag">python · variables</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+    <div class="code-fragment">name   = <span class="st">"Alice"</span>    <span class="cm"># str</span>
+age    = <span class="nu">30</span>         <span class="cm"># int</span>
+pi     = <span class="nu">3.14159</span>    <span class="cm"># float</span>
+active = <span class="kw">True</span>       <span class="cm"># bool</span>
+empty  = <span class="kw">None</span>       <span class="cm"># NoneType</span>
+
+a, b, c = <span class="nu">1</span>, <span class="nu">2</span>, <span class="nu">3</span>  <span class="cm"># tuple unpacking</span>
+a, b    = b, a      <span class="cm"># swap — no temp variable needed</span>
+first, *rest = [<span class="nu">1</span>, <span class="nu">2</span>, <span class="nu">3</span>, <span class="nu">4</span>]  <span class="cm"># extended unpacking</span>
+score  += <span class="nu">10</span>        <span class="cm"># augmented assignment</span>
+
+MAX_RETRIES = <span class="nu">5</span>    <span class="cm"># constant by convention (ALL_CAPS)</span></div>
+
+    <h4 class="subsec">Indentation &amp; the LEGB Scope Rule</h4>
+    <div class="text-block">Blocks are defined by <strong>indentation</strong> (4 spaces — never mix tabs and spaces). No curly braces. Every indent level opens a new scope. Python resolves names using the <strong>LEGB</strong> rule: <strong>L</strong>ocal → <strong>E</strong>nclosing → <strong>G</strong>lobal → <strong>B</strong>uilt-in. Use <code>global x</code> to write to module scope from inside a function, and <code>nonlocal x</code> to write to an enclosing (non-global) scope — commonly used in closures.</div>
+    <div class="code-bar"><span class="lang-tag">python · scope &amp; LEGB</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+    <div class="code-fragment">x = <span class="st">"global"</span>
+
+<span class="kw">def</span> <span class="fn">outer</span>():
+    x = <span class="st">"enclosing"</span>
+    <span class="kw">def</span> <span class="fn">inner</span>():
+        <span class="kw">nonlocal</span> x
+        x = <span class="st">"local (modified enclosing)"</span>
+        <span class="bi">print</span>(x)   <span class="cm"># local (modified enclosing)</span>
+    <span class="fn">inner</span>()
+    <span class="bi">print</span>(x)       <span class="cm"># local (modified enclosing)</span>
+
+<span class="fn">outer</span>()
+<span class="bi">print</span>(x)           <span class="cm"># global (unchanged)</span></div>
+
+    <div class="insight"><p>🔍 <strong>Key insight:</strong> Python's LEGB rule is why you can always <em>read</em> a global variable from inside a function, but need the <code>global</code> keyword to <em>assign</em> to it. Without <code>global</code>, the assignment creates a new local variable that shadows the global — a common source of subtle bugs.</p></div>
+  </section>
+
+  <div class="ad-slot" aria-label="Advertisement">
+    <p class="ad-label">Advertisement</p>
+    <ins class="adsbygoogle" style="display:block"
+      data-ad-client="ca-pub-4575646748966866"
+      data-ad-slot="4226674403"
+      data-ad-format="auto"
+      data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <!-- ═══ 02 DATA TYPES ═══ -->
+  <section class="art-sec" id="s02" aria-labelledby="h02">
+    <p class="sec-lbl">02 — Data Types</p>
+    <h2 class="art-h2" id="h02">Data Types: Numbers, Strings &amp; Collections</h2>
+    <div class="div-bar"></div>
+    <p class="sub-tag">int · float · complex · str · list · tuple · dict · set · bool</p>
+
+    <h4 class="subsec">Numbers</h4>
+    <div class="text-block">Three numeric types: <strong>int</strong> (arbitrary precision — no overflow), <strong>float</strong> (IEEE 754 double), <strong>complex</strong> (<code>3+4j</code>). Key operators: <code>//</code> floor division, <code>**</code> exponentiation, <code>%</code> modulo. The <code>math</code> module adds <code>sqrt</code>, <code>log</code>, <code>ceil</code>, <code>floor</code>, trig functions, and more. Use <code>decimal.Decimal</code> for exact decimal arithmetic (finance).</div>
+    <div class="code-bar"><span class="lang-tag">python · numbers</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+    <div class="code-fragment"><span class="bi">print</span>(<span class="nu">10</span> // <span class="nu">3</span>)           <span class="cm"># 3    floor division</span>
+<span class="bi">print</span>(<span class="nu">10</span> %  <span class="nu">3</span>)           <span class="cm"># 1    modulo</span>
+<span class="bi">print</span>(<span class="nu">2</span>  ** <span class="nu">10</span>)          <span class="cm"># 1024 power</span>
+<span class="bi">print</span>(<span class="bi">abs</span>(-<span class="nu">7</span>))           <span class="cm"># 7</span>
+<span class="bi">print</span>(<span class="bi">round</span>(<span class="nu">3.14159</span>, <span class="nu">2</span>)) <span class="cm"># 3.14</span>
+
+<span class="kw">import</span> math
+<span class="bi">print</span>(math.sqrt(<span class="nu">144</span>))    <span class="cm"># 12.0</span>
+<span class="bi">print</span>(math.pi)            <span class="cm"># 3.14159...</span>
+<span class="bi">print</span>(math.log(<span class="nu">100</span>, <span class="nu">10</span>)) <span class="cm"># 2.0  (log base 10)</span></div>
+
+    <h4 class="subsec">Strings</h4>
+    <div class="text-block">Strings are <strong>immutable sequences of Unicode characters</strong>. Use single, double, or triple quotes. <strong>f-strings</strong> (Python 3.6+) are the preferred interpolation method — they support full expressions inside <code>{}</code>. Strings support indexing, slicing, concatenation (<code>+</code>), and repetition (<code>*</code>). Key methods: <code>.upper()</code>, <code>.lower()</code>, <code>.strip()</code>, <code>.split()</code>, <code>.join()</code>, <code>.replace()</code>, <code>.startswith()</code>, <code>.find()</code>, <code>.format()</code>.</div>
+    <div class="code-bar"><span class="lang-tag">python · strings</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+    <div class="code-fragment">s = <span class="st">"Python"</span>
+<span class="bi">print</span>(s[<span class="nu">0</span>])            <span class="cm"># P      (first char)</span>
+<span class="bi">print</span>(s[-<span class="nu">1</span>])           <span class="cm"># n      (last char)</span>
+<span class="bi">print</span>(s[<span class="nu">1</span>:<span class="nu">4</span>])          <span class="cm"># yth    (slice)</span>
+<span class="bi">print</span>(s[::<span class="nu">-1</span>])         <span class="cm"># nohtyP (reversed)</span>
+<span class="bi">print</span>(<span class="st">" hi "</span>.strip())   <span class="cm"># "hi"</span>
+<span class="bi">print</span>(<span class="st">","</span>.join([<span class="st">"a"</span>,<span class="st">"b"</span>,<span class="st">"c"</span>]))  <span class="cm"># a,b,c</span>
+
+name, ver = <span class="st">"Glenn"</span>, <span class="nu">3.12</span>
+msg = <span class="st">f"Hello {name}, Python {ver:.1f}"</span>
+<span class="bi">print</span>(msg)              <span class="cm"># Hello Glenn, Python 3.1</span>
+
+<span class="cm"># Multiline string</span>
+text = <span class="st">"""Line one
+Line two
+Line three"""</span></div>
+
+    <h4 class="subsec">Built-in Data Structures</h4>
+    <div class="text-block">Python's four core collections power almost every program. Choose the right one for the job — each has distinct performance characteristics and semantics.</div>
+    <div class="grid-2">
+      <div class="card"><span class="card-title">📋 list</span><p>Ordered, mutable, allows duplicates. O(1) append and index access; O(n) insert/delete at arbitrary position. The go-to for sequences that need modification.</p></div>
+      <div class="card"><span class="card-title">📌 tuple</span><p>Ordered, immutable. Slightly faster and more memory-efficient than lists. Use for fixed records, function return values, and as dictionary keys.</p></div>
+      <div class="card"><span class="card-title">🗂 dict</span><p>Key→value mapping with O(1) average lookup, insert, and delete. Insertion-ordered since Python 3.7. Keys must be hashable (str, int, tuple).</p></div>
+      <div class="card"><span class="card-title">🔵 set</span><p>Unordered, unique values only. O(1) membership test (<code>in</code>), union (<code>|</code>), intersection (<code>&amp;</code>), difference (<code>-</code>). Perfect for deduplication and fast membership checks.</p></div>
+    </div>
+    <div class="code-bar"><span class="lang-tag">python · collections</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+    <div class="code-fragment"><span class="cm"># List</span>
+fruits = [<span class="st">"apple"</span>, <span class="st">"mango"</span>, <span class="st">"guava"</span>]
+fruits.append(<span class="st">"lemon"</span>)
+fruits.sort()
+<span class="bi">print</span>(fruits[<span class="nu">0</span>])         <span class="cm"># apple</span>
+
+<span class="cm"># Dict — creation, update, safe get</span>
+person = {<span class="st">"name"</span>: <span class="st">"Glenn"</span>, <span class="st">"age"</span>: <span class="nu">25</span>}
+person[<span class="st">"city"</span>] = <span class="st">"Manila"</span>
+<span class="bi">print</span>(person.get(<span class="st">"city"</span>, <span class="st">"unknown"</span>))  <span class="cm"># Manila</span>
+<span class="bi">print</span>(person.keys(), person.values())
+
+<span class="cm"># Set — dedup &amp; intersection</span>
+tags   = {<span class="st">"python"</span>, <span class="st">"code"</span>, <span class="st">"python"</span>}
+skills = {<span class="st">"python"</span>, <span class="st">"sql"</span>, <span class="st">"docker"</span>}
+<span class="bi">print</span>(tags)               <span class="cm"># {'python', 'code'}</span>
+<span class="bi">print</span>(tags & skills)      <span class="cm"># {'python'}</span></div>
+
+    <div class="tip-box">Use <code>collections.defaultdict</code> to avoid key-existence checks, <code>collections.Counter</code> for frequency counting, and <code>collections.deque</code> for efficient O(1) append/pop from both ends of a sequence.</div>
+  </section>
+
+  <!-- ═══ 03 CONTROL FLOW ═══ -->
+  <section class="art-sec" id="s03" aria-labelledby="h03">
+    <p class="sec-lbl">03 — Control Flow</p>
+    <h2 class="art-h2" id="h03">Control Flow: if, for, while &amp; match</h2>
+    <div class="div-bar"></div>
+    <p class="sub-tag">if · elif · else · for · while · break · continue · match (3.10+)</p>
+
+    <h4 class="subsec">if / elif / else &amp; Ternary</h4>
+    <div class="text-block">Conditional logic uses <code>if</code>, <code>elif</code> (not "else if"), and <code>else</code>. Python supports a compact <strong>ternary expression</strong>: <code>x if condition else y</code>. Since Python 3.10, the <code>match</code> statement adds powerful structural pattern matching — it goes far beyond simple switch-case, supporting sequence destructuring, class patterns, and guards.</div>
+    <div class="code-bar"><span class="lang-tag">python · conditionals</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+    <div class="code-fragment">score = <span class="nu">85</span>
+
+<span class="kw">if</span> score >= <span class="nu">90</span>:
+    grade = <span class="st">"A"</span>
+<span class="kw">elif</span> score >= <span class="nu">75</span>:
+    grade = <span class="st">"B"</span>
+<span class="kw">else</span>:
+    grade = <span class="st">"C"</span>
+
+<span class="cm"># Ternary</span>
+status = <span class="st">"pass"</span> <span class="kw">if</span> score >= <span class="nu">60</span> <span class="kw">else</span> <span class="st">"fail"</span>
+<span class="bi">print</span>(grade, status)    <span class="cm"># B pass</span>
+
+<span class="cm"># match statement (Python 3.10+)</span>
+<span class="kw">def</span> <span class="fn">http_status</span>(code):
+    <span class="kw">match</span> code:
+        <span class="kw">case</span> <span class="nu">200</span>: <span class="kw">return</span> <span class="st">"OK"</span>
+        <span class="kw">case</span> <span class="nu">404</span>: <span class="kw">return</span> <span class="st">"Not Found"</span>
+        <span class="kw">case</span> <span class="nu">500</span>: <span class="kw">return</span> <span class="st">"Server Error"</span>
+        <span class="kw">case</span> _:   <span class="kw">return</span> <span class="st">"Unknown"</span></div>
+
+    <h4 class="subsec">for Loops</h4>
+    <div class="text-block">Python's <code>for</code> iterates over <em>any iterable</em> — lists, strings, dicts, ranges, generators. Use <code>range(start, stop, step)</code> for numeric sequences. <code>enumerate()</code> gives index + value together. <code>zip()</code> pairs two iterables in lockstep. <code>break</code> exits the loop early; <code>continue</code> skips to the next iteration. Loops can have an optional <code>else</code> clause that runs if the loop wasn't broken.</div>
+    <div class="code-bar"><span class="lang-tag">python · for loops</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+    <div class="code-fragment"><span class="kw">for</span> i <span class="kw">in</span> <span class="bi">range</span>(<span class="nu">5</span>):
+    <span class="bi">print</span>(i, end=<span class="st">" "</span>)     <span class="cm"># 0 1 2 3 4</span>
+
+fruits = [<span class="st">"apple"</span>, <span class="st">"mango"</span>, <span class="st">"guava"</span>]
+<span class="kw">for</span> i, fruit <span class="kw">in</span> <span class="bi">enumerate</span>(fruits, start=<span class="nu">1</span>):
+    <span class="bi">print</span>(<span class="st">f"{i}: {fruit}"</span>)
+
+names  = [<span class="st">"Ana"</span>, <span class="st">"Bob"</span>, <span class="st">"Chen"</span>]
+scores = [<span class="nu">95</span>, <span class="nu">88</span>, <span class="nu">92</span>]
+<span class="kw">for</span> name, sc <span class="kw">in</span> <span class="bi">zip</span>(names, scores):
+    <span class="bi">print</span>(<span class="st">f"{name}: {sc}"</span>)
+
+<span class="cm"># for/else — "not found" pattern</span>
+<span class="kw">for</span> x <span class="kw">in</span> [<span class="nu">2</span>, <span class="nu">4</span>, <span class="nu">6</span>]:
+    <span class="kw">if</span> x % <span class="nu">2</span> != <span class="nu">0</span>: <span class="kw">break</span>
+<span class="kw">else</span>:
+    <span class="bi">print</span>(<span class="st">"All even!"</span>)  <span class="cm"># runs — no break</span></div>
+
+    <h4 class="subsec">while Loops</h4>
+    <div class="text-block"><code>while</code> repeats as long as a condition remains true. Use <code>while True</code> with a <code>break</code> for interactive loops. The optional <code>else</code> clause runs when the condition becomes false — but not if <code>break</code> was used. Always ensure the loop has a termination condition to avoid infinite loops.</div>
+    <div class="code-bar"><span class="lang-tag">python · while</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+    <div class="code-fragment">n = <span class="nu">1</span>
+<span class="kw">while</span> n <= <span class="nu">5</span>:
+    <span class="bi">print</span>(n, end=<span class="st">" "</span>)
+    n += <span class="nu">1</span>
+<span class="cm"># 1 2 3 4 5</span>
+
+<span class="cm"># Walrus operator (:=) — assign & test in one step (3.8+)</span>
+<span class="kw">import</span> random
+<span class="kw">while</span> (val := random.randint(<span class="nu">1</span>, <span class="nu">10</span>)) != <span class="nu">7</span>:
+    <span class="bi">print</span>(<span class="st">f"Got {val}, trying again..."</span>)
+<span class="bi">print</span>(<span class="st">"Found 7!"</span>)</div>
+  </section>
+
+  <div class="ad-slot" aria-label="Advertisement">
+    <p class="ad-label">Advertisement</p>
+    <ins class="adsbygoogle" style="display:block"
+      data-ad-client="ca-pub-4575646748966866"
+      data-ad-slot="4226674403"
+      data-ad-format="auto"
+      data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <section class="art-sec" id="s04" aria-labelledby="h04">
+    <p class="sec-lbl">04 — Functions</p>
+    <h2 class="art-h2" id="h04">Functions: args, kwargs, Lambdas &amp; Comprehensions</h2>
+    <div class="div-bar"></div>
+    <p class="sub-tag">def · *args · **kwargs · lambda · map · filter · comprehensions</p>
+
+    <h4 class="subsec">Defining &amp; Calling Functions</h4>
+    <div class="text-block">Functions are defined with <code>def</code>. They support <strong>default parameters</strong>, <strong>keyword arguments</strong>, <strong>*args</strong> (variable positional), and <strong>**kwargs</strong> (variable keyword). Functions always return a value — omitting <code>return</code> returns <code>None</code>. Always write a <strong>docstring</strong> on the first line to document purpose, parameters, and return value.</div>
+    <div class="code-bar"><span class="lang-tag">python · functions</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+    <div class="code-fragment"><span class="kw">def</span> <span class="fn">power</span>(base, exp=<span class="nu">2</span>):
+    <span class="dc">"""Return base raised to exp (default: square)."""</span>
+    <span class="kw">return</span> base ** exp
+
+<span class="bi">print</span>(<span class="fn">power</span>(<span class="nu">3</span>))              <span class="cm"># 9</span>
+<span class="bi">print</span>(<span class="fn">power</span>(<span class="nu">2</span>, <span class="nu">10</span>))         <span class="cm"># 1024</span>
+<span class="bi">print</span>(<span class="fn">power</span>(exp=<span class="nu">3</span>, base=<span class="nu">4</span>)) <span class="cm"># 64 (keyword args)</span>
+
+<span class="kw">def</span> <span class="fn">summarise</span>(*args, **kwargs):
+    <span class="bi">print</span>(<span class="st">"positional:"</span>, args)
+    <span class="bi">print</span>(<span class="st">"keyword:"</span>,    kwargs)
+
+<span class="fn">summarise</span>(<span class="nu">1</span>, <span class="nu">2</span>, name=<span class="st">"Glenn"</span>, city=<span class="st">"Manila"</span>)</div>
+
+    <h4 class="subsec">Lambdas &amp; Higher-Order Functions</h4>
+    <div class="text-block">Functions are <strong>first-class objects</strong> — assign them to variables, store in lists, pass as arguments, and return them from other functions. <code>lambda</code> creates a single-expression anonymous function. <code>map()</code>, <code>filter()</code>, and <code>sorted(key=...)</code> are the classic higher-order functions, though list comprehensions are usually preferred for readability.</div>
+    <div class="code-bar"><span class="lang-tag">python · lambdas &amp; HOF</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+    <div class="code-fragment">double = <span class="kw">lambda</span> x: x * <span class="nu">2</span>
+<span class="bi">print</span>(double(<span class="nu">5</span>))                           <span class="cm"># 10</span>
+
+nums = [<span class="nu">3</span>, <span class="nu">1</span>, <span class="nu">4</span>, <span class="nu">1</span>, <span class="nu">5</span>, <span class="nu">9</span>]
+squares = <span class="bi">list</span>(<span class="bi">map</span>(<span class="kw">lambda</span> x: x**<span class="nu">2</span>, nums))
+evens   = <span class="bi">list</span>(<span class="bi">filter</span>(<span class="kw">lambda</span> x: x%<span class="nu">2</span>==<span class="nu">0</span>, nums))
+<span class="bi">print</span>(squares)   <span class="cm"># [9, 1, 16, 1, 25, 81]</span>
+<span class="bi">print</span>(evens)     <span class="cm"># [4]</span>
+
+words = [<span class="st">"banana"</span>, <span class="st">"apple"</span>, <span class="st">"cherry"</span>]
+<span class="bi">print</span>(<span class="bi">sorted</span>(words, key=<span class="kw">lambda</span> w: <span class="bi">len</span>(w)))  <span class="cm"># by length</span>
+
+<span class="cm"># Functions as arguments (passing behaviour)</span>
+<span class="kw">def</span> <span class="fn">apply</span>(func, values):
+    <span class="kw">return</span> [func(v) <span class="kw">for</span> v <span class="kw">in</span> values]
+
+<span class="bi">print</span>(<span class="fn">apply</span>(str.upper, [<span class="st">"hello"</span>, <span class="st">"world"</span>]))</div>
+
+    <h4 class="subsec">Comprehensions</h4>
+    <div class="text-block">Comprehensions are concise, readable, and faster than equivalent <code>for</code>-loops with <code>.append()</code>. Python supports <strong>list</strong>, <strong>dict</strong>, <strong>set</strong>, and <strong>generator</strong> comprehensions. Pattern: <code>[expr for item in iterable if condition]</code>. Generator comprehensions use <code>()</code> instead of <code>[]</code> and are lazy — they produce values on demand without building the full list in memory.</div>
+    <div class="code-bar"><span class="lang-tag">python · comprehensions</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+    <div class="code-fragment"><span class="cm"># List comprehension</span>
+squares = [x**<span class="nu">2</span> <span class="kw">for</span> x <span class="kw">in</span> <span class="bi">range</span>(<span class="nu">10</span>)]
+even_sq = [x**<span class="nu">2</span> <span class="kw">for</span> x <span class="kw">in</span> <span class="bi">range</span>(<span class="nu">10</span>) <span class="kw">if</span> x%<span class="nu">2</span>==<span class="nu">0</span>]
+
+<span class="cm"># Dict comprehension</span>
+word_len = {w: <span class="bi">len</span>(w) <span class="kw">for</span> w <span class="kw">in</span> [<span class="st">"py"</span>, <span class="st">"code"</span>, <span class="st">"zen"</span>]}
+
+<span class="cm"># Set comprehension</span>
+unique_lens = {<span class="bi">len</span>(w) <span class="kw">for</span> w <span class="kw">in</span> [<span class="st">"hi"</span>, <span class="st">"hey"</span>, <span class="st">"hello"</span>]}
+
+<span class="cm"># Generator expression (lazy — no list in memory)</span>
+total = <span class="bi">sum</span>(x**<span class="nu">2</span> <span class="kw">for</span> x <span class="kw">in</span> <span class="bi">range</span>(<span class="nu">1_000_000</span>))
+
+<span class="cm"># Nested comprehension (flatten a matrix)</span>
+matrix = [[<span class="nu">1</span>,<span class="nu">2</span>],[<span class="nu">3</span>,<span class="nu">4</span>],[<span class="nu">5</span>,<span class="nu">6</span>]]
+flat   = [n <span class="kw">for</span> row <span class="kw">in</span> matrix <span class="kw">for</span> n <span class="kw">in</span> row]</div>
+  </section>
+
+  <section class="art-sec" id="s05" aria-labelledby="h05">
+    <p class="sec-lbl">05 — Object-Oriented Programming</p>
+    <h2 class="art-h2" id="h05">Object-Oriented Programming in Python</h2>
+    <div class="div-bar"></div>
+    <p class="sub-tag">classes · __init__ · inheritance · super() · @property · __dunder__</p>
+
+    <h4 class="subsec">Defining a Class</h4>
+    <div class="text-block">A <strong>class</strong> is a blueprint; an <strong>instance</strong> is a concrete object built from it. <code>__init__</code> is the constructor — it runs whenever an instance is created. <code>self</code> refers to the instance. Define <strong>class attributes</strong> (shared by all instances) separately from <strong>instance attributes</strong> (unique per object). Always implement <code>__repr__</code> for useful debugging output.</div>
+    <div class="code-bar"><span class="lang-tag">python · class basics</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+    <div class="code-fragment"><span class="kw">class</span> <span class="fn">Dog</span>:
+    species = <span class="st">"Canis familiaris"</span>  <span class="cm"># class attribute (shared)</span>
+
+    <span class="kw">def</span> <span class="fn">__init__</span>(self, name: str, age: int):
+        self.name = name    <span class="cm"># instance attributes</span>
+        self.age  = age
+
+    <span class="kw">def</span> <span class="fn">bark</span>(self) -> str:
+        <span class="kw">return</span> <span class="st">f"{self.name} says Woof!"</span>
+
+    <span class="kw">def</span> <span class="fn">__repr__</span>(self) -> str:
+        <span class="kw">return</span> <span class="st">f"Dog(name={self.name!r}, age={self.age})"</span>
+
+    <span class="kw">def</span> <span class="fn">__str__</span>(self) -> str:
+        <span class="kw">return</span> <span class="st">f"{self.name}, {self.age} yrs"</span>
+
+rex = <span class="fn">Dog</span>(<span class="st">"Rex"</span>, <span class="nu">3</span>)
+<span class="bi">print</span>(rex.bark())    <span class="cm"># Rex says Woof!</span>
+<span class="bi">print</span>(<span class="bi">repr</span>(rex))     <span class="cm"># Dog(name='Rex', age=3)</span>
+<span class="bi">print</span>(Dog.species)   <span class="cm"># Canis familiaris</span></div>
+
+    <h4 class="subsec">Inheritance &amp; Polymorphism</h4>
+    <div class="text-block">A child class <strong>inherits</strong> all attributes and methods from its parent. Call the parent constructor with <code>super().__init__()</code>. <strong>Override</strong> methods in the child to specialise behaviour — Python looks up the <strong>MRO (Method Resolution Order)</strong> to find the right method. <strong>Polymorphism</strong> lets different classes respond to the same method name in their own way, enabling flexible, extensible code.</div>
+    <div class="code-bar"><span class="lang-tag">python · inheritance</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+    <div class="code-fragment"><span class="kw">class</span> <span class="fn">Animal</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(self, name: str):
+        self.name = name
+    <span class="kw">def</span> <span class="fn">speak</span>(self) -> str:
+        <span class="kw">return</span> <span class="st">"..."</span>
+
+<span class="kw">class</span> <span class="fn">Dog</span>(<span class="fn">Animal</span>):
+    <span class="kw">def</span> <span class="fn">speak</span>(self) -> str:
+        <span class="kw">return</span> <span class="st">f"{self.name}: Woof!"</span>
+
+<span class="kw">class</span> <span class="fn">Cat</span>(<span class="fn">Animal</span>):
+    <span class="kw">def</span> <span class="fn">speak</span>(self) -> str:
+        <span class="kw">return</span> <span class="st">f"{self.name}: Meow!"</span>
+
+<span class="cm"># Polymorphism — same interface, different behaviour</span>
+<span class="kw">for</span> animal <span class="kw">in</span> [<span class="fn">Dog</span>(<span class="st">"Rex"</span>), <span class="fn">Cat</span>(<span class="st">"Luna"</span>)]:
+    <span class="bi">print</span>(animal.speak())
+
+<span class="bi">print</span>(<span class="fn">Dog</span>.__mro__)   <span class="cm"># (Dog, Animal, object)</span></div>
+
+    <h4 class="subsec">Encapsulation &amp; Properties</h4>
+    <div class="text-block">Use a single underscore (<code>_name</code>) to signal "internal use" (protected by convention), and double underscore (<code>__name</code>) to trigger <strong>name mangling</strong> (prevents accidental override in subclasses — not security). The <code>@property</code> decorator turns a method into a readable attribute; <code>@attr.setter</code> adds validated write access — the Pythonic way to implement getters/setters with invariant enforcement.</div>
+    <div class="code-bar"><span class="lang-tag">python · encapsulation</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+    <div class="code-fragment"><span class="kw">class</span> <span class="fn">BankAccount</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(self, balance: float = <span class="nu">0</span>):
+        self.__balance = balance    <span class="cm"># private via name mangling</span>
+
+    <span class="deco">@property</span>
+    <span class="kw">def</span> <span class="fn">balance</span>(self) -> float:
+        <span class="kw">return</span> self.__balance       <span class="cm"># read-only attribute</span>
+
+    <span class="deco">@balance.setter</span>
+    <span class="kw">def</span> <span class="fn">balance</span>(self, value: float):
+        <span class="kw">if</span> value < <span class="nu">0</span>:
+            <span class="kw">raise</span> <span class="fn">ValueError</span>(<span class="st">"Balance cannot be negative"</span>)
+        self.__balance = value
+
+    <span class="kw">def</span> <span class="fn">deposit</span>(self, amount: float):
+        <span class="kw">if</span> amount <= <span class="nu">0</span>:
+            <span class="kw">raise</span> <span class="fn">ValueError</span>(<span class="st">"Must be positive"</span>)
+        self.__balance += amount
+
+acc = <span class="fn">BankAccount</span>(<span class="nu">100</span>)
+acc.deposit(<span class="nu">50</span>)
+<span class="bi">print</span>(acc.balance)   <span class="cm"># 150</span>
+<span class="cm"># acc.balance = -10  # raises ValueError</span></div>
+
+    <div class="insight"><p>🔍 <strong>Dunder methods (magic methods):</strong> Python's double-underscore methods let you define how objects behave with operators and built-in functions. Implement <code>__len__</code> for <code>len(obj)</code>, <code>__eq__</code> for <code>==</code>, <code>__lt__</code> for <code>&lt;</code>, <code>__add__</code> for <code>+</code>, <code>__iter__</code>/<code>__next__</code> for iteration, and <code>__enter__</code>/<code>__exit__</code> for <code>with</code> statements. This is how Python's built-in types work under the hood.</p></div>
+  </section>
+
+  <div class="ad-slot" aria-label="Advertisement">
+    <p class="ad-label">Advertisement</p>
+    <ins class="adsbygoogle" style="display:block"
+      data-ad-client="ca-pub-4575646748966866"
+      data-ad-slot="4226674403"
+      data-ad-format="auto"
+      data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <section class="art-sec" id="s06" aria-labelledby="h06">
+    <p class="sec-lbl">06 — Modules &amp; Packages</p>
+    <h2 class="art-h2" id="h06">Modules, Packages &amp; the Standard Library</h2>
+    <div class="div-bar"></div>
+    <p class="sub-tag">import · from · __init__.py · stdlib · third-party packages · virtual envs</p>
+
+    <div class="text-block">Every <code>.py</code> file is a module. Import with <code>import module</code> or <code>from module import name</code>. Packages are directories containing an <code>__init__.py</code> file. The standard library is vast — covering math, file I/O, networking, dates, JSON, CSV, regex, threading, and more — with no <code>pip</code> needed. Third-party packages are installed via <code>pip</code> from PyPI (Python Package Index), which hosts over 500,000 packages.</div>
+    <div class="code-bar"><span class="lang-tag">python · modules &amp; stdlib</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+    <div class="code-fragment"><span class="kw">import</span> math
+<span class="bi">print</span>(math.sqrt(<span class="nu">144</span>), math.pi)
+
+<span class="kw">from</span> datetime <span class="kw">import</span> date, timedelta
+today     = date.today()
+next_week = today + timedelta(days=<span class="nu">7</span>)
+<span class="bi">print</span>(today, <span class="st">"→"</span>, next_week)
+
+<span class="kw">import</span> json
+data = {<span class="st">"name"</span>: <span class="st">"Glenn"</span>, <span class="st">"score"</span>: <span class="nu">99</span>}
+json_str = json.dumps(data, indent=<span class="nu">2</span>)
+restored = json.loads(json_str)
+<span class="bi">print</span>(json_str)
+
+<span class="kw">import</span> re
+pattern = re.compile(<span class="st">r'\d{3}-\d{4}'</span>)
+<span class="bi">print</span>(pattern.findall(<span class="st">"Call 123-4567 or 987-6543"</span>))</div>
+
+    <h3>Popular Third-Party Packages</h3>
+    <p>Install with <code>pip install &lt;name&gt;</code>. Best practice: always use a <strong>virtual environment</strong> (<code>python -m venv .venv</code>) per project to isolate dependencies.</p>
+    <div class="grid-2">
+      <div class="card"><span class="card-title">🔢 numpy / pandas</span><p>Fast numerical arrays and DataFrames for data analysis. The foundation of all Python data science work.</p></div>
+      <div class="card"><span class="card-title">📊 matplotlib / seaborn</span><p>Publication-quality plotting and statistical visualisation. Seaborn wraps matplotlib with beautiful default styles.</p></div>
+      <div class="card"><span class="card-title">🌐 requests / httpx</span><p>Elegant HTTP clients. <code>requests</code> is the classic sync option; <code>httpx</code> adds async support and HTTP/2.</p></div>
+      <div class="card"><span class="card-title">⚡ fastapi / flask</span><p>Web frameworks. FastAPI for high-performance async APIs with automatic docs; Flask for lightweight control.</p></div>
+      <div class="card"><span class="card-title">🗄️ sqlalchemy</span><p>The most powerful Python ORM. Maps database tables to Python classes and supports all major SQL databases.</p></div>
+      <div class="card"><span class="card-title">🧪 pytest</span><p>The go-to testing framework. Fixtures, parametrize, plugins, and clean assertion introspection make testing productive.</p></div>
+    </div>
+  </section>
+
+  <section class="art-sec" id="s07" aria-labelledby="h07">
+    <p class="sec-lbl">07 — Error Handling &amp; File I/O</p>
+    <h2 class="art-h2" id="h07">Error Handling &amp; File I/O</h2>
+    <div class="div-bar"></div>
+    <p class="sub-tag">try · except · else · finally · raise · custom exceptions · open · pathlib</p>
+
+    <h4 class="subsec">Exception Handling</h4>
+    <div class="text-block"><code>try / except / else / finally</code> manages error flow. Always catch <strong>specific</strong> exceptions — avoid bare <code>except:</code> which silently swallows every error including <code>KeyboardInterrupt</code>. <code>else</code> runs only if no exception occurred. <code>finally</code> always runs — perfect for resource cleanup. Raise custom errors by subclassing <code>Exception</code> and adding context.</div>
+    <div class="code-bar"><span class="lang-tag">python · exceptions</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+    <div class="code-fragment"><span class="cm"># Custom exception hierarchy</span>
+<span class="kw">class</span> <span class="fn">AppError</span>(<span class="fn">Exception</span>): <span class="kw">pass</span>
+<span class="kw">class</span> <span class="fn">ValidationError</span>(<span class="fn">AppError</span>):
+    <span class="kw">def</span> <span class="fn">__init__</span>(self, field, msg):
+        <span class="bi">super</span>().__init__(<span class="st">f"{field}: {msg}"</span>)
+        self.field = field
+
+<span class="kw">def</span> <span class="fn">safe_divide</span>(a, b):
+    <span class="kw">try</span>:
+        result = a / b
+    <span class="kw">except</span> <span class="fn">ZeroDivisionError</span>:
+        <span class="kw">raise</span> <span class="fn">ValidationError</span>(<span class="st">"b"</span>, <span class="st">"cannot be zero"</span>) <span class="kw">from</span> <span class="kw">None</span>
+    <span class="kw">except</span> <span class="fn">TypeError</span> <span class="kw">as</span> e:
+        <span class="kw">raise</span> <span class="fn">ValidationError</span>(<span class="st">"inputs"</span>, <span class="st">f"must be numeric: {e}"</span>)
+    <span class="kw">else</span>:
+        <span class="kw">return</span> result    <span class="cm"># runs only if no exception</span>
+    <span class="kw">finally</span>:
+        <span class="bi">print</span>(<span class="st">"safe_divide called"</span>)   <span class="cm"># always runs</span></div>
+
+    <h4 class="subsec">File I/O &amp; pathlib</h4>
+    <div class="text-block">Use <code>open()</code> to read and write files. Always use a <strong><code>with</code> block</strong> (context manager) — it guarantees the file is closed even if an exception occurs. Mode flags: <code>"r"</code> read, <code>"w"</code> write (overwrites), <code>"a"</code> append, <code>"rb"</code>/<code>"wb"</code> binary. Use <code>pathlib.Path</code> for modern, readable, cross-platform path manipulation — it replaces <code>os.path</code> in all new code.</div>
+    <div class="code-bar"><span class="lang-tag">python · file I/O &amp; pathlib</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+    <div class="code-fragment"><span class="kw">from</span> pathlib <span class="kw">import</span> Path
+
+base = Path(<span class="st">"data"</span>)
+base.mkdir(exist_ok=<span class="kw">True</span>)
+notes = base / <span class="st">"notes.txt"</span>
+
+<span class="cm"># Write</span>
+<span class="kw">with</span> notes.open(<span class="st">"w"</span>) <span class="kw">as</span> f:
+    f.write(<span class="st">"Python is amazing!\n"</span>)
+    f.write(<span class="st">"pathlib makes paths easy.\n"</span>)
+
+<span class="cm"># Read all at once</span>
+content = notes.read_text()
+<span class="bi">print</span>(content)
+
+<span class="cm"># Read line by line (memory efficient)</span>
+<span class="kw">with</span> notes.open() <span class="kw">as</span> f:
+    <span class="kw">for</span> line <span class="kw">in</span> f:
+        <span class="bi">print</span>(line.strip())
+
+<span class="cm"># Path operations</span>
+<span class="bi">print</span>(notes.suffix)    <span class="cm"># .txt</span>
+<span class="bi">print</span>(notes.stem)      <span class="cm"># notes</span>
+<span class="bi">print</span>(notes.exists())  <span class="cm"># True</span></div>
+
+    <div class="tip-box">Use <code>json.dump(data, f)</code> / <code>json.load(f)</code> for JSON files, <code>csv.DictReader</code> / <code>csv.DictWriter</code> for CSV, and <code>pickle.dump</code> / <code>pickle.load</code> for serialising Python objects (not for untrusted data).</div>
+  </section>
+
+  <section class="art-sec" id="s08" aria-labelledby="h08">
+    <p class="sec-lbl">08 — Advanced Patterns</p>
+    <h2 class="art-h2" id="h08">Advanced Patterns: Generators, Decorators &amp; Type Hints</h2>
+    <div class="div-bar"></div>
+    <p class="sub-tag">yield · itertools · @wraps · lru_cache · type hints · dataclasses</p>
+
+    <h4 class="subsec">Iterators &amp; Generators</h4>
+    <div class="text-block">An <strong>iterator</strong> implements <code>__iter__()</code> and <code>__next__()</code>. A <strong>generator</strong> uses <code>yield</code> to produce values one at a time without building the full sequence in memory — it pauses execution at <code>yield</code> and resumes from that exact point on the next call to <code>next()</code>. This makes generators ideal for large datasets, infinite sequences, and streaming pipelines. Generator expressions are even more concise: <code>sum(x**2 for x in range(n))</code>.</div>
+    <div class="code-bar"><span class="lang-tag">python · generators</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+    <div class="code-fragment"><span class="kw">def</span> <span class="fn">countdown</span>(n):
+    <span class="kw">while</span> n > <span class="nu">0</span>:
+        <span class="kw">yield</span> n      <span class="cm"># suspends here, resumes on next()</span>
+        n -= <span class="nu">1</span>
+
+<span class="kw">for</span> num <span class="kw">in</span> <span class="fn">countdown</span>(<span class="nu">5</span>):
+    <span class="bi">print</span>(num, end=<span class="st">" "</span>)  <span class="cm"># 5 4 3 2 1</span>
+
+<span class="cm"># Infinite Fibonacci — never runs out of memory</span>
+<span class="kw">def</span> <span class="fn">fibonacci</span>():
+    a, b = <span class="nu">0</span>, <span class="nu">1</span>
+    <span class="kw">while</span> <span class="kw">True</span>:
+        <span class="kw">yield</span> a
+        a, b = b, a + b
+
+<span class="kw">from</span> itertools <span class="kw">import</span> islice
+<span class="bi">print</span>(<span class="bi">list</span>(<span class="fn">islice</span>(<span class="fn">fibonacci</span>(), <span class="nu">10</span>)))  <span class="cm"># first 10 Fibonacci</span>
+
+<span class="cm"># Generator with send() — coroutine pattern</span>
+<span class="kw">def</span> <span class="fn">accumulator</span>():
+    total = <span class="nu">0</span>
+    <span class="kw">while</span> <span class="kw">True</span>:
+        value = <span class="kw">yield</span> total
+        <span class="kw">if</span> value <span class="kw">is</span> <span class="kw">None</span>: <span class="kw">break</span>
+        total += value</div>
+
+    <h4 class="subsec">Decorators</h4>
+    <div class="text-block">A <strong>decorator</strong> is a function that wraps another function, adding behaviour (logging, timing, caching, auth) without touching the original code. The <code>@name</code> syntax is syntactic sugar for <code>func = decorator(func)</code>. Always apply <code>@functools.wraps(func)</code> inside your decorator to preserve the wrapped function's <code>__name__</code> and <code>__doc__</code> — critical for debugging and introspection tools.</div>
+    <div class="code-bar"><span class="lang-tag">python · decorators</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+    <div class="code-fragment"><span class="kw">import</span> time
+<span class="kw">from</span> functools <span class="kw">import</span> wraps, lru_cache
+
+<span class="kw">def</span> <span class="fn">timer</span>(func):
+    <span class="deco">@wraps</span>(func)
+    <span class="kw">def</span> <span class="fn">wrapper</span>(*args, **kwargs):
+        start  = time.perf_counter()
+        result = func(*args, **kwargs)
+        end    = time.perf_counter()
+        <span class="bi">print</span>(<span class="st">f"{func.__name__} took {end-start:.4f}s"</span>)
+        <span class="kw">return</span> result
+    <span class="kw">return</span> wrapper
+
+<span class="deco">@timer</span>
+<span class="kw">def</span> <span class="fn">slow_sum</span>(n):
+    <span class="kw">return</span> <span class="bi">sum</span>(<span class="bi">range</span>(n))
+
+<span class="fn">slow_sum</span>(<span class="nu">10_000_000</span>)     <span class="cm"># slow_sum took 0.2134s</span>
+
+<span class="cm"># Built-in: memoisation with lru_cache</span>
+<span class="deco">@lru_cache</span>(maxsize=<span class="kw">None</span>)
+<span class="kw">def</span> <span class="fn">fib</span>(n):
+    <span class="kw">return</span> n <span class="kw">if</span> n < <span class="nu">2</span> <span class="kw">else</span> <span class="fn">fib</span>(n-<span class="nu">1</span>) + <span class="fn">fib</span>(n-<span class="nu">2</span>)
+
+<span class="bi">print</span>(<span class="fn">fib</span>(<span class="nu">50</span>))  <span class="cm"># instant — results are cached</span></div>
+
+    <h4 class="subsec">Type Hints <span class="badge badge-new">3.5+</span></h4>
+    <div class="text-block">Type hints annotate variables and function signatures with expected types. Python does <em>not</em> enforce them at runtime — they are for IDEs, type checkers (<code>mypy</code>, <code>pyright</code>), and self-documenting code. Python 3.9+ allows built-in generics: <code>list[int]</code>, <code>dict[str, Any]</code>. Python 3.10+ uses <code>X | Y</code> union syntax. <code>dataclasses</code> (3.7+) combine type hints with automatic boilerplate generation.</div>
+    <div class="code-bar"><span class="lang-tag">python · type hints &amp; dataclasses</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+    <div class="code-fragment"><span class="kw">from</span> typing <span class="kw">import</span> Optional, Union
+<span class="kw">from</span> dataclasses <span class="kw">import</span> dataclass, field
+
+<span class="kw">def</span> <span class="fn">greet</span>(name: str, times: int = <span class="nu">1</span>) -> str:
+    <span class="kw">return</span> (<span class="st">f"Hello {name}! "</span>) * times
+
+<span class="cm"># Union type — int OR str (Python 3.10+ syntax)</span>
+<span class="kw">def</span> <span class="fn">parse</span>(value: int | str) -> float:
+    <span class="kw">return</span> <span class="bi">float</span>(value)
+
+<span class="cm"># Optional (= T | None)</span>
+<span class="kw">def</span> <span class="fn">find_user</span>(uid: int) -> Optional[str]:
+    users = {<span class="nu">1</span>: <span class="st">"Glenn"</span>}
+    <span class="kw">return</span> users.get(uid)
+
+<span class="cm"># Dataclass — auto __init__, __repr__, __eq__</span>
+<span class="deco">@dataclass</span>
+<span class="kw">class</span> <span class="fn">Point</span>:
+    x: float
+    y: float
+    label: str = <span class="st">"origin"</span>
+    tags: list[str] = field(default_factory=list)
+
+p = <span class="fn">Point</span>(<span class="nu">1.0</span>, <span class="nu">2.0</span>)
+<span class="bi">print</span>(p)  <span class="cm"># Point(x=1.0, y=2.0, label='origin', tags=[])</span></div>
+  </section>
+
+  <section class="art-sec" id="s09" aria-labelledby="h09">
+    <p class="sec-lbl">09 — Quick Reference</p>
+    <h2 class="art-h2" id="h09">Operators Quick Reference</h2>
+    <div class="div-bar"></div>
+    <p class="sub-tag">arithmetic · comparison · logical · identity · membership · bitwise · walrus</p>
+    <table class="ref-table" aria-label="Python Operators Reference">
+      <thead>
+        <tr><th>Category</th><th>Operators</th><th>Example</th><th>Result</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Arithmetic</td><td><code>+ - * / // % **</code></td><td><code>2 ** 8</code></td><td><code>256</code></td></tr>
+        <tr><td>Comparison</td><td><code>== != &lt; &gt; &lt;= &gt;=</code></td><td><code>3 &lt; 5</code></td><td><code>True</code></td></tr>
+        <tr><td>Logical</td><td><code>and  or  not</code></td><td><code>x &gt; 0 and x &lt; 10</code></td><td><code>bool</code></td></tr>
+        <tr><td>Identity</td><td><code>is  is not</code></td><td><code>x is None</code></td><td><code>bool</code></td></tr>
+        <tr><td>Membership</td><td><code>in  not in</code></td><td><code>"a" in "cat"</code></td><td><code>True</code></td></tr>
+        <tr><td>Bitwise</td><td><code>&amp; | ^ ~ &lt;&lt; &gt;&gt;</code></td><td><code>0b1010 &amp; 0b1100</code></td><td><code>8</code></td></tr>
+        <tr><td>Assignment</td><td><code>= += -= *= /= //= %=</code></td><td><code>x //= 3</code></td><td>in-place</td></tr>
+        <tr><td>Walrus <span class="badge badge-new">3.8+</span></td><td><code>:=</code></td><td><code>if (n := len(a)) &gt; 10</code></td><td>assign &amp; test</td></tr>
+        <tr><td>Dict merge <span class="badge badge-new">3.9+</span></td><td><code>|  |=</code></td><td><code>a | b</code></td><td>merged dict</td></tr>
+        <tr><td>Type union <span class="badge badge-new">3.10+</span></td><td><code>|</code></td><td><code>int | str</code></td><td>union type</td></tr>
+      </tbody>
+    </table>
+    <div class="tip-box">Python evaluates <code>and</code> / <code>or</code> with <strong>short-circuit evaluation</strong> — <code>a and b</code> doesn't evaluate <code>b</code> if <code>a</code> is falsy. This is used idiomatically: <code>name = user_input or "default"</code>.</div>
+  </section>
+
+  <div class="ad-slot" aria-label="Advertisement">
+    <p class="ad-label">Advertisement</p>
+    <ins class="adsbygoogle" style="display:block"
+      data-ad-client="ca-pub-4575646748966866"
+      data-ad-slot="4226674403"
+      data-ad-format="auto"
+      data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <section class="art-sec" id="s10" aria-labelledby="h10">
+    <p class="sec-lbl">10 — Best Practices</p>
+    <h2 class="art-h2" id="h10">Pythonic Style &amp; Best Practices</h2>
+    <div class="div-bar"></div>
+    <p class="sub-tag">Zen of Python · PEP 8 · idioms · virtual envs · tooling</p>
+
+    <h4 class="subsec">The Zen of Python</h4>
+    <div class="text-block">Run <code>import this</code> in any Python shell to read all 19 aphorisms. These are the guiding philosophy behind how Python code should be written. Every experienced Python developer has internalised them:
+      <ul>
+        <li><strong>Beautiful is better than ugly.</strong></li>
+        <li><strong>Explicit is better than implicit.</strong></li>
+        <li><strong>Simple is better than complex.</strong></li>
+        <li><strong>Readability counts.</strong></li>
+        <li><strong>Errors should never pass silently.</strong></li>
+        <li><strong>There should be one obvious way to do it.</strong></li>
+        <li><strong>If the implementation is hard to explain, it's a bad idea.</strong></li>
+      </ul>
+    </div>
+
+    <h4 class="subsec">Pythonic Idioms</h4>
+    <div class="text-block">
+      <ul>
+        <li><code>for x in items</code> over <code>for i in range(len(items))</code></li>
+        <li>f-strings over <code>"Hello " + name</code> or <code>"%s" % name</code></li>
+        <li><code>with open(...) as f</code> over manual <code>f.open()</code> / <code>f.close()</code></li>
+        <li>List comprehensions over <code>append()</code> in a for-loop</li>
+        <li><code>x is None</code> over <code>x == None</code> (identity, not equality)</li>
+        <li><code>if items:</code> over <code>if len(items) != 0:</code></li>
+        <li>Unpacking: <code>first, *rest = [1, 2, 3, 4]</code></li>
+        <li>Dict merge <span class="badge badge-new">3.9+</span>: <code>merged = dict_a | dict_b</code></li>
+        <li><code>any()</code> / <code>all()</code> over manual boolean loops</li>
+        <li><code>enumerate()</code> over manual index counters</li>
+        <li><code>zip()</code> to iterate two lists simultaneously</li>
+      </ul>
+    </div>
+
+    <h4 class="subsec">Tooling &amp; Project Setup</h4>
+    <div class="code-bar"><span class="lang-tag">shell · project setup</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+    <div class="code-fragment"><span class="cm"># Create isolated virtual environment</span>
+python -m venv .venv
+source .venv/bin/activate        <span class="cm"># macOS/Linux</span>
+<span class="cm"># .venv\Scripts\activate         # Windows</span>
+
+<span class="cm"># Check syntax without running</span>
+python -m py_compile file.py
+
+<span class="cm"># Format code (Black)</span>
+pip install black
+black .
+
+<span class="cm"># Static type checking (mypy)</span>
+pip install mypy
+mypy main.py
+
+<span class="cm"># Linting (ruff — ultra fast)</span>
+pip install ruff
+ruff check .
+
+<span class="cm"># Run tests (pytest)</span>
+pip install pytest
+pytest -v</div>
+
+    <div class="tip-box">Use <code>python -m pdb -c continue file.py</code> to drop into the debugger when an exception occurs. In VS Code / PyCharm, set breakpoints visually. For quick inspections, <code>breakpoint()</code> (Python 3.7+) drops into pdb wherever you place it.</div>
+  </section>
+
+  <section class="art-sec" id="faq" aria-labelledby="h-faq" style="max-width:860px">
+    <p class="sec-lbl">FAQ</p>
+    <h2 class="art-h2" id="h-faq">Common Python Questions Answered</h2>
+    <div class="div-bar"></div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+          Is Python dynamically or statically typed?
+          <span class="faq-ico">+</span>
+        </button>
+        <div class="faq-ans" role="region">
+          <p>Python is <strong>dynamically and strongly typed</strong>. Dynamic means types are resolved at runtime — no declarations needed. Strong means Python won't silently coerce incompatible types; adding a string to an integer raises a <code>TypeError</code>. Python 3.5+ supports optional type hints for documentation and tools like <code>mypy</code>, but these are not enforced at runtime.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+          What is the difference between a list and a tuple?
+          <span class="faq-ico">+</span>
+        </button>
+        <div class="faq-ans" role="region">
+          <p>A <strong>list</strong> is mutable — you can add, remove, or change elements after creation. A <strong>tuple</strong> is immutable — once created, its contents cannot be changed. Tuples are slightly faster, use less memory, and can be used as dictionary keys. Use tuples for fixed records and function return values; lists for ordered sequences that need modification.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+          What is a Python decorator and when should I use one?
+          <span class="faq-ico">+</span>
+        </button>
+        <div class="faq-ans" role="region">
+          <p>A decorator is a function that wraps another function to add behaviour without modifying the original. The <code>@syntax</code> is shorthand for <code>func = decorator(func)</code>. Use decorators for cross-cutting concerns: logging, timing, caching (<code>@lru_cache</code>), authentication, retry logic, and input validation. The standard library uses them heavily: <code>@property</code>, <code>@staticmethod</code>, <code>@classmethod</code>, <code>@functools.wraps</code>.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+          What is a generator and why is it memory-efficient?
+          <span class="faq-ico">+</span>
+        </button>
+        <div class="faq-ans" role="region">
+          <p>A generator uses <code>yield</code> to produce values one at a time instead of building the entire sequence in memory. When execution hits <code>yield</code>, the function pauses and returns the value — resuming from that exact point on the next call to <code>next()</code>. This makes generators ideal for large files, infinite sequences, and streaming pipelines where loading everything at once would exhaust memory.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+          What does the LEGB rule mean in Python?
+          <span class="faq-ico">+</span>
+        </button>
+        <div class="faq-ans" role="region">
+          <p>LEGB is Python's variable name resolution order: <strong>L</strong>ocal → <strong>E</strong>nclosing → <strong>G</strong>lobal → <strong>B</strong>uilt-in. Python searches each scope until the name is found or a <code>NameError</code> is raised. Use <code>global</code> to write to module-level scope from inside a function, and <code>nonlocal</code> to write to an enclosing (non-global) scope in a closure.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+          When should I use a dataclass instead of a regular class?
+          <span class="faq-ico">+</span>
+        </button>
+        <div class="faq-ans" role="region">
+          <p>Use <code>@dataclass</code> whenever your class is primarily a container for data fields. Dataclasses automatically generate <code>__init__</code>, <code>__repr__</code>, <code>__eq__</code>, and optionally <code>__hash__</code>, <code>__lt__</code> (with <code>order=True</code>), and frozen immutability (with <code>frozen=True</code>). They significantly reduce boilerplate for simple value objects, configuration holders, and DTOs (Data Transfer Objects). For classes with significant behaviour/logic, a regular class is often clearer.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="share-box" aria-label="Share this article">
+    <p class="sec-lbl2">Share This Article</p>
+    <div class="share-btns">
+      <button class="share-btn fb" onclick="genCaption('facebook')">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        Facebook
+      </button>
+      <button class="share-btn li" onclick="genCaption('linkedin')">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </button>
+      <button class="share-btn x" onclick="genCaption('x')">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.742l7.732-8.859L2.266 2.25H8.08l4.26 5.637zM17.083 20.75h1.833L7.084 4.126H5.117z"/></svg>
+        X (Twitter)
+      </button>
+    </div>
+    <div class="caption-box" id="captionBox">Click a platform above to generate an AI-crafted caption for that network.</div>
+    <div class="cap-actions">
+      <button class="btn-sm pri" id="copyCapBtn" onclick="copyCap()" style="display:none">📋 Copy</button>
+      <button class="btn-sm" id="shareOpenBtn" onclick="openShareUrl()" style="display:none">↗ Open &amp; Share</button>
+      <button class="btn-sm" id="regenBtn" onclick="regenCap()" style="display:none">🔄 Regenerate</button>
+      <span class="ai-badge" id="aiBadge" style="display:none">💻 Generate</span>
+    </div>
+  </div>
+
+  <div class="cmt-wrap" aria-label="Comments section">
+    <div class="cmt-hdr">
+      <div>
+        <p class="sec-lbl2" style="margin:0 0 .2rem">Community</p>
+        <h2 class="art-h2" style="border:none;padding:0;margin:0;font-size:.9rem">Comments</h2>
+      </div>
+      <span class="cmt-badge" id="cmtCount">0 comments</span>
+    </div>
+    <div class="cmt-form">
+      <div class="cmt-form-row">
+        <input type="text" id="cmtName" placeholder="Your name" maxlength="40" aria-label="Name">
+        <input type="email" id="cmtEmail" placeholder="Email (private)" maxlength="80" aria-label="Email">
+      </div>
+      <textarea id="cmtText" placeholder="Share your Python questions, tips, or what you found most useful…" maxlength="700" aria-label="Comment"></textarea>
+      <div class="cmt-actions">
+        <button class="btn-p" onclick="postComment()" style="font-size:.75rem;padding:.55rem 1.35rem">Post Comment</button>
+        <span class="cmt-msg" id="cmtMsg"></span>
+      </div>
+    </div>
+    <hr class="cdiv">
+    <div class="cmt-list" id="cmtList">
+      <div class="no-cmt" id="noCmt">Be the first to comment! 👋</div>
+    </div>
+  </div>
+
+  <section id="subscribe" aria-labelledby="h-sub">
+    <div class="sub-wrap">
+      <h2 id="h-sub">Stay in the Loop</h2>
+      <div style="width:32px;height:2px;background:var(--gold);margin:.6rem auto 1rem;border-radius:1px"></div>
+      <p class="sub-desc">Get new Python tutorials, deep-dives, and coding guides delivered to your inbox.</p>
+      <div class="sub-tags">
+        <input type="checkbox" class="sub-chk" id="t1" checked><label class="sub-lbl" for="t1">🖥️ Python</label>
+        <input type="checkbox" class="sub-chk" id="t2" checked><label class="sub-lbl" for="t2">💻 OOP</label>
+        <input type="checkbox" class="sub-chk" id="t3"><label class="sub-lbl" for="t3">🌐 Web Dev</label>
+        <input type="checkbox" class="sub-chk" id="t4"><label class="sub-lbl" for="t4">🤖 ML / AI</label>
+        <input type="checkbox" class="sub-chk" id="t5"><label class="sub-lbl" for="t5">📊 Data Science</label>
+        <input type="checkbox" class="sub-chk" id="t6"><label class="sub-lbl" for="t6">🧪 Testing</label>
+      </div>
+      <div class="sub-grid">
+        <input type="text" id="subName" placeholder="First name" autocomplete="given-name" aria-label="First name">
+        <input type="email" id="subEmail" placeholder="your@email.com" autocomplete="email" aria-label="Email">
+      </div>
+      <div style="text-align:center">
+        <button class="btn-p" onclick="subscribe()" type="button" id="subBtn">Subscribe Free →</button>
+      </div>
+      <div class="perks">
+        <span class="perk">No spam</span>
+        <span class="perk">Free forever</span>
+        <span class="perk">Unsubscribe anytime</span>
+      </div>
+      <p class="snote">Join readers learning Python from first principles.</p>
+      <p id="subMsg" class="subMsg" aria-live="polite"></p>
+    </div>
+  </section>
+
+</div>
+
+<footer role="contentinfo">
+  <div class="fg">
+    <div class="fbrand">
+      <a href="./index.html" class="logo" aria-label="Valleys and Bytes Home">
+        <span aria-hidden="true">💻</span>VALLEYS <span class="amp">&amp;</span> <span class="w2">BYTES</span>
+      </a>
+      <p>Deep, accessible programming education covering Python, OOP, web development, machine learning, and data science. Built with precision and care.</p>
+      <div class="ftags">
+        <span class="ftag">Python</span>
+        <span class="ftag">Fundamentals</span>
+        <span class="ftag">OOP</span>
+        <span class="ftag">Decorators</span>
+        <span class="ftag">Generators</span>
+        <span class="ftag">Type Hints</span>
+      </div>
+    </div>
+    <div class="fcol">
+      <h4>Learn</h4>
+      <div class="fcol-links">
+        <a href="./python-tutorials.html">🖥️ Python Tutorials</a>
+        <a href="./python-fundamentals.html">💻 Fundamentals</a>
+        <a href="./data-structure.html">📚 Data Structures</a>
+        <a href="./web-development.html">🌐 Web Development</a>
+        <a href="./machine-learning.html">🤖 Machine Learning</a>
+      </div>
+    </div>
+    <div class="fcol">
+      <h4>Legal</h4>
+      <div class="fcol-links">
+        <a href="./oop-privacy.html">🔏 Privacy Policy</a>
+        <a href="./oop-terms.html">📜 Terms of Service</a>
+        <a href="./oop-cookie.html">🍪 Cookie Policy</a>
+        <a href="./oop-contact.html">✉️ Contact</a>
+        <a href="./oop-sitemap.html">🗺️ Sitemap</a>
+      </div>
+    </div>
+  </div>
+  <div class="fbot">
+    <p class="fcopy">© 2026 VALLEYS &amp; BYTES — Python Fundamentals Guide · Built with data precision and Created through information authentication. - Glenn Junsay Pansensoy · All rights reserved.</p>
+  </div>
+</footer>
+
+<button id="btt" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const prog = document.getElementById('prog');
+  const btt  = document.getElementById('btt');
+  window.addEventListener('scroll', () => {
+    const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100;
+    if (prog) prog.style.width = pct + '%';
+    if (btt)  btt.classList.toggle('vis', window.scrollY > 400);
+  }, { passive: true });
+
+  const ham = document.getElementById('ham');
+  const drawer = document.getElementById('drawer');
+  const overlay = document.getElementById('overlay');
+  if (ham && drawer && overlay) {
+    const toggle = open => {
+      drawer.classList.toggle('open', open);
+      overlay.classList.toggle('open', open);
+      ham.classList.toggle('open', open);
+      ham.setAttribute('aria-expanded', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    };
+    ham.addEventListener('click', () => toggle(!drawer.classList.contains('open')));
+    overlay.addEventListener('click', () => toggle(false));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') toggle(false); });
+    drawer.querySelectorAll('a').forEach(l => l.addEventListener('click', () => toggle(false)));
+  }
+  initComments();
+});
+
+function toggleFaq(btn) {
+  const item   = btn.closest('.faq-item');
+  const ans    = item.querySelector('.faq-ans');
+  const icon   = btn.querySelector('.faq-ico');
+  const isOpen = item.classList.toggle('open');
+  ans.style.maxHeight = isOpen ? ans.scrollHeight + 'px' : '0';
+  icon.textContent    = isOpen ? '−' : '+';
+  btn.setAttribute('aria-expanded', isOpen);
+}
+
+function copyCode(btn) {
+  const pre = btn.closest('.code-bar').nextElementSibling;
+  const text = pre ? pre.textContent : '';
+  navigator.clipboard.writeText(text).then(() => {
+    const orig = btn.textContent;
+    btn.textContent = 'copied!';
+    setTimeout(() => btn.textContent = orig, 2000);
+  });
+}
+
+function showMsg(el, text, color) {
+  if (!el) return;
+  el.textContent = text;
+  el.style.color   = color || 'var(--gold)';
+  el.style.opacity = '1';
+  setTimeout(() => el.style.opacity = '0', 5000);
+}
+
+function subscribe() {
+  const email = document.getElementById('subEmail').value.trim();
+  const name  = (document.getElementById('subName') || {value:''}).value.trim();
+  const msg   = document.getElementById('subMsg');
+  const btn   = document.getElementById('subBtn');
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    showMsg(msg, '✗ Please enter a valid email address.', '#ff79c6');
+    return;
+  }
+  const interests = [];
+  document.querySelectorAll('.sub-chk:checked').forEach(cb => {
+    interests.push(cb.nextElementSibling.textContent.trim());
+  });
+  if (btn) { btn.disabled = true; btn.textContent = 'Subscribing…'; }
+  setTimeout(() => {
+    const subs = JSON.parse(localStorage.getItem('vb_subs_pyfund') || '[]');
+    subs.push({ email, name, interests, date: new Date().toISOString() });
+    localStorage.setItem('vb_subs_pyfund', JSON.stringify(subs));
+    if (btn) {
+      btn.disabled = false;
+      btn.textContent = '✓ Subscribed!';
+      btn.style.background = 'linear-gradient(135deg,#1a5c2a,#28a745)';
+    }
+    showMsg(msg, `✓ Welcome${name ? ', ' + name : ''}! Check your inbox.`, '#8dc896');
+    document.getElementById('subEmail').value = '';
+    if (document.getElementById('subName')) document.getElementById('subName').value = '';
+  }, 900);
+}
+
+const PAGE_URL   = 'https://code-sense.pansensoyglenn.workers.dev/python-fundamentals.html';
+const PAGE_TITLE = 'Python Fundamentals: Complete Beginner to Intermediate Guide 2026 — Variables, OOP, Decorators & More | Valleys & Bytes';
+let curPlatform  = '';
+let curCaption   = '';
+
+const platformGuide = {
+  facebook: 'casual, warm, beginner-friendly tone. 2-3 sentences, 1-2 emojis, end with an engaging question for the community. No hashtags.',
+  linkedin:  'professional, educational tone. 3-4 sentences highlighting Python fundamentals, OOP, decorators, generators, and type hints as must-know skills. Mention it covers Python 3.12+. End with 4-5 hashtags like #Python #Programming #SoftwareDevelopment.',
+  x:         'punchy hook under 240 characters including the URL. Developer community tone, hint at the depth of content. 2-3 hashtags like #Python #100DaysOfCode #LearnPython.'
+};
+
+async function genCaption(platform) {
+  curPlatform = platform;
+  const box      = document.getElementById('captionBox');
+  const copyBtn  = document.getElementById('copyCapBtn');
+  const openBtn  = document.getElementById('shareOpenBtn');
+  const regenBtn = document.getElementById('regenBtn');
+  const badge    = document.getElementById('aiBadge');
+  box.className = 'caption-box loading';
+  box.textContent = 'Generating caption…';
+  [copyBtn, openBtn, regenBtn, badge].forEach(el => el && (el.style.display = 'none'));
+  try {
+    const resp = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        messages: [{
+          role: 'user',
+          content: `You are a social media copywriter for a Python programming education site. Write a ${platform.toUpperCase()} post sharing this Python fundamentals tutorial.
+
+Title: ${PAGE_TITLE}
+URL: ${PAGE_URL}
+Topics: Core language, dynamic typing, variables, LEGB scope, all built-in data types, control flow (if/for/while/match), functions (*args/**kwargs/lambda), comprehensions, OOP (classes/inheritance/properties), modules, error handling, file I/O with pathlib, generators, decorators (@lru_cache/@wraps), type hints, dataclasses, operators reference, Pythonic best practices.
+Author: Glenn Junsay Pansensoy — Valleys & Bytes
+
+Platform guidelines: ${platformGuide[platform]}
+
+Write ONLY the post text, ready to copy-paste. Include the URL naturally. No quotes around output.`
+        }]
+      })
+    });
+    const data = await resp.json();
+    curCaption = data.content.map(b => b.text || '').join('').trim();
+    box.className = 'caption-box';
+    box.textContent = curCaption;
+    [copyBtn, openBtn, regenBtn, badge].forEach(el => el && (el.style.display = 'inline-flex'));
+  } catch (e) {
+    box.className = 'caption-box';
+    box.textContent = 'Could not generate caption — please check your connection and try again.';
+  }
+}
+
+function copyCap() {
+  if (!curCaption) return;
+  navigator.clipboard.writeText(curCaption).then(() => {
+    const btn = document.getElementById('copyCapBtn');
+    if (!btn) return;
+    const orig = btn.textContent;
+    btn.textContent = '✓ Copied!';
+    setTimeout(() => btn.textContent = orig, 2000);
+  });
+}
+
+function openShareUrl() {
+  const urls = {
+    facebook: 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(PAGE_URL),
+    linkedin:  'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(PAGE_URL),
+    x:         'https://twitter.com/intent/tweet?url=' + encodeURIComponent(PAGE_URL) + '&text=' + encodeURIComponent(curCaption.replace(PAGE_URL,'').trim())
+  };
+  if (urls[curPlatform]) window.open(urls[curPlatform], '_blank', 'width=600,height=500');
+}
+
+function regenCap() { if (curPlatform) genCaption(curPlatform); }
+
+const CMT_KEY  = 'vb_comments_pyfund';
+const LIKE_KEY = 'vb_likes_pyfund';
+function getCmts()    { return JSON.parse(localStorage.getItem(CMT_KEY)  || '[]'); }
+function saveCmts(a)  { localStorage.setItem(CMT_KEY, JSON.stringify(a)); }
+function getLikes()   { return JSON.parse(localStorage.getItem(LIKE_KEY) || '{}'); }
+function saveLikes(o) { localStorage.setItem(LIKE_KEY, JSON.stringify(o)); }
+
+function timeAgo(iso) {
+  const s = (Date.now() - new Date(iso)) / 1000;
+  if (s < 60)    return 'just now';
+  if (s < 3600)  return Math.floor(s / 60)   + 'm ago';
+  if (s < 86400) return Math.floor(s / 3600)  + 'h ago';
+  return Math.floor(s / 86400) + 'd ago';
+}
+
+function escH(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function renderCmts() {
+  const list    = document.getElementById('cmtList');
+  const countEl = document.getElementById('cmtCount');
+  const cmts    = getCmts();
+  const likes   = getLikes();
+  if (countEl) countEl.textContent = cmts.length + (cmts.length === 1 ? ' comment' : ' comments');
+  if (!list) return;
+  if (cmts.length === 0) {
+    list.innerHTML = '<div class="no-cmt">Be the first to comment! 👋</div>';
+    return;
+  }
+  list.innerHTML = cmts.slice().reverse().map(c => {
+    const init  = c.name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0,2);
+    const liked = !!likes[c.id];
+    return `<div class="cmt-item">
+      <div class="cmt-meta">
+        <div class="cmt-av">${init}</div>
+        <span class="cmt-name">${escH(c.name)}</span>
+        <span class="cmt-date">${timeAgo(c.date)}</span>
+      </div>
+      <div class="cmt-body">${escH(c.text)}</div>
+      <div>
+        <button class="cmt-like ${liked ? 'active' : ''}" onclick="likeCmt('${c.id}')">
+          ${liked ? '❤️' : '🤍'} ${c.likes + (liked ? 1 : 0)}
+        </button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function likeCmt(id) {
+  const likes = getLikes(); likes[id] = !likes[id]; saveLikes(likes); renderCmts();
+}
+
+function postComment() {
+  const name = document.getElementById('cmtName').value.trim();
+  const text = document.getElementById('cmtText').value.trim();
+  const msg  = document.getElementById('cmtMsg');
+  if (!name)               { showMsg(msg, '✗ Name is required.', '#ff79c6'); return; }
+  if (!text || text.length < 3) { showMsg(msg, '✗ Comment is too short.', '#ff79c6'); return; }
+  const cmts = getCmts();
+  cmts.push({
+    id: Date.now().toString(36) + Math.random().toString(36).slice(2,5),
+    name, text, likes: 0, date: new Date().toISOString()
+  });
+  saveCmts(cmts);
+  document.getElementById('cmtName').value = '';
+  document.getElementById('cmtText').value = '';
+  renderCmts();
+  showMsg(msg, '✓ Comment posted!', '#8dc896');
+}
+
+function initComments() {
+  if (getCmts().length === 0) {
+    saveCmts([
+      {
+        id: 's1', name: 'Aiko Tanaka',
+        text: 'The LEGB scope section finally made closures click for me. I always knew Python had this rule but never understood why nonlocal was needed until I saw the example with outer/inner. Great explanation!',
+        likes: 27, date: new Date(Date.now() - 259200000).toISOString()
+      },
+      {
+        id: 's2', name: 'Marco Silva',
+        text: 'The @lru_cache decorator example is gold. I had a recursive Fibonacci function timing out and adding that one decorator made it instant. Would love to see a section on async/await in a follow-up!',
+        likes: 15, date: new Date(Date.now() - 36000000).toISOString()
+      },
+      {
+        id: 's3', name: 'Priya Sharma',
+        text: 'The dataclass section expanded on what I expected — showing field() with default_factory is something most tutorials skip entirely. Also appreciated the warning about mutable defaults in regular classes.',
+        likes: 38, date: new Date(Date.now() - 5400000).toISOString()
+      }
+    ]);
+  }
+  renderCmts();
+}
+</script>
+
+</body>
+</html>
