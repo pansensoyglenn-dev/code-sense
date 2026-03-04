@@ -1,0 +1,1628 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: https://ogp.me/ns#">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Web Development in Python: Flask, Django & FastAPI Complete Guide 2026 | Valleys & Bytes</title>
+  <meta name="description" content="Master Python web development with Flask, Django, and FastAPI. Complete guide covering HTTP, Jinja2 templates, WTForms, SQLAlchemy ORM, REST APIs, and runnable code examples. Updated 2026.">
+  <meta name="keywords" content="Python web development, Flask tutorial, Django tutorial, FastAPI, SQLAlchemy ORM, Jinja2 templates, WTForms, REST API Python, Python backend, web frameworks Python 2026">
+  <link rel="canonical" href="https://code-sense.pansensoyglenn.workers.dev/web-development.html">
+  <meta name="author" content="Glenn Junsay Pansensoy — Valleys & Bytes">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow">
+  <meta name="theme-color" content="#0c0f17">
+  <meta name="language" content="English">
+  <meta name="revisit-after" content="7 days">
+
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://code-sense.pansensoyglenn.workers.dev/web-development.html">
+  <meta property="og:title" content="Web Development in Python: Flask, Django & FastAPI Complete Guide 2026">
+  <meta property="og:description" content="Master Python web development with Flask, Django, and FastAPI. Runnable code examples, SQLAlchemy, Jinja2, WTForms, and REST APIs.">
+  <meta property="og:image" content="https://code-sense.pansensoyglenn.workers.dev/assets/web-development-og.jpg">
+  <meta property="og:image:alt" content="Python Web Development with Flask, Django and FastAPI — Valleys & Bytes">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:site_name" content="Valleys & Bytes">
+  <meta property="og:locale" content="en_US">
+  <meta property="article:published_time" content="2026-03-04T00:00:00+00:00">
+  <meta property="article:modified_time" content="2026-03-04T00:00:00+00:00">
+  <meta property="article:author" content="https://code-sense.pansensoyglenn.workers.dev">
+  <meta property="article:publisher" content="https://code-sense.pansensoyglenn.workers.dev">
+  <meta property="article:section" content="Python Programming">
+  <meta property="article:tag" content="Python">
+  <meta property="article:tag" content="Flask">
+  <meta property="article:tag" content="Django">
+  <meta property="article:tag" content="FastAPI">
+  <meta property="article:tag" content="Web Development">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@ValleysBytes">
+  <meta name="twitter:creator" content="@ValleysBytes">
+  <meta name="twitter:title" content="Web Development in Python: Flask, Django & FastAPI Complete Guide 2026">
+  <meta name="twitter:description" content="Master Python web development. Flask, Django, FastAPI — with runnable code examples. Updated 2026.">
+  <meta name="twitter:image" content="https://code-sense.pansensoyglenn.workers.dev/assets/web-development-og.jpg">
+  <meta name="twitter:image:alt" content="Python Web Development Guide — Valleys & Bytes">
+
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Web Development in Python: Flask, Django & FastAPI Complete Guide 2026",
+    "description": "Master Python web development with Flask, Django, and FastAPI. Complete guide covering HTTP, Jinja2 templates, WTForms, SQLAlchemy ORM, REST APIs, and runnable code examples.",
+    "image": "https://code-sense.pansensoyglenn.workers.dev/assets/web-development-og.jpg",
+    "author": {
+      "@type": "Person",
+      "name": "Glenn Junsay Pansensoy",
+      "url": "https://code-sense.pansensoyglenn.workers.dev"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Valleys & Bytes",
+      "url": "https://code-sense.pansensoyglenn.workers.dev",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://code-sense.pansensoyglenn.workers.dev/assets/logo.png",
+        "width": 200,
+        "height": 60
+      }
+    },
+    "datePublished": "2026-03-04",
+    "dateModified": "2026-03-04",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://code-sense.pansensoyglenn.workers.dev/web-development.html"
+    },
+    "url": "https://code-sense.pansensoyglenn.workers.dev/web-development.html",
+    "keywords": "Python web development, Flask, Django, FastAPI, SQLAlchemy, Jinja2, REST API, WTForms",
+    "articleSection": "Python Programming",
+    "inLanguage": "en-US",
+    "learningResourceType": "Tutorial",
+    "educationalLevel": "Intermediate",
+    "isAccessibleForFree": true,
+    "timeRequired": "PT20M"
+  }</script>
+
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type":"ListItem","position":1,"name":"Home","item":"https://code-sense.pansensoyglenn.workers.dev/"},
+      {"@type":"ListItem","position":2,"name":"Python Tutorials","item":"https://code-sense.pansensoyglenn.workers.dev/python-tutorials.html"},
+      {"@type":"ListItem","position":3,"name":"Web Development in Python","item":"https://code-sense.pansensoyglenn.workers.dev/web-development.html"}
+    ]
+  }</script>
+
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Should I learn Flask or Django first?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Start with Flask if you want to understand web fundamentals from the ground up — it gives you full control with minimal magic. Choose Django if you need a production-ready app quickly, as it provides built-in admin, ORM, auth, and templating. For APIs, FastAPI is the modern choice with automatic docs and type hints."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is SQLAlchemy used for in Python?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "SQLAlchemy is Python's most powerful ORM (Object Relational Mapper). It lets you define database tables as Python classes, write queries in Python instead of raw SQL, and switch between database engines (SQLite, PostgreSQL, MySQL) with minimal code changes. Flask-SQLAlchemy integrates it seamlessly into Flask apps."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What makes FastAPI different from Flask and Django?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "FastAPI is built on Starlette and Pydantic, offering native async/await support, automatic OpenAPI documentation at /docs, and request validation via Python type hints. It is significantly faster than Flask for I/O-bound workloads and eliminates boilerplate validation code."
+        }
+      }
+    ]
+  }</script>
+
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Valleys & Bytes",
+    "url": "https://code-sense.pansensoyglenn.workers.dev/",
+    "description": "Deep, accessible programming education covering Python, OOP, AI, and data science.",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://code-sense.pansensoyglenn.workers.dev/search?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }</script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+  <link rel="alternate" type="application/rss+xml" title="Valleys & Bytes" href="/rss.xml">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4575646748966866" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.26.2/full/pyodide.js"></script>
+
+  <style>
+    :root {
+      --bg:          #0c0f17;
+      --bg2:         #0f1420;
+      --surface:     #141824;
+      --surface2:    #1a2030;
+      --surface3:    #1f2738;
+      --blue-dk:     #1a2a3a;
+      --blue-mid:    #2a4a6a;
+      --blue:        #3a6a9a;
+      --blue-lt:     #4b8bbe;
+      --blue-xlt:    #7ab0da;
+      --teal:        #51b3a6;
+      --teal-dim:    rgba(81,179,166,0.12);
+      --gold:        #ffe05c;
+      --gold-dim:    rgba(255,224,92,0.08);
+      --text:        #eef4ff;
+      --muted:       #c9d9ff;
+      --subtle:      #8fa3c9;
+      --border:      #25364a;
+      --border-hov:  #3a5a7a;
+      --code-bg:     #0a1018;
+      --r:           16px;
+      --r-lg:        24px;
+      --syn-kw:      #ffb08c;
+      --syn-fn:      #c6b0ff;
+      --syn-str:     #a3d0ff;
+      --syn-cm:      #5a7a9a;
+      --run-bg:      #1e4a36;
+      --run-hov:     #2d6e52;
+    }
+
+    *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', system-ui, sans-serif;
+      font-size: 1rem;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(58,106,154,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(58,106,154,.025) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--blue-mid); border-radius: 3px; }
+
+    #prog {
+      position: fixed; top: 0; left: 0; height: 3px; z-index: 2000;
+      background: linear-gradient(90deg, var(--blue), var(--teal), var(--gold));
+      width: 0%; transition: width .1s;
+    }
+
+    #btt {
+      position: fixed; bottom: 1.8rem; right: 1.8rem; z-index: 900;
+      width: 40px; height: 40px; border-radius: 10px;
+      background: var(--surface2); border: 1px solid var(--border);
+      color: var(--blue-lt); font-size: .9rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none; transition: all .3s;
+    }
+    #btt.vis { opacity: 1; pointer-events: all; }
+    #btt:hover { background: var(--blue-mid); color: #fff; transform: translateY(-2px); }
+
+    nav.main-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: .85rem 2.5rem;
+      background: rgba(12,15,23,.96);
+      backdrop-filter: blur(24px) saturate(1.5);
+      border-bottom: 1px solid var(--border);
+    }
+    .logo {
+      font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.05rem;
+      color: var(--blue-lt); letter-spacing: -.02em; text-decoration: none;
+      display: inline-flex; align-items: center; gap: .4rem;
+    }
+    .logo .amp { color: var(--gold); }
+    .logo .w2 { color: var(--text); }
+    .ham {
+      display: flex; flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 5px; background: none; border: none; z-index: 1100;
+    }
+    .ham span {
+      display: block; width: 23px; height: 2px; background: var(--text);
+      border-radius: 2px; transition: all .35s cubic-bezier(.77,0,.18,1); transform-origin: center;
+    }
+    .ham.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); background: var(--teal); }
+    .ham.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .ham.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); background: var(--teal); }
+    .drawer {
+      position: fixed; top: 0; right: -310px; bottom: 0; width: 285px;
+      background: var(--surface); border-left: 1px solid var(--border);
+      padding: 5.5rem 1.8rem 2rem; overflow-y: auto;
+      transition: right .4s cubic-bezier(.77,0,.18,1); z-index: 1050;
+    }
+    .drawer.open { right: 0; }
+    .drawer-lbl {
+      font-family: 'DM Mono', monospace; font-size: .6rem;
+      color: var(--teal); letter-spacing: .14em; text-transform: uppercase;
+      margin-bottom: .75rem; opacity: .8;
+    }
+    .drawer-group { display: flex; flex-direction: column; gap: .4rem; margin-bottom: .6rem; }
+    .drawer a {
+      display: flex; align-items: center; gap: .55rem;
+      padding: .6rem 1rem; border-radius: 10px;
+      border: 1px solid var(--border); background: var(--surface2);
+      color: var(--muted); text-decoration: none; font-weight: 500; font-size: .8rem;
+      transition: all .22s cubic-bezier(.23,1,.32,1);
+    }
+    .drawer a:hover { color: var(--text); border-color: var(--border-hov); background: var(--surface3); transform: translateX(3px); }
+    .overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,.8);
+      opacity: 0; pointer-events: none; transition: opacity .35s; z-index: 1040;
+      backdrop-filter: blur(3px);
+    }
+    .overlay.open { opacity: 1; pointer-events: all; }
+
+    .breadcrumb-wrap {
+      width: 100%; max-width: 1200px; margin: 0 auto;
+      padding: 6rem 2.5rem 0; position: relative; z-index: 1;
+    }
+    nav.breadcrumb {
+      display: flex; align-items: center; gap: .4rem; flex-wrap: wrap;
+      font-family: 'DM Mono', monospace; font-size: .62rem;
+      color: var(--muted); margin-bottom: 1rem; animation: fu .5s ease both;
+    }
+    nav.breadcrumb a {
+      color: var(--muted); text-decoration: none;
+      display: inline-flex; align-items: center; gap: .4rem;
+      padding: .28rem .8rem; border-radius: 7px;
+      background: var(--surface2); border: 1px solid var(--border);
+      transition: all .2s;
+    }
+    nav.breadcrumb a:hover { color: var(--blue-lt); border-color: var(--border-hov); background: var(--surface3); }
+    nav.breadcrumb .bc-sep { color: var(--blue-mid); opacity: .6; }
+    nav.breadcrumb .current {
+      color: var(--teal); display: inline-flex; align-items: center; gap: .4rem;
+      padding: .28rem .8rem; border-radius: 7px;
+      background: rgba(81,179,166,.08); border: 1px solid rgba(81,179,166,.22);
+    }
+
+    .hero {
+      max-width: 1200px; margin: 0 auto; padding: 3rem 2.5rem 2.5rem;
+      position: relative; z-index: 1;
+      border-bottom: 2px solid var(--border);
+      margin-bottom: 0;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: rgba(81,179,166,.08); border: 1px solid rgba(81,179,166,.2);
+      color: var(--teal); padding: .28rem 1rem; border-radius: 100px;
+      font-family: 'DM Mono', monospace; font-size: .65rem;
+      margin-bottom: 1.1rem; width: fit-content;
+      animation: fu .5s ease both;
+    }
+    .bdot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); display: inline-block; animation: pulse 2.5s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.3;transform:scale(.75)} }
+    @keyframes fu { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
+
+    h1 {
+      font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 800;
+      line-height: 1.18; max-width: 820px;
+      background: linear-gradient(135deg, var(--blue-lt), var(--teal));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      letter-spacing: -.02em; animation: fu .7s .1s ease both;
+      text-align: justify;
+    }
+    .hero-tagline {
+      font-size: .8rem; color: var(--muted); max-width: 640px;
+      margin-top: .9rem; line-height: 1.85; text-align: justify;
+      animation: fu .7s .18s ease both;
+    }
+    .hero-byline {
+      display: flex; align-items: center; gap: .5rem; margin-top: .8rem; flex-wrap: wrap;
+      animation: fu .7s .24s ease both;
+    }
+    .hero-byline .author {
+      font-family: 'DM Mono', monospace; font-size: .65rem;
+      color: var(--gold); font-weight: 600;
+      background: var(--gold-dim); border: 1px solid rgba(255,224,92,.2);
+      padding: .22rem .75rem; border-radius: 100px;
+    }
+    .chip {
+      display: inline-flex; align-items: center; gap: .3rem;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 6px; padding: .22rem .65rem;
+      font-family: 'DM Mono', monospace; font-size: .6rem; color: var(--subtle);
+    }
+
+    .ad-slot { display: block; text-align: center; margin: 2rem auto; max-width: 970px; width: 100%; overflow: hidden; padding: 0 1rem; }
+    .ad-label { font-family: 'DM Mono', monospace; font-size: .55rem; color: var(--subtle); letter-spacing: .1em; text-transform: uppercase; margin-bottom: .3rem; opacity: .5; }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 2.5rem 2.5rem; position: relative; z-index: 1; }
+
+    .toc-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 2rem 2.2rem;
+      margin: 0 0 3rem;
+      box-shadow: 0 20px 50px -20px rgba(0,0,0,.6);
+    }
+    .toc-block h2 {
+      font-family: 'DM Mono', monospace; font-size: .7rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .14em; color: var(--teal);
+      margin-bottom: 1.5rem; display: flex; align-items: center; gap: .5rem;
+    }
+    .toc-block h2::before { content: ''; display: block; width: 18px; height: 2px; background: var(--teal); border-radius: 1px; }
+    .toc-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: .6rem 2rem;
+    }
+    .toc-item { border-bottom: 1px dashed rgba(37,54,74,.8); padding: .4rem 0; }
+    .toc-item a {
+      color: var(--muted); text-decoration: none;
+      display: flex; align-items: center; gap: .55rem;
+      font-size: .8rem; transition: all .2s;
+    }
+    .toc-item a:hover { color: var(--blue-lt); transform: translateX(4px); }
+    .toc-num {
+      font-family: 'DM Mono', monospace; font-size: .62rem; color: var(--blue-lt);
+      background: rgba(58,106,154,.12); border: 1px solid rgba(58,106,154,.2);
+      padding: .1rem .45rem; border-radius: 4px; flex-shrink: 0;
+    }
+
+    section.article-section {
+      scroll-margin-top: 72px;
+      margin-bottom: 4rem;
+    }
+    .sec-label {
+      font-family: 'DM Mono', monospace; font-size: .62rem; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--teal); margin-bottom: .5rem;
+      display: flex; align-items: center; gap: .5rem;
+    }
+    .sec-label::before { content: ''; display: block; width: 16px; height: 1px; background: var(--teal); }
+    h2.sec-h2 {
+      font-family: 'Syne', sans-serif; font-size: .9rem; font-weight: 700;
+      color: var(--blue-lt); margin-bottom: .4rem;
+      border-left: 4px solid var(--teal); padding-left: .9rem;
+      text-align: justify;
+    }
+    h3 {
+      font-family: 'DM Sans', sans-serif; font-size: .8rem; font-weight: 600;
+      color: var(--teal); margin: 1.5rem 0 .8rem; text-align: justify;
+    }
+    .div-line { width: 32px; height: 2px; background: var(--blue-mid); margin: .75rem 0 1.4rem; border-radius: 1px; }
+    p {
+      color: var(--muted); margin-bottom: 1rem; font-size: .8rem;
+      line-height: 1.85; text-align: justify; letter-spacing: .01em;
+    }
+    p strong { color: var(--text); font-weight: 600; }
+    ul, ol {
+      color: var(--muted); margin-left: 1.6rem; margin-bottom: 1.2rem;
+      font-size: .8rem; line-height: 1.8; text-align: justify;
+    }
+    li { margin: .3rem 0; }
+    hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+
+    .grid-2 {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.2rem; margin: 1.8rem 0;
+    }
+    .card-fw {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--r); padding: 1.4rem;
+      transition: all .25s; position: relative; overflow: hidden;
+    }
+    .card-fw::after {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--blue), var(--teal));
+      opacity: 0; transition: opacity .25s;
+    }
+    .card-fw:hover { border-color: var(--border-hov); box-shadow: 0 12px 30px -10px rgba(0,0,0,.5); transform: translateY(-2px); }
+    .card-fw:hover::after { opacity: 1; }
+    .card-fw strong { font-size: .9rem; display: block; margin-bottom: .5rem; color: var(--gold); font-family: 'Syne', sans-serif; font-weight: 700; }
+    .card-fw p { font-size: .8rem; margin-bottom: 0; }
+
+    .code-block {
+      background: var(--code-bg); border: 1px solid var(--border);
+      border-left: 3px solid var(--teal);
+      border-radius: var(--r); overflow: hidden;
+      margin: 1.8rem 0; box-shadow: 0 18px 40px -18px rgba(0,0,0,.8);
+    }
+    .code-bar {
+      background: rgba(15,28,42,.9); padding: .55rem 1.3rem;
+      display: flex; justify-content: space-between; align-items: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .lang-badge {
+      font-family: 'DM Mono', monospace; font-size: .62rem; color: var(--teal);
+      background: rgba(81,179,166,.1); border: 1px solid rgba(81,179,166,.2);
+      padding: .18rem .65rem; border-radius: 100px; letter-spacing: .05em;
+    }
+    .run-btn {
+      background: var(--run-bg); border: 1px solid rgba(72,157,122,.35);
+      color: #7aefb0; padding: .35rem 1.1rem; border-radius: 100px;
+      font-weight: 700; font-size: .65rem; cursor: pointer;
+      display: flex; align-items: center; gap: 5px; transition: all .18s;
+      font-family: 'DM Mono', monospace;
+    }
+    .run-btn:hover { background: var(--run-hov); transform: scale(1.03); box-shadow: 0 4px 12px rgba(45,110,82,.4); }
+    pre {
+      padding: 1.4rem 1.5rem; overflow-x: auto;
+      font-family: 'DM Mono', monospace; font-size: .78rem;
+      background: transparent; color: #cde0ff; margin: 0; line-height: 1.75;
+    }
+    .output-frame {
+      background: rgba(31,46,68,.8); border-top: 1px solid var(--border);
+      padding: 1.1rem 1.4rem; font-family: 'DM Mono', monospace;
+      font-size: .78rem; white-space: pre-wrap; color: #b8d4ff;
+      max-height: 200px; overflow: auto; line-height: 1.65;
+    }
+    .output-frame.error { background: #1e1420; color: #ffb9b9; border-left: 3px solid #d46b6b; }
+    .syntax-k { color: var(--syn-kw); }
+    .syntax-f { color: var(--syn-fn); }
+    .syntax-s { color: var(--syn-str); }
+    .syntax-comment { color: var(--syn-cm); font-style: italic; }
+
+    .subtitle {
+      font-size: .8rem; color: var(--teal); margin-bottom: .6rem;
+      font-weight: 500; text-align: justify;
+      font-family: 'DM Mono', monospace; letter-spacing: .04em;
+    }
+
+    .insight-box {
+      background: linear-gradient(135deg, var(--surface) 0%, var(--surface2) 100%);
+      border-radius: var(--r); padding: 1.4rem 1.8rem;
+      border-left: 4px solid var(--blue-mid); margin: 2rem 0;
+      border: 1px solid var(--border); border-left-width: 4px; border-left-color: var(--blue);
+    }
+    .insight-box p { font-size: .8rem; margin-bottom: 0; }
+
+    .share-box {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--r-lg); padding: 2rem; margin-bottom: 2rem;
+    }
+    .share-lbl {
+      font-family: 'DM Mono', monospace; font-size: .6rem; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--teal); margin-bottom: 1rem;
+      display: flex; align-items: center; gap: .5rem;
+    }
+    .share-lbl::before { content: ''; display: block; width: 16px; height: 1px; background: var(--teal); }
+    .share-btns { display: flex; gap: .55rem; flex-wrap: wrap; margin-bottom: 1.1rem; }
+    .share-btn {
+      display: inline-flex; align-items: center; gap: .4rem;
+      padding: .5rem 1.1rem; border-radius: 9px;
+      border: 1px solid var(--border); background: var(--surface2);
+      color: var(--muted); font-size: .78rem; font-weight: 600;
+      cursor: pointer; transition: all .2s; font-family: 'DM Sans', sans-serif;
+    }
+    .share-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.35); }
+    .share-btn.fb { border-color: rgba(24,119,242,.3); color: #4a9af4; }
+    .share-btn.fb:hover { background: rgba(24,119,242,.08); }
+    .share-btn.li { border-color: rgba(10,102,194,.3); color: #4a90e2; }
+    .share-btn.li:hover { background: rgba(10,102,194,.08); }
+    .share-btn.x { border-color: rgba(200,220,255,.15); color: var(--text); }
+    .share-btn.x:hover { background: rgba(255,255,255,.05); }
+    .caption-box {
+      background: var(--bg2); border: 1px solid var(--border); border-radius: 10px;
+      padding: 1rem 1.2rem; font-size: .8rem; color: var(--muted);
+      line-height: 1.8; min-height: 78px; white-space: pre-wrap; margin-bottom: .7rem;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .caption-box.loading {
+      background: linear-gradient(90deg, var(--surface) 25%, var(--surface2) 50%, var(--surface) 75%);
+      background-size: 400% 100%; animation: shimmer 1.4s infinite; color: transparent;
+    }
+    @keyframes shimmer { 0%{background-position:100% 0} 100%{background-position:-100% 0} }
+    .caption-actions { display: flex; gap: .5rem; align-items: center; flex-wrap: wrap; }
+    .btn-sm {
+      padding: .38rem .9rem; border-radius: 8px; font-size: .72rem; font-weight: 600;
+      cursor: pointer; transition: all .2s; border: 1px solid var(--border);
+      background: var(--surface2); color: var(--muted); font-family: 'DM Sans', sans-serif;
+    }
+    .btn-sm:hover { color: var(--text); border-color: var(--border-hov); background: var(--surface3); }
+    .btn-sm.primary { background: linear-gradient(135deg, var(--blue-mid), var(--blue)); border: none; color: #fff; }
+    .btn-sm.primary:hover { filter: brightness(1.12); transform: translateY(-1px); }
+    .ai-badge {
+      font-family: 'DM Mono', monospace; font-size: .55rem; color: var(--gold);
+      background: var(--gold-dim); border: 1px solid rgba(255,224,92,.2);
+      padding: .15rem .5rem; border-radius: 4px; margin-left: auto;
+    }
+
+    .comments-wrap {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--r-lg); padding: 2rem; margin-bottom: 2rem;
+    }
+    .comments-hdr {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 1.5rem; flex-wrap: wrap; gap: .5rem;
+    }
+    .cmt-count {
+      font-family: 'DM Mono', monospace; font-size: .62rem; color: var(--teal);
+      background: rgba(81,179,166,.1); padding: .25rem .65rem;
+      border-radius: 100px; border: 1px solid rgba(81,179,166,.2);
+    }
+    .cmt-form-row {
+      display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; margin-bottom: .5rem;
+    }
+    @media(max-width:500px) { .cmt-form-row { grid-template-columns: 1fr; } }
+    .cmt-form textarea {
+      resize: vertical; min-height: 95px; margin-bottom: .55rem;
+      font-size: .8rem; line-height: 1.7; width: 100%;
+    }
+    .cmt-form-actions { display: flex; align-items: center; gap: .6rem; flex-wrap: wrap; margin-top: .4rem; }
+    .cmt-msg { font-family: 'DM Mono', monospace; font-size: .65rem; opacity: 0; transition: opacity .4s; }
+    hr.cmt-div { border: none; border-top: 1px solid var(--border); margin: 1.2rem 0; }
+    .cmt-list { display: flex; flex-direction: column; gap: 1rem; }
+    .cmt-item {
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: var(--r); padding: 1rem 1.2rem; animation: fu .4s ease both;
+    }
+    .cmt-meta { display: flex; align-items: center; gap: .55rem; margin-bottom: .45rem; flex-wrap: wrap; }
+    .cmt-avatar {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue-mid), var(--teal));
+      display: flex; align-items: center; justify-content: center;
+      font-size: .72rem; font-weight: 700; color: #fff;
+      font-family: 'DM Mono', monospace; flex-shrink: 0;
+    }
+    .cmt-author { font-weight: 600; font-size: .8rem; color: var(--text); }
+    .cmt-date { font-family: 'DM Mono', monospace; font-size: .6rem; color: var(--subtle); }
+    .cmt-body { font-size: .8rem; color: var(--muted); line-height: 1.75; margin-bottom: .45rem; text-align: justify; }
+    .cmt-like-btn {
+      display: inline-flex; align-items: center; gap: .3rem;
+      padding: .22rem .6rem; border-radius: 6px; border: 1px solid var(--border);
+      background: none; color: var(--subtle); font-size: .65rem; cursor: pointer;
+      transition: all .2s; font-family: 'DM Sans', sans-serif;
+    }
+    .cmt-like-btn:hover { color: var(--blue-lt); border-color: rgba(58,106,154,.3); }
+    .cmt-like-btn.active { color: #ff6b8a; border-color: rgba(255,107,138,.3); background: rgba(255,107,138,.06); }
+    .no-comments { text-align: center; padding: 2rem; color: var(--subtle); font-size: .8rem; }
+
+    input, textarea {
+      background: var(--bg2); border: 1px solid var(--border); border-radius: 9px;
+      padding: .6rem .9rem; color: var(--text);
+      font-family: 'DM Sans', sans-serif; font-size: .8rem;
+      width: 100%; outline: none; transition: border-color .2s, box-shadow .2s;
+    }
+    input:focus, textarea:focus { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(81,179,166,.1); }
+    .btn-p {
+      background: linear-gradient(135deg, var(--blue-mid), var(--blue));
+      color: #fff; border: none; border-radius: 100px;
+      padding: .65rem 1.75rem; font-family: 'DM Sans', sans-serif;
+      font-weight: 700; font-size: .8rem; cursor: pointer; transition: all .25s;
+      white-space: nowrap;
+    }
+    .btn-p:hover { filter: brightness(1.15); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(58,106,154,.35); }
+
+    .sub-wrap {
+      background: linear-gradient(135deg, var(--surface) 0%, var(--surface2) 100%);
+      border: 1px solid var(--border); border-radius: var(--r-lg);
+      padding: 3rem 2.5rem; text-align: center; position: relative; overflow: hidden;
+    }
+    .sub-wrap::before {
+      content: ''; position: absolute; top: -80px; right: -80px;
+      width: 300px; height: 300px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(81,179,166,.05) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .sub-wrap h2 { font-family: 'Syne', sans-serif; font-size: .9rem; margin-bottom: .4rem; color: var(--text); }
+    .sub-wrap p.sub-desc { font-size: .8rem; color: var(--muted); max-width: 440px; margin: 0 auto .8rem; text-align: center; }
+    .sub-tags { display: flex; justify-content: center; gap: .4rem; flex-wrap: wrap; margin: .75rem 0 1.2rem; }
+    .sub-tag-chk { display: none; }
+    .sub-tag-lbl {
+      display: inline-flex; align-items: center; gap: .3rem;
+      padding: .25rem .65rem; border-radius: 100px;
+      border: 1px solid var(--border); background: var(--surface3);
+      color: var(--subtle); font-size: .65rem; cursor: pointer;
+      transition: all .2s; font-family: 'DM Mono', monospace;
+    }
+    .sub-tag-chk:checked+.sub-tag-lbl {
+      border-color: rgba(81,179,166,.4); background: rgba(81,179,166,.1); color: var(--teal);
+    }
+    .sub-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: .5rem;
+      max-width: 480px; margin: 0 auto 1rem;
+    }
+    @media(max-width:500px) { .sub-grid { grid-template-columns: 1fr; } }
+    .sub-grid input { width: 100%; }
+    .snote { font-size: .72rem; color: var(--subtle); margin-top: .7rem; }
+    .subMsg {
+      margin-top: .6rem; font-size: .78rem; font-family: 'DM Mono', monospace;
+      color: var(--teal); min-height: 1rem; transition: opacity .4s;
+    }
+    .perks { display: flex; justify-content: center; gap: 1.2rem; flex-wrap: wrap; margin: .6rem 0 1rem; }
+    .perk { display: inline-flex; align-items: center; gap: .3rem; font-size: .75rem; color: var(--muted); }
+    .perk::before { content: '✓'; color: var(--teal); font-weight: 700; }
+
+    footer {
+      background: var(--bg2); border-top: 1px solid var(--border);
+      margin-top: 5rem; padding: 3rem 2.5rem 2rem; position: relative; z-index: 1;
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr;
+      gap: 2.5rem; max-width: 1200px; margin: 0 auto;
+    }
+    @media(max-width:768px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+    @media(max-width:480px) { .footer-grid { grid-template-columns: 1fr; } }
+    .footer-brand .logo { display: inline-flex; margin-bottom: .75rem; }
+    .footer-brand p { font-size: .8rem; color: var(--muted); max-width: 290px; text-align: justify; line-height: 1.75; }
+    .footer-col h4 {
+      font-family: 'DM Mono', monospace; font-size: .6rem; font-weight: 700;
+      color: var(--teal); margin-bottom: .75rem; letter-spacing: .14em; text-transform: uppercase;
+      display: flex; align-items: center; gap: .4rem;
+    }
+    .footer-col h4::before { content: ''; display: block; width: 12px; height: 1px; background: var(--teal); }
+    .footer-col-links { display: flex; flex-direction: column; gap: .35rem; }
+    .footer-col a {
+      display: flex; align-items: center; gap: .5rem;
+      color: var(--muted); text-decoration: none; font-size: .8rem;
+      padding: .45rem .8rem; border-radius: 8px;
+      border: 1px solid var(--border); background: var(--surface);
+      transition: all .2s;
+    }
+    .footer-col a:hover { color: var(--text); background: var(--surface2); border-color: var(--border-hov); transform: translateX(2px); }
+    .fbot { max-width: 1200px; margin: 2rem auto 0; padding-top: 1.2rem; border-top: 1px solid var(--border); }
+    .fcopy { font-size: .65rem; color: var(--subtle); font-family: 'DM Mono', monospace; text-align: center; }
+    .ftags { display: flex; flex-wrap: wrap; gap: .2rem; margin-top: .8rem; }
+    .tag {
+      display: inline-block; background: rgba(81,179,166,.07);
+      border: 1px solid rgba(81,179,166,.18); color: var(--teal);
+      font-family: 'DM Mono', monospace; font-size: .6rem;
+      padding: .1rem .5rem; border-radius: 4px; margin: 0 .1rem .1rem 0;
+    }
+
+    @media(max-width:768px) {
+      nav.main-nav { padding: .75rem 1.2rem; }
+      .hero { padding: 2.5rem 1.2rem 2rem; }
+      .container { padding: 2rem 1.2rem; }
+      .breadcrumb-wrap { padding: 5.5rem 1.2rem 0; }
+      .toc-grid { grid-template-columns: 1fr; }
+      .grid-2 { grid-template-columns: 1fr; }
+      h1 { font-size: 1rem; }
+      h2.sec-h2 { font-size: .9rem; }
+    }
+
+    .faq-list { display: flex; flex-direction: column; gap: .6rem; margin-top: 1.5rem; }
+    .faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; }
+    .faq-q {
+      width: 100%; display: flex; align-items: center; justify-content: space-between;
+      padding: .95rem 1.15rem; background: none; border: none; cursor: pointer;
+      font-family: 'DM Sans', sans-serif; font-size: .8rem; font-weight: 600;
+      color: var(--text); text-align: left; gap: 1rem; transition: color .2s;
+    }
+    .faq-q:hover { color: var(--teal); }
+    .faq-ico {
+      width: 20px; height: 20px; border-radius: 50%;
+      background: rgba(81,179,166,.1); border: 1px solid rgba(81,179,166,.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .8rem; color: var(--teal); flex-shrink: 0; transition: all .3s;
+    }
+    .faq-ans { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
+    .faq-ans p { padding: .1rem 1.15rem 1rem; margin: 0; font-size: .8rem; }
+    .faq-item.open .faq-ico { background: rgba(81,179,166,.2); border-color: rgba(81,179,166,.4); }
+  </style>
+</head>
+<body>
+
+<div id="prog" role="progressbar" aria-hidden="true"></div>
+
+<nav class="main-nav" role="navigation" aria-label="Main navigation">
+  <a href="./index.html" class="logo" aria-label="Valleys and Bytes Home">
+    <span aria-hidden="true">💻</span>VALLEYS <span class="amp">&amp;</span> <span class="w2">BYTES</span>
+  </a>
+  <button class="ham" id="ham" aria-label="Toggle navigation" aria-expanded="false" aria-controls="drawer">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="drawer" id="drawer" role="dialog" aria-label="Navigation menu">
+  <p class="drawer-lbl">Navigation</p>
+  <div class="drawer-group">
+    <a href="./index.html">🏠 Home</a>
+    <a href="./python-tutorials.html">🐍 Python Tutorials</a>
+    <a href="./python-fundamentals.html">💻 Python Fundamentals</a>
+    <a href="./data-structure.html">📚 Data Structures & OOP</a>
+    <a href="./web-development.html">🌐 Web Development</a>
+    <a href="./oop-cheatsheet.html">📋 Cheatsheets</a>
+  </div>
+</div>
+<div class="overlay" id="overlay" aria-hidden="true"></div>
+
+<header role="banner">
+  <div class="breadcrumb-wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="./index.html">🏠 Home</a>
+      <span class="bc-sep" aria-hidden="true">›</span>
+      <a href="./python-tutorials.html">🐍 Python Tutorials</a>
+      <span class="bc-sep" aria-hidden="true">›</span>
+      <span class="current" aria-current="page">🌐 Web Development</span>
+    </nav>
+  </div>
+  <div class="hero">
+    <div class="hero-badge"><span class="bdot" aria-hidden="true"></span> PYTHON WEB DEV · 2026</div>
+    <h1>Web Development in Python: <br>Flask, Django &amp; FastAPI</h1>
+    <p class="hero-tagline">A complete, hands-on guide to Python web development. Covers Flask microservices, Django's batteries-included architecture, FastAPI's async REST APIs, SQLAlchemy ORM, Jinja2 templating, and WTForms validation — with fully runnable in-browser code examples powered by Pyodide.</p>
+    <div class="hero-byline">
+      <span class="author">✍️ Glenn Junsay Pansensoy</span>
+      <span class="chip">⏱ 20 min read</span>
+      <span class="chip">📅 Mar 2026</span>
+      <span class="chip">🎓 Intermediate</span>
+      <span class="chip">▶ Runnable Code</span>
+    </div>
+  </div>
+</header>
+
+<div class="ad-slot" aria-label="Advertisement">
+  <p class="ad-label">Advertisement</p>
+  <ins class="adsbygoogle" style="display:block"
+    data-ad-client="ca-pub-4575646748966866"
+    data-ad-slot="4226674403"
+    data-ad-format="auto"
+    data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<div class="container">
+
+  <nav class="toc-block" aria-label="Table of contents">
+    <h2>Python Web Development Curriculum</h2>
+    <div class="toc-grid">
+      <div class="toc-item"><a href="#web-intro"><span class="toc-num">01</span> Python Web Landscape</a></div>
+      <div class="toc-item"><a href="#web-http"><span class="toc-num">02</span> HTTP &amp; Requests</a></div>
+      <div class="toc-item"><a href="#web-flask"><span class="toc-num">03</span> Flask Fundamentals</a></div>
+      <div class="toc-item"><a href="#web-templates"><span class="toc-num">04</span> Jinja2 Templates</a></div>
+      <div class="toc-item"><a href="#web-forms"><span class="toc-num">05</span> Forms &amp; Validation</a></div>
+      <div class="toc-item"><a href="#web-database"><span class="toc-num">06</span> Databases &amp; SQLAlchemy</a></div>
+      <div class="toc-item"><a href="#web-django"><span class="toc-num">07</span> Django Basics</a></div>
+      <div class="toc-item"><a href="#web-api"><span class="toc-num">08</span> REST APIs with FastAPI</a></div>
+      <div class="toc-item"><a href="#web-deploy"><span class="toc-num">09</span> Deployment &amp; Best Practices</a></div>
+      <div class="toc-item"><a href="#faq"><span class="toc-num">FAQ</span> Common Questions</a></div>
+    </div>
+  </nav>
+
+  <section class="article-section" id="web-intro" aria-labelledby="h-intro">
+    <p class="sec-label">01 — Overview</p>
+    <h2 class="sec-h2" id="h-intro">Python Web Development Landscape</h2>
+    <div class="div-line"></div>
+    <p class="subtitle">frameworks and ecosystems</p>
+    <p>Python offers a rich ecosystem of web frameworks, each designed for a different philosophy and scale. <strong>Django</strong> follows the "batteries included" approach, providing a full-stack solution with built-in ORM, admin interface, authentication, and templating. <strong>Flask</strong> is a minimal microframework that gives you full control — ideal for microservices, APIs, and learning the fundamentals. <strong>FastAPI</strong> is the modern choice, built on Python type hints with native async support and automatic OpenAPI documentation generation.</p>
+    <p>Choosing the right framework depends on your project's size, performance requirements, and your team's preferences. All three frameworks share Python's readability and the same underlying HTTP protocol, making it straightforward to migrate or combine them in a microservices architecture.</p>
+    <div class="grid-2">
+      <div class="card-fw">
+        <strong>🏛️ Django</strong>
+        <p>Full-featured, admin interface, built-in ORM, authentication, and extensive middleware. Best for large applications requiring rapid development with built-in security features.</p>
+      </div>
+      <div class="card-fw">
+        <strong>⚗️ Flask</strong>
+        <p>Lightweight and flexible microframework. Minimal core with extensions for nearly everything — perfect for microservices, learning, and projects requiring fine-grained control.</p>
+      </div>
+      <div class="card-fw">
+        <strong>⚡ FastAPI</strong>
+        <p>Modern async framework with automatic OpenAPI docs, Pydantic validation, and exceptional performance rivaling Node.js and Go. The best choice for high-performance REST APIs.</p>
+      </div>
+      <div class="card-fw">
+        <strong>🎨 Jinja2</strong>
+        <p>Powerful templating engine used by Flask and Django. Supports variables, loops, conditionals, template inheritance, and macros for building dynamic HTML with clean separation of concerns.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="ad-slot" aria-label="Advertisement">
+    <p class="ad-label">Advertisement</p>
+    <ins class="adsbygoogle" style="display:block"
+      data-ad-client="ca-pub-4575646748966866"
+      data-ad-slot="4226674403"
+      data-ad-format="auto"
+      data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <section class="article-section" id="web-http" aria-labelledby="h-http">
+    <p class="sec-label">02 — Protocol</p>
+    <h2 class="sec-h2" id="h-http">HTTP &amp; Requests in Python</h2>
+    <div class="div-line"></div>
+    <p class="subtitle">understanding the protocol</p>
+    <p>HTTP (HyperText Transfer Protocol) is the foundation of all web communication. Every web framework you use is ultimately an abstraction over HTTP. Understanding the core concepts — methods, status codes, headers, and the request/response cycle — makes you a more effective web developer regardless of the framework you choose.</p>
+    <p>Python's <code>requests</code> library is the de facto standard for making HTTP calls. It abstracts away the complexity of the underlying <code>urllib</code> module while providing a clean, human-friendly API. The library handles redirects, sessions, authentication, and JSON serialization automatically.</p>
+    <div class="code-block">
+      <div class="code-bar"><span class="lang-badge">python · requests</span><button class="run-btn" onclick="runCode(this)" data-target="out-http">▶ Run</button></div>
+      <pre><code><span class="syntax-k">import</span> requests
+
+response = requests.get(<span class="syntax-s">'https://jsonplaceholder.typicode.com/posts/1'</span>)
+print(<span class="syntax-s">f"Status: {response.status_code}"</span>)
+data = response.json()
+print(<span class="syntax-s">f"Title: {data['title']}"</span>)
+print(<span class="syntax-s">f"Body: {data['body'][:60]}..."</span>)
+
+new_post = {<span class="syntax-s">'title'</span>: <span class="syntax-s">'python web'</span>, <span class="syntax-s">'body'</span>: <span class="syntax-s">'flask is great'</span>, <span class="syntax-s">'userId'</span>: 1}
+post_response = requests.post(<span class="syntax-s">'https://jsonplaceholder.typicode.com/posts'</span>, json=new_post)
+print(<span class="syntax-s">f"Created post ID: {post_response.json()['id']}"</span>)</code></pre>
+    </div>
+    <div id="out-http" class="output-frame">[output will appear here after clicking Run]</div>
+  </section>
+
+  <section class="article-section" id="web-flask" aria-labelledby="h-flask">
+    <p class="sec-label">03 — Microframework</p>
+    <h2 class="sec-h2" id="h-flask">Flask Fundamentals</h2>
+    <div class="div-line"></div>
+    <p class="subtitle">minimal web application</p>
+    <p>Flask is a WSGI microframework that gives you the essentials and nothing more. A minimal application fits in under ten lines. Route decorators map URLs to Python functions called <strong>view functions</strong>. Flask handles the HTTP parsing, routing, and response formatting — you focus entirely on your application logic.</p>
+    <p>Flask's extension ecosystem covers everything missing from the core: Flask-SQLAlchemy for databases, Flask-WTF for forms, Flask-Login for authentication, and Flask-RESTful for API building. This modular architecture means you only add what you actually need.</p>
+    <div class="code-block">
+      <div class="code-bar"><span class="lang-badge">python · flask</span><button class="run-btn" onclick="runCode(this)" data-target="out-flask">▶ Run</button></div>
+      <pre><code><span class="syntax-k">from</span> flask <span class="syntax-k">import</span> Flask, jsonify
+
+app = Flask(__name__)
+
+<span class="syntax-f">@app.route</span>(<span class="syntax-s">'/'</span>)
+<span class="syntax-k">def</span> <span class="syntax-f">home</span>():
+    <span class="syntax-k">return</span> <span class="syntax-s">"Python Blue &amp; Obsidian — Flask App"</span>
+
+<span class="syntax-f">@app.route</span>(<span class="syntax-s">'/api/data'</span>)
+<span class="syntax-k">def</span> <span class="syntax-f">get_data</span>():
+    <span class="syntax-k">return</span> jsonify({<span class="syntax-s">'framework'</span>: <span class="syntax-s">'flask'</span>, <span class="syntax-s">'theme'</span>: <span class="syntax-s">'python blue'</span>, <span class="syntax-s">'version'</span>: <span class="syntax-s">'3.1'</span>})
+
+<span class="syntax-f">@app.route</span>(<span class="syntax-s">'/api/users/&lt;int:user_id&gt;'</span>)
+<span class="syntax-k">def</span> <span class="syntax-f">get_user</span>(user_id):
+    <span class="syntax-k">return</span> jsonify({<span class="syntax-s">'id'</span>: user_id, <span class="syntax-s">'name'</span>: <span class="syntax-s">f'user_{user_id}'</span>})
+
+print(<span class="syntax-s">"Flask app defined."</span>)
+print(<span class="syntax-s">"Routes: / and /api/data and /api/users/&lt;id&gt;"</span>)
+print(<span class="syntax-s">"Run: flask run  or  python app.py"</span>)</code></pre>
+    </div>
+    <div id="out-flask" class="output-frame">[Flask app structure — would serve at http://127.0.0.1:5000]</div>
+  </section>
+
+  <section class="article-section" id="web-templates" aria-labelledby="h-templates">
+    <p class="sec-label">04 — Templating</p>
+    <h2 class="sec-h2" id="h-templates">Jinja2 Templates</h2>
+    <div class="div-line"></div>
+    <p class="subtitle">dynamic HTML generation</p>
+    <p>Jinja2 is the default templating engine for Flask and is also used by Django (with slight syntax differences). It allows you to embed Python-like logic — variables, loops, conditionals, and template inheritance — directly into HTML files. This creates a clean separation between your application logic and presentation layer.</p>
+    <p>The template inheritance system is particularly powerful: define a base layout with blocks, then extend it in child templates. This eliminates HTML duplication across pages and keeps your front-end DRY (Don't Repeat Yourself).</p>
+    <div class="code-block">
+      <div class="code-bar"><span class="lang-badge">python · jinja2</span><button class="run-btn" onclick="runCode(this)" data-target="out-jinja">▶ Run</button></div>
+      <pre><code><span class="syntax-k">from</span> jinja2 <span class="syntax-k">import</span> Template
+
+template_str = <span class="syntax-s">"""
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;&lt;title&gt;{{ title }}&lt;/title&gt;&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;{{ heading }}&lt;/h1&gt;
+  &lt;ul&gt;
+  {% for item in items %}
+    &lt;li&gt;{{ item }}&lt;/li&gt;
+  {% endfor %}
+  &lt;/ul&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+"""</span>
+
+template = Template(template_str)
+rendered = template.render(
+    title=<span class="syntax-s">"python web"</span>,
+    heading=<span class="syntax-s">"flask + jinja2"</span>,
+    items=[<span class="syntax-s">"python blue"</span>, <span class="syntax-s">"obsidian dark"</span>, <span class="syntax-s">"interactive code"</span>]
+)
+print(rendered)</code></pre>
+    </div>
+    <div id="out-jinja" class="output-frame">[rendered HTML will appear here]</div>
+  </section>
+
+  <div class="ad-slot" aria-label="Advertisement">
+    <p class="ad-label">Advertisement</p>
+    <ins class="adsbygoogle" style="display:block"
+      data-ad-client="ca-pub-4575646748966866"
+      data-ad-slot="4226674403"
+      data-ad-format="auto"
+      data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <section class="article-section" id="web-forms" aria-labelledby="h-forms">
+    <p class="sec-label">05 — Input Handling</p>
+    <h2 class="sec-h2" id="h-forms">Forms &amp; Validation (WTForms)</h2>
+    <div class="div-line"></div>
+    <p class="subtitle">handling user input securely</p>
+    <p>Flask-WTF provides seamless integration with WTForms for secure, declarative form handling. Forms are defined as Python classes, with each field declared as a class attribute. Built-in validators cover common cases — required fields, email format, string length, numeric ranges — while custom validators handle business-specific rules.</p>
+    <p>CSRF (Cross-Site Request Forgery) protection is enabled by default through Flask-WTF's <code>FlaskForm</code> base class. This adds a hidden token to every form that Flask validates on submission, protecting against a common web vulnerability with zero extra code.</p>
+    <div class="code-block">
+      <div class="code-bar"><span class="lang-badge">python · wtforms</span><button class="run-btn" onclick="runCode(this)" data-target="out-forms">▶ Run</button></div>
+      <pre><code><span class="syntax-k">from</span> wtforms <span class="syntax-k">import</span> Form, StringField, PasswordField, IntegerField
+<span class="syntax-k">from</span> wtforms.validators <span class="syntax-k">import</span> DataRequired, Email, Length, NumberRange
+
+<span class="syntax-k">class</span> <span class="syntax-f">RegistrationForm</span>(Form):
+    username  = StringField(<span class="syntax-s">'Username'</span>, validators=[DataRequired(), Length(min=3, max=25)])
+    email     = StringField(<span class="syntax-s">'Email'</span>, validators=[DataRequired(), Email()])
+    password  = PasswordField(<span class="syntax-s">'Password'</span>, validators=[DataRequired(), Length(min=8)])
+    age       = IntegerField(<span class="syntax-s">'Age'</span>, validators=[DataRequired(), NumberRange(min=13, max=120)])
+
+<span class="syntax-k">class</span> <span class="syntax-f">MockRequest</span>:
+    <span class="syntax-k">def</span> __<span class="syntax-f">init__</span>(self, data):
+        self.form = data
+        self.method = <span class="syntax-s">'POST'</span>
+
+form_data = {<span class="syntax-s">'username'</span>: <span class="syntax-s">'glenn'</span>, <span class="syntax-s">'email'</span>: <span class="syntax-s">'glenn@example.com'</span>, <span class="syntax-s">'password'</span>: <span class="syntax-s">'securepass'</span>, <span class="syntax-s">'age'</span>: <span class="syntax-s">'28'</span>}
+form = RegistrationForm(data=form_data)
+print(<span class="syntax-s">f"Form valid: {form.validate()}"</span>)
+print(<span class="syntax-s">f"Fields: username={form.username.data}, email={form.email.data}"</span>)
+print(<span class="syntax-s">f"Errors: {form.errors}"</span>)</code></pre>
+    </div>
+    <div id="out-forms" class="output-frame">[form validation output will appear here]</div>
+  </section>
+
+  <section class="article-section" id="web-database" aria-labelledby="h-db">
+    <p class="sec-label">06 — ORM</p>
+    <h2 class="sec-h2" id="h-db">Databases &amp; SQLAlchemy</h2>
+    <div class="div-line"></div>
+    <p class="subtitle">ORM for Python</p>
+    <p>SQLAlchemy is Python's most powerful and mature ORM. It bridges the gap between your Python object model and the relational database world. Models are defined as Python classes that inherit from a declarative base — SQLAlchemy automatically generates the SQL for table creation, inserts, queries, and relationships.</p>
+    <p>The ORM supports all major database engines — SQLite for development, PostgreSQL for production, MySQL, and others — with near-zero code changes when switching. Advanced features include lazy loading, eager loading, relationship back-references, and hybrid properties that compute values from both Python and SQL.</p>
+    <div class="code-block">
+      <div class="code-bar"><span class="lang-badge">python · sqlalchemy</span><button class="run-btn" onclick="runCode(this)" data-target="out-db">▶ Run</button></div>
+      <pre><code><span class="syntax-k">from</span> sqlalchemy <span class="syntax-k">import</span> create_engine, Column, Integer, String, DateTime
+<span class="syntax-k">from</span> sqlalchemy.orm <span class="syntax-k">import</span> declarative_base, sessionmaker
+<span class="syntax-k">from</span> datetime <span class="syntax-k">import</span> datetime
+
+engine = create_engine(<span class="syntax-s">'sqlite:///:memory:'</span>)
+Base = declarative_base()
+
+<span class="syntax-k">class</span> <span class="syntax-f">User</span>(Base):
+    __tablename__ = <span class="syntax-s">'users'</span>
+    id         = Column(Integer, primary_key=<span class="syntax-k">True</span>)
+    username   = Column(String(50), unique=<span class="syntax-k">True</span>, nullable=<span class="syntax-k">False</span>)
+    email      = Column(String(120), unique=<span class="syntax-k">True</span>)
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+    <span class="syntax-k">def</span> __<span class="syntax-f">repr__</span>(self):
+        <span class="syntax-k">return</span> <span class="syntax-s">f"&lt;User {self.username}&gt;"</span>
+
+Base.metadata.create_all(engine)
+Session = sessionmaker(bind=engine)
+session = Session()
+
+session.add_all([
+    User(username=<span class="syntax-s">'glenn'</span>, email=<span class="syntax-s">'glenn@valleysbytes.dev'</span>),
+    User(username=<span class="syntax-s">'alice'</span>, email=<span class="syntax-s">'alice@example.com'</span>),
+])
+session.commit()
+
+users = session.query(User).all()
+<span class="syntax-k">for</span> u <span class="syntax-k">in</span> users:
+    print(<span class="syntax-s">f"User: {u.username} — {u.email}"</span>)
+print(<span class="syntax-s">f"Total users: {session.query(User).count()}"</span>)</code></pre>
+    </div>
+    <div id="out-db" class="output-frame">[SQLAlchemy in-memory DB output will appear here]</div>
+  </section>
+
+  <section class="article-section" id="web-django" aria-labelledby="h-django">
+    <p class="sec-label">07 — Full-Stack Framework</p>
+    <h2 class="sec-h2" id="h-django">Django Basics</h2>
+    <div class="div-line"></div>
+    <p class="subtitle">batteries-included framework</p>
+    <p>Django follows the "batteries included" philosophy — everything you need for a production web application is built in: a powerful ORM, admin interface, authentication system, URL routing, form handling, template engine, and security middleware. This makes Django an exceptionally fast choice for teams building feature-rich applications.</p>
+    <p>Django's <strong>MTV architecture</strong> (Model-Template-View) maps cleanly onto the web: Models define your data structure, Templates render HTML, and Views contain the business logic connecting them. The auto-generated admin interface alone can save days of development for internal tools.</p>
+    <div class="code-block">
+      <div class="code-bar"><span class="lang-badge">python · django</span><button class="run-btn" onclick="runCode(this)" data-target="out-django">▶ Run</button></div>
+      <pre><code><span class="syntax-comment"># models.py — Django model definition</span>
+<span class="syntax-k">from</span> django.db <span class="syntax-k">import</span> models
+
+<span class="syntax-k">class</span> <span class="syntax-f">BlogPost</span>(models.Model):
+    title     = models.CharField(max_length=200)
+    content   = models.TextField()
+    published = models.DateTimeField(auto_now_add=<span class="syntax-k">True</span>)
+    author    = models.ForeignKey(<span class="syntax-s">'auth.User'</span>, on_delete=models.CASCADE)
+
+    <span class="syntax-k">def</span> __<span class="syntax-f">str__</span>(self):
+        <span class="syntax-k">return</span> self.title
+
+    <span class="syntax-k">class</span> <span class="syntax-f">Meta</span>:
+        ordering = [<span class="syntax-s">'-published'</span>]
+
+<span class="syntax-comment"># views.py — View function using the model</span>
+<span class="syntax-k">from</span> django.shortcuts <span class="syntax-k">import</span> render
+<span class="syntax-k">from</span> .models <span class="syntax-k">import</span> BlogPost
+
+<span class="syntax-k">def</span> <span class="syntax-f">post_list</span>(request):
+    posts = BlogPost.objects.all().order_by(<span class="syntax-s">'-published'</span>)
+    <span class="syntax-k">return</span> render(request, <span class="syntax-s">'blog/list.html'</span>, {<span class="syntax-s">'posts'</span>: posts})
+
+print(<span class="syntax-s">"Django model BlogPost defined with author ForeignKey."</span>)
+print(<span class="syntax-s">"Run: python manage.py makemigrations &amp;&amp; python manage.py migrate"</span>)
+print(<span class="syntax-s">"Admin: python manage.py createsuperuser"</span>)</code></pre>
+    </div>
+    <div id="out-django" class="output-frame">[Django structure — requires a Django environment to execute]</div>
+  </section>
+
+  <div class="ad-slot" aria-label="Advertisement">
+    <p class="ad-label">Advertisement</p>
+    <ins class="adsbygoogle" style="display:block"
+      data-ad-client="ca-pub-4575646748966866"
+      data-ad-slot="4226674403"
+      data-ad-format="auto"
+      data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <section class="article-section" id="web-api" aria-labelledby="h-api">
+    <p class="sec-label">08 — Modern APIs</p>
+    <h2 class="sec-h2" id="h-api">REST APIs with FastAPI</h2>
+    <div class="div-line"></div>
+    <p class="subtitle">modern, async, type hints</p>
+    <p>FastAPI is built on Starlette (ASGI framework) and Pydantic (data validation). It leverages Python type hints to automatically generate request validation, serialization, and interactive OpenAPI documentation at <code>/docs</code>. This eliminates an entire category of boilerplate code found in Flask or Django REST framework.</p>
+    <p>FastAPI's async support means a single worker can handle thousands of concurrent connections without threads, making it ideal for I/O-bound workloads like database queries and external API calls. Benchmark tests consistently place it among the fastest Python web frameworks, comparable to Node.js and Go.</p>
+    <div class="code-block">
+      <div class="code-bar"><span class="lang-badge">python · fastapi</span><button class="run-btn" onclick="runCode(this)" data-target="out-api">▶ Run</button></div>
+      <pre><code><span class="syntax-k">from</span> fastapi <span class="syntax-k">import</span> FastAPI, HTTPException
+<span class="syntax-k">from</span> pydantic <span class="syntax-k">import</span> BaseModel
+<span class="syntax-k">from</span> typing <span class="syntax-k">import</span> List, Optional
+
+app = FastAPI(title=<span class="syntax-s">"Python Blue API"</span>, version=<span class="syntax-s">"1.0"</span>)
+
+<span class="syntax-k">class</span> <span class="syntax-f">Item</span>(BaseModel):
+    name:  str
+    price: float
+    tags:  List[str] = []
+    in_stock: Optional[bool] = <span class="syntax-k">True</span>
+
+items_db: List[Item] = []
+
+<span class="syntax-f">@app.post</span>(<span class="syntax-s">"/items/"</span>, response_model=Item)
+<span class="syntax-k">async def</span> <span class="syntax-f">create_item</span>(item: Item):
+    items_db.append(item)
+    <span class="syntax-k">return</span> item
+
+<span class="syntax-f">@app.get</span>(<span class="syntax-s">"/items/"</span>, response_model=List[Item])
+<span class="syntax-k">async def</span> <span class="syntax-f">read_items</span>():
+    <span class="syntax-k">return</span> items_db
+
+<span class="syntax-f">@app.get</span>(<span class="syntax-s">"/items/{item_id}"</span>)
+<span class="syntax-k">async def</span> <span class="syntax-f">read_item</span>(item_id: int):
+    <span class="syntax-k">if</span> item_id &gt;= len(items_db):
+        <span class="syntax-k">raise</span> HTTPException(status_code=404, detail=<span class="syntax-s">"Item not found"</span>)
+    <span class="syntax-k">return</span> items_db[item_id]
+
+print(<span class="syntax-s">"FastAPI app with Pydantic models defined."</span>)
+print(<span class="syntax-s">"Run: uvicorn main:app --reload"</span>)
+print(<span class="syntax-s">"Interactive API docs: http://localhost:8000/docs"</span>)</code></pre>
+    </div>
+    <div id="out-api" class="output-frame">[FastAPI structure — run with uvicorn for a live server]</div>
+  </section>
+
+  <section class="article-section" id="web-deploy" aria-labelledby="h-deploy">
+    <p class="sec-label">09 — Production</p>
+    <h2 class="sec-h2" id="h-deploy">Deployment &amp; Best Practices</h2>
+    <div class="div-line"></div>
+    <p class="subtitle">taking your app to production</p>
+    <p>Deploying a Python web application involves several key considerations: choosing a WSGI/ASGI server, containerization with Docker, environment variable management, database migrations, and static file serving. Each framework has a recommended production stack.</p>
+    <ul>
+      <li><strong>Flask/Django (WSGI):</strong> Use Gunicorn as the application server, Nginx as a reverse proxy, and PostgreSQL as the production database.</li>
+      <li><strong>FastAPI (ASGI):</strong> Use Uvicorn (single worker) or Gunicorn with Uvicorn workers for multi-core production deployments.</li>
+      <li><strong>Environment variables:</strong> Never hardcode secrets. Use <code>python-decouple</code> or <code>python-dotenv</code> to load configuration from <code>.env</code> files.</li>
+      <li><strong>Docker:</strong> Containerize your app for consistent environments across development, staging, and production.</li>
+      <li><strong>Database migrations:</strong> Use Flask-Migrate (Alembic) for Flask, or Django's built-in migration system for schema versioning.</li>
+    </ul>
+    <div class="code-block">
+      <div class="code-bar"><span class="lang-badge">shell · deployment</span><button class="run-btn" onclick="runCode(this)" data-target="out-deploy">▶ Run</button></div>
+      <pre><code>import subprocess, sys
+
+commands = [
+    "pip install flask gunicorn flask-sqlalchemy flask-migrate python-decouple",
+    "gunicorn --workers 4 --bind 0.0.0.0:8000 wsgi:app",
+    "uvicorn main:app --host 0.0.0.0 --port 8000 --workers 4",
+]
+
+print("=== Python Web Deployment Checklist ===")
+print()
+print("1. Install production server:")
+print("   pip install gunicorn uvicorn[standard]")
+print()
+print("2. Set environment variables in .env:")
+print("   SECRET_KEY=your-secret-key-here")
+print("   DATABASE_URL=postgresql://user:pass@localhost/dbname")
+print("   DEBUG=False")
+print()
+print("3. Run with Gunicorn (Flask/Django):")
+print("   gunicorn --workers 4 --bind 0.0.0.0:8000 wsgi:app")
+print()
+print("4. Run with Uvicorn (FastAPI):")
+print("   uvicorn main:app --host 0.0.0.0 --port 8000 --workers 4")
+print()
+print("5. Nginx config (reverse proxy to port 8000)")
+print("   proxy_pass http://127.0.0.1:8000;")
+print()
+print("Deployment checklist complete.")</code></pre>
+    </div>
+    <div id="out-deploy" class="output-frame">[deployment checklist will appear here]</div>
+
+    <div class="insight-box">
+      <p><strong>🧠 Python web stack summary:</strong> Use Flask for learning and microservices, Django for feature-complete applications with built-in admin, and FastAPI for high-performance async APIs. All frameworks benefit from PostgreSQL in production, Gunicorn/Uvicorn as application servers, Nginx as a reverse proxy, and Docker for containerization.</p>
+    </div>
+  </section>
+
+  <section class="article-section" id="faq" aria-labelledby="h-faq" style="max-width:860px">
+    <p class="sec-label">FAQ</p>
+    <h2 class="sec-h2" id="h-faq">Frequently Asked Questions</h2>
+    <div class="div-line"></div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+          Should I learn Flask or Django first?
+          <span class="faq-ico" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-ans" role="region">
+          <p>Start with Flask if you want to understand web fundamentals from the ground up — it gives you full control with minimal magic. Choose Django if you need a production-ready application quickly, as it provides built-in admin, ORM, authentication, and templating. For APIs specifically, FastAPI is the modern choice with automatic documentation and type hints.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+          What is SQLAlchemy used for in Python?
+          <span class="faq-ico" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-ans" role="region">
+          <p>SQLAlchemy is Python's most powerful ORM (Object Relational Mapper). It lets you define database tables as Python classes, write queries in Python instead of raw SQL, and switch between database engines (SQLite, PostgreSQL, MySQL) with minimal code changes. Flask-SQLAlchemy integrates it seamlessly into Flask applications.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+          What makes FastAPI different from Flask and Django?
+          <span class="faq-ico" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-ans" role="region">
+          <p>FastAPI is built on Starlette and Pydantic, offering native async/await support, automatic OpenAPI documentation at /docs, and request validation via Python type hints. It is significantly faster than Flask for I/O-bound workloads and eliminates boilerplate validation code, while Django excels at full-stack applications requiring admin interfaces and built-in authentication.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+          How do I handle user authentication in Flask?
+          <span class="faq-ico" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-ans" role="region">
+          <p>Use <strong>Flask-Login</strong> for session-based authentication and <strong>Flask-JWT-Extended</strong> for token-based authentication in APIs. Flask-Login manages user sessions, the "remember me" feature, and provides the <code>@login_required</code> decorator. Always hash passwords with <code>werkzeug.security</code> or <code>bcrypt</code> — never store plain text.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+          Can I use Python for frontend web development?
+          <span class="faq-ico" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-ans" role="region">
+          <p>Yes — <strong>Pyodide</strong> (as used in this page) runs Python in the browser via WebAssembly. <strong>PyScript</strong> lets you write Python directly in HTML. For production SPAs, frameworks like <strong>Reflex</strong> and <strong>Streamlit</strong> let you build full-stack apps in pure Python. However, JavaScript frameworks (React, Vue) remain the dominant choice for complex interactive UIs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="share-box">
+    <p class="share-lbl">Share This Article</p>
+    <div class="share-btns">
+      <button class="share-btn fb" onclick="genCaption('facebook')">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        Facebook
+      </button>
+      <button class="share-btn li" onclick="genCaption('linkedin')">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </button>
+      <button class="share-btn x" onclick="genCaption('x')">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.742l7.732-8.859L2.266 2.25H8.08l4.26 5.637zM17.083 20.75h1.833L7.084 4.126H5.117z"/></svg>
+        X (Twitter)
+      </button>
+    </div>
+    <div class="caption-box" id="captionBox">Click a platform above to generate an AI-crafted caption tailored for that network.</div>
+    <div class="caption-actions">
+      <button class="btn-sm primary" id="copyCapBtn" onclick="copyCap()" style="display:none">📋 Copy</button>
+      <button class="btn-sm" id="shareOpenBtn" onclick="openShareUrl()" style="display:none">↗ Open &amp; Share</button>
+      <button class="btn-sm" id="regenBtn" onclick="regenCap()" style="display:none">🔄 Regenerate</button>
+      <span class="ai-badge" id="aiBadge" style="display:none">✨ AI-Generated</span>
+    </div>
+  </div>
+
+  <div class="comments-wrap">
+    <div class="comments-hdr">
+      <div>
+        <p class="sec-label" style="margin:0 0 .2rem">Community</p>
+        <h2 class="sec-h2" style="border:none;padding:0;margin:0;font-size:.9rem">Comments</h2>
+      </div>
+      <span class="cmt-count" id="cmtCount">0 comments</span>
+    </div>
+    <div class="cmt-form">
+      <div class="cmt-form-row">
+        <input type="text" id="cmtName" placeholder="Your name" maxlength="40" aria-label="Name">
+        <input type="email" id="cmtEmail" placeholder="Email (private)" maxlength="80" aria-label="Email">
+      </div>
+      <textarea id="cmtText" placeholder="Share your thoughts, questions, or experiences with Python web development…" maxlength="600" aria-label="Comment"></textarea>
+      <div class="cmt-form-actions">
+        <button class="btn-p" onclick="postComment()" style="font-size:.75rem;padding:.55rem 1.4rem">Post Comment</button>
+        <span class="cmt-msg" id="cmtMsg"></span>
+      </div>
+    </div>
+    <hr class="cmt-div">
+    <div class="cmt-list" id="cmtList">
+      <div class="no-comments" id="noCmts">Be the first to comment! 👋</div>
+    </div>
+  </div>
+
+  <section id="subscribe" aria-labelledby="h-sub">
+    <div class="sub-wrap">
+      <h2 id="h-sub">Stay in the Loop</h2>
+      <div style="width:32px;height:2px;background:var(--teal);margin:.6rem auto 1rem;border-radius:1px"></div>
+      <p class="sub-desc">Get new Python tutorials, web development guides, and code deep-dives delivered to your inbox.</p>
+      <div class="sub-tags">
+        <input type="checkbox" class="sub-tag-chk" id="t1" checked><label class="sub-tag-lbl" for="t1">🌐 Web Dev</label>
+        <input type="checkbox" class="sub-tag-chk" id="t2" checked><label class="sub-tag-lbl" for="t2">⚗️ Flask</label>
+        <input type="checkbox" class="sub-tag-chk" id="t3"><label class="sub-tag-lbl" for="t3">🏛️ Django</label>
+        <input type="checkbox" class="sub-tag-chk" id="t4"><label class="sub-tag-lbl" for="t4">⚡ FastAPI</label>
+        <input type="checkbox" class="sub-tag-chk" id="t5"><label class="sub-tag-lbl" for="t5">🤖 AI/ML</label>
+        <input type="checkbox" class="sub-tag-chk" id="t6"><label class="sub-tag-lbl" for="t6">🐍 Python</label>
+      </div>
+      <div class="sub-grid">
+        <input type="text" id="subName" placeholder="First name" autocomplete="given-name" aria-label="First name">
+        <input type="email" id="subEmail" placeholder="your@email.com" autocomplete="email" aria-label="Email">
+      </div>
+      <div style="text-align:center">
+        <button class="btn-p" onclick="subscribe()" type="button" id="subBtn">Subscribe Free →</button>
+      </div>
+      <div class="perks">
+        <span class="perk">No spam</span>
+        <span class="perk">Free forever</span>
+        <span class="perk">Unsubscribe anytime</span>
+      </div>
+      <p class="snote">Join readers learning Python &amp; web development.</p>
+      <p id="subMsg" class="subMsg" aria-live="polite"></p>
+    </div>
+  </section>
+
+</div>
+
+<footer role="contentinfo">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="./index.html" class="logo" aria-label="Valleys and Bytes Home">
+        <span aria-hidden="true">💻</span>VALLEYS <span class="amp">&amp;</span> <span class="w2">BYTES</span>
+      </a>
+      <p>Deep, accessible programming education covering Python, OOP, web development, AI, and data science. Built with thorough research and logical precision.</p>
+      <div class="ftags">
+        <span class="tag">Python</span>
+        <span class="tag">Flask</span>
+        <span class="tag">Django</span>
+        <span class="tag">FastAPI</span>
+        <span class="tag">SQLAlchemy</span>
+        <span class="tag">Web Dev</span>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Learn</h4>
+      <div class="footer-col-links">
+        <a href="./python-tutorials.html">🖥️ Python Tutorials</a>
+        <a href="./python-fundamentals.html">💻 Fundamentals</a>
+        <a href="./data-structure.html">📚 Data Structures</a>
+        <a href="./oop-cheatsheet.html">📋 Cheatsheets</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <div class="footer-col-links">
+        <a href="./oop-privacy.html">🔏 Privacy Policy</a>
+        <a href="./oop-terms.html">📜 Terms of Service</a>
+        <a href="./oop-cookie.html">🍪 Cookie Policy</a>
+        <a href="./oop-contact.html">✉️ Contact</a>
+      </div>
+    </div>
+  </div>
+  <div class="fbot">
+    <p class="fcopy">© 2026 VALLEYS &amp; BYTES — Web Development in Python Guide · Built with data precision and Created through intensive information authentication. - By: Glenn Junsay Pansensoy · All rights reserved.</p>
+  </div>
+</footer>
+
+<button id="btt" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const prog = document.getElementById('prog');
+  const btt  = document.getElementById('btt');
+  window.addEventListener('scroll', () => {
+    const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100;
+    if (prog) prog.style.width = pct + '%';
+    if (btt)  btt.classList.toggle('vis', window.scrollY > 400);
+  }, { passive: true });
+
+  const ham     = document.getElementById('ham');
+  const drawer  = document.getElementById('drawer');
+  const overlay = document.getElementById('overlay');
+  if (ham && drawer && overlay) {
+    const toggle = open => {
+      drawer.classList.toggle('open', open);
+      overlay.classList.toggle('open', open);
+      ham.classList.toggle('open', open);
+      ham.setAttribute('aria-expanded', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    };
+    ham.addEventListener('click', () => toggle(!drawer.classList.contains('open')));
+    overlay.addEventListener('click', () => toggle(false));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') toggle(false); });
+    drawer.querySelectorAll('a').forEach(l => l.addEventListener('click', () => toggle(false)));
+  }
+
+  initComments();
+});
+
+function toggleFaq(btn) {
+  const item   = btn.closest('.faq-item');
+  const ans    = item.querySelector('.faq-ans');
+  const icon   = btn.querySelector('.faq-ico');
+  const isOpen = item.classList.toggle('open');
+  ans.style.maxHeight = isOpen ? ans.scrollHeight + 'px' : '0';
+  icon.textContent    = isOpen ? '−' : '+';
+  btn.setAttribute('aria-expanded', isOpen);
+}
+
+let pyodideReady = null;
+async function loadPyodideOnce() {
+  if (!pyodideReady) {
+    pyodideReady = loadPyodide({ indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.26.2/full/' })
+      .then(async py => {
+        await py.loadPackage(['requests', 'jinja2', 'sqlalchemy', 'wtforms']);
+        return py;
+      });
+  }
+  return pyodideReady;
+}
+
+async function runCode(button) {
+  const block     = button.closest('.code-block');
+  const codeElem  = block.querySelector('pre code');
+  const targetId  = button.getAttribute('data-target');
+  const outDiv    = document.getElementById(targetId);
+  if (!outDiv) return;
+  outDiv.textContent = '⏳ Loading Python runtime…';
+  outDiv.className = 'output-frame';
+  const temp = document.createElement('div');
+  temp.innerHTML = codeElem.innerHTML;
+  temp.querySelectorAll('span').forEach(s => s.replaceWith(s.textContent));
+  let cleanCode = temp.textContent;
+  try {
+    const pyodide = await loadPyodideOnce();
+    pyodide.runPython(`
+import sys
+from io import StringIO
+sys.stdout = StringIO()
+sys.stderr = StringIO()
+    `);
+    await pyodide.runPythonAsync(cleanCode);
+    const stdout = pyodide.runPython('sys.stdout.getvalue()');
+    const stderr = pyodide.runPython('sys.stderr.getvalue()');
+    if (stderr && !stdout) {
+      outDiv.textContent = stderr;
+      outDiv.classList.add('error');
+    } else {
+      outDiv.textContent = stdout || '✅ Done (no output)';
+      outDiv.classList.remove('error');
+    }
+  } catch (err) {
+    outDiv.textContent = '❌ ' + err.message;
+    outDiv.classList.add('error');
+  }
+}
+
+function showMsg(el, text, color) {
+  if (!el) return;
+  el.textContent = text;
+  el.style.color  = color || 'var(--teal)';
+  el.style.opacity = '1';
+  setTimeout(() => el.style.opacity = '0', 5000);
+}
+
+function subscribe() {
+  const email = document.getElementById('subEmail').value.trim();
+  const name  = (document.getElementById('subName') || { value: '' }).value.trim();
+  const msg   = document.getElementById('subMsg');
+  const btn   = document.getElementById('subBtn');
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    showMsg(msg, '✗ Please enter a valid email address.', '#ff6b8a');
+    return;
+  }
+  const interests = [];
+  document.querySelectorAll('.sub-tag-chk:checked').forEach(cb => {
+    interests.push(cb.nextElementSibling.textContent.trim());
+  });
+  if (btn) { btn.disabled = true; btn.textContent = 'Subscribing…'; }
+  setTimeout(() => {
+    const subs = JSON.parse(localStorage.getItem('vb_subs_wd') || '[]');
+    subs.push({ email, name, interests, date: new Date().toISOString() });
+    localStorage.setItem('vb_subs_wd', JSON.stringify(subs));
+    if (btn) {
+      btn.disabled = false;
+      btn.textContent = '✓ Subscribed!';
+      btn.style.background = 'linear-gradient(135deg,#1a5c2a,#28a745)';
+    }
+    showMsg(msg, `✓ Welcome${name ? ', ' + name : ''}! Check your inbox.`, '#50fa7b');
+    document.getElementById('subEmail').value = '';
+    if (document.getElementById('subName')) document.getElementById('subName').value = '';
+  }, 900);
+}
+
+const PAGE_URL   = 'https://code-sense.pansensoyglenn.workers.dev/web-development.html';
+const PAGE_TITLE = 'Web Development in Python: Flask, Django & FastAPI Complete Guide 2026 | Valleys & Bytes';
+let curPlatform  = '';
+let curCaption   = '';
+
+const platformGuide = {
+  facebook: 'casual, engaging, community tone, 2-3 sentences, 1-2 emojis, end with a question to spark discussion. No hashtags.',
+  linkedin:  'professional, career-focused tone. 3-4 sentences highlighting Flask, Django, FastAPI, and SQLAlchemy. Mention the runnable code feature. End with 4-5 relevant hashtags.',
+  x:         'punchy hook line under 240 characters including the URL. Conversational, developer tone. 2-3 relevant hashtags.'
+};
+
+async function genCaption(platform) {
+  curPlatform = platform;
+  const box      = document.getElementById('captionBox');
+  const copyBtn  = document.getElementById('copyCapBtn');
+  const openBtn  = document.getElementById('shareOpenBtn');
+  const regenBtn = document.getElementById('regenBtn');
+  const badge    = document.getElementById('aiBadge');
+  box.className = 'caption-box loading';
+  box.textContent = 'Generating caption…';
+  [copyBtn, openBtn, regenBtn, badge].forEach(el => el && (el.style.display = 'none'));
+  try {
+    const resp = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        messages: [{
+          role: 'user',
+          content: `You are a social media copywriter. Write a ${platform.toUpperCase()} post sharing this Python web development tutorial.
+
+Title: ${PAGE_TITLE}
+URL: ${PAGE_URL}
+Topics covered: Flask microframework, Django full-stack, FastAPI async REST APIs, Jinja2 templates, WTForms validation, SQLAlchemy ORM, deployment best practices, runnable in-browser Python code.
+Author: Glenn Junsay Pansensoy — Valleys & Bytes
+
+Platform guidelines: ${platformGuide[platform]}
+
+Write ONLY the post text, ready to copy-paste. Include the URL naturally. No quotes around output.`
+        }]
+      })
+    });
+    const data = await resp.json();
+    curCaption = data.content.map(b => b.text || '').join('').trim();
+    box.className = 'caption-box';
+    box.textContent = curCaption;
+    [copyBtn, openBtn, regenBtn, badge].forEach(el => el && (el.style.display = 'inline-flex'));
+  } catch (e) {
+    box.className = 'caption-box';
+    box.textContent = 'Could not generate caption — please check your connection and try again.';
+  }
+}
+
+function copyCap() {
+  if (!curCaption) return;
+  navigator.clipboard.writeText(curCaption).then(() => {
+    const btn = document.getElementById('copyCapBtn');
+    if (!btn) return;
+    const orig = btn.textContent;
+    btn.textContent = '✓ Copied!';
+    setTimeout(() => btn.textContent = orig, 2000);
+  });
+}
+
+function openShareUrl() {
+  const urls = {
+    facebook: 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(PAGE_URL),
+    linkedin:  'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(PAGE_URL),
+    x:         'https://twitter.com/intent/tweet?url=' + encodeURIComponent(PAGE_URL) + '&text=' + encodeURIComponent(curCaption.replace(PAGE_URL, '').trim())
+  };
+  if (urls[curPlatform]) window.open(urls[curPlatform], '_blank', 'width=600,height=500');
+}
+
+function regenCap() {
+  if (curPlatform) genCaption(curPlatform);
+}
+
+const CMT_KEY  = 'vb_comments_webdev';
+const LIKE_KEY = 'vb_cmt_likes_webdev';
+
+function getCmts()      { return JSON.parse(localStorage.getItem(CMT_KEY)  || '[]'); }
+function saveCmts(arr)  { localStorage.setItem(CMT_KEY, JSON.stringify(arr)); }
+function getLikes()     { return JSON.parse(localStorage.getItem(LIKE_KEY) || '{}'); }
+function saveLikes(obj) { localStorage.setItem(LIKE_KEY, JSON.stringify(obj)); }
+
+function timeAgo(iso) {
+  const s = (Date.now() - new Date(iso)) / 1000;
+  if (s < 60)    return 'just now';
+  if (s < 3600)  return Math.floor(s / 60)   + 'm ago';
+  if (s < 86400) return Math.floor(s / 3600)  + 'h ago';
+  return Math.floor(s / 86400) + 'd ago';
+}
+
+function escH(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function renderCmts() {
+  const list    = document.getElementById('cmtList');
+  const countEl = document.getElementById('cmtCount');
+  const cmts    = getCmts();
+  const likes   = getLikes();
+  if (countEl) countEl.textContent = cmts.length + (cmts.length === 1 ? ' comment' : ' comments');
+  if (!list) return;
+  if (cmts.length === 0) {
+    list.innerHTML = '<div class="no-comments">Be the first to comment! 👋</div>';
+    return;
+  }
+  list.innerHTML = cmts.slice().reverse().map(c => {
+    const init  = c.name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
+    const liked = !!likes[c.id];
+    return `<div class="cmt-item">
+      <div class="cmt-meta">
+        <div class="cmt-avatar">${init}</div>
+        <span class="cmt-author">${escH(c.name)}</span>
+        <span class="cmt-date">${timeAgo(c.date)}</span>
+      </div>
+      <div class="cmt-body">${escH(c.text)}</div>
+      <div>
+        <button class="cmt-like-btn ${liked ? 'active' : ''}" onclick="likeCmt('${c.id}')">
+          ${liked ? '❤️' : '🤍'} ${c.likes + (liked ? 1 : 0)}
+        </button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function likeCmt(id) {
+  const likes = getLikes();
+  likes[id] = !likes[id];
+  saveLikes(likes);
+  renderCmts();
+}
+
+function postComment() {
+  const name = document.getElementById('cmtName').value.trim();
+  const text = document.getElementById('cmtText').value.trim();
+  const msg  = document.getElementById('cmtMsg');
+  if (!name)               { showMsg(msg, '✗ Name is required.', '#ff6b8a'); return; }
+  if (!text || text.length < 3) { showMsg(msg, '✗ Comment is too short.', '#ff6b8a'); return; }
+  const cmts = getCmts();
+  cmts.push({
+    id:   Date.now().toString(36) + Math.random().toString(36).slice(2, 5),
+    name, text, likes: 0,
+    date: new Date().toISOString()
+  });
+  saveCmts(cmts);
+  document.getElementById('cmtName').value = '';
+  document.getElementById('cmtText').value = '';
+  renderCmts();
+  showMsg(msg, '✓ Comment posted!', '#50fa7b');
+}
+
+function initComments() {
+  const cmts = getCmts();
+  if (cmts.length === 0) {
+    saveCmts([
+      { id: 's1', name: 'Maria Chen',    text: 'The FastAPI section finally clicked for me. The automatic /docs endpoint is a game-changer for API development — saves so much time on documentation.', likes: 18, date: new Date(Date.now() - 172800000).toISOString() },
+      { id: 's2', name: 'Dev Rafi',       text: 'SQLAlchemy code example is clean and production-ready. Most tutorials skip the declarative_base pattern and jump straight to Flask-SQLAlchemy. Appreciate the depth here!', likes: 11, date: new Date(Date.now() - 28800000).toISOString() },
+      { id: 's3', name: 'Priya Nair',    text: 'The deployment section is what I was missing. Covered Gunicorn, Uvicorn, and Nginx in one place. Would love to see a Docker-compose example next!', likes: 25, date: new Date(Date.now() - 5400000).toISOString() }
+    ]);
+  }
+  renderCmts();
+}
+</script>
+
+</body>
+</html>
