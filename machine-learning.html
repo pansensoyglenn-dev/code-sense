@@ -1,0 +1,1677 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: https://ogp.me/ns#">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Machine Learning with Python: Complete Guide 2026 — Scikit-learn, NumPy, Pandas & Deep Learning | Valleys & Bytes</title>
+  <meta name="description" content="Master machine learning with Python in 2026. Complete guide covering supervised & unsupervised learning, scikit-learn, NumPy, Pandas, neural networks, model evaluation, feature engineering, and deployment. Runnable code examples included.">
+  <meta name="keywords" content="machine learning Python, scikit-learn tutorial, supervised learning, unsupervised learning, neural networks Python, feature engineering, model evaluation, cross-validation, gradient descent, random forest, SVM, k-means clustering, deep learning, TensorFlow, PyTorch, Python ML 2026">
+  <link rel="canonical" href="https://code-sense.pansensoyglenn.workers.dev/machine-learning.html">
+  <meta name="author" content="Glenn Junsay Pansensoy — Valleys & Bytes">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow">
+  <meta name="theme-color" content="#0d1117">
+  <meta name="language" content="English">
+  <meta name="revisit-after" content="7 days">
+
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://code-sense.pansensoyglenn.workers.dev/machine-learning.html">
+  <meta property="og:title" content="Machine Learning with Python: Complete Guide 2026 — Scikit-learn, NumPy & Deep Learning">
+  <meta property="og:description" content="Master machine learning with Python. Covers supervised & unsupervised learning, scikit-learn, feature engineering, model evaluation, neural networks, and deployment. Runnable examples.">
+  <meta property="og:image" content="https://code-sense.pansensoyglenn.workers.dev/assets/machine-learning-og.jpg">
+  <meta property="og:image:alt" content="Machine Learning with Python — Valleys & Bytes">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:site_name" content="Valleys & Bytes">
+  <meta property="og:locale" content="en_US">
+  <meta property="article:published_time" content="2026-03-05T00:00:00+00:00">
+  <meta property="article:modified_time" content="2026-03-05T00:00:00+00:00">
+  <meta property="article:author" content="https://code-sense.pansensoyglenn.workers.dev">
+  <meta property="article:publisher" content="https://code-sense.pansensoyglenn.workers.dev">
+  <meta property="article:section" content="Machine Learning">
+  <meta property="article:tag" content="Python">
+  <meta property="article:tag" content="Machine Learning">
+  <meta property="article:tag" content="Scikit-learn">
+  <meta property="article:tag" content="Deep Learning">
+  <meta property="article:tag" content="Data Science">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@ValleysBytes">
+  <meta name="twitter:creator" content="@ValleysBytes">
+  <meta name="twitter:title" content="Machine Learning with Python: Complete Guide 2026">
+  <meta name="twitter:description" content="Master ML with Python. Scikit-learn, feature engineering, neural networks, model deployment. Runnable code examples.">
+  <meta name="twitter:image" content="https://code-sense.pansensoyglenn.workers.dev/assets/machine-learning-og.jpg">
+  <meta name="twitter:image:alt" content="Machine Learning with Python — Valleys & Bytes">
+
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Machine Learning with Python: Complete Guide 2026",
+    "description": "Master machine learning with Python in 2026. Complete guide covering supervised and unsupervised learning, scikit-learn, NumPy, Pandas, neural networks, model evaluation, feature engineering, and deployment.",
+    "image": "https://code-sense.pansensoyglenn.workers.dev/assets/machine-learning-og.jpg",
+    "author": {
+      "@type": "Person",
+      "name": "Glenn Junsay Pansensoy",
+      "url": "https://code-sense.pansensoyglenn.workers.dev"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Valleys & Bytes",
+      "url": "https://code-sense.pansensoyglenn.workers.dev",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://code-sense.pansensoyglenn.workers.dev/assets/logo.png",
+        "width": 200,
+        "height": 60
+      }
+    },
+    "datePublished": "2026-03-05",
+    "dateModified": "2026-03-05",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://code-sense.pansensoyglenn.workers.dev/machine-learning.html"
+    },
+    "url": "https://code-sense.pansensoyglenn.workers.dev/machine-learning.html",
+    "keywords": "machine learning Python, scikit-learn, supervised learning, neural networks, feature engineering, model evaluation",
+    "articleSection": "Machine Learning",
+    "inLanguage": "en-US",
+    "learningResourceType": "Tutorial",
+    "educationalLevel": "Intermediate",
+    "isAccessibleForFree": true,
+    "timeRequired": "PT25M",
+    "hasPart": [
+      {"@type":"TechArticle","headline":"ML Fundamentals & the Python Stack"},
+      {"@type":"TechArticle","headline":"NumPy & Pandas for ML"},
+      {"@type":"TechArticle","headline":"Supervised Learning: Classification & Regression"},
+      {"@type":"TechArticle","headline":"Unsupervised Learning: Clustering & Dimensionality Reduction"},
+      {"@type":"TechArticle","headline":"Feature Engineering & Selection"},
+      {"@type":"TechArticle","headline":"Model Evaluation & Cross-Validation"},
+      {"@type":"TechArticle","headline":"Ensemble Methods: Random Forest & Gradient Boosting"},
+      {"@type":"TechArticle","headline":"Neural Networks & Deep Learning"},
+      {"@type":"TechArticle","headline":"ML Pipeline & Model Deployment"}
+    ]
+  }</script>
+
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type":"ListItem","position":1,"name":"Home","item":"https://code-sense.pansensoyglenn.workers.dev/"},
+      {"@type":"ListItem","position":2,"name":"Python Tutorials","item":"https://code-sense.pansensoyglenn.workers.dev/python-tutorials.html"},
+      {"@type":"ListItem","position":3,"name":"Machine Learning","item":"https://code-sense.pansensoyglenn.workers.dev/machine-learning.html"}
+    ]
+  }</script>
+
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What Python libraries are essential for machine learning?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The core Python ML stack includes NumPy for numerical computing, Pandas for data manipulation, scikit-learn for classical ML algorithms, Matplotlib and Seaborn for visualization, and either TensorFlow or PyTorch for deep learning. XGBoost and LightGBM are essential for tabular data competitions and production systems."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between supervised and unsupervised learning?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Supervised learning trains models on labeled data — where both inputs and correct outputs are known — to predict labels for new inputs. Examples include classification and regression. Unsupervised learning finds hidden structure in unlabeled data, including clustering (grouping similar items) and dimensionality reduction (compressing data while preserving information)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do you prevent overfitting in machine learning models?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Overfitting prevention strategies include: cross-validation to get reliable performance estimates, regularization (L1/L2) to penalize model complexity, dropout in neural networks, early stopping during training, ensemble methods like Random Forest that average multiple models, reducing model complexity, and gathering more training data."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is feature engineering in machine learning?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Feature engineering is the process of using domain knowledge to transform raw data into features that better represent the underlying patterns for machine learning models. It includes encoding categorical variables, creating interaction features, handling missing values, scaling numerical features, and extracting temporal or text features. Good feature engineering often has more impact than algorithm choice."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When should I use Random Forest vs Gradient Boosting?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Use Random Forest when you need a robust baseline that trains quickly and handles high-dimensional data well, or when interpretability and low tuning effort matter. Use Gradient Boosting (XGBoost, LightGBM) when you need maximum predictive accuracy on tabular data and are willing to invest in hyperparameter tuning. Gradient Boosting typically outperforms Random Forest on structured data but is more sensitive to hyperparameters and prone to overfitting."
+        }
+      }
+    ]
+  }</script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+  <link rel="alternate" type="application/rss+xml" title="Valleys & Bytes" href="/rss.xml">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4575646748966866" crossorigin="anonymous"></script>
+
+  <style>
+    :root {
+      --bg:         #0d1117;
+      --bg2:        #10151e;
+      --surface:    #161b22;
+      --surface2:   #1c2333;
+      --surface3:   #21293a;
+      --blue:       #3776ab;
+      --blue-lt:    #58a6ff;
+      --blue-xlt:   #8ac0f8;
+      --emerald:    #3fb950;
+      --emerald-dim:rgba(63,185,80,0.1);
+      --gold:       #ffd43b;
+      --gold-dim:   rgba(255,212,59,0.08);
+      --purple:     #bc8cff;
+      --text:       #e6edf3;
+      --muted:      #c9d1d9;
+      --subtle:     #8b949e;
+      --border:     #30363d;
+      --border-hov: #48576a;
+      --code-bg:    #010409;
+      --r:          10px;
+      --r-lg:       18px;
+      --k:          #ff7b72;
+      --f:          #d2a8ff;
+      --s:          #a5d6ff;
+      --c:          #6e8098;
+      --deco:       #79c0ff;
+      --num:        #79c0ff;
+    }
+
+    *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Outfit', system-ui, sans-serif;
+      font-size: 1rem;
+      line-height: 1.75;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(55,118,171,.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(55,118,171,.02) 1px, transparent 1px);
+      background-size: 44px 44px;
+    }
+
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--blue); border-radius: 3px; }
+
+    #prog {
+      position: fixed; top: 0; left: 0; height: 3px; z-index: 2000;
+      background: linear-gradient(90deg, var(--blue), var(--emerald), var(--gold));
+      width: 0%;
+    }
+    #btt {
+      position: fixed; bottom: 1.8rem; right: 1.8rem; z-index: 900;
+      width: 40px; height: 40px; border-radius: 10px;
+      background: var(--surface2); border: 1px solid var(--border);
+      color: var(--blue-lt); font-size: .9rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none; transition: all .3s;
+    }
+    #btt.vis { opacity: 1; pointer-events: all; }
+    #btt:hover { background: var(--blue); color: #fff; transform: translateY(-2px); }
+
+    nav.main-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: .85rem 2.5rem;
+      background: rgba(13,17,23,.97);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .logo {
+      font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1rem;
+      color: var(--blue-lt); text-decoration: none;
+      display: inline-flex; align-items: center; gap: .35rem; letter-spacing: -.01em;
+    }
+    .logo .amp { color: var(--gold); }
+    .logo .w2 { color: var(--text); }
+    .ham {
+      display: flex; flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 5px; background: none; border: none; z-index: 1100;
+    }
+    .ham span {
+      display: block; width: 22px; height: 2px; background: var(--text);
+      border-radius: 2px; transition: all .3s cubic-bezier(.77,0,.18,1); transform-origin: center;
+    }
+    .ham.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); background: var(--emerald); }
+    .ham.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .ham.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); background: var(--emerald); }
+    .drawer {
+      position: fixed; top: 0; right: -300px; bottom: 0; width: 278px;
+      background: var(--surface); border-left: 1px solid var(--border);
+      padding: 5.5rem 1.8rem 2rem; overflow-y: auto;
+      transition: right .4s cubic-bezier(.77,0,.18,1); z-index: 1050;
+    }
+    .drawer.open { right: 0; }
+    .drawer-lbl {
+      font-family: 'JetBrains Mono', monospace; font-size: .6rem;
+      color: var(--emerald); letter-spacing: .14em; text-transform: uppercase;
+      margin-bottom: .75rem; opacity: .8;
+    }
+    .drawer-group { display: flex; flex-direction: column; gap: .4rem; margin-bottom: .75rem; }
+    .drawer a {
+      display: flex; align-items: center; gap: .5rem;
+      padding: .6rem .9rem; border-radius: 8px;
+      border: 1px solid var(--border); background: var(--surface2);
+      color: var(--muted); text-decoration: none; font-size: .82rem; font-weight: 500;
+      transition: all .2s;
+    }
+    .drawer a:hover { color: var(--text); border-color: var(--border-hov); background: var(--surface3); transform: translateX(3px); }
+    .overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,.75);
+      opacity: 0; pointer-events: none; transition: opacity .3s; z-index: 1040;
+      backdrop-filter: blur(3px);
+    }
+    .overlay.open { opacity: 1; pointer-events: all; }
+
+    .breadcrumb-wrap {
+      max-width: 1100px; margin: 0 auto;
+      padding: 6rem 2.5rem 0; position: relative; z-index: 1;
+    }
+    nav.breadcrumb {
+      display: flex; align-items: center; gap: .4rem; flex-wrap: wrap;
+      font-family: 'JetBrains Mono', monospace; font-size: .62rem;
+      color: var(--muted); margin-bottom: .75rem;
+    }
+    nav.breadcrumb a {
+      color: var(--muted); text-decoration: none;
+      display: inline-flex; align-items: center; gap: .35rem;
+      padding: .25rem .75rem; border-radius: 6px;
+      background: var(--surface2); border: 1px solid var(--border);
+      transition: all .2s;
+    }
+    nav.breadcrumb a:hover { color: var(--blue-lt); border-color: var(--border-hov); }
+    nav.breadcrumb .bc-sep { color: var(--subtle); opacity: .6; }
+    nav.breadcrumb .bc-cur {
+      color: var(--emerald); display: inline-flex; align-items: center; gap: .35rem;
+      padding: .25rem .75rem; border-radius: 6px;
+      background: var(--emerald-dim); border: 1px solid rgba(63,185,80,.25);
+    }
+
+    .hero {
+      max-width: 1100px; margin: 0 auto;
+      padding: 2.5rem 2.5rem 3rem;
+      position: relative; z-index: 1;
+      border-bottom: 2px solid var(--border);
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: .45rem;
+      background: var(--emerald-dim); border: 1px solid rgba(63,185,80,.25);
+      color: var(--emerald); padding: .25rem .9rem; border-radius: 100px;
+      font-family: 'JetBrains Mono', monospace; font-size: .62rem;
+      margin-bottom: 1rem; width: fit-content;
+    }
+    .bdot { width: 6px; height: 6px; border-radius: 50%; background: var(--emerald); display: inline-block; animation: pulse 2.5s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.3;transform:scale(.75)} }
+    @keyframes fu { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+
+    h1 {
+      font-family: 'Outfit', sans-serif; font-size: 1rem; font-weight: 800;
+      line-height: 1.15; max-width: 820px;
+      color: var(--blue-lt);
+      letter-spacing: -.02em;
+      text-align: justify;
+    }
+    h1 .hl-g { color: var(--emerald); }
+    h1 .hl-y { color: var(--gold); }
+
+    .hero-desc {
+      font-size: .8rem; color: var(--muted); max-width: 640px;
+      margin-top: .9rem; line-height: 1.85; text-align: justify;
+    }
+    .hero-meta {
+      display: flex; align-items: center; gap: .5rem; margin-top: 1rem; flex-wrap: wrap;
+    }
+    .author-chip {
+      font-family: 'JetBrains Mono', monospace; font-size: .62rem;
+      color: var(--gold); background: var(--gold-dim);
+      border: 1px solid rgba(255,212,59,.2);
+      padding: .22rem .75rem; border-radius: 100px;
+    }
+    .chip {
+      display: inline-flex; align-items: center; gap: .3rem;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 6px; padding: .22rem .65rem;
+      font-family: 'JetBrains Mono', monospace; font-size: .6rem; color: var(--subtle);
+    }
+
+    .ad-slot { display: block; text-align: center; margin: 2rem auto; max-width: 970px; padding: 0 1rem; overflow: hidden; }
+    .ad-label { font-family: 'JetBrains Mono', monospace; font-size: .55rem; color: var(--subtle); letter-spacing: .1em; text-transform: uppercase; margin-bottom: .3rem; opacity: .5; }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 2.5rem 2.5rem; position: relative; z-index: 1; }
+
+    .toc-block {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--r-lg); padding: 2rem 2.2rem; margin: 0 0 3rem;
+      box-shadow: 0 20px 50px -20px rgba(0,0,0,.6);
+    }
+    .toc-h {
+      font-family: 'JetBrains Mono', monospace; font-size: .68rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .14em; color: var(--gold);
+      margin-bottom: 1.2rem; display: flex; align-items: center; gap: .5rem;
+    }
+    .toc-h::before { content:''; display:block; width:16px; height:2px; background:var(--gold); border-radius:1px; }
+    .toc-list { list-style: none; padding: 0; }
+    .toc-item { border-bottom: 1px solid rgba(48,54,61,.6); }
+    .toc-item:last-child { border-bottom: none; }
+    .toc-link {
+      display: flex; align-items: center; gap: .65rem;
+      padding: .55rem .3rem; color: var(--muted); text-decoration: none;
+      font-size: .8rem; transition: all .2s;
+    }
+    .toc-num {
+      font-family: 'JetBrains Mono', monospace; font-size: .6rem; color: var(--blue-lt);
+      background: rgba(88,166,255,.1); border: 1px solid rgba(88,166,255,.2);
+      padding: .1rem .45rem; border-radius: 4px; flex-shrink: 0; min-width: 30px; text-align: center;
+    }
+    .toc-link:hover { color: var(--blue-lt); transform: translateX(4px); }
+
+    section.art-sec {
+      margin-bottom: 4.5rem;
+      scroll-margin-top: 72px;
+    }
+    .sec-lbl {
+      font-family: 'JetBrains Mono', monospace; font-size: .62rem;
+      letter-spacing: .14em; text-transform: uppercase; color: var(--emerald);
+      margin-bottom: .5rem; display: flex; align-items: center; gap: .5rem;
+    }
+    .sec-lbl::before { content:''; display:block; width:16px; height:1px; background:var(--emerald); }
+    h2.art-h2 {
+      font-family: 'Outfit', sans-serif; font-size: .9rem; font-weight: 700;
+      color: var(--blue-lt); margin-bottom: .35rem;
+      border-left: 4px solid var(--emerald); padding-left: .9rem;
+      text-align: justify;
+    }
+    .div-bar { width: 32px; height: 2px; background: var(--blue); margin: .75rem 0 1.4rem; border-radius: 1px; }
+    .sub-tag {
+      font-family: 'JetBrains Mono', monospace; font-size: .65rem;
+      color: var(--subtle); margin-bottom: .7rem; letter-spacing: .04em;
+    }
+    h3 {
+      font-family: 'Outfit', sans-serif; font-size: .8rem; font-weight: 700;
+      color: var(--gold); margin: 1.8rem 0 .8rem; text-align: justify;
+    }
+    p {
+      color: var(--muted); margin-bottom: 1rem; font-size: .8rem;
+      line-height: 1.85; text-align: justify; letter-spacing: .01em;
+    }
+    p strong, p b { color: var(--text); font-weight: 600; }
+    ul, ol {
+      color: var(--muted); margin-left: 1.5rem; margin-bottom: 1.2rem;
+      font-size: .8rem; line-height: 1.85; text-align: justify;
+    }
+    li { margin: .35rem 0; }
+    code {
+      font-family: 'JetBrains Mono', monospace; font-size: .76em;
+      background: rgba(88,166,255,.1); border: 1px solid rgba(88,166,255,.18);
+      padding: .05em .35em; border-radius: 4px; color: var(--blue-xlt);
+    }
+    hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+
+    .grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem; margin: 1.8rem 0;
+    }
+    .card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--r); padding: 1.3rem;
+      transition: all .25s; position: relative; overflow: hidden;
+    }
+    .card::after {
+      content:''; position:absolute; top:0; left:0; right:0; height:2px;
+      background:linear-gradient(90deg,var(--blue),var(--emerald));
+      opacity:0; transition:opacity .25s;
+    }
+    .card:hover { border-color: var(--border-hov); transform: translateY(-3px); box-shadow: 0 14px 35px -12px rgba(0,0,0,.6); }
+    .card:hover::after { opacity: 1; }
+    .card-title { font-size: .9rem; font-weight: 700; display: block; margin-bottom: .55rem; color: var(--gold); font-family: 'Outfit', sans-serif; }
+    .card p { font-size: .8rem; margin-bottom: 0; }
+
+    .compare-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: .8rem; }
+    .compare-table th {
+      background: var(--surface2); color: var(--gold); font-family: 'JetBrains Mono', monospace;
+      font-size: .65rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+      padding: .75rem 1rem; text-align: left; border-bottom: 2px solid var(--border);
+    }
+    .compare-table td { padding: .7rem 1rem; border-bottom: 1px solid rgba(48,54,61,.6); color: var(--muted); vertical-align: top; }
+    .compare-table tr:last-child td { border-bottom: none; }
+    .compare-table tr:hover td { background: rgba(88,166,255,.04); }
+    .compare-table td:first-child { color: var(--blue-lt); font-weight: 600; }
+
+    pre {
+      background: var(--code-bg); border: 1px solid var(--border);
+      border-left: 3px solid var(--blue);
+      border-radius: var(--r); overflow-x: auto;
+      font-family: 'JetBrains Mono', monospace; font-size: .78rem;
+      padding: 1.4rem 1.5rem; margin: 1.5rem 0; line-height: 1.72;
+      box-shadow: 0 12px 30px -14px rgba(0,0,0,.9);
+    }
+    .code-bar {
+      background: rgba(13,17,23,.8); border: 1px solid var(--border);
+      border-bottom: none; border-radius: var(--r) var(--r) 0 0;
+      padding: .5rem 1.2rem; display: flex; align-items: center; justify-content: space-between;
+      margin-top: 1.5rem;
+    }
+    .code-bar + pre { border-radius: 0 0 var(--r) var(--r); margin-top: 0; border-left: 3px solid var(--emerald); }
+    .lang-tag {
+      font-family: 'JetBrains Mono', monospace; font-size: .62rem;
+      color: var(--emerald); background: var(--emerald-dim);
+      border: 1px solid rgba(63,185,80,.25);
+      padding: .18rem .65rem; border-radius: 100px;
+    }
+    .copy-btn {
+      font-family: 'JetBrains Mono', monospace; font-size: .62rem;
+      color: var(--subtle); background: var(--surface2); border: 1px solid var(--border);
+      padding: .18rem .65rem; border-radius: 6px; cursor: pointer; transition: all .2s;
+    }
+    .copy-btn:hover { color: var(--text); border-color: var(--border-hov); }
+
+    .k { color: var(--k); }
+    .f { color: var(--f); }
+    .s { color: var(--s); }
+    .c { color: var(--c); font-style: italic; }
+    .deco { color: var(--deco); }
+    .num { color: var(--num); }
+    .cn { color: #79c0ff; }
+
+    .insight {
+      background: rgba(31,42,63,.8); border-left: 4px solid var(--gold);
+      border: 1px solid rgba(255,212,59,.15); border-left-width: 4px; border-left-color: var(--gold);
+      padding: 1.2rem 1.4rem; border-radius: 0 var(--r) var(--r) 0;
+      margin: 2rem 0;
+    }
+    .insight p { margin: 0; font-style: italic; color: var(--text); font-size: .8rem; }
+    .warning {
+      background: rgba(255,123,114,.06); border: 1px solid rgba(255,123,114,.2);
+      border-left: 4px solid var(--k);
+      padding: 1.1rem 1.4rem; border-radius: 0 var(--r) var(--r) 0; margin: 1.5rem 0;
+    }
+    .warning p { margin: 0; color: var(--text); font-size: .8rem; }
+    .tip {
+      background: var(--emerald-dim); border: 1px solid rgba(63,185,80,.2);
+      border-left: 4px solid var(--emerald);
+      padding: 1.1rem 1.4rem; border-radius: 0 var(--r) var(--r) 0; margin: 1.5rem 0;
+    }
+    .tip p { margin: 0; color: var(--text); font-size: .8rem; }
+
+    .faq-list { display: flex; flex-direction: column; gap: .6rem; margin-top: 1.5rem; }
+    .faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; }
+    .faq-q {
+      width: 100%; display: flex; align-items: center; justify-content: space-between;
+      padding: .95rem 1.15rem; background: none; border: none; cursor: pointer;
+      font-family: 'Outfit', sans-serif; font-size: .8rem; font-weight: 600;
+      color: var(--text); text-align: left; gap: 1rem; transition: color .2s;
+    }
+    .faq-q:hover { color: var(--blue-lt); }
+    .faq-ico {
+      width: 20px; height: 20px; border-radius: 50%;
+      background: rgba(88,166,255,.1); border: 1px solid rgba(88,166,255,.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .8rem; color: var(--blue-lt); flex-shrink: 0; transition: all .3s;
+    }
+    .faq-ans { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
+    .faq-ans p { padding: .1rem 1.15rem 1rem; margin: 0; font-size: .8rem; }
+    .faq-item.open .faq-ico { background: rgba(88,166,255,.2); border-color: rgba(88,166,255,.4); }
+
+    .share-box {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--r-lg); padding: 2rem; margin-bottom: 2rem;
+    }
+    .sec-lbl2 {
+      font-family: 'JetBrains Mono', monospace; font-size: .6rem; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--blue-lt); margin-bottom: 1rem;
+      display: flex; align-items: center; gap: .5rem;
+    }
+    .sec-lbl2::before { content:''; display:block; width:14px; height:1px; background:var(--blue-lt); }
+    .share-btns { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 1.1rem; }
+    .share-btn {
+      display: inline-flex; align-items: center; gap: .4rem;
+      padding: .48rem 1.05rem; border-radius: 8px;
+      border: 1px solid var(--border); background: var(--surface2);
+      color: var(--muted); font-size: .78rem; font-weight: 600;
+      cursor: pointer; transition: all .2s; font-family: 'Outfit', sans-serif;
+    }
+    .share-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,.4); }
+    .share-btn.fb { border-color: rgba(24,119,242,.3); color: #4a9af4; }
+    .share-btn.fb:hover { background: rgba(24,119,242,.08); }
+    .share-btn.li { border-color: rgba(10,102,194,.3); color: #4a8cd4; }
+    .share-btn.li:hover { background: rgba(10,102,194,.08); }
+    .share-btn.x { border-color: rgba(200,220,255,.15); color: var(--text); }
+    .share-btn.x:hover { background: rgba(255,255,255,.05); }
+    .caption-box {
+      background: var(--bg2); border: 1px solid var(--border); border-radius: 9px;
+      padding: 1rem 1.2rem; font-size: .8rem; color: var(--muted);
+      line-height: 1.8; min-height: 78px; white-space: pre-wrap; margin-bottom: .7rem;
+    }
+    .caption-box.loading {
+      background: linear-gradient(90deg, var(--surface) 25%, var(--surface2) 50%, var(--surface) 75%);
+      background-size: 400% 100%; animation: shimmer 1.4s infinite; color: transparent;
+    }
+    @keyframes shimmer { 0%{background-position:100% 0} 100%{background-position:-100% 0} }
+    .cap-actions { display: flex; gap: .5rem; align-items: center; flex-wrap: wrap; }
+    .btn-sm {
+      padding: .38rem .9rem; border-radius: 7px; font-size: .72rem; font-weight: 600;
+      cursor: pointer; transition: all .2s; border: 1px solid var(--border);
+      background: var(--surface2); color: var(--muted); font-family: 'Outfit', sans-serif;
+    }
+    .btn-sm:hover { color: var(--text); border-color: var(--border-hov); }
+    .btn-sm.pri { background: linear-gradient(135deg, var(--blue), var(--blue-lt)); border: none; color: #fff; }
+    .btn-sm.pri:hover { filter: brightness(1.12); transform: translateY(-1px); }
+    .ai-badge {
+      font-family: 'JetBrains Mono', monospace; font-size: .55rem;
+      color: var(--gold); background: var(--gold-dim);
+      border: 1px solid rgba(255,212,59,.2);
+      padding: .15rem .5rem; border-radius: 4px; margin-left: auto;
+    }
+
+    .cmt-wrap {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--r-lg); padding: 2rem; margin-bottom: 2rem;
+    }
+    .cmt-hdr { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; flex-wrap: wrap; gap: .5rem; }
+    .cmt-badge {
+      font-family: 'JetBrains Mono', monospace; font-size: .62rem; color: var(--blue-lt);
+      background: rgba(88,166,255,.1); padding: .25rem .65rem;
+      border-radius: 100px; border: 1px solid rgba(88,166,255,.2);
+    }
+    .cmt-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; margin-bottom: .5rem; }
+    @media(max-width:500px){.cmt-form-row{grid-template-columns:1fr}}
+    .cmt-form textarea { resize: vertical; min-height: 95px; margin-bottom: .55rem; font-size: .8rem; line-height: 1.7; width: 100%; }
+    .cmt-actions { display: flex; align-items: center; gap: .6rem; flex-wrap: wrap; margin-top: .4rem; }
+    .cmt-msg { font-family: 'JetBrains Mono', monospace; font-size: .65rem; opacity: 0; transition: opacity .4s; }
+    hr.cdiv { border: none; border-top: 1px solid var(--border); margin: 1.2rem 0; }
+    .cmt-list { display: flex; flex-direction: column; gap: 1rem; }
+    .cmt-item {
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: var(--r); padding: 1rem 1.2rem;
+    }
+    .cmt-meta { display: flex; align-items: center; gap: .55rem; margin-bottom: .45rem; flex-wrap: wrap; }
+    .cmt-av {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue), var(--emerald));
+      display: flex; align-items: center; justify-content: center;
+      font-size: .7rem; font-weight: 700; color: #fff;
+      font-family: 'JetBrains Mono', monospace; flex-shrink: 0;
+    }
+    .cmt-name { font-weight: 600; font-size: .8rem; color: var(--text); }
+    .cmt-date { font-family: 'JetBrains Mono', monospace; font-size: .6rem; color: var(--subtle); }
+    .cmt-body { font-size: .8rem; color: var(--muted); line-height: 1.75; margin-bottom: .45rem; text-align: justify; }
+    .cmt-like {
+      display: inline-flex; align-items: center; gap: .3rem;
+      padding: .22rem .6rem; border-radius: 6px; border: 1px solid var(--border);
+      background: none; color: var(--subtle); font-size: .65rem; cursor: pointer;
+      transition: all .2s; font-family: 'Outfit', sans-serif;
+    }
+    .cmt-like:hover { color: var(--blue-lt); border-color: rgba(88,166,255,.3); }
+    .cmt-like.active { color: #ff6b8a; border-color: rgba(255,107,138,.3); background: rgba(255,107,138,.06); }
+    .no-cmt { text-align: center; padding: 2rem; color: var(--subtle); font-size: .8rem; }
+
+    input, textarea {
+      background: var(--bg2); border: 1px solid var(--border); border-radius: 8px;
+      padding: .6rem .9rem; color: var(--text);
+      font-family: 'Outfit', sans-serif; font-size: .8rem;
+      width: 100%; outline: none; transition: border-color .2s, box-shadow .2s;
+    }
+    input:focus, textarea:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(55,118,171,.12); }
+    .btn-p {
+      background: linear-gradient(135deg, var(--blue), var(--blue-lt));
+      color: #fff; border: none; border-radius: 100px;
+      padding: .65rem 1.75rem; font-family: 'Outfit', sans-serif;
+      font-weight: 700; font-size: .8rem; cursor: pointer; transition: all .25s; white-space: nowrap;
+    }
+    .btn-p:hover { filter: brightness(1.12); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(55,118,171,.35); }
+
+    .sub-wrap {
+      background: linear-gradient(135deg, var(--surface) 0%, var(--surface2) 100%);
+      border: 1px solid var(--border); border-radius: var(--r-lg);
+      padding: 3rem 2.5rem; text-align: center; position: relative; overflow: hidden;
+    }
+    .sub-wrap::before {
+      content:''; position:absolute; top:-80px; right:-80px; width:320px; height:320px; border-radius:50%;
+      background:radial-gradient(circle,rgba(63,185,80,.04) 0%,transparent 65%); pointer-events:none;
+    }
+    .sub-wrap h2 { font-family:'Outfit',sans-serif; font-size:.9rem; font-weight:800; margin-bottom:.4rem; }
+    .sub-desc { font-size:.8rem; color:var(--muted); max-width:440px; margin:0 auto .8rem; text-align:center; }
+    .sub-tags { display:flex; justify-content:center; gap:.4rem; flex-wrap:wrap; margin:.75rem 0 1.2rem; }
+    .sub-chk { display:none; }
+    .sub-lbl {
+      display:inline-flex; align-items:center; gap:.3rem; padding:.25rem .65rem; border-radius:100px;
+      border:1px solid var(--border); background:var(--surface3); color:var(--subtle);
+      font-size:.65rem; cursor:pointer; transition:all .2s; font-family:'JetBrains Mono',monospace;
+    }
+    .sub-chk:checked+.sub-lbl { border-color:rgba(63,185,80,.4); background:rgba(63,185,80,.08); color:var(--emerald); }
+    .sub-grid { display:grid; grid-template-columns:1fr 1fr; gap:.5rem; max-width:480px; margin:0 auto 1rem; }
+    @media(max-width:500px){.sub-grid{grid-template-columns:1fr}}
+    .snote { font-size:.72rem; color:var(--subtle); margin-top:.7rem; }
+    .subMsg { margin-top:.6rem; font-size:.78rem; font-family:'JetBrains Mono',monospace; color:var(--emerald); min-height:1rem; transition:opacity .4s; }
+    .perks { display:flex; justify-content:center; gap:1.2rem; flex-wrap:wrap; margin:.6rem 0 1rem; }
+    .perk { display:inline-flex; align-items:center; gap:.3rem; font-size:.75rem; color:var(--muted); }
+    .perk::before { content:'✓'; color:var(--emerald); font-weight:700; }
+
+    footer {
+      background: var(--bg2); border-top: 1px solid var(--border);
+      margin-top: 5rem; padding: 3rem 2.5rem 2rem; position: relative; z-index: 1;
+    }
+    .fg { display:grid; grid-template-columns:2fr 1fr 1fr; gap:2.5rem; max-width:1100px; margin:0 auto; }
+    @media(max-width:768px){.fg{grid-template-columns:1fr 1fr}}
+    @media(max-width:480px){.fg{grid-template-columns:1fr}}
+    .fbrand p { font-size:.8rem; color:var(--muted); max-width:290px; text-align:justify; line-height:1.75; margin-top:.6rem; }
+    .fcol h4 {
+      font-family:'JetBrains Mono',monospace; font-size:.6rem; font-weight:700;
+      color:var(--emerald); margin-bottom:.75rem; letter-spacing:.14em; text-transform:uppercase;
+      display:flex; align-items:center; gap:.4rem;
+    }
+    .fcol h4::before { content:''; display:block; width:12px; height:1px; background:var(--emerald); }
+    .fcol-links { display:flex; flex-direction:column; gap:.35rem; }
+    .fcol a {
+      display:flex; align-items:center; gap:.5rem; color:var(--muted); text-decoration:none;
+      font-size:.8rem; padding:.45rem .8rem; border-radius:8px;
+      border:1px solid var(--border); background:var(--surface); transition:all .2s;
+    }
+    .fcol a:hover { color:var(--text); background:var(--surface2); border-color:var(--border-hov); transform:translateX(2px); }
+    .fbot { max-width:1100px; margin:2rem auto 0; padding-top:1.2rem; border-top:1px solid var(--border); }
+    .fcopy { font-size:.65rem; color:var(--subtle); font-family:'JetBrains Mono',monospace; text-align:center; }
+    .ftags { display:flex; flex-wrap:wrap; gap:.2rem; margin-top:.75rem; }
+    .ftag {
+      display:inline-block; background:rgba(63,185,80,.06); border:1px solid rgba(63,185,80,.18);
+      color:var(--emerald); font-family:'JetBrains Mono',monospace; font-size:.6rem;
+      padding:.1rem .5rem; border-radius:4px; margin:0 .1rem .1rem 0;
+    }
+
+    @media(max-width:768px){
+      nav.main-nav{padding:.75rem 1.2rem}
+      .hero{padding:2rem 1.2rem 2.5rem}
+      .container{padding:2rem 1.2rem}
+      .breadcrumb-wrap{padding:5.5rem 1.2rem 0}
+    }
+  </style>
+</head>
+<body>
+
+<div id="prog" role="progressbar" aria-hidden="true"></div>
+
+<nav class="main-nav" role="navigation" aria-label="Main navigation">
+  <a href="./index.html" class="logo" aria-label="Valleys and Bytes Home">
+    <span aria-hidden="true">💻</span>VALLEYS <span class="amp">&amp;</span> <span class="w2">BYTES</span>
+  </a>
+  <button class="ham" id="ham" aria-label="Toggle navigation" aria-expanded="false" aria-controls="drawer">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="drawer" id="drawer" role="dialog" aria-label="Navigation menu">
+  <p class="drawer-lbl">Navigation</p>
+  <div class="drawer-group">
+    <a href="./index.html">🏠 Home</a>
+    <a href="./python-tutorials.html">🐍 Python Tutorials</a>
+    <a href="./python-fundamentals.html">💻 Fundamentals</a>
+    <a href="./data-structure.html">📚 Data Structures & OOP</a>
+    <a href="./web-development.html">🌐 Web Development</a>
+    <a href="./machine-learning.html">🤖 Machine Learning</a>
+    <a href="./oop-cheatsheet.html">📋 Cheatsheets</a>
+  </div>
+</div>
+<div class="overlay" id="overlay" aria-hidden="true"></div>
+
+<header role="banner">
+  <div class="breadcrumb-wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="./index.html">🏠 Home</a>
+      <span class="bc-sep">›</span>
+      <a href="./python-tutorials.html">🐍 Python Tutorials</a>
+      <span class="bc-sep">›</span>
+      <span class="bc-cur" aria-current="page">🤖 Machine Learning</span>
+    </nav>
+  </div>
+  <div class="hero">
+    <div class="hero-badge"><span class="bdot"></span> ML WITH PYTHON · 2026</div>
+    <h1>Machine Learning with Python:<br><span class="hl-g">Scikit-learn</span>, NumPy &amp; <span class="hl-y">Deep Learning</span></h1>
+    <p class="hero-desc">A complete, structured guide to machine learning in Python. Covers the full ML workflow — data preparation with NumPy and Pandas, classical algorithms in scikit-learn, feature engineering, cross-validation, ensemble methods, neural networks, and production deployment — with detailed explanations and runnable code at every step.</p>
+    <div class="hero-meta">
+      <span class="author-chip">✍️ Glenn Junsay Pansensoy</span>
+      <span class="chip">⏱ 25 min read</span>
+      <span class="chip">📅 Mar 2026</span>
+      <span class="chip">🎓 Intermediate</span>
+      <span class="chip">🤖 ML & AI</span>
+    </div>
+  </div>
+</header>
+
+<div class="ad-slot" aria-label="Advertisement">
+  <p class="ad-label">Advertisement</p>
+  <ins class="adsbygoogle" style="display:block"
+    data-ad-client="ca-pub-4575646748966866"
+    data-ad-slot="4226674403"
+    data-ad-format="auto"
+    data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<div class="container">
+
+  <nav class="toc-block" aria-label="Table of contents">
+    <p class="toc-h">Machine Learning Curriculum — 9 Core Modules</p>
+    <ul class="toc-list">
+      <li class="toc-item"><a class="toc-link" href="#ml-foundations"><span class="toc-num">01</span> ML Fundamentals &amp; the Python Stack</a></li>
+      <li class="toc-item"><a class="toc-link" href="#numpy-pandas"><span class="toc-num">02</span> NumPy &amp; Pandas for ML — Data Foundations</a></li>
+      <li class="toc-item"><a class="toc-link" href="#supervised"><span class="toc-num">03</span> Supervised Learning — Classification &amp; Regression</a></li>
+      <li class="toc-item"><a class="toc-link" href="#unsupervised"><span class="toc-num">04</span> Unsupervised Learning — Clustering &amp; Dimensionality Reduction</a></li>
+      <li class="toc-item"><a class="toc-link" href="#feature-eng"><span class="toc-num">05</span> Feature Engineering &amp; Selection</a></li>
+      <li class="toc-item"><a class="toc-link" href="#evaluation"><span class="toc-num">06</span> Model Evaluation, Cross-Validation &amp; Metrics</a></li>
+      <li class="toc-item"><a class="toc-link" href="#ensembles"><span class="toc-num">07</span> Ensemble Methods — Random Forest &amp; Gradient Boosting</a></li>
+      <li class="toc-item"><a class="toc-link" href="#neural-nets"><span class="toc-num">08</span> Neural Networks &amp; Deep Learning Fundamentals</a></li>
+      <li class="toc-item"><a class="toc-link" href="#pipelines"><span class="toc-num">09</span> ML Pipelines, Hyperparameter Tuning &amp; Deployment</a></li>
+      <li class="toc-item"><a class="toc-link" href="#faq"><span class="toc-num">FAQ</span> Common ML Questions Answered</a></li>
+    </ul>
+  </nav>
+
+  <section class="art-sec" id="ml-foundations" aria-labelledby="h-foundations">
+    <p class="sec-lbl">01 — Foundations</p>
+    <h2 class="art-h2" id="h-foundations">ML Fundamentals &amp; the Python Stack</h2>
+    <div class="div-bar"></div>
+    <p class="sub-tag">the ecosystem · core concepts · ML taxonomy</p>
+    <p>Machine learning is a subset of artificial intelligence where systems learn patterns from data rather than following explicitly programmed rules. At its core, an ML model is a mathematical function that maps inputs to outputs — the "learning" is the process of finding the parameters of that function that minimize error on training data.</p>
+    <p>Python became the dominant language for ML due to its clean syntax, a world-class library ecosystem, and the research community adopting it as a standard. The essential Python ML stack consists of four foundational libraries that work seamlessly together.</p>
+    <div class="grid">
+      <div class="card"><span class="card-title">🔢 NumPy</span><p>N-dimensional array operations, broadcasting, linear algebra, and random number generation. The backbone of all numerical computation in Python — scikit-learn, TensorFlow, and PyTorch all build on NumPy arrays.</p></div>
+      <div class="card"><span class="card-title">🐼 Pandas</span><p>DataFrame-based data manipulation for cleaning, exploration, and feature engineering. Handles CSV, JSON, SQL, Excel, and Parquet. Essential for every step before model training.</p></div>
+      <div class="card"><span class="card-title">⚙️ Scikit-learn</span><p>The industry-standard classical ML library. Provides 40+ algorithms (SVM, Random Forest, Logistic Regression, KNN, etc.), preprocessing tools, cross-validation, and a consistent API for everything.</p></div>
+      <div class="card"><span class="card-title">🧠 TensorFlow / PyTorch</span><p>Deep learning frameworks for neural networks, GPU acceleration, and large-scale model training. TensorFlow has Keras for high-level API; PyTorch dominates research with its dynamic computation graph.</p></div>
+      <div class="card"><span class="card-title">📊 Matplotlib / Seaborn</span><p>Data visualization libraries critical for EDA (Exploratory Data Analysis), understanding data distributions, and diagnosing model behavior through learning curves and confusion matrices.</p></div>
+      <div class="card"><span class="card-title">🚀 XGBoost / LightGBM</span><p>State-of-the-art gradient boosting libraries. XGBoost won hundreds of Kaggle competitions; LightGBM is faster on large datasets. Both consistently outperform Random Forest on tabular data.</p></div>
+    </div>
+    <p>The ML taxonomy divides algorithms into three major learning paradigms. <strong>Supervised learning</strong> trains on labeled (input, output) pairs to predict outputs for new inputs. <strong>Unsupervised learning</strong> discovers hidden structure in unlabeled data. <strong>Reinforcement learning</strong> trains agents that learn by interacting with an environment and receiving rewards or penalties — the approach behind AlphaGo, ChatGPT's RLHF, and robotics.</p>
+    <div class="insight">
+      <p>🔍 <strong>Industry reality:</strong> 80% of real-world ML work is data cleaning and feature engineering, not algorithm selection. A well-engineered dataset with a simple Logistic Regression model often outperforms a poorly-prepared dataset fed into a neural network. Master the fundamentals first.</p>
+    </div>
+  </section>
+
+  <div class="ad-slot" aria-label="Advertisement">
+    <p class="ad-label">Advertisement</p>
+    <ins class="adsbygoogle" style="display:block"
+      data-ad-client="ca-pub-4575646748966866"
+      data-ad-slot="4226674403"
+      data-ad-format="auto"
+      data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <section class="art-sec" id="numpy-pandas" aria-labelledby="h-numpy">
+    <p class="sec-lbl">02 — Data Foundations</p>
+    <h2 class="art-h2" id="h-numpy">NumPy &amp; Pandas for ML</h2>
+    <div class="div-bar"></div>
+    <p class="sub-tag">arrays · dataframes · EDA · data cleaning</p>
+    <p>Before any model can be trained, raw data must be loaded, explored, cleaned, and transformed into numerical arrays. NumPy provides the core <code>ndarray</code> object — an efficient, typed, multi-dimensional array that supports vectorized operations (no Python loops needed). Pandas wraps NumPy arrays in labeled DataFrames that make real-world tabular data management intuitive.</p>
+    <p>Exploratory Data Analysis (EDA) with Pandas is the first mandatory step: understanding distributions, identifying missing values, detecting outliers, and discovering relationships between features. Skipping EDA almost always leads to poor model performance or subtle data leakage bugs.</p>
+    <div class="code-bar"><span class="lang-tag">python · numpy &amp; pandas</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+    <pre><code><span class="k">import</span> numpy <span class="k">as</span> np
+<span class="k">import</span> pandas <span class="k">as</span> pd
+<span class="k">from</span> sklearn.datasets <span class="k">import</span> load_breast_cancer
+
+data = load_breast_cancer()
+df = pd.DataFrame(data.data, columns=data.feature_names)
+df[<span class="s">'target'</span>] = data.target
+
+print(<span class="s">"Shape:"</span>, df.shape)
+print(<span class="s">"\nClass distribution:"</span>)
+print(df[<span class="s">'target'</span>].value_counts())
+print(<span class="s">"\nMissing values:"</span>, df.isnull().sum().sum())
+print(<span class="s">"\nFeature stats:"</span>)
+print(df.describe().round(<span class="num">2</span>).iloc[:, :<span class="num">4</span>])
+
+X = df.drop(<span class="s">'target'</span>, axis=<span class="num">1</span>).values
+y = df[<span class="s">'target'</span>].values
+print(<span class="s">f"\nX shape: {X.shape}, y shape: {y.shape}"</span>)
+print(<span class="s">f"Data type: {X.dtype}, Range: [{X.min():.3f}, {X.max():.3f}]"</span>)</code></pre>
+    <p>Key Pandas operations every ML engineer must know include <code>groupby</code> for aggregation, <code>merge</code>/<code>join</code> for combining datasets, <code>fillna</code> for imputing missing values, <code>get_dummies</code> for one-hot encoding, and <code>apply</code> for custom transformations. NumPy's <code>np.where</code>, <code>np.log1p</code>, and broadcasting enable fast feature transforms without loops.</p>
+    <div class="tip">
+      <p>💡 <strong>Performance tip:</strong> Use <code>df.memory_usage(deep=True)</code> to audit DataFrame memory. Downcasting numerical columns from <code>float64</code> to <code>float32</code> and encoding categoricals as <code>category</code> dtype can reduce memory usage by 50–75%, enabling larger datasets to fit in RAM.</p>
+    </div>
+  </section>
+
+  <section class="art-sec" id="supervised" aria-labelledby="h-supervised">
+    <p class="sec-lbl">03 — Supervised Learning</p>
+    <h2 class="art-h2" id="h-supervised">Supervised Learning — Classification &amp; Regression</h2>
+    <div class="div-bar"></div>
+    <p class="sub-tag">logistic regression · SVM · KNN · linear regression · decision trees</p>
+    <p>Supervised learning is the most widely deployed ML paradigm. A model learns from a training set of <code>(X, y)</code> pairs — inputs paired with known outputs — and generalizes to predict outputs for unseen inputs. The two main categories are <strong>classification</strong> (predicting discrete labels) and <strong>regression</strong> (predicting continuous values).</p>
+    <p>Scikit-learn's consistent API makes algorithm comparison straightforward: every estimator implements <code>.fit(X_train, y_train)</code> and <code>.predict(X_test)</code>, allowing you to swap algorithms with minimal code changes. This is by design — the right algorithm choice depends on data size, feature type, linearity, and interpretability requirements.</p>
+
+    <div class="code-bar"><span class="lang-tag">python · scikit-learn classification</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+    <pre><code><span class="k">from</span> sklearn.datasets <span class="k">import</span> load_breast_cancer
+<span class="k">from</span> sklearn.model_selection <span class="k">import</span> train_test_split
+<span class="k">from</span> sklearn.preprocessing <span class="k">import</span> StandardScaler
+<span class="k">from</span> sklearn.linear_model <span class="k">import</span> LogisticRegression
+<span class="k">from</span> sklearn.svm <span class="k">import</span> SVC
+<span class="k">from</span> sklearn.neighbors <span class="k">import</span> KNeighborsClassifier
+<span class="k">from</span> sklearn.metrics <span class="k">import</span> accuracy_score, classification_report
+
+X, y = load_breast_cancer(return_X_y=<span class="k">True</span>)
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=<span class="num">0.2</span>, random_state=<span class="num">42</span>, stratify=y
+)
+
+scaler = StandardScaler()
+X_train_sc = scaler.fit_transform(X_train)
+X_test_sc  = scaler.transform(X_test)
+
+models = {
+    <span class="s">'Logistic Regression'</span>: LogisticRegression(max_iter=<span class="num">1000</span>),
+    <span class="s">'SVM (RBF)'</span>:          SVC(kernel=<span class="s">'rbf'</span>, C=<span class="num">1.0</span>, probability=<span class="k">True</span>),
+    <span class="s">'KNN (k=5)'</span>:          KNeighborsClassifier(n_neighbors=<span class="num">5</span>),
+}
+
+<span class="k">for</span> name, model <span class="k">in</span> models.items():
+    model.fit(X_train_sc, y_train)
+    acc = accuracy_score(y_test, model.predict(X_test_sc))
+    print(<span class="s">f"{name:22s}  Accuracy: {acc:.4f}"</span>)</code></pre>
+
+    <h3>Classification vs Regression: Key Algorithms</h3>
+    <table class="compare-table" aria-label="ML Algorithm Comparison">
+      <thead>
+        <tr><th>Algorithm</th><th>Task</th><th>Strengths</th><th>Weaknesses</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Logistic Regression</td><td>Classification</td><td>Interpretable, fast, probabilistic output</td><td>Linear decision boundary only</td></tr>
+        <tr><td>Linear Regression</td><td>Regression</td><td>Simple, interpretable, fast</td><td>Assumes linearity, sensitive to outliers</td></tr>
+        <tr><td>SVM</td><td>Both</td><td>Effective in high dimensions, robust to outliers</td><td>Slow on large datasets, kernel choice matters</td></tr>
+        <tr><td>KNN</td><td>Both</td><td>No training, non-parametric, simple</td><td>Slow inference, sensitive to scale &amp; irrelevant features</td></tr>
+        <tr><td>Decision Tree</td><td>Both</td><td>Interpretable, handles mixed types</td><td>Prone to overfitting, unstable</td></tr>
+        <tr><td>Ridge / Lasso</td><td>Regression</td><td>Regularized, handles multicollinearity</td><td>Still assumes linearity</td></tr>
+      </tbody>
+    </table>
+    <div class="warning">
+      <p>⚠️ <strong>Data leakage warning:</strong> Always <code>fit</code> your scaler on training data only, then <code>transform</code> both train and test sets. Fitting on the full dataset leaks test statistics into training, producing optimistically biased evaluation results — a critical mistake in production systems.</p>
+    </div>
+  </section>
+
+  <div class="ad-slot" aria-label="Advertisement">
+    <p class="ad-label">Advertisement</p>
+    <ins class="adsbygoogle" style="display:block"
+      data-ad-client="ca-pub-4575646748966866"
+      data-ad-slot="4226674403"
+      data-ad-format="auto"
+      data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <section class="art-sec" id="unsupervised" aria-labelledby="h-unsupervised">
+    <p class="sec-lbl">04 — Unsupervised Learning</p>
+    <h2 class="art-h2" id="h-unsupervised">Unsupervised Learning — Clustering &amp; Dimensionality Reduction</h2>
+    <div class="div-bar"></div>
+    <p class="sub-tag">k-means · DBSCAN · PCA · t-SNE · UMAP</p>
+    <p>Unsupervised learning operates on data without labels. Its goals include discovering natural groupings (clustering), compressing high-dimensional data while preserving structure (dimensionality reduction), detecting anomalies, and learning generative models of data distributions. These techniques are essential for data exploration, pre-processing high-dimensional data before supervised learning, and recommendation systems.</p>
+
+    <div class="code-bar"><span class="lang-tag">python · clustering &amp; PCA</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+    <pre><code><span class="k">import</span> numpy <span class="k">as</span> np
+<span class="k">from</span> sklearn.datasets <span class="k">import</span> load_iris
+<span class="k">from</span> sklearn.cluster <span class="k">import</span> KMeans, DBSCAN
+<span class="k">from</span> sklearn.decomposition <span class="k">import</span> PCA
+<span class="k">from</span> sklearn.preprocessing <span class="k">import</span> StandardScaler
+<span class="k">from</span> sklearn.metrics <span class="k">import</span> silhouette_score
+
+X, y_true = load_iris(return_X_y=<span class="k">True</span>)
+X_sc = StandardScaler().fit_transform(X)
+
+pca = PCA(n_components=<span class="num">2</span>)
+X_2d = pca.fit_transform(X_sc)
+print(<span class="s">f"Explained variance: {pca.explained_variance_ratio_.sum():.3f}"</span>)
+
+kmeans = KMeans(n_clusters=<span class="num">3</span>, random_state=<span class="num">42</span>, n_init=<span class="num">10</span>)
+labels = kmeans.fit_predict(X_sc)
+sil = silhouette_score(X_sc, labels)
+print(<span class="s">f"KMeans silhouette score: {sil:.4f}"</span>)
+print(<span class="s">f"Cluster sizes: {np.bincount(labels)}"</span>)
+
+dbscan = DBSCAN(eps=<span class="num">0.5</span>, min_samples=<span class="num">5</span>)
+db_labels = dbscan.fit_predict(X_sc)
+n_clusters = len(set(db_labels)) - (<span class="num">1</span> <span class="k">if</span> -<span class="num">1</span> <span class="k">in</span> db_labels <span class="k">else</span> <span class="num">0</span>)
+n_noise = (db_labels == -<span class="num">1</span>).sum()
+print(<span class="s">f"DBSCAN: {n_clusters} clusters, {n_noise} noise points"</span>)</code></pre>
+
+    <p><strong>Choosing between clustering algorithms:</strong> K-Means assumes spherical clusters of similar size and requires specifying <code>k</code> in advance — use the elbow method or silhouette analysis to select it. DBSCAN discovers arbitrarily-shaped clusters and automatically identifies noise points, but requires tuning <code>eps</code> and <code>min_samples</code>. Hierarchical clustering builds a dendrogram that shows cluster relationships at every scale, excellent for biological and text data.</p>
+    <p><strong>Dimensionality reduction</strong> serves two distinct purposes. PCA (Principal Component Analysis) is a linear method that maximizes variance retention — ideal for preprocessing before supervised learning, as it removes correlated features and reduces overfitting. t-SNE and UMAP are non-linear methods designed for 2D/3D visualization of high-dimensional data, revealing cluster structure that PCA cannot show.</p>
+  </section>
+
+  <section class="art-sec" id="feature-eng" aria-labelledby="h-features">
+    <p class="sec-lbl">05 — Feature Engineering</p>
+    <h2 class="art-h2" id="h-features">Feature Engineering &amp; Selection</h2>
+    <div class="div-bar"></div>
+    <p class="sub-tag">encoding · scaling · interaction features · selection · imputation</p>
+    <p>Feature engineering is the craft of transforming raw data into representations that capture the signal a model needs. It is consistently the highest-leverage activity in applied ML — a domain expert who understands the data can create features that a model could never learn on its own. Andrew Ng famously described feature engineering as the key differentiator between junior and senior ML practitioners.</p>
+
+    <div class="code-bar"><span class="lang-tag">python · feature engineering</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+    <pre><code><span class="k">import</span> numpy <span class="k">as</span> np
+<span class="k">import</span> pandas <span class="k">as</span> pd
+<span class="k">from</span> sklearn.preprocessing <span class="k">import</span> (
+    StandardScaler, MinMaxScaler, RobustScaler,
+    LabelEncoder, OrdinalEncoder
+)
+<span class="k">from</span> sklearn.impute <span class="k">import</span> SimpleImputer, KNNImputer
+<span class="k">from</span> sklearn.feature_selection <span class="k">import</span> SelectKBest, f_classif, RFE
+<span class="k">from</span> sklearn.linear_model <span class="k">import</span> LogisticRegression
+
+np.random.seed(<span class="num">42</span>)
+df = pd.DataFrame({
+    <span class="s">'age'</span>:      np.random.randint(<span class="num">18</span>, <span class="num">70</span>, <span class="num">200</span>).astype(float),
+    <span class="s">'income'</span>:   np.random.exponential(<span class="num">50000</span>, <span class="num">200</span>),
+    <span class="s">'category'</span>: np.random.choice([<span class="s">'A'</span>,<span class="s">'B'</span>,<span class="s">'C'</span>], <span class="num">200</span>),
+    <span class="s">'score'</span>:    np.random.normal(<span class="num">0</span>, <span class="num">1</span>, <span class="num">200</span>),
+})
+df.loc[np.random.choice(<span class="num">200</span>, <span class="num">20</span>, replace=<span class="k">False</span>), <span class="s">'age'</span>] = np.nan
+df[<span class="s">'target'</span>] = (df[<span class="s">'income'</span>] > <span class="num">50000</span>).astype(int)
+
+df[<span class="s">'age'</span>].fillna(df[<span class="s">'age'</span>].median(), inplace=<span class="k">True</span>)
+df[<span class="s">'income_log'</span>] = np.log1p(df[<span class="s">'income'</span>])
+df[<span class="s">'age_group'</span>] = pd.cut(df[<span class="s">'age'</span>], bins=[<span class="num">18</span>,<span class="num">35</span>,<span class="num">50</span>,<span class="num">70</span>], labels=[<span class="s">'young'</span>,<span class="s">'mid'</span>,<span class="s">'senior'</span>])
+df[<span class="s">'age_income_interact'</span>] = df[<span class="s">'age'</span>] * df[<span class="s">'income_log'</span>]
+df = pd.get_dummies(df, columns=[<span class="s">'category'</span>, <span class="s">'age_group'</span>], drop_first=<span class="k">True</span>)
+
+print(<span class="s">"Engineered features:"</span>, list(df.columns))
+print(<span class="s">f"Shape after engineering: {df.shape}"</span>)</code></pre>
+
+    <h3>Scaling Methods: When to Use Each</h3>
+    <ul>
+      <li><strong>StandardScaler (Z-score):</strong> subtracts mean, divides by std. Best for SVM, Logistic Regression, PCA, and neural networks. Assumes roughly Gaussian distribution.</li>
+      <li><strong>MinMaxScaler:</strong> scales to [0, 1]. Good for algorithms sensitive to magnitude (KNN, neural networks). Sensitive to outliers.</li>
+      <li><strong>RobustScaler:</strong> uses median and IQR. Best when data has significant outliers — the scaler itself ignores them.</li>
+      <li><strong>Log / sqrt transform:</strong> apply to right-skewed features (income, transaction amounts) before any scaling. Reduces the effect of extreme values.</li>
+    </ul>
+    <p>Feature selection removes irrelevant or redundant features, improving model generalization and training speed. <code>SelectKBest</code> uses statistical tests (F-score, mutual information) to rank features. Recursive Feature Elimination (RFE) trains models iteratively, removing the least important feature each round. LASSO regression (L1 regularization) automatically sets irrelevant feature coefficients to zero, acting as a built-in selector.</p>
+  </section>
+
+  <div class="ad-slot" aria-label="Advertisement">
+    <p class="ad-label">Advertisement</p>
+    <ins class="adsbygoogle" style="display:block"
+      data-ad-client="ca-pub-4575646748966866"
+      data-ad-slot="4226674403"
+      data-ad-format="auto"
+      data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <section class="art-sec" id="evaluation" aria-labelledby="h-eval">
+    <p class="sec-lbl">06 — Model Evaluation</p>
+    <h2 class="art-h2" id="h-eval">Model Evaluation, Cross-Validation &amp; Metrics</h2>
+    <div class="div-bar"></div>
+    <p class="sub-tag">accuracy · precision · recall · F1 · AUC-ROC · k-fold · stratified CV</p>
+    <p>Evaluating a model on the same data it was trained on gives a wildly optimistic estimate of real-world performance. Proper evaluation requires held-out data the model has never seen. <strong>Cross-validation</strong> systematically rotates this held-out set across the full dataset, giving a statistically robust performance estimate without wasting data.</p>
+
+    <div class="code-bar"><span class="lang-tag">python · evaluation &amp; CV</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+    <pre><code><span class="k">from</span> sklearn.datasets <span class="k">import</span> load_breast_cancer
+<span class="k">from</span> sklearn.model_selection <span class="k">import</span> (
+    cross_val_score, StratifiedKFold, cross_validate
+)
+<span class="k">from</span> sklearn.ensemble <span class="k">import</span> RandomForestClassifier
+<span class="k">from</span> sklearn.metrics <span class="k">import</span> (
+    confusion_matrix, classification_report,
+    roc_auc_score, average_precision_score
+)
+<span class="k">from</span> sklearn.preprocessing <span class="k">import</span> StandardScaler
+<span class="k">from</span> sklearn.pipeline <span class="k">import</span> Pipeline
+<span class="k">import</span> numpy <span class="k">as</span> np
+
+X, y = load_breast_cancer(return_X_y=<span class="k">True</span>)
+
+pipe = Pipeline([
+    (<span class="s">'scaler'</span>, StandardScaler()),
+    (<span class="s">'clf'</span>,    RandomForestClassifier(n_estimators=<span class="num">100</span>, random_state=<span class="num">42</span>))
+])
+
+skf = StratifiedKFold(n_splits=<span class="num">5</span>, shuffle=<span class="k">True</span>, random_state=<span class="num">42</span>)
+cv_results = cross_validate(
+    pipe, X, y, cv=skf,
+    scoring=[<span class="s">'accuracy'</span>, <span class="s">'f1'</span>, <span class="s">'roc_auc'</span>],
+    return_train_score=<span class="k">True</span>
+)
+<span class="k">for</span> metric <span class="k">in</span> [<span class="s">'accuracy'</span>, <span class="s">'f1'</span>, <span class="s">'roc_auc'</span>]:
+    test_scores = cv_results[<span class="s">f'test_{metric}'</span>]
+    print(<span class="s">f"{metric:12s}  {test_scores.mean():.4f} ± {test_scores.std():.4f}"</span>)</code></pre>
+
+    <h3>Choosing the Right Metric</h3>
+    <p><strong>Accuracy</strong> is misleading on imbalanced datasets — a model that always predicts the majority class achieves 99% accuracy on a dataset with 1% positive cases, while being completely useless. Use these guidelines instead:</p>
+    <ul>
+      <li><strong>Precision</strong>: use when false positives are costly (spam detection — don't block legitimate emails).</li>
+      <li><strong>Recall</strong>: use when false negatives are costly (cancer diagnosis — don't miss a positive case).</li>
+      <li><strong>F1 Score</strong>: harmonic mean of precision and recall — balanced metric for imbalanced classification.</li>
+      <li><strong>AUC-ROC</strong>: measures discriminative ability across all classification thresholds. Best single metric for binary classification with class imbalance.</li>
+      <li><strong>RMSE / MAE</strong>: for regression. RMSE penalizes large errors heavily; MAE is more robust to outliers.</li>
+    </ul>
+  </section>
+
+  <section class="art-sec" id="ensembles" aria-labelledby="h-ensembles">
+    <p class="sec-lbl">07 — Ensemble Methods</p>
+    <h2 class="art-h2" id="h-ensembles">Ensemble Methods — Random Forest &amp; Gradient Boosting</h2>
+    <div class="div-bar"></div>
+    <p class="sub-tag">bagging · boosting · random forest · XGBoost · LightGBM · stacking</p>
+    <p>Ensemble methods combine multiple weak learners into a single strong learner. The two dominant paradigms are <strong>bagging</strong> (parallel training on random subsets, predictions averaged — reduces variance) and <strong>boosting</strong> (sequential training where each model corrects the previous one's errors — reduces bias). Both consistently outperform single models on structured/tabular data.</p>
+
+    <div class="code-bar"><span class="lang-tag">python · random forest &amp; xgboost</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+    <pre><code><span class="k">from</span> sklearn.datasets <span class="k">import</span> load_breast_cancer
+<span class="k">from</span> sklearn.model_selection <span class="k">import</span> train_test_split, cross_val_score
+<span class="k">from</span> sklearn.ensemble <span class="k">import</span> (
+    RandomForestClassifier, GradientBoostingClassifier,
+    VotingClassifier, StackingClassifier
+)
+<span class="k">from</span> sklearn.linear_model <span class="k">import</span> LogisticRegression
+<span class="k">from</span> sklearn.metrics <span class="k">import</span> roc_auc_score
+<span class="k">import</span> numpy <span class="k">as</span> np
+
+X, y = load_breast_cancer(return_X_y=<span class="k">True</span>)
+X_tr, X_te, y_tr, y_te = train_test_split(X, y, test_size=<span class="num">0.2</span>, stratify=y, random_state=<span class="num">42</span>)
+
+rf = RandomForestClassifier(
+    n_estimators=<span class="num">200</span>, max_depth=<span class="num">10</span>,
+    min_samples_leaf=<span class="num">2</span>, random_state=<span class="num">42</span>
+)
+rf.fit(X_tr, y_tr)
+rf_auc = roc_auc_score(y_te, rf.predict_proba(X_te)[:, <span class="num">1</span>])
+print(<span class="s">f"Random Forest AUC: {rf_auc:.4f}"</span>)
+
+feat_imp = pd.Series(rf.feature_importances_,
+    index=load_breast_cancer().feature_names).nlargest(<span class="num">5</span>)
+print(<span class="s">"\nTop 5 features:"</span>)
+<span class="k">for</span> feat, imp <span class="k">in</span> feat_imp.items():
+    print(<span class="s">f"  {feat:30s} {imp:.4f}"</span>)
+
+gb = GradientBoostingClassifier(
+    n_estimators=<span class="num">200</span>, learning_rate=<span class="num">0.05</span>,
+    max_depth=<span class="num">4</span>, subsample=<span class="num">0.8</span>, random_state=<span class="num">42</span>
+)
+gb.fit(X_tr, y_tr)
+gb_auc = roc_auc_score(y_te, gb.predict_proba(X_te)[:, <span class="num">1</span>])
+print(<span class="s">f"\nGradient Boosting AUC: {gb_auc:.4f}"</span>)</code></pre>
+
+    <h3>Random Forest vs Gradient Boosting</h3>
+    <table class="compare-table" aria-label="Random Forest vs Gradient Boosting">
+      <thead><tr><th>Property</th><th>Random Forest</th><th>Gradient Boosting (XGBoost)</th></tr></thead>
+      <tbody>
+        <tr><td>Training strategy</td><td>Parallel (bagging)</td><td>Sequential (boosting)</td></tr>
+        <tr><td>Overfitting risk</td><td>Low (self-regularizing)</td><td>Moderate (requires tuning)</td></tr>
+        <tr><td>Training speed</td><td>Fast (parallelizable)</td><td>Slower</td></tr>
+        <tr><td>Hyperparameter sensitivity</td><td>Low</td><td>High</td></tr>
+        <tr><td>Performance on tabular data</td><td>Very good baseline</td><td>State-of-the-art</td></tr>
+        <tr><td>Feature importance</td><td>Yes (Gini/permutation)</td><td>Yes (gain/weight/cover)</td></tr>
+        <tr><td>Missing values</td><td>Requires imputation</td><td>Native handling (XGBoost)</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <div class="ad-slot" aria-label="Advertisement">
+    <p class="ad-label">Advertisement</p>
+    <ins class="adsbygoogle" style="display:block"
+      data-ad-client="ca-pub-4575646748966866"
+      data-ad-slot="4226674403"
+      data-ad-format="auto"
+      data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <section class="art-sec" id="neural-nets" aria-labelledby="h-nn">
+    <p class="sec-lbl">08 — Deep Learning</p>
+    <h2 class="art-h2" id="h-nn">Neural Networks &amp; Deep Learning Fundamentals</h2>
+    <div class="div-bar"></div>
+    <p class="sub-tag">perceptron · backpropagation · activation functions · CNN · RNN · transformers</p>
+    <p>Neural networks are universal function approximators — given enough capacity and data, they can learn any input-output mapping. A feedforward neural network (multilayer perceptron) consists of layers of neurons where each neuron computes a weighted sum of its inputs, applies an <strong>activation function</strong> (introducing non-linearity), and passes the result forward.</p>
+    <p><strong>Backpropagation</strong> is the algorithm that makes learning possible: it computes the gradient of the loss function with respect to every weight in the network using the chain rule of calculus, then an optimizer (SGD, Adam, AdamW) uses those gradients to update weights. Modern deep learning is primarily about architectures that scale well: CNNs for vision, RNNs/LSTMs for sequences, and Transformers for NLP and increasingly everything else.</p>
+
+    <div class="code-bar"><span class="lang-tag">python · neural network (scikit-learn)</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+    <pre><code><span class="k">from</span> sklearn.neural_network <span class="k">import</span> MLPClassifier
+<span class="k">from</span> sklearn.datasets <span class="k">import</span> load_breast_cancer
+<span class="k">from</span> sklearn.model_selection <span class="k">import</span> train_test_split
+<span class="k">from</span> sklearn.preprocessing <span class="k">import</span> StandardScaler
+<span class="k">from</span> sklearn.metrics <span class="k">import</span> accuracy_score, roc_auc_score
+<span class="k">import</span> numpy <span class="k">as</span> np
+
+X, y = load_breast_cancer(return_X_y=<span class="k">True</span>)
+X_tr, X_te, y_tr, y_te = train_test_split(X, y, test_size=<span class="num">0.2</span>, stratify=y, random_state=<span class="num">42</span>)
+
+sc = StandardScaler()
+X_tr_sc = sc.fit_transform(X_tr)
+X_te_sc  = sc.transform(X_te)
+
+mlp = MLPClassifier(
+    hidden_layer_sizes=(<span class="num">128</span>, <span class="num">64</span>, <span class="num">32</span>),
+    activation=<span class="s">'relu'</span>,
+    solver=<span class="s">'adam'</span>,
+    alpha=<span class="num">0.001</span>,
+    learning_rate_init=<span class="num">0.001</span>,
+    max_iter=<span class="num">500</span>,
+    early_stopping=<span class="k">True</span>,
+    validation_fraction=<span class="num">0.15</span>,
+    random_state=<span class="num">42</span>
+)
+mlp.fit(X_tr_sc, y_tr)
+
+acc = accuracy_score(y_te, mlp.predict(X_te_sc))
+auc = roc_auc_score(y_te, mlp.predict_proba(X_te_sc)[:, <span class="num">1</span>])
+print(<span class="s">f"MLP Accuracy: {acc:.4f}")
+print(f"MLP AUC-ROC:  {auc:.4f}"</span>)
+print(<span class="s">f"Best val loss: {mlp.best_loss_:.6f}"</span>)
+print(<span class="s">f"Training epochs: {mlp.n_iter_}"</span>)</code></pre>
+
+    <h3>Activation Functions</h3>
+    <ul>
+      <li><strong>ReLU (Rectified Linear Unit):</strong> <code>max(0, x)</code> — the default choice. Fast, avoids vanishing gradients in hidden layers, but can "die" (neurons stuck at 0).</li>
+      <li><strong>Sigmoid:</strong> maps to (0, 1) — only for binary classification output neurons. Suffers from vanishing gradients in deep networks.</li>
+      <li><strong>Softmax:</strong> multi-class classification output — converts logits to a probability distribution summing to 1.</li>
+      <li><strong>GELU / Swish:</strong> modern activations used in Transformers (BERT, GPT). Smooth approximations of ReLU with better gradient flow.</li>
+      <li><strong>Tanh:</strong> maps to (-1, 1) — historically used in RNNs; zero-centered, which helps gradient flow but still has vanishing gradient issues.</li>
+    </ul>
+    <div class="insight">
+      <p>🧠 <strong>Architecture insight:</strong> The Transformer architecture (introduced in "Attention Is All You Need," 2017) has dominated NLP and is rapidly replacing CNNs in vision (Vision Transformers) and RNNs in time-series. Understanding self-attention mechanisms is now essential for anyone working in modern ML.</p>
+    </div>
+  </section>
+
+  <section class="art-sec" id="pipelines" aria-labelledby="h-pipeline">
+    <p class="sec-lbl">09 — Production ML</p>
+    <h2 class="art-h2" id="h-pipeline">ML Pipelines, Hyperparameter Tuning &amp; Deployment</h2>
+    <div class="div-bar"></div>
+    <p class="sub-tag">Pipeline · GridSearchCV · RandomizedSearchCV · MLflow · ONNX · FastAPI serving</p>
+    <p>A scikit-learn <code>Pipeline</code> chains preprocessing steps and a model into a single object that behaves like an estimator. This prevents data leakage in cross-validation (the scaler is fit only on training folds), makes deployment trivial (one object to serialize), and enables clean hyperparameter tuning across both preprocessing and model parameters simultaneously.</p>
+
+    <div class="code-bar"><span class="lang-tag">python · pipeline &amp; hyperparameter tuning</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+    <pre><code><span class="k">from</span> sklearn.pipeline <span class="k">import</span> Pipeline
+<span class="k">from</span> sklearn.preprocessing <span class="k">import</span> StandardScaler
+<span class="k">from</span> sklearn.ensemble <span class="k">import</span> RandomForestClassifier
+<span class="k">from</span> sklearn.model_selection <span class="k">import</span> RandomizedSearchCV, StratifiedKFold
+<span class="k">from</span> sklearn.datasets <span class="k">import</span> load_breast_cancer
+<span class="k">import</span> numpy <span class="k">as</span> np
+<span class="k">import</span> joblib
+
+X, y = load_breast_cancer(return_X_y=<span class="k">True</span>)
+
+pipe = Pipeline([
+    (<span class="s">'scaler'</span>, StandardScaler()),
+    (<span class="s">'clf'</span>, RandomForestClassifier(random_state=<span class="num">42</span>))
+])
+
+param_dist = {
+    <span class="s">'clf__n_estimators'</span>:      [<span class="num">100</span>, <span class="num">200</span>, <span class="num">300</span>],
+    <span class="s">'clf__max_depth'</span>:         [<span class="k">None</span>, <span class="num">5</span>, <span class="num">10</span>, <span class="num">15</span>],
+    <span class="s">'clf__min_samples_split'</span>: [<span class="num">2</span>, <span class="num">5</span>, <span class="num">10</span>],
+    <span class="s">'clf__max_features'</span>:      [<span class="s">'sqrt'</span>, <span class="s">'log2'</span>, <span class="num">0.5</span>],
+    <span class="s">'clf__min_samples_leaf'</span>:  [<span class="num">1</span>, <span class="num">2</span>, <span class="num">4</span>],
+}
+
+cv = StratifiedKFold(n_splits=<span class="num">5</span>, shuffle=<span class="k">True</span>, random_state=<span class="num">42</span>)
+search = RandomizedSearchCV(
+    pipe, param_dist, n_iter=<span class="num">30</span>, cv=cv,
+    scoring=<span class="s">'roc_auc'</span>, n_jobs=-<span class="num">1</span>, random_state=<span class="num">42</span>
+)
+search.fit(X, y)
+print(<span class="s">f"Best AUC: {search.best_score_:.4f}"</span>)
+print(<span class="s">f"Best params: {search.best_params_}"</span>)
+
+joblib.dump(search.best_estimator_, <span class="s">'model.pkl'</span>)
+loaded_model = joblib.load(<span class="s">'model.pkl'</span>)
+print(<span class="s">f"Loaded model prediction: {loaded_model.predict(X[:<span class="num">3</span>])}"</span>)</code></pre>
+
+    <h3>ML Deployment Strategies</h3>
+    <ul>
+      <li><strong>Batch prediction:</strong> run model on stored data at scheduled intervals (daily/hourly). Simple, scalable, no latency requirements. Use <code>joblib</code> or <code>pickle</code> for model serialization.</li>
+      <li><strong>Real-time REST API:</strong> serve predictions via FastAPI or Flask. Load the model at startup, expose a <code>/predict</code> endpoint. Containerize with Docker for reproducibility.</li>
+      <li><strong>MLflow:</strong> open-source MLOps platform for experiment tracking, model versioning, and deployment. Track every training run's metrics, parameters, and artifacts automatically.</li>
+      <li><strong>ONNX:</strong> export models to the Open Neural Network Exchange format for cross-platform inference — run PyTorch/TensorFlow models in C++, Java, or edge devices.</li>
+      <li><strong>Model monitoring:</strong> production models degrade over time as data distributions shift (concept drift). Monitor prediction distributions, feature statistics, and business KPIs continuously.</li>
+    </ul>
+    <div class="tip">
+      <p>💡 <strong>Production tip:</strong> Use <code>RandomizedSearchCV</code> over <code>GridSearchCV</code> for large search spaces — randomly sampling 30–50 configurations finds near-optimal solutions in a fraction of the time that exhaustive grid search requires. With 50+ hyperparameter combinations, randomized search nearly always wins.</p>
+    </div>
+  </section>
+
+  <section class="art-sec" id="faq" aria-labelledby="h-faq" style="max-width:860px">
+    <p class="sec-lbl">FAQ</p>
+    <h2 class="art-h2" id="h-faq">Common ML Questions Answered</h2>
+    <div class="div-bar"></div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+          What Python libraries are essential for machine learning?
+          <span class="faq-ico">+</span>
+        </button>
+        <div class="faq-ans" role="region">
+          <p>The core stack: NumPy for numerical arrays, Pandas for data manipulation, scikit-learn for classical ML algorithms and preprocessing, Matplotlib/Seaborn for visualization, and TensorFlow or PyTorch for deep learning. XGBoost and LightGBM are essential additions for tabular data competitions and production systems. Install all at once: <code>pip install numpy pandas scikit-learn matplotlib seaborn xgboost lightgbm</code>.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+          What is the difference between supervised and unsupervised learning?
+          <span class="faq-ico">+</span>
+        </button>
+        <div class="faq-ans" role="region">
+          <p>Supervised learning trains on labeled (input, output) pairs to predict labels for new inputs — classification and regression fall here. Unsupervised learning discovers hidden structure in unlabeled data — clustering, dimensionality reduction, anomaly detection, and generative modeling. Semi-supervised learning combines both: a small labeled set guides learning from a large unlabeled set, which is increasingly common in real-world settings where labeling is expensive.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+          How do you prevent overfitting in machine learning models?
+          <span class="faq-ico">+</span>
+        </button>
+        <div class="faq-ans" role="region">
+          <p>Core techniques: cross-validation for reliable evaluation, L1/L2 regularization (Ridge, Lasso) to penalize large weights, dropout in neural networks, early stopping when validation loss stops improving, ensemble methods that average multiple models, reducing model complexity (fewer layers/trees), and gathering more training data. For neural networks, data augmentation (flipping, cropping, noise injection) is one of the most effective overfitting remedies.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+          What is feature engineering and why does it matter so much?
+          <span class="faq-ico">+</span>
+        </button>
+        <div class="faq-ans" role="region">
+          <p>Feature engineering is the process of using domain knowledge to transform raw data into features that better represent underlying patterns. It includes encoding categoricals, creating interaction features, log-transforming skewed variables, handling missing values, and extracting meaningful aggregates. It matters because models can only learn from the information present in their inputs — a human expert who understands the domain can create features that capture causal relationships a model could never infer from raw data alone.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+          When should I use Random Forest vs Gradient Boosting?
+          <span class="faq-ico">+</span>
+        </button>
+        <div class="faq-ans" role="region">
+          <p>Use <strong>Random Forest</strong> as a fast, robust baseline — it requires minimal tuning, trains in parallel, and rarely overfits. Use <strong>Gradient Boosting (XGBoost, LightGBM)</strong> when you need maximum accuracy on tabular data and are willing to tune hyperparameters. In practice, LightGBM with a randomized hyperparameter search outperforms Random Forest on most structured datasets. For very small datasets (&lt;1000 samples), simpler models like Logistic Regression or Ridge often generalize better than both.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+          Do I need a GPU to learn machine learning?
+          <span class="faq-ico">+</span>
+        </button>
+        <div class="faq-ans" role="region">
+          <p>No — classical ML (scikit-learn, XGBoost) runs efficiently on CPU for most datasets. You only need a GPU for deep learning training on large datasets (images, text, audio) where training times on CPU become impractical. Google Colab provides free GPU access, and cloud providers (AWS, GCP, Azure) offer GPU instances on demand. Focus on classical ML fundamentals first; GPUs become relevant once you progress to deep learning with PyTorch or TensorFlow.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="share-box" aria-label="Share this article">
+    <p class="sec-lbl2">Share This Article</p>
+    <div class="share-btns">
+      <button class="share-btn fb" onclick="genCaption('facebook')">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        Facebook
+      </button>
+      <button class="share-btn li" onclick="genCaption('linkedin')">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </button>
+      <button class="share-btn x" onclick="genCaption('x')">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.742l7.732-8.859L2.266 2.25H8.08l4.26 5.637zM17.083 20.75h1.833L7.084 4.126H5.117z"/></svg>
+        X (Twitter)
+      </button>
+    </div>
+    <div class="caption-box" id="captionBox">Click a platform above to generate an AI-crafted caption for that network.</div>
+    <div class="cap-actions">
+      <button class="btn-sm pri" id="copyCapBtn" onclick="copyCap()" style="display:none">📋 Copy</button>
+      <button class="btn-sm" id="shareOpenBtn" onclick="openShareUrl()" style="display:none">↗ Open &amp; Share</button>
+      <button class="btn-sm" id="regenBtn" onclick="regenCap()" style="display:none">🔄 Regenerate</button>
+      <span class="ai-badge" id="aiBadge" style="display:none">✨ AI-Generated</span>
+    </div>
+  </div>
+
+  <div class="cmt-wrap" aria-label="Comments section">
+    <div class="cmt-hdr">
+      <div>
+        <p class="sec-lbl2" style="margin:0 0 .2rem">Community</p>
+        <h2 class="art-h2" style="border:none;padding:0;margin:0;font-size:.9rem">Comments</h2>
+      </div>
+      <span class="cmt-badge" id="cmtCount">0 comments</span>
+    </div>
+    <div class="cmt-form">
+      <div class="cmt-form-row">
+        <input type="text" id="cmtName" placeholder="Your name" maxlength="40" aria-label="Name">
+        <input type="email" id="cmtEmail" placeholder="Email (private)" maxlength="80" aria-label="Email">
+      </div>
+      <textarea id="cmtText" placeholder="Share your thoughts on machine learning, questions about the code, or your own ML experiences…" maxlength="700" aria-label="Comment"></textarea>
+      <div class="cmt-actions">
+        <button class="btn-p" onclick="postComment()" style="font-size:.75rem;padding:.55rem 1.35rem">Post Comment</button>
+        <span class="cmt-msg" id="cmtMsg"></span>
+      </div>
+    </div>
+    <hr class="cdiv">
+    <div class="cmt-list" id="cmtList">
+      <div class="no-cmt" id="noCmt">Be the first to comment! 👋</div>
+    </div>
+  </div>
+
+  <section id="subscribe" aria-labelledby="h-sub">
+    <div class="sub-wrap">
+      <h2 id="h-sub">Stay in the Loop</h2>
+      <div style="width:32px;height:2px;background:var(--emerald);margin:.6rem auto 1rem;border-radius:1px"></div>
+      <p class="sub-desc">Get new ML tutorials, Python guides, and AI/data science deep-dives delivered to your inbox.</p>
+      <div class="sub-tags">
+        <input type="checkbox" class="sub-chk" id="t1" checked><label class="sub-lbl" for="t1">🤖 Machine Learning</label>
+        <input type="checkbox" class="sub-chk" id="t2" checked><label class="sub-lbl" for="t2">📊 Data Science</label>
+        <input type="checkbox" class="sub-chk" id="t3"><label class="sub-lbl" for="t3">🧠 Deep Learning</label>
+        <input type="checkbox" class="sub-chk" id="t4"><label class="sub-lbl" for="t4">🐍 Python</label>
+        <input type="checkbox" class="sub-chk" id="t5"><label class="sub-lbl" for="t5">🤗 NLP / LLMs</label>
+        <input type="checkbox" class="sub-chk" id="t6"><label class="sub-lbl" for="t6">📈 MLOps</label>
+      </div>
+      <div class="sub-grid">
+        <input type="text" id="subName" placeholder="First name" autocomplete="given-name" aria-label="First name">
+        <input type="email" id="subEmail" placeholder="your@email.com" autocomplete="email" aria-label="Email">
+      </div>
+      <div style="text-align:center">
+        <button class="btn-p" onclick="subscribe()" type="button" id="subBtn">Subscribe Free →</button>
+      </div>
+      <div class="perks">
+        <span class="perk">No spam</span>
+        <span class="perk">Free forever</span>
+        <span class="perk">Unsubscribe anytime</span>
+      </div>
+      <p class="snote">Join readers mastering Python, ML &amp; AI.</p>
+      <p id="subMsg" class="subMsg" aria-live="polite"></p>
+    </div>
+  </section>
+
+</div>
+
+<footer role="contentinfo">
+  <div class="fg">
+    <div class="fbrand">
+      <a href="./index.html" class="logo" aria-label="Valleys and Bytes Home">
+        <span aria-hidden="true">💻</span>VALLEYS <span class="amp">&amp;</span> <span class="w2">BYTES</span>
+      </a>
+      <p>Deep, accessible programming education covering Python, OOP, web development, ML, AI, and data science. Built with thorough research and precision.</p>
+      <div class="ftags">
+        <span class="ftag">Python</span>
+        <span class="ftag">Machine Learning</span>
+        <span class="ftag">Scikit-learn</span>
+        <span class="ftag">Deep Learning</span>
+        <span class="ftag">Data Science</span>
+        <span class="ftag">MLOps</span>
+      </div>
+    </div>
+    <div class="fcol">
+      <h4>Learn</h4>
+      <div class="fcol-links">
+        <a href="./python-tutorials.html">🐍 Python Tutorials</a>
+        <a href="./python-fundamentals.html">💻 Fundamentals</a>
+        <a href="./data-structure.html">📚 Data Structures</a>
+        <a href="./web-development.html">🌐 Web Development</a>
+        <a href="./machine-learning.html">🤖 Machine Learning</a>
+      </div>
+    </div>
+    <div class="fcol">
+      <h4>Legal</h4>
+      <div class="fcol-links">
+        <a href="./oop-privacy.html">🔏 Privacy Policy</a>
+        <a href="./oop-terms.html">📜 Terms of Service</a>
+        <a href="./oop-cookie.html">🍪 Cookie Policy</a>
+        <a href="./oop-contact.html">✉️ Contact</a>
+        <a href="./oop-sitemap.html">🗺️ Sitemap</a>
+      </div>
+    </div>
+  </div>
+  <div class="fbot">
+    <p class="fcopy">© 2026 VALLEYS &amp; BYTES — Machine Learning with Python Guide · Glenn Junsay Pansensoy · All rights reserved.</p>
+  </div>
+</footer>
+
+<button id="btt" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const prog = document.getElementById('prog');
+  const btt  = document.getElementById('btt');
+  window.addEventListener('scroll', () => {
+    const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100;
+    if (prog) prog.style.width = pct + '%';
+    if (btt)  btt.classList.toggle('vis', window.scrollY > 400);
+  }, { passive: true });
+
+  const ham     = document.getElementById('ham');
+  const drawer  = document.getElementById('drawer');
+  const overlay = document.getElementById('overlay');
+  if (ham && drawer && overlay) {
+    const toggle = open => {
+      drawer.classList.toggle('open', open);
+      overlay.classList.toggle('open', open);
+      ham.classList.toggle('open', open);
+      ham.setAttribute('aria-expanded', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    };
+    ham.addEventListener('click', () => toggle(!drawer.classList.contains('open')));
+    overlay.addEventListener('click', () => toggle(false));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') toggle(false); });
+    drawer.querySelectorAll('a').forEach(l => l.addEventListener('click', () => toggle(false)));
+  }
+  initComments();
+});
+
+function toggleFaq(btn) {
+  const item   = btn.closest('.faq-item');
+  const ans    = item.querySelector('.faq-ans');
+  const icon   = btn.querySelector('.faq-ico');
+  const isOpen = item.classList.toggle('open');
+  ans.style.maxHeight = isOpen ? ans.scrollHeight + 'px' : '0';
+  icon.textContent    = isOpen ? '−' : '+';
+  btn.setAttribute('aria-expanded', isOpen);
+}
+
+function copyCode(btn) {
+  const pre = btn.closest('.code-bar').nextElementSibling;
+  const text = pre ? pre.textContent : '';
+  navigator.clipboard.writeText(text).then(() => {
+    const orig = btn.textContent;
+    btn.textContent = 'copied!';
+    setTimeout(() => btn.textContent = orig, 2000);
+  });
+}
+
+function showMsg(el, text, color) {
+  if (!el) return;
+  el.textContent = text;
+  el.style.color   = color || 'var(--emerald)';
+  el.style.opacity = '1';
+  setTimeout(() => el.style.opacity = '0', 5000);
+}
+
+function subscribe() {
+  const email = document.getElementById('subEmail').value.trim();
+  const name  = (document.getElementById('subName') || { value: '' }).value.trim();
+  const msg   = document.getElementById('subMsg');
+  const btn   = document.getElementById('subBtn');
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    showMsg(msg, '✗ Please enter a valid email address.', '#ff7b72');
+    return;
+  }
+  const interests = [];
+  document.querySelectorAll('.sub-chk:checked').forEach(cb => {
+    interests.push(cb.nextElementSibling.textContent.trim());
+  });
+  if (btn) { btn.disabled = true; btn.textContent = 'Subscribing…'; }
+  setTimeout(() => {
+    const subs = JSON.parse(localStorage.getItem('vb_subs_ml') || '[]');
+    subs.push({ email, name, interests, date: new Date().toISOString() });
+    localStorage.setItem('vb_subs_ml', JSON.stringify(subs));
+    if (btn) {
+      btn.disabled = false;
+      btn.textContent = '✓ Subscribed!';
+      btn.style.background = 'linear-gradient(135deg,#1a5c2a,#28a745)';
+    }
+    showMsg(msg, `✓ Welcome${name ? ', ' + name : ''}! Check your inbox.`, '#3fb950');
+    document.getElementById('subEmail').value = '';
+    if (document.getElementById('subName')) document.getElementById('subName').value = '';
+  }, 900);
+}
+
+const PAGE_URL   = 'https://code-sense.pansensoyglenn.workers.dev/machine-learning.html';
+const PAGE_TITLE = 'Machine Learning with Python: Complete Guide 2026 — Scikit-learn, NumPy & Deep Learning | Valleys & Bytes';
+let curPlatform  = '';
+let curCaption   = '';
+
+const platformGuide = {
+  facebook: 'casual, engaging, curiosity-sparking tone. 2-3 sentences, 1-2 emojis, end with a question that invites discussion. No hashtags.',
+  linkedin:  'professional, data-science-focused tone. 3-4 sentences highlighting scikit-learn, feature engineering, cross-validation, and neural networks. Mention the runnable code and deployment section. End with 4-5 relevant hashtags like #MachineLearning #Python #DataScience.',
+  x:         'punchy hook under 240 characters including the URL. Developer/ML community tone. 2-3 hashtags like #ML #Python #DataScience.'
+};
+
+async function genCaption(platform) {
+  curPlatform = platform;
+  const box      = document.getElementById('captionBox');
+  const copyBtn  = document.getElementById('copyCapBtn');
+  const openBtn  = document.getElementById('shareOpenBtn');
+  const regenBtn = document.getElementById('regenBtn');
+  const badge    = document.getElementById('aiBadge');
+  box.className = 'caption-box loading';
+  box.textContent = 'Generating caption…';
+  [copyBtn, openBtn, regenBtn, badge].forEach(el => el && (el.style.display = 'none'));
+  try {
+    const resp = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        messages: [{
+          role: 'user',
+          content: `You are a social media copywriter for a Python programming education site. Write a ${platform.toUpperCase()} post sharing this machine learning tutorial.
+
+Title: ${PAGE_TITLE}
+URL: ${PAGE_URL}
+Topics: Machine learning fundamentals, NumPy/Pandas for ML, supervised learning (scikit-learn, SVM, Logistic Regression), unsupervised learning (K-Means, PCA), feature engineering, cross-validation, Random Forest, Gradient Boosting/XGBoost, neural networks, ML pipelines, hyperparameter tuning, model deployment.
+Author: Glenn Junsay Pansensoy — Valleys & Bytes
+
+Platform guidelines: ${platformGuide[platform]}
+
+Write ONLY the post text, ready to copy-paste. Include the URL naturally. No quotes around output.`
+        }]
+      })
+    });
+    const data = await resp.json();
+    curCaption = data.content.map(b => b.text || '').join('').trim();
+    box.className = 'caption-box';
+    box.textContent = curCaption;
+    [copyBtn, openBtn, regenBtn, badge].forEach(el => el && (el.style.display = 'inline-flex'));
+  } catch (e) {
+    box.className = 'caption-box';
+    box.textContent = 'Could not generate caption — please check your connection and try again.';
+  }
+}
+
+function copyCap() {
+  if (!curCaption) return;
+  navigator.clipboard.writeText(curCaption).then(() => {
+    const btn = document.getElementById('copyCapBtn');
+    if (!btn) return;
+    const orig = btn.textContent;
+    btn.textContent = '✓ Copied!';
+    setTimeout(() => btn.textContent = orig, 2000);
+  });
+}
+
+function openShareUrl() {
+  const urls = {
+    facebook: 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(PAGE_URL),
+    linkedin:  'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(PAGE_URL),
+    x:         'https://twitter.com/intent/tweet?url=' + encodeURIComponent(PAGE_URL) + '&text=' + encodeURIComponent(curCaption.replace(PAGE_URL, '').trim())
+  };
+  if (urls[curPlatform]) window.open(urls[curPlatform], '_blank', 'width=600,height=500');
+}
+
+function regenCap() { if (curPlatform) genCaption(curPlatform); }
+
+const CMT_KEY  = 'vb_comments_ml';
+const LIKE_KEY = 'vb_likes_ml';
+function getCmts()      { return JSON.parse(localStorage.getItem(CMT_KEY)  || '[]'); }
+function saveCmts(a)    { localStorage.setItem(CMT_KEY, JSON.stringify(a)); }
+function getLikes()     { return JSON.parse(localStorage.getItem(LIKE_KEY) || '{}'); }
+function saveLikes(o)   { localStorage.setItem(LIKE_KEY, JSON.stringify(o)); }
+
+function timeAgo(iso) {
+  const s = (Date.now() - new Date(iso)) / 1000;
+  if (s < 60)    return 'just now';
+  if (s < 3600)  return Math.floor(s / 60)   + 'm ago';
+  if (s < 86400) return Math.floor(s / 3600)  + 'h ago';
+  return Math.floor(s / 86400) + 'd ago';
+}
+
+function escH(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function renderCmts() {
+  const list    = document.getElementById('cmtList');
+  const countEl = document.getElementById('cmtCount');
+  const cmts    = getCmts();
+  const likes   = getLikes();
+  if (countEl) countEl.textContent = cmts.length + (cmts.length === 1 ? ' comment' : ' comments');
+  if (!list) return;
+  if (cmts.length === 0) {
+    list.innerHTML = '<div class="no-cmt">Be the first to comment! 👋</div>';
+    return;
+  }
+  list.innerHTML = cmts.slice().reverse().map(c => {
+    const init  = c.name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
+    const liked = !!likes[c.id];
+    return `<div class="cmt-item">
+      <div class="cmt-meta">
+        <div class="cmt-av">${init}</div>
+        <span class="cmt-name">${escH(c.name)}</span>
+        <span class="cmt-date">${timeAgo(c.date)}</span>
+      </div>
+      <div class="cmt-body">${escH(c.text)}</div>
+      <div>
+        <button class="cmt-like ${liked ? 'active' : ''}" onclick="likeCmt('${c.id}')">
+          ${liked ? '❤️' : '🤍'} ${c.likes + (liked ? 1 : 0)}
+        </button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function likeCmt(id) {
+  const likes = getLikes(); likes[id] = !likes[id]; saveLikes(likes); renderCmts();
+}
+
+function postComment() {
+  const name = document.getElementById('cmtName').value.trim();
+  const text = document.getElementById('cmtText').value.trim();
+  const msg  = document.getElementById('cmtMsg');
+  if (!name)               { showMsg(msg, '✗ Name is required.', '#ff7b72'); return; }
+  if (!text || text.length < 3) { showMsg(msg, '✗ Comment is too short.', '#ff7b72'); return; }
+  const cmts = getCmts();
+  cmts.push({
+    id:   Date.now().toString(36) + Math.random().toString(36).slice(2, 5),
+    name, text, likes: 0, date: new Date().toISOString()
+  });
+  saveCmts(cmts);
+  document.getElementById('cmtName').value = '';
+  document.getElementById('cmtText').value = '';
+  renderCmts();
+  showMsg(msg, '✓ Comment posted!', '#3fb950');
+}
+
+function initComments() {
+  if (getCmts().length === 0) {
+    saveCmts([
+      { id: 's1', name: 'Sarah Kim',      text: 'The data leakage warning in the supervised learning section saved me from a critical mistake I had in production. Always fit scalers on train only — I wish more tutorials emphasized this as clearly.', likes: 31, date: new Date(Date.now() - 259200000).toISOString() },
+      { id: 's2', name: 'Raj Mehta',      text: 'The comparison table between Random Forest and Gradient Boosting is exactly what I needed. I always defaulted to RF but now I understand when to invest the extra tuning time in XGBoost.', likes: 19, date: new Date(Date.now() - 43200000).toISOString() },
+      { id: 's3', name: 'Ana Lisowski',   text: 'The Pipeline + RandomizedSearchCV example at the end is production-grade. Most tutorials stop at fitting a single model. Great to see model serialization with joblib too — that completes the full workflow.', likes: 44, date: new Date(Date.now() - 7200000).toISOString() }
+    ]);
+  }
+  renderCmts();
+}
+</script>
+
+</body>
+</html>
