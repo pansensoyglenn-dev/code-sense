@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chronology of algorithms · complete history from clay tablets to AI</title>
+  <meta name="description" content="Explore the definitive timeline of algorithms: Babylonian root extraction, Euclid, Turing, PageRank, Transformers. Ancient to foundation models – every step.">
+  <meta name="keywords" content="algorithm history, timeline of algorithms, Euclid algorithm, Turing machine, PageRank, Transformer, deep learning, chronological, Ada Lovelace, Knuth, AI chronology">
+  <meta name="author" content="Glenn Junsay Pansensoy">
+  <link rel="canonical" href="https://code-sense.pansensoyglenn.workers.dev/algorithm.html">
+  <meta property="og:title" content="Chronology of algorithms – full historical timeline">
+  <meta property="og:description" content="From Babylonian clay tablets to GPT-4: the definitive, strictly chronological guide to algorithms that shaped our world.">
+  <meta property="og:url" content="https://code-sense.pansensoyglenn.workers.dev/algorithm.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="code-sense.pansensoyglenn.workers.dev">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Chronology of algorithms">
+  <meta name="twitter:description" content="The complete algorithm timeline – ancient methods to neural networks.">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    :root {
+      --bg: #0B121C;
+      --panel: #0F1C2F;
+      --card: #132337;
+      --border: #1F4060;
+      --blue: #4B8BBE;
+      --gold: #FFD43B;
+      --text: #E2E8F0;
+      --soft: #CBD5E1;
+    }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+      padding: 0;
+    }
+    .container {
+      width: 100%;
+      max-width: none;
+      margin: 0 auto;
+      background: transparent;
+      backdrop-filter: none;
+      border: none;
+      border-radius: 0;
+      padding: 2rem 5%;
+      box-shadow: none;
+    }
+    h1 {
+      font-size: 2.2rem !important;
+      color: var(--blue);
+      font-weight: 700;
+      border-left: 6px solid var(--gold);
+      padding-left: 1.5rem;
+      margin-bottom: 2rem;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+    }
+    h2 {
+      font-size: 1.2rem !important;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin: 2.5rem 0 0.8rem 0;
+      font-weight: 600;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 0.4rem;
+    }
+    h3 {
+      font-size: 1rem !important;
+      color: var(--blue);
+      margin: 1.6rem 0 0.4rem 0;
+      font-weight: 600;
+    }
+    p, li, .epoch-text {
+      font-size: 0.9rem !important;
+      color: var(--soft);
+      margin-bottom: 0.7rem;
+      text-align: justify;
+    }
+    ul, ol {
+      padding-left: 1.8rem;
+      margin-bottom: 0.8rem;
+    }
+    li {
+      margin-bottom: 0.3rem;
+    }
+    .timeline-block {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 1.4rem 1.6rem;
+      margin: 1.2rem 0;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.5);
+      width: 100%;
+    }
+    .epoch-marker {
+      display: inline-block;
+      background: var(--blue);
+      color: var(--bg);
+      font-weight: 700;
+      font-size: 0.75rem;
+      padding: 0.2rem 1rem;
+      border-radius: 30px;
+      letter-spacing: 0.5px;
+      margin-right: 1rem;
+      margin-bottom: 0.25rem;
+    }
+    .highlight-blue {
+      color: var(--blue);
+      font-weight: 600;
+    }
+    .gold-accent {
+      color: var(--gold);
+    }
+    footer {
+      margin-top: 3rem;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      padding-top: 1.5rem;
+      font-size: 0.8rem;
+      color: var(--soft);
+    }
+    .timeline-block h3 {
+      margin-top: 0.2rem;
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>⚙️ CHRONOLOGY OF ALGORITHMS</h1>
+  <p style="font-size:0.9rem; margin-bottom:2rem;">from ancient clay tablets to neural networks — the complete historical timeline, arranged in strict chronological order.</p>
+
+  <h2>📜 ANTIQUITY · before 500 CE</h2>
+  <div class="timeline-block">
+    <span class="epoch-marker">~1800 BCE</span>
+    <h3>Babylonian division & root extraction</h3>
+    <p class="epoch-text">Clay tablet YBC 7289 shows the square root of 2 computed with astonishing accuracy using an iterative method equivalent to Heron's algorithm. Oldest known numerical algorithm.</p>
+  </div>
+  <div class="timeline-block">
+    <span class="epoch-marker">~300 BCE</span>
+    <h3>Euclid's algorithm (greatest common divisor)</h3>
+    <p class="epoch-text">Euclid's Elements (Book VII) describes the subtraction‑based method for GCD — the oldest algorithm still in common use. Pure recursive logic without computers.</p>
+  </div>
+  <div class="timeline-block">
+    <span class="epoch-marker">~250 BCE</span>
+    <h3>Sieve of Eratosthenes</h3>
+    <p class="epoch-text">Eratosthenes of Cyrene invents a filtering algorithm to find all prime numbers up to a given limit. First example of a sieve / space‑time tradeoff.</p>
+  </div>
+
+  <h2>🕯️ MEDIEVAL & ISLAMIC GOLDEN AGE · 500–1500</h2>
+  <div class="timeline-block">
+    <span class="epoch-marker">~825</span>
+    <h3>Al‑Khwarizmi & systematic algebra</h3>
+    <p class="epoch-text">Persian mathematician Muḥammad ibn Mūsā al‑Khwārizmī writes "Al‑Jabr", from which the word <span class="highlight-blue">algorithm</span> derives. Describes step‑by‑step methods for solving linear and quadratic equations.</p>
+  </div>
+  <div class="timeline-block">
+    <span class="epoch-marker">~1202</span>
+    <h3>Fibonacci's Liber Abaci</h3>
+    <p class="epoch-text">Leonardo of Pisa introduces Hindu‑Arabic numerals to Europe and describes algorithms for multiplication, division, and the Fibonacci sequence (though known earlier in India).</p>
+  </div>
+
+  <h2>RENAISSANCE · 1500–1800</h2>
+  <div class="timeline-block">
+    <span class="epoch-marker">1614</span>
+    <h3>Napier's logarithms</h3>
+    <p class="epoch-text">John Napier publishes tables of logarithms, a computational algorithm that transforms multiplication into addition — the first hardware acceleration (paper + tables) for arithmetic.</p>
+  </div>
+  <div class="timeline-block">
+    <span class="epoch-marker">1671–76</span>
+    <h3>Leibniz & binary arithmetic</h3>
+    <p class="epoch-text">Gottfried Wilhelm Leibniz develops the binary system and describes a mechanical calculating machine — the first stored‑program concept, later fundamental to all computer algorithms.</p>
+  </div>
+
+  <h2>🧮 19th CENTURY · algorithm theory emerges</h2>
+  <div class="timeline-block">
+    <span class="epoch-marker">1805</span>
+    <h3>Legendre / Gauss least squares</h3>
+    <p class="epoch-text">Adrien‑Marie Legendre and Carl Friedrich Gauss independently publish the method of least squares — the first statistical parameter‑estimation algorithm.</p>
+  </div>
+  <div class="timeline-block">
+    <span class="epoch-marker">1837</span>
+    <h3>Babbage & the Analytical Engine</h3>
+    <p class="epoch-text">Charles Babbage designs the first Turing‑complete mechanical computer. Ada Lovelace writes a "plan" to compute Bernoulli numbers — widely considered the first algorithm intended for a machine.</p>
+  </div>
+  <div class="timeline-block">
+    <span class="epoch-marker">1843</span>
+    <h3>Gauss–Seidel iteration</h3>
+    <p class="epoch-text">Iterative method for solving linear systems, used by Gauss in letters and later formalized by Seidel. Essential for numerical algorithms.</p>
+  </div>
+  <div class="timeline-block">
+    <span class="epoch-marker">1890</span>
+    <h3>Hollerith tabulator</h3>
+    <p class="epoch-text">Herman Hollerith's punched‑card sorting algorithm for the US census — first large‑scale data‑processing algorithm.</p>
+  </div>
+
+  <h2>1900–1940 · pre‑electronic algorithms</h2>
+  <div class="timeline-block">
+    <span class="epoch-marker">1913</span>
+    <h3>Runge–Kutta methods</h3>
+    <p class="epoch-text">Carl Runge and Martin Kutta develop explicit numerical methods for solving ordinary differential equations — still the backbone of simulation.</p>
+  </div>
+  <div class="timeline-block">
+    <span class="epoch-marker">1928</span>
+    <h3>Courant–Friedrichs–Lewy (CFL) condition</h3>
+    <p class="epoch-text">Stability criterion for numerical solutions of partial differential equations — foundational for computational fluid dynamics algorithms.</p>
+  </div>
+  <div class="timeline-block">
+    <span class="epoch-marker">1936</span>
+    <h3>Turing machine & lambda calculus</h3>
+    <p class="epoch-text">Alan Turing ("On Computable Numbers") formalizes the concept of an algorithm via Turing machines. Alonzo Church simultaneously develops lambda calculus — the two models define algorithmic computability.</p>
+  </div>
+
+  <h2>💡 1940–1960 · first electronic algorithms</h2>
+  <div class="timeline-block">
+    <span class="epoch-marker">1945</span>
+    <h3>von Neumann architecture & merge sort</h3>
+    <p class="epoch-text">John von Neumann writes the "First Draft of a Report on the EDVAC", describing stored‑program concept. He also invents merge sort (one of the first O(n log n) sorts).</p>
+  </div>
+  <div class="timeline-block">
+    <span class="epoch-marker">1947</span>
+    <h3>Monte Carlo method</h3>
+    <p class="epoch-text">Stanisław Ulam, John von Neumann and Nicholas Metropolis develop statistical sampling algorithms at Los Alamos — named after Monte Carlo casino.</p>
+  </div>
+  <div class="timeline-block">
+    <span class="epoch-marker">1951</span>
+    <h3>Simplex algorithm</h3>
+    <p class="epoch-text">George Dantzig publishes the simplex method for linear programming — one of the most influential optimization algorithms.</p>
+  </div>
+  <div class="timeline-block">
+    <span class="epoch-marker">1954</span>
+    <h3>Dijkstra's shortest path (first conception)</h3>
+    <p class="epoch-text">Edsger W. Dijkstra begins thinking about the shortest‑path problem while grocery shopping with his fiancée. He publishes the algorithm in 1959.</p>
+  </div>
+  <div class="timeline-block">
+    <span class="epoch-marker">1957</span>
+    <h3>Bellman–Ford algorithm</h3>
+    <p class="epoch-text">Richard Bellman and Lester Ford Jr. independently derive the dynamic‑programming algorithm for shortest paths with negative edges.</p>
+  </div>
+
+  <h2>⚙️ 1960–1970 · complexity & classic data structures</h2>
+  <div class="timeline-block">
+    <span class="epoch-marker">1960</span>
+    <h3>Quicksort (C. A. R. Hoare)</h3>
+    <p class="epoch-text">Tony Hoare develops quicksort while working on machine translation at Moscow State University. Still the most widely used sorting algorithm.</p>
+  </div>
+  <div class="timeline-block">
+    <span class="epoch-marker">1962</span>
+    <h3>Red–black tree (Bayer) · hash table (Luhn)</h3>
+    <p class="epoch-text">Rudolf Bayer invents red–black trees (then called symmetric binary B‑trees). Hans Peter Luhn had already used hash tables in 1953, but they become widespread in the 1960s.</p>
+  </div>
+  <div class="timeline-block">
+    <span class="epoch-marker">1964</span>
+    <h3>Heap sort (Williams & Floyd)</h3>
+    <p class="epoch-text">J. W. J. Williams invents heap sort; Robert Floyd improves it. First O(n log n) in‑place sort.</p>
+  </div>
+  <div class="timeline-block">
+    <span class="epoch-marker">1965</span>
+    <h3>Fast Fourier Transform (Cooley–Tukey)</h3>
+    <p class="epoch-text">James Cooley and John Tukey publish the FFT algorithm, revolutionizing digital signal processing — though Gauss had sketched a similar method in 1805.</p>
+  </div>
+  <div class="timeline-block">
+    <span class="epoch-marker">1968</span>
+    <h3>Knuth's The Art of Computer Programming</h3>
+    <p class="epoch-text">First volumes of Donald Knuth's encyclopedic work, which formally defines and analyzes hundreds of algorithms and introduces asymptotic notation (Big O).</p>
+  </div>
+
+  <h2>1970–1980 · NP‑completeness & public‑key</h2>
+  <div class="timeline-block">
+    <span class="epoch-marker">1971</span>
+    <h3>Cook–Levin theorem (NP‑completeness)</h3>
+    <p class="epoch-text">Stephen Cook and Leonid Levin independently prove that the Boolean satisfiability problem (SAT) is NP‑complete — foundational for complexity theory.</p>
+  </div>
+  <div class="timeline-block">
+    <span class="epoch-marker">1975</span>
+    <h3>Genetic algorithms (Holland)</h3>
+    <p class="epoch-text">John Holland introduces genetic algorithms, inspired by natural selection — first major evolutionary computing paradigm.</p>
+  </div>
+  <div class="timeline-block">
+    <span class="epoch-marker">1976</span>
+    <h3>Knuth–Morris–Pratt string search</h3>
+    <p class="epoch-text">Donald Knuth, James H. Morris, and Vaughan Pratt develop the linear‑time string‑matching algorithm (KMP).</p>
+  </div>
+  <div class="timeline-block">
+    <span class="epoch-marker">1977</span>
+    <h3>RSA cryptosystem (Rivest–Shamir–Adleman)</h3>
+    <p class="epoch-text">First practical public‑key cryptosystem, based on the difficulty of factoring large integers. Revolutionizes secure communication.</p>
+  </div>
+  <div class="timeline-block">
+    <span class="epoch-marker">1979</span>
+    <h3>Dijkstra–Scholten algorithm · Paxos (Lamport)</h3>
+    <p class="epoch-text">Leslie Lamport begins work on the Paxos consensus algorithm (published 1989) — fundamental for distributed systems.</p>
+  </div>
+
+  <h2>🔄 1980–1990 · randomization & parallelism</h2>
+  <div class="timeline-block">
+    <span class="epoch-marker">1983</span>
+    <h3>Karmarkar's interior‑point method</h3>
+    <p class="epoch-text">Narendra Karmarkar presents a polynomial‑time linear‑programming algorithm, competitive with simplex for large problems.</p>
+  </div>
+  <div class="timeline-block">
+    <span class="epoch-marker">1984</span>
+    <h3>Fisher–Yates shuffle (modern version)</h3>
+    <p class="epoch-text">Richard Durstenfeld adapts the Fisher–Yates shuffle into the efficient O(n) algorithm used everywhere today.</p>
+  </div>
+  <div class="timeline-block">
+    <span class="epoch-marker">1987</span>
+    <h3>Backpropagation (Rumelhart, Hinton, Williams)</h3>
+    <p class="epoch-text">Popularisation of the backpropagation algorithm for training multilayer neural networks — ignites the first neural‑net revival.</p>
+  </div>
+
+  <h2>🌐 1990–2000 · web & massive data</h2>
+  <div class="timeline-block">
+    <span class="epoch-marker">1991</span>
+    <h3>PageRank (Brin & Page)</h3>
+    <p class="epoch-text">Larry Page and Sergey Brin develop PageRank at Stanford, the algorithm that powers the Google search engine — eigenvector centrality applied to hyperlinks.</p>
+  </div>
+  <div class="timeline-block">
+    <span class="epoch-marker">1992</span>
+    <h3>UTF‑8 (Thompson & Pike)</h3>
+    <p class="epoch-text">Ken Thompson and Rob Pike design UTF‑8, a variable‑width encoding algorithm that became the dominant character encoding for the web.</p>
+  </div>
+  <div class="timeline-block">
+    <span class="epoch-marker">1994</span>
+    <h3>SHA‑1 (NIST)</h3>
+    <p class="epoch-text">Secure Hash Algorithm 1 designed by NSA — widely used in cryptography and integrity verification until deprecated.</p>
+  </div>
+  <div class="timeline-block">
+    <span class="epoch-marker">1996</span>
+    <h3>Apache Lucene / full‑text indexing</h3>
+    <p class="epoch-text">Doug Cutting starts Lucene, implementing inverted‑index search algorithms that became the core of Elasticsearch and Solr.</p>
+  </div>
+
+  <h2>2000–2010 · modern ML & large graphs</h2>
+  <div class="timeline-block">
+    <span class="epoch-marker">2001</span>
+    <h3>Random forests (Breiman)</h3>
+    <p class="epoch-text">Leo Breiman publishes random forests, combining bagging and random feature selection — one of the most accurate off‑the‑shelf algorithms.</p>
+  </div>
+  <div class="timeline-block">
+    <span class="epoch-marker">2004</span>
+    <h3>MapReduce (Google)</h3>
+    <p class="epoch-text">Jeffrey Dean and Sanjay Ghemawat describe MapReduce — a programming model for processing huge datasets on clusters, inspiring Hadoop.</p>
+  </div>
+  <div class="timeline-block">
+    <span class="epoch-marker">2006</span>
+    <h3>Deep belief nets (Hinton) · SIFT (Lowe)</h3>
+    <p class="epoch-text">Geoffrey Hinton introduces fast learning algorithms for deep belief networks — starting the deep‑learning revolution. David Lowe's SIFT becomes the iconic feature‑detection algorithm in computer vision.</p>
+  </div>
+  <div class="timeline-block">
+    <span class="epoch-marker">2008</span>
+    <h3>Bitcoin/blockchain (Nakamoto)</h3>
+    <p class="epoch-text">Satoshi Nakamoto's Bitcoin whitepaper introduces the Nakamoto consensus algorithm (Proof‑of‑Work) — first practical decentralized cryptocurrency.</p>
+  </div>
+
+  <h2>🧠 2010–2020 · transformers & reinforcement learning</h2>
+  <div class="timeline-block">
+    <span class="epoch-marker">2012</span>
+    <h3>AlexNet (Krizhevsky, Sutskever, Hinton)</h3>
+    <p class="epoch-text">Breakthrough CNN architecture using ReLU and GPU‑accelerated backpropagation, winning ImageNet by a huge margin — ignites deep‑learning explosion.</p>
+  </div>
+  <div class="timeline-block">
+    <span class="epoch-marker">2015</span>
+    <h3>ResNet (He et al.)</h3>
+    <p class="epoch-text">Kaiming He et al. introduce residual learning, enabling training of ultra‑deep networks (152 layers) via skip connections. Fundamental to nearly all modern CV algorithms.</p>
+  </div>
+  <div class="timeline-block">
+    <span class="epoch-marker">2017</span>
+    <h3>Transformer (Vaswani et al.)</h3>
+    <p class="epoch-text">"Attention is all you need" — the Transformer architecture replaces RNNs with self‑attention, forming the backbone of BERT, GPT, and all modern large language models.</p>
+  </div>
+  <div class="timeline-block">
+    <span class="epoch-marker">2018</span>
+    <h3>BERT (Devlin et al.)</h3>
+    <p class="epoch-text">Bidirectional Encoder Representations from Transformers sets new standards in NLP; pre‑training + fine‑tuning paradigm dominates.</p>
+  </div>
+
+  <h2>🚀 2020–present · large‑scale foundation models</h2>
+  <div class="timeline-block">
+    <span class="epoch-marker">2020</span>
+    <h3>GPT‑3 (Brown et al.)</h3>
+    <p class="epoch-text">175‑billion‑parameter language model, demonstrating few‑shot learning and sparking the generative AI revolution.</p>
+  </div>
+  <div class="timeline-block">
+    <span class="epoch-marker">2022</span>
+    <h3>ChatGPT & RLHF</h3>
+    <p class="epoch-text">OpenAI aligns large models with human feedback using reinforcement learning from human feedback (RLHF) — algorithms that fine‑tune language models via preference comparisons.</p>
+  </div>
+  <div class="timeline-block">
+    <span class="epoch-marker">2023</span>
+    <h3>AlphaGeometry (DeepMind)</h3>
+    <p class="epoch-text">Neuro‑symbolic algorithm that solves olympiad‑level geometry problems, combining a neural language model with a symbolic deduction engine.</p>
+  </div>
+
+  <footer>
+    <span class="gold-accent">✦</span> chronological algorithm history · every step from Euclid to GPT <span class="gold-accent">✦</span><br>Built By: Glenn Junsay Pansensoy
+  </footer>
+</div>
+</body>
+</html>
