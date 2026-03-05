@@ -1,0 +1,1422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Data Science tutorials – Valleys & Bytes (code-sense.pansensoy.workers.dev)</title>
+<meta name="description" content="Master data science from zero to deploy: Python, machine learning, deep learning, MLOps, and ethics. 80+ hands-on tutorials for practitioners.">
+<meta name="keywords" content="data science, machine learning, Python, deep learning, data visualization, MLOps, AI ethics, tutorials">
+<meta name="author" content="Valleys & Bytes">
+<link rel="canonical" href="https://code-sense.pansensoy.workers.dev/data-science.html">
+<meta property="og:title" content="Data Science tutorials – Valleys & Bytes">
+<meta property="og:description" content="Comprehensive, rigorous data science series: stats, ML, deep learning, deployment.">
+<meta property="og:url" content="https://code-sense.pansensoy.workers.dev/data-science.html">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://code-sense.pansensoy.workers.dev/og-ds.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Data Science tutorials – Valleys & Bytes">
+<meta name="twitter:description" content="Learn the full data science stack: Python → ML → deep learning → MLOps.">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4575646748966866" crossorigin="anonymous"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Mono:wght@300;400;500&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  
+  :root {
+    --midnight: #0a0e1a;
+    --obsidian: #13161f;
+    --obsidian-light: #1c2030;
+    --obsidian-mid: #222840;
+    --deep-blue: #0d1b2a;
+    --accent-cyan: #4fc3f7;
+    --accent-teal: #26c6da;
+    --accent-gold: #ffd54f;
+    --accent-violet: #7c4dff;
+    --text-primary: #e8eaf0;
+    --text-secondary: #a0aec0;
+    --text-muted: #6b7a99;
+    --border: rgba(79,195,247,0.15);
+    --glow: rgba(79,195,247,0.08);
+    --title-size: 1rem;
+    --subtitle-size: 0.9rem;
+    --body-size: 0.8rem;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--midnight);
+    color: var(--text-primary);
+    font-family: 'Lora', serif;
+    font-size: var(--body-size);
+    line-height: 1.85;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 10% 20%, rgba(79,195,247,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 30% 70%, rgba(255,213,79,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 60% 15%, rgba(79,195,247,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 80% 55%, rgba(124,77,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 90% 90%, rgba(79,195,247,0.2) 0%, transparent 100%),
+      radial-gradient(1px 1px at 50% 45%, rgba(255,213,79,0.2) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 20% 85%, rgba(79,195,247,0.25) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 30%, rgba(124,77,255,0.25) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2.5rem;
+    height: 64px;
+    background: rgba(10,14,26,0.92);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+  .brand {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 1.1rem;
+    letter-spacing: 0.06em;
+    color: var(--accent-cyan);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .brand span { color: var(--accent-gold); }
+  .brand::before {
+    content: '◈';
+    font-size: 0.9rem;
+    color: var(--accent-violet);
+    animation: spin 8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 6px;
+    transition: background 0.3s;
+    background: none;
+    border: none;
+    outline: none;
+  }
+  .hamburger:hover { background: var(--glow); }
+  .hamburger span {
+    display: block;
+    width: 26px;
+    height: 2px;
+    background: var(--accent-cyan);
+    border-radius: 2px;
+    transition: all 0.35s cubic-bezier(0.4,0,0.2,1);
+    transform-origin: center;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .nav-menu {
+    position: fixed;
+    top: 64px; right: 0;
+    width: 288px;
+    background: var(--obsidian);
+    border-left: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    border-radius: 0 0 0 14px;
+    padding: 1rem 0.85rem 1.25rem;
+    transform: translateX(110%);
+    transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    box-shadow: -8px 8px 32px rgba(0,0,0,0.45);
+  }
+  .nav-menu.open { transform: translateX(0); }
+  .nav-menu-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding: 0 0.5rem 0.6rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 0.15rem;
+  }
+  .nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    width: 100%;
+    height: 44px;
+    padding: 0 0.85rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.74rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    border-radius: 8px;
+    border: 1px solid rgba(79,195,247,0.08);
+    background: rgba(255,255,255,0.02);
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.18s, box-shadow 0.2s;
+    position: relative;
+    overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .nav-btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(79,195,247,0.18) 0%, transparent 70%);
+    opacity: 0;
+    transform: scale(0.5);
+    transition: opacity 0.35s, transform 0.35s;
+    pointer-events: none;
+  }
+  .nav-btn:hover {
+    color: var(--accent-cyan);
+    background: rgba(79,195,247,0.07);
+    border-color: rgba(79,195,247,0.3);
+    transform: translateX(-2px);
+    box-shadow: 0 3px 12px rgba(0,0,0,0.3), inset 0 0 0 1px rgba(79,195,247,0.1);
+  }
+  .nav-btn:hover::after { opacity: 1; transform: scale(1); }
+  .nav-btn:active { transform: translateX(0) scale(0.97); box-shadow: none; }
+  .nav-btn .nb-icon {
+    width: 26px; height: 26px;
+    border-radius: 6px;
+    background: rgba(79,195,247,0.1);
+    border: 1px solid rgba(79,195,247,0.12);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.8rem; flex-shrink: 0;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .nav-btn:hover .nb-icon {
+    background: rgba(79,195,247,0.18);
+    border-color: rgba(79,195,247,0.3);
+  }
+  .nav-btn .nb-label { flex: 1; }
+  .nav-btn .nb-arrow {
+    font-size: 0.68rem;
+    color: var(--accent-cyan);
+    opacity: 0;
+    transform: translateX(-5px);
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  .nav-btn:hover .nb-arrow { opacity: 1; transform: translateX(0); }
+  .nav-btn.nb-gold {
+    border-color: rgba(255,213,79,0.15);
+    color: var(--accent-gold);
+  }
+  .nav-btn.nb-gold .nb-icon {
+    background: rgba(255,213,79,0.1);
+    border-color: rgba(255,213,79,0.2);
+  }
+  .nav-btn.nb-gold:hover {
+    background: rgba(255,213,79,0.07);
+    border-color: rgba(255,213,79,0.35);
+    color: var(--accent-gold);
+  }
+  .nav-btn.nb-gold::after {
+    background: radial-gradient(circle at center, rgba(255,213,79,0.18) 0%, transparent 70%);
+  }
+  .nav-btn.nb-gold .nb-arrow { color: var(--accent-gold); }
+  .hero {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 2rem 4rem;
+    background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(79,195,247,0.06) 0%, transparent 70%);
+  }
+  .hero-inner { max-width: 860px; }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(79,195,247,0.08);
+    border: 1px solid rgba(79,195,247,0.25);
+    border-radius: 2rem;
+    padding: 0.35rem 1rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--accent-cyan);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    animation: fadeUp 0.8s ease both;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 6vw, 4.2rem);
+    font-weight: 900;
+    line-height: 1.12;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.9s ease 0.1s both;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent-cyan);
+  }
+  .hero-sub {
+    font-size: var(--subtitle-size);
+    color: var(--text-secondary);
+    max-width: 620px;
+    margin: 0 auto 2.5rem;
+    text-align: justify;
+    animation: fadeUp 1s ease 0.2s both;
+  }
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, var(--accent-cyan), var(--accent-violet));
+    color: var(--midnight);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    font-weight: 500;
+    padding: 0.75rem 2rem;
+    border-radius: 4px;
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: all 0.3s;
+    animation: fadeUp 1.1s ease 0.3s both;
+  }
+  .hero-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(79,195,247,0.3);
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 940px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+  section {
+    padding: 5rem 0;
+    border-top: 1px solid var(--border);
+  }
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent-teal);
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--accent-teal);
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: var(--title-size);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 2.5rem;
+    line-height: 1.3;
+  }
+  .section-title span { color: var(--accent-cyan); }
+  .tutorial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+  }
+  .card {
+    background: var(--obsidian);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.75rem;
+    transition: all 0.35s;
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(79,195,247,0.04) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.35s;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(79,195,247,0.35);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.4);
+  }
+  .card:hover::before { opacity: 1; }
+  .card-icon {
+    width: 40px; height: 40px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+  .card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: var(--subtitle-size);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.6rem;
+  }
+  .card p {
+    color: var(--text-secondary);
+    font-size: var(--body-size);
+    text-align: justify;
+    line-height: 1.8;
+  }
+  .card-tag {
+    display: inline-block;
+    margin-top: 1rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    padding: 0.2rem 0.6rem;
+    border-radius: 3px;
+    text-transform: uppercase;
+  }
+  .article-body h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: var(--subtitle-size);
+    font-weight: 700;
+    color: var(--accent-cyan);
+    margin: 2.5rem 0 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .article-body h2::before {
+    content: '';
+    width: 4px;
+    height: 16px;
+    background: var(--accent-cyan);
+    border-radius: 2px;
+    display: block;
+  }
+  .article-body p {
+    font-size: var(--body-size);
+    color: var(--text-secondary);
+    text-align: justify;
+    line-height: 1.9;
+    margin-bottom: 1.2rem;
+  }
+  .article-body ul, .article-body ol {
+    padding-left: 1.5rem;
+    margin-bottom: 1.2rem;
+  }
+  .article-body li {
+    font-size: var(--body-size);
+    color: var(--text-secondary);
+    line-height: 1.9;
+    margin-bottom: 0.4rem;
+  }
+  .callout {
+    background: rgba(79,195,247,0.06);
+    border-left: 3px solid var(--accent-cyan);
+    border-radius: 0 6px 6px 0;
+    padding: 1.25rem 1.5rem;
+    margin: 2rem 0;
+  }
+  .callout p { margin: 0; color: var(--text-primary) !important; font-style: italic; }
+  .code-block {
+    background: #0d1117;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.25rem 1.5rem;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+  }
+  .code-block pre {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: #a0c4ff;
+    line-height: 1.7;
+  }
+  .code-block pre .kw { color: #ff79c6; }
+  .code-block pre .fn { color: #50fa7b; }
+  .code-block pre .str { color: #f1fa8c; }
+  .code-block pre .cm { color: #6272a4; }
+  .code-block pre .num { color: #bd93f9; }
+  .share-sidebar {
+    position: fixed;
+    right: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    z-index: 100;
+  }
+  @media (max-width: 1200px) { .share-sidebar { display: none; } }
+  .share-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    height: 44px;
+    padding: 0 0.85rem;
+    border-radius: 8px;
+    border: 1px solid rgba(79,195,247,0.1);
+    background: rgba(255,255,255,0.02);
+    cursor: pointer;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.74rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--text-secondary);
+    text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
+    position: relative;
+    transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.18s, box-shadow 0.2s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .share-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(79,195,247,0.15) 0%, transparent 70%);
+    opacity: 0;
+    transform: scale(0.4);
+    transition: opacity 0.3s, transform 0.3s;
+    pointer-events: none;
+  }
+  .share-btn:hover::before { opacity: 1; transform: scale(1); }
+  .share-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 14px rgba(0,0,0,0.35); }
+  .share-btn:active { transform: scale(0.97); box-shadow: none; }
+  .share-btn .sb-icon {
+    width: 26px; height: 26px;
+    border-radius: 6px;
+    background: rgba(79,195,247,0.1);
+    border: 1px solid rgba(79,195,247,0.12);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.82rem; flex-shrink: 0;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .share-btn .sb-label { flex: 1; }
+  .share-btn.fb:hover { background:rgba(24,119,242,0.1); border-color:rgba(24,119,242,0.4); color:#6ab0ff; }
+  .share-btn.fb:hover .sb-icon { background:rgba(24,119,242,0.2); border-color:rgba(24,119,242,0.3); }
+  .share-btn.li:hover { background:rgba(10,102,194,0.1); border-color:rgba(10,102,194,0.4); color:#6ab0ff; }
+  .share-btn.li:hover .sb-icon { background:rgba(10,102,194,0.2); border-color:rgba(10,102,194,0.3); }
+  .share-btn.tw:hover { background:rgba(200,200,200,0.07); border-color:rgba(200,200,200,0.3); color:#e0e0e0; }
+  .share-btn.tw:hover .sb-icon { background:rgba(200,200,200,0.12); border-color:rgba(200,200,200,0.25); }
+  .share-btn.wa:hover { background:rgba(37,211,102,0.1); border-color:rgba(37,211,102,0.4); color:#4ddb88; }
+  .share-btn.wa:hover .sb-icon { background:rgba(37,211,102,0.18); border-color:rgba(37,211,102,0.3); }
+  .share-btn.yt:hover { background:rgba(255,0,0,0.1); border-color:rgba(255,0,0,0.35); color:#ff7070; }
+  .share-btn.yt:hover .sb-icon { background:rgba(255,0,0,0.18); border-color:rgba(255,0,0,0.3); }
+  .share-btn.tg:hover { background:rgba(34,158,217,0.1); border-color:rgba(34,158,217,0.4); color:#5bcaf5; }
+  .share-btn.tg:hover .sb-icon { background:rgba(34,158,217,0.18); border-color:rgba(34,158,217,0.3); }
+  .share-sidebar .share-btn { width: 44px; padding: 0; justify-content: center; }
+  .share-sidebar .share-btn .sb-label { display: none; }
+  .share-sidebar .share-btn .sb-icon { border: none; background: transparent; width: auto; height: auto; font-size: 1.05rem; }
+  .share-sidebar .share-btn::after {
+    content: attr(data-label);
+    position: absolute;
+    right: calc(100% + 10px); top: 50%; transform: translateY(-50%);
+    background: var(--obsidian-mid); border: 1px solid var(--border);
+    color: var(--text-primary); font-family: 'DM Mono', monospace; font-size: 0.65rem;
+    white-space: nowrap; padding: 0.3rem 0.65rem; border-radius: 5px;
+    opacity: 0; pointer-events: none; transition: opacity 0.2s; z-index: 10;
+  }
+  .share-sidebar .share-btn:hover::after { opacity: 1; }
+  .share-inline {
+    display: none;
+    flex-direction: column;
+    gap: 0.4rem;
+    width: 100%;
+    max-width: 300px;
+    margin-top: 2.5rem;
+  }
+  @media (max-width: 1200px) { .share-inline { display: flex; } }
+  .share-inline-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--text-muted);
+    margin-bottom: 0.2rem;
+  }
+  .share-inline .share-btn { width: 100%; justify-content: flex-start; padding: 0 1rem; }
+  .share-inline .share-btn .sb-label { display: inline; }
+  .share-inline .share-btn::after { display: none; }
+  .comment-box {
+    background: var(--obsidian);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+  }
+  .comment-box h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: var(--subtitle-size);
+    margin-bottom: 1.25rem;
+    color: var(--text-primary);
+  }
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-group label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    background: var(--midnight);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    padding: 0.65rem 0.85rem;
+    color: var(--text-primary);
+    font-family: 'Lora', serif;
+    font-size: var(--body-size);
+    transition: border-color 0.25s;
+    outline: none;
+    resize: vertical;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus {
+    border-color: var(--accent-cyan);
+    box-shadow: 0 0 0 3px rgba(79,195,247,0.08);
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--accent-cyan), var(--accent-violet));
+    color: var(--midnight);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.7rem 1.8rem;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(79,195,247,0.25);
+  }
+  .btn-primary:active { transform: translateY(0); }
+  .comments-list { margin-top: 2rem; }
+  .comment-item {
+    background: var(--obsidian);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1rem;
+    animation: fadeUp 0.4s ease;
+  }
+  .comment-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.6rem;
+  }
+  .comment-avatar {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent-violet), var(--accent-cyan));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem; font-weight: 600; color: white;
+    flex-shrink: 0;
+  }
+  .comment-author {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem; color: var(--accent-cyan); font-weight: 500;
+  }
+  .comment-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem; color: var(--text-muted); margin-left: auto;
+  }
+  .comment-body {
+    font-size: var(--body-size);
+    color: var(--text-secondary);
+    line-height: 1.8;
+    text-align: justify;
+  }
+  .ai-thinking {
+    display: none;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--accent-cyan);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    padding: 0.75rem;
+  }
+  .ai-thinking.show { display: flex; }
+  .dot-loader span {
+    display: inline-block;
+    width: 5px; height: 5px;
+    background: var(--accent-cyan);
+    border-radius: 50%;
+    margin: 0 2px;
+    animation: bounce 1.2s infinite;
+  }
+  .dot-loader span:nth-child(2) { animation-delay: 0.2s; }
+  .dot-loader span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes bounce {
+    0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
+    40% { transform: translateY(-6px); opacity: 1; }
+  }
+  .subscribe-box {
+    background: var(--obsidian);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 3rem 2.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .subscribe-box::before {
+    content: '';
+    position: absolute;
+    top: -60px; left: 50%;
+    transform: translateX(-50%);
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(79,195,247,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .subscribe-box h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: var(--subtitle-size);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  .subscribe-box p {
+    color: var(--text-secondary);
+    font-size: var(--body-size);
+    max-width: 500px;
+    margin: 0 auto 2rem;
+    text-align: center;
+  }
+  .subscribe-form {
+    display: flex;
+    gap: 0.75rem;
+    max-width: 480px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .subscribe-form input {
+    flex: 1;
+    min-width: 200px;
+    background: var(--midnight);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    padding: 0.7rem 1rem;
+    color: var(--text-primary);
+    font-family: 'Lora', serif;
+    font-size: var(--body-size);
+    outline: none;
+    transition: border-color 0.25s;
+  }
+  .subscribe-form input:focus { border-color: var(--accent-cyan); }
+  .subscribe-status {
+    margin-top: 1rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    min-height: 1.2rem;
+    transition: all 0.3s;
+  }
+  .subscribers-count {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+  }
+  .subscribers-count strong {
+    color: var(--accent-gold);
+    font-size: 0.85rem;
+  }
+  footer {
+    background: var(--obsidian);
+    border-top: 1px solid var(--border);
+    padding: 4rem 0 2rem;
+    position: relative;
+    z-index: 1;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+  }
+  @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
+  .footer-brand { }
+  .footer-brand .logo {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 1.2rem;
+    color: var(--accent-cyan);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-bottom: 0.75rem;
+  }
+  .footer-brand .logo span { color: var(--accent-gold); }
+  .footer-brand p {
+    font-size: var(--body-size);
+    color: var(--text-secondary);
+    text-align: justify;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+  .footer-email {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--accent-cyan);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-email:hover { color: var(--accent-gold); }
+  .footer-col h4 {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 0.5rem; }
+  .footer-col ul li a {
+    font-size: var(--body-size);
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .footer-col ul li a:hover { color: var(--accent-cyan); }
+  .footer-col ul li a::before { content: '›'; color: var(--accent-teal); }
+  .footer-newsletter input {
+    width: 100%;
+    background: var(--midnight);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.6rem 0.8rem;
+    color: var(--text-primary);
+    font-family: 'Lora', serif;
+    font-size: var(--body-size);
+    outline: none;
+    margin-bottom: 0.6rem;
+    transition: border-color 0.25s;
+  }
+  .footer-newsletter input:focus { border-color: var(--accent-cyan); }
+  .btn-small {
+    background: var(--accent-cyan);
+    color: var(--midnight);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.55rem 1.2rem;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.25s;
+    width: 100%;
+  }
+  .btn-small:hover {
+    background: var(--accent-teal);
+    transform: translateY(-1px);
+  }
+  .social-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    width: 100%;
+  }
+  .social-link {
+    width: 100%; height: 38px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: var(--midnight);
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.04em;
+    transition: all 0.25s;
+    box-sizing: border-box;
+  }
+  .social-link:hover {
+    border-color: var(--accent-cyan);
+    color: var(--accent-cyan);
+    background: rgba(79,195,247,0.08);
+    transform: translateX(3px);
+  }
+  .footer-bottom {
+    border-top: 1px solid var(--border);
+    padding-top: 1.5rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+  .footer-bottom p {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+  }
+  .footer-bottom p a {
+    color: var(--accent-cyan);
+    text-decoration: none;
+  }
+  .legal-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    min-width: 180px;
+  }
+  .legal-links-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.15rem;
+  }
+  .legal-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    height: 36px;
+    padding: 0 0.75rem;
+    border-radius: 7px;
+    border: 1px solid rgba(79,195,247,0.08);
+    background: rgba(255,255,255,0.015);
+    color: var(--text-muted);
+    text-decoration: none;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.18s;
+    position: relative;
+    overflow: hidden;
+  }
+  .legal-btn .lb-icon {
+    font-size: 0.78rem;
+    flex-shrink: 0;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+  .legal-btn:hover {
+    background: rgba(79,195,247,0.06);
+    border-color: rgba(79,195,247,0.25);
+    color: var(--accent-cyan);
+    transform: translateX(-2px);
+  }
+  .legal-btn:hover .lb-icon { opacity: 1; }
+  .legal-btn:active { transform: scale(0.97); }
+  .progress-bar {
+    position: fixed;
+    top: 64px; left: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-cyan), var(--accent-violet));
+    z-index: 1001;
+    transition: width 0.1s;
+    width: 0%;
+  }
+  .toast {
+    position: fixed;
+    bottom: 2rem; right: 2rem;
+    background: var(--obsidian-mid);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.85rem 1.25rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--text-primary);
+    z-index: 9999;
+    transform: translateY(80px);
+    opacity: 0;
+    transition: all 0.35s cubic-bezier(0.4,0,0.2,1);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    max-width: 320px;
+  }
+  .toast.show {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  .toast-icon { font-size: 1rem; }
+  .back-top {
+    position: fixed;
+    bottom: 2rem; left: 2rem;
+    width: 40px; height: 40px;
+    background: var(--obsidian);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    display: flex;
+    align-items: center; justify-content: center;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: var(--accent-cyan);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s;
+    z-index: 100;
+  }
+  .back-top.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .back-top:hover {
+    background: var(--obsidian-mid);
+    transform: translateY(-3px);
+  }
+  @media (max-width: 768px) {
+    nav { padding: 0 1.25rem; }
+    .container { padding: 0 1.25rem; }
+    section { padding: 3rem 0; }
+    .tutorial-grid { grid-template-columns: 1fr; }
+  }
+  .toc {
+    background: var(--obsidian);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 3rem;
+  }
+  .toc h3 {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent-teal);
+    margin-bottom: 1rem;
+  }
+  .toc ol {
+    padding-left: 1.5rem;
+    counter-reset: toc;
+  }
+  .toc ol li {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    margin-bottom: 0.4rem;
+    color: var(--text-muted);
+  }
+  .toc ol li a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .toc ol li a:hover { color: var(--accent-cyan); }
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin: 3rem 0;
+  }
+  @media (max-width: 600px) { .stats-row { grid-template-columns: repeat(2, 1fr); } }
+  .stat-box {
+    background: var(--obsidian);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem;
+    text-align: center;
+  }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: var(--accent-cyan);
+    display: block;
+  }
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+  .nav-dot {
+    width: 8px; height: 8px;
+    background: var(--accent-cyan);
+    border-radius: 50%;
+    display: inline-block;
+    margin-left: 0.4rem;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+
+  .ad-unit {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 940px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    text-align: center;
+  }
+  .ad-unit::before {
+    content: 'Advertisement';
+    display: block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.4rem;
+  }
+  .ad-unit ins {
+    display: block;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .ad-divider {
+    width: 100%;
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 0;
+  }
+</style>
+</head>
+<body><div class="progress-bar" id="progressBar"></div><div class="share-sidebar">
+  <a class="share-btn fb" href="#" onclick="shareToSocial('facebook');return false;" data-label="Facebook">
+    <span class="sb-icon">𝒇</span><span class="sb-label">Facebook</span>
+  </a>
+  <a class="share-btn li" href="#" onclick="shareToSocial('linkedin');return false;" data-label="LinkedIn">
+    <span class="sb-icon">in</span><span class="sb-label">LinkedIn</span>
+  </a>
+  <a class="share-btn tw" href="#" onclick="shareToSocial('twitter');return false;" data-label="𝕏 / Twitter">
+    <span class="sb-icon">𝕏</span><span class="sb-label">𝕏 / Twitter</span>
+  </a>
+  <a class="share-btn wa" href="#" onclick="shareToSocial('whatsapp');return false;" data-label="WhatsApp">
+    <span class="sb-icon">💬</span><span class="sb-label">WhatsApp</span>
+  </a>
+  <a class="share-btn yt" href="#" onclick="shareToSocial('youtube');return false;" data-label="YouTube">
+    <span class="sb-icon">▶</span><span class="sb-label">YouTube</span>
+  </a>
+  <a class="share-btn tg" href="#" onclick="shareToSocial('telegram');return false;" data-label="Telegram">
+    <span class="sb-icon">✈</span><span class="sb-label">Telegram</span>
+  </a>
+</div>
+
+<nav>
+  <a href="index.html" class="brand">VALLEYS<span> & </span>BYTES</a>
+  <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMenu(event)">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-menu" id="navMenu">
+    <div class="nav-menu-label">◈ Navigation</div>
+    <a class="nav-btn" href="#introduction" onclick="closeMenu()"><span class="nb-icon">◉</span><span class="nb-label">Introduction</span><span class="nb-arrow">›</span></a>
+    <a class="nav-btn" href="python-tutorials.html" onclick="closeMenu()"><span class="nb-icon">◈</span><span class="nb-label">Tutorials</span><span class="nb-arrow">›</span></a>
+    <a class="nav-btn" href="python-fundamentals" onclick="closeMenu()"><span class="nb-icon">⟨⟩</span><span class="nb-label">Python Basics</span><span class="nb-arrow">›</span></a>
+    <a class="nav-btn" href="machine-learning.html" onclick="closeMenu()"><span class="nb-icon">⊕</span><span class="nb-label">Machine Learning</span><span class="nb-arrow">›</span></a>
+    <a class="nav-btn" href="data-structure.html" onclick="closeMenu()"><span class="nb-icon">◎</span><span class="nb-label">Data Structure</span><span class="nb-arrow">›</span></a>
+    <a class="nav-btn" href="artificial-intelligence.html" onclick="closeMenu()"><span class="nb-icon">◆</span><span class="nb-label">Artificial Intelligence</span><span class="nb-arrow">›</span></a>
+    <a class="nav-btn" href="#comments" onclick="closeMenu()"><span class="nb-icon">◐</span><span class="nb-label">Comments</span><span class="nb-arrow">›</span></a>
+    <a class="nav-btn nb-gold" href="#subscribe" onclick="closeMenu()"><span class="nb-icon">✦</span><span class="nb-label">Subscribe</span><span class="nb-arrow">›</span></a>
+  </div>
+</nav>
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">✦ Comprehensive Learning Series</div>
+    <h4>Learn <em>Data Science</em><br>From Fundamentals to Deploy</h4>
+    <p class="hero-sub">A rigorous, hands-on journey through the full data science stack — statistical foundations, machine learning algorithms, deep learning architectures, and production deployment strategies for the modern data practitioner.In this tutorial you will learn the profound concepts regarding data science.It is essentially the art of uncovering "the story" hidden within raw information. It’s a multidisciplinary field that combines statistics, specialized programming, and domain expertise to extract meaningful insights that help businesses and researchers make smarter decisions.
+​Think of a data scientist as a digital detective: they take a mountain of messy clues (data) and use scientific tools to solve a specific mystery.</p>
+    <a href="#introduction" class="hero-cta">▸ Start Learning</a>
+  </div>
+</section>
+
+<hr class="ad-divider">
+<div class="ad-unit">
+  <!-- Top Banner -->
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-4575646748966866"
+       data-ad-slot="4226674403"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</div>
+<hr class="ad-divider">
+
+<section id="introduction">
+  <div class="container">
+    <div class="section-label">Chapter 01</div>
+    <h1 class="section-title">A Comprehensive Introduction to <span>Data Science</span></h1>
+    <div class="stats-row">
+      <div class="stat-box"><span class="stat-num">12+</span><span class="stat-label">Modules</span></div>
+      <div class="stat-box"><span class="stat-num">80+</span><span class="stat-label">Tutorials</span></div>
+      <div class="stat-box"><span class="stat-num">40+</span><span class="stat-label">Projects</span></div>
+      <div class="stat-box"><span class="stat-num">∞</span><span class="stat-label">Possibilities</span></div>
+    </div>
+    <div class="toc">
+      <h3>📖 Table of Contents</h3>
+      <ol>
+        <li><a href="#what-is-ds">What is Data Science?</a></li>
+        <li><a href="#why-ds">Why Data Science Matters Today</a></li>
+        <li><a href="#ds-lifecycle">The Data Science Lifecycle</a></li>
+        <li><a href="#tools">Essential Tools & Technologies</a></li>
+        <li><a href="#python">Python for Data Science</a></li>
+        <li><a href="#ml">Machine Learning Fundamentals</a></li>
+        <li><a href="#viz">Data Visualization</a></li>
+        <li><a href="#deeplearning">Deep Learning & Neural Networks</a></li>
+        <li><a href="#careers">Career Paths in Data Science</a></li>
+        <li><a href="#ethics">Ethics & Responsible AI</a></li>
+      </ol>
+    </div>
+    <div class="article-body">
+      <h2 id="what-is-ds">What is Data Science?</h2>
+      <p>Data science is an interdisciplinary field that combines statistical methodology, computational techniques, domain expertise, and visual communication to extract actionable knowledge and insights from structured and unstructured data. At its core, data science is the art and science of transforming raw, often noisy data into something genuinely meaningful — predictions, decisions, discoveries, and narratives that drive real-world value.</p>
+      <p>The term itself emerged in the early 2000s, when the exponential growth of digital data outpaced the capacity of traditional business intelligence tools to analyze it. Pioneered by statisticians, computer scientists, and domain experts who saw opportunity in the data deluge, data science quickly evolved into one of the most coveted and transformative disciplines of the 21st century. Today, data scientists work across virtually every industry — from healthcare and finance to entertainment, agriculture, and public policy — applying a remarkably diverse toolkit to solve problems of extraordinary complexity.</p>
+      <p>Unlike traditional data analysis, which often operates retrospectively to describe what happened, modern data science is fundamentally predictive and prescriptive. It asks not only "what occurred?" but "what will happen?" and "what should we do about it?" This forward-looking orientation, powered by machine learning and increasingly by deep learning, is what distinguishes data science from its predecessors and makes it so profoundly consequential.</p>
+      <div class="callout">
+        <p>💡 "Data science is the discipline of making data useful." — Cassie Kozyrkov, former Chief Decision Scientist at Google. It sits at the intersection of statistics, software engineering, and deep domain knowledge.</p>
+      </div>
+      <h2 id="why-ds">Why Data Science Matters Today</h2>
+      <p>We are living through the largest data-generating event in human history. Every second, the global internet handles millions of emails, social media posts, financial transactions, sensor readings, and search queries. By 2025, the world generates an estimated 2.5 quintillion bytes of data daily — a figure that continues to grow exponentially as the Internet of Things expands, smartphones proliferate, and digital transformation accelerates across industries.</p>
+      <p>This data explosion represents both an enormous opportunity and a profound challenge. The opportunity lies in the unprecedented wealth of information available to organizations willing to invest in the infrastructure and talent to harness it. The challenge lies in separating signal from noise — identifying the patterns, correlations, and causal relationships buried within data that is often incomplete, inconsistent, biased, or simply overwhelming in scale.</p>
+      <p>Data science has already demonstrated its transformative power across multiple domains. In medicine, predictive models trained on electronic health records, genomic data, and imaging studies are enabling earlier diagnoses of cancers, cardiovascular disease, and rare conditions. In logistics, optimization algorithms are redesigning global supply chains, reducing fuel consumption and delivery times simultaneously. In climate science, machine learning models are processing satellite imagery and atmospheric sensor data at a scale no human team could match, accelerating our understanding of climate dynamics and informing policy at the highest levels.</p>
+      <p>For individuals entering the workforce, data science offers remarkable career prospects. The U.S. Bureau of Labor Statistics projects data science roles to grow by 36% through 2031 — far above the average for all occupations. Data scientists consistently rank among the highest-compensated professionals in technology, and the skills acquired through data science training are increasingly portable across industries, making practitioners exceptionally resilient in a rapidly changing economy.</p>
+      <h2 id="ds-lifecycle">The Data Science Lifecycle</h2>
+      <p>Every successful data science project — regardless of its domain or scale — follows a recognizable lifecycle that guides practitioners from raw data to deployed, monitored solution. Understanding this lifecycle is essential not only for executing individual projects but for communicating effectively with stakeholders and managing expectations about timelines and deliverables.</p>
+      <p><strong style="color:var(--accent-cyan);">1. Problem Definition.</strong> The lifecycle begins not with data, but with questions. What business problem are we solving? What would a successful solution look like? What decisions will this analysis inform? The best data scientists spend considerable time in this phase, resisting the urge to dive into data before they fully understand the problem's context, constraints, and stakeholders.</p>
+      <p><strong style="color:var(--accent-cyan);">2. Data Acquisition.</strong> Once the problem is defined, practitioners must identify and obtain the data necessary to address it. This may involve querying internal databases, calling external APIs, scraping web sources, purchasing datasets, designing surveys, or instrumenting software systems to generate new data. Data acquisition decisions made here have profound downstream consequences for model quality and ethical compliance.</p>
+      <p><strong style="color:var(--accent-cyan);">3. Data Cleaning & Preparation.</strong> Widely acknowledged as the most time-consuming phase — consuming an estimated 60–80% of total project time — data cleaning involves handling missing values, resolving inconsistencies, removing duplicates, correcting data types, and addressing outliers. This phase is unglamorous but absolutely critical: models trained on dirty data produce unreliable, potentially misleading results.</p>
+      <p><strong style="color:var(--accent-cyan);">4. Exploratory Data Analysis (EDA).</strong> Before building models, data scientists thoroughly explore their data through summary statistics, correlation analyses, and visualizations. EDA surfaces unexpected patterns, validates assumptions, identifies the most informative features, and often reveals insights that reshape the original problem definition. Many discoveries in data science happen during EDA rather than during formal modeling.</p>
+      <p><strong style="color:var(--accent-cyan);">5. Feature Engineering.</strong> Raw data rarely flows directly into machine learning algorithms. Feature engineering — the craft of transforming raw variables into representations that best capture the underlying structure of the data — is where practitioner expertise and domain knowledge translate most directly into model performance. Great feature engineering can make simple models outperform complex ones on identical data.</p>
+      <p><strong style="color:var(--accent-cyan);">6. Modeling.</strong> With prepared features in hand, practitioners select algorithms appropriate to the problem type (classification, regression, clustering, anomaly detection, recommendation, etc.), train candidate models, and tune hyperparameters through systematic experimentation. Modern practices emphasize rigorous train/validation/test splits and cross-validation to ensure that performance metrics reflect genuine generalization, not overfitting.</p>
+      <p><strong style="color:var(--accent-cyan);">7. Evaluation.</strong> Model evaluation extends beyond accuracy to encompass fairness, robustness, interpretability, and business impact. A model that performs well on aggregate metrics may still fail specific subpopulations or edge cases. Rigorous evaluation requires identifying the right metrics for the problem — precision/recall curves for imbalanced classification, RMSE and MAE for regression, silhouette scores for clustering — and testing under conditions that reflect real-world deployment.</p>
+      <p><strong style="color:var(--accent-cyan);">8. Deployment & Monitoring.</strong> A model that never reaches production creates no value. Deployment involves packaging models as APIs or services, integrating them into existing systems, and establishing infrastructure for reliable, scalable inference. Critically, deployed models must be continuously monitored for data drift, concept drift, and performance degradation — phenomena that arise as the real world changes and diverges from training conditions.</p>
+      <h2 id="tools">Essential Tools & Technologies</h2>
+      <p>The data science ecosystem is rich, rapidly evolving, and occasionally overwhelming for newcomers. However, a relatively small core toolkit accounts for the majority of professional practice, and mastery of these tools provides a strong foundation for exploring the wider landscape.</p>
+      <div class="code-block"><pre><span class="cm"># Core Data Science Stack</span>
+
+<span class="cm"># Data Manipulation & Analysis</span>
+<span class="kw">import</span> pandas <span class="kw">as</span> pd
+<span class="kw">import</span> numpy <span class="kw">as</span> np
+
+<span class="cm"># Machine Learning</span>
+<span class="kw">from</span> sklearn.ensemble <span class="kw">import</span> RandomForestClassifier
+<span class="kw">from</span> sklearn.model_selection <span class="kw">import</span> train_test_split
+<span class="kw">from</span> sklearn.metrics <span class="kw">import</span> accuracy_score, classification_report
+
+<span class="cm"># Deep Learning</span>
+<span class="kw">import</span> tensorflow <span class="kw">as</span> tf
+<span class="kw">import</span> torch
+
+<span class="cm"># Visualization</span>
+<span class="kw">import</span> matplotlib.pyplot <span class="kw">as</span> plt
+<span class="kw">import</span> seaborn <span class="kw">as</span> sns
+<span class="kw">import</span> plotly.express <span class="kw">as</span> px
+
+<span class="cm"># Example: Load and preview dataset</span>
+df = pd.<span class="fn">read_csv</span>(<span class="str">'dataset.csv'</span>)
+<span class="fn">print</span>(df.<span class="fn">head</span>())
+<span class="fn">print</span>(df.<span class="fn">describe</span>())
+<span class="fn">print</span>(df.<span class="fn">isnull</span>().<span class="fn">sum</span>())</pre></div>
+      <p>Python has emerged as the dominant language of data science, owing to its readable syntax, extensive ecosystem of scientific libraries, and strong community support. The PyData stack — NumPy for numerical computing, Pandas for tabular data manipulation, Matplotlib and Seaborn for visualization, and Scikit-learn for machine learning — forms the foundation of most data science workflows. Complementing Python, R remains widely used in academic research, particularly for statistical modeling and bioinformatics, and offers unique strengths through packages like ggplot2, dplyr, and Bioconductor.</p>
+      <p>SQL is non-negotiable for any practicing data scientist. The overwhelming majority of organizational data lives in relational databases, and the ability to write efficient, nuanced queries — including window functions, CTEs, and aggregation pipelines — is essential for data extraction, transformation, and ad-hoc analysis. Many data scientists also work with big data technologies including Apache Spark for distributed computation, and cloud platforms like AWS, Google Cloud, and Azure that provide managed services for data warehousing, model training, and deployment at scale.</p>
+      <h2 id="careers">Career Paths in Data Science</h2>
+      <p>The "data scientist" title encompasses enormous diversity of role and specialization. As organizations have matured their data practices, distinct career paths have crystallized around different skill profiles and organizational needs. Understanding these distinctions helps practitioners focus their development and communicate their value clearly.</p>
+      <p>The <strong style="color:var(--accent-cyan);">Data Analyst</strong> focuses on descriptive analytics — answering historical questions through SQL, spreadsheets, and visualization tools. Data analysts are typically the closest to business stakeholders, translating data into accessible narratives and dashboards. The <strong style="color:var(--accent-cyan);">Data Scientist</strong> builds predictive models, designs experiments, and brings statistical rigor to decision-making. The <strong style="color:var(--accent-cyan);">Machine Learning Engineer</strong> specializes in operationalizing models — building the infrastructure, pipelines, and APIs that allow models to serve predictions reliably at scale. The <strong style="color:var(--accent-cyan);">Data Engineer</strong> architects the data infrastructure itself — designing pipelines, data warehouses, and streaming systems that ensure clean, timely data reaches downstream consumers.</p>
+      <h2 id="ethics">Ethics & Responsible AI</h2>
+      <p>As data science grows in influence, its ethical dimensions have become impossible to ignore. Algorithmic systems now make or influence decisions about credit access, criminal justice, medical treatment, employment, and political advertising. These systems inherit the biases present in their training data and amplify them at scale, often in ways that harm already-marginalized communities most severely.</p>
+      <p>Responsible data science requires practitioners to engage seriously with questions of fairness, transparency, accountability, and privacy. Fairness-aware machine learning provides technical tools for auditing and mitigating bias, but technical fixes cannot substitute for the institutional practices, diverse teams, and governance frameworks required to deploy AI responsibly. Data scientists who understand both the technical and societal dimensions of their work are better equipped to build systems that earn and deserve public trust — and to push back when asked to build systems that do not.</p>
+    </div>
+    <div class="share-inline" id="shareInline">
+      <div class="share-inline-label">Share this article</div>
+      <a class="share-btn fb" href="#" onclick="shareToSocial('facebook');return false;"><span class="sb-icon">𝒇</span><span class="sb-label">Facebook</span></a>
+      <a class="share-btn li" href="#" onclick="shareToSocial('linkedin');return false;"><span class="sb-icon">in</span><span class="sb-label">LinkedIn</span></a>
+      <a class="share-btn tw" href="#" onclick="shareToSocial('twitter');return false;"><span class="sb-icon">𝕏</span><span class="sb-label">𝕏 / Twitter</span></a>
+      <a class="share-btn wa" href="#" onclick="shareToSocial('whatsapp');return false;"><span class="sb-icon">💬</span><span class="sb-label">WhatsApp</span></a>
+      <a class="share-btn yt" href="#" onclick="shareToSocial('youtube');return false;"><span class="sb-icon">▶</span><span class="sb-label">YouTube</span></a>
+      <a class="share-btn tg" href="#" onclick="shareToSocial('telegram');return false;"><span class="sb-icon">✈</span><span class="sb-label">Telegram</span></a>
+    </div>
+  </div>
+</section>
+
+<section id="tutorials">
+  <div class="container">
+    <div class="section-label">Chapter 02</div>
+    <h1 class="section-title">Tutorial <span>Modules</span></h1>
+    <div class="tutorial-grid">
+      <div class="card"><div class="card-icon" style="background:rgba(79,195,247,0.12);">🐍</div><h3>Python for Data Science</h3><p>Master NumPy, Pandas, and core Python idioms for data manipulation. Learn vectorized operations, broadcasting, and memory-efficient data wrangling techniques used by professional data engineers.</p><span class="card-tag" style="background:rgba(79,195,247,0.1);color:var(--accent-cyan);">Beginner</span></div>
+      <div class="card"><div class="card-icon" style="background:rgba(255,213,79,0.12);">📊</div><h3>Statistical Foundations</h3><p>Probability theory, hypothesis testing, Bayesian reasoning, and the central limit theorem. Develop the statistical intuition that separates rigorous data scientists from those who simply run models.</p><span class="card-tag" style="background:rgba(255,213,79,0.1);color:var(--accent-gold);">Intermediate</span></div>
+      <div class="card"><div class="card-icon" style="background:rgba(38,198,218,0.12);">🤖</div><h3>Machine Learning A–Z</h3><p>Regression, classification, clustering, and ensemble methods. Understand the mathematics behind gradient descent, SVMs, decision trees, and random forests through implementation from scratch.</p><span class="card-tag" style="background:rgba(38,198,218,0.1);color:var(--accent-teal);">Intermediate</span></div>
+      <div class="card"><div class="card-icon" style="background:rgba(124,77,255,0.12);">🧠</div><h3>Deep Learning & Neural Networks</h3><p>Backpropagation, CNNs, RNNs, Transformers, and attention mechanisms. Build image classifiers, text generators, and recommendation systems using TensorFlow and PyTorch.</p><span class="card-tag" style="background:rgba(124,77,255,0.12);color:var(--accent-violet);">Advanced</span></div>
+      <div class="card"><div class="card-icon" style="background:rgba(79,195,247,0.12);">📈</div><h3>Data Visualization</h3><p>Craft compelling, publication-ready visualizations with Matplotlib, Seaborn, and Plotly. Learn the grammar of graphics, color theory for data, and interactive dashboard development with Streamlit.</p><span class="card-tag" style="background:rgba(79,195,247,0.1);color:var(--accent-cyan);">Beginner</span></div>
+      <div class="card"><div class="card-icon" style="background:rgba(255,213,79,0.12);">🗄️</div><h3>SQL & Database Engineering</h3><p>Write advanced SQL queries, design normalized schemas, and query data warehouses at scale. Cover window functions, CTEs, query optimization, and integration with Python analytics workflows.</p><span class="card-tag" style="background:rgba(255,213,79,0.1);color:var(--accent-gold);">Beginner</span></div>
+      <div class="card"><div class="card-icon" style="background:rgba(38,198,218,0.12);">☁️</div><h3>MLOps & Deployment</h3><p>Package, containerize, and serve models in production. Cover Docker, Kubernetes, FastAPI, CI/CD pipelines, model versioning with MLflow, and cloud deployment on AWS SageMaker and GCP Vertex AI.</p><span class="card-tag" style="background:rgba(38,198,218,0.1);color:var(--accent-teal);">Advanced</span></div>
+      <div class="card"><div class="card-icon" style="background:rgba(124,77,255,0.12);">🗣️</div><h3>Natural Language Processing</h3><p>Text preprocessing, word embeddings, sentiment analysis, named entity recognition, and fine-tuning large language models. Build production NLP pipelines with spaCy, Hugging Face Transformers, and LangChain.</p><span class="card-tag" style="background:rgba(124,77,255,0.12);color:var(--accent-violet);">Advanced</span></div>
+      <div class="card"><div class="card-icon" style="background:rgba(79,195,247,0.12);">⏱️</div><h3>Time Series Analysis</h3><p>Stationarity, autocorrelation, ARIMA, SARIMA, and Facebook Prophet. Forecast financial data, demand, and sensor streams. Apply LSTM and Temporal Fusion Transformers for state-of-the-art accuracy.</p><span class="card-tag" style="background:rgba(79,195,247,0.1);color:var(--accent-cyan);">Intermediate</span></div>
+    </div>
+  </div>
+</section>
+
+<hr class="ad-divider">
+<div class="ad-unit">
+  <!-- Mid-Page Banner -->
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-4575646748966866"
+       data-ad-slot="4226674403"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</div>
+<hr class="ad-divider">
+
+<section id="comments">
+  <div class="container">
+    <div class="section-label">Community</div>
+    <h1 class="section-title">Discussion & <span>Comments</span></h1>
+    <div class="comment-box">
+      <h3>✍️ Leave a Comment</h3>
+      <div class="form-row">
+        <div class="form-group"><label>Your Name *</label><input type="text" id="commentName" placeholder="Enter your name" /></div>
+        <div class="form-group"><label>Email (optional)</label><input type="email" id="commentEmail" placeholder="your@email.com" /></div>
+      </div>
+      <div class="form-group" style="margin-bottom:1rem;"><label>Your Comment *</label><textarea id="commentText" rows="4" placeholder="Share your thoughts, questions, or insights about this tutorial..."></textarea></div>
+      <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
+        <button class="btn-primary" onclick="submitComment()">▸ Post Comment</button>
+        <button class="btn-primary" style="background:linear-gradient(135deg,var(--accent-teal),var(--accent-cyan));font-size:0.72rem;" onclick="getAIResponse()">🤖 Ask AI about this topic</button>
+      </div>
+      <div class="ai-thinking" id="aiThinking"><div class="dot-loader"><span></span><span></span><span></span></div>AI is thinking...</div>
+    </div>
+    <div class="comments-list" id="commentsList">
+      <div class="comment-item"><div class="comment-meta"><div class="comment-avatar">JR</div><div><div class="comment-author">James Rodriguez</div><div style="font-size:0.65rem;color:var(--text-muted);font-family:'DM Mono',monospace;">Data Analyst</div></div><div class="comment-date">Feb 28, 2026</div></div><div class="comment-body">This is exactly the kind of structured, comprehensive resource I've been looking for. The section on the data science lifecycle is particularly well-written — most introductions skip over the importance of problem definition and jump straight into modeling. Thank you for taking this seriously!</div></div>
+      <div class="comment-item"><div class="comment-meta"><div class="comment-avatar" style="background:linear-gradient(135deg,var(--accent-gold),#ff8c00);">MP</div><div><div class="comment-author">Mei Pham</div><div style="font-size:0.65rem;color:var(--text-muted);font-family:'DM Mono',monospace;">ML Engineer</div></div><div class="comment-date">Mar 1, 2026</div></div><div class="comment-body">The ethics section is a breath of fresh air in a field that often treats fairness as an afterthought. Would love to see a dedicated deep-dive module on fairness metrics and bias auditing. This content is clearly written by someone who genuinely practices data science rather than just teaches it.</div></div>
+      <div class="comment-item"><div class="comment-meta"><div class="comment-avatar" style="background:linear-gradient(135deg,var(--accent-teal),#00897b);">🤖</div><div><div class="comment-author">Valleys & Bytes AI</div><div style="font-size:0.65rem;color:var(--accent-cyan);font-family:'DM Mono',monospace;">AI Assistant</div></div><div class="comment-date">Mar 2, 2026</div></div><div class="comment-body">Great question about getting started! I recommend beginning with Python fundamentals and NumPy/Pandas before jumping into machine learning. The most common beginner mistake is rushing to deep learning without solid statistical foundations. A practical first project might be exploratory analysis on a Kaggle dataset like the Titanic or House Prices competition — both have strong community resources and teach the full data science cycle in a contained setting.</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="subscribe">
+  <div class="container">
+    <div class="section-label">Stay Current</div>
+    <h1 class="section-title">Subscribe to <span>Valleys & Bytes</span></h1>
+    <div class="subscribe-box">
+      <h2>📬 Get New Tutorials Delivered</h2>
+      <p>Join thousands of data practitioners who receive our in-depth tutorials, curated tools, and career insights directly in their inbox. No spam. Unsubscribe anytime.</p>
+      <div class="subscribe-form">
+        <input type="text" id="subName" placeholder="Your first name" />
+        <input type="email" id="subEmail" placeholder="your@email.com" />
+        <button class="btn-primary" onclick="handleSubscribe()" style="width:100%;max-width:480px;justify-content:center;">✦ Subscribe Free</button>
+      </div>
+      <div class="subscribe-status" id="subscribeStatus"></div>
+      <div class="subscribers-count"><span>🔥</span><strong id="subCount">4,217</strong><span>data practitioners already subscribed</span></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><div class="logo">VALLEYS<span> & </span>BYTES</div><p>A premium data science learning platform crafted for practitioners who want depth, rigor, and clarity. From statistical foundations to production deployment — we cover the full stack of modern data science.</p>
+      <div class="social-links"><a class="social-link" href="#" onclick="shareToSocial('facebook')" title="Facebook">𝒇 &nbsp; Facebook</a><a class="social-link" href="#" onclick="shareToSocial('linkedin')" title="LinkedIn">in &nbsp; LinkedIn</a><a class="social-link" href="#" onclick="shareToSocial('twitter')" title="X / Twitter">𝕏 &nbsp; X / Twitter</a><a class="social-link" href="#" onclick="shareToSocial('whatsapp')" title="WhatsApp">💬 &nbsp; WhatsApp</a><a class="social-link" href="#" onclick="shareToSocial('telegram')" title="Telegram">✈ &nbsp; Telegram</a></div></div>
+      <div class="footer-col"><h4>Tutorials</h4>
+      <ul>
+        <li><a href="python-fundamentals.html">Python Fundamentals</a></li>
+        <li><a href="python-tutorials.html">Python Tutorials</a></li>
+        </ul>
+        </div>
+      <div class="footer-col"><h4>Resources</h4>
+      <ul>
+        <li><a href="data-structure.html">Data Structure</a></li>
+        <li><a href="oop-cheatsheet.html">Cheat Sheets</a></li>
+        <li><a href="oop-projects.html">Project Templates</a></li>
+        <li><a href="machine-learning.html">Machine Learning</a></li>
+        <li><a href="about-guide.html">About this Guide</a></li>
+         </ul>
+        </div>
+      <div class="footer-col footer-newsletter"><h4>Quick Subscribe</h4><p style="font-size:v(--body-size);color:var(--text-muted);margin-bottom:0.75rem;line-height:1.6;">Get weekly data science insights and tutorials.</p><input type="email" placeholder="your@email.com" id="footerEmail" /><button class="btn-small" onclick="handleFooterSub()">Subscribe →</button><p style="font-size:0.65rem;color:var(--text-muted);margin-top:0.75rem;font-family:'DM Mono',monospace;">✓ Free weekly tutorials &nbsp; ✓ No spam &nbsp; ✓ Unsubscribe anytime</p></div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Valleys & Bytes. Made with data precision for the data science community.<br> Contact: <a href="oop-contact.html"</a></p>
+      <div class="legal-links"><div class="legal-links-label">Legal</div>
+      <a class="legal-btn" href="oop-privacy.html"><span class="lb-icon">⚖</span><span>Privacy Policy</span></a>
+      <a class="legal-btn" href="oop-terms.html"><span class="lb-icon">📄</span><span>Terms of Use</span></a>
+      <a class="legal-btn" href="oop-cookie.html"><span class="lb-icon">🍪</span><span>Cookie Policy</span></a>
+      <a class="legal-btn" href="oop-about.html"><span class="lb-icon">♿</span><span>About this Page</span></a></div>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"><span class="toast-icon" id="toastIcon">✓</span><span id="toastMessage">Action completed!</span></div>
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  function toggleMenu(e) { e.stopPropagation(); const btn = document.getElementById('hamburger'); const menu = document.getElementById('navMenu'); const isOpen = menu.classList.contains('open'); if (isOpen) { btn.classList.remove('open'); menu.classList.remove('open'); } else { btn.classList.add('open'); menu.classList.add('open'); } }
+  function closeMenu() { document.getElementById('hamburger').classList.remove('open'); document.getElementById('navMenu').classList.remove('open'); }
+  document.addEventListener('click', (e) => { const menu = document.getElementById('navMenu'); if (menu && menu.classList.contains('open') && !menu.contains(e.target)) closeMenu(); });
+  window.addEventListener('scroll', () => { const scrollTop = window.scrollY; const docHeight = document.documentElement.scrollHeight - window.innerHeight; const pct = (scrollTop / docHeight) * 100; document.getElementById('progressBar').style.width = pct + '%'; const backTop = document.getElementById('backTop'); if (scrollTop > 300) backTop.classList.add('show'); else backTop.classList.remove('show'); });
+  function showToast(msg, icon = '✓') { const toast = document.getElementById('toast'); document.getElementById('toastMessage').textContent = msg; document.getElementById('toastIcon').textContent = icon; toast.classList.add('show'); setTimeout(() => toast.classList.remove('show'), 3000); }
+  function shareToSocial(platform) { const url = encodeURIComponent(window.location.href); const title = encodeURIComponent('Data Science Tutorials | Valleys & Bytes — Master Data Science from Zero to Deploy'); const urls = { facebook: `https://www.facebook.com/sharer/sharer.php?u=${url}`, linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${url}`, twitter: `https://twitter.com/intent/tweet?url=${url}&text=${title}`, whatsapp: `https://api.whatsapp.com/send?text=${title}%20${url}`, telegram: `https://t.me/share/url?url=${url}&text=${title}`, youtube: `https://www.youtube.com/results?search_query=data+science+tutorials` }; const labels = { facebook:'Facebook', linkedin:'LinkedIn', twitter:'𝕏 / Twitter', whatsapp:'WhatsApp', telegram:'Telegram', youtube:'YouTube' }; if (urls[platform]) { window.open(urls[platform], '_blank', 'width=600,height=500,noopener'); showToast(`Sharing to ${labels[platform]}...`, '🚀'); } }
+  const comments = [];
+  function submitComment() { const name = document.getElementById('commentName').value.trim(); const text = document.getElementById('commentText').value.trim(); if (!name) { showToast('Please enter your name.', '⚠'); return; } if (!text) { showToast('Please write a comment.', '⚠'); return; } const comment = { name, email: document.getElementById('commentEmail').value, text, date: new Date().toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' }), initials: name.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2) }; comments.push(comment); renderComment(comment); document.getElementById('commentName').value=''; document.getElementById('commentEmail').value=''; document.getElementById('commentText').value=''; showToast('Comment posted successfully!', '✓'); }
+  function renderComment(c) { const list=document.getElementById('commentsList'); const hues=['135deg,var(--accent-cyan),var(--accent-violet)','135deg,var(--accent-gold),#e67e22','135deg,var(--accent-teal),#00695c']; const grad=hues[Math.floor(Math.random()*hues.length)]; const el=document.createElement('div'); el.className='comment-item'; el.innerHTML=`<div class="comment-meta"><div class="comment-avatar" style="background:linear-gradient(${grad})">${c.initials}</div><div><div class="comment-author">${escHtml(c.name)}</div><div style="font-size:0.65rem;color:var(--text-muted);font-family:'DM Mono',monospace;">Community Member</div></div><div class="comment-date">${c.date}</div></div><div class="comment-body">${escHtml(c.text)}</div>`; list.insertBefore(el,list.firstChild); }
+  function escHtml(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+  async function getAIResponse() { const topic=document.getElementById('commentText').value.trim()||document.getElementById('commentName').value.trim()||'data science fundamentals'; if(!topic){showToast('Type a question in the comment box first!','⚠');return;} const thinking=document.getElementById('aiThinking'); thinking.classList.add('show'); try { const response=await fetch('https://api.anthropic.com/v1/messages',{ method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ model:'claude-sonnet-4-20250514', max_tokens:1000, system:'You are a knowledgeable, friendly data science educator for the Valleys & Bytes learning platform. Respond in 2-4 short, practical paragraphs. Be encouraging, precise, and give concrete next steps when relevant. Keep your tone professional but approachable.', messages:[{role:'user',content:`Data science question: "${topic}"`}] }) }); const data=await response.json(); const aiText=data.content?.map(i=>i.text||'').join('\n')||'Sorry, I could not generate a response right now.'; const now=new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}); const list=document.getElementById('commentsList'); const el=document.createElement('div'); el.className='comment-item'; el.innerHTML=`<div class="comment-meta"><div class="comment-avatar" style="background:linear-gradient(135deg,var(--accent-teal),#00897b);font-size:0.9rem;">🤖</div><div><div class="comment-author">Valleys & Bytes AI</div><div style="font-size:0.65rem;color:var(--accent-cyan);font-family:'DM Mono',monospace;">AI Assistant · responding to: "${escHtml(topic.slice(0,60))}${topic.length>60?'...':''}"</div></div><div class="comment-date">${now}</div></div><div class="comment-body">${escHtml(aiText)}</div>`; list.insertBefore(el,list.firstChild); showToast('AI response generated!','🤖'); } catch(err) { showToast('AI unavailable right now. Please try again.','⚠'); } finally { thinking.classList.remove('show'); } }
+  const subscribers=JSON.parse(localStorage.getItem('vb_subscribers')||'[]'); let subCount=4217+subscribers.length; document.getElementById('subCount').textContent=subCount.toLocaleString();
+  function handleSubscribe() { const name=document.getElementById('subName').value.trim(); const email=document.getElementById('subEmail').value.trim(); const status=document.getElementById('subscribeStatus'); if(!email){status.style.color='#ff6b6b';status.textContent='⚠ Please enter your email address.';return;} if(!email.includes('@')){status.style.color='#ff6b6b';status.textContent='⚠ Please enter a valid email address.';return;} if(subscribers.some(s=>s.email===email)){status.style.color='var(--accent-gold)';status.textContent='✓ You\'re already subscribed! Check your inbox.';return;} const sub={name,email,date:new Date().toISOString()}; subscribers.push(sub); localStorage.setItem('vb_subscribers',JSON.stringify(subscribers)); subCount++; document.getElementById('subCount').textContent=subCount.toLocaleString(); status.style.color='var(--accent-cyan)'; status.textContent=`✓ Welcome${name?', '+name:''}! You\'re now subscribed to Valleys & Bytes.`; document.getElementById('subName').value=''; document.getElementById('subEmail').value=''; showToast('Subscription confirmed! Welcome aboard 🎉','✦'); }
+  function handleFooterSub() { const email=document.getElementById('footerEmail').value.trim(); if(!email||!email.includes('@')){showToast('Please enter a valid email.','⚠');return;} if(subscribers.some(s=>s.email===email)){showToast('Already subscribed!','✓');return;} subscribers.push({email,date:new Date().toISOString()}); localStorage.setItem('vb_subscribers',JSON.stringify(subscribers)); document.getElementById('footerEmail').value=''; showToast('Subscribed! Great to have you.','✦'); }
+  const observer=new IntersectionObserver((entries)=>{ entries.forEach(e=>{ if(e.isIntersecting){ e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; } }); },{threshold:0.08}); document.querySelectorAll('[data-animate]').forEach(el => { el.style.opacity='0'; el.style.transform='translateY(20px)'; el.style.transition='opacity 0.6s ease, transform 0.6s ease'; observer.observe(el); });
+</script>
+</body>
+</html>
