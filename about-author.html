@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>About Glenn Junsay Pansensoy | Web Designer & Programmer</title>
+    <meta name="description" content="Glenn Junsay Pansensoy is a passionate programmer, web designer, and tech enthusiast specializing in full-stack development and digital innovation.">
+    <meta name="keywords" content="Glenn Junsay Pansensoy, Web Developer, Programmer, Web Designer, Code Sense, Zamboanga Peninsula, Tech Enthusiast">
+    <link rel="canonical" href="https://code-sense.pansensoyglenn.workers.dev/about-author.html">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://code-sense.pansensoyglenn.workers.dev/about-author.html">
+    <meta property="og:title" content="About Glenn Junsay Pansensoy | Web Designer & Programmer">
+    <meta property="og:description" content="Explore the portfolio and technical expertise of Glenn Junsay Pansensoy.">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Glenn Junsay Pansensoy",
+      "url": "https://code-sense.pansensoyglenn.workers.dev",
+      "email": "pansensoyglenn@gmail.com",
+      "jobTitle": "Web Designer and Developer",
+      "description": "A passionate programmer and technological enthusiast specialized in web design and development."
+    }
+    </script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --obsidian: #05070a;
+            --midnight: #0f172a;
+            --electric-blue: #38bdf8;
+            --slate-text: #94a3b8;
+            --glass-white: rgba(255, 255, 255, 0.05);
+            --border-glow: rgba(56, 189, 248, 0.3);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--obsidian);
+            color: #f1f5f9;
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .about-card {
+            background-color: var(--midnight);
+            max-width: 950px;
+            width: 100%;
+            display: flex;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border-glow);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .sidebar {
+            background-color: #020617;
+            padding: 40px 20px;
+            flex: 0 0 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            border-right: 1px solid var(--border-glow);
+        }
+
+        .avatar-container {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--electric-blue), #1e40af);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 50px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 20px var(--border-glow);
+            border: 3px solid var(--midnight);
+        }
+
+        h1 { font-size: 1rem; margin-bottom: 5px; letter-spacing: 0.5px; }
+        .role { color: var(--electric-blue); font-weight: 600; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 1px; margin-bottom: 25px; }
+
+        .social-grid { display: flex; gap: 10px; margin-bottom: 30px; }
+        .social-grid a {
+            color: var(--slate-text);
+            font-size: 1.1rem;
+            width: 35px;
+            height: 35px;
+            background: var(--glass-white);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .social-grid a:hover { color: white; background: var(--electric-blue); }
+
+        .content {
+            flex: 1;
+            padding: 40px;
+            background: linear-gradient(135deg, #0f172a 0%, #020617 100%);
+        }
+
+        h2 { font-size: 1rem; margin-bottom: 15px; background: linear-gradient(to right, #fff, var(--electric-blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .bio-text { color: var(--slate-text); margin-bottom: 25px; font-size: 0.8rem; text-align: justify; }
+
+        .section-header { font-size: 0.9rem; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; color: #fff; font-weight: bold; }
+        .section-header::after { content: ""; height: 1px; background: var(--border-glow); flex-grow: 1; }
+
+        .grid-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .info-box {
+            background: var(--glass-white);
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .info-box h3 { font-size: 0.8rem; color: var(--electric-blue); margin-bottom: 8px; }
+        .info-box p { font-size: 0.75rem; color: var(--slate-text); text-align: justify; }
+
+        .skills-flex { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 30px; }
+        .skill-tag { background: rgba(56, 189, 248, 0.1); padding: 5px 12px; border-radius: 20px; font-size: 0.7rem; color: var(--electric-blue); border: 1px solid var(--border-glow); }
+
+        blockquote { background: rgba(56, 189, 248, 0.03); padding: 15px; border-radius: 10px; border-left: 3px solid var(--electric-blue); margin-bottom: 30px; font-style: italic; color: #cbd5e1; font-size: 0.8rem; text-align: justify; }
+
+        .contact-footer { display: flex; justify-content: space-between; align-items: center; padding-top: 25px; border-top: 1px solid var(--glass-white); }
+        .contact-email { font-family: 'Courier New', monospace; color: var(--electric-blue); font-size: 0.8rem; }
+        .btn-hire { background: var(--electric-blue); color: var(--obsidian); padding: 8px 20px; border-radius: 6px; text-decoration: none; font-weight: 700; font-size: 0.8rem; transition: 0.3s; }
+
+        @media (max-width: 850px) {
+            .about-card { flex-direction: column; }
+            .sidebar { border-right: none; border-bottom: 1px solid var(--border-glow); flex: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <main class="about-card" role="main">
+        <aside class="sidebar">
+            <div class="avatar-container">
+                <i class="fas fa-terminal"></i>
+            </div>
+            <h1>Glenn J. Pansensoy</h1>
+            <p class="role">Programmer & Designer</p>
+            
+            <nav class="social-grid">
+                <a href="mailto:pansensoyglenn@gmail.com" aria-label="Email Glenn"><i class="fas fa-envelope"></i></a>
+                <a href="https://pansensoyglenn-dev.github.io/code-sense/" aria-label="GitHub Profile"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/glenn-pansensoy-6288453a2" aria-label="LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
+            </nav>
+
+            <div class="stats-column" style="width: 100%; border-top: 1px solid var(--glass-white); padding-top: 20px;">
+                <div style="margin-bottom: 15px;">
+                    <span style="display: block; font-weight: bold; color: white; font-size: 1rem;">VALLEYS & BYTES</span>
+                    <span style="font-size: 0.7rem; color: var(--slate-text); text-transform: uppercase;">Digital Identity</span>
+                </div>
+            </div>
+        </aside>
+
+        <article class="content">
+            <header>
+                <h2>Engineering Better Digital Experiences</h2>
+                <p class="bio-text">
+                    Glenn Junsay Pansensoy is a dedicated <strong>Web Designer and Developer</strong> based in the Philippines. I specialize in bridging the gap between sophisticated backend logic and user-centric frontend design. My mission is to translate complex business requirements into seamless, high-performance digital products that provide value at every interaction point.
+                </p>
+            </header>
+
+            <section>
+                <div class="section-header">Operational Methodologies</div>
+                <div class="grid-layout">
+                    <div class="info-box">
+                        <h3>Strategy & Concept</h3>
+                        <p>Every project begins with deep research to understand the core purpose. I prioritize user journeys and SEO-friendly architecture from the first prototype.</p>
+                    </div>
+                    <div class="info-box">
+                        <h3>Responsive Development</h3>
+                        <p>I build with scalability in mind, utilizing modern web standards to ensure your site performs flawlessly across mobile, tablet, and desktop devices.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <div class="section-header">Core Expertise</div>
+                <div class="skills-flex">
+                    <span class="skill-tag">Web Development</span>
+                    <span class="skill-tag">SEO Optimization</span>
+                    <span class="skill-tag">UI/UX Design</span>
+                    <span class="skill-tag">Clean Programming</span>
+                    <span class="skill-tag">Cloudflare Workers</span>
+                    <span class="skill-tag">Technical Architecture</span>
+                </div>
+            </section>
+
+            <blockquote>
+                "Effective code is not just about solving a problem; it's about creating a sustainable and accessible solution for the future."
+            </blockquote>
+
+            <footer class="contact-footer">
+                <div>
+                    <span style="display: block; font-size: 0.7rem; color: var(--slate-text);">Business Inquiries</span>
+                    <span class="contact-email">pansensoyglenn@gmail.com</span>
+                </div>
+                <a href="oop-contact.html" class="btn-hire">Connect Now</a>
+            </footer>
+        </article>
+    </main>
+
+</body>
+</html>
