@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Programming Lab | VALLEYS & BYTES</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --obsidian: #05070a;
+            --midnight: #0f172a;
+            --electric-blue: #38bdf8;
+            --neon-purple: #a855f7;
+            --slate-text: #94a3b8;
+            --glass-white: rgba(255, 255, 255, 0.05);
+            --border-glow: rgba(56, 189, 248, 0.3);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--obsidian);
+            color: #f1f5f9;
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .container { max-width: 1000px; margin: 0 auto; }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 40px;
+            background: var(--midnight);
+            border-radius: 20px;
+            border: 1px solid var(--border-glow);
+        }
+
+        h1 { font-size: 1.5rem; color: #fff; letter-spacing: 1px; }
+        .subtitle { color: var(--electric-blue); font-size: 0.9rem; text-transform: uppercase; margin-top: 10px; }
+
+        .quantum-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 25px;
+        }
+
+        .example-card {
+            background: var(--midnight);
+            border-radius: 15px;
+            border: 1px solid var(--glass-white);
+            padding: 25px;
+            transition: 0.3s;
+        }
+
+        .example-card:hover { border-color: var(--electric-blue); transform: translateY(-5px); }
+
+        h2 { font-size: 1rem; color: var(--electric-blue); margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+        p { font-size: 0.8rem; color: var(--slate-text); text-align: justify; margin-bottom: 15px; }
+
+        code-box {
+            display: block;
+            background: #020617;
+            padding: 15px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.75rem;
+            color: #cbd5e1;
+            border: 1px solid rgba(255,255,255,0.1);
+            white-space: pre;
+            overflow-x: auto;
+        }
+
+        .math-highlight { color: var(--neon-purple); font-weight: bold; }
+
+        @media (max-width: 600px) { .quantum-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Quantum Computing Laboratory</h1>
+            <p class="subtitle">10 Core Programming Concepts for the Quantum Era</p>
+        </header>
+
+        <main class="quantum-grid">
+            
+            <article class="example-card">
+                <h2><i class="fas fa-atom"></i> 01. Qubit Initialization</h2>
+                <p>Unlike a classical bit (0 or 1), a Qubit starts in a ground state but can hold complex probabilities.</p>
+                <code-box>qreg q[1]; // Declare 1 quantum register
+creg c[1]; // Declare 1 classical register</code-box>
+            </article>
+
+            <article class="example-card">
+                <h2><i class="fas fa-wave-square"></i> 02. Hadamard Gate (Superposition)</h2>
+                <p>The H-Gate puts a qubit into a state where it is 50% zero and 50% one simultaneously.</p>
+                <code-box>h q[0]; // Apply Hadamard gate
+// State: (|0&gt; + |1&gt;) / &radic;2</code-box>
+            </article>
+
+            <article class="example-card">
+                <h2><i class="fas fa-link"></i> 03. Pauli-X Gate (Quantum NOT)</h2>
+                <p>The X-Gate flips the state of a qubit, acting as the quantum equivalent of the classical NOT gate.</p>
+                <code-box>x q[0]; // Flips |0&gt; to |1&gt; or vice versa</code-box>
+            </article>
+
+            <article class="example-card">
+                <h2><i class="fas fa-project-diagram"></i> 04. CNOT Gate (Entanglement)</h2>
+                <p>Controlled-NOT links two qubits. If the control qubit is 1, the target qubit flips. This creates entanglement.</p>
+                <code-box>cx q[0], q[1]; // Control q0, Target q1</code-box>
+            </article>
+
+            <article class="example-card">
+                <h2><i class="fas fa-eye"></i> 05. Measurement</h2>
+                <p>Measurement forces the quantum "wavefunction" to collapse into a single classical 0 or 1 value.</p>
+                <code-box>measure q[0] -> c[0]; // Collapse to classical bit</code-box>
+            </article>
+
+            <article class="example-card">
+                <h2><i class="fas fa-random"></i> 06. Bell State Pair</h2>
+                <p>Combining Hadamard and CNOT creates the simplest form of quantum entanglement between two particles.</p>
+                <code-box>h q[0];
+cx q[0], q[1];
+// Result: Perfectly correlated qubits</code-box>
+            </article>
+
+            <article class="example-card">
+                <h2><i class="fas fa-user-astronaut"></i> 07. Quantum Teleportation</h2>
+                <p>Logic to move the state of one qubit to another using a pre-entangled pair and classical communication.</p>
+                <code-box>// Transferring state from q0 to q2
+h q[1]; cx q[1], q[2];
+cx q[0], q[1]; h q[0];</code-box>
+            </article>
+
+            <article class="example-card">
+                <h2><i class="fas fa-search"></i> 08. Grover’s Algorithm (Search)</h2>
+                <p>Quantum logic that finds an item in an unsorted database of $N$ items in roughly $\sqrt{N}$ steps.</p>
+                <code-box>// Oracle implementation
+h q[0..n];
+oracle(q);
+diffusion(q);</code-box>
+            </article>
+
+            <article class="example-card">
+                <h2><i class="fas fa-shield-alt"></i> 09. Quantum Key Distribution (BB84)</h2>
+                <p>Uses quantum mechanics to ensure secure communication. Any eavesdropping attempt collapses the state.</p>
+                <code-box>if (basis_match) {
+    keep_key_bit();
+} else {
+    discard();
+}</code-box>
+            </article>
+
+            <article class="example-card">
+                <h2><i class="fas fa-microchip"></i> 10. Toffoli Gate (CCNOT)</h2>
+                <p>A universal reversible logic gate with two control bits and one target. Essential for quantum arithmetic.</p>
+                <code-box>ccx q[0], q[1], q[2]; // If q0 & q1 are 1, flip q2</code-box>
+            </article>
+
+        </main>
+        
+        <footer style="margin-top: 50px; text-align: center; color: var(--slate-text); font-size: 0.7rem;">
+            &copy; 2026 Code Sense | Glenn Junsay Pansensoy | Designed for the Quantum Future
+        </footer>
+    </div>
+
+</body>
+</html>
