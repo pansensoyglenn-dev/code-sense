@@ -1,0 +1,3113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>Python ATM System: OOP, Security & Design Patterns | Valleys &amp; Bytes</title>
+<meta name="description" content="Build a production-ready ATM system in Python. Master OOP encapsulation, SHA-256 PIN hashing, Command & Observer patterns, unit testing, and a live interactive simulator. The most comprehensive Python ATM tutorial online."/>
+<meta name="keywords" content="Python ATM system, Python OOP tutorial, object-oriented programming, encapsulation Python, design patterns Python, SHA-256 PIN hashing, Python banking project, Python beginner to intermediate, Python unit testing, Valleys and Bytes"/>
+<meta name="author" content="Valleys &amp; Bytes"/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://code-sense.pansensoyglenn.workers.dev/atm.html"/>
+
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="Python ATM System: OOP, Security &amp; Design Patterns | Valleys &amp; Bytes"/>
+<meta property="og:description" content="The most comprehensive Python ATM programming tutorial — covering OOP encapsulation, SHA-256 security, Gang of Four design patterns, unit testing, and a live interactive simulator."/>
+<meta property="og:url" content="https://code-sense.pansensoyglenn.workers.dev/atm.html"/>
+<meta property="og:site_name" content="Valleys &amp; Bytes"/>
+<meta property="og:locale" content="en_US"/>
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Python ATM System: OOP, Security &amp; Design Patterns"/>
+<meta name="twitter:description" content="Build a production-ready ATM in Python. Learn OOP encapsulation, SHA-256 PIN hashing, design patterns, and testing through a live interactive simulator."/>
+<meta name="twitter:site" content="@valleysandbytes"/>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "Python ATM System: OOP, Security & Design Patterns",
+  "description": "A comprehensive guide to building a production-ready ATM system in Python, covering OOP encapsulation, SHA-256 PIN hashing, Command and Observer design patterns, unit testing strategy, and a live interactive browser simulator.",
+  "author": {
+    "@type": "Organization",
+    "name": "Valleys & Bytes",
+    "url": "https://code-sense.pansensoyglenn.workers.dev/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Valleys & Bytes",
+    "url": "https://code-sense.pansensoyglenn.workers.dev/"
+  },
+  "url": "https://code-sense.pansensoyglenn.workers.dev/atm.html",
+  "datePublished": "2025-02-28",
+  "inLanguage": "en",
+  "keywords": ["Python", "OOP", "ATM", "Encapsulation", "Design Patterns", "SHA-256", "Banking Software", "Unit Testing", "Object-Oriented Programming"],
+  "educationalLevel": "Intermediate to Advanced",
+  "learningResourceType": "Tutorial",
+  "teaches": "Python Object-Oriented Programming through a real-world ATM system",
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Valleys & Bytes", "item": "https://code-sense.pansensoyglenn.workers.dev/" },
+      { "@type": "ListItem", "position": 2, "name": "Encapsulation Hub", "item": "https://code-sense.pansensoyglenn.workers.dev/encapsulation.html" },
+      { "@type": "ListItem", "position": 3, "name": "Python ATM System", "item": "https://code-sense.pansensoyglenn.workers.dev/atm.html" }
+    ]
+  }
+}
+</script>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;0,700;1,300;1,600&family=JetBrains+Mono:wght@300;400;500&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --obsidian:    #0a0a0f;
+  --obsidian-2:  #0e0e16;
+  --obsidian-3:  #13131e;
+  --obsidian-4:  #1a1a28;
+  --midnight:    #0d1b3e;
+  --midnight-2:  #112050;
+  --midnight-3:  #1a2f6e;
+  --blue-glow:   #2563eb;
+  --blue-mid:    #3b82f6;
+  --blue-light:  #60a5fa;
+  --blue-pale:   #93c5fd;
+  --cyan:        #06b6d4;
+  --cyan-soft:   #22d3ee;
+  --silver:      #cbd5e1;
+  --silver-dim:  #64748b;
+  --white:       #f1f5f9;
+  --white-soft:  #e2e8f0;
+  --accent-gold: #f59e0b;
+  --red-like:    #ef4444;
+  --green-love:  #10b981;
+  --border:      #1e2a4a;
+  --border-soft: #1a2035;
+  --card-bg:     #0f1220;
+  --input-bg:    #111827;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:hidden;max-width:100%}
+body{
+  background:var(--obsidian);
+  color:#e8edf5;
+  font-family:'Outfit',sans-serif;
+  font-weight:300;
+  line-height:1.7;
+  overflow-x:hidden;
+  cursor:none;
+  text-align:justify;
+}
+
+.cursor{position:fixed;width:10px;height:10px;background:var(--blue-mid);border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:transform .1s,background .2s;mix-blend-mode:screen}
+.cursor-ring{position:fixed;width:32px;height:32px;border:1px solid var(--blue-light);border-radius:50%;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:transform .18s ease,width .2s,height .2s,opacity .2s;opacity:.5}
+body:hover .cursor-ring{opacity:.7}
+
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:9999;opacity:.4;
+}
+
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 40px;
+  background:linear-gradient(180deg,#0a0a0fee 0%,#0a0a0f00 100%);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid #1e2a4a44;
+  transition:background .3s;
+  gap:20px;
+}
+nav.scrolled{background:#0a0a0ff5;border-bottom-color:var(--border)}
+
+.nav-btn-bar{
+  display:flex;align-items:center;gap:4px;
+  flex-wrap:nowrap;overflow:hidden;
+}
+.nav-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:7px 13px;
+  border-radius:6px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:.68rem;
+  font-weight:400;
+  letter-spacing:.04em;
+  color:var(--silver-dim);
+  background:transparent;
+  border:1px solid transparent;
+  text-decoration:none;
+  cursor:none;
+  white-space:nowrap;
+  transition:color .2s, background .2s, border-color .2s, transform .15s, box-shadow .2s;
+  position:relative;
+}
+.nav-btn .nb-icon{
+  font-size:.85rem;
+  line-height:1;
+  transition:transform .2s;
+}
+.nav-btn:hover{
+  color:var(--blue-light);
+  background:#2563eb0e;
+  border-color:#2563eb33;
+  transform:translateY(-1px);
+  box-shadow:0 4px 16px #2563eb1a;
+}
+.nav-btn:hover .nb-icon{
+  transform:scale(1.15);
+}
+.nav-btn.nb-active{
+  color:var(--blue-light);
+  background:#2563eb14;
+  border-color:#2563eb44;
+}
+.nav-btn::after{
+  content:'';
+  position:absolute;
+  bottom:-1px;left:50%;right:50%;
+  height:1px;background:var(--blue-light);
+  transition:left .2s,right .2s;
+  opacity:0;
+}
+.nav-btn:hover::after{left:10%;right:10%;opacity:.6}
+
+.nav-social-pills{
+  display:flex;align-items:center;gap:6px;
+  margin-left:8px;
+  padding-left:12px;
+  border-left:1px solid var(--border);
+}
+.nav-pill{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:5px 11px;
+  border-radius:100px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:.65rem;
+  font-weight:400;
+  color:var(--silver-dim);
+  border:1px solid var(--border-soft);
+  text-decoration:none;
+  cursor:none;
+  transition:all .2s;
+}
+.nav-pill:hover{color:var(--white);border-color:var(--silver-dim);background:#ffffff08}
+.nav-pill-x:hover{color:#fff;border-color:#555;background:#111}
+.nav-pill-li:hover{color:#fff;border-color:#0a66c2;background:#0a66c214}
+.nav-pill-gh:hover{color:#fff;border-color:#555;background:#24292f}
+
+@media(max-width:1100px){
+  .nav-btn-bar{display:none}
+  .nav-social-pills{display:none}
+  .hamburger{display:flex}
+}
+@media(min-width:1101px){
+  .hamburger{display:none}
+  .nav-overlay{display:none!important}
+}
+
+.nav-logo{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.55rem;font-weight:700;
+  color:var(--white);
+  letter-spacing:.02em;
+  text-decoration:none;
+}
+.nav-logo span{color:var(--blue-light)}
+
+.hamburger{
+  display:inline-flex;align-items:center;gap:10px;
+  cursor:pointer;
+  background:transparent;
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:8px 14px;
+  position:relative;z-index:1010;
+  color:var(--silver);
+  font-family:'JetBrains Mono',monospace;
+  font-size:.72rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  transition:color .2s,border-color .2s,background .2s,box-shadow .2s;
+}
+.hamburger:hover{
+  color:var(--blue-light);
+  border-color:var(--blue-mid);
+  background:#2563eb0c;
+  box-shadow:0 0 16px #2563eb1a;
+}
+.hamburger.open{
+  color:var(--blue-light);
+  border-color:var(--blue-mid);
+  background:#2563eb14;
+}
+.hbr-bars{
+  display:flex;flex-direction:column;gap:4px;
+}
+.hbr-bar{
+  display:block;width:18px;height:1.5px;
+  background:currentColor;
+  border-radius:2px;
+  transition:transform .32s cubic-bezier(.77,0,.175,1),opacity .2s,width .2s;
+}
+.hamburger.open .hbr-bars .hbr-bar:nth-child(1){transform:translateY(5.5px) rotate(45deg)}
+.hamburger.open .hbr-bars .hbr-bar:nth-child(2){opacity:0;width:0}
+.hamburger.open .hbr-bars .hbr-bar:nth-child(3){transform:translateY(-5.5px) rotate(-45deg)}
+.hbr-label{
+  font-size:.68rem;
+  letter-spacing:.14em;
+  line-height:1;
+}
+.hamburger.open .hbr-label{
+  opacity:0;
+  width:0;
+  overflow:hidden;
+  transition:opacity .2s,width .2s;
+}
+
+.nav-overlay{
+  position:fixed;inset:0;z-index:999;
+  background:#0a0a0fff;
+  display:flex;flex-direction:column;align-items:flex-start;justify-content:center;
+  gap:0;
+  padding:60px 0;
+  overflow-y:auto;
+  opacity:0;pointer-events:none;
+  transition:opacity .4s ease;
+}
+.nav-overlay.open{opacity:1;pointer-events:all}
+
+.nav-social{
+  display:flex;gap:12px;margin-top:32px;padding:0 40px;
+  transform:translateY(12px);opacity:0;
+  transition:transform .4s .55s ease,opacity .4s .55s ease;
+}
+.nav-overlay.open .nav-social{transform:translateY(0);opacity:1}
+
+.hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:120px 5vw 80px;
+  position:relative;
+  overflow:hidden;
+  text-align:center;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 30%,#0d1b3e88,transparent),
+    radial-gradient(ellipse 50% 40% at 80% 70%,#1a2f6e33,transparent),
+    radial-gradient(ellipse 40% 50% at 10% 60%,#06b6d411,transparent);
+}
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(var(--border-soft) 1px,transparent 1px),
+    linear-gradient(90deg,var(--border-soft) 1px,transparent 1px);
+  background-size:60px 60px;
+  opacity:.18;
+  mask-image:radial-gradient(ellipse 80% 80% at 50% 40%,black,transparent);
+}
+.hero-eyebrow{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.72rem;letter-spacing:.25em;
+  color:var(--cyan-soft);text-transform:uppercase;
+  margin-bottom:24px;
+  animation:fadeUp .8s .2s both;
+}
+.hero h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(3rem,8vw,6.5rem);
+  font-weight:700;line-height:1.05;
+  color:var(--white);
+  max-width:820px;
+  animation:fadeUp .8s .35s both;
+}
+.hero h1 em{font-style:italic;color:var(--blue-pale)}
+.hero-sub{
+  font-size:clamp(.95rem,2vw,1.15rem);
+  color:var(--silver-dim);font-weight:300;
+  max-width:560px;margin-top:20px;
+  animation:fadeUp .8s .5s both;
+}
+.hero-cta{
+  display:flex;gap:14px;flex-wrap:wrap;justify-content:center;
+  margin-top:40px;
+  animation:fadeUp .8s .65s both;
+}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 26px;border-radius:6px;
+  font-family:'Outfit',sans-serif;font-size:.88rem;font-weight:500;
+  text-decoration:none;cursor:none;border:none;
+  transition:transform .2s,box-shadow .2s,background .2s;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary{
+  background:var(--blue-glow);color:#fff;
+  box-shadow:0 0 24px #2563eb44;
+}
+.btn-primary:hover{background:var(--blue-mid);box-shadow:0 0 36px #3b82f666}
+.btn-ghost{
+  background:transparent;color:var(--silver);
+  border:1px solid var(--border);
+}
+.btn-ghost:hover{border-color:var(--blue-light);color:var(--blue-light);box-shadow:0 0 20px #3b82f622}
+.hero-scroll{
+  position:absolute;bottom:36px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  font-family:'JetBrains Mono',monospace;font-size:.65rem;
+  color:var(--silver-dim);letter-spacing:.15em;animation:fadeUp .8s .9s both;
+}
+.scroll-line{width:1px;height:40px;background:linear-gradient(var(--blue-light),transparent);animation:scrollPulse 2s infinite}
+@keyframes scrollPulse{0%{opacity:1;transform:scaleY(1)}100%{opacity:0;transform:scaleY(0);transform-origin:top}}
+
+.section{padding:80px 5vw}
+.section-inner{max-width:1080px;margin:0 auto}
+.section-label{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--cyan);margin-bottom:10px;
+}
+.section-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.8rem,4vw,3rem);
+  font-weight:700;color:var(--white);
+  line-height:1.15;margin-bottom:36px;
+}
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:0 0 60px}
+
+.intro-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+@media(max-width:720px){.intro-grid{grid-template-columns:1fr}}
+.intro-text p{color:var(--silver);font-size:1rem;margin-bottom:16px}
+.intro-text p:first-of-type{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.2rem;font-style:italic;color:var(--white-soft);
+  line-height:1.5;
+}
+.intro-stats{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.stat-card{
+  background:var(--card-bg);
+  border:1px solid var(--border);
+  border-radius:10px;padding:24px 20px;
+  text-align:center;
+  transition:border-color .3s,box-shadow .3s;
+}
+.stat-card:hover{border-color:var(--blue-mid);box-shadow:0 0 24px #2563eb22}
+.stat-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.2rem;font-weight:700;color:var(--blue-light);
+}
+.stat-lbl{font-size:.78rem;color:var(--silver-dim);font-family:'JetBrains Mono',monospace;letter-spacing:.1em}
+
+.posts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:24px}
+.post-card{
+  background:var(--card-bg);
+  border:1px solid var(--border);
+  border-radius:12px;overflow:hidden;
+  transition:transform .3s,box-shadow .3s,border-color .3s;
+  animation:fadeUp .6s both;
+}
+.post-card:hover{transform:translateY(-6px);box-shadow:0 20px 48px #00000066;border-color:var(--midnight-3)}
+.post-thumb{
+  height:180px;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+  font-size:3rem;
+}
+.post-thumb-1{background:linear-gradient(135deg,#0d1b3e,#1a2f6e)}
+.post-thumb-2{background:linear-gradient(135deg,#0a1628,#112050)}
+.post-thumb-3{background:linear-gradient(135deg,#060d1f,#0d1b3e)}
+.post-meta{
+  display:flex;align-items:center;gap:8px;
+  padding:16px 18px 0;
+}
+.post-tag{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--cyan);background:#06b6d411;
+  padding:3px 9px;border-radius:4px;border:1px solid #06b6d422;
+}
+.post-date{font-size:.75rem;color:var(--silver-dim);margin-left:auto}
+.post-body{padding:14px 18px 18px}
+.post-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.25rem;font-weight:600;color:var(--white);
+  margin-bottom:8px;line-height:1.3;
+}
+.post-excerpt{font-size:.85rem;color:var(--silver-dim);line-height:1.6}
+.post-footer{
+  display:flex;align-items:center;gap:10px;
+  padding:14px 18px;
+  border-top:1px solid var(--border-soft);
+}
+.post-author{font-size:.78rem;color:var(--silver-dim)}
+.post-read{
+  margin-left:auto;font-size:.75rem;
+  color:var(--blue-light);
+  font-family:'JetBrains Mono',monospace;
+  text-decoration:none;cursor:none;
+  transition:color .2s;
+}
+.post-read:hover{color:var(--cyan)}
+
+.reactions-row{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 18px 14px;
+}
+.react-btn{
+  display:inline-flex;align-items:center;gap:5px;
+  background:none;border:1px solid var(--border);
+  border-radius:100px;padding:5px 12px;
+  font-size:.78rem;color:var(--silver-dim);
+  cursor:none;transition:all .2s;font-family:'Outfit',sans-serif;
+}
+.react-btn:hover,.react-btn.active{color:#fff}
+.react-btn.love:hover,.react-btn.love.active{background:#10b98122;border-color:var(--green-love);color:var(--green-love)}
+.react-btn.like:hover,.react-btn.like.active{background:#2563eb22;border-color:var(--blue-mid);color:var(--blue-light)}
+.react-btn span{font-size:1rem}
+
+.follow-section{
+  background:linear-gradient(135deg,var(--obsidian-3),var(--midnight));
+  border:1px solid var(--border);border-radius:16px;
+  padding:48px 40px;text-align:center;
+  position:relative;overflow:hidden;
+}
+.follow-section::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 60% at 50% 0%,#1a2f6e44,transparent);
+  pointer-events:none;
+}
+.follow-section h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.5rem,5vw,2.2rem);font-weight:700;color:var(--white);margin-bottom:12px;
+}
+.follow-section p{color:var(--silver-dim);max-width:480px;margin:0 auto 32px;font-size:.95rem}
+.follow-btns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.follow-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:11px 22px;border-radius:8px;
+  font-size:.85rem;font-weight:500;
+  cursor:none;border:none;text-decoration:none;
+  transition:transform .2s,box-shadow .2s,opacity .2s;
+  font-family:'Outfit',sans-serif;
+}
+.follow-btn:hover{transform:translateY(-3px);opacity:.9}
+.fb-btn{background:#1877f2;color:#fff}
+.tw-btn{background:#000;color:#fff;border:1px solid #333}
+.li-btn{background:#0a66c2;color:#fff}
+.gh-btn{background:#24292f;color:#fff;border:1px solid #444}
+.yt-btn{background:#ff0000;color:#fff}
+.follow-counts{
+  display:flex;gap:32px;justify-content:center;
+  margin-top:32px;flex-wrap:wrap;
+}
+.follow-count-item{text-align:center}
+.follow-count-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.8rem;font-weight:700;color:var(--blue-light);display:block;
+}
+.follow-count-lbl{font-size:.72rem;color:var(--silver-dim);font-family:'JetBrains Mono',monospace;letter-spacing:.1em}
+
+.share-section{
+  background:var(--card-bg);border:1px solid var(--border);
+  border-radius:16px;padding:36px;margin-top:32px;
+}
+.share-section h3{
+  font-family:'Cormorant Garamond',serif;font-size:1.5rem;
+  color:var(--white);margin-bottom:6px;
+}
+.share-section p{font-size:.85rem;color:var(--silver-dim);margin-bottom:20px}
+.ai-preview{
+  background:var(--obsidian-3);border:1px solid var(--border-soft);
+  border-radius:8px;padding:16px;margin-bottom:16px;
+  font-size:.85rem;color:var(--silver);line-height:1.6;
+  min-height:72px;font-family:'Outfit',sans-serif;
+}
+.ai-preview.loading{color:var(--silver-dim);font-style:italic}
+.ai-preview.loading::after{content:'▋';animation:blink .7s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.share-controls{display:flex;gap:10px;flex-wrap:wrap}
+.share-platform-btn{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:9px 18px;border-radius:6px;border:none;
+  font-size:.82rem;font-weight:500;cursor:none;
+  font-family:'Outfit',sans-serif;transition:transform .2s,opacity .2s;
+}
+.share-platform-btn:hover{transform:translateY(-2px);opacity:.88}
+.sp-fb{background:#1877f2;color:#fff}
+.sp-li{background:#0a66c2;color:#fff}
+.sp-x{background:#000;color:#fff;border:1px solid #333}
+.btn-gen{
+  background:linear-gradient(90deg,var(--blue-glow),var(--cyan));
+  color:#fff;padding:9px 18px;border-radius:6px;border:none;
+  font-size:.82rem;font-weight:500;cursor:none;
+  font-family:'Outfit',sans-serif;transition:opacity .2s,transform .2s;
+}
+.btn-gen:hover{opacity:.85;transform:translateY(-1px)}
+
+.comment-form{
+  background:var(--card-bg);border:1px solid var(--border);
+  border-radius:12px;padding:28px;margin-bottom:32px;
+}
+.comment-form h3{
+  font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--white);margin-bottom:18px;
+}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+@media(max-width:540px){.form-row{grid-template-columns:1fr}}
+.form-group{display:flex;flex-direction:column;gap:6px}
+.form-group label{font-size:.75rem;color:var(--silver-dim);font-family:'JetBrains Mono',monospace;letter-spacing:.08em}
+.form-group input,.form-group textarea,.form-group select{
+  background:var(--input-bg);border:1px solid var(--border);
+  border-radius:7px;padding:10px 14px;
+  color:var(--white);font-family:'Outfit',sans-serif;font-size:.88rem;
+  outline:none;transition:border-color .2s,box-shadow .2s;resize:vertical;
+}
+.form-group input:focus,.form-group textarea:focus{
+  border-color:var(--blue-mid);
+  box-shadow:0 0 16px #2563eb22;
+}
+.form-group textarea{min-height:100px}
+.form-submit{
+  background:var(--blue-glow);color:#fff;
+  padding:11px 24px;border-radius:7px;border:none;
+  font-size:.88rem;font-weight:500;cursor:none;
+  font-family:'Outfit',sans-serif;
+  transition:background .2s,box-shadow .2s,transform .2s;
+  margin-top:8px;
+}
+.form-submit:hover{background:var(--blue-mid);box-shadow:0 0 24px #3b82f644;transform:translateY(-1px)}
+.comments-list{display:flex;flex-direction:column;gap:18px}
+.comment-item{
+  background:var(--card-bg);border:1px solid var(--border-soft);
+  border-radius:10px;padding:20px;
+  animation:fadeUp .5s both;
+}
+.comment-header{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.comment-avatar{
+  width:38px;height:38px;border-radius:50%;
+  background:linear-gradient(135deg,var(--midnight-2),var(--midnight-3));
+  display:flex;align-items:center;justify-content:center;
+  font-size:.9rem;font-weight:600;color:var(--blue-pale);
+  font-family:'Cormorant Garamond',serif;flex-shrink:0;
+  border:1px solid var(--border);
+}
+.comment-meta{flex:1}
+.comment-name{font-size:.9rem;font-weight:500;color:var(--white)}
+.comment-time{font-size:.72rem;color:var(--silver-dim);font-family:'JetBrains Mono',monospace}
+.comment-text{font-size:.88rem;color:var(--silver);line-height:1.65}
+.comment-actions{display:flex;gap:10px;margin-top:10px}
+.comment-react{
+  background:none;border:none;font-size:.78rem;
+  color:var(--silver-dim);cursor:none;padding:3px 8px;
+  border-radius:4px;transition:color .2s,background .2s;
+  font-family:'Outfit',sans-serif;
+}
+.comment-react:hover{background:var(--obsidian-4);color:var(--blue-light)}
+.comment-react.liked{color:var(--blue-light)}
+
+.sub-section{
+  background:linear-gradient(135deg,var(--midnight) 0%,var(--obsidian-3) 60%,#06b6d408 100%);
+  border:1px solid var(--border);border-radius:20px;
+  padding:60px 48px;text-align:center;
+  position:relative;overflow:hidden;
+}
+.sub-section::before{
+  content:'';position:absolute;
+  top:-60px;left:50%;transform:translateX(-50%);
+  width:300px;height:300px;
+  background:radial-gradient(circle,#2563eb22,transparent 70%);
+  pointer-events:none;
+}
+.sub-section h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2rem,4vw,3.2rem);font-weight:700;
+  color:var(--white);margin-bottom:14px;
+}
+.sub-section p{color:var(--silver-dim);max-width:500px;margin:0 auto 32px;font-size:.95rem}
+.sub-plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:18px;margin-bottom:36px;text-align:left}
+.plan-card{
+  background:#0a0a0f;border:1px solid var(--border);
+  border-radius:12px;padding:24px;
+  transition:border-color .3s,box-shadow .3s,transform .3s;
+}
+.plan-card:hover{border-color:var(--blue-mid);box-shadow:0 12px 36px #2563eb22;transform:translateY(-4px)}
+.plan-card.featured{border-color:var(--blue-glow);background:var(--midnight);box-shadow:0 0 32px #2563eb33}
+.plan-name{font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cyan);margin-bottom:8px}
+.plan-price{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700;color:var(--white);line-height:1}
+.plan-price sup{font-size:1rem;vertical-align:top;margin-top:.5rem;color:var(--silver-dim)}
+.plan-price span{font-size:.75rem;color:var(--silver-dim);font-family:'Outfit',sans-serif;font-weight:300}
+.plan-desc{font-size:.8rem;color:var(--silver-dim);margin:10px 0 14px}
+.plan-features{list-style:none;display:flex;flex-direction:column;gap:7px}
+.plan-features li{font-size:.8rem;color:var(--silver);display:flex;align-items:center;gap:7px}
+.plan-features li::before{content:'→';color:var(--blue-light);font-family:'JetBrains Mono',monospace;font-size:.75rem}
+.plan-btn{
+  display:block;text-align:center;
+  margin-top:20px;padding:9px 18px;border-radius:7px;
+  font-size:.82rem;font-weight:500;cursor:none;border:none;
+  font-family:'Outfit',sans-serif;transition:all .2s;
+  text-decoration:none;
+}
+.plan-btn-outline{background:transparent;color:var(--silver);border:1px solid var(--border)}
+.plan-btn-outline:hover{border-color:var(--blue-mid);color:var(--blue-light)}
+.plan-btn-filled{background:var(--blue-glow);color:#fff}
+.plan-btn-filled:hover{background:var(--blue-mid);box-shadow:0 0 20px #3b82f644}
+
+.sub-email-row{
+  display:flex;gap:10px;max-width:480px;
+  margin:0 auto;flex-wrap:wrap;
+}
+.sub-email-row input{
+  flex:1;background:var(--input-bg);border:1px solid var(--border);
+  border-radius:7px;padding:12px 16px;
+  color:var(--white);font-family:'Outfit',sans-serif;font-size:.9rem;
+  outline:none;transition:border-color .2s,box-shadow .2s;
+}
+.sub-email-row input:focus{border-color:var(--blue-mid);box-shadow:0 0 16px #2563eb22}
+.sub-btn{
+  background:var(--blue-glow);color:#fff;
+  padding:12px 22px;border-radius:7px;border:none;
+  font-size:.88rem;font-weight:500;cursor:none;
+  font-family:'Outfit',sans-serif;white-space:nowrap;
+  transition:background .2s,box-shadow .2s,transform .2s;
+}
+.sub-btn:hover{background:var(--blue-mid);box-shadow:0 0 24px #3b82f655;transform:translateY(-1px)}
+.sub-note{font-size:.72rem;color:var(--silver-dim);margin-top:12px;font-family:'JetBrains Mono',monospace}
+.sub-success{
+  display:none;
+  background:#10b98118;border:1px solid var(--green-love);
+  border-radius:8px;padding:14px 20px;margin-top:14px;
+  color:var(--green-love);font-size:.88rem;
+  max-width:480px;margin-left:auto;margin-right:auto;
+}
+
+footer{
+  background:var(--obsidian-2);
+  border-top:1px solid var(--border);
+  padding:60px 5vw 28px;
+}
+.footer-inner{max-width:1080px;margin:0 auto}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
+@media(max-width:760px){.footer-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.footer-grid{grid-template-columns:1fr}}
+.footer-brand .nav-logo{display:inline-block;margin-bottom:14px;text-decoration:none}
+.footer-brand p{font-size:.85rem;color:#c8d4e8;line-height:1.65;max-width:260px;text-align:justify}
+.footer-social{display:flex;gap:10px;margin-top:18px}
+.footer-social a{
+  width:34px;height:34px;border-radius:6px;
+  background:var(--obsidian-4);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.8rem;color:#a0b4cc;text-decoration:none;
+  transition:color .2s,border-color .2s,background .2s;
+}
+.footer-social a:hover{color:var(--blue-light);border-color:var(--blue-mid);background:var(--midnight)}
+.footer-col h4{
+  font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--blue-light);margin-bottom:16px;
+  text-align:left;
+}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.footer-col ul a{
+  font-size:.83rem;color:#b8c8de;text-decoration:none;
+  transition:color .2s;display:flex;align-items:center;gap:6px;
+  text-align:left;
+}
+.footer-col ul a:hover{color:var(--white)}
+.footer-col ul a::before{content:'›';color:var(--blue-light);font-size:1rem}
+.footer-bottom{
+  display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:20px;
+  padding-top:28px;border-top:1px solid var(--border-soft);
+}
+.footer-copy{font-size:.75rem;color:#9aaec4;font-family:'JetBrains Mono',monospace;text-align:left}
+.footer-legal{
+  display:flex;flex-direction:column;align-items:flex-end;gap:8px;
+}
+.footer-legal a{
+  font-size:.75rem;color:#9aaec4;text-decoration:none;
+  transition:color .2s;font-family:'JetBrains Mono',monospace;
+  text-align:right;
+}
+.footer-legal a:hover{color:var(--blue-light)}
+.footer-tech{
+  font-family:'JetBrains Mono',monospace;font-size:.68rem;
+  color:#3a4a60;margin-top:14px;text-align:center;
+}
+
+.toast{
+  position:fixed;bottom:32px;right:32px;z-index:9000;
+  background:var(--obsidian-3);border:1px solid var(--border);
+  border-radius:10px;padding:14px 20px;
+  font-size:.85rem;color:var(--white);
+  box-shadow:0 12px 40px #00000088;
+  transform:translateY(20px);opacity:0;
+  transition:transform .3s,opacity .3s;
+  max-width:300px;
+}
+.toast.show{transform:translateY(0);opacity:1}
+.toast.success{border-color:var(--green-love);color:var(--green-love)}
+.toast.info{border-color:var(--blue-mid);color:var(--blue-light)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+
+@media(max-width:640px){
+  nav{padding:14px 22px}
+  .section{padding:60px 22px}
+  .sub-section{padding:40px 24px}
+  .follow-section{padding:36px 24px}
+  .sub-email-row{flex-direction:column}
+  .sub-btn{width:100%}
+  .share-controls{flex-direction:column}
+  .follow-btns{flex-direction:column;align-items:center}
+  footer{padding:48px 22px 24px}
+  .footer-bottom{flex-direction:column;align-items:flex-start;gap:16px}
+  .footer-legal{align-items:flex-start}
+}
+
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+@media (hover: none) and (pointer: coarse) {
+  .cursor, .cursor-ring { display: none !important; }
+  body { cursor: auto; }
+  button, a, [role="button"] { cursor: pointer !important; }
+}
+
+*,*::before,*::after { max-width: 100%; }
+img, video, iframe, pre, table { max-width: 100%; }
+
+pre { overflow-x: auto; white-space: pre; }
+.code-panel pre,
+.veg-source-pre { overflow-x: auto; white-space: pre; }
+
+.hero, .veggie-hero, .follow-section, .sub-section,
+.deep-read-visual { overflow: hidden; }
+
+@media (max-width: 900px) {
+  .section { padding: 64px 5vw; }
+  .code-panel pre { font-size: .78rem; }
+  .code-showcase-header { flex-wrap: wrap; gap: 6px; }
+  .flow-nodes { max-width: 100%; }
+  .reactions-row { flex-wrap: wrap; gap: 8px; }
+  .veggie-meta-pills { flex-wrap: wrap; gap: 6px; }
+  .steps-wrap { margin-top: 32px; }
+  .reading-type { font-size: .6rem; padding: 2px 7px; }
+  .tip-item { font-size: .65rem; }
+  .tips-track { gap: 40px; }
+  #termOutput { font-size: .7rem !important; }
+}
+
+@media (max-width: 640px) {
+  nav { padding: 13px 18px; }
+  .section { padding: 52px 18px; }
+  .divider { margin: 0 0 36px; }
+
+  
+  .hero { padding: 100px 18px 72px; }
+  .hero-cta { flex-direction: column; align-items: stretch; gap: 10px; }
+  .hero-cta .btn { width: 100%; justify-content: center; }
+
+  
+  .intro-grid { grid-template-columns: 1fr; gap: 32px; }
+  .intro-stats { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .stat-card { padding: 16px 10px; }
+  .stat-num { font-size: 1.4rem; }
+
+  
+  .deep-read { grid-template-columns: 1fr; }
+  .deep-read-visual { min-height: 220px; padding: 24px 20px; }
+  .deep-read-visual h3 { font-size: 1.45rem; }
+  .deep-read-glyph { font-size: 4.5rem; top: 16px; right: 16px; }
+  .deep-read-body { padding: 24px 20px; }
+  .deep-read-footer { flex-wrap: wrap; gap: 10px; }
+
+  
+  .veggie-hero { grid-template-columns: 1fr; padding: 28px 18px; gap: 24px; }
+  .veggie-hero h2 { font-size: clamp(1.6rem, 5vw, 2.2rem); }
+  .veggie-hero-glyph { display: none; }
+  .veggie-hero-stats { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .veggie-stat { padding: 14px 10px; }
+  .veggie-stat-n { font-size: 1.5rem; }
+
+  
+  .veg-source-bar { padding: 10px 14px; }
+  .veg-source-pre { font-size: .7rem; padding: 16px 12px; }
+
+  
+  .steps-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .step-filter-btn { font-size: .6rem; padding: 4px 10px; }
+
+  
+  .code-tab { padding: 9px 12px; font-size: .67rem; }
+  .code-panel pre { font-size: .7rem; padding: 16px 12px; }
+  .code-copy { top: 8px; right: 8px; font-size: .62rem; padding: 4px 8px; }
+  .code-lang-badge { font-size: .6rem; }
+
+  
+  .veg-flow { padding: 26px 16px; }
+  .flow-branch-wrap { flex-direction: column; margin-left: 16px; gap: 6px; }
+
+  
+  .follow-section { padding: 32px 18px; }
+  .follow-btns { flex-direction: column; align-items: stretch; gap: 8px; }
+  .follow-btn { justify-content: center; }
+  .follow-counts { gap: 16px; }
+
+  
+  .share-section { padding: 22px 16px; }
+  .share-controls { flex-direction: column; gap: 8px; }
+  .share-platform-btn, .btn-gen { width: 100%; justify-content: center; }
+
+  
+  .comment-form { padding: 20px 16px; }
+  .form-row { grid-template-columns: 1fr; gap: 10px; }
+
+  
+  .sub-section { padding: 36px 18px; }
+  .sub-email-row { flex-direction: column; gap: 8px; }
+  .sub-btn, .sub-email-row input { width: 100%; }
+  .sub-plans { grid-template-columns: 1fr; }
+
+  
+  .reading-item { grid-template-columns: auto 1fr; gap: 10px; padding: 12px 14px; }
+  .reading-type { display: none; }
+
+  
+  .pull-quote { padding: 18px 16px; }
+
+  
+  .authors-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .author-card { padding: 16px 12px; }
+  .author-avatar-lg { width: 56px; height: 56px; font-size: 1.4rem; }
+  .author-name { font-size: 1rem; }
+  .author-stats { gap: 10px; }
+
+  
+  footer { padding: 40px 18px 20px; }
+  .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .footer-legal { align-items: flex-start; }
+
+  
+  .toast { bottom: 12px; right: 12px; left: 12px; max-width: none; }
+
+  
+  
+  .nav-social { gap: 14px; margin-top: 24px; }
+}
+
+p, li, .post-excerpt, .intro-text p, .deep-read-body p,
+.radar-desc, .tool-desc, .author-bio, .digest-preview,
+.media-title, .veg-card-body p, .hero-sub,
+.follow-section p, .sub-section p, .share-section p,
+.comment-text, .plan-desc, .reading-info { text-align: justify; }
+
+h1,h2,h3,h4,h5,h6,
+.section-label,.section-title,.hero-eyebrow,
+.post-tag,.post-date,.post-author,.post-title,
+.radar-name,.radar-ring,.radar-category,
+.stat-lbl,.stat-num,.veggie-stat-l,.veggie-stat-n,
+.deep-badge,.deep-toc-title,.deep-meta-item,
+.deep-author-name,.deep-author-title,
+.media-ep,.media-meta,.digest-issue,.digest-date,
+.reading-num,.reading-title,.reading-author,.reading-type,
+.tool-name,.tool-tags,.tool-link,
+.author-name,.author-role,.author-stat-n,.author-stat-l,
+.card-title,.card-badge,.card-code-snippet,
+.veg-card-title,.veg-card-snippet,.veg-card-badge,
+.veg-step-num,.veggie-hero-label,.veggie-hero h2,
+.nav-logo,.hero-cta,.hero-scroll,
+.comment-name,.comment-time,.comment-actions,
+.step-filter-btn,.code-tab,.plan-name,.plan-price,
+.plan-features li,.sub-note,.digest-open,.flow-box,
+.flow-box-sm,.tip-item,.sub-success,
+button,a,label,select,input,code,.ic,
+[class*="badge"],[class*="tag"],[class*="pill"],
+[class*="label"],[class*="mono"],
+font-family\ JetBrains { text-align: left !important; }
+
+p { color: #dce6f5; }
+.post-excerpt { color: #c8d8ee; }
+.radar-desc { color: #c8d8ee; }
+.tool-desc { color: #c8d8ee; }
+.author-bio { color: #c8d8ee; }
+.digest-preview { color: #c8d8ee; }
+.veg-card-body p { color: #ccd8ee; }
+.intro-text p { color: #d8e4f4; }
+.deep-read-body p { color: #d0ddf0; }
+.hero-sub { color: #b8ccdf; }
+.plan-desc { color: #b8ccdf; }
+.plan-features li { color: #d0dce8; }
+.comment-text { color: #ccd8e8; }
+.reading-author { color: #9ab0c8; }
+.follow-section p { color: #c0cfe0; }
+.sub-section p { color: #c0cfe0; }
+.share-section p { color: #b8c8de; }
+.footer-brand p { color: #c0cfe0; }
+.footer-col ul a { color: #b8c8de; }
+.stat-lbl { color: #8aaccf; }
+.deep-meta-item { color: #9ab4cc; }
+.post-author { color: #8aaac4; }
+.post-date { color: #7a9ab8; }
+.section-title { color: #f0f4ff; }
+.post-title { color: #e8f0ff; }
+.radar-name { color: #e8eeff; }
+.tool-name { color: #e8eeff; }
+.author-name { color: #eef2ff; }
+.reading-title { color: #eaeeff; }
+.digest-title { color: #e8eeff; }
+.media-title { color: #e8eeff; }
+.deep-read-visual h3 { color: #f0f4ff; }
+.comment-name { color: #e0ecff; }
+.plan-price { color: #f0f4ff; }
+.flow-box { color: #d0dff0; }
+.flow-box-sm { color: #a8bcd4; }
+
+.deep-read{
+  display:grid;grid-template-columns:1fr 1fr;gap:0;
+  background:var(--card-bg);border:1px solid var(--border);
+  border-radius:16px;overflow:hidden;
+}
+@media(max-width:720px){.deep-read{grid-template-columns:1fr}}
+.deep-read-visual{
+  background:linear-gradient(135deg,#060d1f 0%,#0d1b3e 50%,#1a2f6e 100%);
+  min-height:360px;display:flex;flex-direction:column;
+  align-items:flex-start;justify-content:flex-end;
+  padding:36px;position:relative;overflow:hidden;
+}
+.deep-read-visual::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 70% 70% at 70% 30%,#2563eb33,transparent);
+}
+.deep-read-glyph{
+  font-size:7rem;position:absolute;top:24px;right:24px;opacity:.15;line-height:1;
+}
+.deep-badge{
+  font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--accent-gold);
+  background:#f59e0b18;border:1px solid #f59e0b33;
+  padding:4px 10px;border-radius:4px;margin-bottom:16px;position:relative;
+}
+.deep-read-visual h3{
+  font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:700;
+  color:var(--white);line-height:1.2;position:relative;max-width:340px;
+}
+.deep-read-body{padding:36px;display:flex;flex-direction:column;justify-content:space-between}
+.deep-read-body p{font-size:.9rem;color:var(--silver);line-height:1.75;margin-bottom:16px}
+.deep-meta-row{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:20px}
+.deep-meta-item{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--silver-dim);display:flex;align-items:center;gap:5px}
+.deep-meta-item span{color:var(--cyan)}
+.deep-toc{margin:18px 0}
+.deep-toc-title{font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--blue-light);margin-bottom:10px}
+.deep-toc ol{list-style:none;counter-reset:toc;display:flex;flex-direction:column;gap:7px}
+.deep-toc ol li{counter-increment:toc;font-size:.82rem;color:var(--silver-dim);display:flex;align-items:flex-start;gap:8px}
+.deep-toc ol li::before{content:counter(toc,decimal-leading-zero);font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--blue-light);flex-shrink:0;margin-top:2px}
+.deep-read-footer{display:flex;align-items:center;gap:12px;margin-top:20px}
+.deep-author-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--midnight-2),var(--midnight-3));display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:700;color:var(--blue-pale);border:1px solid var(--border);flex-shrink:0}
+.deep-author-info{flex:1}
+.deep-author-name{font-size:.85rem;font-weight:500;color:var(--white)}
+.deep-author-title{font-size:.72rem;color:var(--silver-dim);font-family:'JetBrains Mono',monospace}
+
+.code-tabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:0;overflow-x:auto}
+.code-tab{
+  font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.06em;
+  padding:10px 18px;background:none;border:none;color:var(--silver-dim);
+  cursor:none;border-bottom:2px solid transparent;transition:color .2s,border-color .2s;
+  white-space:nowrap;
+}
+.code-tab.active{color:var(--blue-light);border-bottom-color:var(--blue-light)}
+.code-tab:hover{color:var(--silver)}
+.code-panel{display:none;background:var(--code-bg,#0f1a28);border-radius:0 0 12px 12px;position:relative}
+.code-panel.active{display:block}
+.code-panel pre{
+  font-family:'JetBrains Mono',monospace;font-size:.8rem;
+  line-height:1.8;color:#a8d5b5;padding:24px 28px;overflow-x:auto;
+  tab-size:2;
+}
+.code-copy{
+  position:absolute;top:12px;right:12px;
+  background:#1e2a4a;border:1px solid var(--border);border-radius:6px;
+  padding:5px 12px;font-size:.7rem;font-family:'JetBrains Mono',monospace;
+  color:var(--silver-dim);cursor:none;transition:color .2s,background .2s;
+}
+.code-copy:hover{color:var(--white);background:#1a2f6e}
+.code-lang-badge{
+  position:absolute;top:12px;left:16px;
+  font-family:'JetBrains Mono',monospace;font-size:.65rem;
+  color:var(--cyan);letter-spacing:.1em;text-transform:uppercase;
+}
+.code-showcase-wrap{
+  background:var(--card-bg);border:1px solid var(--border);border-radius:12px;overflow:hidden;
+}
+.code-showcase-header{
+  display:flex;align-items:center;gap:8px;padding:12px 16px;background:#0a0a0f;border-bottom:1px solid var(--border-soft);
+}
+
+.veggie-hero{
+  background:linear-gradient(135deg,#050d1a 0%,#0a1628 40%,#0d2010 100%);
+  border:1px solid var(--border);border-radius:20px;
+  padding:56px 48px;position:relative;overflow:hidden;
+  display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;
+}
+@media(max-width:760px){.veggie-hero{grid-template-columns:1fr;padding:36px 24px}}
+.veggie-hero::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 60% 80% at 100% 50%,#10b98112,transparent),
+    radial-gradient(ellipse 40% 60% at 0% 50%,#2563eb0e,transparent);
+  pointer-events:none;
+}
+.veggie-hero-glyph{
+  position:absolute;right:40px;top:30px;
+  font-size:9rem;opacity:.06;line-height:1;pointer-events:none;
+}
+.veggie-hero-label{
+  font-family:'JetBrains Mono',monospace;font-size:.65rem;
+  letter-spacing:.22em;text-transform:uppercase;
+  color:#52b788;margin-bottom:14px;
+}
+.veggie-hero h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2rem,4vw,3rem);font-weight:700;
+  color:var(--white);line-height:1.1;margin-bottom:16px;
+}
+.veggie-hero h2 em{font-style:italic;color:#52b788}
+.veggie-hero-desc{font-size:.92rem;color:var(--silver-dim);line-height:1.7;margin-bottom:24px}
+.veggie-meta-pills{display:flex;gap:8px;flex-wrap:wrap}
+.veggie-pill{
+  font-family:'JetBrains Mono',monospace;font-size:.65rem;
+  letter-spacing:.1em;text-transform:uppercase;
+  padding:4px 11px;border-radius:100px;
+}
+.vp-py{background:#3b82f618;color:var(--blue-light);border:1px solid #3b82f633}
+.vp-green{background:#10b98118;color:#52b788;border:1px solid #10b98133}
+.vp-gold{background:#f59e0b18;color:var(--accent-gold);border:1px solid #f59e0b33}
+.veggie-hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.veggie-stat{
+  background:#ffffff06;border:1px solid #ffffff10;
+  border-radius:10px;padding:18px 16px;text-align:center;
+}
+.veggie-stat-n{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2rem;font-weight:700;color:#52b788;display:block;
+}
+.veggie-stat-l{font-size:.7rem;color:var(--silver-dim);font-family:'JetBrains Mono',monospace;letter-spacing:.08em}
+
+.veg-source-wrap{
+  background:#060e0a;border:1px solid #1a3a28;
+  border-radius:14px;overflow:hidden;
+  box-shadow:0 24px 64px #00000088;
+}
+.veg-source-bar{
+  display:flex;align-items:center;gap:8px;
+  padding:13px 18px;background:#040b07;
+  border-bottom:1px solid #1a3a28;
+}
+.veg-source-bar .dot{width:12px;height:12px;border-radius:50%}
+.veg-source-filename{
+  font-family:'JetBrains Mono',monospace;font-size:.75rem;
+  color:#52b788;margin-left:8px;
+}
+.veg-source-copy{
+  margin-left:auto;background:#1a3a2844;border:1px solid #2d6a4f44;
+  color:#52b788;font-family:'JetBrains Mono',monospace;font-size:.68rem;
+  padding:4px 12px;border-radius:5px;cursor:none;transition:background .2s,color .2s;
+}
+.veg-source-copy:hover{background:#2d6a4f44;color:#b7e4c7}
+.veg-source-pre{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.78rem;line-height:1.85;
+  color:#a8d5b5;padding:28px 26px;
+  overflow-x:auto;tab-size:4;
+  counter-reset:line;
+}
+.veg-source-pre .ln{
+  display:inline-block;width:2.2em;
+  color:#2d6a4f;font-size:.7rem;
+  user-select:none;margin-right:12px;text-align:right;
+}
+
+.vkw{color:#7dd3a8;font-weight:600}
+.vfn{color:#86c1f4}
+.vst{color:#f6c90e}
+.vnm{color:#e9a84c}
+.vcm{color:#3d6b4e;font-style:italic}
+.vbi{color:#c084fc}
+.vop{color:#4a6572}
+
+.steps-wrap{margin-top:48px}
+.steps-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;flex-wrap:wrap;gap:12px}
+.steps-filter{display:flex;gap:8px;flex-wrap:wrap}
+.step-filter-btn{
+  font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.1em;
+  text-transform:uppercase;padding:5px 13px;border-radius:100px;
+  background:none;border:1px solid var(--border);color:var(--silver-dim);
+  cursor:none;transition:all .2s;
+}
+.step-filter-btn.active,.step-filter-btn:hover{
+  background:#1a2f6e33;border-color:var(--blue-mid);color:var(--blue-light);
+}
+.veg-steps-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));
+  gap:20px;
+}
+.veg-step-card{
+  background:var(--card-bg);border:1px solid var(--border);
+  border-radius:12px;overflow:hidden;
+  transition:transform .28s,box-shadow .28s,border-color .28s;
+  animation:fadeUp .5s both;
+}
+.veg-step-card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 18px 44px #00000066;
+  border-color:var(--midnight-3);
+}
+.veg-card-top{
+  padding:18px 20px 14px;
+  border-bottom:1px solid var(--border-soft);
+  display:flex;align-items:flex-start;gap:14px;
+}
+.veg-step-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.2rem;font-weight:900;
+  color:#52b788;line-height:1;min-width:36px;
+}
+.veg-card-head{flex:1}
+.veg-card-title{
+  font-size:.95rem;font-weight:500;color:var(--white);line-height:1.3;
+}
+.veg-card-snippet{
+  font-family:'JetBrains Mono',monospace;font-size:.68rem;
+  color:#52b788;margin-top:5px;opacity:.8;
+}
+.veg-card-body{padding:16px 20px 18px}
+.veg-card-badge{
+  display:inline-block;
+  background:#10b98110;color:#52b788;
+  font-family:'JetBrains Mono',monospace;font-size:.62rem;
+  padding:2px 9px;border-radius:100px;margin-bottom:10px;
+  border:1px solid #10b98122;letter-spacing:.08em;
+}
+.veg-card-body p{font-size:.85rem;color:var(--silver);line-height:1.65}
+.veg-card-body p+p{margin-top:9px}
+.veg-mini-table{width:100%;border-collapse:collapse;margin-top:10px;font-size:.78rem}
+.veg-mini-table th{background:#0a1628;color:var(--blue-pale);font-weight:500;padding:5px 10px;text-align:left;font-family:'JetBrains Mono',monospace;font-size:.68rem}
+.veg-mini-table td{padding:5px 10px;border-bottom:1px solid var(--border-soft);font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--silver-dim)}
+.veg-mini-table tr:last-child td{border-bottom:none}
+.ic{font-family:'JetBrains Mono',monospace;background:#0a1628;color:#52b788;font-size:.8em;padding:1px 5px;border-radius:3px}
+
+.veg-flow{
+  background:linear-gradient(135deg,#050d1a,#0d2010 60%,#050d1a 100%);
+  border:1px solid var(--border);border-radius:16px;
+  padding:40px 36px;margin-top:40px;
+}
+.veg-flow-title{
+  font-family:'Cormorant Garamond',serif;font-size:1.5rem;
+  font-weight:700;color:var(--white);margin-bottom:28px;
+}
+.flow-nodes{display:flex;flex-direction:column;gap:0;max-width:580px}
+.flow-node-row{display:flex;align-items:center;gap:12px}
+.flow-box{
+  background:#ffffff08;border:1px solid #ffffff14;
+  border-radius:8px;padding:10px 18px;font-size:.84rem;color:var(--silver);
+  min-width:0;line-height:1.4;width:100%;
+}
+.flow-box b{color:#52b788;font-family:'JetBrains Mono',monospace;font-size:.78rem;font-weight:500}
+.flow-box.terminus{background:#10b98115;border-color:#10b98133;color:#86efac}
+.flow-arrow-down{height:28px;width:1px;background:linear-gradient(#52b788,#52b78844);margin-left:28px}
+.flow-branch-wrap{display:flex;gap:14px;margin-left:40px;flex-wrap:wrap}
+.flow-branch-col{display:flex;flex-direction:column;align-items:center;gap:4px}
+.flow-box-sm{
+  background:#ffffff06;border:1px solid #ffffff10;
+  border-radius:7px;padding:8px 14px;font-size:.75rem;color:var(--silver-dim);
+  min-width:0;text-align:center;line-height:1.35;
+}
+
+.radar-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(260px,100%),1fr));gap:16px}
+.radar-card{
+  background:var(--card-bg);border:1px solid var(--border);border-radius:10px;
+  padding:20px;transition:transform .25s,border-color .25s,box-shadow .25s;
+}
+.radar-card:hover{transform:translateY(-4px);border-color:var(--midnight-3);box-shadow:0 12px 32px #00000055}
+.radar-ring{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.12em;
+  text-transform:uppercase;padding:3px 9px;border-radius:100px;margin-bottom:12px;
+}
+.ring-adopt{background:#10b98118;color:#10b981;border:1px solid #10b98133}
+.ring-trial{background:#f59e0b18;color:#f59e0b;border:1px solid #f59e0b33}
+.ring-assess{background:#3b82f618;color:var(--blue-light);border:1px solid #3b82f633}
+.ring-hold{background:#ef444418;color:#ef4444;border:1px solid #ef444433}
+.radar-name{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--white);margin-bottom:6px}
+.radar-desc{font-size:.8rem;color:var(--silver-dim);line-height:1.6}
+.radar-category{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--silver-dim);margin-top:10px;letter-spacing:.08em}
+
+.media-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:20px}
+.media-card{
+  background:var(--card-bg);border:1px solid var(--border);border-radius:12px;
+  overflow:hidden;transition:transform .25s,box-shadow .25s;
+}
+.media-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px #00000066}
+.media-thumb{
+  height:160px;display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+}
+.media-thumb-pod{background:linear-gradient(135deg,#1a0a2e,#2d1060)}
+.media-thumb-vid{background:linear-gradient(135deg,#0a1628,#1a0a20)}
+.media-thumb-live{background:linear-gradient(135deg,#0a1e1a,#0d3030)}
+.play-btn{
+  width:56px;height:56px;border-radius:50%;
+  background:#ffffff18;border:2px solid #ffffff44;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.3rem;cursor:none;
+  transition:background .2s,transform .2s;
+  backdrop-filter:blur(6px);
+}
+.play-btn:hover{background:#ffffff28;transform:scale(1.1)}
+.media-live-badge{
+  position:absolute;top:12px;left:12px;
+  background:#ef4444;color:#fff;font-size:.65rem;font-family:'JetBrains Mono',monospace;
+  padding:3px 8px;border-radius:4px;letter-spacing:.1em;
+  animation:livePulse 1.5s infinite;
+}
+@keyframes livePulse{0%,100%{opacity:1}50%{opacity:.6}}
+.media-ep{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--silver-dim);padding:14px 16px 0;letter-spacing:.08em}
+.media-title{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:var(--white);padding:6px 16px 0;line-height:1.3}
+.media-meta{display:flex;align-items:center;gap:10px;padding:8px 16px 14px;font-size:.75rem;color:var(--silver-dim);font-family:'JetBrains Mono',monospace}
+.media-dot{width:3px;height:3px;border-radius:50%;background:var(--silver-dim)}
+
+.reading-list{display:flex;flex-direction:column;gap:2px}
+.reading-item{
+  display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:16px;
+  padding:16px 20px;background:var(--card-bg);border:1px solid var(--border);
+  border-radius:8px;transition:background .2s,border-color .2s;
+  margin-bottom:4px;min-width:0;
+}
+.reading-item:hover{background:var(--obsidian-4);border-color:var(--midnight-3)}
+.reading-num{
+  font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--blue-light);
+  width:24px;text-align:center;
+}
+.reading-info{}
+.reading-title{font-size:.9rem;font-weight:500;color:var(--white);margin-bottom:3px}
+.reading-author{font-size:.75rem;color:var(--silver-dim);font-family:'JetBrains Mono',monospace}
+.reading-type{
+  font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.1em;
+  text-transform:uppercase;padding:3px 9px;border-radius:4px;white-space:nowrap;
+}
+.type-book{background:#06b6d418;color:var(--cyan);border:1px solid #06b6d433}
+.type-paper{background:#a78bfa18;color:#a78bfa;border:1px solid #a78bfa33}
+.type-blog{background:#f59e0b18;color:var(--accent-gold);border:1px solid #f59e0b33}
+.type-docs{background:#10b98118;color:var(--green-love);border:1px solid #10b98133}
+
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(220px,100%),1fr));gap:14px}
+.tool-card{
+  background:var(--card-bg);border:1px solid var(--border);border-radius:10px;
+  padding:18px;transition:transform .2s,border-color .2s,box-shadow .2s;
+  display:flex;flex-direction:column;gap:10px;
+}
+.tool-card:hover{transform:translateY(-3px);border-color:var(--midnight-3);box-shadow:0 10px 28px #00000055}
+.tool-icon{font-size:2rem;line-height:1}
+.tool-name{font-size:.9rem;font-weight:500;color:var(--white)}
+.tool-desc{font-size:.78rem;color:var(--silver-dim);line-height:1.55;flex:1}
+.tool-tags{display:flex;gap:5px;flex-wrap:wrap}
+.tool-tag{
+  font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.06em;
+  text-transform:uppercase;padding:2px 7px;border-radius:3px;
+  background:#1e2a4a;color:var(--silver-dim);
+}
+.tool-link{
+  font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--blue-light);
+  text-decoration:none;cursor:none;transition:color .2s;
+  display:flex;align-items:center;gap:4px;
+}
+.tool-link:hover{color:var(--cyan)}
+
+.digest-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(280px,100%),1fr));gap:16px}
+.digest-card{
+  background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:22px;
+  display:flex;flex-direction:column;gap:12px;
+  transition:border-color .25s,transform .25s;
+}
+.digest-card:hover{border-color:var(--midnight-3);transform:translateY(-3px)}
+.digest-issue{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--cyan);letter-spacing:.12em;text-transform:uppercase}
+.digest-title{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--white);line-height:1.3}
+.digest-preview{font-size:.8rem;color:var(--silver-dim);line-height:1.6}
+.digest-links{display:flex;flex-direction:column;gap:6px}
+.digest-link-item{
+  display:flex;align-items:flex-start;gap:8px;
+  font-size:.78rem;color:var(--silver);
+}
+.digest-link-item::before{content:'→';color:var(--blue-light);font-family:'JetBrains Mono',monospace;flex-shrink:0;margin-top:1px}
+.digest-footer{display:flex;align-items:center;justify-content:space-between;padding-top:10px;border-top:1px solid var(--border-soft)}
+.digest-date{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--silver-dim)}
+.digest-open{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--blue-light);text-decoration:none;cursor:none;transition:color .2s}
+.digest-open:hover{color:var(--cyan)}
+
+.pull-quote{
+  border-left:3px solid var(--blue-glow);
+  padding:28px 32px;margin:0;
+  background:linear-gradient(90deg,#2563eb0a,transparent);
+  border-radius:0 10px 10px 0;
+}
+.pull-quote blockquote{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.3rem,3vw,1.9rem);
+  font-style:italic;color:var(--white-soft);
+  line-height:1.45;margin-bottom:14px;
+}
+.pull-quote cite{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.72rem;color:var(--silver-dim);letter-spacing:.1em;
+  text-transform:uppercase;
+}
+
+.tips-bar{
+  background:var(--obsidian-3);border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  padding:12px 0;overflow:hidden;position:relative;
+}
+.tips-track{
+  display:flex;gap:60px;white-space:nowrap;
+  animation:ticker 35s linear infinite;
+  width:max-content;
+}
+.tips-bar:hover .tips-track{animation-play-state:paused}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.tip-item{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--silver-dim);
+}
+.tip-label{color:var(--cyan);font-weight:500}
+
+.authors-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(240px,100%),1fr));gap:18px}
+.author-card{
+  background:var(--card-bg);border:1px solid var(--border);border-radius:12px;
+  padding:24px;text-align:center;
+  transition:transform .25s,border-color .25s;
+}
+.author-card:hover{transform:translateY(-4px);border-color:var(--midnight-3)}
+.author-avatar-lg{
+  width:72px;height:72px;border-radius:50%;
+  background:linear-gradient(135deg,var(--midnight-2),var(--midnight-3));
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;
+  color:var(--blue-pale);border:2px solid var(--border);
+  margin:0 auto 14px;
+}
+.author-name{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--white);margin-bottom:4px}
+.author-role{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--cyan);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px}
+.author-bio{font-size:.8rem;color:var(--silver-dim);line-height:1.6;margin-bottom:14px}
+.author-stats{display:flex;justify-content:center;gap:20px}
+.author-stat{text-align:center}
+.author-stat-n{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:700;color:var(--blue-light);display:block}
+.author-stat-l{font-size:.65rem;color:var(--silver-dim);font-family:'JetBrains Mono',monospace}
+
+.mob-nav-btn {
+  display:flex;
+  align-items:center;
+  gap:16px;
+  width:100%;
+  padding:14px 40px;
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.5rem,4.5vw,2.8rem);
+  font-weight:600;
+  color:var(--white-soft);
+  background:transparent;
+  border:none;
+  border-left:3px solid transparent;
+  border-radius:0;
+  text-align:left;
+  cursor:pointer;
+  opacity:0;
+  transform:translateX(-24px);
+  transition:opacity .4s ease, transform .4s ease, color .2s, background .2s, border-color .2s;
+  letter-spacing:.01em;
+}
+.nav-overlay.open .mob-nav-btn { opacity:1; transform:translateX(0); }
+.nav-overlay.open .mob-nav-btn:nth-child(1){transition-delay:.08s}
+.nav-overlay.open .mob-nav-btn:nth-child(2){transition-delay:.13s}
+.nav-overlay.open .mob-nav-btn:nth-child(3){transition-delay:.18s}
+.nav-overlay.open .mob-nav-btn:nth-child(4){transition-delay:.23s}
+.nav-overlay.open .mob-nav-btn:nth-child(5){transition-delay:.28s}
+.nav-overlay.open .mob-nav-btn:nth-child(6){transition-delay:.33s}
+.nav-overlay.open .mob-nav-btn:nth-child(7){transition-delay:.38s}
+.nav-overlay.open .mob-nav-btn:nth-child(8){transition-delay:.43s}
+.nav-overlay.open .mob-nav-btn:nth-child(9){transition-delay:.48s}
+.nav-overlay.open .mob-nav-btn:nth-child(10){transition-delay:.53s}
+.mob-nav-btn:hover {
+  color:var(--blue-light);
+  background:linear-gradient(90deg,#2563eb0f,transparent);
+  border-left-color:var(--blue-light);
+}
+.mob-nav-btn:active { transform:scale(.985); }
+.mob-nav-icon { font-size:1.6rem; line-height:1; flex-shrink:0; }
+
+.nav-social {
+  display:flex;
+  gap:10px;
+  margin-top:32px;
+  opacity:0;
+  transform:translateY(12px);
+  transition:opacity .4s .55s ease, transform .4s .55s ease;
+}
+.nav-overlay.open .nav-social { opacity:1; transform:translateY(0); }
+
+.mob-social-btn {
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:9px 22px;
+  border-radius:100px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:.78rem;
+  font-weight:500;
+  letter-spacing:.06em;
+  cursor:pointer;
+  border:1px solid var(--border);
+  color:var(--silver-dim);
+  background:transparent;
+  transition:color .2s, border-color .2s, background .2s, transform .15s;
+}
+.mob-social-btn:hover { transform:translateY(-2px); }
+.mob-social-x:hover  { color:#fff; border-color:#555; background:#111; }
+.mob-social-li:hover { color:#fff; border-color:#0a66c2; background:#0a66c214; }
+.mob-social-gh:hover { color:#e6edf3; border-color:#555; background:#24292f; }
+
+.ft-social-btn {
+  width:36px;
+  height:36px;
+  border-radius:8px;
+  background:var(--obsidian-4);
+  border:1px solid var(--border);
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-size:.85rem;
+  color:#a0b4cc;
+  cursor:pointer;
+  transition:color .2s, border-color .2s, background .2s, transform .18s, box-shadow .18s;
+}
+.ft-social-btn:hover {
+  color:var(--blue-light);
+  border-color:var(--blue-mid);
+  background:var(--midnight);
+  transform:translateY(-3px);
+  box-shadow:0 6px 18px #2563eb22;
+}
+
+.ft-link-btn {
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  background:none;
+  border:none;
+  font-size:.83rem;
+  color:#b8c8de;
+  font-family:'Outfit',sans-serif;
+  font-weight:300;
+  cursor:pointer;
+  padding:4px 0;
+  text-align:left;
+  line-height:1.4;
+  transition:color .2s, transform .18s, gap .18s;
+}
+.ft-link-btn::before {
+  content:'›';
+  color:var(--blue-light);
+  font-size:1.1rem;
+  line-height:1;
+  flex-shrink:0;
+  transition:transform .18s;
+}
+.ft-link-btn:hover {
+  color:var(--white);
+  transform:translateX(4px);
+}
+.ft-link-btn:hover::before { transform:translateX(2px); }
+
+.ft-legal-btn {
+  display:inline-block;
+  background:none;
+  border:none;
+  font-size:.75rem;
+  color:#9aaec4;
+  font-family:'JetBrains Mono',monospace;
+  cursor:pointer;
+  padding:3px 0;
+  text-align:right;
+  transition:color .2s;
+}
+.ft-legal-btn:hover { color:var(--blue-light); }
+
+.footer-social { display:flex; gap:10px; margin-top:18px; }
+</style>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4575646748966866" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<style>
+.back-btn-bar {
+  position: fixed;
+  bottom: 28px;
+  left: 28px;
+  z-index: 8000;
+}
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 100px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .68rem;
+  font-weight: 400;
+  letter-spacing: .08em;
+  color: var(--silver);
+  background: rgba(10,10,15,.92);
+  border: 1px solid var(--border);
+  text-decoration: none;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 24px rgba(0,0,0,.55), 0 0 0 1px rgba(37,99,235,.12);
+  transition: color .2s, border-color .2s, background .2s, transform .2s, box-shadow .2s;
+  white-space: nowrap;
+}
+.back-btn:hover {
+  color: var(--blue-light);
+  border-color: var(--blue-mid);
+  background: rgba(13,27,62,.95);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(37,99,235,.22), 0 0 0 1px rgba(59,130,246,.3);
+}
+.back-btn .back-arrow {
+  font-size: .9rem;
+  line-height: 1;
+  transition: transform .2s;
+}
+
+/* ── Hamburger menu overlay redesign ── */
+.nav-overlay {
+  padding: 0 !important;
+  justify-content: flex-start !important;
+  align-items: stretch !important;
+  overflow-y: auto;
+}
+.mob-menu-inner {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 80px 28px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.mob-menu-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .58rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin-bottom: .75rem;
+}
+.mob-menu-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 1rem;
+}
+.mob-menu-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 16px 18px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background .2s, border-color .2s, transform .18s, box-shadow .18s;
+  text-align: left;
+}
+.mob-menu-btn:hover {
+  background: var(--midnight);
+  border-color: var(--blue-mid);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37,99,235,.18);
+}
+.mob-menu-icon { font-size: 1.3rem; line-height: 1; }
+.mob-menu-text {
+  font-family: 'Outfit', sans-serif;
+  font-size: .8rem;
+  font-weight: 400;
+  color: var(--silver);
+  line-height: 1.3;
+}
+.mob-social-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+.mob-social-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 18px;
+  border-radius: 100px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .72rem;
+  letter-spacing: .06em;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  color: var(--silver-dim);
+  background: transparent;
+  transition: color .2s, border-color .2s, background .2s, transform .15s;
+  flex: 1;
+  justify-content: center;
+}
+.mob-social-pill:hover { transform: translateY(-2px); }
+.mob-social-x:hover  { color: #fff; border-color: #555; background: #111; }
+.mob-social-li:hover { color: #fff; border-color: #0a66c2; background: #0a66c214; }
+.mob-social-gh:hover { color: #e6edf3; border-color: #555; background: #24292f; }
+.mob-close-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .72rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--silver-dim);
+  background: transparent;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: color .2s, border-color .2s, background .2s;
+}
+.mob-close-btn:hover { color: var(--red-like); border-color: var(--red-like); background: rgba(239,68,68,.06); }
+
+/* ── Footer nav buttons ── */
+.ft-btn-col { display: flex; flex-direction: column; gap: 6px; }
+.ft-nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 14px;
+  border-radius: 8px;
+  background: var(--card-bg);
+  border: 1px solid var(--border-soft);
+  color: var(--silver);
+  font-family: 'Outfit', sans-serif;
+  font-size: .82rem;
+  font-weight: 300;
+  cursor: pointer;
+  text-align: left;
+  transition: background .2s, border-color .2s, color .2s, transform .18s;
+  width: 100%;
+}
+.ft-nav-btn:hover { background: var(--midnight); border-color: var(--blue-mid); color: var(--white); transform: translateX(3px); }
+.ft-nav-icon { font-size: .9rem; flex-shrink: 0; }
+.ft-bottom-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
+  border-radius: 7px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .62rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--silver-dim);
+  background: var(--card-bg);
+  border: 1px solid var(--border-soft);
+  cursor: pointer;
+  transition: color .2s, border-color .2s, background .2s, transform .18s;
+}
+.ft-bottom-btn:hover { color: var(--blue-light); border-color: var(--blue-mid); background: rgba(37,99,235,.08); transform: translateY(-2px); }
+.ft-bottom-btn--highlight { color: var(--accent-gold); border-color: rgba(245,158,11,.3); background: rgba(245,158,11,.05); }
+.ft-bottom-btn--highlight:hover { color: var(--accent-gold); border-color: var(--accent-gold); background: rgba(245,158,11,.12); }
+
+/* ── Horizontal Subscribe ── */
+.sub-section--horiz {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+  text-align: left !important;
+  padding: 48px !important;
+}
+.sub-section--horiz h2 { font-size: clamp(1.4rem,3vw,2rem) !important; margin-bottom: .75rem; }
+.sub-section--horiz p { margin: 0 !important; }
+.sub-horiz-left { display: flex; flex-direction: column; gap: .5rem; }
+.sub-horiz-right { display: flex; flex-direction: column; gap: 0; }
+.sub-horiz-right .sub-email-row { flex-direction: column; max-width: 100%; margin: 0; }
+.sub-horiz-right input { border-radius: 8px 8px 0 0 !important; border-bottom: none !important; }
+.sub-horiz-right .sub-btn { border-radius: 0 0 8px 8px !important; width: 100%; }
+@media(max-width:720px) {
+  .sub-section--horiz { grid-template-columns: 1fr !important; gap: 24px !important; padding: 32px 24px !important; text-align: center !important; }
+}
+
+/* ── Horizontal Comments ── */
+.comments-horiz {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin-top: 1.5rem;
+  align-items: flex-start;
+}
+.comments-form-col { position: sticky; top: 80px; }
+.comments-list-col {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-height: 520px;
+  overflow-y: auto;
+  padding-right: 4px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+.comments-list-col::-webkit-scrollbar { width: 4px; }
+.comments-list-col::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+@media(max-width:860px) {
+  .comments-horiz { grid-template-columns: 1fr; }
+  .comments-form-col { position: static; }
+  .comments-list-col { max-height: none; }
+}
+@media(max-width:480px) { .mob-menu-grid { grid-template-columns: 1fr; } }
+</style>
+
+<div class="back-btn-bar">
+  <a class="back-btn" href="encapsulation.html" aria-label="Back to Encapsulation Hub">
+    <span class="back-arrow">←</span> Back to Encapsulation Hub
+  </a>
+</div>
+
+<div style="max-width:1080px;margin:0 auto;padding:72px 5vw 0;">
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-4575646748966866"
+       data-ad-slot="4226674403"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<div class="nav-overlay" id="navOverlay">
+  <div class="mob-menu-inner">
+    <div class="mob-menu-label">Navigate</div>
+    <div class="mob-menu-grid">
+      <button class="mob-menu-btn" onclick="location.href='#introduction';closeMenu()">
+        <span class="mob-menu-icon">📖</span>
+        <span class="mob-menu-text">Introduction</span>
+      </button>
+      <button class="mob-menu-btn" onclick="location.href='#simulator';closeMenu()">
+        <span class="mob-menu-icon">🎮</span>
+        <span class="mob-menu-text">Simulator</span>
+      </button>
+      <button class="mob-menu-btn" onclick="location.href='#code';closeMenu()">
+        <span class="mob-menu-icon">💻</span>
+        <span class="mob-menu-text">Source Code</span>
+      </button>
+      <button class="mob-menu-btn" onclick="location.href='#concepts';closeMenu()">
+        <span class="mob-menu-icon">🔬</span>
+        <span class="mob-menu-text">Design Decisions</span>
+      </button>
+      <button class="mob-menu-btn" onclick="location.href='#design';closeMenu()">
+        <span class="mob-menu-icon">🏗️</span>
+        <span class="mob-menu-text">Patterns</span>
+      </button>
+      <button class="mob-menu-btn" onclick="location.href='#testing';closeMenu()">
+        <span class="mob-menu-icon">🧪</span>
+        <span class="mob-menu-text">Testing</span>
+      </button>
+      <button class="mob-menu-btn" onclick="location.href='#advanced';closeMenu()">
+        <span class="mob-menu-icon">⚡</span>
+        <span class="mob-menu-text">Production</span>
+      </button>
+      <button class="mob-menu-btn" onclick="location.href='#comments';closeMenu()">
+        <span class="mob-menu-icon">💬</span>
+        <span class="mob-menu-text">Discussion</span>
+      </button>
+      <button class="mob-menu-btn" onclick="location.href='#subscribe';closeMenu()">
+        <span class="mob-menu-icon">📧</span>
+        <span class="mob-menu-text">Subscribe</span>
+      </button>
+      <button class="mob-menu-btn" onclick="location.href='#footer';closeMenu()">
+        <span class="mob-menu-icon">🏠</span>
+        <span class="mob-menu-text">About</span>
+      </button>
+    </div>
+    <div class="mob-menu-label" style="margin-top:1.5rem;">Connect</div>
+    <div class="mob-social-row">
+      <button class="mob-social-pill mob-social-x" onclick="window.open('#','_blank')">
+        <span>𝕏</span> Twitter/X
+      </button>
+      <button class="mob-social-pill mob-social-li" onclick="window.open('#','_blank')">
+        <span>in</span> LinkedIn
+      </button>
+      <button class="mob-social-pill mob-social-gh" onclick="window.open('#','_blank')">
+        <span>⌥</span> GitHub
+      </button>
+    </div>
+    <button class="mob-close-btn" onclick="closeMenu()">✕ Close Menu</button>
+  </div>
+</div>
+
+<nav id="mainNav">
+  <a class="nav-logo" href="atm.html">Valleys <span>&amp;</span> Bytes</a>
+
+  <div class="nav-btn-bar" id="navBtnBar">
+    <a class="nav-btn" href="#introduction" data-section="introduction"><span class="nb-icon">📖</span>Intro</a>
+    <a class="nav-btn" href="#simulator" data-section="simulator"><span class="nb-icon">🎮</span>Simulator</a>
+    <a class="nav-btn" href="#code" data-section="code"><span class="nb-icon">💻</span>Code</a>
+    <a class="nav-btn" href="#concepts" data-section="concepts"><span class="nb-icon">🔬</span>Concepts</a>
+    <a class="nav-btn" href="#design" data-section="design"><span class="nb-icon">🏗️</span>Patterns</a>
+    <a class="nav-btn" href="#testing" data-section="testing"><span class="nb-icon">🧪</span>Testing</a>
+    <a class="nav-btn" href="#advanced" data-section="advanced"><span class="nb-icon">⚡</span>Advanced</a>
+    <a class="nav-btn" href="#comments" data-section="comments"><span class="nb-icon">💬</span>Discussion</a>
+    <a class="nav-btn" href="#subscribe" data-section="subscribe"><span class="nb-icon">📧</span>Subscribe</a>
+    <div class="nav-social-pills">
+      <a class="nav-pill nav-pill-x" href="#">𝕏</a>
+      <a class="nav-pill nav-pill-li" href="#">in</a>
+      <a class="nav-pill nav-pill-gh" href="#">gh</a>
+    </div>
+  </div>
+
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span class="hbr-bars">
+      <span class="hbr-bar"></span>
+      <span class="hbr-bar"></span>
+      <span class="hbr-bar"></span>
+    </span>
+    <span class="hbr-label">Menu</span>
+  </button>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <p class="hero-eyebrow">Python · OOP · Banking Software</p>
+  <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,8vw,6.5rem);font-weight:700;line-height:1.05;color:var(--white);max-width:820px;animation:fadeUp .8s .35s both;">Programming in OOP:<br/><em>Production-Ready ATM</em></h1>
+  <p class="hero-sub">The most comprehensive ATM programming tutorial on the web — covering Python OOP, security architecture, design patterns, unit testing, and a live interactive simulator.This is an intensive method of learning to grasp the profound conceps of encapsulation in Python.Think of Object-Oriented Programming (OOP) as a way of organizing code that mimics how we perceive the real world. Instead of writing a long list of instructions for the computer to follow (procedural programming), you create "objects" that interact with one another.</p>
+  <div class="hero-cta">
+    <a class="btn btn-primary" href="#introduction" onclick="document.getElementById('introduction').scrollIntoView({behavior:'smooth'});return false;">Read the Guide</a>
+    <a class="btn btn-ghost" href="#simulator" onclick="document.getElementById('simulator').scrollIntoView({behavior:'smooth'});return false;">🎮 Try Live Simulator</a>
+  </div>
+  <div class="hero-scroll">
+    <span>SCROLL</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<div style="max-width:1080px;margin:0 auto;padding:0 5vw 32px;">
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-4575646748966866"
+       data-ad-slot="4226674403"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+  <script>
+       (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</div>
+
+<div class="tips-bar">
+  <div class="tips-track">
+    <span class="tip-item"><span class="tip-label">READING TIME</span> Approx. 2–3 hours</span>
+    <span class="tip-item"><span class="tip-label">LEVEL</span> Intermediate to Advanced</span>
+    <span class="tip-item"><span class="tip-label">LANGUAGE</span> Python 3.8+</span>
+    <span class="tip-item"><span class="tip-label">TOPICS</span> OOP · Security · Design Patterns · Testing</span>
+    <span class="tip-item"><span class="tip-label">PUBLISHED</span> February 28, 2025</span>
+    <span class="tip-item"><span class="tip-label">READING TIME</span> Approx. 2–3 hours</span>
+    <span class="tip-item"><span class="tip-label">LEVEL</span> Intermediate to Advanced</span>
+    <span class="tip-item"><span class="tip-label">LANGUAGE</span> Python 3.8+</span>
+    <span class="tip-item"><span class="tip-label">TOPICS</span> OOP · Security · Design Patterns · Testing</span>
+    <span class="tip-item"><span class="tip-label">PUBLISHED</span> February 28, 2025</span>
+  </div>
+</div>
+
+<section class="section" id="introduction">
+  <div class="section-inner">
+    <div class="divider"></div>
+    <p class="section-label">Introduction</p>
+    <h2 class="section-title">Learning Object-Oriented Programming:<br/>Building a Production-Ready ATM System</h2>
+
+    <div class="pull-quote reveal">
+      <blockquote>"This isn't just another 'hello world' example — we're building a complete, production-inspired banking system that teaches you real-world software development.Object-Oriented Programming (OOP) is a programming paradigm based on the concept of "objects," which can contain data and code. Data in the form of fields (often known as attributes or properties), and code in the form of procedures (often known as methods).
+​Instead of thinking about a program as a list of steps (procedural), OOP encourages you to think about it as a collection of interacting entities."</blockquote>
+      <cite>— Valleys &amp; Bytes</cite>
+    </div>
+
+    <div class="deep-read reveal" style="margin:2.5rem 0;">
+      <div class="deep-read-visual">
+        <div class="deep-read-glyph">🏧</div>
+        <div class="deep-badge">What Makes This Different</div>
+        <h3>Most tutorials show isolated concepts.<br/>Here you see how everything fits together.</h3>
+      </div>
+      <div class="deep-read-body">
+        <div class="deep-meta-row">
+          <span class="deep-meta-item"><span>📖</span> 5000+ words</span>
+          <span class="deep-meta-item"><span>⏱</span> 2–3 hours</span>
+          <span class="deep-meta-item"><span>🎮</span> Live simulator</span>
+        </div>
+        <p>Whether you're a self-taught developer trying to level up, a CS student bridging the gap between theory and practice, or a working programmer sharpening your OOP instincts — this guide was written specifically for you.</p>
+        <p style="color:var(--blue-pale);font-style:italic;">By the time you finish, you won't just have working code — you'll have a mental model for <em>how professionals think</em> about designing software systems. That mental model is what separates a junior developer from a senior one.</p>
+        <div class="deep-toc">
+          <div class="deep-toc-title">What you'll understand</div>
+          <ol>
+            <li>How professional banking software is architected from the ground up</li>
+            <li>Why OOP principles prevent real production failures</li>
+            <li>How to write maintainable, testable, and secure code</li>
+            <li>The thought process and trade-offs behind every design decision</li>
+            <li>How to handle edge cases and errors like a senior engineer</li>
+          </ol>
+        </div>
+        <div class="deep-read-footer">
+          <div class="deep-author-avatar">V&amp;B</div>
+          <div class="deep-author-info">
+            <div class="deep-author-name">Valleys &amp; Bytes</div>
+            <div class="deep-author-title">Published · February 28, 2025</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--white);margin:2.5rem 0 1rem;">The Problem: Why Build an ATM?</h3>
+    <p>An ATM system is the perfect learning vehicle because every person on the planet has used one. That familiarity is an advantage — you already understand the expected behavior, which means you can focus on the engineering rather than the domain. ATMs are deceptively complex: they involve authentication, transaction processing, concurrent state management, security hardening, audit trails, hardware abstraction, and strict business rules — exactly the same challenges you'll face in any serious application.</p>
+    <p>Banking software has <strong style="color:var(--blue-pale);">zero tolerance for bugs</strong>. A mistake in your ATM code doesn't just break a feature — it could drain someone's account or lock them out of their money. Building in this mindset trains you to write better software in every domain.</p>
+
+    <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--white);margin:2.5rem 0 1rem;">Prerequisites &amp; Who This Is For</h3>
+    <p>This tutorial assumes basic Python syntax: variables, loops, functions, and maybe a little about classes. You don't need to be an OOP expert — that's what we're building. Estimated time: 2–3 hours for reading, plus however long you spend experimenting with the live simulator.</p>
+
+    <div class="radar-grid" style="margin-top:2rem;">
+      <div class="radar-card reveal">
+        <span class="radar-ring ring-adopt">● OOP Fundamentals</span>
+        <div class="radar-name">Classes &amp; Encapsulation</div>
+        <div class="radar-desc">Classes, objects, encapsulation, and instance state — the bedrock of everything.</div>
+      </div>
+      <div class="radar-card reveal">
+        <span class="radar-ring ring-adopt">● Security</span>
+        <div class="radar-name">SHA-256 PIN Hashing</div>
+        <div class="radar-desc">Password hashing, brute-force prevention, and automatic account locking mechanisms.</div>
+      </div>
+      <div class="radar-card reveal">
+        <span class="radar-ring ring-trial">● Design Patterns</span>
+        <div class="radar-name">Command · Observer · Factory</div>
+        <div class="radar-desc">Gang of Four patterns applied in a real, working banking system context.</div>
+      </div>
+      <div class="radar-card reveal">
+        <span class="radar-ring ring-trial">● Unit Testing</span>
+        <div class="radar-name">Comprehensive Test Strategy</div>
+        <div class="radar-desc">Writing tests that catch bugs before they reach production — including edge cases.</div>
+      </div>
+      <div class="radar-card reveal">
+        <span class="radar-ring ring-assess">● Error Handling</span>
+        <div class="radar-name">Structured Results Pattern</div>
+        <div class="radar-desc">Returning structured results instead of throwing raw exceptions — the professional way.</div>
+      </div>
+      <div class="radar-card reveal">
+        <span class="radar-ring ring-assess">● Audit Trails</span>
+        <div class="radar-name">Transaction History</div>
+        <div class="radar-desc">Building a transaction log that supports debugging, compliance, and fraud detection.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="simulator">
+  <div class="section-inner">
+    <div class="divider"></div>
+    <p class="section-label">Interactive Demo</p>
+    <h2 class="section-title">🎮 Live ATM Simulator</h2>
+    <p>Try the ATM yourself! Use card <strong style="color:var(--blue-pale);">1234</strong> with PIN <strong style="color:var(--blue-pale);">1234</strong>. The simulator mirrors the exact Python logic implemented below — test invalid PINs, insufficient funds, daily limits, PIN changes, and more.</p>
+
+    <div class="veggie-hero reveal" style="background:linear-gradient(135deg,#050d1a 0%,#060b1f 50%,#0a1628 100%);margin:2rem 0;">
+      <div class="veggie-hero-glyph" style="font-size:8rem;opacity:.05;right:30px;top:20px;">🏧</div>
+      <div>
+        <div class="veggie-hero-label">ATM Simulator v2.0</div>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.6rem,4vw,2.4rem);font-weight:700;color:var(--white);line-height:1.15;margin-bottom:12px;">Mirrors the exact Python logic<br/><em style="color:var(--blue-pale);">implemented below.</em></h2>
+        <p class="veggie-hero-desc">Test card: 1234 &nbsp;·&nbsp; PIN: 1234 &nbsp;·&nbsp; Balance: ₱12,500.75</p>
+        <div class="veggie-meta-pills">
+          <span class="veggie-pill vp-py">Multi-Account</span>
+          <span class="veggie-pill vp-green">Daily Limits</span>
+          <span class="veggie-pill vp-gold">PIN Change</span>
+        </div>
+      </div>
+      <div class="veggie-hero-stats">
+        <div class="veggie-stat"><span class="veggie-stat-n">₱10k</span><span class="veggie-stat-l">Daily Limit</span></div>
+        <div class="veggie-stat"><span class="veggie-stat-n">3</span><span class="veggie-stat-l">PIN Attempts</span></div>
+        <div class="veggie-stat"><span class="veggie-stat-n">₱50k</span><span class="veggie-stat-l">Deposit Cap</span></div>
+        <div class="veggie-stat"><span class="veggie-stat-n">SHA-256</span><span class="veggie-stat-l">PIN Hashing</span></div>
+      </div>
+    </div>
+
+    <div class="veg-source-wrap" style="background:#050d1a;">
+      <div class="veg-source-bar" style="background:#030a14;">
+        <div class="dot" style="background:#ff5f57;"></div>
+        <div class="dot" style="background:#ffbd2e;"></div>
+        <div class="dot" style="background:#28c840;"></div>
+        <span class="veg-source-filename" style="color:var(--blue-pale);">ATM Simulator — Interactive Session</span>
+      </div>
+      <div id="atmScreen" style="font-family:'JetBrains Mono',monospace;font-size:.78rem;color:#7dd3fc;padding:24px;min-height:300px;white-space:pre-wrap;line-height:1.75;overflow-y:auto;max-height:420px;">==================================
+   VALLEYS &amp; BYTES ATM v2.0
+==================================
+
+Welcome to the ATM Simulator
+
+→ Press START to begin your session
+→ Test card: 1234
+→ PIN: 1234
+→ Balance: ₱12,500.75
+
+This simulator mirrors the exact logic
+of our Python implementation below.</div>
+      <div style="padding:14px 20px 8px;display:flex;gap:10px;flex-wrap:wrap;">
+        <input type="text" id="atmInput" placeholder="Enter input..." disabled
+          style="flex:1;min-width:0;background:#0a0f1e;border:1px solid var(--border);border-radius:100px;padding:10px 18px;color:var(--white);font-family:'JetBrains Mono',monospace;font-size:.78rem;outline:none;transition:border-color .2s;">
+        <button id="atmSubmit" disabled
+          style="background:var(--blue-glow);border:none;border-radius:100px;padding:10px 22px;color:#fff;font-family:'Outfit',sans-serif;font-size:.82rem;font-weight:500;cursor:pointer;white-space:nowrap;transition:background .2s;">Submit</button>
+      </div>
+      <div style="padding:0 20px 18px;">
+        <button id="atmStart"
+          style="width:100%;padding:12px;background:var(--blue-glow);border:none;border-radius:8px;color:white;font-family:'Outfit',sans-serif;font-size:.85rem;font-weight:600;cursor:pointer;letter-spacing:.04em;transition:background .2s;">▶ START ATM SIMULATOR</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="code">
+  <div class="section-inner">
+    <div class="divider"></div>
+    <p class="section-label">Implementation</p>
+    <h2 class="section-title">💻 Complete Production-Ready Implementation</h2>
+    <p>Below is our ATM system with professional features: multi-account support, transaction limits, audit logging, and comprehensive error handling. Every design decision is explained in the sections that follow.</p>
+
+    <div class="veg-source-wrap reveal">
+      <div class="veg-source-bar">
+        <div class="dot" style="background:#ff5f57;"></div>
+        <div class="dot" style="background:#ffbd2e;"></div>
+        <div class="dot" style="background:#28c840;"></div>
+        <span class="veg-source-filename">atm_system.py</span>
+        <button class="veg-source-copy" onclick="copyATMCode(this)">copy code</button>
+      </div>
+      <pre class="veg-source-pre" id="atmSourcePre"><span class="vcm"># ── atm_system.py ──────────────────────────────────────────────</span>
+<span class="vkw">import</span> hashlib
+<span class="vkw">import</span> datetime
+<span class="vkw">import</span> json
+<span class="vkw">from</span> typing <span class="vkw">import</span> Dict, List, Optional, Tuple
+
+<span class="vkw">class</span> <span class="vfn">Account</span>:
+    <span class="vkw">def</span> <span class="vfn">__init__</span>(self, account_number: <span class="vbi">str</span>, pin_hash: <span class="vbi">str</span>,
+                 holder_name: <span class="vbi">str</span>, initial_balance: <span class="vbi">float</span> = <span class="vnm">0.0</span>,
+                 account_type: <span class="vbi">str</span> = <span class="vst">"savings"</span>):
+        self.account_number = account_number
+        self.pin_hash = pin_hash
+        self.holder_name = holder_name
+        self.balance = initial_balance
+        self.account_type = account_type
+        self.is_locked = <span class="vkw">False</span>
+        self.failed_attempts = <span class="vnm">0</span>
+        self.transaction_history: List[Dict] = []
+        self.daily_withdrawal_total = <span class="vnm">0.0</span>
+        self.last_transaction_date = datetime.date.today()
+
+    <span class="vkw">def</span> <span class="vfn">verify_pin</span>(self, plain_pin: <span class="vbi">str</span>) -&gt; <span class="vbi">bool</span>:
+        input_hash = hashlib.sha256(plain_pin.encode()).hexdigest()
+        <span class="vkw">return</span> input_hash == self.pin_hash
+
+    <span class="vkw">def</span> <span class="vfn">can_withdraw</span>(self, amount: <span class="vbi">float</span>,
+                     daily_limit: <span class="vbi">float</span> = <span class="vnm">10000.0</span>) -&gt; Tuple[<span class="vbi">bool</span>, <span class="vbi">str</span>]:
+        <span class="vkw">if</span> self.last_transaction_date &lt; datetime.date.today():
+            self.daily_withdrawal_total = <span class="vnm">0.0</span>
+            self.last_transaction_date = datetime.date.today()
+        <span class="vkw">if</span> self.is_locked:
+            <span class="vkw">return</span> <span class="vkw">False</span>, <span class="vst">"Account is locked. Please contact support."</span>
+        <span class="vkw">if</span> amount &lt;= <span class="vnm">0</span>:
+            <span class="vkw">return</span> <span class="vkw">False</span>, <span class="vst">"Amount must be positive."</span>
+        <span class="vkw">if</span> amount &gt; self.balance:
+            <span class="vkw">return</span> <span class="vkw">False</span>, <span class="vst">"Insufficient funds."</span>
+        <span class="vkw">if</span> amount % <span class="vnm">100</span> != <span class="vnm">0</span>:
+            <span class="vkw">return</span> <span class="vkw">False</span>, <span class="vst">"Withdrawals must be in multiples of 100."</span>
+        <span class="vkw">if</span> self.daily_withdrawal_total + amount &gt; daily_limit:
+            <span class="vkw">return</span> <span class="vkw">False</span>, <span class="vst">f"Daily withdrawal limit of ₱{daily_limit:,.2f} exceeded."</span>
+        <span class="vkw">return</span> <span class="vkw">True</span>, <span class="vst">"Approved"</span>
+
+    <span class="vkw">def</span> <span class="vfn">withdraw</span>(self, amount: <span class="vbi">float</span>) -&gt; Dict:
+        can_withdraw, message = self.can_withdraw(amount)
+        <span class="vkw">if not</span> can_withdraw:
+            <span class="vkw">return</span> {<span class="vst">"success"</span>: <span class="vkw">False</span>, <span class="vst">"message"</span>: message}
+        self.balance -= amount
+        self.daily_withdrawal_total += amount
+        transaction = {
+            <span class="vst">"type"</span>: <span class="vst">"withdrawal"</span>, <span class="vst">"amount"</span>: amount,
+            <span class="vst">"balance_after"</span>: self.balance,
+            <span class="vst">"timestamp"</span>: datetime.datetime.now().isoformat()
+        }
+        self.transaction_history.append(transaction)
+        <span class="vkw">return</span> {<span class="vst">"success"</span>: <span class="vkw">True</span>,
+                <span class="vst">"message"</span>: <span class="vst">f"Withdrawn ₱{amount:,.2f}"</span>,
+                <span class="vst">"new_balance"</span>: self.balance,
+                <span class="vst">"transaction"</span>: transaction}
+
+<span class="vkw">class</span> <span class="vfn">ATM</span>:
+    DAILY_WITHDRAWAL_LIMIT = <span class="vnm">10000.0</span>
+    MAX_FAILED_ATTEMPTS = <span class="vnm">3</span>
+
+    <span class="vkw">def</span> <span class="vfn">__init__</span>(self):
+        self.accounts: Dict[<span class="vbi">str</span>, Account] = {}
+        self.current_account: Optional[Account] = <span class="vkw">None</span>
+        self.session_start = <span class="vkw">None</span>
+        self._initialize_test_accounts()
+
+    <span class="vkw">def</span> <span class="vfn">_initialize_test_accounts</span>(self):
+        demo_hash = hashlib.sha256(<span class="vst">"1234"</span>.encode()).hexdigest()
+        self.accounts[<span class="vst">"1234"</span>] = Account(<span class="vst">"1234"</span>, demo_hash,
+            <span class="vst">"Glenn Junsay Pansensoy"</span>, <span class="vnm">12500.75</span>, <span class="vst">"savings"</span>)
+        self.accounts[<span class="vst">"5678"</span>] = Account(<span class="vst">"5678"</span>, demo_hash,
+            <span class="vst">"Maria Santos"</span>, <span class="vnm">25000.00</span>, <span class="vst">"checking"</span>)
+
+    <span class="vkw">def</span> <span class="vfn">authenticate</span>(self, card_number: <span class="vbi">str</span>, pin: <span class="vbi">str</span>) -&gt; Tuple[<span class="vbi">bool</span>, <span class="vbi">str</span>]:
+        <span class="vkw">if</span> card_number <span class="vkw">not in</span> self.accounts:
+            <span class="vkw">return</span> <span class="vkw">False</span>, <span class="vst">"Card not recognized"</span>
+        account = self.accounts[card_number]
+        <span class="vkw">if</span> account.is_locked:
+            <span class="vkw">return</span> <span class="vkw">False</span>, <span class="vst">"Account locked. Please contact customer service."</span>
+        <span class="vkw">if</span> account.verify_pin(pin):
+            account.failed_attempts = <span class="vnm">0</span>
+            self.current_account = account
+            self.session_start = datetime.datetime.now()
+            <span class="vkw">return</span> <span class="vkw">True</span>, <span class="vst">f"Welcome, {account.holder_name}!"</span>
+        account.failed_attempts += <span class="vnm">1</span>
+        <span class="vkw">if</span> account.failed_attempts &gt;= self.MAX_FAILED_ATTEMPTS:
+            account.is_locked = <span class="vkw">True</span>
+            <span class="vkw">return</span> <span class="vkw">False</span>, <span class="vst">"Too many failed attempts. Account locked."</span>
+        remaining = self.MAX_FAILED_ATTEMPTS - account.failed_attempts
+        <span class="vkw">return</span> <span class="vkw">False</span>, <span class="vst">f"Incorrect PIN. {remaining} attempt(s) remaining."</span>
+
+    <span class="vkw">def</span> <span class="vfn">check_balance</span>(self) -&gt; <span class="vbi">str</span>:
+        <span class="vkw">if not</span> self.current_account: <span class="vkw">return</span> <span class="vst">"No active session"</span>
+        <span class="vkw">return</span> <span class="vst">f"Current Balance: ₱{self.current_account.balance:,.2f}"</span>
+
+    <span class="vkw">def</span> <span class="vfn">deposit</span>(self, amount: <span class="vbi">float</span>) -&gt; Dict:
+        <span class="vkw">if not</span> self.current_account:
+            <span class="vkw">return</span> {<span class="vst">"success"</span>: <span class="vkw">False</span>, <span class="vst">"message"</span>: <span class="vst">"No active session"</span>}
+        <span class="vkw">if</span> amount &lt;= <span class="vnm">0</span>:
+            <span class="vkw">return</span> {<span class="vst">"success"</span>: <span class="vkw">False</span>, <span class="vst">"message"</span>: <span class="vst">"Deposit must be positive"</span>}
+        <span class="vkw">if</span> amount &gt; <span class="vnm">50000</span>:
+            <span class="vkw">return</span> {<span class="vst">"success"</span>: <span class="vkw">False</span>, <span class="vst">"message"</span>: <span class="vst">"Over ₱50,000 requires teller"</span>}
+        self.current_account.balance += amount
+        tx = {<span class="vst">"type"</span>: <span class="vst">"deposit"</span>, <span class="vst">"amount"</span>: amount,
+              <span class="vst">"balance_after"</span>: self.current_account.balance,
+              <span class="vst">"timestamp"</span>: datetime.datetime.now().isoformat()}
+        self.current_account.transaction_history.append(tx)
+        <span class="vkw">return</span> {<span class="vst">"success"</span>: <span class="vkw">True</span>, <span class="vst">"message"</span>: <span class="vst">f"Deposited ₱{amount:,.2f}"</span>,
+                <span class="vst">"new_balance"</span>: self.current_account.balance, <span class="vst">"transaction"</span>: tx}
+
+    <span class="vkw">def</span> <span class="vfn">withdraw</span>(self, amount: <span class="vbi">float</span>) -&gt; Dict:
+        <span class="vkw">if not</span> self.current_account:
+            <span class="vkw">return</span> {<span class="vst">"success"</span>: <span class="vkw">False</span>, <span class="vst">"message"</span>: <span class="vst">"No active session"</span>}
+        <span class="vkw">return</span> self.current_account.withdraw(amount)
+
+    <span class="vkw">def</span> <span class="vfn">change_pin</span>(self, old_pin: <span class="vbi">str</span>, new_pin: <span class="vbi">str</span>) -&gt; Dict:
+        <span class="vkw">if not</span> self.current_account:
+            <span class="vkw">return</span> {<span class="vst">"success"</span>: <span class="vkw">False</span>, <span class="vst">"message"</span>: <span class="vst">"No active session"</span>}
+        <span class="vkw">if not</span> self.current_account.verify_pin(old_pin):
+            <span class="vkw">return</span> {<span class="vst">"success"</span>: <span class="vkw">False</span>, <span class="vst">"message"</span>: <span class="vst">"Current PIN is incorrect"</span>}
+        <span class="vkw">if</span> <span class="vbi">len</span>(new_pin) != <span class="vnm">4</span> <span class="vkw">or not</span> new_pin.isdigit():
+            <span class="vkw">return</span> {<span class="vst">"success"</span>: <span class="vkw">False</span>, <span class="vst">"message"</span>: <span class="vst">"PIN must be exactly 4 digits"</span>}
+        <span class="vkw">if</span> new_pin == old_pin:
+            <span class="vkw">return</span> {<span class="vst">"success"</span>: <span class="vkw">False</span>, <span class="vst">"message"</span>: <span class="vst">"New PIN must differ from old"</span>}
+        self.current_account.pin_hash = hashlib.sha256(new_pin.encode()).hexdigest()
+        <span class="vkw">return</span> {<span class="vst">"success"</span>: <span class="vkw">True</span>, <span class="vst">"message"</span>: <span class="vst">"PIN changed successfully."</span>}
+
+    <span class="vkw">def</span> <span class="vfn">get_transaction_history</span>(self, limit: <span class="vbi">int</span> = <span class="vnm">10</span>) -&gt; List[Dict]:
+        <span class="vkw">if not</span> self.current_account: <span class="vkw">return</span> []
+        <span class="vkw">return</span> self.current_account.transaction_history[-limit:]
+
+    <span class="vkw">def</span> <span class="vfn">logout</span>(self):
+        self.current_account = <span class="vkw">None</span>
+        self.session_start = <span class="vkw">None</span></pre>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="concepts">
+  <div class="section-inner">
+    <div class="divider"></div>
+    <p class="section-label">Deep Dive</p>
+    <h2 class="section-title">🔬 Understanding Every Design Decision</h2>
+
+    <div class="posts-grid">
+      <div class="post-card reveal">
+        <div class="post-thumb post-thumb-1" style="font-size:2.5rem;">🏛️</div>
+        <div class="post-meta"><span class="post-tag">Architecture</span></div>
+        <div class="post-body">
+          <div class="post-title">Separation of Concerns</div>
+          <p class="post-excerpt">We split <code>Account</code> (data + individual operations) from <code>ATM</code> (system-wide coordination). Each class has exactly one reason to change — a core SRP principle that makes maintenance straightforward.</p>
+        </div>
+      </div>
+      <div class="post-card reveal">
+        <div class="post-thumb post-thumb-2" style="font-size:2.5rem;">🔐</div>
+        <div class="post-meta"><span class="post-tag">Security</span></div>
+        <div class="post-body">
+          <div class="post-title">Security Architecture</div>
+          <p class="post-excerpt">Never store plaintext PINs. SHA-256 hashing here for clarity; real systems use <code>bcrypt</code> or <code>Argon2</code> with per-user salts. Failed attempt tracking stops brute force: 3 wrong PINs locks the account permanently.</p>
+        </div>
+      </div>
+      <div class="post-card reveal">
+        <div class="post-thumb post-thumb-3" style="font-size:2.5rem;">📊</div>
+        <div class="post-meta"><span class="post-tag">State</span></div>
+        <div class="post-body">
+          <div class="post-title">State Management</div>
+          <p class="post-excerpt">Each account tracks its own state: balance, lock status, failed attempts, and daily withdrawal total. This encapsulation means one account's state can never corrupt another's — naturally thread-safe at the account level.</p>
+        </div>
+      </div>
+      <div class="post-card reveal">
+        <div class="post-thumb post-thumb-1" style="font-size:2.5rem;">💼</div>
+        <div class="post-meta"><span class="post-tag">Business Logic</span></div>
+        <div class="post-body">
+          <div class="post-title">Business Rules Encapsulation</div>
+          <p class="post-excerpt">All withdrawal rules live in <code>can_withdraw()</code>. When compliance says "add a minimum withdrawal of ₱200," there's exactly one place to make that change — no scattered checks to miss.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.7rem;color:var(--white);margin:3rem 0 1.5rem;line-height:1.2;">📝 Line-by-Line: Critical Sections Explained</h3>
+
+    <div class="deep-read reveal" style="margin-bottom:1.5rem;">
+      <div class="deep-read-visual" style="min-height:auto;padding:30px;">
+        <div class="deep-badge">Authentication Flow</div>
+        <h3 style="font-size:1.35rem;max-width:300px;">Why the order of checks matters in <code style="font-size:.75rem;">authenticate()</code></h3>
+      </div>
+      <div class="deep-read-body">
+        <p><code>authenticate()</code> performs a careful sequence of checks. First it verifies the card exists — then checks if the account is already locked. This order matters: you should never reveal whether a locked account's PIN is correct, since that leaks security-sensitive information.</p>
+        <p>PIN verification uses hashed comparison — the actual PIN is never stored or transmitted in plaintext. Even if an attacker accessed the database directly, they'd only see cryptographic hashes.</p>
+        <div class="deep-toc">
+          <div class="deep-toc-title">Why <code>Tuple[bool, str]</code> return types?</div>
+          <ol>
+            <li>A failed login is an expected outcome, not an exceptional one</li>
+            <li>Callers handle both success and failure paths cleanly without try/except</li>
+            <li>Makes testing easier: assert on both the boolean AND the message</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <div class="deep-read reveal" style="margin-bottom:1.5rem;">
+      <div class="deep-read-visual" style="min-height:auto;padding:30px;">
+        <div class="deep-badge">Withdrawal Logic</div>
+        <h3 style="font-size:1.35rem;max-width:300px;">The heart of the business rules engine</h3>
+      </div>
+      <div class="deep-read-body">
+        <p>The <code>can_withdraw()</code> method checks conditions in priority order. First: is today a new calendar day? If so, reset the daily counter. Real ATMs do exactly this — your daily limit refreshes at midnight, not 24 hours after your last withdrawal.</p>
+        <p>Five conditions are checked in order: account lock, positive amount, sufficient balance, denomination validity (multiples of ₱100), and daily limit. The denomination check (<code>amount % 100 !== 0</code>) is especially realistic — physical ATMs can only dispense whole bills, so only amounts divisible by the smallest denomination are valid.</p>
+      </div>
+    </div>
+
+    <div class="deep-read reveal">
+      <div class="deep-read-visual" style="min-height:auto;padding:30px;">
+        <div class="deep-badge">Class Constants</div>
+        <h3 style="font-size:1.35rem;max-width:300px;">DRY principle applied to configuration</h3>
+      </div>
+      <div class="deep-read-body">
+        <p><code>DAILY_WITHDRAWAL_LIMIT = 10000.0</code> and <code>MAX_FAILED_ATTEMPTS = 3</code> are declared as class-level constants. When a business requirement changes — say, the daily limit increases to ₱15,000 — you change it in exactly one place, and every method picks up the new value automatically.</p>
+        <p>Every successful operation appends a structured record to <code>transaction_history</code>: type, amount, resulting balance, and an ISO 8601 timestamp. This isn't optional in banking — regulators require complete audit trails. Design your public methods to be implementation-agnostic, so you can swap the storage backend later without changing callers.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="design">
+  <div class="section-inner">
+    <div class="divider"></div>
+    <p class="section-label">Design Patterns</p>
+    <h2 class="section-title">🏗️ Professional Design Patterns in Action</h2>
+    <p>Our ATM system demonstrates several Gang of Four design patterns that appear constantly in professional software:</p>
+
+    <div class="radar-grid reveal">
+      <div class="radar-card">
+        <span class="radar-ring ring-adopt">● Command</span>
+        <div class="radar-name">Command Pattern</div>
+        <div class="radar-desc">Each ATM operation (deposit, withdraw, balance check) could be encapsulated as a command object — enabling queued transactions, undo operations, and complete audit logging.</div>
+        <div class="radar-category">BEHAVIORAL PATTERN</div>
+      </div>
+      <div class="radar-card">
+        <span class="radar-ring ring-trial">● Observer</span>
+        <div class="radar-name">Observer Pattern</div>
+        <div class="radar-desc">Transaction history demonstrates Observer-like behavior — accounts notify interested parties (ATM screen, receipt printer, fraud detector) when state changes, decoupling account from presentation.</div>
+        <div class="radar-category">BEHAVIORAL PATTERN</div>
+      </div>
+      <div class="radar-card">
+        <span class="radar-ring ring-assess">● Factory</span>
+        <div class="radar-name">Factory Pattern</div>
+        <div class="radar-desc">Account creation could use a factory to handle different account types (savings, checking, business) each with different rules. The factory centralizes all creation logic.</div>
+        <div class="radar-category">CREATIONAL PATTERN</div>
+      </div>
+      <div class="radar-card">
+        <span class="radar-ring ring-assess">● Strategy</span>
+        <div class="radar-name">Strategy Pattern</div>
+        <div class="radar-desc">Withdrawal rules could be swapped out based on account type. A savings account has different limits from a business account — Strategy makes these interchangeable and independently testable.</div>
+        <div class="radar-category">BEHAVIORAL PATTERN</div>
+      </div>
+    </div>
+
+    <div class="pull-quote reveal" style="margin-top:2.5rem;">
+      <blockquote>"A withdrawal command (Command) uses a withdrawal strategy (Strategy) that checks business rules, then notifies observers (Observer) — all without the Account class knowing any of those systems exist."</blockquote>
+      <cite>— Valleys &amp; Bytes, on decoupling</cite>
+    </div>
+    <p style="margin-top:1.5rem;">Being able to name and apply these patterns in an interview — with a concrete example like this ATM — immediately signals that you think at an architectural level, not just a "make the test pass" level.</p>
+  </div>
+</section>
+
+<section class="section" id="testing">
+  <div class="section-inner">
+    <div class="divider"></div>
+    <p class="section-label">Testing Strategy</p>
+    <h2 class="section-title">🧪 Comprehensive Testing Strategy</h2>
+    <p>Professional code requires professional testing. Here's how we'd test our ATM system — covering the four most critical scenarios:</p>
+
+    <div class="veg-source-wrap reveal">
+      <div class="veg-source-bar">
+        <div class="dot" style="background:#ff5f57;"></div>
+        <div class="dot" style="background:#ffbd2e;"></div>
+        <div class="dot" style="background:#28c840;"></div>
+        <span class="veg-source-filename">test_atm.py</span>
+      </div>
+      <pre class="veg-source-pre"><span class="vkw">import</span> unittest
+
+<span class="vkw">class</span> <span class="vfn">TestATM</span>(unittest.TestCase):
+    <span class="vkw">def</span> <span class="vfn">setUp</span>(self):
+        self.atm = ATM()   <span class="vcm"># fresh ATM before every test</span>
+
+    <span class="vkw">def</span> <span class="vfn">test_successful_authentication</span>(self):
+        success, message = self.atm.authenticate(<span class="vst">"1234"</span>, <span class="vst">"1234"</span>)
+        self.assertTrue(success)
+        self.assertIn(<span class="vst">"Welcome"</span>, message)
+
+    <span class="vkw">def</span> <span class="vfn">test_failed_authentication_locks_account</span>(self):
+        <span class="vkw">for</span> i <span class="vkw">in</span> <span class="vbi">range</span>(<span class="vnm">3</span>):
+            success, _ = self.atm.authenticate(<span class="vst">"1234"</span>, <span class="vst">"wrong"</span>)
+            self.assertFalse(success)
+        <span class="vcm"># correct PIN must now fail because account is locked</span>
+        success, message = self.atm.authenticate(<span class="vst">"1234"</span>, <span class="vst">"1234"</span>)
+        self.assertFalse(success)
+        self.assertIn(<span class="vst">"locked"</span>, message.lower())
+
+    <span class="vkw">def</span> <span class="vfn">test_withdrawal_rules</span>(self):
+        self.atm.authenticate(<span class="vst">"1234"</span>, <span class="vst">"1234"</span>)
+        self.assertFalse(self.atm.withdraw(-<span class="vnm">100</span>)[<span class="vst">"success"</span>])    <span class="vcm"># negative amount</span>
+        self.assertFalse(self.atm.withdraw(<span class="vnm">999999</span>)[<span class="vst">"success"</span>])   <span class="vcm"># exceeds balance</span>
+        self.assertFalse(self.atm.withdraw(<span class="vnm">150</span>)[<span class="vst">"success"</span>])      <span class="vcm"># not multiple of 100</span>
+        self.assertTrue(self.atm.withdraw(<span class="vnm">1000</span>)[<span class="vst">"success"</span>])      <span class="vcm"># valid ✓</span>
+
+    <span class="vkw">def</span> <span class="vfn">test_daily_limit</span>(self):
+        self.atm.authenticate(<span class="vst">"1234"</span>, <span class="vst">"1234"</span>)
+        self.assertTrue(self.atm.withdraw(<span class="vnm">5000</span>)[<span class="vst">"success"</span>])
+        self.assertTrue(self.atm.withdraw(<span class="vnm">5000</span>)[<span class="vst">"success"</span>])
+        result = self.atm.withdraw(<span class="vnm">1000</span>)
+        self.assertFalse(result[<span class="vst">"success"</span>])
+        self.assertIn(<span class="vst">"daily withdrawal limit"</span>, result[<span class="vst">"message"</span>].lower())
+
+    <span class="vkw">def</span> <span class="vfn">test_transaction_history</span>(self):
+        self.atm.authenticate(<span class="vst">"1234"</span>, <span class="vst">"1234"</span>)
+        self.atm.deposit(<span class="vnm">1000</span>)
+        self.atm.withdraw(<span class="vnm">500</span>)
+        history = self.atm.get_transaction_history()
+        self.assertEqual(<span class="vbi">len</span>(history), <span class="vnm">2</span>)
+        self.assertEqual(history[<span class="vnm">0</span>][<span class="vst">"type"</span>], <span class="vst">"deposit"</span>)
+        self.assertEqual(history[<span class="vnm">1</span>][<span class="vst">"type"</span>], <span class="vst">"withdrawal"</span>)</pre>
+    </div>
+
+    <p>Notice how each test is self-contained — <code>setUp()</code> creates a fresh ATM before every test, so a failure in one test can never corrupt another. This isolation is the difference between tests you trust and tests that give you false confidence.</p>
+    <p>In a real project, you'd also test concurrent access (two withdrawals submitted at the same millisecond), database integration, and mocked external API calls. Aim for &gt;90% code coverage and run these tests automatically on every commit via CI/CD pipelines like GitHub Actions or Jenkins.</p>
+  </div>
+</section>
+
+<section class="section" id="advanced">
+  <div class="section-inner">
+    <div class="divider"></div>
+    <p class="section-label">Production Considerations</p>
+    <h2 class="section-title">⚡ Taking It Further</h2>
+
+    <div class="tools-grid">
+      <div class="tool-card reveal">
+        <div class="tool-icon">📦</div>
+        <div class="tool-name">Database Integration</div>
+        <div class="tool-desc">In production, accounts live in a database. You'd use connection pooling, transactions, and optimistic locking for concurrent access. The Account class becomes a Data Access Object (DAO).</div>
+        <div class="tool-tags"><span class="tool-tag">PostgreSQL</span><span class="tool-tag">SQLAlchemy</span></div>
+        <a class="tool-link" href="#">Learn more →</a>
+      </div>
+      <div class="tool-card reveal">
+        <div class="tool-icon">🔗</div>
+        <div class="tool-name">API Design</div>
+        <div class="tool-desc">A real ATM network exposes REST or gRPC APIs. Each ATM is a client; a central server handles transactions. You'd need authentication, rate limiting, and idempotency keys.</div>
+        <div class="tool-tags"><span class="tool-tag">FastAPI</span><span class="tool-tag">gRPC</span></div>
+        <a class="tool-link" href="#">Learn more →</a>
+      </div>
+      <div class="tool-card reveal">
+        <div class="tool-icon">📈</div>
+        <div class="tool-name">Monitoring &amp; Logging</div>
+        <div class="tool-desc">Production systems need structured JSON logs, Prometheus metrics, and distributed tracing. Every transaction should be trackable for debugging and fraud detection.</div>
+        <div class="tool-tags"><span class="tool-tag">Prometheus</span><span class="tool-tag">OpenTelemetry</span></div>
+        <a class="tool-link" href="#">Learn more →</a>
+      </div>
+      <div class="tool-card reveal">
+        <div class="tool-icon">🔒</div>
+        <div class="tool-name">Advanced Security</div>
+        <div class="tool-desc">Real ATMs use hardware security modules (HSM), encrypted PIN pads, and tamper detection. The software side needs encryption at rest, TLS for all communications, and regular security audits.</div>
+        <div class="tool-tags"><span class="tool-tag">HSM</span><span class="tool-tag">Argon2</span><span class="tool-tag">TLS</span></div>
+        <a class="tool-link" href="#">Learn more →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="share">
+  <div class="section-inner">
+    <div class="divider"></div>
+    <div class="follow-section reveal">
+      <h2>📢 Share This Masterclass</h2>
+      <p>Found this guide valuable? Help other developers discover it.</p>
+      <div class="follow-btns">
+        <button class="follow-btn fb-btn share-btn" data-platform="facebook">📘 Facebook</button>
+        <button class="follow-btn li-btn share-btn" data-platform="linkedin">🔗 LinkedIn</button>
+        <button class="follow-btn tw-btn share-btn" data-platform="twitter">🐦 X / Twitter</button>
+        <button class="follow-btn share-btn" style="background:#25d366;color:#fff;" data-platform="whatsapp">📱 WhatsApp</button>
+        <button class="follow-btn share-btn" style="background:#229ed9;color:#fff;" data-platform="telegram">✈️ Telegram</button>
+        <button class="follow-btn yt-btn share-btn" data-platform="youtube">▶️ YouTube</button>
+      </div>
+      <div class="follow-counts">
+        <div class="follow-count-item"><span class="follow-count-num">5,000+</span><span class="follow-count-lbl">Subscribers</span></div>
+        <div class="follow-count-item"><span class="follow-count-num">Open</span><span class="follow-count-lbl">Source on GitHub</span></div>
+        <div class="follow-count-item"><span class="follow-count-num">Free</span><span class="follow-count-lbl">Always</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="subscribe">
+  <div class="section-inner">
+    <div class="sub-section reveal sub-section--horiz">
+      <div class="sub-horiz-left">
+        <h2>📧 Never Miss an In-Depth Tutorial</h2>
+        <p>Join 5,000+ developers who receive our weekly deep dives on Python, OOP, system design, and more.</p>
+        <p class="sub-note" style="margin-top:.5rem;">No spam. Unsubscribe at any time.</p>
+      </div>
+      <div class="sub-horiz-right">
+        <div class="sub-email-row">
+          <input type="email" id="subscribeEmail" placeholder="Enter your email address">
+          <button class="sub-btn" id="subscribeBtn">Subscribe Free</button>
+        </div>
+        <p id="subscribeMessage" style="margin-top:.8rem;font-size:.82rem;"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="comments">
+  <div class="section-inner">
+    <div class="divider"></div>
+    <p class="section-label">Discussion</p>
+    <h2 class="section-title">💬 Join the Discussion</h2>
+
+    <div class="comments-horiz">
+      <div class="comments-form-col">
+        <div class="comment-form reveal">
+          <h3>Leave a Comment</h3>
+          <textarea id="commentText" rows="5"
+            placeholder="Share your thoughts, questions, or insights about ATM programming..."
+            style="width:100%;background:var(--input-bg);border:1px solid var(--border);border-radius:8px;padding:14px;color:var(--white);font-family:'Outfit',sans-serif;font-size:.88rem;resize:vertical;outline:none;transition:border-color .2s;margin-top:12px;line-height:1.6;"></textarea>
+          <div class="reactions-row" style="margin-top:14px;flex-wrap:wrap;gap:10px;">
+            <button class="react-btn like" id="likeBtn"><span>👍</span> <span id="likeCount">127</span></button>
+            <button class="react-btn love" id="loveBtn"><span>❤️</span> <span id="loveCount">43</span></button>
+            <button class="react-btn" id="postCommentBtn" style="background:var(--blue-glow);color:#fff;border-color:var(--blue-glow);margin-left:auto;">Post Comment</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="comments-list-col">
+        <div id="commentList" style="display:flex;flex-direction:column;gap:14px;">
+          <div class="comment-item" style="background:var(--card-bg);border:1px solid var(--border-soft);border-radius:10px;padding:18px;">
+            <div class="comment-header"><div class="comment-avatar">P</div><div class="comment-meta"><div class="comment-name">@python_dev</div><div class="comment-time">2 hours ago</div></div></div>
+            <div class="comment-text">This is exactly what I needed! The explanation about daily withdrawal limits and account locking really clarified things for me.</div>
+          </div>
+          <div class="comment-item" style="background:var(--card-bg);border:1px solid var(--border-soft);border-radius:10px;padding:18px;">
+            <div class="comment-header"><div class="comment-avatar">S</div><div class="comment-meta"><div class="comment-name">@security_pro</div><div class="comment-time">5 hours ago</div></div></div>
+            <div class="comment-text">Great security practices. Would love to see a follow-up on implementing proper salt+bcrypt for PIN storage in production.</div>
+          </div>
+          <div class="comment-item" style="background:var(--card-bg);border:1px solid var(--border-soft);border-radius:10px;padding:18px;">
+            <div class="comment-header"><div class="comment-avatar">B</div><div class="comment-meta"><div class="comment-name">@beginner_coder</div><div class="comment-time">yesterday</div></div></div>
+            <div class="comment-text">The way you broke down the withdrawal validation into separate checks helped me understand how to structure my own code. Thank you!</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="footer" style="background:var(--obsidian-2);border-top:1px solid var(--border);padding:60px 5vw 28px;">
+  <div style="max-width:1080px;margin:0 auto;">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="nav-logo" href="#" style="display:inline-block;margin-bottom:14px;text-decoration:none;">Valleys <span>&amp;</span> Bytes</a>
+        <p>An independent technology publication dedicated to exploring the intersections of software engineering, computational thinking, and the culture surrounding the machines we build.</p>
+        <div class="footer-social" style="margin-top:18px;">
+          <button class="ft-social-btn" onclick="window.open('#','_blank')" title="Twitter/X" aria-label="Twitter">𝕏</button>
+          <button class="ft-social-btn" onclick="window.open('#','_blank')" title="LinkedIn" aria-label="LinkedIn">in</button>
+          <button class="ft-social-btn" onclick="window.open('#','_blank')" title="GitHub" aria-label="GitHub">gh</button>
+          <button class="ft-social-btn" onclick="window.open('#','_blank')" title="YouTube" aria-label="YouTube">▶</button>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Valleys &amp; Bytes</h4>
+        <div class="ft-btn-col">
+          <button class="ft-nav-btn" onclick="location.href='#'">
+            <span class="ft-nav-icon">👋</span> About Us
+          </button>
+          <button class="ft-nav-btn" onclick="location.href='#'">
+            <span class="ft-nav-icon">📚</span> Tutorials
+          </button>
+          <button class="ft-nav-btn" onclick="location.href='#'">
+            <span class="ft-nav-icon">✍️</span> Blog
+          </button>
+          <button class="ft-nav-btn" onclick="location.href='#'">
+            <span class="ft-nav-icon">🎙️</span> Podcast
+          </button>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Learning Paths</h4>
+        <div class="ft-btn-col">
+          <button class="ft-nav-btn" onclick="location.href='#'">
+            <span class="ft-nav-icon">🐍</span> Python Mastery
+          </button>
+          <button class="ft-nav-btn" onclick="location.href='#'">
+            <span class="ft-nav-icon">🔬</span> OOP Deep Dive
+          </button>
+          <button class="ft-nav-btn" onclick="location.href='#'">
+            <span class="ft-nav-icon">🏗️</span> Design Patterns
+          </button>
+          <button class="ft-nav-btn" onclick="location.href='#'">
+            <span class="ft-nav-icon">⚙️</span> System Design
+          </button>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <div class="ft-btn-col">
+          <button class="ft-nav-btn" onclick="location.href='oop-privacy.html'">
+            <span class="ft-nav-icon">🔒</span> Privacy Policy
+          </button>
+          <button class="ft-nav-btn" onclick="location.href='oop-terms.html'">
+            <span class="ft-nav-icon">📄</span> Terms of Service
+          </button>
+          <button class="ft-nav-btn" onclick="location.href='oop-cookie.html'">
+            <span class="ft-nav-icon">🍪</span> Cookie Policy
+          </button>
+          <button class="ft-nav-btn" onclick="location.href='about-author.html'">
+            <span class="ft-nav-icon">🧑‍💻</span> About the Author
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2025 Valleys &amp; Bytes · Hosted on code-sense.pansensoyglenn.workers.dev · All content available under Creative Commons Attribution 4.0</div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+        <button class="ft-bottom-btn" onclick="location.href='data-science.html'">📊 Data Science</button>
+        <button class="ft-bottom-btn ft-bottom-btn--highlight" onclick="location.href='oop-cheatsheet.html'">⬇ Download Cheat Sheet</button>
+      </div>
+    </div>
+    <div class="footer-tech" style="color:white;"> — Built with data precision and Created through intensive information authentication. — By: Glenn Junsay Pansensoy</div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+document.addEventListener('mousemove', e => {
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top = e.clientY + 'px';
+  setTimeout(() => {
+    ring.style.left = e.clientX + 'px';
+    ring.style.top = e.clientY + 'px';
+  }, 80);
+});
+document.querySelectorAll('a,button,[onclick]').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    cursor.style.transform = 'translate(-50%,-50%) scale(2)';
+    ring.style.width = '48px'; ring.style.height = '48px';
+  });
+  el.addEventListener('mouseleave', () => {
+    cursor.style.transform = 'translate(-50%,-50%) scale(1)';
+    ring.style.width = '32px'; ring.style.height = '32px';
+  });
+});
+
+window.addEventListener('scroll', () => {
+  document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 40);
+});
+
+let menuOpen = false;
+function toggleMenu() {
+  menuOpen = !menuOpen;
+  document.getElementById('hamburger').classList.toggle('open', menuOpen);
+  document.getElementById('navOverlay').classList.toggle('open', menuOpen);
+  document.body.style.overflow = menuOpen ? 'hidden' : '';
+}
+function closeMenu() {
+  menuOpen = false;
+  document.getElementById('hamburger').classList.remove('open');
+  document.getElementById('navOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+
+document.querySelectorAll('.nav-btn[data-section]').forEach(btn => {
+  btn.addEventListener('click', function(e) {
+    e.preventDefault();
+    const id = this.dataset.section;
+    const target = document.getElementById(id);
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+
+// Scroll-spy: highlight active nav button
+(function() {
+  const sections = ['introduction','simulator','code','concepts','design','testing','advanced','comments','subscribe'];
+  const navBtns = document.querySelectorAll('.nav-btn[data-section]');
+  function onScroll() {
+    let current = '';
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= 120) current = id;
+      }
+    });
+    navBtns.forEach(btn => {
+      btn.classList.toggle('nb-active', btn.dataset.section === current);
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+
+function showToast(msg, type = 'info') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast ' + type + ' show';
+  setTimeout(() => t.classList.remove('show'), 3200);
+}
+
+const reacted = {};
+function react(btn, type, postId) {
+  const key = type + postId;
+  const countEl = btn.querySelector('.count');
+  const emojiEl = btn.querySelector('span:first-child');
+  const current = parseInt(countEl.textContent);
+  if (reacted[key]) {
+    reacted[key] = false;
+    btn.classList.remove('active');
+    countEl.textContent = current - 1;
+    emojiEl.textContent = type === 'love' ? '🤍' : '👍';
+  } else {
+    reacted[key] = true;
+    btn.classList.add('active');
+    countEl.textContent = current + 1;
+    emojiEl.textContent = type === 'love' ? '❤️' : '👍';
+    btn.style.transform = 'scale(1.2)';
+    setTimeout(() => btn.style.transform = 'scale(1)', 200);
+    showToast(type === 'love' ? '❤️ Loved!' : '👍 Liked!', 'success');
+  }
+}
+
+const followed = {};
+function followPlatform(platform) {
+  if (!followed[platform]) {
+    followed[platform] = true;
+    showToast('✓ Following Valleys & Bytes on ' + platform + '!', 'success');
+  } else {
+    showToast('You already follow us on ' + platform, 'info');
+  }
+}
+
+const COMMENT_KEY = 'vb_comments';
+function getComments() {
+  try { return JSON.parse(localStorage.getItem(COMMENT_KEY)) || []; } catch { return []; }
+}
+function saveComments(arr) {
+  try { localStorage.setItem(COMMENT_KEY, JSON.stringify(arr)); } catch {}
+}
+function submitComment() {
+  const name = document.getElementById('cName').value.trim();
+  const email = document.getElementById('cEmail').value.trim();
+  const text = document.getElementById('cText').value.trim();
+  const article = document.getElementById('cArticle').value;
+  if (!name) { showToast('⚠ Please enter your name.', 'info'); return; }
+  if (!email || !email.includes('@')) { showToast('⚠ Please enter a valid email.', 'info'); return; }
+  if (text.length < 10) { showToast('⚠ Comment too short — write at least a sentence!', 'info'); return; }
+
+  const comment = { name, text, article, time: new Date().toLocaleString() };
+  const arr = getComments(); arr.push(comment); saveComments(arr);
+  renderNewComment(comment);
+  document.getElementById('cName').value = '';
+  document.getElementById('cEmail').value = '';
+  document.getElementById('cText').value = '';
+  showToast('✓ Comment posted! Thanks for joining the discussion.', 'success');
+}
+function renderNewComment(c) {
+  const initials = c.name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
+  const div = document.createElement('div');
+  div.className = 'comment-item';
+  div.style.borderColor = 'var(--blue-mid)';
+  div.innerHTML = `
+    <div class="comment-header">
+      <div class="comment-avatar">${initials}</div>
+      <div class="comment-meta">
+        <div class="comment-name">${c.name}</div>
+        <div class="comment-time">${c.time}</div>
+      </div>
+    </div>
+    <p class="comment-text">${c.text}</p>
+    <div class="comment-actions">
+      <button class="comment-react" onclick="likeComment(this)">👍 0</button>
+      <button class="comment-react" onclick="replyComment(this)">↩ Reply</button>
+    </div>`;
+  document.getElementById('commentsList').prepend(div);
+  setTimeout(() => div.style.borderColor = '', 2000);
+}
+function likeComment(btn) {
+  const match = btn.textContent.match(/\d+/);
+  const n = match ? parseInt(match[0]) : 0;
+  btn.textContent = '👍 ' + (n + 1);
+  btn.classList.add('liked');
+}
+function replyComment(btn) {
+  showToast('↩ Reply thread — coming soon!', 'info');
+}
+
+const captions = {
+  transformer: {
+    linkedin: "Just finished reading this exceptional deep-dive on Transformer architectures from Valleys & Bytes. The breakdown of attention mechanisms is the clearest I've encountered — essential reading for anyone working in ML or AI engineering. 🧠 #MachineLearning #AI #DeepLearning",
+    facebook: "Mind = blown 🤯 This article on how Transformer AI works is SO well written. Even if you're not a developer, the way they explain attention mechanisms with real analogies makes it totally understandable. Highly recommend sharing this one!",
+    x: "Best explanation of transformer attention I've read. Valleys & Bytes knocked it out of the park. If you're confused by how LLMs actually work — read this. 🧵 #AI #MachineLearning"
+  },
+  rust: {
+    linkedin: "Valleys & Bytes just published a masterclass on Rust's ownership model. For engineers debating whether to invest in learning Rust, this article makes a compelling case — the borrow checker isn't a constraint, it's a superpower. #RustLang #SystemsProgramming",
+    facebook: "This article about the Rust programming language genuinely changed how I think about memory and bugs. The author explains the borrow checker in a way that finally makes sense. Sharing for all my dev friends! 💻",
+    x: "Rust's borrow checker is not your enemy. It's the compiler being more honest with you than you've been with yourself. Great piece from @ValleysAndBytes. #Rust #Programming"
+  },
+  progressive: {
+    linkedin: "An important counter-narrative for 2026: Valleys & Bytes makes a compelling argument for progressive enhancement and HTML-first architecture. As JavaScript fatigue reaches an all-time high, this is a timely and well-reasoned read. #WebDev #HTMX",
+    facebook: "Anyone else exhausted by how complicated web development has gotten? This article argues we overcomplicated everything and shows teams getting back to basics with AMAZING results. A refreshing read.",
+    x: "Team ripped out 40k lines of React. Replaced with server-side + HTMX. Build times: 4 min → 8 sec. Valleys & Bytes called this months ago. #WebDev #HTMX"
+  },
+  zerotrust: {
+    linkedin: "Zero-trust is one of the most misused buzzwords in enterprise security. Valleys & Bytes cuts through the vendor noise with a grounded, philosophical look at what zero-trust actually requires. Required reading for security practitioners. #CyberSecurity #ZeroTrust",
+    facebook: "Fascinating article on why 'Zero Trust Security' is more of a mindset than a product you can buy. Really eye-opening if you've been following cybersecurity trends!",
+    x: "No vendor can sell you zero-trust. It's a posture, not a product. Excellent explainer from Valleys & Bytes. #CyberSecurity #InfoSec"
+  },
+  docker: {
+    linkedin: "Valleys & Bytes published an exceptional technical deep-dive on Docker internals — from cgroups and Linux namespaces to multi-stage builds. If you've been using containers without knowing what's under the hood, this fills the gap perfectly. #Docker #DevOps",
+    facebook: "Ever wondered what Docker is ACTUALLY doing when you run a container? This article explains it from the ground up, and suddenly everything makes so much more sense. Amazing writing.",
+    x: "From cgroups to multi-stage builds — the best Docker internals explainer I've read. Zero hand-waving, all signal. Valleys & Bytes 🐳 #Docker #DevOps"
+  },
+  postgres: {
+    linkedin: "The thesis of this Valleys & Bytes article: Postgres has quietly become the Swiss Army knife of databases — with extensions for time-series, vector search, JSON, and more. The consolidation argument is compelling and data-backed. #PostgreSQL #Databases",
+    facebook: "Hilarious and insightful: this article tracks how Postgres, the database that's been around forever, is basically just absorbing every trendy database type. NoSQL? Time-series? Vector DB? Postgres has an extension for that 😂",
+    x: "Every 6 months a new DB category emerges. Every 12 months Postgres adds an extension that does it better. The consolidation is real. @ValleysAndBytes investigates. #Postgres #Database"
+  }
+};
+let currentCaption = '';
+function generateShareCaption() {
+  const article = document.getElementById('shareArticle').value;
+  const platform = document.getElementById('sharePlatform').value;
+  const preview = document.getElementById('aiPreview');
+  preview.className = 'ai-preview loading';
+  preview.textContent = 'Generating caption';
+  setTimeout(() => {
+    currentCaption = (captions[article] && captions[article][platform]) || 'Check out this amazing article on Valleys & Bytes!';
+    preview.className = 'ai-preview';
+    preview.textContent = currentCaption;
+    showToast('✦ AI caption generated!', 'success');
+  }, 1400);
+}
+function shareToSocial(platform) {
+  if (!currentCaption) { showToast('⚠ Generate a caption first!', 'info'); return; }
+  const text = encodeURIComponent(currentCaption + ' https://valleysandbytes.dev');
+  const urls = {
+    Facebook: `https://www.facebook.com/sharer/sharer.php?u=https://valleysandbytes.dev&quote=${text}`,
+    LinkedIn: `https://www.linkedin.com/sharing/share-offsite/?url=https://valleysandbytes.dev&summary=${text}`,
+    X: `https://twitter.com/intent/tweet?text=${text}`
+  };
+  window.open(urls[platform] || '#', '_blank');
+  showToast('↗ Opening ' + platform + ' share dialog...', 'info');
+}
+
+const subscribers = JSON.parse(localStorage.getItem('vb_subs') || '[]');
+function subscribeEmail() {
+  const email = document.getElementById('subEmail').value.trim();
+  if (!email || !email.includes('@')) { showToast('⚠ Please enter a valid email address.', 'info'); return; }
+  if (subscribers.includes(email)) { showToast('✓ You\'re already subscribed!', 'success'); return; }
+  subscribers.push(email);
+  try { localStorage.setItem('vb_subs', JSON.stringify(subscribers)); } catch {}
+  document.getElementById('subSuccess').style.display = 'block';
+  document.getElementById('subEmail').value = '';
+  showToast('✓ Subscription confirmed!', 'success');
+}
+function subscribe(plan) {
+  showToast('✦ ' + plan + ' plan selected — redirecting to checkout...', 'success');
+  setTimeout(() => showToast('(Demo mode — no actual charge)', 'info'), 2000);
+}
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+function animateCounters() {
+  document.querySelectorAll('.stat-num[data-count]').forEach(el => {
+    const target = parseInt(el.dataset.count);
+    const step = target / 60;
+    let current = 0;
+    const timer = setInterval(() => {
+      current = Math.min(current + step, target);
+      el.textContent = Math.floor(current).toLocaleString();
+      if (current >= target) clearInterval(timer);
+    }, 16);
+  });
+}
+const statsObs = new IntersectionObserver(entries => {
+  if (entries[0].isIntersecting) { animateCounters(); statsObs.disconnect(); }
+}, { threshold: 0.3 });
+const statsEl = document.querySelector('.intro-stats');
+if (statsEl) statsObs.observe(statsEl);
+
+class ATMSimulator {
+  constructor() {
+    this.screen = document.getElementById('atmScreen');
+    this.input = document.getElementById('atmInput');
+    this.submitBtn = document.getElementById('atmSubmit');
+    this.startBtn = document.getElementById('atmStart');
+    this.state = 'idle';
+    this.attempts = 3;
+    this.balance = 12500.75;
+    this.pin = '1234';
+    this.name = 'Glenn Junsay Pansensoy';
+    this.authenticated = false;
+    this.dailyWithdrawal = 0;
+    this.lastDate = new Date().toDateString();
+  }
+  start() {
+    this.state = 'waiting_card';
+    this.updateScreen(`==================================\n   VALLEYS & BYTES ATM v2.0\n==================================\n\nEnter card number:\n→ Use 1234 for demo account\n→ PIN will be requested after\n\nCard number: `);
+    this.input.disabled = false;
+    this.submitBtn.disabled = false;
+    this.input.focus();
+  }
+  updateScreen(text) { this.screen.innerHTML = text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>'); }
+  handleInput(value) {
+    if (this.state === 'waiting_card') {
+      if (value === '1234') {
+        this.state = 'waiting_pin';
+        this.updateScreen(`Card accepted: ${this.name}\n\nEnter PIN (${this.attempts} attempts remaining):\n→ 4-digit PIN required\n→ 3 attempts before card lock\n\nPIN: `);
+      } else {
+        this.updateScreen(`Invalid card number: ${value}\n\nOnly card 1234 is available in this demo.\n\nPress ENTER to try again`);
+        this.state = 'menu_return'; setTimeout(() => { this.state = 'waiting_card'; this.updateScreen(`Enter card number:\n\nCard number: `); }, 2000);
+      }
+    } else if (this.state === 'waiting_pin') {
+      if (value === this.pin) {
+        this.authenticated = true; this.attempts = 3; this.showMenu();
+      } else {
+        this.attempts--;
+        if (this.attempts <= 0) {
+          this.updateScreen(`Card blocked.\n\nToo many incorrect PIN attempts.\nPlease contact your bank.\n\nFor security, please restart.`);
+          this.state = 'idle'; this.input.disabled = true; this.submitBtn.disabled = true;
+        } else {
+          this.updateScreen(`Incorrect PIN. ${this.attempts} attempt(s) remaining.\n\nEnter PIN: `);
+        }
+      }
+    } else if (this.state === 'menu') {
+      this.handleMenu(value);
+    } else if (this.state === 'deposit') {
+      this.handleDeposit(value);
+    } else if (this.state === 'withdraw') {
+      this.handleWithdraw(value);
+    } else if (this.state === 'pin_old') {
+      this.handlePinChange(value);
+    } else if (this.state === 'pin_new') {
+      this.handleNewPin(value);
+    } else if (this.state === 'menu_return') {
+      this.showMenu();
+    }
+  }
+  showMenu() {
+    this.state = 'menu';
+    this.updateScreen(`==================================\n   MAIN MENU — ${this.name}\n==================================\n\n  Balance: ₱${this.balance.toFixed(2)}\n\n  [1] Check Balance\n  [2] Withdraw\n  [3] Deposit\n  [4] Change PIN\n  [5] Exit\n\nSelect option: `);
+  }
+  handleMenu(option) {
+    if (option === '1') {
+      this.updateScreen(`==================================\n        ACCOUNT BALANCE\n==================================\n\nCurrent Balance: ₱${this.balance.toFixed(2)}\n\nAvailable: ₱${Math.min(this.balance, 10000 - this.dailyWithdrawal).toFixed(2)}\nDaily Withdrawal Used: ₱${this.dailyWithdrawal.toFixed(2)}\n\nPress ENTER to return to menu`);
+      this.state = 'menu_return';
+    } else if (option === '2') {
+      this.state = 'withdraw';
+      this.updateScreen(`==================================\n          WITHDRAWAL\n==================================\n\nAvailable balance: ₱${this.balance.toFixed(2)}\nDaily limit remaining: ₱${(10000 - this.dailyWithdrawal).toFixed(2)}\n\nNote: Multiples of ₱100 only\n\nEnter amount: `);
+    } else if (option === '3') {
+      this.state = 'deposit';
+      this.updateScreen(`==================================\n           DEPOSIT\n==================================\n\nCurrent balance: ₱${this.balance.toFixed(2)}\nMaximum single deposit: ₱50,000\n\nEnter amount: `);
+    } else if (option === '4') {
+      this.state = 'pin_old';
+      this.updateScreen(`==================================\n          CHANGE PIN\n==================================\n\nFor security, enter your CURRENT PIN\nto authorize this change.\n\nCurrent PIN: `);
+    } else if (option === '5') {
+      this.updateScreen(`==================================\n  THANK YOU FOR BANKING WITH US\n==================================\n\nGoodbye, ${this.name}!\n\nPlease take your card.\n\nHave a great day! 🏦`);
+      this.state = 'idle'; this.authenticated = false; this.attempts = 3;
+      this.input.disabled = true; this.submitBtn.disabled = true;
+    } else {
+      this.updateScreen(`Invalid option: ${option}\n\nPlease enter 1, 2, 3, 4, or 5.\n\nPress ENTER to try again`);
+      this.state = 'menu_return';
+    }
+  }
+  handleDeposit(amount) {
+    amount = parseFloat(amount);
+    if (isNaN(amount) || amount <= 0) {
+      this.updateScreen(`Invalid amount.\n\nAmount must be a positive number.\n\nPress ENTER to try again`);
+    } else if (amount > 50000) {
+      this.updateScreen(`Deposit declined: Amount exceeds ₱50,000\n\nYou attempted: ₱${amount.toFixed(2)}\n\nPlease visit a teller for larger deposits.\n\nPress ENTER to continue`);
+    } else {
+      this.balance += amount;
+      this.updateScreen(`==================================\n        DEPOSIT SUCCESSFUL\n==================================\n\nAmount deposited: ₱${amount.toFixed(2)}\nNew balance:      ₱${this.balance.toFixed(2)}\n\nTransaction complete.\n\nPress ENTER to return to menu`);
+    }
+    this.state = 'menu_return';
+  }
+  handleWithdraw(amount) {
+    amount = parseFloat(amount);
+    const today = new Date().toDateString();
+    if (today !== this.lastDate) { this.dailyWithdrawal = 0; this.lastDate = today; }
+    if (isNaN(amount) || amount <= 0) {
+      this.updateScreen(`Invalid amount: ${amount}\n\nAmount must be a positive number.\n\nPress ENTER to try again`);
+    } else if (amount > this.balance) {
+      this.updateScreen(`Withdrawal declined: Insufficient funds\n\nAvailable balance: ₱${this.balance.toFixed(2)}\nRequested amount:  ₱${amount.toFixed(2)}\n\nPress ENTER to continue`);
+    } else if (amount % 100 !== 0) {
+      this.updateScreen(`Withdrawal declined: Invalid denomination\n\nThis ATM only dispenses ₱100 bills.\nPlease enter a multiple of 100.\n\nExample: 100, 200, 500, 1000\n\nPress ENTER to try again`);
+    } else if (this.dailyWithdrawal + amount > 10000) {
+      this.updateScreen(`Withdrawal declined: Daily limit exceeded\n\nDaily limit:      ₱10,000.00\nUsed today:       ₱${this.dailyWithdrawal.toFixed(2)}\nRemaining today:  ₱${(10000-this.dailyWithdrawal).toFixed(2)}\nRequested:        ₱${amount.toFixed(2)}\n\nPress ENTER to continue`);
+    } else {
+      this.balance -= amount; this.dailyWithdrawal += amount;
+      this.updateScreen(`==================================\n       WITHDRAWAL SUCCESSFUL\n==================================\n\nAmount withdrawn: ₱${amount.toFixed(2)}\nPlease take your cash.\n\nNew balance:      ₱${this.balance.toFixed(2)}\nDaily remaining:  ₱${(10000-this.dailyWithdrawal).toFixed(2)}\n\nPress ENTER to return to menu`);
+    }
+    this.state = 'menu_return';
+  }
+  handlePinChange(oldPin) {
+    if (oldPin !== this.pin) {
+      this.updateScreen(`Incorrect PIN\n\nThe PIN you entered does not match.\nThis attempt has been logged.\n\nPress ENTER to return to menu`);
+      this.state = 'menu_return';
+    } else {
+      this.state = 'pin_new';
+      this.updateScreen(`Enter NEW 4-digit PIN:\n\nRequirements:\n→ Exactly 4 digits\n→ Numbers only (0-9)\n→ Cannot be same as old PIN\n\nNew PIN: `);
+    }
+  }
+  handleNewPin(newPin) {
+    if (newPin.length !== 4 || !/^\d+$/.test(newPin)) {
+      this.updateScreen(`Invalid PIN format\n\nPIN must be exactly 4 digits (0-9 only).\n\nPress ENTER to try again`);
+      this.state = 'menu_return';
+    } else if (newPin === this.pin) {
+      this.updateScreen(`PIN unchanged\n\nNew PIN cannot be the same as your current PIN.\n\nPress ENTER to continue`);
+      this.state = 'menu_return';
+    } else {
+      this.pin = newPin;
+      this.updateScreen(`==================================\n        PIN CHANGE SUCCESSFUL\n==================================\n\nYour PIN has been updated.\n\nIMPORTANT: Remember your new PIN.\nFor security, memorize this number.\n\nPress ENTER to return to menu`);
+      this.state = 'menu_return';
+    }
+  }
+  reset() { this.state='idle'; this.authenticated=false; this.attempts=3; this.input.disabled=true; this.submitBtn.disabled=true; }
+}
+
+const atmSim = new ATMSimulator();
+
+document.getElementById('atmStart').addEventListener('click', () => atmSim.start());
+document.getElementById('atmSubmit').addEventListener('click', function() {
+  const input = document.getElementById('atmInput');
+  if (input.value.trim() && atmSim.state !== 'idle') {
+    atmSim.handleInput(input.value.trim()); input.value = '';
+  }
+});
+document.getElementById('atmInput').addEventListener('keypress', e => { if (e.key==='Enter') document.getElementById('atmSubmit').click(); });
+document.getElementById('atmInput').addEventListener('keydown', function(e) {
+  if (e.key==='Enter' && atmSim.state==='menu_return') { e.preventDefault(); atmSim.showMenu(); this.value=''; }
+});
+
+document.querySelectorAll('.share-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    const platform = this.dataset.platform;
+    const url = encodeURIComponent('https://code-sense.pansensoyglenn.workers.dev/atm.html');
+    const text = encodeURIComponent('Complete ATM Programming Masterclass: From OOP Basics to Production-Ready Banking Software');
+    const urls = {
+      facebook: `https://www.facebook.com/sharer/sharer.php?u=${url}`,
+      linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${url}`,
+      twitter: `https://twitter.com/intent/tweet?url=${url}&text=${text}`,
+      whatsapp: `https://wa.me/?text=${text}%20${url}`,
+      telegram: `https://t.me/share/url?url=${url}&text=${text}`,
+    };
+    if (platform === 'youtube') { alert('🎥 Subscribe to our YouTube channel!\nhttps://youtube.com/valleysandbytes'); return; }
+    if (urls[platform]) window.open(urls[platform], '_blank', 'width=600,height=400');
+  });
+});
+
+document.getElementById('subscribeBtn').addEventListener('click', function() {
+  const email = document.getElementById('subscribeEmail').value;
+  const msg = document.getElementById('subscribeMessage');
+  if (email && email.includes('@') && email.includes('.')) {
+    msg.textContent = '✅ Success! Check your inbox for confirmation.';
+    msg.style.color = 'var(--green-love)';
+    document.getElementById('subscribeEmail').value = '';
+  } else {
+    msg.textContent = '❌ Please enter a valid email address';
+    msg.style.color = 'var(--red-like)';
+  }
+});
+
+let likeCount = 127, loveCount = 43;
+document.getElementById('likeBtn').addEventListener('click', function() {
+  likeCount++; document.getElementById('likeCount').textContent = likeCount;
+  this.classList.add('active');
+});
+document.getElementById('loveBtn').addEventListener('click', function() {
+  loveCount++; document.getElementById('loveCount').textContent = loveCount;
+  this.classList.add('active');
+});
+
+document.getElementById('postCommentBtn').addEventListener('click', function() {
+  const comment = document.getElementById('commentText').value.trim();
+  if (comment) {
+    const list = document.getElementById('commentList');
+    const item = document.createElement('div');
+    item.className = 'comment-item';
+    item.style.cssText = 'background:var(--card-bg);border:1px solid var(--border-soft);border-radius:10px;padding:18px;';
+    item.innerHTML = `<div class="comment-header"><div class="comment-avatar">Y</div><div class="comment-meta"><div class="comment-name">@visitor</div><div class="comment-time">just now</div></div></div><div class="comment-text">${comment.replace(/</g,'&lt;')}</div>`;
+    list.insertBefore(item, list.firstChild);
+    document.getElementById('commentText').value = '';
+  }
+});
+
+function copyATMCode(btn) {
+  const pre = document.getElementById('atmSourcePre');
+  navigator.clipboard.writeText(pre.innerText).then(() => {
+    btn.textContent = '✓ copied!';
+    setTimeout(() => btn.textContent = 'copy code', 2000);
+    showToast('✓ atm_system.py copied to clipboard!', 'success');
+  }).catch(() => showToast('Could not copy — try manually.', 'info'));
+}
+
+</script>
+</body>
+</html>
