@@ -1,0 +1,3352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Valleys &amp; Bytes</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;0,700;1,300;1,600&family=JetBrains+Mono:wght@300;400;500&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --obsidian:    #0a0a0f;
+  --obsidian-2:  #0e0e16;
+  --obsidian-3:  #13131e;
+  --obsidian-4:  #1a1a28;
+  --midnight:    #0d1b3e;
+  --midnight-2:  #112050;
+  --midnight-3:  #1a2f6e;
+  --blue-glow:   #2563eb;
+  --blue-mid:    #3b82f6;
+  --blue-light:  #60a5fa;
+  --blue-pale:   #93c5fd;
+  --cyan:        #06b6d4;
+  --cyan-soft:   #22d3ee;
+  --silver:      #cbd5e1;
+  --silver-dim:  #64748b;
+  --white:       #f1f5f9;
+  --white-soft:  #e2e8f0;
+  --accent-gold: #f59e0b;
+  --red-like:    #ef4444;
+  --green-love:  #10b981;
+  --border:      #1e2a4a;
+  --border-soft: #1a2035;
+  --card-bg:     #0f1220;
+  --input-bg:    #111827;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:hidden;max-width:100%}
+body{
+  background:var(--obsidian);
+  color:#e8edf5;
+  font-family:'Outfit',sans-serif;
+  font-weight:300;
+  line-height:1.7;
+  overflow-x:hidden;
+  cursor:none;
+  text-align:justify;
+}
+
+.cursor{position:fixed;width:10px;height:10px;background:var(--blue-mid);border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:transform .1s,background .2s;mix-blend-mode:screen}
+.cursor-ring{position:fixed;width:32px;height:32px;border:1px solid var(--blue-light);border-radius:50%;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:transform .18s ease,width .2s,height .2s,opacity .2s;opacity:.5}
+body:hover .cursor-ring{opacity:.7}
+
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:9999;opacity:.4;
+}
+
+
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 40px;
+  background:linear-gradient(180deg,#0a0a0fee 0%,#0a0a0f00 100%);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid #1e2a4a44;
+  transition:background .3s;
+}
+nav.scrolled{background:#0a0a0ff5;border-bottom-color:var(--border)}
+
+.nav-logo{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.55rem;font-weight:700;
+  color:var(--white);
+  letter-spacing:.02em;
+  text-decoration:none;
+}
+.nav-logo span{color:var(--blue-light)}
+
+.hamburger{
+  display:flex;flex-direction:column;gap:5px;
+  cursor:none;background:none;border:none;padding:8px;
+  position:relative;z-index:1010;
+}
+.hamburger span{
+  display:block;width:26px;height:2px;
+  background:var(--silver);
+  border-radius:2px;
+  transition:transform .35s cubic-bezier(.77,0,.175,1),opacity .2s,width .3s;
+}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0;width:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* MOBILE MENU */
+.nav-overlay{
+  position:fixed;inset:0;z-index:999;
+  background:#0a0a0fff;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:0;
+  opacity:0;pointer-events:none;
+  transition:opacity .4s ease;
+}
+.nav-overlay.open{opacity:1;pointer-events:all}
+.nav-overlay a{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2rem,6vw,3.5rem);
+  font-weight:600;color:var(--white-soft);
+  text-decoration:none;padding:10px 0;
+  border-bottom:1px solid transparent;
+  transition:color .2s,border-color .2s;
+  transform:translateY(20px);opacity:0;
+  transition:transform .4s ease,opacity .4s ease,color .2s;
+}
+.nav-overlay.open a{transform:translateY(0);opacity:1}
+.nav-overlay.open a:nth-child(1){transition-delay:.1s}
+.nav-overlay.open a:nth-child(2){transition-delay:.15s}
+.nav-overlay.open a:nth-child(3){transition-delay:.2s}
+.nav-overlay.open a:nth-child(4){transition-delay:.25s}
+.nav-overlay.open a:nth-child(5){transition-delay:.3s}
+.nav-overlay.open a:nth-child(6){transition-delay:.35s}
+.nav-overlay a:hover{color:var(--blue-light)}
+.nav-social{
+  display:flex;gap:20px;margin-top:40px;
+  transform:translateY(20px);opacity:0;transition:transform .4s .4s ease,opacity .4s .4s ease;
+}
+.nav-overlay.open .nav-social{transform:translateY(0);opacity:1}
+.nav-social a{color:var(--silver-dim);font-size:.85rem;font-family:'JetBrains Mono',monospace;text-decoration:none;transition:color .2s}
+.nav-social a:hover{color:var(--blue-light)}
+
+.hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:120px 5vw 80px;
+  position:relative;
+  overflow:hidden;
+  text-align:center;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 30%,#0d1b3e88,transparent),
+    radial-gradient(ellipse 50% 40% at 80% 70%,#1a2f6e33,transparent),
+    radial-gradient(ellipse 40% 50% at 10% 60%,#06b6d411,transparent);
+}
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(var(--border-soft) 1px,transparent 1px),
+    linear-gradient(90deg,var(--border-soft) 1px,transparent 1px);
+  background-size:60px 60px;
+  opacity:.18;
+  mask-image:radial-gradient(ellipse 80% 80% at 50% 40%,black,transparent);
+}
+.hero-eyebrow{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.72rem;letter-spacing:.25em;
+  color:var(--cyan-soft);text-transform:uppercase;
+  margin-bottom:24px;
+  animation:fadeUp .8s .2s both;
+}
+.hero h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(3rem,8vw,6.5rem);
+  font-weight:700;line-height:1.05;
+  color:var(--white);
+  max-width:820px;
+  animation:fadeUp .8s .35s both;
+}
+.hero h1 em{font-style:italic;color:var(--blue-pale)}
+.hero-sub{
+  font-size:clamp(.95rem,2vw,1.15rem);
+  color:var(--silver-dim);font-weight:300;
+  max-width:560px;margin-top:20px;
+  animation:fadeUp .8s .5s both;
+}
+.hero-cta{
+  display:flex;gap:14px;flex-wrap:wrap;justify-content:center;
+  margin-top:40px;
+  animation:fadeUp .8s .65s both;
+}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 26px;border-radius:6px;
+  font-family:'Outfit',sans-serif;font-size:.88rem;font-weight:500;
+  text-decoration:none;cursor:none;border:none;
+  transition:transform .2s,box-shadow .2s,background .2s;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary{
+  background:var(--blue-glow);color:#fff;
+  box-shadow:0 0 24px #2563eb44;
+}
+.btn-primary:hover{background:var(--blue-mid);box-shadow:0 0 36px #3b82f666}
+.btn-ghost{
+  background:transparent;color:var(--silver);
+  border:1px solid var(--border);
+}
+.btn-ghost:hover{border-color:var(--blue-light);color:var(--blue-light);box-shadow:0 0 20px #3b82f622}
+.hero-scroll{
+  position:absolute;bottom:36px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  font-family:'JetBrains Mono',monospace;font-size:.65rem;
+  color:var(--silver-dim);letter-spacing:.15em;animation:fadeUp .8s .9s both;
+}
+.scroll-line{width:1px;height:40px;background:linear-gradient(var(--blue-light),transparent);animation:scrollPulse 2s infinite}
+@keyframes scrollPulse{0%{opacity:1;transform:scaleY(1)}100%{opacity:0;transform:scaleY(0);transform-origin:top}}
+
+.section{padding:80px 5vw}
+.section-inner{max-width:1080px;margin:0 auto}
+.section-label{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--cyan);margin-bottom:10px;
+}
+.section-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.8rem,4vw,3rem);
+  font-weight:700;color:var(--white);
+  line-height:1.15;margin-bottom:36px;
+}
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:0 0 60px}
+
+.intro-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+@media(max-width:720px){.intro-grid{grid-template-columns:1fr}}
+.intro-text p{color:var(--silver);font-size:1rem;margin-bottom:16px}
+.intro-text p:first-of-type{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.2rem;font-style:italic;color:var(--white-soft);
+  line-height:1.5;
+}
+.intro-stats{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.stat-card{
+  background:var(--card-bg);
+  border:1px solid var(--border);
+  border-radius:10px;padding:24px 20px;
+  text-align:center;
+  transition:border-color .3s,box-shadow .3s;
+}
+.stat-card:hover{border-color:var(--blue-mid);box-shadow:0 0 24px #2563eb22}
+.stat-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.2rem;font-weight:700;color:var(--blue-light);
+}
+.stat-lbl{font-size:.78rem;color:var(--silver-dim);font-family:'JetBrains Mono',monospace;letter-spacing:.1em}
+
+
+.posts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:24px}
+.post-card{
+  background:var(--card-bg);
+  border:1px solid var(--border);
+  border-radius:12px;overflow:hidden;
+  transition:transform .3s,box-shadow .3s,border-color .3s;
+  animation:fadeUp .6s both;
+}
+.post-card:hover{transform:translateY(-6px);box-shadow:0 20px 48px #00000066;border-color:var(--midnight-3)}
+.post-thumb{
+  height:180px;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+  font-size:3rem;
+}
+.post-thumb-1{background:linear-gradient(135deg,#0d1b3e,#1a2f6e)}
+.post-thumb-2{background:linear-gradient(135deg,#0a1628,#112050)}
+.post-thumb-3{background:linear-gradient(135deg,#060d1f,#0d1b3e)}
+.post-meta{
+  display:flex;align-items:center;gap:8px;
+  padding:16px 18px 0;
+}
+.post-tag{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--cyan);background:#06b6d411;
+  padding:3px 9px;border-radius:4px;border:1px solid #06b6d422;
+}
+.post-date{font-size:.75rem;color:var(--silver-dim);margin-left:auto}
+.post-body{padding:14px 18px 18px}
+.post-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.25rem;font-weight:600;color:var(--white);
+  margin-bottom:8px;line-height:1.3;
+}
+.post-excerpt{font-size:.85rem;color:var(--silver-dim);line-height:1.6}
+.post-footer{
+  display:flex;align-items:center;gap:10px;
+  padding:14px 18px;
+  border-top:1px solid var(--border-soft);
+}
+.post-author{font-size:.78rem;color:var(--silver-dim)}
+.post-read{
+  margin-left:auto;font-size:.75rem;
+  color:var(--blue-light);
+  font-family:'JetBrains Mono',monospace;
+  text-decoration:none;cursor:none;
+  transition:color .2s;
+}
+.post-read:hover{color:var(--cyan)}
+
+.reactions-row{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 18px 14px;
+}
+.react-btn{
+  display:inline-flex;align-items:center;gap:5px;
+  background:none;border:1px solid var(--border);
+  border-radius:100px;padding:5px 12px;
+  font-size:.78rem;color:var(--silver-dim);
+  cursor:none;transition:all .2s;font-family:'Outfit',sans-serif;
+}
+.react-btn:hover,.react-btn.active{color:#fff}
+.react-btn.love:hover,.react-btn.love.active{background:#10b98122;border-color:var(--green-love);color:var(--green-love)}
+.react-btn.like:hover,.react-btn.like.active{background:#2563eb22;border-color:var(--blue-mid);color:var(--blue-light)}
+.react-btn span{font-size:1rem}
+
+.follow-section{
+  background:linear-gradient(135deg,var(--obsidian-3),var(--midnight));
+  border:1px solid var(--border);border-radius:16px;
+  padding:48px 40px;text-align:center;
+  position:relative;overflow:hidden;
+}
+.follow-section::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 60% at 50% 0%,#1a2f6e44,transparent);
+  pointer-events:none;
+}
+.follow-section h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.5rem,5vw,2.2rem);font-weight:700;color:var(--white);margin-bottom:12px;
+}
+.follow-section p{color:var(--silver-dim);max-width:480px;margin:0 auto 32px;font-size:.95rem}
+.follow-btns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.follow-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:11px 22px;border-radius:8px;
+  font-size:.85rem;font-weight:500;
+  cursor:none;border:none;text-decoration:none;
+  transition:transform .2s,box-shadow .2s,opacity .2s;
+  font-family:'Outfit',sans-serif;
+}
+.follow-btn:hover{transform:translateY(-3px);opacity:.9}
+.fb-btn{background:#1877f2;color:#fff}
+.tw-btn{background:#000;color:#fff;border:1px solid #333}
+.li-btn{background:#0a66c2;color:#fff}
+.gh-btn{background:#24292f;color:#fff;border:1px solid #444}
+.yt-btn{background:#ff0000;color:#fff}
+.follow-counts{
+  display:flex;gap:32px;justify-content:center;
+  margin-top:32px;flex-wrap:wrap;
+}
+.follow-count-item{text-align:center}
+.follow-count-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.8rem;font-weight:700;color:var(--blue-light);display:block;
+}
+.follow-count-lbl{font-size:.72rem;color:var(--silver-dim);font-family:'JetBrains Mono',monospace;letter-spacing:.1em}
+
+
+.share-section{
+  background:var(--card-bg);border:1px solid var(--border);
+  border-radius:16px;padding:36px;margin-top:32px;
+}
+.share-section h3{
+  font-family:'Cormorant Garamond',serif;font-size:1.5rem;
+  color:var(--white);margin-bottom:6px;
+}
+.share-section p{font-size:.85rem;color:var(--silver-dim);margin-bottom:20px}
+.ai-preview{
+  background:var(--obsidian-3);border:1px solid var(--border-soft);
+  border-radius:8px;padding:16px;margin-bottom:16px;
+  font-size:.85rem;color:var(--silver);line-height:1.6;
+  min-height:72px;font-family:'Outfit',sans-serif;
+}
+.ai-preview.loading{color:var(--silver-dim);font-style:italic}
+.ai-preview.loading::after{content:'▋';animation:blink .7s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.share-controls{display:flex;gap:10px;flex-wrap:wrap}
+.share-platform-btn{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:9px 18px;border-radius:6px;border:none;
+  font-size:.82rem;font-weight:500;cursor:none;
+  font-family:'Outfit',sans-serif;transition:transform .2s,opacity .2s;
+}
+.share-platform-btn:hover{transform:translateY(-2px);opacity:.88}
+.sp-fb{background:#1877f2;color:#fff}
+.sp-li{background:#0a66c2;color:#fff}
+.sp-x{background:#000;color:#fff;border:1px solid #333}
+.btn-gen{
+  background:linear-gradient(90deg,var(--blue-glow),var(--cyan));
+  color:#fff;padding:9px 18px;border-radius:6px;border:none;
+  font-size:.82rem;font-weight:500;cursor:none;
+  font-family:'Outfit',sans-serif;transition:opacity .2s,transform .2s;
+}
+.btn-gen:hover{opacity:.85;transform:translateY(-1px)}
+
+.comment-form{
+  background:var(--card-bg);border:1px solid var(--border);
+  border-radius:12px;padding:28px;margin-bottom:32px;
+}
+.comment-form h3{
+  font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--white);margin-bottom:18px;
+}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+@media(max-width:540px){.form-row{grid-template-columns:1fr}}
+.form-group{display:flex;flex-direction:column;gap:6px}
+.form-group label{font-size:.75rem;color:var(--silver-dim);font-family:'JetBrains Mono',monospace;letter-spacing:.08em}
+.form-group input,.form-group textarea,.form-group select{
+  background:var(--input-bg);border:1px solid var(--border);
+  border-radius:7px;padding:10px 14px;
+  color:var(--white);font-family:'Outfit',sans-serif;font-size:.88rem;
+  outline:none;transition:border-color .2s,box-shadow .2s;resize:vertical;
+}
+.form-group input:focus,.form-group textarea:focus{
+  border-color:var(--blue-mid);
+  box-shadow:0 0 16px #2563eb22;
+}
+.form-group textarea{min-height:100px}
+.form-submit{
+  background:var(--blue-glow);color:#fff;
+  padding:11px 24px;border-radius:7px;border:none;
+  font-size:.88rem;font-weight:500;cursor:none;
+  font-family:'Outfit',sans-serif;
+  transition:background .2s,box-shadow .2s,transform .2s;
+  margin-top:8px;
+}
+.form-submit:hover{background:var(--blue-mid);box-shadow:0 0 24px #3b82f644;transform:translateY(-1px)}
+.comments-list{display:flex;flex-direction:column;gap:18px}
+.comment-item{
+  background:var(--card-bg);border:1px solid var(--border-soft);
+  border-radius:10px;padding:20px;
+  animation:fadeUp .5s both;
+}
+.comment-header{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.comment-avatar{
+  width:38px;height:38px;border-radius:50%;
+  background:linear-gradient(135deg,var(--midnight-2),var(--midnight-3));
+  display:flex;align-items:center;justify-content:center;
+  font-size:.9rem;font-weight:600;color:var(--blue-pale);
+  font-family:'Cormorant Garamond',serif;flex-shrink:0;
+  border:1px solid var(--border);
+}
+.comment-meta{flex:1}
+.comment-name{font-size:.9rem;font-weight:500;color:var(--white)}
+.comment-time{font-size:.72rem;color:var(--silver-dim);font-family:'JetBrains Mono',monospace}
+.comment-text{font-size:.88rem;color:var(--silver);line-height:1.65}
+.comment-actions{display:flex;gap:10px;margin-top:10px}
+.comment-react{
+  background:none;border:none;font-size:.78rem;
+  color:var(--silver-dim);cursor:none;padding:3px 8px;
+  border-radius:4px;transition:color .2s,background .2s;
+  font-family:'Outfit',sans-serif;
+}
+.comment-react:hover{background:var(--obsidian-4);color:var(--blue-light)}
+.comment-react.liked{color:var(--blue-light)}
+
+.sub-section{
+  background:linear-gradient(135deg,var(--midnight) 0%,var(--obsidian-3) 60%,#06b6d408 100%);
+  border:1px solid var(--border);border-radius:20px;
+  padding:60px 48px;text-align:center;
+  position:relative;overflow:hidden;
+}
+.sub-section::before{
+  content:'';position:absolute;
+  top:-60px;left:50%;transform:translateX(-50%);
+  width:300px;height:300px;
+  background:radial-gradient(circle,#2563eb22,transparent 70%);
+  pointer-events:none;
+}
+.sub-section h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2rem,4vw,3.2rem);font-weight:700;
+  color:var(--white);margin-bottom:14px;
+}
+.sub-section p{color:var(--silver-dim);max-width:500px;margin:0 auto 32px;font-size:.95rem}
+.sub-plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:18px;margin-bottom:36px;text-align:left}
+.plan-card{
+  background:#0a0a0f;border:1px solid var(--border);
+  border-radius:12px;padding:24px;
+  transition:border-color .3s,box-shadow .3s,transform .3s;
+}
+.plan-card:hover{border-color:var(--blue-mid);box-shadow:0 12px 36px #2563eb22;transform:translateY(-4px)}
+.plan-card.featured{border-color:var(--blue-glow);background:var(--midnight);box-shadow:0 0 32px #2563eb33}
+.plan-name{font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cyan);margin-bottom:8px}
+.plan-price{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700;color:var(--white);line-height:1}
+.plan-price sup{font-size:1rem;vertical-align:top;margin-top:.5rem;color:var(--silver-dim)}
+.plan-price span{font-size:.75rem;color:var(--silver-dim);font-family:'Outfit',sans-serif;font-weight:300}
+.plan-desc{font-size:.8rem;color:var(--silver-dim);margin:10px 0 14px}
+.plan-features{list-style:none;display:flex;flex-direction:column;gap:7px}
+.plan-features li{font-size:.8rem;color:var(--silver);display:flex;align-items:center;gap:7px}
+.plan-features li::before{content:'→';color:var(--blue-light);font-family:'JetBrains Mono',monospace;font-size:.75rem}
+.plan-btn{
+  display:block;text-align:center;
+  margin-top:20px;padding:9px 18px;border-radius:7px;
+  font-size:.82rem;font-weight:500;cursor:none;border:none;
+  font-family:'Outfit',sans-serif;transition:all .2s;
+  text-decoration:none;
+}
+.plan-btn-outline{background:transparent;color:var(--silver);border:1px solid var(--border)}
+.plan-btn-outline:hover{border-color:var(--blue-mid);color:var(--blue-light)}
+.plan-btn-filled{background:var(--blue-glow);color:#fff}
+.plan-btn-filled:hover{background:var(--blue-mid);box-shadow:0 0 20px #3b82f644}
+
+.sub-email-row{
+  display:flex;gap:10px;max-width:480px;
+  margin:0 auto;flex-wrap:wrap;
+}
+.sub-email-row input{
+  flex:1;background:var(--input-bg);border:1px solid var(--border);
+  border-radius:7px;padding:12px 16px;
+  color:var(--white);font-family:'Outfit',sans-serif;font-size:.9rem;
+  outline:none;transition:border-color .2s,box-shadow .2s;
+}
+.sub-email-row input:focus{border-color:var(--blue-mid);box-shadow:0 0 16px #2563eb22}
+.sub-btn{
+  background:var(--blue-glow);color:#fff;
+  padding:12px 22px;border-radius:7px;border:none;
+  font-size:.88rem;font-weight:500;cursor:none;
+  font-family:'Outfit',sans-serif;white-space:nowrap;
+  transition:background .2s,box-shadow .2s,transform .2s;
+}
+.sub-btn:hover{background:var(--blue-mid);box-shadow:0 0 24px #3b82f655;transform:translateY(-1px)}
+.sub-note{font-size:.72rem;color:var(--silver-dim);margin-top:12px;font-family:'JetBrains Mono',monospace}
+.sub-success{
+  display:none;
+  background:#10b98118;border:1px solid var(--green-love);
+  border-radius:8px;padding:14px 20px;margin-top:14px;
+  color:var(--green-love);font-size:.88rem;
+  max-width:480px;margin-left:auto;margin-right:auto;
+}
+
+footer{
+  background:var(--obsidian-2);
+  border-top:1px solid var(--border);
+  padding:60px 5vw 28px;
+}
+.footer-inner{max-width:1080px;margin:0 auto}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
+@media(max-width:760px){.footer-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.footer-grid{grid-template-columns:1fr}}
+.footer-brand .nav-logo{display:inline-block;margin-bottom:14px;text-decoration:none}
+.footer-brand p{font-size:.85rem;color:#c8d4e8;line-height:1.65;max-width:260px;text-align:justify}
+.footer-social{display:flex;gap:10px;margin-top:18px}
+.footer-social a{
+  width:34px;height:34px;border-radius:6px;
+  background:var(--obsidian-4);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.8rem;color:#a0b4cc;text-decoration:none;
+  transition:color .2s,border-color .2s,background .2s;
+}
+.footer-social a:hover{color:var(--blue-light);border-color:var(--blue-mid);background:var(--midnight)}
+.footer-col h4{
+  font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--blue-light);margin-bottom:16px;
+  text-align:left;
+}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.footer-col ul a{
+  font-size:.83rem;color:#b8c8de;text-decoration:none;
+  transition:color .2s;display:flex;align-items:center;gap:6px;
+  text-align:left;
+}
+.footer-col ul a:hover{color:var(--white)}
+.footer-col ul a::before{content:'›';color:var(--blue-light);font-size:1rem}
+.footer-bottom{
+  display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:20px;
+  padding-top:28px;border-top:1px solid var(--border-soft);
+}
+.footer-copy{font-size:.75rem;color:#9aaec4;font-family:'JetBrains Mono',monospace;text-align:left}
+.footer-legal{
+  display:flex;flex-direction:column;align-items:flex-end;gap:8px;
+}
+.footer-legal a{
+  font-size:.75rem;color:#9aaec4;text-decoration:none;
+  transition:color .2s;font-family:'JetBrains Mono',monospace;
+  text-align:right;
+}
+.footer-legal a:hover{color:var(--blue-light)}
+.footer-tech{
+  font-family:'JetBrains Mono',monospace;font-size:.68rem;
+  color:#3a4a60;margin-top:14px;text-align:center;
+}
+
+.toast{
+  position:fixed;bottom:32px;right:32px;z-index:9000;
+  background:var(--obsidian-3);border:1px solid var(--border);
+  border-radius:10px;padding:14px 20px;
+  font-size:.85rem;color:var(--white);
+  box-shadow:0 12px 40px #00000088;
+  transform:translateY(20px);opacity:0;
+  transition:transform .3s,opacity .3s;
+  max-width:300px;
+}
+.toast.show{transform:translateY(0);opacity:1}
+.toast.success{border-color:var(--green-love);color:var(--green-love)}
+.toast.info{border-color:var(--blue-mid);color:var(--blue-light)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+
+@media(max-width:640px){
+  nav{padding:14px 22px}
+  .section{padding:60px 22px}
+  .sub-section{padding:40px 24px}
+  .follow-section{padding:36px 24px}
+  .sub-email-row{flex-direction:column}
+  .sub-btn{width:100%}
+  .share-controls{flex-direction:column}
+  .follow-btns{flex-direction:column;align-items:center}
+  footer{padding:48px 22px 24px}
+  .footer-bottom{flex-direction:column;align-items:flex-start;gap:16px}
+  .footer-legal{align-items:flex-start}
+}
+
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ── MOBILE RESPONSIVENESS ─────────────────────────────────────────── */
+
+/* 1. Kill the custom cursor on real touch devices */
+@media (hover: none) and (pointer: coarse) {
+  .cursor, .cursor-ring { display: none !important; }
+  body { cursor: auto; }
+  button, a, [role="button"] { cursor: pointer !important; }
+}
+
+/* 2. Global overflow guard — applies to ALL widths */
+*,*::before,*::after { max-width: 100%; }
+img, video, iframe, pre, table { max-width: 100%; }
+/* Code/pre blocks scroll internally instead of pushing layout */
+pre { overflow-x: auto; white-space: pre; }
+.code-panel pre,
+.veg-source-pre { overflow-x: auto; white-space: pre; }
+/* Contain any absolutely-positioned decorative elements */
+.hero, .veggie-hero, .follow-section, .sub-section,
+.deep-read-visual { overflow: hidden; }
+
+/* 3. Tablets & large phones (≤ 900px) */
+@media (max-width: 900px) {
+  .section { padding: 64px 5vw; }
+  .code-panel pre { font-size: .78rem; }
+  .code-showcase-header { flex-wrap: wrap; gap: 6px; }
+  .flow-nodes { max-width: 100%; }
+  .reactions-row { flex-wrap: wrap; gap: 8px; }
+  .veggie-meta-pills { flex-wrap: wrap; gap: 6px; }
+  .steps-wrap { margin-top: 32px; }
+  .reading-type { font-size: .6rem; padding: 2px 7px; }
+  .tip-item { font-size: .65rem; }
+  .tips-track { gap: 40px; }
+  #termOutput { font-size: .7rem !important; }
+}
+
+/* 4. Phones (≤ 640px) */
+@media (max-width: 640px) {
+  nav { padding: 13px 18px; }
+  .section { padding: 52px 18px; }
+  .divider { margin: 0 0 36px; }
+
+  /* Hero */
+  .hero { padding: 100px 18px 72px; }
+  .hero-cta { flex-direction: column; align-items: stretch; gap: 10px; }
+  .hero-cta .btn { width: 100%; justify-content: center; }
+
+  /* Intro */
+  .intro-grid { grid-template-columns: 1fr; gap: 32px; }
+  .intro-stats { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .stat-card { padding: 16px 10px; }
+  .stat-num { font-size: 1.4rem; }
+
+  /* Deep read — already has media query but reinforce */
+  .deep-read { grid-template-columns: 1fr; }
+  .deep-read-visual { min-height: 220px; padding: 24px 20px; }
+  .deep-read-visual h3 { font-size: 1.45rem; }
+  .deep-read-glyph { font-size: 4.5rem; top: 16px; right: 16px; }
+  .deep-read-body { padding: 24px 20px; }
+  .deep-read-footer { flex-wrap: wrap; gap: 10px; }
+
+  /* Veggie hero */
+  .veggie-hero { grid-template-columns: 1fr; padding: 28px 18px; gap: 24px; }
+  .veggie-hero h2 { font-size: clamp(1.6rem, 5vw, 2.2rem); }
+  .veggie-hero-glyph { display: none; }
+  .veggie-hero-stats { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .veggie-stat { padding: 14px 10px; }
+  .veggie-stat-n { font-size: 1.5rem; }
+
+  /* Veg source code block */
+  .veg-source-bar { padding: 10px 14px; }
+  .veg-source-pre { font-size: .7rem; padding: 16px 12px; }
+
+  /* Steps */
+  .steps-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .step-filter-btn { font-size: .6rem; padding: 4px 10px; }
+
+  /* Code tabs */
+  .code-tab { padding: 9px 12px; font-size: .67rem; }
+  .code-panel pre { font-size: .7rem; padding: 16px 12px; }
+  .code-copy { top: 8px; right: 8px; font-size: .62rem; padding: 4px 8px; }
+  .code-lang-badge { font-size: .6rem; }
+
+  /* Flow diagram */
+  .veg-flow { padding: 26px 16px; }
+  .flow-branch-wrap { flex-direction: column; margin-left: 16px; gap: 6px; }
+
+  /* Follow section */
+  .follow-section { padding: 32px 18px; }
+  .follow-btns { flex-direction: column; align-items: stretch; gap: 8px; }
+  .follow-btn { justify-content: center; }
+  .follow-counts { gap: 16px; }
+
+  /* Share */
+  .share-section { padding: 22px 16px; }
+  .share-controls { flex-direction: column; gap: 8px; }
+  .share-platform-btn, .btn-gen { width: 100%; justify-content: center; }
+
+  /* Comment form */
+  .comment-form { padding: 20px 16px; }
+  .form-row { grid-template-columns: 1fr; gap: 10px; }
+
+  /* Subscribe */
+  .sub-section { padding: 36px 18px; }
+  .sub-email-row { flex-direction: column; gap: 8px; }
+  .sub-btn, .sub-email-row input { width: 100%; }
+  .sub-plans { grid-template-columns: 1fr; }
+
+  /* Reading list — hide type badge, 2-col grid */
+  .reading-item { grid-template-columns: auto 1fr; gap: 10px; padding: 12px 14px; }
+  .reading-type { display: none; }
+
+  /* Pull quote */
+  .pull-quote { padding: 18px 16px; }
+
+  /* Authors */
+  .authors-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .author-card { padding: 16px 12px; }
+  .author-avatar-lg { width: 56px; height: 56px; font-size: 1.4rem; }
+  .author-name { font-size: 1rem; }
+  .author-stats { gap: 10px; }
+
+  /* Footer */
+  footer { padding: 40px 18px 20px; }
+  .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .footer-legal { align-items: flex-start; }
+
+  /* Toast */
+  .toast { bottom: 12px; right: 12px; left: 12px; max-width: none; }
+
+  /* Nav overlay */
+  .nav-overlay a { font-size: clamp(1.5rem, 5vw, 2.2rem); padding: 7px 0; }
+  .nav-social { gap: 14px; margin-top: 24px; }
+}
+
+p, li, .post-excerpt, .intro-text p, .deep-read-body p,
+.radar-desc, .tool-desc, .author-bio, .digest-preview,
+.media-title, .veg-card-body p, .hero-sub,
+.follow-section p, .sub-section p, .share-section p,
+.comment-text, .plan-desc, .reading-info { text-align: justify; }
+
+h1,h2,h3,h4,h5,h6,
+.section-label,.section-title,.hero-eyebrow,
+.post-tag,.post-date,.post-author,.post-title,
+.radar-name,.radar-ring,.radar-category,
+.stat-lbl,.stat-num,.veggie-stat-l,.veggie-stat-n,
+.deep-badge,.deep-toc-title,.deep-meta-item,
+.deep-author-name,.deep-author-title,
+.media-ep,.media-meta,.digest-issue,.digest-date,
+.reading-num,.reading-title,.reading-author,.reading-type,
+.tool-name,.tool-tags,.tool-link,
+.author-name,.author-role,.author-stat-n,.author-stat-l,
+.card-title,.card-badge,.card-code-snippet,
+.veg-card-title,.veg-card-snippet,.veg-card-badge,
+.veg-step-num,.veggie-hero-label,.veggie-hero h2,
+.nav-logo,.hero-cta,.hero-scroll,
+.comment-name,.comment-time,.comment-actions,
+.step-filter-btn,.code-tab,.plan-name,.plan-price,
+.plan-features li,.sub-note,.digest-open,.flow-box,
+.flow-box-sm,.tip-item,.sub-success,
+button,a,label,select,input,code,.ic,
+[class*="badge"],[class*="tag"],[class*="pill"],
+[class*="label"],[class*="mono"],
+font-family\ JetBrains { text-align: left !important; }
+
+p { color: #dce6f5; }
+.post-excerpt { color: #c8d8ee; }
+.radar-desc { color: #c8d8ee; }
+.tool-desc { color: #c8d8ee; }
+.author-bio { color: #c8d8ee; }
+.digest-preview { color: #c8d8ee; }
+.veg-card-body p { color: #ccd8ee; }
+.intro-text p { color: #d8e4f4; }
+.deep-read-body p { color: #d0ddf0; }
+.hero-sub { color: #b8ccdf; }
+.plan-desc { color: #b8ccdf; }
+.plan-features li { color: #d0dce8; }
+.comment-text { color: #ccd8e8; }
+.reading-author { color: #9ab0c8; }
+.follow-section p { color: #c0cfe0; }
+.sub-section p { color: #c0cfe0; }
+.share-section p { color: #b8c8de; }
+.footer-brand p { color: #c0cfe0; }
+.footer-col ul a { color: #b8c8de; }
+.stat-lbl { color: #8aaccf; }
+.deep-meta-item { color: #9ab4cc; }
+.post-author { color: #8aaac4; }
+.post-date { color: #7a9ab8; }
+.section-title { color: #f0f4ff; }
+.post-title { color: #e8f0ff; }
+.radar-name { color: #e8eeff; }
+.tool-name { color: #e8eeff; }
+.author-name { color: #eef2ff; }
+.reading-title { color: #eaeeff; }
+.digest-title { color: #e8eeff; }
+.media-title { color: #e8eeff; }
+.deep-read-visual h3 { color: #f0f4ff; }
+.comment-name { color: #e0ecff; }
+.plan-price { color: #f0f4ff; }
+.flow-box { color: #d0dff0; }
+.flow-box-sm { color: #a8bcd4; }
+
+.deep-read{
+  display:grid;grid-template-columns:1fr 1fr;gap:0;
+  background:var(--card-bg);border:1px solid var(--border);
+  border-radius:16px;overflow:hidden;
+}
+@media(max-width:720px){.deep-read{grid-template-columns:1fr}}
+.deep-read-visual{
+  background:linear-gradient(135deg,#060d1f 0%,#0d1b3e 50%,#1a2f6e 100%);
+  min-height:360px;display:flex;flex-direction:column;
+  align-items:flex-start;justify-content:flex-end;
+  padding:36px;position:relative;overflow:hidden;
+}
+.deep-read-visual::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 70% 70% at 70% 30%,#2563eb33,transparent);
+}
+.deep-read-glyph{
+  font-size:7rem;position:absolute;top:24px;right:24px;opacity:.15;line-height:1;
+}
+.deep-badge{
+  font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--accent-gold);
+  background:#f59e0b18;border:1px solid #f59e0b33;
+  padding:4px 10px;border-radius:4px;margin-bottom:16px;position:relative;
+}
+.deep-read-visual h3{
+  font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:700;
+  color:var(--white);line-height:1.2;position:relative;max-width:340px;
+}
+.deep-read-body{padding:36px;display:flex;flex-direction:column;justify-content:space-between}
+.deep-read-body p{font-size:.9rem;color:var(--silver);line-height:1.75;margin-bottom:16px}
+.deep-meta-row{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:20px}
+.deep-meta-item{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--silver-dim);display:flex;align-items:center;gap:5px}
+.deep-meta-item span{color:var(--cyan)}
+.deep-toc{margin:18px 0}
+.deep-toc-title{font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--blue-light);margin-bottom:10px}
+.deep-toc ol{list-style:none;counter-reset:toc;display:flex;flex-direction:column;gap:7px}
+.deep-toc ol li{counter-increment:toc;font-size:.82rem;color:var(--silver-dim);display:flex;align-items:flex-start;gap:8px}
+.deep-toc ol li::before{content:counter(toc,decimal-leading-zero);font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--blue-light);flex-shrink:0;margin-top:2px}
+.deep-read-footer{display:flex;align-items:center;gap:12px;margin-top:20px}
+.deep-author-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--midnight-2),var(--midnight-3));display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:700;color:var(--blue-pale);border:1px solid var(--border);flex-shrink:0}
+.deep-author-info{flex:1}
+.deep-author-name{font-size:.85rem;font-weight:500;color:var(--white)}
+.deep-author-title{font-size:.72rem;color:var(--silver-dim);font-family:'JetBrains Mono',monospace}
+
+.code-tabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:0;overflow-x:auto}
+.code-tab{
+  font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.06em;
+  padding:10px 18px;background:none;border:none;color:var(--silver-dim);
+  cursor:none;border-bottom:2px solid transparent;transition:color .2s,border-color .2s;
+  white-space:nowrap;
+}
+.code-tab.active{color:var(--blue-light);border-bottom-color:var(--blue-light)}
+.code-tab:hover{color:var(--silver)}
+.code-panel{display:none;background:var(--code-bg,#0f1a28);border-radius:0 0 12px 12px;position:relative}
+.code-panel.active{display:block}
+.code-panel pre{
+  font-family:'JetBrains Mono',monospace;font-size:.8rem;
+  line-height:1.8;color:#a8d5b5;padding:24px 28px;overflow-x:auto;
+  tab-size:2;
+}
+.code-copy{
+  position:absolute;top:12px;right:12px;
+  background:#1e2a4a;border:1px solid var(--border);border-radius:6px;
+  padding:5px 12px;font-size:.7rem;font-family:'JetBrains Mono',monospace;
+  color:var(--silver-dim);cursor:none;transition:color .2s,background .2s;
+}
+.code-copy:hover{color:var(--white);background:#1a2f6e}
+.code-lang-badge{
+  position:absolute;top:12px;left:16px;
+  font-family:'JetBrains Mono',monospace;font-size:.65rem;
+  color:var(--cyan);letter-spacing:.1em;text-transform:uppercase;
+}
+.code-showcase-wrap{
+  background:var(--card-bg);border:1px solid var(--border);border-radius:12px;overflow:hidden;
+}
+.code-showcase-header{
+  display:flex;align-items:center;gap:8px;padding:12px 16px;background:#0a0a0f;border-bottom:1px solid var(--border-soft);
+}
+
+.veggie-hero{
+  background:linear-gradient(135deg,#050d1a 0%,#0a1628 40%,#0d2010 100%);
+  border:1px solid var(--border);border-radius:20px;
+  padding:56px 48px;position:relative;overflow:hidden;
+  display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;
+}
+@media(max-width:760px){.veggie-hero{grid-template-columns:1fr;padding:36px 24px}}
+.veggie-hero::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 60% 80% at 100% 50%,#10b98112,transparent),
+    radial-gradient(ellipse 40% 60% at 0% 50%,#2563eb0e,transparent);
+  pointer-events:none;
+}
+.veggie-hero-glyph{
+  position:absolute;right:40px;top:30px;
+  font-size:9rem;opacity:.06;line-height:1;pointer-events:none;
+}
+.veggie-hero-label{
+  font-family:'JetBrains Mono',monospace;font-size:.65rem;
+  letter-spacing:.22em;text-transform:uppercase;
+  color:#52b788;margin-bottom:14px;
+}
+.veggie-hero h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2rem,4vw,3rem);font-weight:700;
+  color:var(--white);line-height:1.1;margin-bottom:16px;
+}
+.veggie-hero h2 em{font-style:italic;color:#52b788}
+.veggie-hero-desc{font-size:.92rem;color:var(--silver-dim);line-height:1.7;margin-bottom:24px}
+.veggie-meta-pills{display:flex;gap:8px;flex-wrap:wrap}
+.veggie-pill{
+  font-family:'JetBrains Mono',monospace;font-size:.65rem;
+  letter-spacing:.1em;text-transform:uppercase;
+  padding:4px 11px;border-radius:100px;
+}
+.vp-py{background:#3b82f618;color:var(--blue-light);border:1px solid #3b82f633}
+.vp-green{background:#10b98118;color:#52b788;border:1px solid #10b98133}
+.vp-gold{background:#f59e0b18;color:var(--accent-gold);border:1px solid #f59e0b33}
+.veggie-hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.veggie-stat{
+  background:#ffffff06;border:1px solid #ffffff10;
+  border-radius:10px;padding:18px 16px;text-align:center;
+}
+.veggie-stat-n{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2rem;font-weight:700;color:#52b788;display:block;
+}
+.veggie-stat-l{font-size:.7rem;color:var(--silver-dim);font-family:'JetBrains Mono',monospace;letter-spacing:.08em}
+
+.veg-source-wrap{
+  background:#060e0a;border:1px solid #1a3a28;
+  border-radius:14px;overflow:hidden;
+  box-shadow:0 24px 64px #00000088;
+}
+.veg-source-bar{
+  display:flex;align-items:center;gap:8px;
+  padding:13px 18px;background:#040b07;
+  border-bottom:1px solid #1a3a28;
+}
+.veg-source-bar .dot{width:12px;height:12px;border-radius:50%}
+.veg-source-filename{
+  font-family:'JetBrains Mono',monospace;font-size:.75rem;
+  color:#52b788;margin-left:8px;
+}
+.veg-source-copy{
+  margin-left:auto;background:#1a3a2844;border:1px solid #2d6a4f44;
+  color:#52b788;font-family:'JetBrains Mono',monospace;font-size:.68rem;
+  padding:4px 12px;border-radius:5px;cursor:none;transition:background .2s,color .2s;
+}
+.veg-source-copy:hover{background:#2d6a4f44;color:#b7e4c7}
+.veg-source-pre{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.78rem;line-height:1.85;
+  color:#a8d5b5;padding:28px 26px;
+  overflow-x:auto;tab-size:4;
+  counter-reset:line;
+}
+.veg-source-pre .ln{
+  display:inline-block;width:2.2em;
+  color:#2d6a4f;font-size:.7rem;
+  user-select:none;margin-right:12px;text-align:right;
+}
+
+.vkw{color:#7dd3a8;font-weight:600}
+.vfn{color:#86c1f4}
+.vst{color:#f6c90e}
+.vnm{color:#e9a84c}
+.vcm{color:#3d6b4e;font-style:italic}
+.vbi{color:#c084fc}
+.vop{color:#4a6572}
+
+.steps-wrap{margin-top:48px}
+.steps-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;flex-wrap:wrap;gap:12px}
+.steps-filter{display:flex;gap:8px;flex-wrap:wrap}
+.step-filter-btn{
+  font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.1em;
+  text-transform:uppercase;padding:5px 13px;border-radius:100px;
+  background:none;border:1px solid var(--border);color:var(--silver-dim);
+  cursor:none;transition:all .2s;
+}
+.step-filter-btn.active,.step-filter-btn:hover{
+  background:#1a2f6e33;border-color:var(--blue-mid);color:var(--blue-light);
+}
+.veg-steps-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));
+  gap:20px;
+}
+.veg-step-card{
+  background:var(--card-bg);border:1px solid var(--border);
+  border-radius:12px;overflow:hidden;
+  transition:transform .28s,box-shadow .28s,border-color .28s;
+  animation:fadeUp .5s both;
+}
+.veg-step-card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 18px 44px #00000066;
+  border-color:var(--midnight-3);
+}
+.veg-card-top{
+  padding:18px 20px 14px;
+  border-bottom:1px solid var(--border-soft);
+  display:flex;align-items:flex-start;gap:14px;
+}
+.veg-step-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.2rem;font-weight:900;
+  color:#52b788;line-height:1;min-width:36px;
+}
+.veg-card-head{flex:1}
+.veg-card-title{
+  font-size:.95rem;font-weight:500;color:var(--white);line-height:1.3;
+}
+.veg-card-snippet{
+  font-family:'JetBrains Mono',monospace;font-size:.68rem;
+  color:#52b788;margin-top:5px;opacity:.8;
+}
+.veg-card-body{padding:16px 20px 18px}
+.veg-card-badge{
+  display:inline-block;
+  background:#10b98110;color:#52b788;
+  font-family:'JetBrains Mono',monospace;font-size:.62rem;
+  padding:2px 9px;border-radius:100px;margin-bottom:10px;
+  border:1px solid #10b98122;letter-spacing:.08em;
+}
+.veg-card-body p{font-size:.85rem;color:var(--silver);line-height:1.65}
+.veg-card-body p+p{margin-top:9px}
+.veg-mini-table{width:100%;border-collapse:collapse;margin-top:10px;font-size:.78rem}
+.veg-mini-table th{background:#0a1628;color:var(--blue-pale);font-weight:500;padding:5px 10px;text-align:left;font-family:'JetBrains Mono',monospace;font-size:.68rem}
+.veg-mini-table td{padding:5px 10px;border-bottom:1px solid var(--border-soft);font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--silver-dim)}
+.veg-mini-table tr:last-child td{border-bottom:none}
+.ic{font-family:'JetBrains Mono',monospace;background:#0a1628;color:#52b788;font-size:.8em;padding:1px 5px;border-radius:3px}
+
+.veg-flow{
+  background:linear-gradient(135deg,#050d1a,#0d2010 60%,#050d1a 100%);
+  border:1px solid var(--border);border-radius:16px;
+  padding:40px 36px;margin-top:40px;
+}
+.veg-flow-title{
+  font-family:'Cormorant Garamond',serif;font-size:1.5rem;
+  font-weight:700;color:var(--white);margin-bottom:28px;
+}
+.flow-nodes{display:flex;flex-direction:column;gap:0;max-width:580px}
+.flow-node-row{display:flex;align-items:center;gap:12px}
+.flow-box{
+  background:#ffffff08;border:1px solid #ffffff14;
+  border-radius:8px;padding:10px 18px;font-size:.84rem;color:var(--silver);
+  min-width:0;line-height:1.4;width:100%;
+}
+.flow-box b{color:#52b788;font-family:'JetBrains Mono',monospace;font-size:.78rem;font-weight:500}
+.flow-box.terminus{background:#10b98115;border-color:#10b98133;color:#86efac}
+.flow-arrow-down{height:28px;width:1px;background:linear-gradient(#52b788,#52b78844);margin-left:28px}
+.flow-branch-wrap{display:flex;gap:14px;margin-left:40px;flex-wrap:wrap}
+.flow-branch-col{display:flex;flex-direction:column;align-items:center;gap:4px}
+.flow-box-sm{
+  background:#ffffff06;border:1px solid #ffffff10;
+  border-radius:7px;padding:8px 14px;font-size:.75rem;color:var(--silver-dim);
+  min-width:0;text-align:center;line-height:1.35;
+}
+
+
+
+.radar-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(260px,100%),1fr));gap:16px}
+.radar-card{
+  background:var(--card-bg);border:1px solid var(--border);border-radius:10px;
+  padding:20px;transition:transform .25s,border-color .25s,box-shadow .25s;
+}
+.radar-card:hover{transform:translateY(-4px);border-color:var(--midnight-3);box-shadow:0 12px 32px #00000055}
+.radar-ring{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.12em;
+  text-transform:uppercase;padding:3px 9px;border-radius:100px;margin-bottom:12px;
+}
+.ring-adopt{background:#10b98118;color:#10b981;border:1px solid #10b98133}
+.ring-trial{background:#f59e0b18;color:#f59e0b;border:1px solid #f59e0b33}
+.ring-assess{background:#3b82f618;color:var(--blue-light);border:1px solid #3b82f633}
+.ring-hold{background:#ef444418;color:#ef4444;border:1px solid #ef444433}
+.radar-name{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--white);margin-bottom:6px}
+.radar-desc{font-size:.8rem;color:var(--silver-dim);line-height:1.6}
+.radar-category{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--silver-dim);margin-top:10px;letter-spacing:.08em}
+
+.media-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:20px}
+.media-card{
+  background:var(--card-bg);border:1px solid var(--border);border-radius:12px;
+  overflow:hidden;transition:transform .25s,box-shadow .25s;
+}
+.media-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px #00000066}
+.media-thumb{
+  height:160px;display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+}
+.media-thumb-pod{background:linear-gradient(135deg,#1a0a2e,#2d1060)}
+.media-thumb-vid{background:linear-gradient(135deg,#0a1628,#1a0a20)}
+.media-thumb-live{background:linear-gradient(135deg,#0a1e1a,#0d3030)}
+.play-btn{
+  width:56px;height:56px;border-radius:50%;
+  background:#ffffff18;border:2px solid #ffffff44;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.3rem;cursor:none;
+  transition:background .2s,transform .2s;
+  backdrop-filter:blur(6px);
+}
+.play-btn:hover{background:#ffffff28;transform:scale(1.1)}
+.media-live-badge{
+  position:absolute;top:12px;left:12px;
+  background:#ef4444;color:#fff;font-size:.65rem;font-family:'JetBrains Mono',monospace;
+  padding:3px 8px;border-radius:4px;letter-spacing:.1em;
+  animation:livePulse 1.5s infinite;
+}
+@keyframes livePulse{0%,100%{opacity:1}50%{opacity:.6}}
+.media-ep{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--silver-dim);padding:14px 16px 0;letter-spacing:.08em}
+.media-title{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:var(--white);padding:6px 16px 0;line-height:1.3}
+.media-meta{display:flex;align-items:center;gap:10px;padding:8px 16px 14px;font-size:.75rem;color:var(--silver-dim);font-family:'JetBrains Mono',monospace}
+.media-dot{width:3px;height:3px;border-radius:50%;background:var(--silver-dim)}
+
+.reading-list{display:flex;flex-direction:column;gap:2px}
+.reading-item{
+  display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:16px;
+  padding:16px 20px;background:var(--card-bg);border:1px solid var(--border);
+  border-radius:8px;transition:background .2s,border-color .2s;
+  margin-bottom:4px;min-width:0;
+}
+.reading-item:hover{background:var(--obsidian-4);border-color:var(--midnight-3)}
+.reading-num{
+  font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--blue-light);
+  width:24px;text-align:center;
+}
+.reading-info{}
+.reading-title{font-size:.9rem;font-weight:500;color:var(--white);margin-bottom:3px}
+.reading-author{font-size:.75rem;color:var(--silver-dim);font-family:'JetBrains Mono',monospace}
+.reading-type{
+  font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.1em;
+  text-transform:uppercase;padding:3px 9px;border-radius:4px;white-space:nowrap;
+}
+.type-book{background:#06b6d418;color:var(--cyan);border:1px solid #06b6d433}
+.type-paper{background:#a78bfa18;color:#a78bfa;border:1px solid #a78bfa33}
+.type-blog{background:#f59e0b18;color:var(--accent-gold);border:1px solid #f59e0b33}
+.type-docs{background:#10b98118;color:var(--green-love);border:1px solid #10b98133}
+
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(220px,100%),1fr));gap:14px}
+.tool-card{
+  background:var(--card-bg);border:1px solid var(--border);border-radius:10px;
+  padding:18px;transition:transform .2s,border-color .2s,box-shadow .2s;
+  display:flex;flex-direction:column;gap:10px;
+}
+.tool-card:hover{transform:translateY(-3px);border-color:var(--midnight-3);box-shadow:0 10px 28px #00000055}
+.tool-icon{font-size:2rem;line-height:1}
+.tool-name{font-size:.9rem;font-weight:500;color:var(--white)}
+.tool-desc{font-size:.78rem;color:var(--silver-dim);line-height:1.55;flex:1}
+.tool-tags{display:flex;gap:5px;flex-wrap:wrap}
+.tool-tag{
+  font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.06em;
+  text-transform:uppercase;padding:2px 7px;border-radius:3px;
+  background:#1e2a4a;color:var(--silver-dim);
+}
+.tool-link{
+  font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--blue-light);
+  text-decoration:none;cursor:none;transition:color .2s;
+  display:flex;align-items:center;gap:4px;
+}
+.tool-link:hover{color:var(--cyan)}
+
+.digest-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(280px,100%),1fr));gap:16px}
+.digest-card{
+  background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:22px;
+  display:flex;flex-direction:column;gap:12px;
+  transition:border-color .25s,transform .25s;
+}
+.digest-card:hover{border-color:var(--midnight-3);transform:translateY(-3px)}
+.digest-issue{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--cyan);letter-spacing:.12em;text-transform:uppercase}
+.digest-title{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--white);line-height:1.3}
+.digest-preview{font-size:.8rem;color:var(--silver-dim);line-height:1.6}
+.digest-links{display:flex;flex-direction:column;gap:6px}
+.digest-link-item{
+  display:flex;align-items:flex-start;gap:8px;
+  font-size:.78rem;color:var(--silver);
+}
+.digest-link-item::before{content:'→';color:var(--blue-light);font-family:'JetBrains Mono',monospace;flex-shrink:0;margin-top:1px}
+.digest-footer{display:flex;align-items:center;justify-content:space-between;padding-top:10px;border-top:1px solid var(--border-soft)}
+.digest-date{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--silver-dim)}
+.digest-open{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--blue-light);text-decoration:none;cursor:none;transition:color .2s}
+.digest-open:hover{color:var(--cyan)}
+
+.pull-quote{
+  border-left:3px solid var(--blue-glow);
+  padding:28px 32px;margin:0;
+  background:linear-gradient(90deg,#2563eb0a,transparent);
+  border-radius:0 10px 10px 0;
+}
+.pull-quote blockquote{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.3rem,3vw,1.9rem);
+  font-style:italic;color:var(--white-soft);
+  line-height:1.45;margin-bottom:14px;
+}
+.pull-quote cite{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.72rem;color:var(--silver-dim);letter-spacing:.1em;
+  text-transform:uppercase;
+}
+
+.tips-bar{
+  background:var(--obsidian-3);border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  padding:12px 0;overflow:hidden;position:relative;
+}
+.tips-track{
+  display:flex;gap:60px;white-space:nowrap;
+  animation:ticker 35s linear infinite;
+  width:max-content;
+}
+.tips-bar:hover .tips-track{animation-play-state:paused}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.tip-item{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--silver-dim);
+}
+.tip-label{color:var(--cyan);font-weight:500}
+
+.authors-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(240px,100%),1fr));gap:18px}
+.author-card{
+  background:var(--card-bg);border:1px solid var(--border);border-radius:12px;
+  padding:24px;text-align:center;
+  transition:transform .25s,border-color .25s;
+}
+.author-card:hover{transform:translateY(-4px);border-color:var(--midnight-3)}
+.author-avatar-lg{
+  width:72px;height:72px;border-radius:50%;
+  background:linear-gradient(135deg,var(--midnight-2),var(--midnight-3));
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;
+  color:var(--blue-pale);border:2px solid var(--border);
+  margin:0 auto 14px;
+}
+.author-name{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--white);margin-bottom:4px}
+.author-role{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--cyan);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px}
+.author-bio{font-size:.8rem;color:var(--silver-dim);line-height:1.6;margin-bottom:14px}
+.author-stats{display:flex;justify-content:center;gap:20px}
+.author-stat{text-align:center}
+.author-stat-n{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:700;color:var(--blue-light);display:block}
+.author-stat-l{font-size:.65rem;color:var(--silver-dim);font-family:'JetBrains Mono',monospace}
+
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<div class="nav-overlay" id="navOverlay">
+  <a href="#intro" onclick="closeMenu()">Introduction</a>
+  <a href="#content" onclick="closeMenu()">Articles</a>
+  <a href="#veggie-showcase" onclick="closeMenu()">🥦 Veggie Source Code</a>
+  <a href="#deep-read" onclick="closeMenu()">Deep Read</a>
+  <a href="#code-lab" onclick="closeMenu()">Code Lab</a>
+  <a href="#tech-radar" onclick="closeMenu()">Tech Radar</a>
+  <a href="#media" onclick="closeMenu()">Podcast &amp; Video</a>
+  <a href="#tools" onclick="closeMenu()">Tools</a>
+  <a href="about-author.html" onclick="closeMenu()">Author</a>
+  <a href="#share" onclick="closeMenu()">Share</a>
+  <a href="#comments" onclick="closeMenu()">Comments</a>
+  <a href="#subscribe" onclick="closeMenu()">Subscribe</a>
+  <a href="#footer" onclick="closeMenu()">About</a>
+  <div class="nav-social">
+    <a href="#">Twitter/X</a>
+    <a href="#">LinkedIn</a>
+    <a href="#">GitHub</a>
+
+  </div>
+</div>
+
+<nav id="mainNav">
+  <a class="nav-logo" href="#">Valleys <span>&amp;</span> Bytes</a>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <p class="hero-eyebrow"> Where code meets curiosity</p>
+  <h1>Valleys <em>&amp;</em> Bytes</h1>
+  <p class="hero-sub">Exploring the landscapes of technology, one algorithm at a time. Deep dives into code, culture, and the machines that shape our world.</p>
+
+  <div class="hero-scroll">
+    <span>SCROLL</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+
+<section class="section" id="intro">
+  <div class="section-inner">
+    <div class="divider"></div>
+    <p class="section-label"> introduction</p>
+    <div class="intro-grid reveal">
+      <div class="intro-text">
+        <h2 class="section-title">A signal in<br/>the digital noise.</h2>
+        <p><em>"We live between the valleys of human thought and the bytes of machine logic — this is where I write."</em></p>
+        <p>Valleys &amp; Bytes is an independent technology publication dedicated to exploring the intersections of software engineering, computational thinking, and the culture surrounding the machines we build. Founded in 2023, this space was born out of a conviction that technical writing doesn't have to be dry — it can be poetic, provocative, and precise all at once.</p>
+        <p>Every article here is a deep-dive: no shallow takes, no engagement-bait. Whether dissecting a sorting algorithm or tracing the philosophy behind open-source software, we commit to the full picture. Pull up a chair. The terminal is always on.</p>
+      </div>
+      <div class="intro-stats">
+        <div class="stat-card reveal">
+          <div class="stat-num" data-count="142">0</div>
+          <div class="stat-lbl">Articles Published</div>
+        </div>
+        <div class="stat-card reveal">
+          <div class="stat-num" data-count="28400">0</div>
+          <div class="stat-lbl">Monthly Readers</div>
+        </div>
+        <div class="stat-card reveal">
+          <div class="stat-num" data-count="9300">0</div>
+          <div class="stat-lbl">Newsletter Subscribers</div>
+        </div>
+        <div class="stat-card reveal">
+          <div class="stat-num" data-count="6">0</div>
+          <div class="stat-lbl">Years Online</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="content">
+  <div class="section-inner">
+    <div class="divider"></div>
+    <p class="section-label">Featured articles</p>
+    <h2 class="section-title">Latest from the lab.</h2>
+    <div class="posts-grid">
+
+      <article class="post-card reveal" style="animation-delay:.05s">
+        <div class="post-thumb post-thumb-1">🧠</div>
+        <div class="post-meta">
+          <span class="post-tag">AI / ML</span>
+          <span class="post-date">Feb 28, 2026</span>
+        </div>
+        <div class="post-body">
+          <h3 class="post-title">The Quiet Revolution Inside Transformer Architectures</h3>
+          <p class="post-excerpt">Attention mechanisms have reshaped every corner of machine learning. We trace their origins, their math, and what comes next when the context window has no ceiling.</p>
+        </div>
+        <div class="reactions-row">
+          <button class="react-btn love" onclick="react(this,'love',1)"><span>🤍</span> <span class="count">47</span></button>
+          <button class="react-btn like" onclick="react(this,'like',1)"><span>👍</span> <span class="count">112</span></button>
+        </div>
+        <div class="post-footer">
+          <span class="post-author">by A. Mendez</span>
+          <a href="#" class="post-read">read → </a>
+        </div>
+      </article>
+
+      <article class="post-card reveal" style="animation-delay:.1s">
+        <div class="post-thumb post-thumb-2">⚙️</div>
+        <div class="post-meta">
+          <span class="post-tag">Systems</span>
+          <span class="post-date">Feb 14, 2026</span>
+        </div>
+        <div class="post-body">
+          <h3 class="post-title">Rust's Ownership Model and the End of Memory Guilt</h3>
+          <p class="post-excerpt">Why does Rust feel so different? We dig into the borrow checker, lifetimes, and why a compiler's refusal to compile is sometimes the kindest thing it can do for you.</p>
+        </div>
+        <div class="reactions-row">
+          <button class="react-btn love" onclick="react(this,'love',2)"><span>🤍</span> <span class="count">89</span></button>
+          <button class="react-btn like" onclick="react(this,'like',2)"><span>👍</span> <span class="count">203</span></button>
+        </div>
+        <div class="post-footer">
+          <span class="post-author">by C. Lim</span>
+          <a href="#" class="post-read">read → </a>
+        </div>
+      </article>
+
+      <article class="post-card reveal" style="animation-delay:.15s">
+        <div class="post-thumb post-thumb-3">🌐</div>
+        <div class="post-meta">
+          <span class="post-tag">Web</span>
+          <span class="post-date">Jan 31, 2026</span>
+        </div>
+        <div class="post-body">
+          <h3 class="post-title">Progressive Enhancement in the Age of JavaScript Fatigue</h3>
+          <p class="post-excerpt">The pendulum swings back. How server-side rendering, HTML-first thinking, and HTMX are reclaiming the simplicity we sacrificed for SPA complexity.</p>
+        </div>
+        <div class="reactions-row">
+          <button class="react-btn love" onclick="react(this,'love',3)"><span>🤍</span> <span class="count">63</span></button>
+          <button class="react-btn like" onclick="react(this,'like',3)"><span>👍</span> <span class="count">158</span></button>
+        </div>
+        <div class="post-footer">
+          <span class="post-author">by R. Santos</span>
+          <a href="#" class="post-read">read → </a>
+        </div>
+      </article>
+
+      <article class="post-card reveal" style="animation-delay:.2s">
+        <div class="post-thumb post-thumb-1">🔐</div>
+        <div class="post-meta">
+          <span class="post-tag">Security</span>
+          <span class="post-date">Jan 19, 2026</span>
+        </div>
+        <div class="post-body">
+          <h3 class="post-title">Zero-Trust Is Not a Product — It's a Posture</h3>
+          <p class="post-excerpt">Vendors will sell you zero-trust in a box. But the philosophy behind it requires a rethinking of every assumption your network was built on.</p>
+        </div>
+        <div class="reactions-row">
+          <button class="react-btn love" onclick="react(this,'love',4)"><span>🤍</span> <span class="count">38</span></button>
+          <button class="react-btn like" onclick="react(this,'like',4)"><span>👍</span> <span class="count">91</span></button>
+        </div>
+        <div class="post-footer">
+          <span class="post-author">by M. Reyes</span>
+          <a href="#" class="post-read">read → </a>
+        </div>
+      </article>
+
+      <article class="post-card reveal" style="animation-delay:.25s">
+        <div class="post-thumb post-thumb-2">📦</div>
+        <div class="post-meta">
+          <span class="post-tag">DevOps</span>
+          <span class="post-date">Jan 5, 2026</span>
+        </div>
+        <div class="post-body">
+          <h3 class="post-title">Containers All the Way Down: A Docker Deep Dive</h3>
+          <p class="post-excerpt">From cgroups and namespaces to multi-stage builds, we demystify what Docker is actually doing under the hood — and why it changed software delivery forever.</p>
+        </div>
+        <div class="reactions-row">
+          <button class="react-btn love" onclick="react(this,'love',5)"><span>🤍</span> <span class="count">72</span></button>
+          <button class="react-btn like" onclick="react(this,'like',5)"><span>👍</span> <span class="count">187</span></button>
+        </div>
+        <div class="post-footer">
+          <span class="post-author">by A. Mendez</span>
+          <a href="#" class="post-read">read → </a>
+        </div>
+      </article>
+
+      <article class="post-card reveal" style="animation-delay:.3s">
+        <div class="post-thumb post-thumb-3">💾</div>
+        <div class="post-meta">
+          <span class="post-tag">Data</span>
+          <span class="post-date">Dec 22, 2025</span>
+        </div>
+        <div class="post-body">
+          <h3 class="post-title">Postgres Is Eating the Database World (And That's Okay)</h3>
+          <p class="post-excerpt">NoSQL promised flexibility. Time-series DBs promised speed. Vector DBs promise AI magic. Meanwhile, Postgres quietly added extensions for all of it. An investigation.</p>
+        </div>
+        <div class="reactions-row">
+          <button class="react-btn love" onclick="react(this,'love',6)"><span>🤍</span> <span class="count">94</span></button>
+          <button class="react-btn like" onclick="react(this,'like',6)"><span>👍</span> <span class="count">241</span></button>
+        </div>
+        <div class="post-footer">
+          <span class="post-author">by C. Lim</span>
+          <a href="#" class="post-read">read → </a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section class="section" id="veggie-showcase" style="background:linear-gradient(180deg,var(--obsidian) 0%,#060d0a 50%,var(--obsidian) 100%)">
+  <div class="section-inner">
+    <div class="divider"></div>
+    <p class="section-label" style="color:#52b788">The article that started it all</p>
+
+    <div class="veggie-hero reveal">
+      <div style="position:relative;z-index:1">
+        <p class="veggie-hero-label">★ Signature Feature · Python · Step-by-Step</p>
+        <h2>The <em>Vegetable Shop</em><br/>Source Code</h2>
+        <p class="veggie-hero-desc">This humble Python script is the heart and soul of Valleys &amp; Bytes. A complete command-line vegetable ordering system built from scratch — and pulled apart line by line so every piece of logic is crystal clear. Whether you're a beginner meeting Python for the first time or an experienced dev who wants a crisp refresher, this is the article for you.</p>
+        <div class="veggie-meta-pills">
+          <span class="veggie-pill vp-py">Python 3</span>
+          <span class="veggie-pill vp-green">Beginner Friendly</span>
+          <span class="veggie-pill vp-gold">18 min read</span>
+          <span class="veggie-pill vp-py">11 Concepts Explained</span>
+        </div>
+      </div>
+      <div class="veggie-hero-stats" style="position:relative;z-index:1">
+        <div class="veggie-stat"><span class="veggie-stat-n">11</span><span class="veggie-stat-l">Concepts Covered</span></div>
+        <div class="veggie-stat"><span class="veggie-stat-n">12</span><span class="veggie-stat-l">Vegetables in Menu</span></div>
+        <div class="veggie-stat"><span class="veggie-stat-n">~80</span><span class="veggie-stat-l">Lines of Code</span></div>
+        <div class="veggie-stat"><span class="veggie-stat-n">1</span><span class="veggie-stat-l">File. No Dependencies.</span></div>
+      </div>
+      <div class="veggie-hero-glyph">🥦</div>
+    </div>
+
+    <div style="margin-top:48px">
+      <p class="section-label" style="color:#52b788;margin-bottom:12px">Full source · vegetable_shop.py</p>
+      <div class="veg-source-wrap reveal">
+        <div class="veg-source-bar">
+          <span class="dot" style="background:#ff5f56"></span>
+          <span class="dot" style="background:#ffbd2e"></span>
+          <span class="dot" style="background:#27c93f"></span>
+          <span class="veg-source-filename">vegetable_shop.py</span>
+          <button class="veg-source-copy" onclick="copyVegCode(this)">copy code</button>
+        </div>
+        <pre class="veg-source-pre" id="vegSourcePre"><span class="vkw">def</span> <span class="vfn">main</span>():
+    prices <span class="vop">=</span> {
+        <span class="vst">"Eggplant (Talong)"</span>: <span class="vnm">80</span>,
+        <span class="vst">"Tomatoes"</span>:          <span class="vnm">120</span>,
+        <span class="vst">"Potatoes"</span>:          <span class="vnm">140</span>,
+        <span class="vst">"Onions"</span>:            <span class="vnm">160</span>,
+        <span class="vst">"Garlic"</span>:            <span class="vnm">180</span>,
+        <span class="vst">"Pechay"</span>:            <span class="vnm">80</span>,
+        <span class="vst">"Broccoli"</span>:          <span class="vnm">170</span>,
+        <span class="vst">"Carrots"</span>:           <span class="vnm">160</span>,
+        <span class="vst">"Radish (Labanos)"</span>:  <span class="vnm">80</span>,
+        <span class="vst">"Alugbati"</span>:          <span class="vnm">60</span>,
+        <span class="vst">"Kangkong"</span>:          <span class="vnm">50</span>,
+        <span class="vst">"Cabbage"</span>:           <span class="vnm">150</span>
+    }
+
+    order <span class="vop">=</span> {}
+
+    <span class="vfn">print</span>(<span class="vst">"════════════════════════════════════════════"</span>)
+    <span class="vfn">print</span>(<span class="vst">"       WELCOME TO THE VEGETABLE SHOP        "</span>)
+    <span class="vfn">print</span>(<span class="vst">"════════════════════════════════════════════"</span>)
+
+    <span class="vfn">print</span>(<span class="vfn">f</span><span class="vst">"{'Item Name':<25} {'Price per kg':>15}"</span>)
+    <span class="vfn">print</span>(<span class="vst">"-"</span> <span class="vop">*</span> <span class="vnm">42</span>)
+    <span class="vkw">for</span> veg, price <span class="vkw">in</span> prices.<span class="vfn">items</span>():
+        <span class="vfn">print</span>(<span class="vfn">f</span><span class="vst">"{veg:<25} ₱{price:>14.2f}"</span>)
+    <span class="vfn">print</span>(<span class="vst">"-"</span> <span class="vop">*</span> <span class="vnm">42</span>)
+
+    <span class="vfn">print</span>(<span class="vst">"\nINSTRUCTIONS:"</span>)
+    <span class="vfn">print</span>(<span class="vst">"• Enter quantity in kg (e.g., 0.5, 2, 1.25)"</span>)
+    <span class="vfn">print</span>(<span class="vst">"• Press Enter to skip an item"</span>)
+    <span class="vfn">print</span>(<span class="vst">"• Type 'DONE' at any time to finish and pay\n"</span>)
+
+    <span class="vkw">for</span> vegetable, price <span class="vkw">in</span> prices.<span class="vfn">items</span>():
+        <span class="vkw">while</span> <span class="vbi">True</span>:
+            <span class="vkw">try</span>:
+                user_input <span class="vop">=</span> <span class="vfn">input</span>(<span class="vfn">f</span><span class="vst">"How many kg of {vegetable}? "</span>).<span class="vfn">strip</span>().<span class="vfn">lower</span>()
+
+                <span class="vkw">if</span> user_input <span class="vop">==</span> <span class="vst">"done"</span>:
+                    <span class="vkw">break</span>
+                <span class="vkw">if</span> user_input <span class="vop">==</span> <span class="vst">""</span>:
+                    qty <span class="vop">=</span> <span class="vnm">0.0</span>
+                    <span class="vkw">break</span>
+
+                qty <span class="vop">=</span> <span class="vfn">float</span>(user_input)
+                <span class="vkw">if</span> qty <span class="vop">&lt;</span> <span class="vnm">0</span>:
+                    <span class="vfn">print</span>(<span class="vst">"Quantity cannot be negative."</span>)
+                    <span class="vkw">continue</span>
+                <span class="vkw">break</span>
+            <span class="vkw">except</span> <span class="vbi">ValueError</span>:
+                <span class="vfn">print</span>(<span class="vst">"Invalid input. Please enter a number or 'done'."</span>)
+
+        <span class="vkw">if</span> <span class="vst">'user_input'</span> <span class="vkw">in</span> <span class="vfn">locals</span>() <span class="vkw">and</span> user_input <span class="vop">==</span> <span class="vst">"done"</span>:
+            <span class="vkw">break</span>
+
+        <span class="vkw">if</span> qty <span class="vop">&gt;</span> <span class="vnm">0</span>:
+            order[vegetable] <span class="vop">=</span> qty
+
+    <span class="vkw">if not</span> order:
+        <span class="vfn">print</span>(<span class="vst">"\nNo items selected. Have a nice day!"</span>)
+        <span class="vkw">return</span>
+
+    <span class="vfn">print</span>(<span class="vst">"\n"</span> <span class="vop">+</span> <span class="vst">"="</span><span class="vop">*</span><span class="vnm">60</span>)
+    <span class="vfn">print</span>(<span class="vst">"FINAL RECEIPT"</span>.<span class="vfn">center</span>(<span class="vnm">60</span>))
+    <span class="vfn">print</span>(<span class="vst">"="</span><span class="vop">*</span><span class="vnm">60</span>)
+    <span class="vfn">print</span>(<span class="vfn">f</span><span class="vst">"{'Vegetable':<20} {'Qty (kg)':>10} {'Unit Price':>12} {'Subtotal':>12}"</span>)
+    <span class="vfn">print</span>(<span class="vst">"-"</span> <span class="vop">*</span> <span class="vnm">60</span>)
+
+    total <span class="vop">=</span> <span class="vnm">0.0</span>
+    <span class="vkw">for</span> veg, qty <span class="vkw">in</span> order.<span class="vfn">items</span>():
+        subtotal <span class="vop">=</span> qty <span class="vop">*</span> prices[veg]
+        total <span class="vop">+=</span> subtotal
+        <span class="vfn">print</span>(<span class="vfn">f</span><span class="vst">"{veg:<20} {qty:>10.2f} {prices[veg]:>12.2f} {subtotal:>12.2f}"</span>)
+
+    <span class="vfn">print</span>(<span class="vst">"-"</span> <span class="vop">*</span> <span class="vnm">60</span>)
+    <span class="vfn">print</span>(<span class="vfn">f</span><span class="vst">"{'TOTAL AMOUNT DUE':<44} ₱{total:>11.2f}"</span>)
+    <span class="vfn">print</span>(<span class="vst">"="</span><span class="vop">*</span><span class="vnm">60</span>)
+    <span class="vfn">print</span>(<span class="vst">"\nThank you for shopping with us!"</span>)
+
+
+<span class="vkw">if</span> __name__ <span class="vop">==</span> <span class="vst">"__main__"</span>:
+    <span class="vfn">main</span>()</pre>
+      </div>
+    </div>
+
+    <div style="margin-top:48px" class="reveal">
+      <p class="section-label" style="color:#52b788;margin-bottom:6px">Interactive demo</p>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:var(--white);margin-bottom:16px">Run the program yourself.</h3>
+      <p style="font-size:.9rem;color:var(--silver-dim);margin-bottom:24px;max-width:560px">This is a fully functional JavaScript simulation of the Python program. Enter quantities, type <code class="ic">done</code> to finish early, press Enter to skip — it behaves exactly like the real script.</p>
+
+      <div id="vegTerminal" style="
+        background:#040b07;border:1px solid #1a3a28;border-radius:14px;
+        overflow:hidden;box-shadow:0 24px 64px #00000099;max-width:720px;
+      ">
+
+        <div style="display:flex;align-items:center;gap:8px;padding:13px 18px;background:#030806;border-bottom:1px solid #1a3a28;">
+          <span style="width:12px;height:12px;border-radius:50%;background:#ff5f56;display:inline-block"></span>
+          <span style="width:12px;height:12px;border-radius:50%;background:#ffbd2e;display:inline-block"></span>
+          <span style="width:12px;height:12px;border-radius:50%;background:#27c93f;display:inline-block"></span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:.72rem;color:#3d6b4e;margin-left:8px">vegetable_shop.py — interactive terminal</span>
+          <div style="margin-left:auto;display:flex;gap:8px;">
+            <button onclick="resetTerminal()" style="
+              background:#1a3a2844;border:1px solid #2d6a4f44;color:#52b788;
+              font-family:'JetBrains Mono',monospace;font-size:.65rem;
+              padding:4px 11px;border-radius:5px;cursor:none;transition:background .2s;
+            " onmouseover="this.style.background='#2d6a4f44'" onmouseout="this.style.background='#1a3a2844'">↺ reset</button>
+          </div>
+        </div>
+
+        <div id="termOutput" style="
+          font-family:'JetBrains Mono',monospace;font-size:.78rem;
+          line-height:1.85;color:#a8d5b5;
+          padding:20px 22px 8px;min-height:180px;max-height:420px;
+          overflow-y:auto;white-space:pre-wrap;word-break:break-word;
+        "></div>
+
+        <div id="termInputRow" style="
+          display:none;
+          align-items:center;gap:0;
+          padding:6px 22px 18px;
+        ">
+          <span id="termPrompt" style="
+            font-family:'JetBrains Mono',monospace;font-size:.78rem;
+            color:#f6c90e;white-space:nowrap;flex-shrink:0;
+          "></span>
+          <input id="termInput" type="text" autocomplete="off" spellcheck="false" style="
+            flex:1;background:transparent;border:none;outline:none;
+            font-family:'JetBrains Mono',monospace;font-size:.78rem;
+            color:#27c93f;caret-color:#27c93f;padding:0 6px;min-width:0;
+            cursor:text;
+          " placeholder="" onkeydown="handleTermKey(event)"/>
+        </div>
+
+        <div id="termRunRow" style="padding:18px 22px 22px;display:flex;align-items:center;gap:14px;">
+          <button onclick="startVegProgram()" id="runBtn" style="
+            display:inline-flex;align-items:center;gap:10px;
+            background:linear-gradient(90deg,#1a4a2a,#2d6a4f);
+            border:1px solid #52b788;border-radius:8px;
+            color:#b7e4c7;font-family:'JetBrains Mono',monospace;font-size:.82rem;
+            padding:12px 26px;cursor:none;letter-spacing:.06em;
+            transition:transform .2s,box-shadow .2s,opacity .2s;
+            box-shadow:0 0 24px #10b98133;
+          "
+          onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 0 36px #10b98155'"
+          onmouseout="this.style.transform='';this.style.boxShadow='0 0 24px #10b98133'">
+            <span style="font-size:1.1rem">▶</span> Run Program
+          </button>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:.65rem;color:#3d6b4e">
+            Click to launch the vegetable shop
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="steps-wrap">
+      <div class="steps-header">
+        <div>
+          <p class="section-label" style="color:#52b788;margin-bottom:6px">Step-By-Step explanation</p>
+          <h2 class="section-title" style="margin-bottom:0">Every line. Every reason. Every detail.</h2>
+        </div>
+        <div class="steps-filter">
+          <button class="step-filter-btn active" onclick="filterSteps('all',this)">All</button>
+          <button class="step-filter-btn" onclick="filterSteps('structure',this)">Structure</button>
+          <button class="step-filter-btn" onclick="filterSteps('loop',this)">Loops</button>
+          <button class="step-filter-btn" onclick="filterSteps('data',this)">Data</button>
+          <button class="step-filter-btn" onclick="filterSteps('control',this)">Control Flow</button>
+        </div>
+      </div>
+
+      <div class="veg-steps-grid" id="vegStepsGrid">
+
+        <div class="veg-step-card reveal" data-category="structure" style="animation-delay:.04s">
+          <div class="veg-card-top">
+            <span class="veg-step-num">01</span>
+            <div class="veg-card-head">
+              <div class="veg-card-title">Defining the Main Function</div>
+              <div class="veg-card-snippet">def main():</div>
+            </div>
+          </div>
+          <div class="veg-card-body">
+            <span class="veg-card-badge">function · structure</span>
+            <p>A <strong>function definition</strong> wraps all program logic under a single named block. Encapsulating everything inside <code class="ic">main()</code> keeps variables out of global scope, prevents accidental side effects on import, and makes the code easy to test in isolation.</p>
+            <p>Think of it as the engine — nothing runs until <code class="ic">main()</code> is explicitly called at the very bottom of the file.</p>
+          </div>
+        </div>
+
+        <div class="veg-step-card reveal" data-category="data" style="animation-delay:.08s">
+          <div class="veg-card-top">
+            <span class="veg-step-num">02</span>
+            <div class="veg-card-head">
+              <div class="veg-card-title">The <code style="color:#52b788">prices</code> Dictionary</div>
+              <div class="veg-card-snippet">prices = { "Tomatoes": 120, ... }</div>
+            </div>
+          </div>
+          <div class="veg-card-body">
+            <span class="veg-card-badge">dict · data store</span>
+            <p>A Python <strong>dictionary</strong> stores key-value pairs. Each vegetable name (the key) maps to its price per kg (the value). Dictionaries allow instant O(1) lookup — <code class="ic">prices["Garlic"]</code> returns <code class="ic">180</code> without scanning the entire collection.</p>
+            <p>This is the program's single source of truth for all pricing. Updating a price means changing exactly one number in one place.</p>
+          </div>
+        </div>
+
+        <div class="veg-step-card reveal" data-category="data" style="animation-delay:.12s">
+          <div class="veg-card-top">
+            <span class="veg-step-num">03</span>
+            <div class="veg-card-head">
+              <div class="veg-card-title">Empty <code style="color:#52b788">order</code> Dictionary</div>
+              <div class="veg-card-snippet">order = {}</div>
+            </div>
+          </div>
+          <div class="veg-card-body">
+            <span class="veg-card-badge">dict · accumulator</span>
+            <p>An empty dictionary initialised to collect the customer's selections as the program runs. As quantities are entered it grows dynamically: <code class="ic">order["Tomatoes"] = 1.5</code>.</p>
+            <p>Only items with <code class="ic">qty &gt; 0</code> are ever stored, so the final receipt stays clean — no zero-quantity rows cluttering the output.</p>
+          </div>
+        </div>
+
+        <div class="veg-step-card reveal" data-category="structure" style="animation-delay:.16s">
+          <div class="veg-card-top">
+            <span class="veg-step-num">04</span>
+            <div class="veg-card-head">
+              <div class="veg-card-title">Banner &amp; Inventory Table</div>
+              <div class="veg-card-snippet">print(f"{'Item Name':&lt;25} ...")</div>
+            </div>
+          </div>
+          <div class="veg-card-body">
+            <span class="veg-card-badge">f-string · formatting</span>
+            <p>F-strings with alignment specifiers produce a neat, readable price table before any ordering begins — so customers know what's available and what it costs.</p>
+            <table class="veg-mini-table">
+              <tr><th>Specifier</th><th>Meaning</th></tr>
+              <tr><td>:&lt;25</td><td>Left-align, pad to 25 chars</td></tr>
+              <tr><td>:&gt;14.2f</td><td>Right-align float, 2 decimals</td></tr>
+              <tr><td>"–" * 42</td><td>Repeats a separator line</td></tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="veg-step-card reveal" data-category="loop" style="animation-delay:.2s">
+          <div class="veg-card-top">
+            <span class="veg-step-num">05</span>
+            <div class="veg-card-head">
+              <div class="veg-card-title">Nested <code style="color:#52b788">for</code> + <code style="color:#52b788">while</code> Loops</div>
+              <div class="veg-card-snippet">for vegetable, price in prices.items():</div>
+            </div>
+          </div>
+          <div class="veg-card-body">
+            <span class="veg-card-badge">loop · iteration</span>
+            <p>The <strong>for loop</strong> visits each vegetable exactly once, in order. The inner <strong>while True</strong> loop keeps re-asking the same question until the user provides valid input — it can only escape via <code class="ic">break</code>.</p>
+            <p><code class="ic">.strip().lower()</code> normalises the raw input so <code class="ic">"DONE"</code>, <code class="ic">"Done"</code>, and <code class="ic">"done"</code> are all treated identically.</p>
+          </div>
+        </div>
+
+        <div class="veg-step-card reveal" data-category="control" style="animation-delay:.24s">
+          <div class="veg-card-top">
+            <span class="veg-step-num">06</span>
+            <div class="veg-card-head">
+              <div class="veg-card-title">try / except Error Handling</div>
+              <div class="veg-card-snippet">except ValueError:</div>
+            </div>
+          </div>
+          <div class="veg-card-body">
+            <span class="veg-card-badge">exception handling · safety</span>
+            <p>Calling <code class="ic">float("abc")</code> raises a <code class="ic">ValueError</code> that would crash an unprotected program. The <code class="ic">try/except</code> block intercepts it and prints a helpful message instead of terminating.</p>
+            <table class="veg-mini-table">
+              <tr><th>Keyword</th><th>What it does</th></tr>
+              <tr><td>continue</td><td>Skips back to top of while loop</td></tr>
+              <tr><td>break</td><td>Exits the current loop level</td></tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="veg-step-card reveal" data-category="control" style="animation-delay:.28s">
+          <div class="veg-card-top">
+            <span class="veg-step-num">07</span>
+            <div class="veg-card-head">
+              <div class="veg-card-title">"done" Two-Level Exit</div>
+              <div class="veg-card-snippet">if user_input == "done": break × 2</div>
+            </div>
+          </div>
+          <div class="veg-card-body">
+            <span class="veg-card-badge">control flow · nested break</span>
+            <p>A single <code class="ic">break</code> only exits one loop level. Because the loops are nested, two strategically placed <code class="ic">break</code> statements are needed — the first escapes the <code class="ic">while</code> loop, the second escapes the <code class="ic">for</code> loop.</p>
+            <p><code class="ic">'user_input' in locals()</code> is a defensive guard ensuring the variable exists before it's read, preventing a <code class="ic">NameError</code> on first iteration.</p>
+          </div>
+        </div>
+
+        <div class="veg-step-card reveal" data-category="data" style="animation-delay:.32s">
+          <div class="veg-card-top">
+            <span class="veg-step-num">08</span>
+            <div class="veg-card-head">
+              <div class="veg-card-title">Storing Valid Orders</div>
+              <div class="veg-card-snippet">if qty > 0: order[vegetable] = qty</div>
+            </div>
+          </div>
+          <div class="veg-card-body">
+            <span class="veg-card-badge">conditional · filtering</span>
+            <p>Skipped items (Enter pressed) default to <code class="ic">qty = 0.0</code>. The <code class="ic">if qty &gt; 0</code> guard ensures only genuinely ordered vegetables are added to the <code class="ic">order</code> dictionary.</p>
+            <p>This keeps the receipt accurate and uncluttered — a small condition with a big impact on the final output's quality.</p>
+          </div>
+        </div>
+
+        <div class="veg-step-card reveal" data-category="control" style="animation-delay:.36s">
+          <div class="veg-card-top">
+            <span class="veg-step-num">09</span>
+            <div class="veg-card-head">
+              <div class="veg-card-title">Empty Order Early Exit</div>
+              <div class="veg-card-snippet">if not order: return</div>
+            </div>
+          </div>
+          <div class="veg-card-body">
+            <span class="veg-card-badge">defensive programming · guard clause</span>
+            <p><code class="ic">not order</code> evaluates to <code class="ic">True</code> when the dictionary is empty. The <code class="ic">return</code> statement exits the function immediately, preventing the receipt section from running with no data to display.</p>
+            <p>This is called a <em>guard clause</em> — a clean pattern that handles edge cases at the top rather than nesting them inside the main logic.</p>
+          </div>
+        </div>
+
+        <div class="veg-step-card reveal" data-category="loop" style="animation-delay:.4s">
+          <div class="veg-card-top">
+            <span class="veg-step-num">10</span>
+            <div class="veg-card-head">
+              <div class="veg-card-title">Receipt &amp; Running Total</div>
+              <div class="veg-card-snippet">total += subtotal</div>
+            </div>
+          </div>
+          <div class="veg-card-body">
+            <span class="veg-card-badge">accumulator pattern · arithmetic</span>
+            <p><code class="ic">total</code> starts at <code class="ic">0.0</code>. Each iteration computes <code class="ic">subtotal = qty × price</code> and adds it to the running total — the classic <strong>accumulator pattern</strong>.</p>
+            <p><code class="ic">prices[veg]</code> cross-references the original prices dictionary by name, since <code class="ic">order</code> only stores quantities. Two dictionaries working as one system.</p>
+          </div>
+        </div>
+
+        <div class="veg-step-card reveal" data-category="structure" style="animation-delay:.44s">
+          <div class="veg-card-top">
+            <span class="veg-step-num">11</span>
+            <div class="veg-card-head">
+              <div class="veg-card-title">The <code style="color:#52b788">__main__</code> Guard</div>
+              <div class="veg-card-snippet">if __name__ == "__main__": main()</div>
+            </div>
+          </div>
+          <div class="veg-card-body">
+            <span class="veg-card-badge">module guard · Python idiom</span>
+            <p>When this file is <strong>run directly</strong>, Python sets <code class="ic">__name__</code> to <code class="ic">"__main__"</code> and <code class="ic">main()</code> is called. When it's <strong>imported</strong> by another script, <code class="ic">__name__</code> equals the filename — so <code class="ic">main()</code> is silently skipped.</p>
+            <p>This is a universal Python best practice that makes every script both safely importable as a module and directly runnable as a program.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="veg-flow reveal">
+      <p class="section-label" style="color:#52b788;margin-bottom:8px">// program flow</p>
+      <div class="veg-flow-title">How the program executes, top to bottom.</div>
+      <div class="flow-nodes">
+
+        <div class="flow-node-row">
+          <div class="flow-box"><b>START</b> → define <b>prices</b> dict &amp; empty <b>order</b> dict</div>
+        </div>
+        <div class="flow-arrow-down"></div>
+
+        <div class="flow-node-row">
+          <div class="flow-box">Print welcome banner &amp; full inventory price table</div>
+        </div>
+        <div class="flow-arrow-down"></div>
+
+        <div class="flow-node-row">
+          <div class="flow-box"><b>for</b> each vegetable in prices.items()</div>
+        </div>
+        <div class="flow-arrow-down"></div>
+
+        <div class="flow-node-row">
+          <div class="flow-box"><b>while True</b> → ask "How many kg of {vegetable}?"</div>
+        </div>
+        <div class="flow-arrow-down"></div>
+
+        <div class="flow-branch-wrap">
+          <div class="flow-branch-col">
+            <div class="flow-box-sm">"done" typed<br/>→ break × 2<br/>exit both loops</div>
+          </div>
+          <div class="flow-branch-col">
+            <div class="flow-box-sm">Invalid input<br/>→ print error<br/>→ retry (continue)</div>
+          </div>
+          <div class="flow-branch-col">
+            <div class="flow-box-sm">qty &lt; 0<br/>→ print warning<br/>→ retry (continue)</div>
+          </div>
+          <div class="flow-branch-col">
+            <div class="flow-box-sm">Valid qty &gt; 0<br/>→ store in order<br/>→ next vegetable</div>
+          </div>
+        </div>
+        <div class="flow-arrow-down"></div>
+
+        <div class="flow-node-row">
+          <div class="flow-box"><b>if not order</b> → print "No items selected" → <b>return</b> early</div>
+        </div>
+        <div class="flow-arrow-down"></div>
+
+        <div class="flow-node-row">
+          <div class="flow-box"><b>for</b> each item in order → compute subtotal → accumulate total</div>
+        </div>
+        <div class="flow-arrow-down"></div>
+
+        <div class="flow-node-row">
+          <div class="flow-box">Print formatted receipt with all subtotals</div>
+        </div>
+        <div class="flow-arrow-down"></div>
+
+        <div class="flow-node-row">
+          <div class="flow-box">Print grand total (₱ total)</div>
+        </div>
+        <div class="flow-arrow-down"></div>
+
+        <div class="flow-node-row">
+          <div class="flow-box terminus">END → "Thank you for shopping with us!" ✓</div>
+        </div>
+
+      </div>
+    </div>
+
+    </div>
+</section>
+
+<div class="tips-bar">
+  <div class="tips-track">
+    <span class="tip-item"><span class="tip-label">TIP</span> Use <code>git bisect</code> to binary-search your way to a broken commit in seconds</span>
+    <span class="tip-item"><span class="tip-label">FACT</span> The first computer bug was an actual moth found in a Harvard Mark II relay in 1947</span>
+    <span class="tip-item"><span class="tip-label">TIP</span> In Python, <code>a, *b, c = [1,2,3,4,5]</code> gives you starred unpacking for free</span>
+    <span class="tip-item"><span class="tip-label">QUOTE</span> "Any fool can write code a computer understands. Good programmers write code humans can understand." — Fowler</span>
+    <span class="tip-item"><span class="tip-label">TIP</span> Use <code>ssh -L</code> for local port forwarding to tunnel traffic securely through a bastion host</span>
+    <span class="tip-item"><span class="tip-label">FACT</span> The Linux kernel has over 27 million lines of code contributed by thousands of developers worldwide</span>
+    <span class="tip-item"><span class="tip-label">TIP</span> <code>console.time('label')</code> and <code>console.timeEnd('label')</code> — free performance profiling in the browser</span>
+    <!-- duplicate for seamless loop -->
+    <span class="tip-item"><span class="tip-label">TIP</span> Use <code>git bisect</code> to binary-search your way to a broken commit in seconds</span>
+    <span class="tip-item"><span class="tip-label">FACT</span> The first computer bug was an actual moth found in a Harvard Mark II relay in 1947</span>
+    <span class="tip-item"><span class="tip-label">TIP</span> In Python, <code>a, *b, c = [1,2,3,4,5]</code> gives you starred unpacking for free</span>
+    <span class="tip-item"><span class="tip-label">QUOTE</span> "Any fool can write code a computer understands. Good programmers write code humans can understand." — Fowler</span>
+    <span class="tip-item"><span class="tip-label">TIP</span> Use <code>ssh -L</code> for local port forwarding to tunnel traffic securely through a bastion host</span>
+    <span class="tip-item"><span class="tip-label">FACT</span> The Linux kernel has over 27 million lines of code contributed by thousands of developers worldwide</span>
+    <span class="tip-item"><span class="tip-label">TIP</span> <code>console.time('label')</code> and <code>console.timeEnd('label')</code> — free performance profiling in the browser</span>
+  </div>
+</div>
+
+<section class="section" id="deep-read">
+  <div class="section-inner">
+    <div class="divider"></div>
+    <p class="section-label">// editor's deep read</p>
+    <h2 class="section-title">This month's long-form.</h2>
+    <div class="deep-read reveal">
+      <div class="deep-read-visual">
+        <div class="deep-read-glyph">⚛</div>
+        <span class="deep-badge">★ Editor's Pick · 22 min read</span>
+        <h3>The Quantum Computing Inflection Point: What Developers Need to Know Right Now</h3>
+      </div>
+      <div class="deep-read-body">
+        <div>
+          <div class="deep-meta-row">
+            <span class="deep-meta-item"><span>📅</span> March 1, 2026</span>
+            <span class="deep-meta-item"><span>✍</span> Dr. A. Mendez</span>
+            <span class="deep-meta-item"><span>⏱</span> 22 min read</span>
+            <span class="deep-meta-item"><span>👁</span> 14,200 views</span>
+          </div>
+          <p>Quantum computing has spent a decade as a permanent "five years away" promise. But 2025 quietly changed something. Google's Willow chip demonstrated error correction that scales, IBM crossed 1,000 logical qubits, and three startups began offering quantum-as-a-service APIs that any developer can call from a laptop. The inflection point isn't here yet — but you can see it from here.</p>
+          <p>This deep-read walks through the actual math you need (no PhD required), the programming models emerging around quantum circuits, and — most importantly — which classes of problems will actually benefit from quantum speedup in your lifetime as a developer.</p>
+          <div class="deep-toc">
+            <div class="deep-toc-title">// table of contents</div>
+            <ol>
+              <li>Qubits, superposition, and what "quantum advantage" actually means</li>
+              <li>The error correction breakthrough and why it matters more than qubit count</li>
+              <li>Quantum programming models: Qiskit, Cirq, and PennyLane compared</li>
+              <li>Real use cases: optimization, cryptography, and molecular simulation</li>
+              <li>What to learn now to be quantum-ready in 2028</li>
+            </ol>
+          </div>
+        </div>
+        <div class="deep-read-footer">
+          <div class="deep-author-avatar">AM</div>
+          <div class="deep-author-info">
+            <div class="deep-author-name">Dr. A. Mendez</div>
+            <div class="deep-author-title">Senior Editor · Quantum &amp; Systems</div>
+          </div>
+          <a href="quantum.html" class="btn btn-primary" style="margin-left:auto;font-size:.8rem;padding:10px 18px">Read Full Article →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0;padding-bottom:0">
+  <div class="section-inner">
+    <div class="pull-quote reveal">
+      <blockquote>"The best code is the code you don't have to write. The second best is code so clear it reads like a well-argued essay — confident, purposeful, and impossible to misread."</blockquote>
+      <cite>— Valleys &amp; Bytes Editorial Manifesto, Issue #001</cite>
+    </div>
+  </div>
+</section>
+
+<!-- CODE LAB -->
+<section class="section" id="code-lab">
+  <div class="section-inner">
+    <div class="divider"></div>
+    <p class="section-label">// code lab</p>
+    <h2 class="section-title">Patterns worth memorising.</h2>
+    <div class="code-showcase-wrap reveal">
+      <div class="code-showcase-header">
+        <span class="dot" style="width:12px;height:12px;border-radius:50%;background:#ff5f56;display:inline-block"></span>
+        <span class="dot" style="width:12px;height:12px;border-radius:50%;background:#ffbd2e;display:inline-block"></span>
+        <span class="dot" style="width:12px;height:12px;border-radius:50%;background:#27c93f;display:inline-block"></span>
+      </div>
+      <div class="code-tabs">
+        <button class="code-tab active" onclick="switchTab(this,'tab-py')">Python</button>
+        <button class="code-tab" onclick="switchTab(this,'tab-rust')">Rust</button>
+        <button class="code-tab" onclick="switchTab(this,'tab-js')">JavaScript</button>
+        <button class="code-tab" onclick="switchTab(this,'tab-sql')">SQL</button>
+        <button class="code-tab" onclick="switchTab(this,'tab-bash')">Bash</button>
+      </div>
+      <div class="code-panel active" id="tab-py">
+        <span class="code-lang-badge">python</span>
+        <button class="code-copy" onclick="copyCode(this)">copy</button>
+        <pre><span style="color:#7dd3a8">from</span> <span style="color:#86c1f4">functools</span> <span style="color:#7dd3a8">import</span> cache
+<span style="color:#7dd3a8">from</span> <span style="color:#86c1f4">typing</span> <span style="color:#7dd3a8">import</span> Generator
+
+<span style="color:#5a8f6a"># ── Memoised Fibonacci with generator ──────────────────────</span>
+<span style="color:#7dd3a8">@cache</span>
+<span style="color:#7dd3a8">def</span> <span style="color:#86c1f4">fib</span>(n: <span style="color:#86c1f4">int</span>) -> <span style="color:#86c1f4">int</span>:
+    <span style="color:#f6c90e">"""O(n) time, O(n) space — but only computed once per n."""</span>
+    <span style="color:#7dd3a8">return</span> n <span style="color:#94a3b8">if</span> n < <span style="color:#e9a84c">2</span> <span style="color:#94a3b8">else</span> fib(n - <span style="color:#e9a84c">1</span>) + fib(n - <span style="color:#e9a84c">2</span>)
+
+<span style="color:#7dd3a8">def</span> <span style="color:#86c1f4">fib_stream</span>(limit: <span style="color:#86c1f4">int</span>) -> Generator[<span style="color:#86c1f4">int</span>, <span style="color:#c084fc">None</span>, <span style="color:#c084fc">None</span>]:
+    <span style="color:#f6c90e">"""Lazy infinite stream — pull only what you need."""</span>
+    a, b = <span style="color:#e9a84c">0</span>, <span style="color:#e9a84c">1</span>
+    <span style="color:#7dd3a8">while</span> a <= limit:
+        <span style="color:#7dd3a8">yield</span> a
+        a, b = b, a + b
+
+<span style="color:#5a8f6a"># ── Context manager for timing code blocks ──────────────────</span>
+<span style="color:#7dd3a8">from</span> <span style="color:#86c1f4">contextlib</span> <span style="color:#7dd3a8">import</span> contextmanager
+<span style="color:#7dd3a8">import</span> <span style="color:#86c1f4">time</span>
+
+<span style="color:#7dd3a8">@contextmanager</span>
+<span style="color:#7dd3a8">def</span> <span style="color:#86c1f4">timer</span>(label: <span style="color:#86c1f4">str</span> = <span style="color:#f6c90e">"block"</span>):
+    start = time.perf_counter()
+    <span style="color:#7dd3a8">try</span>:
+        <span style="color:#7dd3a8">yield</span>
+    <span style="color:#7dd3a8">finally</span>:
+        elapsed = time.perf_counter() - start
+        <span style="color:#86c1f4">print</span>(<span style="color:#f6c90e">f"[{label}] {elapsed * 1000:.2f}ms"</span>)
+
+<span style="color:#5a8f6a"># Usage</span>
+<span style="color:#7dd3a8">with</span> timer(<span style="color:#f6c90e">"fib(35)"</span>):
+    result = fib(<span style="color:#e9a84c">35</span>)
+    <span style="color:#86c1f4">print</span>(<span style="color:#f6c90e">f"fib(35) = {result}"</span>)
+
+first_20 = <span style="color:#86c1f4">list</span>(fib_stream(<span style="color:#e9a84c">6765</span>))
+<span style="color:#86c1f4">print</span>(<span style="color:#f6c90e">f"First 20 Fibonacci: {first_20}"</span>)</pre>
+      </div>
+      <div class="code-panel" id="tab-rust">
+        <span class="code-lang-badge">rust</span>
+        <button class="code-copy" onclick="copyCode(this)">copy</button>
+        <pre><span style="color:#5a8f6a">// ── Safe concurrent counter using Arc + Mutex ───────────────</span>
+<span style="color:#7dd3a8">use</span> std::sync::{Arc, Mutex};
+<span style="color:#7dd3a8">use</span> std::thread;
+
+<span style="color:#7dd3a8">fn</span> <span style="color:#86c1f4">main</span>() {
+    <span style="color:#7dd3a8">let</span> counter = Arc::new(Mutex::new(<span style="color:#e9a84c">0u64</span>));
+    <span style="color:#7dd3a8">let</span> <span style="color:#7dd3a8">mut</span> handles = Vec::new();
+
+    <span style="color:#7dd3a8">for</span> _ <span style="color:#7dd3a8">in</span> <span style="color:#e9a84c">0</span>..<span style="color:#e9a84c">8</span> {
+        <span style="color:#7dd3a8">let</span> c = Arc::clone(&counter);
+        handles.push(thread::spawn(<span style="color:#7dd3a8">move</span> || {
+            <span style="color:#7dd3a8">for</span> _ <span style="color:#7dd3a8">in</span> <span style="color:#e9a84c">0</span>..<span style="color:#e9a84c">1_000_000</span> {
+                <span style="color:#7dd3a8">let</span> <span style="color:#7dd3a8">mut</span> val = c.lock().unwrap();
+                *val += <span style="color:#e9a84c">1</span>;
+            }
+        }));
+    }
+
+    <span style="color:#7dd3a8">for</span> h <span style="color:#7dd3a8">in</span> handles { h.join().unwrap(); }
+    println!(<span style="color:#f6c90e">"Final count: {}"</span>, *counter.lock().unwrap());
+    <span style="color:#5a8f6a">// Always prints 8_000_000 — no data race possible</span>
+}
+
+<span style="color:#5a8f6a">// ── Zero-copy string slicing ──────────────────────────────────</span>
+<span style="color:#7dd3a8">fn</span> <span style="color:#86c1f4">first_word</span>(s: &<span style="color:#86c1f4">str</span>) -> &<span style="color:#86c1f4">str</span> {
+    s.split_whitespace().next().unwrap_or(<span style="color:#f6c90e">""</span>)
+}
+
+<span style="color:#5a8f6a">// The returned &str borrows from s — no allocation, no copy.</span>
+<span style="color:#5a8f6a">// The borrow checker guarantees s outlives the slice.</span>
+<span style="color:#7dd3a8">fn</span> <span style="color:#86c1f4">demonstrate</span>() {
+    <span style="color:#7dd3a8">let</span> sentence = String::from(<span style="color:#f6c90e">"valleys and bytes"</span>);
+    <span style="color:#7dd3a8">let</span> word = first_word(&sentence); <span style="color:#5a8f6a">// &str into String's buffer</span>
+    println!(<span style="color:#f6c90e">"First word: {word}"</span>);
+}</pre>
+      </div>
+      <div class="code-panel" id="tab-js">
+        <span class="code-lang-badge">javascript</span>
+        <button class="code-copy" onclick="copyCode(this)">copy</button>
+        <pre><span style="color:#5a8f6a">// ── Observable pattern — reactive state without a framework ──</span>
+<span style="color:#7dd3a8">function</span> <span style="color:#86c1f4">createStore</span>(initialState) {
+  <span style="color:#7dd3a8">let</span> state = structuredClone(initialState);
+  <span style="color:#7dd3a8">const</span> listeners = <span style="color:#7dd3a8">new</span> Set();
+
+  <span style="color:#7dd3a8">return</span> {
+    getState: () => structuredClone(state),
+
+    setState(updater) {
+      <span style="color:#7dd3a8">const</span> next = <span style="color:#7dd3a8">typeof</span> updater === <span style="color:#f6c90e">'function'</span>
+        ? updater(state) : updater;
+      state = { ...state, ...next };
+      listeners.forEach(fn => fn(state));
+    },
+
+    subscribe(fn) {
+      listeners.add(fn);
+      <span style="color:#7dd3a8">return</span> () => listeners.delete(fn); <span style="color:#5a8f6a">// unsubscribe</span>
+    }
+  };
+}
+
+<span style="color:#5a8f6a">// Usage</span>
+<span style="color:#7dd3a8">const</span> store = createStore({ count: <span style="color:#e9a84c">0</span>, user: <span style="color:#c084fc">null</span> });
+
+<span style="color:#7dd3a8">const</span> unsubscribe = store.subscribe(state => {
+  console.log(<span style="color:#f6c90e">'State changed:'</span>, state);
+});
+
+store.setState(s => ({ count: s.count + <span style="color:#e9a84c">1</span> }));
+store.setState({ user: { name: <span style="color:#f6c90e">'Ada'</span> } });
+unsubscribe(); <span style="color:#5a8f6a">// stop listening</span>
+
+<span style="color:#5a8f6a">// ── Async retry with exponential backoff ──────────────────────</span>
+<span style="color:#7dd3a8">async function</span> <span style="color:#86c1f4">withRetry</span>(fn, { retries = <span style="color:#e9a84c">3</span>, base = <span style="color:#e9a84c">300</span> } = {}) {
+  <span style="color:#7dd3a8">for</span> (<span style="color:#7dd3a8">let</span> i = <span style="color:#e9a84c">0</span>; i <= retries; i++) {
+    <span style="color:#7dd3a8">try</span> { <span style="color:#7dd3a8">return await</span> fn(); }
+    <span style="color:#7dd3a8">catch</span> (err) {
+      <span style="color:#7dd3a8">if</span> (i === retries) <span style="color:#7dd3a8">throw</span> err;
+      <span style="color:#7dd3a8">await new</span> Promise(r => setTimeout(r, base * <span style="color:#e9a84c">2</span> ** i));
+    }
+  }
+}</pre>
+      </div>
+      <div class="code-panel" id="tab-sql">
+        <span class="code-lang-badge">sql · postgresql</span>
+        <button class="code-copy" onclick="copyCode(this)">copy</button>
+        <pre><span style="color:#5a8f6a">-- ── Window functions: running totals and rankings ────────────</span>
+<span style="color:#7dd3a8">SELECT</span>
+  author,
+  title,
+  views,
+  published_at,
+
+  <span style="color:#5a8f6a">-- Running total of views per author, ordered by date</span>
+  <span style="color:#86c1f4">SUM</span>(views) <span style="color:#7dd3a8">OVER</span> (
+    <span style="color:#7dd3a8">PARTITION BY</span> author
+    <span style="color:#7dd3a8">ORDER BY</span> published_at
+    ROWS <span style="color:#7dd3a8">BETWEEN</span> UNBOUNDED PRECEDING <span style="color:#7dd3a8">AND</span> CURRENT ROW
+  ) <span style="color:#7dd3a8">AS</span> running_views,
+
+  <span style="color:#5a8f6a">-- Dense rank by views (ties get same rank, no gaps)</span>
+  <span style="color:#86c1f4">DENSE_RANK</span>() <span style="color:#7dd3a8">OVER</span> (<span style="color:#7dd3a8">ORDER BY</span> views <span style="color:#7dd3a8">DESC</span>) <span style="color:#7dd3a8">AS</span> popularity_rank,
+
+  <span style="color:#5a8f6a">-- 3-article rolling average views</span>
+  <span style="color:#86c1f4">AVG</span>(views) <span style="color:#7dd3a8">OVER</span> (
+    <span style="color:#7dd3a8">PARTITION BY</span> author
+    <span style="color:#7dd3a8">ORDER BY</span> published_at
+    ROWS <span style="color:#7dd3a8">BETWEEN</span> <span style="color:#e9a84c">2</span> PRECEDING <span style="color:#7dd3a8">AND</span> CURRENT ROW
+  ) <span style="color:#7dd3a8">AS</span> rolling_avg_3
+
+<span style="color:#7dd3a8">FROM</span>   articles
+<span style="color:#7dd3a8">WHERE</span>  published_at >= NOW() - INTERVAL <span style="color:#f6c90e">'90 days'</span>
+<span style="color:#7dd3a8">ORDER</span> <span style="color:#7dd3a8">BY</span> author, published_at;
+
+<span style="color:#5a8f6a">-- ── Recursive CTE: traverse a tag hierarchy ──────────────────</span>
+<span style="color:#7dd3a8">WITH RECURSIVE</span> tag_tree <span style="color:#7dd3a8">AS</span> (
+  <span style="color:#7dd3a8">SELECT</span> id, name, parent_id, <span style="color:#e9a84c">0</span> <span style="color:#7dd3a8">AS</span> depth
+  <span style="color:#7dd3a8">FROM</span>   tags <span style="color:#7dd3a8">WHERE</span> parent_id <span style="color:#7dd3a8">IS NULL</span>
+  <span style="color:#7dd3a8">UNION ALL</span>
+  <span style="color:#7dd3a8">SELECT</span> t.id, t.name, t.parent_id, tt.depth + <span style="color:#e9a84c">1</span>
+  <span style="color:#7dd3a8">FROM</span>   tags t
+  <span style="color:#7dd3a8">JOIN</span>   tag_tree tt <span style="color:#7dd3a8">ON</span> t.parent_id = tt.id
+)
+<span style="color:#7dd3a8">SELECT</span> REPEAT(<span style="color:#f6c90e">'  '</span>, depth) || name <span style="color:#7dd3a8">AS</span> hierarchy
+<span style="color:#7dd3a8">FROM</span>   tag_tree <span style="color:#7dd3a8">ORDER BY</span> depth, name;</pre>
+      </div>
+      <div class="code-panel" id="tab-bash">
+        <span class="code-lang-badge">bash</span>
+        <button class="code-copy" onclick="copyCode(this)">copy</button>
+        <pre><span style="color:#5a8f6a">#!/usr/bin/env bash</span>
+<span style="color:#5a8f6a"># ── Robust script template with error handling ────────────────</span>
+<span style="color:#7dd3a8">set</span> -euo pipefail          <span style="color:#5a8f6a"># exit on error, unset var, pipe fail</span>
+<span style="color:#7dd3a8">trap</span> <span style="color:#f6c90e">'cleanup'</span> EXIT INT TERM
+
+SCRIPT_DIR=<span style="color:#f6c90e">"$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"</span>
+LOG_FILE=<span style="color:#f6c90e">"${SCRIPT_DIR}/deploy.log"</span>
+
+<span style="color:#86c1f4">log</span>() { printf <span style="color:#f6c90e">'[%s] %s\n'</span> <span style="color:#f6c90e">"$(date +%T)"</span> <span style="color:#f6c90e">"$*"</span> | tee -a <span style="color:#f6c90e">"$LOG_FILE"</span>; }
+<span style="color:#86c1f4">die</span>() { log <span style="color:#f6c90e">"ERROR: $*"</span>; exit <span style="color:#e9a84c">1</span>; }
+<span style="color:#86c1f4">cleanup</span>() { log <span style="color:#f6c90e">"Script finished."</span>; }
+
+<span style="color:#5a8f6a"># ── Check dependencies ────────────────────────────────────────</span>
+<span style="color:#86c1f4">require</span>() {
+  <span style="color:#7dd3a8">for</span> cmd <span style="color:#7dd3a8">in</span> <span style="color:#f6c90e">"$@"</span>; <span style="color:#7dd3a8">do</span>
+    command -v <span style="color:#f6c90e">"$cmd"</span> &>/dev/null || die <span style="color:#f6c90e">"Required: $cmd not found"</span>
+  <span style="color:#7dd3a8">done</span>
+}
+
+require docker kubectl git curl
+
+<span style="color:#5a8f6a"># ── Parallel execution with job control ───────────────────────</span>
+<span style="color:#7dd3a8">declare</span> -a pids=()
+<span style="color:#7dd3a8">for</span> service <span style="color:#7dd3a8">in</span> api worker scheduler; <span style="color:#7dd3a8">do</span>
+  docker build -t <span style="color:#f6c90e">"app/${service}:${GIT_SHA}"</span> <span style="color:#f6c90e">"services/${service}"</span> &
+  pids+=(<span style="color:#f6c90e">"$!"</span>)
+  log <span style="color:#f6c90e">"Building ${service} (PID $!)"</span>
+<span style="color:#7dd3a8">done</span>
+
+<span style="color:#7dd3a8">for</span> pid <span style="color:#7dd3a8">in</span> <span style="color:#f6c90e">"${pids[@]}"</span>; <span style="color:#7dd3a8">do</span>
+  wait <span style="color:#f6c90e">"$pid"</span> || die <span style="color:#f6c90e">"Build failed (PID $pid)"</span>
+<span style="color:#7dd3a8">done</span>
+log <span style="color:#f6c90e">"All services built successfully."</span></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="tech-radar">
+  <div class="section-inner">
+    <div class="divider"></div>
+    <p class="section-label">// tech radar · Q1 2026</p>
+    <h2 class="section-title">What to adopt, trial,<br/>assess, or avoid.</h2>
+    <div class="radar-grid">
+      <div class="radar-card reveal">
+        <span class="radar-ring ring-adopt">● Adopt</span>
+        <div class="radar-name">Bun Runtime</div>
+        <div class="radar-desc">Drop-in Node.js replacement with dramatically faster startup, native TypeScript, and built-in bundler. Production-ready for most workloads.</div>
+        <div class="radar-category">// runtime · javascript</div>
+      </div>
+      <div class="radar-card reveal">
+        <span class="radar-ring ring-adopt">● Adopt</span>
+        <div class="radar-name">Zod Schema Validation</div>
+        <div class="radar-desc">TypeScript-first schema validation that co-locates your types and runtime checks. Eliminates an entire class of runtime type bugs.</div>
+        <div class="radar-category">// typescript · validation</div>
+      </div>
+      <div class="radar-card reveal">
+        <span class="radar-ring ring-trial">◐ Trial</span>
+        <div class="radar-name">Gleam Language</div>
+        <div class="radar-desc">A statically typed functional language that compiles to Erlang/JS. Combines the safety of Rust's type system with the concurrency of the BEAM VM.</div>
+        <div class="radar-category">// language · functional</div>
+      </div>
+      <div class="radar-card reveal">
+        <span class="radar-ring ring-trial">◐ Trial</span>
+        <div class="radar-name">Drizzle ORM</div>
+        <div class="radar-desc">Lightweight, type-safe SQL ORM for TypeScript. Unlike Prisma, it generates zero runtime abstraction — just plain SQL with full type inference.</div>
+        <div class="radar-category">// database · orm</div>
+      </div>
+      <div class="radar-card reveal">
+        <span class="radar-ring ring-assess">○ Assess</span>
+        <div class="radar-name">Sovereign AI Models</div>
+        <div class="radar-desc">Self-hosted LLMs via Ollama and llama.cpp are maturing fast. Privacy-first AI pipelines are now feasible for teams with moderate hardware budgets.</div>
+        <div class="radar-category">// ai · infrastructure</div>
+      </div>
+      <div class="radar-card reveal">
+        <span class="radar-ring ring-assess">○ Assess</span>
+        <div class="radar-name">Temporal Workflow Engine</div>
+        <div class="radar-desc">Durable execution framework that survives crashes, retries failures, and makes long-running distributed workflows trivially testable.</div>
+        <div class="radar-category">// distributed · workflows</div>
+      </div>
+      <div class="radar-card reveal">
+        <span class="radar-ring ring-hold">✕ Hold</span>
+        <div class="radar-name">Create React App</div>
+        <div class="radar-desc">Officially unmaintained since 2023. Replaced by Vite, Next.js, Remix, or Astro depending on your needs. There is no reason to start a new project with CRA.</div>
+        <div class="radar-category">// frontend · deprecated</div>
+      </div>
+      <div class="radar-card reveal">
+        <span class="radar-ring ring-hold">✕ Hold</span>
+        <div class="radar-name">Class Components (React)</div>
+        <div class="radar-desc">The React team has moved firmly toward hooks-based functional components. Class components receive no new features and new docs don't mention them.</div>
+        <div class="radar-category">// react · legacy</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="media">
+  <div class="section-inner">
+    <div class="divider"></div>
+    <p class="section-label">// podcast &amp; video</p>
+    <h2 class="section-title">Listen. Watch. Learn.</h2>
+    <div class="media-grid">
+      <div class="media-card reveal">
+        <div class="media-thumb media-thumb-pod">
+          <button class="play-btn" onclick="showToast('▶ Opening podcast player...','info')">▶</button>
+        </div>
+        <div class="media-ep">EP. 48 · PODCAST</div>
+        <div class="media-title">The Rise of AI-Assisted Debugging: Will We Still Need Breakpoints?</div>
+        <div class="media-meta"><span>C. Lim</span><span class="media-dot"></span><span>1h 12m</span><span class="media-dot"></span><span>Feb 22</span></div>
+      </div>
+      <div class="media-card reveal">
+        <div class="media-thumb media-thumb-vid" style="position:relative">
+          <span class="media-live-badge">● LIVE REC</span>
+          <button class="play-btn" onclick="showToast('▶ Opening video...','info')">▶</button>
+        </div>
+        <div class="media-ep">TALK · VIDEO</div>
+        <div class="media-title">Live Code Review: Refactoring a 3,000-line Python Monolith</div>
+        <div class="media-meta"><span>A. Mendez</span><span class="media-dot"></span><span>2h 05m</span><span class="media-dot"></span><span>Feb 14</span></div>
+      </div>
+      <div class="media-card reveal">
+        <div class="media-thumb media-thumb-pod">
+          <button class="play-btn" onclick="showToast('▶ Opening podcast player...','info')">▶</button>
+        </div>
+        <div class="media-ep">EP. 47 · PODCAST</div>
+        <div class="media-title">Open Source Sustainability: Who Funds the Internet's Infrastructure?</div>
+        <div class="media-meta"><span>R. Santos</span><span class="media-dot"></span><span>58m</span><span class="media-dot"></span><span>Feb 8</span></div>
+      </div>
+      <div class="media-card reveal">
+        <div class="media-thumb media-thumb-live">
+          <button class="play-btn" onclick="showToast('▶ Opening video...','info')">▶</button>
+        </div>
+        <div class="media-ep">TUTORIAL · VIDEO</div>
+        <div class="media-title">Build a Vector Search API in 40 Minutes with Postgres + pgvector</div>
+        <div class="media-meta"><span>C. Lim</span><span class="media-dot"></span><span>43m</span><span class="media-dot"></span><span>Jan 30</span></div>
+      </div>
+      <div class="media-card reveal">
+        <div class="media-thumb media-thumb-vid">
+          <button class="play-btn" onclick="showToast('▶ Opening video...','info')">▶</button>
+        </div>
+        <div class="media-ep">EP. 46 · PODCAST</div>
+        <div class="media-title">Systems Thinking for Software Engineers: Beyond the Happy Path</div>
+        <div class="media-meta"><span>M. Reyes</span><span class="media-dot"></span><span>1h 24m</span><span class="media-dot"></span><span>Jan 22</span></div>
+      </div>
+      <div class="media-card reveal">
+        <div class="media-thumb media-thumb-live">
+          <button class="play-btn" onclick="showToast('▶ Opening video...','info')">▶</button>
+        </div>
+        <div class="media-ep">WORKSHOP · VIDEO</div>
+        <div class="media-title">Zero to Production: Deploying a Rust API on Kubernetes in One Session</div>
+        <div class="media-meta"><span>A. Mendez</span><span class="media-dot"></span><span>3h 10m</span><span class="media-dot"></span><span>Jan 15</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER DIGEST ARCHIVE -->
+<section class="section" id="digest">
+  <div class="section-inner">
+    <div class="divider"></div>
+    <p class="section-label">// newsletter digest</p>
+    <h2 class="section-title">Recent issues worth revisiting.</h2>
+    <div class="digest-grid">
+      <div class="digest-card reveal">
+        <div class="digest-issue">#041 · Feb 24, 2026</div>
+        <div class="digest-title">The March Toward Smaller, Faster Models</div>
+        <div class="digest-preview">This week's links curated around the trend of model distillation — why 7B parameter models are eating the lunch of GPT-4-scale giants for 90% of real tasks.</div>
+        <div class="digest-links">
+          <div class="digest-link-item">Phi-3 vs Mistral vs Llama 3: a practical benchmark</div>
+          <div class="digest-link-item">When to fine-tune vs prompt-engineer vs RAG</div>
+          <div class="digest-link-item">Quantisation explained without the math anxiety</div>
+        </div>
+        <div class="digest-footer">
+          <span class="digest-date">1,840 opens · 62% rate</span>
+          <a href="#" class="digest-open">read →</a>
+        </div>
+      </div>
+      <div class="digest-card reveal">
+        <div class="digest-issue">#040 · Feb 17, 2026</div>
+        <div class="digest-title">The Hidden Cost of Abstractions</div>
+        <div class="digest-preview">Five reads this week about the tax developers pay when frameworks do too much thinking for them — and what it means when you finally have to debug below the abstraction.</div>
+        <div class="digest-links">
+          <div class="digest-link-item">ORMs and the N+1 query problem — still unsolved?</div>
+          <div class="digest-link-item">Understanding what React actually does on re-render</div>
+          <div class="digest-link-item">The case for reading your database's query plan</div>
+        </div>
+        <div class="digest-footer">
+          <span class="digest-date">2,110 opens · 71% rate</span>
+          <a href="#" class="digest-open">read →</a>
+        </div>
+      </div>
+      <div class="digest-card reveal">
+        <div class="digest-issue">#039 · Feb 10, 2026</div>
+        <div class="digest-title">Observability Is Not Monitoring</div>
+        <div class="digest-preview">An issue dedicated to the difference between knowing your system is broken and understanding why — structured logs, distributed traces, and why dashboards can lie.</div>
+        <div class="digest-links">
+          <div class="digest-link-item">OpenTelemetry: the standard finally winning</div>
+          <div class="digest-link-item">Building a trace-first debugging culture</div>
+          <div class="digest-link-item">Honeycomb vs Datadog vs Grafana: a real comparison</div>
+        </div>
+        <div class="digest-footer">
+          <span class="digest-date">1,990 opens · 67% rate</span>
+          <a href="#" class="digest-open">read →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="reading">
+  <div class="section-inner">
+    <div class="divider"></div>
+    <p class="section-label">// curated reading list</p>
+    <h2 class="section-title">Books &amp; papers every<br/>developer should encounter.</h2>
+    <div class="reading-list reveal">
+      <div class="reading-item">
+        <span class="reading-num">01</span>
+        <div class="reading-info">
+          <div class="reading-title">Designing Data-Intensive Applications</div>
+          <div class="reading-author">Martin Kleppmann · O'Reilly, 2017</div>
+        </div>
+        <span class="reading-type type-book">Book</span>
+      </div>
+      <div class="reading-item">
+        <span class="reading-num">02</span>
+        <div class="reading-info">
+          <div class="reading-title">Attention Is All You Need</div>
+          <div class="reading-author">Vaswani et al. · NeurIPS, 2017</div>
+        </div>
+        <span class="reading-type type-paper">Paper</span>
+      </div>
+      <div class="reading-item">
+        <span class="reading-num">03</span>
+        <div class="reading-info">
+          <div class="reading-title">The Philosophy of Software Design</div>
+          <div class="reading-author">John Ousterhout · Yaknyam Press, 2018</div>
+        </div>
+        <span class="reading-type type-book">Book</span>
+      </div>
+      <div class="reading-item">
+        <span class="reading-num">04</span>
+        <div class="reading-info">
+          <div class="reading-title">Reflections on Trusting Trust</div>
+          <div class="reading-author">Ken Thompson · ACM Turing Award Lecture, 1984</div>
+        </div>
+        <span class="reading-type type-paper">Paper</span>
+      </div>
+      <div class="reading-item">
+        <span class="reading-num">05</span>
+        <div class="reading-info">
+          <div class="reading-title">The Rust Programming Language (The Book)</div>
+          <div class="reading-author">Steve Klabnik &amp; Carol Nichols · rust-lang.org</div>
+        </div>
+        <span class="reading-type type-docs">Docs</span>
+      </div>
+      <div class="reading-item">
+        <span class="reading-num">06</span>
+        <div class="reading-info">
+          <div class="reading-title">You Don't Know JS (series)</div>
+          <div class="reading-author">Kyle Simpson · GitHub / O'Reilly</div>
+        </div>
+        <span class="reading-type type-blog">Blog</span>
+      </div>
+      <div class="reading-item">
+        <span class="reading-num">07</span>
+        <div class="reading-info">
+          <div class="reading-title">Clean Architecture</div>
+          <div class="reading-author">Robert C. Martin · Prentice Hall, 2017</div>
+        </div>
+        <span class="reading-type type-book">Book</span>
+      </div>
+      <div class="reading-item">
+        <span class="reading-num">08</span>
+        <div class="reading-info">
+          <div class="reading-title">MapReduce: Simplified Data Processing on Large Clusters</div>
+          <div class="reading-author">Dean &amp; Ghemawat · OSDI, 2004</div>
+        </div>
+        <span class="reading-type type-paper">Paper</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS DIRECTORY -->
+<section class="section" id="tools">
+  <div class="section-inner">
+    <div class="divider"></div>
+    <p class="section-label">// tools directory</p>
+    <h2 class="section-title">The developer's toolbox,<br/>curated and tested.</h2>
+    <div class="tools-grid">
+      <div class="tool-card reveal">
+        <div class="tool-icon">🦀</div>
+        <div class="tool-name">Rust Analyzer</div>
+        <div class="tool-desc">The definitive LSP for Rust. Inline type hints, fast completions, and macro expansion that actually makes sense.</div>
+        <div class="tool-tags"><span class="tool-tag">IDE</span><span class="tool-tag">Rust</span></div>
+        <a href="#" class="tool-link">rust-analyzer.github.io →</a>
+      </div>
+      <div class="tool-card reveal">
+        <div class="tool-icon">⚡</div>
+        <div class="tool-name">Vite</div>
+        <div class="tool-desc">Next-generation frontend tooling. Native ESM, sub-second HMR, and a plugin ecosystem that covers every modern framework.</div>
+        <div class="tool-tags"><span class="tool-tag">Build</span><span class="tool-tag">Frontend</span></div>
+        <a href="#" class="tool-link">vitejs.dev →</a>
+      </div>
+      <div class="tool-card reveal">
+        <div class="tool-icon">🐙</div>
+        <div class="tool-name">lazygit</div>
+        <div class="tool-desc">Terminal UI for Git that makes complex rebases, cherry-picks, and interactive staging feel like a game rather than a chore.</div>
+        <div class="tool-tags"><span class="tool-tag">Git</span><span class="tool-tag">TUI</span></div>
+        <a href="#" class="tool-link">github.com/jesseduffield →</a>
+      </div>
+      <div class="tool-card reveal">
+        <div class="tool-icon">🔭</div>
+        <div class="tool-name">Zellij</div>
+        <div class="tool-desc">A terminal multiplexer written in Rust with a friendlier UX than tmux. Floating panes, session persistence, and WASM plugins.</div>
+        <div class="tool-tags"><span class="tool-tag">Terminal</span><span class="tool-tag">Rust</span></div>
+        <a href="#" class="tool-link">zellij.dev →</a>
+      </div>
+      <div class="tool-card reveal">
+        <div class="tool-icon">🗄️</div>
+        <div class="tool-name">TablePlus</div>
+        <div class="tool-desc">Native database GUI for Postgres, MySQL, SQLite, Redis and more. Fast, clean, and doesn't try to be an IDE.</div>
+        <div class="tool-tags"><span class="tool-tag">DB</span><span class="tool-tag">GUI</span></div>
+        <a href="#" class="tool-link">tableplus.com →</a>
+      </div>
+      <div class="tool-card reveal">
+        <div class="tool-icon">📡</div>
+        <div class="tool-name">Bruno</div>
+        <div class="tool-desc">Open-source API client that stores collections as plain-text files in your repo. Git-native, offline-first, and free forever.</div>
+        <div class="tool-tags"><span class="tool-tag">API</span><span class="tool-tag">Open Source</span></div>
+        <a href="#" class="tool-link">usebruno.com →</a>
+      </div>
+      <div class="tool-card reveal">
+        <div class="tool-icon">🧪</div>
+        <div class="tool-name">Vitest</div>
+        <div class="tool-desc">Vite-native unit test framework compatible with Jest APIs. Instant watch mode, native ESM, and TypeScript support with no config.</div>
+        <div class="tool-tags"><span class="tool-tag">Testing</span><span class="tool-tag">JS</span></div>
+        <a href="#" class="tool-link">vitest.dev →</a>
+      </div>
+      <div class="tool-card reveal">
+        <div class="tool-icon">🔒</div>
+        <div class="tool-name">Infisical</div>
+        <div class="tool-desc">Open-source secrets management — sync environment variables across machines, teams, and CI/CD pipelines without pasting into Slack.</div>
+        <div class="tool-tags"><span class="tool-tag">Security</span><span class="tool-tag">DevOps</span></div>
+        <a href="#" class="tool-link">infisical.com →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="authors">
+  <div class="section-inner">
+    <div class="divider"></div>
+    <p class="section-label">// author spotlight</p>
+    <h2 class="section-title">The minds behind the words.</h2>
+    <div class="authors-grid">
+      <div class="author-card reveal">
+        <div class="author-avatar-lg">AM</div>
+        <div class="author-name">Dr. A. Mendez</div>
+        <div class="author-role">Senior Editor · AI &amp; Systems</div>
+        <div class="author-bio">Former research engineer at a quantum computing lab. Writes about machine learning, distributed systems, and the philosophy of computation.</div>
+        <div class="author-stats">
+          <div class="author-stat"><span class="author-stat-n">58</span><span class="author-stat-l">Articles</span></div>
+          <div class="author-stat"><span class="author-stat-n">142K</span><span class="author-stat-l">Reads</span></div>
+        </div>
+      </div>
+      <div class="author-card reveal">
+        <div class="author-avatar-lg">CL</div>
+        <div class="author-name">C. Lim</div>
+        <div class="author-role">Staff Writer · Languages &amp; Runtimes</div>
+        <div class="author-bio">Systems programmer with a decade of C++ and Rust. Believes programming languages are the most underappreciated form of design.</div>
+        <div class="author-stats">
+          <div class="author-stat"><span class="author-stat-n">41</span><span class="author-stat-l">Articles</span></div>
+          <div class="author-stat"><span class="author-stat-n">98K</span><span class="author-stat-l">Reads</span></div>
+        </div>
+      </div>
+      <div class="author-card reveal">
+        <div class="author-avatar-lg">RS</div>
+        <div class="author-name">R. Santos</div>
+        <div class="author-role">Contributing Editor · Web &amp; Culture</div>
+        <div class="author-bio">Full-stack developer and open-source advocate. Covers the human side of software — developer experience, tooling culture, and what makes teams thrive.</div>
+        <div class="author-stats">
+          <div class="author-stat"><span class="author-stat-n">29</span><span class="author-stat-l">Articles</span></div>
+          <div class="author-stat"><span class="author-stat-n">74K</span><span class="author-stat-l">Reads</span></div>
+        </div>
+      </div>
+      <div class="author-card reveal">
+        <div class="author-avatar-lg">MR</div>
+        <div class="author-name">M. Reyes</div>
+        <div class="author-role">Security Correspondent</div>
+        <div class="author-bio">Penetration tester and security architect. Specialises in making security concepts accessible without sacrificing technical depth or accuracy.</div>
+        <div class="author-stats">
+          <div class="author-stat"><span class="author-stat-n">14</span><span class="author-stat-l">Articles</span></div>
+          <div class="author-stat"><span class="author-stat-n">52K</span><span class="author-stat-l">Reads</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <div class="section-inner reveal">
+    <div class="divider"></div>
+    <div class="follow-section">
+      <p class="section-label">// stay connected</p>
+      <h2>Follow the signal.</h2>
+      <p>Join the community across every platform. Get updates, code snippets, and behind-the-scenes dispatches wherever you spend your screen time.</p>
+      <div class="follow-btns">
+        <button class="follow-btn fb-btn" onclick="followPlatform('Facebook')">📘 Facebook</button>
+        <button class="follow-btn tw-btn" onclick="followPlatform('X / Twitter')">𝕏 Twitter / X</button>
+        <button class="follow-btn li-btn" onclick="followPlatform('LinkedIn')">💼 LinkedIn</button>
+        <button class="follow-btn gh-btn" onclick="followPlatform('GitHub')">🐙 GitHub</button>
+        <button class="follow-btn yt-btn" onclick="followPlatform('YouTube')">▶ YouTube</button>
+      </div>
+      <div class="follow-counts">
+        <div class="follow-count-item"><span class="follow-count-num">14.2K</span><span class="follow-count-lbl">Facebook</span></div>
+        <div class="follow-count-item"><span class="follow-count-num">22.8K</span><span class="follow-count-lbl">Twitter / X</span></div>
+        <div class="follow-count-item"><span class="follow-count-num">8.5K</span><span class="follow-count-lbl">LinkedIn</span></div>
+        <div class="follow-count-item"><span class="follow-count-num">5.1K</span><span class="follow-count-lbl">GitHub Stars</span></div>
+        <div class="follow-count-item"><span class="follow-count-num">11.3K</span><span class="follow-count-lbl">YouTube</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="share">
+  <div class="section-inner">
+    <div class="divider"></div>
+    <p class="section-label">// ai-powered sharing</p>
+    <h2 class="section-title">Share with intelligence.</h2>
+    <div class="share-section reveal">
+      <h3>Generate a share caption with AI</h3>
+      <p>Pick an article and platform — our AI will write a tailored, platform-optimised caption for you instantly.</p>
+      <div class="form-row" style="margin-bottom:16px">
+        <div class="form-group">
+          <label>Select Article</label>
+          <select id="shareArticle">
+            <option value="transformer">The Quiet Revolution Inside Transformer Architectures</option>
+            <option value="rust">Rust's Ownership Model and the End of Memory Guilt</option>
+            <option value="progressive">Progressive Enhancement in the Age of JavaScript Fatigue</option>
+            <option value="zerotrust">Zero-Trust Is Not a Product — It's a Posture</option>
+            <option value="docker">Containers All the Way Down: A Docker Deep Dive</option>
+            <option value="postgres">Postgres Is Eating the Database World</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Target Platform</label>
+          <select id="sharePlatform">
+            <option value="linkedin">LinkedIn (professional)</option>
+            <option value="facebook">Facebook (casual)</option>
+            <option value="x">X / Twitter (punchy)</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn-gen" onclick="generateShareCaption()">✦ Generate with AI</button>
+      <div class="ai-preview" id="aiPreview" style="margin-top:16px">Your AI-generated caption will appear here. Select an article and platform above, then click Generate.</div>
+      <div class="share-controls" style="margin-top:12px">
+        <button class="share-platform-btn sp-fb" onclick="shareToSocial('Facebook')">📘 Share to Facebook</button>
+        <button class="share-platform-btn sp-li" onclick="shareToSocial('LinkedIn')">💼 Share to LinkedIn</button>
+        <button class="share-platform-btn sp-x" onclick="shareToSocial('X')">𝕏 Share to X</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMMENTS -->
+<section class="section" id="comments">
+  <div class="section-inner">
+    <div class="divider"></div>
+    <p class="section-label">// discussion</p>
+    <h2 class="section-title">Join the conversation.</h2>
+
+    <div class="comment-form reveal">
+      <h3>Leave a Comment</h3>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Your Name *</label>
+          <input type="text" id="cName" placeholder="Ada Lovelace"/>
+        </div>
+        <div class="form-group">
+          <label>Email Address *</label>
+          <input type="email" id="cEmail" placeholder="ada@example.com"/>
+        </div>
+      </div>
+      <div class="form-group" style="margin-bottom:14px">
+        <label>Commenting On</label>
+        <select id="cArticle">
+          <option>The Quiet Revolution Inside Transformer Architectures</option>
+          <option>Rust's Ownership Model and the End of Memory Guilt</option>
+          <option>Progressive Enhancement in the Age of JavaScript Fatigue</option>
+          <option>Zero-Trust Is Not a Product — It's a Posture</option>
+          <option>Containers All the Way Down: A Docker Deep Dive</option>
+          <option>Postgres Is Eating the Database World</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Your Comment *</label>
+        <textarea id="cText" placeholder="Share your thoughts, questions, or insights..."></textarea>
+      </div>
+      <button class="form-submit" onclick="submitComment()">Post Comment →</button>
+    </div>
+
+    <div class="comments-list" id="commentsList">
+      <!-- seeded comments -->
+      <div class="comment-item">
+        <div class="comment-header">
+          <div class="comment-avatar">JT</div>
+          <div class="comment-meta">
+            <div class="comment-name">James Tao</div>
+            <div class="comment-time">Feb 28, 2026 · 14:22</div>
+          </div>
+        </div>
+        <p class="comment-text">The section on attention mechanisms finally made it click for me. I've read three textbooks and this article explained it better in 1,200 words. The analogy with spotlight allocation was particularly elegant.</p>
+        <div class="comment-actions">
+          <button class="comment-react" onclick="likeComment(this)">👍 12</button>
+          <button class="comment-react" onclick="replyComment(this)">↩ Reply</button>
+        </div>
+      </div>
+      <div class="comment-item">
+        <div class="comment-header">
+          <div class="comment-avatar">SP</div>
+          <div class="comment-meta">
+            <div class="comment-name">Sofia Park</div>
+            <div class="comment-time">Feb 15, 2026 · 09:47</div>
+          </div>
+        </div>
+        <p class="comment-text">As someone coming from a Python background, the Rust article felt like being told you've been riding with training wheels your whole life. Simultaneously humbling and invigorating. The borrow checker section was a revelation.</p>
+        <div class="comment-actions">
+          <button class="comment-react" onclick="likeComment(this)">👍 27</button>
+          <button class="comment-react" onclick="replyComment(this)">↩ Reply</button>
+        </div>
+      </div>
+      <div class="comment-item">
+        <div class="comment-header">
+          <div class="comment-avatar">MV</div>
+          <div class="comment-meta">
+            <div class="comment-name">Marco Villanueva</div>
+            <div class="comment-time">Jan 31, 2026 · 17:05</div>
+          </div>
+        </div>
+        <p class="comment-text">The HTMX piece aged incredibly well. My team just ripped out a 40k-line React codebase and replaced it with server-side templates + HTMX. Build times went from 4 minutes to 8 seconds. Valleys &amp; Bytes called it months ago.</p>
+        <div class="comment-actions">
+          <button class="comment-react" onclick="likeComment(this)">👍 44</button>
+          <button class="comment-react" onclick="replyComment(this)">↩ Reply</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUBSCRIBE -->
+<section class="section" id="subscribe">
+  <div class="section-inner reveal">
+    <div class="divider"></div>
+    <div class="sub-section">
+      <p class="section-label">// subscription</p>
+      <h2>Read deeper.<br/>Think further.</h2>
+      <p>Choose a plan that fits how deep you want to go. From free weekly digests to full archive access and community perks.</p>
+
+      <div class="sub-plans">
+        <div class="plan-card">
+          <div class="plan-name">Hiker</div>
+          <div class="plan-price"><sup>₱</sup>0<span> / month</span></div>
+          <div class="plan-desc">Perfect for casual explorers of the digital landscape.</div>
+          <ul class="plan-features">
+            <li>Weekly newsletter</li>
+            <li>3 free articles / month</li>
+            <li>Community comments</li>
+            <li>Public code snippets</li>
+          </ul>
+          <button class="plan-btn plan-btn-outline" onclick="subscribe('Hiker')">Get Started Free</button>
+        </div>
+        <div class="plan-card featured">
+          <div class="plan-name">Explorer ✦ Popular</div>
+          <div class="plan-price"><sup>₱</sup>199<span> / month</span></div>
+          <div class="plan-desc">For developers who want the full map, not just the trail.</div>
+          <ul class="plan-features">
+            <li>Unlimited articles</li>
+            <li>Full archive access</li>
+            <li>Monthly deep-dive reports</li>
+            <li>Early article access</li>
+            <li>Priority comment replies</li>
+          </ul>
+          <button class="plan-btn plan-btn-filled" onclick="subscribe('Explorer')">Subscribe Now</button>
+        </div>
+        <div class="plan-card">
+          <div class="plan-name">Summit</div>
+          <div class="plan-price"><sup>₱</sup>499<span> / month</span></div>
+          <div class="plan-desc">The full summit experience — for those who go all the way.</div>
+          <ul class="plan-features">
+            <li>Everything in Explorer</li>
+            <li>Live Q&amp;A sessions</li>
+            <li>Private Discord community</li>
+            <li>Source code repositories</li>
+            <li>1-on-1 monthly office hour</li>
+          </ul>
+          <button class="plan-btn plan-btn-outline" onclick="subscribe('Summit')">Go Summit</button>
+        </div>
+      </div>
+
+      <p style="font-size:.85rem;color:var(--silver-dim);margin-bottom:20px">Or just subscribe to our free newsletter — no plan required:</p>
+      <div class="sub-email-row">
+        <input type="email" id="subEmail" placeholder="your@email.com"/>
+        <button class="sub-btn" onclick="subscribeEmail()">Subscribe Free →</button>
+      </div>
+      <p class="sub-note">// no spam · unsubscribe anytime · your data stays yours</p>
+      <div class="sub-success" id="subSuccess">✓ You're subscribed! Welcome to Valleys &amp; Bytes. Check your inbox for a confirmation.</div>
+    </div>
+  </div>
+</section>
+
+<footer id="footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="nav-logo" href="#">Valleys <span>&amp;</span> Bytes</a>
+        <p>An independent technology publication for curious minds. We write about software, systems, and the culture of code — with depth and without jargon.</p>
+        <div class="footer-social">
+          <a href="https://facebook/Glenn Junsay Pansensoy" title="Facebook">fb</a>
+          <a href="www.x/@GlennPansensoy" title="Twitter/X">𝕏</a>
+          <a href="https://www.linkedin.com/in/glenn-pansensoy-6288453a2" title="LinkedIn">in</a>
+          <a href="https://pansensoyglenn-dev.github.io/code-sense/" title="GitHub">gh</a>
+          <a href="www.youtube/c/@GlennPansensoy" title="YouTube">▶</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="artificial-intelligence.html">Artificial Intelligence</a></li>
+          <li><a href="machine-learning.html">Machine Learning</a></li>
+          <li><a href="python-fundamentals.html">Python Fundamentals</a></li>
+          <li><a href="web-development.html">Web Development</a></li>
+          <li><a href="data-structure.html">Data Structure</a></li>
+          <li><a href="data-science.html">Data Science</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Publication</h4>
+        <ul>
+          <li><a href="oop-about.html">About This Page</a></li>
+          <li><a href="about-author.html">About the Author</a></li>
+          <li><a href="write.html">Write for Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="algorithm.html">Algorithm</a></li>
+          <li><a href="oop-programming.html">OOP Programming</a></li>
+          <li><a href="automation.html">Automation</a></li>
+          <li><a href="python-tutorials.html">Python Tutorials</a></li>
+          <li><a href="#">Community Forum</a></li>
+          <li><a href="#">Subscribe</a></li>
+          <li><a href="oop-contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Valleys &amp; Bytes. All rights reserved.</span>
+      <div class="footer-legal">
+        <a href="oop-privacy.html">Privacy Policy</a>
+        <a href="oop-terms.html">Terms of Use</a>
+        <a href="oop-cookie.html">Cookie Settings</a>
+        <a href="oop-about.html">About</a>
+      </div>
+    </div>
+    <p class="footer-tech" style="color:white;"> Built with data precision and Created through intensive information authentication.By: GLenn Junsay Pansensoy</p>
+  </div>
+</footer>
+
+
+<div class="toast" id="toast"></div>
+
+<script>
+
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+document.addEventListener('mousemove', e => {
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top = e.clientY + 'px';
+  setTimeout(() => {
+    ring.style.left = e.clientX + 'px';
+    ring.style.top = e.clientY + 'px';
+  }, 80);
+});
+document.querySelectorAll('a,button,[onclick]').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    cursor.style.transform = 'translate(-50%,-50%) scale(2)';
+    ring.style.width = '48px'; ring.style.height = '48px';
+  });
+  el.addEventListener('mouseleave', () => {
+    cursor.style.transform = 'translate(-50%,-50%) scale(1)';
+    ring.style.width = '32px'; ring.style.height = '32px';
+  });
+});
+
+
+window.addEventListener('scroll', () => {
+  document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 40);
+});
+
+
+let menuOpen = false;
+function toggleMenu() {
+  menuOpen = !menuOpen;
+  document.getElementById('hamburger').classList.toggle('open', menuOpen);
+  document.getElementById('navOverlay').classList.toggle('open', menuOpen);
+  document.body.style.overflow = menuOpen ? 'hidden' : '';
+}
+function closeMenu() {
+  menuOpen = false;
+  document.getElementById('hamburger').classList.remove('open');
+  document.getElementById('navOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+
+function showToast(msg, type = 'info') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast ' + type + ' show';
+  setTimeout(() => t.classList.remove('show'), 3200);
+}
+
+const reacted = {};
+function react(btn, type, postId) {
+  const key = type + postId;
+  const countEl = btn.querySelector('.count');
+  const emojiEl = btn.querySelector('span:first-child');
+  const current = parseInt(countEl.textContent);
+  if (reacted[key]) {
+    reacted[key] = false;
+    btn.classList.remove('active');
+    countEl.textContent = current - 1;
+    emojiEl.textContent = type === 'love' ? '🤍' : '👍';
+  } else {
+    reacted[key] = true;
+    btn.classList.add('active');
+    countEl.textContent = current + 1;
+    emojiEl.textContent = type === 'love' ? '❤️' : '👍';
+    btn.style.transform = 'scale(1.2)';
+    setTimeout(() => btn.style.transform = 'scale(1)', 200);
+    showToast(type === 'love' ? '❤️ Loved!' : '👍 Liked!', 'success');
+  }
+}
+
+
+const followed = {};
+function followPlatform(platform) {
+  if (!followed[platform]) {
+    followed[platform] = true;
+    showToast('✓ Following Valleys & Bytes on ' + platform + '!', 'success');
+  } else {
+    showToast('You already follow us on ' + platform, 'info');
+  }
+}
+
+const COMMENT_KEY = 'vb_comments';
+function getComments() {
+  try { return JSON.parse(localStorage.getItem(COMMENT_KEY)) || []; } catch { return []; }
+}
+function saveComments(arr) {
+  try { localStorage.setItem(COMMENT_KEY, JSON.stringify(arr)); } catch {}
+}
+function submitComment() {
+  const name = document.getElementById('cName').value.trim();
+  const email = document.getElementById('cEmail').value.trim();
+  const text = document.getElementById('cText').value.trim();
+  const article = document.getElementById('cArticle').value;
+  if (!name) { showToast('⚠ Please enter your name.', 'info'); return; }
+  if (!email || !email.includes('@')) { showToast('⚠ Please enter a valid email.', 'info'); return; }
+  if (text.length < 10) { showToast('⚠ Comment too short — write at least a sentence!', 'info'); return; }
+
+  const comment = { name, text, article, time: new Date().toLocaleString() };
+  const arr = getComments(); arr.push(comment); saveComments(arr);
+  renderNewComment(comment);
+  document.getElementById('cName').value = '';
+  document.getElementById('cEmail').value = '';
+  document.getElementById('cText').value = '';
+  showToast('✓ Comment posted! Thanks for joining the discussion.', 'success');
+}
+function renderNewComment(c) {
+  const initials = c.name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
+  const div = document.createElement('div');
+  div.className = 'comment-item';
+  div.style.borderColor = 'var(--blue-mid)';
+  div.innerHTML = `
+    <div class="comment-header">
+      <div class="comment-avatar">${initials}</div>
+      <div class="comment-meta">
+        <div class="comment-name">${c.name}</div>
+        <div class="comment-time">${c.time}</div>
+      </div>
+    </div>
+    <p class="comment-text">${c.text}</p>
+    <div class="comment-actions">
+      <button class="comment-react" onclick="likeComment(this)">👍 0</button>
+      <button class="comment-react" onclick="replyComment(this)">↩ Reply</button>
+    </div>`;
+  document.getElementById('commentsList').prepend(div);
+  setTimeout(() => div.style.borderColor = '', 2000);
+}
+function likeComment(btn) {
+  const match = btn.textContent.match(/\d+/);
+  const n = match ? parseInt(match[0]) : 0;
+  btn.textContent = '👍 ' + (n + 1);
+  btn.classList.add('liked');
+}
+function replyComment(btn) {
+  showToast('↩ Reply thread — coming soon!', 'info');
+}
+
+const captions = {
+  transformer: {
+    linkedin: "Just finished reading this exceptional deep-dive on Transformer architectures from Valleys & Bytes. The breakdown of attention mechanisms is the clearest I've encountered — essential reading for anyone working in ML or AI engineering. 🧠 #MachineLearning #AI #DeepLearning",
+    facebook: "Mind = blown 🤯 This article on how Transformer AI works is SO well written. Even if you're not a developer, the way they explain attention mechanisms with real analogies makes it totally understandable. Highly recommend sharing this one!",
+    x: "Best explanation of transformer attention I've read. Valleys & Bytes knocked it out of the park. If you're confused by how LLMs actually work — read this. 🧵 #AI #MachineLearning"
+  },
+  rust: {
+    linkedin: "Valleys & Bytes just published a masterclass on Rust's ownership model. For engineers debating whether to invest in learning Rust, this article makes a compelling case — the borrow checker isn't a constraint, it's a superpower. #RustLang #SystemsProgramming",
+    facebook: "This article about the Rust programming language genuinely changed how I think about memory and bugs. The author explains the borrow checker in a way that finally makes sense. Sharing for all my dev friends! 💻",
+    x: "Rust's borrow checker is not your enemy. It's the compiler being more honest with you than you've been with yourself. Great piece from @ValleysAndBytes. #Rust #Programming"
+  },
+  progressive: {
+    linkedin: "An important counter-narrative for 2026: Valleys & Bytes makes a compelling argument for progressive enhancement and HTML-first architecture. As JavaScript fatigue reaches an all-time high, this is a timely and well-reasoned read. #WebDev #HTMX",
+    facebook: "Anyone else exhausted by how complicated web development has gotten? This article argues we overcomplicated everything and shows teams getting back to basics with AMAZING results. A refreshing read.",
+    x: "Team ripped out 40k lines of React. Replaced with server-side + HTMX. Build times: 4 min → 8 sec. Valleys & Bytes called this months ago. #WebDev #HTMX"
+  },
+  zerotrust: {
+    linkedin: "Zero-trust is one of the most misused buzzwords in enterprise security. Valleys & Bytes cuts through the vendor noise with a grounded, philosophical look at what zero-trust actually requires. Required reading for security practitioners. #CyberSecurity #ZeroTrust",
+    facebook: "Fascinating article on why 'Zero Trust Security' is more of a mindset than a product you can buy. Really eye-opening if you've been following cybersecurity trends!",
+    x: "No vendor can sell you zero-trust. It's a posture, not a product. Excellent explainer from Valleys & Bytes. #CyberSecurity #InfoSec"
+  },
+  docker: {
+    linkedin: "Valleys & Bytes published an exceptional technical deep-dive on Docker internals — from cgroups and Linux namespaces to multi-stage builds. If you've been using containers without knowing what's under the hood, this fills the gap perfectly. #Docker #DevOps",
+    facebook: "Ever wondered what Docker is ACTUALLY doing when you run a container? This article explains it from the ground up, and suddenly everything makes so much more sense. Amazing writing.",
+    x: "From cgroups to multi-stage builds — the best Docker internals explainer I've read. Zero hand-waving, all signal. Valleys & Bytes 🐳 #Docker #DevOps"
+  },
+  postgres: {
+    linkedin: "The thesis of this Valleys & Bytes article: Postgres has quietly become the Swiss Army knife of databases — with extensions for time-series, vector search, JSON, and more. The consolidation argument is compelling and data-backed. #PostgreSQL #Databases",
+    facebook: "Hilarious and insightful: this article tracks how Postgres, the database that's been around forever, is basically just absorbing every trendy database type. NoSQL? Time-series? Vector DB? Postgres has an extension for that 😂",
+    x: "Every 6 months a new DB category emerges. Every 12 months Postgres adds an extension that does it better. The consolidation is real. @ValleysAndBytes investigates. #Postgres #Database"
+  }
+};
+let currentCaption = '';
+function generateShareCaption() {
+  const article = document.getElementById('shareArticle').value;
+  const platform = document.getElementById('sharePlatform').value;
+  const preview = document.getElementById('aiPreview');
+  preview.className = 'ai-preview loading';
+  preview.textContent = 'Generating caption';
+  setTimeout(() => {
+    currentCaption = (captions[article] && captions[article][platform]) || 'Check out this amazing article on Valleys & Bytes!';
+    preview.className = 'ai-preview';
+    preview.textContent = currentCaption;
+    showToast('✦ AI caption generated!', 'success');
+  }, 1400);
+}
+function shareToSocial(platform) {
+  if (!currentCaption) { showToast('⚠ Generate a caption first!', 'info'); return; }
+  const text = encodeURIComponent(currentCaption + ' https://pansensoyglenn-dev.github.io/code-sense/');
+  const urls = {
+    Facebook: `https://www.facebook.com/sharer/sharer.php?u=https://pansensoyglenn-dev.github.io/code-sense/&quote=${text}`,
+    LinkedIn: `https://www.linkedin.com/sharing/share-offsite/?url=https://pansensoyglenn-dev.github.io/code-sense/&summary=${text}`,
+    X: `https://twitter.com/intent/tweet?text=${text}`
+  };
+  window.open(urls[platform] || '#', '_blank');
+  showToast('↗ Opening ' + platform + ' share dialog...', 'info');
+}
+
+const subscribers = JSON.parse(localStorage.getItem('vb_subs') || '[]');
+function subscribeEmail() {
+  const email = document.getElementById('subEmail').value.trim();
+  if (!email || !email.includes('@')) { showToast('⚠ Please enter a valid email address.', 'info'); return; }
+  if (subscribers.includes(email)) { showToast('✓ You\'re already subscribed!', 'success'); return; }
+  subscribers.push(email);
+  try { localStorage.setItem('vb_subs', JSON.stringify(subscribers)); } catch {}
+  document.getElementById('subSuccess').style.display = 'block';
+  document.getElementById('subEmail').value = '';
+  showToast('✓ Subscription confirmed!', 'success');
+}
+function subscribe(plan) {
+  showToast('✦ ' + plan + ' plan selected — redirecting to checkout...', 'success');
+  setTimeout(() => showToast('(Demo mode — no actual charge)', 'info'), 2000);
+}
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ══════════════════════════════════════════════════════════════
+// VEGETABLE SHOP — Interactive Terminal Simulator
+// ══════════════════════════════════════════════════════════════
+const PRICES = {
+  "Eggplant (Talong)": 80,
+  "Tomatoes":          120,
+  "Potatoes":          140,
+  "Onions":            160,
+  "Garlic":            180,
+  "Pechay":            80,
+  "Broccoli":          170,
+  "Carrots":           160,
+  "Radish (Labanos)":  80,
+  "Alugbati":          60,
+  "Kangkong":          50,
+  "Cabbage":           150
+};
+const VEG_KEYS = Object.keys(PRICES);
+
+let termState = 'idle';  // idle | running | done
+let vegIdx = 0;
+let termOrder = {};
+let lastInput = '';
+
+function pad(str, len, right=false) {
+  str = String(str);
+  if (right) return str.padStart(len);
+  return str.padEnd(len);
+}
+
+function termPrint(text, color) {
+  const out = document.getElementById('termOutput');
+  const span = document.createElement('span');
+  span.style.color = color || '#a8d5b5';
+  span.textContent = text + '\n';
+  out.appendChild(span);
+  out.scrollTop = out.scrollHeight;
+}
+
+function termPrintRaw(html) {
+  const out = document.getElementById('termOutput');
+  const div = document.createElement('div');
+  div.innerHTML = html;
+  out.appendChild(div);
+  out.scrollTop = out.scrollHeight;
+}
+
+function setPrompt(text) {
+  document.getElementById('termPrompt').textContent = text;
+}
+
+function showInputRow() {
+  const row = document.getElementById('termInputRow');
+  row.style.display = 'flex';
+  const inp = document.getElementById('termInput');
+  inp.value = '';
+  setTimeout(() => inp.focus(), 60);
+}
+
+function hideInputRow() {
+  document.getElementById('termInputRow').style.display = 'none';
+}
+
+function startVegProgram() {
+  termState = 'running';
+  vegIdx = 0;
+  termOrder = {};
+  lastInput = '';
+
+  // Hide run button
+  document.getElementById('termRunRow').style.display = 'none';
+  document.getElementById('termOutput').innerHTML = '';
+
+  // Print header
+  termPrint('════════════════════════════════════════════', '#52b788');
+  termPrint('       WELCOME TO THE VEGETABLE SHOP        ', '#b7e4c7');
+  termPrint('════════════════════════════════════════════', '#52b788');
+
+  // Print price table
+  termPrint(pad('Item Name', 26) + pad('Price per kg', 14, true), '#4a7a5a');
+  termPrint('─'.repeat(42), '#2d6a4f');
+  for (const [veg, price] of Object.entries(PRICES)) {
+    const priceStr = '₱' + price.toFixed(2);
+    termPrint(pad(veg, 26) + pad(priceStr, 14, true), '#a8d5b5');
+  }
+  termPrint('─'.repeat(42), '#2d6a4f');
+
+  termPrint('');
+  termPrint('INSTRUCTIONS:', '#86c1f4');
+  termPrint('• Enter quantity in kg  (e.g. 0.5, 2, 1.25)', '#a8d5b5');
+  termPrint('• Press Enter to skip an item', '#a8d5b5');
+  termPrint("• Type 'done' at any time to finish and pay", '#a8d5b5');
+  termPrint('');
+
+  askNextVeg();
+}
+
+function askNextVeg() {
+  if (vegIdx >= VEG_KEYS.length) {
+    printReceipt();
+    return;
+  }
+  const veg = VEG_KEYS[vegIdx];
+  setPrompt(`How many kg of ${veg}? `);
+  showInputRow();
+}
+
+function handleTermKey(e) {
+  if (e.key !== 'Enter') return;
+  const raw = document.getElementById('termInput').value.trim();
+  const val = raw.toLowerCase();
+  document.getElementById('termInput').value = '';
+
+  const veg = VEG_KEYS[vegIdx];
+  termPrint(`How many kg of ${veg}? ${raw}`, '#6b8f6b');
+
+  lastInput = val;
+
+  if (val === 'done') {
+    hideInputRow();
+    printReceipt();
+    return;
+  }
+
+  if (val === '') {
+    vegIdx++;
+    askNextVeg();
+    return;
+  }
+
+  const qty = parseFloat(val);
+  if (isNaN(qty)) {
+    termPrint("Invalid input. Please enter a number or 'done'.", '#ef4444');
+
+    setPrompt(`How many kg of ${veg}? `);
+    showInputRow();
+    return;
+  }
+
+  if (qty < 0) {
+    termPrint('Quantity cannot be negative.', '#ef4444');
+    setPrompt(`How many kg of ${veg}? `);
+    showInputRow();
+    return;
+  }
+
+  if (qty > 0) {
+    termOrder[veg] = qty;
+  }
+
+  vegIdx++;
+  askNextVeg();
+}
+
+function printReceipt() {
+  hideInputRow();
+  termState = 'done';
+
+  if (Object.keys(termOrder).length === 0) {
+    termPrint('');
+    termPrint('No items selected. Have a nice day! 👋', '#52b788');
+    showResetBtn();
+    return;
+  }
+
+  termPrint('');
+  termPrint('='.repeat(60), '#52b788');
+  termPrint('                   FINAL RECEIPT                   ', '#b7e4c7');
+  termPrint('='.repeat(60), '#52b788');
+  termPrint(
+    pad('Vegetable', 22) + pad('Qty (kg)', 10, true) + pad('Unit Price', 12, true) + pad('Subtotal', 12, true),
+    '#4a7a5a'
+  );
+  termPrint('─'.repeat(60), '#2d6a4f');
+
+  let total = 0;
+  for (const [veg, qty] of Object.entries(termOrder)) {
+    const price = PRICES[veg];
+    const sub = qty * price;
+    total += sub;
+    termPrint(
+      pad(veg, 22) + pad(qty.toFixed(2), 10, true) + pad(price.toFixed(2), 12, true) + pad(sub.toFixed(2), 12, true),
+      '#a8d5b5'
+    );
+  }
+
+  termPrint('─'.repeat(60), '#2d6a4f');
+  termPrint(pad('TOTAL AMOUNT DUE', 46) + pad('₱' + total.toFixed(2), 12, true), '#b7e4c7');
+  termPrint('='.repeat(60), '#52b788');
+  termPrint('');
+  termPrint('Thank you for shopping with us! 🥦', '#52b788');
+
+  showResetBtn();
+}
+
+function showResetBtn() {
+  const row = document.getElementById('termRunRow');
+  row.style.display = 'flex';
+  const btn = document.getElementById('runBtn');
+  btn.innerHTML = '<span style="font-size:1.1rem">↺</span> Run Again';
+  btn.onclick = resetTerminal;
+}
+
+function resetTerminal() {
+  termState = 'idle';
+  vegIdx = 0;
+  termOrder = {};
+  document.getElementById('termOutput').innerHTML = '';
+  hideInputRow();
+  const row = document.getElementById('termRunRow');
+  row.style.display = 'flex';
+  const btn = document.getElementById('runBtn');
+  btn.innerHTML = '<span style="font-size:1.1rem">▶</span> Run Program';
+  btn.onclick = startVegProgram;
+  termPrint('Terminal cleared. Click ▶ Run Program to start.', '#3d6b4e');
+}
+
+function copyVegCode(btn) {
+  const pre = document.getElementById('vegSourcePre');
+  navigator.clipboard.writeText(pre.innerText).then(() => {
+    btn.textContent = '✓ copied!';
+    setTimeout(() => btn.textContent = 'copy code', 2000);
+    showToast('✓ vegetable_shop.py copied to clipboard!', 'success');
+  }).catch(() => showToast('Could not copy — try manually.', 'info'));
+}
+
+function filterSteps(category, btn) {
+  document.querySelectorAll('.step-filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.veg-step-card').forEach(card => {
+    const show = category === 'all' || card.dataset.category === category;
+    card.style.display = show ? '' : 'none';
+  });
+}
+
+function switchTab(btn, panelId) {
+  document.querySelectorAll('.code-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.code-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(panelId).classList.add('active');
+}
+function copyCode(btn) {
+  const panel = btn.closest('.code-panel');
+  const text = panel.querySelector('pre').innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = 'copied!';
+    setTimeout(() => btn.textContent = 'copy', 1800);
+    showToast('✓ Code copied to clipboard!', 'success');
+  }).catch(() => showToast('Could not copy — try manually.', 'info'));
+}
+
+
+function animateCounters() {
+  document.querySelectorAll('.stat-num[data-count]').forEach(el => {
+    const target = parseInt(el.dataset.count);
+    const step = target / 60;
+    let current = 0;
+    const timer = setInterval(() => {
+      current = Math.min(current + step, target);
+      el.textContent = Math.floor(current).toLocaleString();
+      if (current >= target) clearInterval(timer);
+    }, 16);
+  });
+}
+const statsObs = new IntersectionObserver(entries => {
+  if (entries[0].isIntersecting) { animateCounters(); statsObs.disconnect(); }
+}, { threshold: 0.3 });
+const statsEl = document.querySelector('.intro-stats');
+if (statsEl) statsObs.observe(statsEl);
+</script>
+</body>
+</html>
