@@ -1,0 +1,2238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Python Fruit Retail — Step-by-Step Code Explanation | Valleys & Bytes</title>
+<meta name="description" content="A comprehensive step-by-step breakdown of a Python Fruit Retail program. Learn dictionaries, loops, error handling, data structures, and more through a real-world Philippine market simulation."/>
+<meta name="keywords" content="Python tutorial, fruit retail Python, Python dictionary, while loop Python, try except Python, Python beginner, code explanation, Philippine fruit market, Python data structures"/>
+<meta name="author" content="Valleys & Bytes"/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://code-sense.pansensoyglenn.workers.dev/fruit.html"/>
+<meta property="og:title" content="Python Fruit Retail — Step-by-Step Code Explanation | Valleys & Bytes"/>
+<meta property="og:description" content="Master Python fundamentals through a complete fruit retail simulation. Covers dictionaries, loops, error handling, tuples, and more."/>
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="https://code-sense.pansensoyglenn.workers.dev/fruit.html"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Python Fruit Retail Code Explained | Valleys & Bytes"/>
+<meta name="twitter:description" content="Step-by-step breakdown of a Python fruit retail program covering all core programming concepts."/>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "Python Fruit Retail — Step-by-Step Code Explanation",
+  "description": "A comprehensive step-by-step breakdown of a Python Fruit Retail program covering dictionaries, loops, error handling, data structures, and discount systems.",
+  "author": {
+    "@type": "Person",
+    "name": "Valleys & Bytes",
+    "url": "about-author.html"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Valleys & Bytes",
+    "url": "https://code-sense.pansensoyglenn.workers.dev"
+  },
+  "datePublished": "2025-01-01",
+  "dateModified": "2025-07-01",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://code-sense.pansensoyglenn.workers.dev/fruit.html"
+  },
+  "about": {
+    "@type": "SoftwareSourceCode",
+    "programmingLanguage": "Python",
+    "name": "Philippine Fruit Retail Business Simulation"
+  },
+  "educationalLevel": "Beginner",
+  "learningResourceType": "Tutorial",
+  "teaches": ["Python dictionaries", "while loops", "try/except", "list of tuples", "f-strings", "functions", "entry guard pattern"]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://code-sense.pansensoyglenn.workers.dev"},
+    {"@type": "ListItem", "position": 2, "name": "Python Guides", "item": "https://code-sense.pansensoyglenn.workers.dev/python"},
+    {"@type": "ListItem", "position": 3, "name": "Fruit Retail", "item": "https://code-sense.pansensoyglenn.workers.dev/fruit.html"}
+  ]
+}
+</script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4575646748966866" crossorigin="anonymous"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"/>
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* prevent horizontal overflow globally */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+:root {
+  --obsidian: #0d0f12;
+  --obsidian-2: #13161b;
+  --obsidian-3: #1a1f26;
+  --obsidian-4: #222830;
+  --obsidian-5: #2c333d;
+  --py-blue: #3b82f6;
+  --py-blue-light: #60a5fa;
+  --py-blue-dim: #1d4ed8;
+  --py-yellow: #f59e0b;
+  --py-green: #10b981;
+  --py-purple: #8b5cf6;
+  --py-red: #ef4444;
+  --py-cyan: #06b6d4;
+  --white: #ffffff;
+  --white-90: rgba(255,255,255,0.90);
+  --white-70: rgba(255,255,255,0.70);
+  --white-50: rgba(255,255,255,0.50);
+  --white-30: rgba(255,255,255,0.30);
+  --white-15: rgba(255,255,255,0.15);
+  --white-08: rgba(255,255,255,0.08);
+  --white-05: rgba(255,255,255,0.05);
+  --border: rgba(59,130,246,0.2);
+  --border-soft: rgba(255,255,255,0.08);
+  --kw: #c792ea;
+  --fn: #82aaff;
+  --str: #c3e88d;
+  --num: #f78c6c;
+  --cm: #546e7a;
+  --bi: #ffcb6b;
+  --op: #89ddff;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--obsidian);
+  color: var(--white-90);
+  font-family: 'Crimson Pro', Georgia, serif;
+  font-size: 16px;
+  line-height: 1.75;
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
+}
+
+/* ensure all text wraps to avoid horizontal scroll */
+p, li, h1, h2, h3, h4, h5, h6, .hero-desc, .intro-card p, .panel p {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+/* code blocks can scroll internally, never cause page overflow */
+.code-body, pre, .panel-snippet pre {
+  max-width: 100%;
+  overflow-x: auto;
+  white-space: pre-wrap;       /* allow wrapping for readability on mobile */
+  word-break: break-all;       /* fallback */
+}
+
+@media (min-width: 768px) {
+  .code-body pre, .panel-snippet pre {
+    white-space: pre;           /* keep original formatting on larger screens */
+  }
+}
+
+.topbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  background: rgba(13,15,18,0.95);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+}
+
+.brand {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--white);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.brand-icon {
+  width: 28px; height: 28px;
+  background: linear-gradient(135deg, var(--py-blue), var(--py-purple));
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+}
+
+.hamburger {
+  background: none; border: none; cursor: pointer;
+  display: flex; flex-direction: column; gap: 5px;
+  padding: 6px; border-radius: 6px;
+  transition: background 0.2s;
+}
+.hamburger:hover { background: var(--white-08); }
+.hamburger span {
+  display: block; width: 24px; height: 2px;
+  background: var(--white-70);
+  border-radius: 2px;
+  transition: all 0.3s;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.nav-drawer {
+  position: fixed;
+  top: 60px; right: -320px;
+  width: 300px;
+  height: calc(100vh - 60px);
+  background: var(--obsidian-2);
+  border-left: 1px solid var(--border);
+  z-index: 999;
+  overflow-y: auto;
+  padding: 24px 20px;
+  transition: right 0.35s cubic-bezier(0.4,0,0.2,1);
+}
+.nav-drawer.open { right: 0; }
+.nav-drawer h3 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--py-blue-light);
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-soft);
+}
+.nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 11px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--white-70);
+  background: var(--obsidian-3);
+  border: 1px solid var(--border-soft);
+  cursor: pointer;
+  transition: all 0.18s;
+  margin-bottom: 6px;
+  text-align: left;
+  box-sizing: border-box;
+}
+.nav-btn:hover {
+  background: rgba(59,130,246,0.12);
+  border-color: rgba(59,130,246,0.4);
+  color: var(--white);
+  transform: translateX(3px);
+}
+.nav-btn .nav-btn-icon {
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+.nav-btn-divider {
+  height: 1px;
+  background: var(--border-soft);
+  margin: 10px 0;
+}
+.nav-btn.nav-btn-external {
+  background: rgba(59,130,246,0.06);
+  border-color: rgba(59,130,246,0.2);
+}
+.nav-btn.nav-btn-external:hover {
+  background: rgba(59,130,246,0.16);
+  border-color: rgba(59,130,246,0.5);
+}
+
+.nav-overlay {
+  position: fixed; inset: 0; z-index: 998;
+  background: rgba(0,0,0,0.5);
+  display: none;
+}
+.nav-overlay.show { display: block; }
+
+.page-wrapper {
+  padding-top: 60px;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding-left: 28px;
+  padding-right: 28px;
+  width: 100%;
+}
+
+/* Return button added */
+.return-bar {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0 0;
+}
+.return-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--py-blue);
+  color: white;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: 40px;
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.2);
+  transition: all 0.2s;
+  box-shadow: 0 4px 12px rgba(59,130,246,0.3);
+  white-space: normal;
+  text-align: center;
+  max-width: 100%;
+}
+.return-btn:hover {
+  background: var(--py-blue-dim);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(59,130,246,0.4);
+}
+.return-btn svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ad-banner {
+  margin: 20px 0 0;
+}
+
+.hero {
+  padding: 64px 0 56px;
+  border-bottom: 1px solid var(--border-soft);
+  margin-bottom: 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -100px; right: -150px;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 3px;
+  color: var(--py-blue-light);
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  display: flex; align-items: center; gap: 10px;
+}
+.eyebrow::before {
+  content: '';
+  width: 28px; height: 1px;
+  background: var(--py-blue);
+}
+
+.hero h1 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--white);
+  margin-bottom: 20px;
+  text-align: justify;
+}
+
+.hero h1 .accent { color: var(--py-blue-light); }
+.hero h1 .italic { font-style: italic; font-family: 'Crimson Pro', serif; font-weight: 400; }
+
+.hero-desc {
+  font-size: 0.9rem;
+  color: var(--white-70);
+  max-width: 640px;
+  line-height: 1.8;
+  margin-bottom: 28px;
+  text-align: justify;
+}
+
+.hero-tags {
+  display: flex; flex-wrap: wrap; gap: 8px;
+}
+
+.tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: var(--white-05);
+  border: 1px solid var(--border-soft);
+  color: var(--white-70);
+}
+.tag.blue { border-color: rgba(59,130,246,0.4); color: var(--py-blue-light); background: rgba(59,130,246,0.08); }
+.tag.yellow { border-color: rgba(245,158,11,0.4); color: var(--py-yellow); background: rgba(245,158,11,0.08); }
+.tag.green { border-color: rgba(16,185,129,0.4); color: var(--py-green); background: rgba(16,185,129,0.08); }
+
+.section { margin-bottom: 60px; }
+
+.section-heading {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 18px;
+  display: flex; align-items: center; gap: 12px;
+}
+.section-heading::after {
+  content: '';
+  flex: 1; height: 1px;
+  background: var(--border-soft);
+}
+.section-heading .tag-inline {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--py-blue-light);
+  background: rgba(59,130,246,0.1);
+  border: 1px solid rgba(59,130,246,0.3);
+  padding: 2px 8px;
+  border-radius: 4px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.intro-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.intro-card {
+  background: var(--obsidian-3);
+  border: 1px solid var(--border-soft);
+  border-radius: 10px;
+  padding: 20px 22px;
+  transition: border-color 0.2s;
+}
+.intro-card:hover { border-color: var(--border); }
+
+.intro-card h4 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 8px;
+  display: flex; align-items: center; gap: 8px;
+}
+
+.intro-card p {
+  font-size: 0.8rem;
+  color: var(--white-70);
+  line-height: 1.7;
+  text-align: justify;
+}
+
+.intro-prose p {
+  font-size: 0.8rem;
+  color: var(--white-70);
+  line-height: 1.85;
+  margin-bottom: 14px;
+  text-align: justify;
+}
+.intro-prose p:last-child { margin-bottom: 0; }
+
+.code-window {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border-soft);
+  margin-bottom: 16px;
+}
+
+.code-titlebar {
+  background: var(--obsidian-4);
+  padding: 12px 18px;
+  display: flex; align-items: center; gap: 8px;
+  border-bottom: 1px solid var(--border-soft);
+}
+.dot { width: 11px; height: 11px; border-radius: 50%; }
+.dot-r { background: #ff5f57; }
+.dot-y { background: #febc2e; }
+.dot-g { background: #28c840; }
+.code-fname {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--white-50);
+  margin-left: 8px;
+}
+
+.code-body {
+  background: var(--obsidian-2);
+  padding: 24px 28px;
+  overflow-x: auto;
+}
+
+.code-body pre {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  line-height: 2;
+  color: var(--white-70);
+  white-space: pre;
+}
+
+.step-divider {
+  border: none;
+  border-top: 1px solid var(--border-soft);
+  margin: 48px 0;
+}
+
+.steps-header {
+  margin-bottom: 40px;
+}
+.steps-header h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+.steps-header p {
+  font-size: 0.8rem;
+  color: var(--white-50);
+  text-align: justify;
+}
+
+.step { margin-bottom: 52px; scroll-margin-top: 80px; }
+
+.step-top {
+  display: flex; align-items: flex-start;
+  gap: 16px; margin-bottom: 16px;
+}
+
+.step-index {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--py-blue-light);
+  background: rgba(59,130,246,0.1);
+  border: 1px solid rgba(59,130,246,0.3);
+  border-radius: 4px;
+  padding: 3px 10px;
+  white-space: nowrap;
+  margin-top: 3px;
+}
+
+.step-badge {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--white-50);
+  border: 1px solid var(--border-soft);
+  border-radius: 20px;
+  padding: 2px 10px;
+  margin-top: 5px;
+}
+
+.step-panels {
+  border: 1px solid var(--border-soft);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.panel {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border-soft);
+}
+.panel:last-child { border-bottom: none; }
+
+.panel-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  display: flex; align-items: center; gap: 8px;
+  color: var(--white-50);
+}
+
+.panel-why { background: rgba(16,185,129,0.04); }
+.panel-why .panel-label { color: var(--py-green); }
+
+.panel-snippet { background: var(--obsidian-2); padding: 0; }
+.panel-snippet .panel-label { padding: 14px 24px 0; color: var(--white-30); }
+.panel-snippet pre {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  line-height: 1.9;
+  color: var(--white-70);
+  padding: 10px 24px 18px;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+.panel-how { background: rgba(139,92,246,0.04); }
+.panel-how .panel-label { color: var(--py-purple); }
+
+.panel-sig { background: rgba(59,130,246,0.04); border-left: 3px solid var(--py-blue); }
+.panel-sig .panel-label { color: var(--py-blue-light); }
+
+.panel p {
+  font-size: 0.8rem;
+  color: var(--white-70);
+  line-height: 1.8;
+  text-align: justify;
+}
+
+.step h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--white);
+  line-height: 1.3;
+}
+
+code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  background: rgba(59,130,246,0.1);
+  border: 1px solid rgba(59,130,246,0.2);
+  padding: 1px 5px;
+  border-radius: 3px;
+  color: var(--py-blue-light);
+}
+
+.kw { color: var(--kw); }
+.fn { color: var(--fn); }
+.str { color: var(--str); }
+.num { color: var(--num); }
+.cm { color: var(--cm); }
+.bi { color: var(--bi); }
+.op { color: var(--op); }
+
+.content-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.content-card {
+  background: var(--obsidian-3);
+  border: 1px solid var(--border-soft);
+  border-radius: 10px;
+  padding: 18px 20px;
+  transition: all 0.2s;
+}
+.content-card:hover {
+  border-color: rgba(59,130,246,0.35);
+  transform: translateY(-2px);
+}
+
+.content-card .icon {
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.content-card h4 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+
+.content-card p {
+  font-size: 0.8rem;
+  color: var(--white-60, var(--white-70));
+  line-height: 1.6;
+  text-align: justify;
+}
+
+.concept-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+  margin-top: 16px;
+}
+.concept-table th {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--py-blue-light);
+  background: rgba(59,130,246,0.08);
+  padding: 10px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+.concept-table td {
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border-soft);
+  color: var(--white-70);
+  vertical-align: top;
+}
+.concept-table tr:last-child td { border-bottom: none; }
+.concept-table tr:hover td { background: var(--white-05); }
+.concept-table td:first-child { color: var(--py-blue-light); font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; }
+
+.comments-section { margin-bottom: 60px; }
+
+.comment-form {
+  background: var(--obsidian-3);
+  border: 1px solid var(--border-soft);
+  border-radius: 12px;
+  padding: 24px 26px;
+  margin-bottom: 28px;
+}
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-group.full { grid-column: 1 / -1; }
+
+.form-group label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--white-50);
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  background: var(--obsidian-4);
+  border: 1px solid var(--border-soft);
+  border-radius: 7px;
+  padding: 10px 14px;
+  font-family: 'Crimson Pro', serif;
+  font-size: 0.9rem;
+  color: var(--white);
+  outline: none;
+  transition: border-color 0.2s;
+  resize: vertical;
+  width: 100%;
+}
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  border-color: var(--py-blue);
+  box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
+}
+.form-group input::placeholder,
+.form-group textarea::placeholder { color: var(--white-30); }
+
+.btn-primary {
+  background: var(--py-blue);
+  color: var(--white);
+  border: none;
+  border-radius: 7px;
+  padding: 11px 24px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-primary:hover { background: var(--py-blue-dim); transform: translateY(-1px); }
+
+.comment-list { display: flex; flex-direction: column; gap: 14px; }
+
+.comment-item {
+  background: var(--obsidian-3);
+  border: 1px solid var(--border-soft);
+  border-radius: 10px;
+  padding: 18px 22px;
+}
+
+.comment-meta {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 8px;
+}
+
+.comment-avatar {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--py-blue), var(--py-purple));
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 0.75rem;
+  color: var(--white);
+  flex-shrink: 0;
+}
+
+.comment-author {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--white);
+}
+
+.comment-date {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--white-30);
+  margin-left: auto;
+}
+
+.comment-text {
+  font-size: 0.8rem;
+  color: var(--white-70);
+  line-height: 1.7;
+  text-align: justify;
+}
+
+.comment-status {
+  padding: 12px 16px;
+  border-radius: 7px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.8rem;
+  display: none;
+  margin-top: 12px;
+}
+.comment-status.success { background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.3); color: var(--py-green); }
+.comment-status.error { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); color: var(--py-red); }
+
+.follow-section { margin-bottom: 60px; }
+
+.social-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.social-card {
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center;
+  gap: 8px; padding: 16px 12px;
+  background: var(--obsidian-3);
+  border: 1px solid var(--border-soft);
+  border-radius: 10px;
+  text-decoration: none;
+  transition: all 0.2s;
+  text-align: center;
+  min-height: 0;
+}
+.social-card:hover { transform: translateY(-3px); }
+.social-card svg { width: 22px; height: 22px; flex-shrink: 0; }
+.social-card .social-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--white);
+  line-height: 1.2;
+}
+.social-card .social-handle {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.58rem;
+  color: var(--white-50);
+  word-break: break-all;
+}
+
+.social-fb { border-color: rgba(24,119,242,0.3); }
+.social-fb:hover { border-color: #1877f2; background: rgba(24,119,242,0.06); }
+.social-fb svg { color: #1877f2; }
+
+.social-li { border-color: rgba(10,102,194,0.3); }
+.social-li:hover { border-color: #0a66c2; background: rgba(10,102,194,0.06); }
+.social-li svg { color: #0a66c2; }
+
+.social-x { border-color: rgba(255,255,255,0.2); }
+.social-x:hover { border-color: #fff; background: rgba(255,255,255,0.04); }
+.social-x svg { color: var(--white); }
+
+.social-yt { border-color: rgba(255,0,0,0.3); }
+.social-yt:hover { border-color: #ff0000; background: rgba(255,0,0,0.06); }
+.social-yt svg { color: #ff0000; }
+
+.subscribe-section { margin-bottom: 60px; }
+
+.subscribe-box {
+  background: linear-gradient(135deg, rgba(59,130,246,0.1), rgba(139,92,246,0.08));
+  border: 1px solid rgba(59,130,246,0.25);
+  border-radius: 14px;
+  padding: 36px 40px;
+  text-align: center;
+}
+
+.subscribe-box h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 10px;
+}
+
+.subscribe-box p {
+  font-size: 0.8rem;
+  color: var(--white-70);
+  margin-bottom: 24px;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  line-height: 1.75;
+}
+
+.subscribe-form { display: flex; gap: 10px; max-width: 460px; margin: 0 auto 12px; }
+
+.subscribe-form input {
+  flex: 1;
+  background: var(--obsidian-4);
+  border: 1px solid var(--border-soft);
+  border-radius: 7px;
+  padding: 11px 16px;
+  font-family: 'Crimson Pro', serif;
+  font-size: 0.9rem;
+  color: var(--white);
+  outline: none;
+  transition: border-color 0.2s;
+  min-width: 0;
+}
+.subscribe-form input:focus { border-color: var(--py-blue); }
+.subscribe-form input::placeholder { color: var(--white-30); }
+
+.subscribe-privacy {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--white-30);
+  text-align: center;
+}
+
+.subscribe-status {
+  padding: 10px 16px;
+  border-radius: 7px;
+  font-size: 0.8rem;
+  display: none;
+  margin-top: 12px;
+  font-family: 'Space Grotesk', sans-serif;
+}
+.subscribe-status.success { background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.3); color: var(--py-green); }
+.subscribe-status.error { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); color: var(--py-red); }
+
+/* OUTRO SECTION — FULL WIDTH, NO CONTAINER BOXES */
+.outro-section {
+  margin-bottom: 60px;
+}
+.outro-section p {
+  font-size: 0.8rem;
+  color: var(--white-70);
+  line-height: 1.85;
+  margin-bottom: 14px;
+  text-align: justify;
+}
+.outro-highlights {
+  display: block;
+  margin: 20px 0;
+}
+.highlight-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  margin-bottom: 10px;
+}
+.highlight-icon {
+  font-size: 1rem;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.highlight-text {
+  font-size: 0.8rem;
+  color: var(--white-70);
+  line-height: 1.5;
+}
+.highlight-text strong {
+  display: block;
+  color: var(--white);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+footer {
+  background: var(--obsidian-2);
+  border-top: 1px solid var(--border-soft);
+  padding: 50px 28px 30px;
+  margin-top: 40px;
+}
+
+.footer-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 36px;
+  margin-bottom: 40px;
+}
+
+.footer-brand h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 10px;
+}
+
+.footer-brand p {
+  font-size: 0.8rem;
+  color: var(--white-50);
+  line-height: 1.7;
+  text-align: justify;
+}
+
+.footer-col h4 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--py-blue-light);
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.footer-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--white-60, var(--white-70));
+  background: var(--obsidian-3);
+  border: 1px solid var(--border-soft);
+  cursor: pointer;
+  transition: all 0.18s;
+  margin-bottom: 6px;
+  box-sizing: border-box;
+  text-align: left;
+}
+.footer-btn:hover {
+  background: rgba(59,130,246,0.1);
+  border-color: rgba(59,130,246,0.35);
+  color: var(--white);
+  transform: translateY(-1px);
+}
+
+.footer-col-legal h4 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--py-blue-light);
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border-soft);
+}
+.footer-legal-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.footer-legal-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--white-70);
+  background: rgba(59,130,246,0.06);
+  border: 1px solid rgba(59,130,246,0.18);
+  cursor: pointer;
+  transition: all 0.18s;
+  white-space: normal;          /* allow text wrap */
+  word-break: break-word;
+}
+.footer-legal-btn:hover {
+  background: rgba(59,130,246,0.14);
+  border-color: rgba(59,130,246,0.45);
+  color: var(--white);
+  transform: translateX(3px);
+}
+.footer-legal-btn .btn-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--py-blue);
+  flex-shrink: 0;
+}
+
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-soft);
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.footer-copy {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--white-30);
+}
+
+#reading-progress {
+  position: fixed; top: 60px; left: 0; right: 0;
+  height: 2px; background: transparent; z-index: 999;
+}
+#reading-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--py-blue), var(--py-purple));
+  width: 0%;
+  transition: width 0.1s;
+}
+
+.back-top {
+  position: fixed; bottom: 28px; right: 28px;
+  width: 42px; height: 42px;
+  background: var(--py-blue);
+  border: none; border-radius: 50%;
+  cursor: pointer; display: none;
+  align-items: center; justify-content: center;
+  color: var(--white); font-size: 1.1rem;
+  box-shadow: 0 4px 20px rgba(59,130,246,0.4);
+  transition: all 0.2s;
+  z-index: 900;
+}
+.back-top:hover { background: var(--py-blue-dim); transform: translateY(-2px); }
+.back-top.visible { display: flex; }
+
+@media (max-width: 768px) {
+  .page-wrapper { padding-left: 18px; padding-right: 18px; }
+  .hero { padding: 36px 0 40px; }
+  .intro-grid { grid-template-columns: 1fr; }
+  .content-grid { grid-template-columns: 1fr 1fr; }
+  .social-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+  .outro-highlights { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .subscribe-form { flex-direction: column; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; }
+}
+
+@media (max-width: 480px) {
+  .content-grid { grid-template-columns: 1fr; }
+  .social-grid { grid-template-columns: repeat(2, 1fr); gap: 6px; }
+  .social-card { padding: 12px 8px; gap: 6px; }
+  .social-card svg { width: 18px; height: 18px; }
+  .social-card .social-name { font-size: 0.72rem; }
+  .social-card .social-handle { font-size: 0.54rem; }
+  .footer-top { grid-template-columns: 1fr; }
+}
+
+/* Global text size enforcement */
+p, li {
+  font-size: 0.8rem;
+  text-align: justify;
+}
+h1 { font-size: 1rem !important; }
+h2, h3, h4, h5, h6 { font-size: 0.9rem !important; }
+</style>
+</head>
+<body>
+
+<div id="reading-progress"><div id="reading-progress-bar"></div></div>
+
+<nav class="topbar" role="navigation" aria-label="Main navigation">
+  <a href="https://code-sense.pansensoyglenn.workers.dev" class="brand" aria-label="Valleys and Bytes Home">
+    <div class="brand-icon">🏔</div>
+    VALLEYS &amp; BYTES
+  </a>
+  <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="nav-overlay" id="navOverlay"></div>
+<div class="nav-drawer" id="navDrawer" role="dialog" aria-label="Navigation menu">
+  <h3>Navigation</h3>
+  <a href="#intro" class="nav-btn"><span class="nav-btn-icon">📖</span> Introduction</a>
+  <a href="#source" class="nav-btn"><span class="nav-btn-icon">💻</span> Full Source Code</a>
+  <a href="#steps" class="nav-btn"><span class="nav-btn-icon">🔍</span> Step-by-Step</a>
+  <a href="#concepts" class="nav-btn"><span class="nav-btn-icon">🧠</span> Core Concepts</a>
+  <a href="#tips" class="nav-btn"><span class="nav-btn-icon">💡</span> Pro Tips</a>
+  <a href="#mistakes" class="nav-btn"><span class="nav-btn-icon">⚠️</span> Common Mistakes</a>
+  <a href="#deepdive" class="nav-btn"><span class="nav-btn-icon">🔬</span> Deep Dive</a>
+  <a href="#comments" class="nav-btn"><span class="nav-btn-icon">💬</span> Comments</a>
+  <a href="#follow" class="nav-btn"><span class="nav-btn-icon">🌐</span> Follow Us</a>
+  <a href="#subscribe" class="nav-btn"><span class="nav-btn-icon">📬</span> Subscribe</a>
+  <div class="nav-btn-divider"></div>
+  <a href="about-author.html" class="nav-btn nav-btn-external"><span class="nav-btn-icon">👤</span> About the Author</a>
+  <a href="about-guide.html" class="nav-btn nav-btn-external"><span class="nav-btn-icon">📄</span> About this Page</a>
+</div>
+
+<div class="page-wrapper">
+
+  <div class="ad-banner">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-4575646748966866"
+         data-ad-slot="4226674403"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <header class="hero" role="banner">
+    <div class="eyebrow">Python Tutorial · Beginner to Intermediate</div>
+    <h1>
+      Fruit Retail Business<br/>
+      <span class="italic accent">Code Explained,</span> Step by Step
+    </h1>
+    <p class="hero-desc">
+      A complete, annotated walkthrough of a real Python program simulating a Philippine fruit retail market.
+      Every design decision — from dictionary lookups to exception handling — is explained in plain language
+      so you understand not just <em>what</em> the code does, but <em>why</em> it was written that way.
+    </p>
+    <div class="hero-tags">
+      <span class="tag blue">Python 3</span>
+      <span class="tag yellow">Dictionaries</span>
+      <span class="tag green">Error Handling</span>
+      <span class="tag">While Loops</span>
+      <span class="tag">Tuples &amp; Lists</span>
+      <span class="tag">f-Strings</span>
+      <span class="tag">Functions</span>
+    </div>
+  </header>
+
+  <section class="section" id="intro" aria-labelledby="intro-heading">
+    <div class="section-heading" id="intro-heading">
+      Introduction <span class="tag-inline">Overview</span>
+    </div>
+
+    <div class="intro-prose">
+      <p>
+        Programming becomes meaningful when it solves real problems. The <strong>Philippine Fruit Retail Business</strong>
+        simulation is a perfect beginner-to-intermediate Python project because it touches nearly every core concept
+        you'll use in production code: data structures for storing inventory, functions for organizing logic,
+        loops for user interaction, exception handling for crash prevention, and arithmetic for business calculations.
+      </p>
+      <p>
+        This guide assumes you are a student, self-taught programmer, or coding bootcamp participant who has
+        seen Python syntax before but wants a deeper understanding of <em>why</em> professional developers
+        make the choices they do. Each of the 8 steps below dissects one key concept — its purpose,
+        its implementation, how it operates at runtime, and why it matters in the real world.
+      </p>
+      <p>
+        By the end of this guide you will understand how a dictionary enables O(1) price lookups,
+        why <code>while True</code> with <code>break</code> is the correct pattern for user-driven loops,
+        how <code>try/except</code> prevents crashes from bad input, and why <code>if __name__ == "__main__"</code>
+        is considered mandatory in professional Python development.
+      </p>
+    </div>
+
+    <div class="intro-grid">
+      <div class="intro-card">
+        <h4>🎯 What You'll Learn</h4>
+        <p>Python dictionaries, functions, while loops, try/except error handling, list of tuples, f-string formatting, discount arithmetic, and the entry guard pattern — all through one coherent program.</p>
+      </div>
+      <div class="intro-card">
+        <h4>🛒 The Program in Brief</h4>
+        <p>A command-line fruit market simulation. Users browse Philippine fruit prices, add items to a cart, apply discount codes, and receive a formatted receipt — all built with core Python, no external libraries.</p>
+      </div>
+      <div class="intro-card">
+        <h4>⏱ Estimated Read Time</h4>
+        <p>20–30 minutes to read through all 8 steps thoroughly. For best results, keep a Python terminal open alongside and type the snippets yourself to build muscle memory.</p>
+      </div>
+      <div class="intro-card">
+        <h4>📌 Prerequisites</h4>
+        <p>Basic Python syntax familiarity: variables, print statements, and if/else conditions. No prior knowledge of data structures, error handling, or functions is required to follow this guide.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="source" aria-labelledby="source-heading">
+    <div class="section-heading" id="source-heading">
+      Full Source Code <span class="tag-inline">fruit_retail.py</span>
+    </div>
+    <div class="code-window">
+      <div class="code-titlebar">
+        <span class="dot dot-r"></span>
+        <span class="dot dot-y"></span>
+        <span class="dot dot-g"></span>
+        <span class="code-fname">fruit_retail.py</span>
+      </div>
+      <div class="code-body">
+        <pre><span class="cm"># Philippine Fruit Retail Business Simulation</span>
+<span class="cm"># Core Python — no external libraries required</span>
+
+fruits = {
+    <span class="str">"mangoes"</span>:    <span class="num">180.00</span>,
+    <span class="str">"papayas"</span>:    <span class="num">75.00</span>,
+    <span class="str">"rambutan"</span>:   <span class="num">180.00</span>,
+    <span class="str">"coconuts"</span>:   <span class="num">50.00</span>,
+    <span class="str">"lanzones"</span>:   <span class="num">120.00</span>,
+    <span class="str">"mangosteen"</span>: <span class="num">135.00</span>,
+    <span class="str">"bananas"</span>:    <span class="num">60.00</span>,
+    <span class="str">"pineapples"</span>: <span class="num">75.00</span>,
+    <span class="str">"guavas"</span>:     <span class="num">50.00</span>,
+    <span class="str">"guyavanos"</span>:  <span class="num">130.00</span>,
+    <span class="str">"avocados"</span>:   <span class="num">120.00</span>
+}
+
+<span class="kw">def</span> <span class="fn">display_fruits</span>():
+    <span class="bi">print</span>(<span class="str">"Available Fruits and Prices (per kg in PHP):"</span>)
+    <span class="kw">for</span> fruit, price <span class="kw">in</span> fruits.<span class="fn">items</span>():
+        <span class="bi">print</span>(<span class="str">f"{fruit.<span class="fn">capitalize</span>()}: {price:<span class="op">.2f</span>}"</span>)
+
+<span class="kw">def</span> <span class="fn">get_discount</span>():
+    codes = {<span class="str">"SALE10"</span>: <span class="num">10</span>, <span class="str">"FRESH15"</span>: <span class="num">15</span>, <span class="str">"FRUIT20"</span>: <span class="num">20</span>}
+    <span class="kw">while</span> <span class="bi">True</span>:
+        ans = <span class="bi">input</span>(<span class="str">"Do you have a discount code? (yes/no): "</span>).<span class="fn">lower</span>()
+        <span class="kw">if</span> ans == <span class="str">'yes'</span>:
+            code = <span class="bi">input</span>(<span class="str">"Enter your discount code: "</span>).<span class="fn">upper</span>()
+            <span class="kw">if</span> code <span class="kw">in</span> codes:
+                discount = codes[code]
+                <span class="bi">print</span>(<span class="str">f"Discount code accepted! {discount}% off applied."</span>)
+                <span class="kw">return</span> discount
+            <span class="kw">else</span>:
+                <span class="bi">print</span>(<span class="str">"Invalid discount code. No discount applied."</span>)
+                <span class="kw">return</span> <span class="num">0.0</span>
+        <span class="kw">elif</span> ans == <span class="str">'no'</span>:
+            <span class="kw">return</span> <span class="num">0.0</span>
+        <span class="kw">else</span>:
+            <span class="bi">print</span>(<span class="str">"Please enter 'yes' or 'no'."</span>)
+
+<span class="kw">def</span> <span class="fn">calculate_total</span>():
+    total_cost = <span class="num">0.0</span>
+    shopping_cart = []
+
+    <span class="kw">while</span> <span class="bi">True</span>:
+        <span class="fn">display_fruits</span>()
+        choice = <span class="bi">input</span>(<span class="str">"\nEnter the fruit you want to buy (or 'done' to finish): "</span>).<span class="fn">lower</span>()
+
+        <span class="kw">if</span> choice == <span class="str">'done'</span>:
+            <span class="kw">break</span>
+
+        <span class="kw">if</span> choice <span class="kw">not in</span> fruits:
+            <span class="bi">print</span>(<span class="str">"Invalid fruit selection."</span>)
+            <span class="kw">continue</span>
+
+        <span class="kw">try</span>:
+            quantity = <span class="bi">float</span>(<span class="bi">input</span>(<span class="str">f"Enter quantity in kg for {choice}: "</span>))
+            <span class="kw">if</span> quantity <= <span class="num">0</span>:
+                <span class="kw">raise</span> <span class="bi">ValueError</span>
+        <span class="kw">except</span> <span class="bi">ValueError</span>:
+            <span class="bi">print</span>(<span class="str">"Invalid quantity. Please enter a positive number."</span>)
+            <span class="kw">continue</span>
+
+        cost = fruits[choice] * quantity
+        shopping_cart.<span class="fn">append</span>((choice, quantity, cost))
+        total_cost += cost
+        <span class="bi">print</span>(<span class="str">f"Added {quantity} kg of {choice} for {cost:<span class="op">.2f</span>} PHP."</span>)
+
+    <span class="kw">if</span> shopping_cart:
+        <span class="bi">print</span>(<span class="str">"\nShopping Cart Summary:"</span>)
+        <span class="kw">for</span> item <span class="kw">in</span> shopping_cart:
+            <span class="bi">print</span>(<span class="str">f"{item[<span class="num">0</span>].<span class="fn">capitalize</span>()}: {item[<span class="num">1</span>]} kg = {item[<span class="num">2</span>]:<span class="op">.2f</span>} PHP"</span>)
+        discount_percent = <span class="fn">get_discount</span>()
+        discount_amount = total_cost * (discount_percent / <span class="num">100</span>)
+        final_total = total_cost - discount_amount
+        <span class="bi">print</span>(<span class="str">f"\nSubtotal: {total_cost:<span class="op">.2f</span>} PHP"</span>)
+        <span class="kw">if</span> discount_percent > <span class="num">0</span>:
+            <span class="bi">print</span>(<span class="str">f"Discount ({discount_percent}%): -{discount_amount:<span class="op">.2f</span>} PHP"</span>)
+        <span class="bi">print</span>(<span class="str">f"Total Cost: {final_total:<span class="op">.2f</span>} PHP"</span>)
+    <span class="kw">else</span>:
+        <span class="bi">print</span>(<span class="str">f"\nTotal Cost: {total_cost:<span class="op">.2f</span>} PHP"</span>)
+
+<span class="kw">if</span> __name__ == <span class="str">"__main__"</span>:
+    <span class="bi">print</span>(<span class="str">"Welcome to the Philippine Fruit Retail Business!"</span>)
+    <span class="fn">calculate_total</span>()
+    <span class="bi">print</span>(<span class="str">"Thank you for shopping with us!"</span>)</pre>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="steps" aria-labelledby="steps-heading">
+    <div class="steps-header">
+      <div class="section-heading" id="steps-heading">
+        Step-by-Step Explanation <span class="tag-inline">8 Concepts</span>
+      </div>
+      <p style="font-size:0.8rem;color:var(--white-50);">Each section covers: <strong style="color:var(--white-70);">Why</strong> · <strong style="color:var(--white-70);">Snippet</strong> · <strong style="color:var(--white-70);">How it operates</strong> · <strong style="color:var(--white-70);">Significance</strong></p>
+    </div>
+
+    <div class="step" id="step1">
+      <div class="step-top">
+        <span class="step-index">STEP 01</span>
+        <div>
+          <h3>Dictionary — Storing Fruits &amp; Prices</h3>
+          <span class="step-badge">Data Structure</span>
+        </div>
+      </div>
+      <div class="step-panels">
+        <div class="panel panel-why">
+          <div class="panel-label"><span class="icon">◆</span> Why this code was used</div>
+          <p>A <strong>dictionary</strong> (<code>dict</code>) is chosen because the program needs to link each fruit name to a price. Instead of maintaining two separate lists and manually keeping them in sync, a dictionary binds the name and price together as a single key-value pair, making the data self-contained and readable.</p>
+        </div>
+        <div class="panel panel-snippet">
+          <div class="panel-label"><span class="icon">◆</span> Code Snippet</div>
+          <pre><span class="kw">fruits</span> = {
+    <span class="str">"mangoes"</span>:    <span class="num">180.00</span>,
+    <span class="str">"papayas"</span>:    <span class="num">75.00</span>,
+    <span class="str">"rambutan"</span>:   <span class="num">180.00</span>,
+    <span class="str">"coconuts"</span>:   <span class="num">50.00</span>,
+    <span class="str">"lanzones"</span>:   <span class="num">120.00</span>,
+    <span class="str">"mangosteen"</span>: <span class="num">135.00</span>,
+    <span class="str">"bananas"</span>:    <span class="num">60.00</span>,
+    <span class="str">"pineapples"</span>: <span class="num">75.00</span>,
+    <span class="str">"guavas"</span>:     <span class="num">50.00</span>,
+    <span class="str">"guyavanos"</span>:  <span class="num">130.00</span>,
+    <span class="str">"avocados"</span>:   <span class="num">120.00</span>
+}</pre>
+        </div>
+        <div class="panel panel-how">
+          <div class="panel-label"><span class="icon">◆</span> How it operates</div>
+          <p>Python stores this as a hash table internally. When you write <code>fruits["mangoes"]</code>, Python hashes the key <code>"mangoes"</code> and retrieves the value <code>180.00</code> in O(1) constant time — no looping required. You can add a new fruit with one line: <code>fruits["guava"] = 90.00</code>.</p>
+        </div>
+        <div class="panel panel-sig">
+          <div class="panel-label"><span class="icon">◆</span> Significance</div>
+          <p><strong>Speed and simplicity.</strong> Lookup is instant regardless of how many fruits exist. If we used a list instead, we'd have to loop through every item to find a match — an O(n) operation. The dictionary also makes the code self-documenting: anyone reading it immediately understands that "rambutan costs 180 PHP per kg."</p>
+        </div>
+      </div>
+    </div>
+
+    <hr class="step-divider"/>
+
+    <div class="step" id="step2">
+      <div class="step-top">
+        <span class="step-index">STEP 02</span>
+        <div>
+          <h3>display_fruits() — Iterating &amp; Formatting</h3>
+          <span class="step-badge">Function · Iteration</span>
+        </div>
+      </div>
+      <div class="step-panels">
+        <div class="panel panel-why">
+          <div class="panel-label"><span class="icon">◆</span> Why this code was used</div>
+          <p>The display logic is isolated into its own function so it can be called at the start of every shopping loop without duplicating code. <code>.items()</code> is used instead of looping through keys alone because we need both the name and price simultaneously. <code>.capitalize()</code> and <code>:.2f</code> ensure the output always looks clean and professional.</p>
+        </div>
+        <div class="panel panel-snippet">
+          <div class="panel-label"><span class="icon">◆</span> Code Snippet</div>
+          <pre><span class="kw">def</span> <span class="fn">display_fruits</span>():
+    <span class="bi">print</span>(<span class="str">"Available Fruits and Prices (per kg in PHP):"</span>)
+    <span class="kw">for</span> fruit, price <span class="kw">in</span> fruits.<span class="fn">items</span>():
+        <span class="bi">print</span>(<span class="str">f"{fruit.<span class="fn">capitalize</span>()}: {price:<span class="op">.2f</span>}"</span>)</pre>
+        </div>
+        <div class="panel panel-how">
+          <div class="panel-label"><span class="icon">◆</span> How it operates</div>
+          <p><code>fruits.items()</code> returns each key-value pair as a tuple. The <code>for fruit, price in ...</code> line unpacks that tuple into two named variables in one step. <code>fruit.capitalize()</code> converts the first letter to uppercase. The f-string <code>{price:.2f}</code> formats the float to exactly 2 decimal places — so <code>50.0</code> prints as <code>50.00</code>.</p>
+        </div>
+        <div class="panel panel-sig">
+          <div class="panel-label"><span class="icon">◆</span> Significance</div>
+          <p><strong>Reusability and separation of concerns.</strong> Because display is its own function, <code>calculate_total()</code> can call it at the top of every loop iteration with a single line. If the display format ever needs to change, you change it in one place only — not in every location it appears.</p>
+        </div>
+      </div>
+    </div>
+
+    <hr class="step-divider"/>
+
+    <div class="step" id="step3">
+      <div class="step-top">
+        <span class="step-index">STEP 03</span>
+        <div>
+          <h3>while True — Continuous Shopping Loop</h3>
+          <span class="step-badge">Control Flow · Input</span>
+        </div>
+      </div>
+      <div class="step-panels">
+        <div class="panel panel-why">
+          <div class="panel-label"><span class="icon">◆</span> Why this code was used</div>
+          <p>A <code>while True</code> loop is used because the number of items a customer wants to buy is unknown in advance. The program should keep asking for input until the user explicitly decides to stop. <code>.lower()</code> is applied so the comparison <code>choice == 'done'</code> works regardless of how the user types it — "Done", "DONE", and "done" all match.</p>
+        </div>
+        <div class="panel panel-snippet">
+          <div class="panel-label"><span class="icon">◆</span> Code Snippet</div>
+          <pre><span class="kw">while</span> <span class="bi">True</span>:
+    <span class="fn">display_fruits</span>()
+    choice = <span class="bi">input</span>(<span class="str">"\nEnter fruit or 'done' to finish: "</span>).<span class="fn">lower</span>()
+
+    <span class="kw">if</span> choice == <span class="str">'done'</span>:
+        <span class="kw">break</span>
+
+    <span class="kw">if</span> choice <span class="kw">not in</span> fruits:
+        <span class="bi">print</span>(<span class="str">"Invalid selection."</span>)
+        <span class="kw">continue</span></pre>
+        </div>
+        <div class="panel panel-how">
+          <div class="panel-label"><span class="icon">◆</span> How it operates</div>
+          <p><code>while True</code> creates an infinite loop — it will never stop on its own. The only exit is the <code>break</code> statement, which fires when the user types "done". <code>continue</code> skips the rest of the current loop iteration and returns to the top immediately, re-displaying the fruit list and asking for input again when an invalid choice is entered.</p>
+        </div>
+        <div class="panel panel-sig">
+          <div class="panel-label"><span class="icon">◆</span> Significance</div>
+          <p><strong>User-driven flow control.</strong> Without this loop, the program would terminate after a single purchase. The <code>while True</code> + <code>break</code> pattern hands control to the user — the program ends only when they say so. <code>continue</code> prevents bad input from crashing or advancing the loop prematurely.</p>
+        </div>
+      </div>
+    </div>
+
+    <hr class="step-divider"/>
+
+    <div class="step" id="step4">
+      <div class="step-top">
+        <span class="step-index">STEP 04</span>
+        <div>
+          <h3>try/except — Input Validation</h3>
+          <span class="step-badge">Error Handling · Defensive Programming</span>
+        </div>
+      </div>
+      <div class="step-panels">
+        <div class="panel panel-why">
+          <div class="panel-label"><span class="icon">◆</span> Why this code was used</div>
+          <p><code>input()</code> always returns a string. Converting it with <code>float()</code> will crash the program with an unhandled exception if the user types anything non-numeric (like "two" or "!"). A <code>try/except</code> block intercepts that crash and handles it gracefully. A manual <code>raise ValueError</code> is added to also catch logically invalid values like zero or negative quantities.</p>
+        </div>
+        <div class="panel panel-snippet">
+          <div class="panel-label"><span class="icon">◆</span> Code Snippet</div>
+          <pre><span class="kw">try</span>:
+    quantity = <span class="bi">float</span>(<span class="bi">input</span>(<span class="str">f"Enter quantity in kg for {choice}: "</span>))
+    <span class="kw">if</span> quantity <= <span class="num">0</span>:
+        <span class="kw">raise</span> <span class="bi">ValueError</span>
+<span class="kw">except</span> <span class="bi">ValueError</span>:
+    <span class="bi">print</span>(<span class="str">"Invalid quantity. Please enter a positive number."</span>)
+    <span class="kw">continue</span></pre>
+        </div>
+        <div class="panel panel-how">
+          <div class="panel-label"><span class="icon">◆</span> How it operates</div>
+          <p>Python enters the <code>try</code> block and attempts <code>float(...)</code>. If that fails (e.g. input is "abc"), Python raises a <code>ValueError</code> automatically. If <code>float()</code> succeeds but the result is ≤ 0, we manually <code>raise ValueError</code> ourselves. Either way, the <code>except ValueError</code> block catches it, prints an error message, and <code>continue</code> restarts the loop.</p>
+        </div>
+        <div class="panel panel-sig">
+          <div class="panel-label"><span class="icon">◆</span> Significance</div>
+          <p><strong>Crash prevention and user experience.</strong> Without this block, a single bad keystroke would terminate the program entirely — losing all cart data. With it, the program recovers silently and lets the user try again. This is the foundation of robust, production-grade input handling in any interactive Python program.</p>
+        </div>
+      </div>
+    </div>
+
+    <hr class="step-divider"/>
+
+    <div class="step" id="step5">
+      <div class="step-top">
+        <span class="step-index">STEP 05</span>
+        <div>
+          <h3>Shopping Cart — List of Tuples</h3>
+          <span class="step-badge">Data Structure · Accumulation</span>
+        </div>
+      </div>
+      <div class="step-panels">
+        <div class="panel panel-why">
+          <div class="panel-label"><span class="icon">◆</span> Why this code was used</div>
+          <p>Each purchase is a fixed 3-part record: fruit name, quantity, and cost. A <strong>tuple</strong> is used for each entry because tuples are immutable — once created, that record cannot be accidentally changed. A <strong>list</strong> wraps all of them because lists are ordered and dynamic, allowing unlimited items to be appended.</p>
+        </div>
+        <div class="panel panel-snippet">
+          <div class="panel-label"><span class="icon">◆</span> Code Snippet</div>
+          <pre>cost = fruits[choice] * quantity
+shopping_cart.<span class="fn">append</span>((choice, quantity, cost))
+total_cost += cost
+
+<span class="cm"># Later — printing the summary:</span>
+<span class="kw">for</span> item <span class="kw">in</span> shopping_cart:
+    <span class="bi">print</span>(<span class="str">f"{item[<span class="num">0</span>].<span class="fn">capitalize</span>()}: {item[<span class="num">1</span>]} kg = {item[<span class="num">2</span>]:<span class="op">.2f</span>} PHP"</span>)</pre>
+        </div>
+        <div class="panel panel-how">
+          <div class="panel-label"><span class="icon">◆</span> How it operates</div>
+          <p><code>fruits[choice] * quantity</code> computes cost by multiplying the dictionary price by quantity. <code>shopping_cart.append((choice, quantity, cost))</code> adds the tuple as a new element at the end of the list. <code>total_cost += cost</code> is shorthand for <code>total_cost = total_cost + cost</code>, keeping a running sum. In the summary loop, <code>item[0]</code>, <code>item[1]</code>, <code>item[2]</code> access each part of the tuple by position.</p>
+        </div>
+        <div class="panel panel-sig">
+          <div class="panel-label"><span class="icon">◆</span> Significance</div>
+          <p><strong>Data integrity and clarity.</strong> Using immutable tuples inside a mutable list gives the best of both worlds: you can grow the cart freely, but individual purchase records stay protected. The running <code>total_cost</code> accumulator avoids re-summing the entire cart on every iteration, which is more efficient.</p>
+        </div>
+      </div>
+    </div>
+
+    <hr class="step-divider"/>
+
+    <div class="step" id="step6">
+      <div class="step-top">
+        <span class="step-index">STEP 06</span>
+        <div>
+          <h3>Discount System — Dictionary Lookup</h3>
+          <span class="step-badge">Feature · O(1) Lookup</span>
+        </div>
+      </div>
+      <div class="step-panels">
+        <div class="panel panel-why">
+          <div class="panel-label"><span class="icon">◆</span> Why this code was used</div>
+          <p>Discount codes are stored in a dictionary because code validation requires fast, exact key lookups. Using a dictionary instead of a chain of <code>if/elif</code> statements means the logic stays the same whether there are 3 codes or 300. <code>.upper()</code> is applied so codes are case-insensitive from the user's perspective.</p>
+        </div>
+        <div class="panel panel-snippet">
+          <div class="panel-label"><span class="icon">◆</span> Code Snippet</div>
+          <pre>codes = {
+    <span class="str">"SALE10"</span>:  <span class="num">10</span>,
+    <span class="str">"FRESH15"</span>: <span class="num">15</span>,
+    <span class="str">"FRUIT20"</span>: <span class="num">20</span>
+}
+code = <span class="bi">input</span>(<span class="str">"Enter your discount code: "</span>).<span class="fn">upper</span>()
+
+<span class="kw">if</span> code <span class="kw">in</span> codes:
+    discount = codes[code]
+    <span class="bi">print</span>(<span class="str">f"Discount code accepted! {discount}% off applied."</span>)
+    <span class="kw">return</span> discount
+<span class="kw">else</span>:
+    <span class="bi">print</span>(<span class="str">"Invalid discount code. No discount applied."</span>)
+    <span class="kw">return</span> <span class="num">0.0</span></pre>
+        </div>
+        <div class="panel panel-how">
+          <div class="panel-label"><span class="icon">◆</span> How it operates</div>
+          <p><code>if code in codes</code> checks whether the user's input exists as a key in the dictionary — this is a safe O(1) check that will never raise a <code>KeyError</code>. If it exists, <code>codes[code]</code> retrieves the associated integer discount percentage directly. If not, the <code>else</code> branch runs and returns <code>0.0</code>, meaning no discount is applied.</p>
+        </div>
+        <div class="panel panel-sig">
+          <div class="panel-label"><span class="icon">◆</span> Significance</div>
+          <p><strong>Scalability and maintainability.</strong> Adding a new discount code only requires one new line in the dictionary — no logic changes needed. A chain of <code>if/elif</code> for each code would become unmanageable at scale. The <code>in</code> check before accessing also prevents <code>KeyError</code> exceptions that would crash the program.</p>
+        </div>
+      </div>
+    </div>
+
+    <hr class="step-divider"/>
+
+    <div class="step" id="step7">
+      <div class="step-top">
+        <span class="step-index">STEP 07</span>
+        <div>
+          <h3>Discount Calculation — Arithmetic</h3>
+          <span class="step-badge">Math · Currency Logic</span>
+        </div>
+      </div>
+      <div class="step-panels">
+        <div class="panel panel-why">
+          <div class="panel-label"><span class="icon">◆</span> Why this code was used</div>
+          <p>The discount is stored as an integer percentage (e.g. <code>10</code>) for readability. To apply it, we must convert it to a decimal multiplier by dividing by 100. The calculation is deliberately split into two separate variables — <code>discount_amount</code> and <code>final_total</code> — so each step can be displayed independently in the receipt summary.</p>
+        </div>
+        <div class="panel panel-snippet">
+          <div class="panel-label"><span class="icon">◆</span> Code Snippet</div>
+          <pre>discount_percent = <span class="fn">get_discount</span>()
+discount_amount  = total_cost * (discount_percent / <span class="num">100</span>)
+final_total      = total_cost - discount_amount
+
+<span class="bi">print</span>(<span class="str">f"Subtotal:           {total_cost:<span class="op">.2f</span>} PHP"</span>)
+<span class="kw">if</span> discount_percent > <span class="num">0</span>:
+    <span class="bi">print</span>(<span class="str">f"Discount ({discount_percent}%): -{discount_amount:<span class="op">.2f</span>} PHP"</span>)
+<span class="bi">print</span>(<span class="str">f"Total Cost:         {final_total:<span class="op">.2f</span>} PHP"</span>)</pre>
+        </div>
+        <div class="panel panel-how">
+          <div class="panel-label"><span class="icon">◆</span> How it operates</div>
+          <p><code>discount_percent / 100</code> converts e.g. <code>15</code> → <code>0.15</code>. Multiplying by <code>total_cost</code> gives the peso amount to deduct. Subtracting yields the final price. The <code>if discount_percent &gt; 0</code> guard ensures the discount line only prints when a code was actually applied — keeping the receipt clean for customers with no discount.</p>
+        </div>
+        <div class="panel panel-sig">
+          <div class="panel-label"><span class="icon">◆</span> Significance</div>
+          <p><strong>Transparency and auditability.</strong> Breaking the calculation into named variables (<code>discount_amount</code>, <code>final_total</code>) makes the math readable and easy to debug. A customer can see exactly how much was deducted and why. This mirrors how real POS (point-of-sale) receipt systems work — showing subtotal, discount, and grand total as separate line items.</p>
+        </div>
+      </div>
+    </div>
+
+    <hr class="step-divider"/>
+
+    <div class="step" id="step8">
+      <div class="step-top">
+        <span class="step-index">STEP 08</span>
+        <div>
+          <h3>if __name__ == "__main__" — Entry Guard</h3>
+          <span class="step-badge">Best Practice · Modularity</span>
+        </div>
+      </div>
+      <div class="step-panels">
+        <div class="panel panel-why">
+          <div class="panel-label"><span class="icon">◆</span> Why this code was used</div>
+          <p>This guard is a Python best practice that separates the "runnable script" from the "importable module." Without it, the moment another Python file does <code>import fruit_retail</code>, the program would immediately launch the interactive shopping session — an unintended side effect. The guard prevents this by checking the context in which the file is being executed.</p>
+        </div>
+        <div class="panel panel-snippet">
+          <div class="panel-label"><span class="icon">◆</span> Code Snippet</div>
+          <pre><span class="kw">if</span> __name__ == <span class="str">"__main__"</span>:
+    <span class="bi">print</span>(<span class="str">"Welcome to the Philippine Fruit Retail Business!"</span>)
+    <span class="fn">calculate_total</span>()
+    <span class="bi">print</span>(<span class="str">"Thank you for shopping with us!"</span>)</pre>
+        </div>
+        <div class="panel panel-how">
+          <div class="panel-label"><span class="icon">◆</span> How it operates</div>
+          <p>Python sets the special variable <code>__name__</code> to <code>"__main__"</code> when a file is run directly (e.g. <code>python fruit_retail.py</code>). When the file is imported by another module, <code>__name__</code> is instead set to the file's module name (<code>"fruit_retail"</code>). The <code>if</code> check means the welcome message and <code>calculate_total()</code> call only execute in the first case.</p>
+        </div>
+        <div class="panel panel-sig">
+          <div class="panel-label"><span class="icon">◆</span> Significance</div>
+          <p><strong>Reusability and testability.</strong> This single pattern transforms the script into a proper module. Another developer could import <code>display_fruits</code> or <code>get_discount</code> into a larger retail system, or write unit tests for individual functions, without triggering the full program. It is considered mandatory in professional Python development.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="concepts" aria-labelledby="concepts-heading">
+    <div class="section-heading" id="concepts-heading">
+      Core Concepts Quick Reference <span class="tag-inline">Cheatsheet</span>
+    </div>
+    <div class="intro-prose">
+      <p>The table below summarizes every Python concept featured in this program. Bookmark it as a study reference — each concept maps directly to a step in the guide above.</p>
+    </div>
+    <table class="concept-table">
+      <thead>
+        <tr>
+          <th>Concept</th>
+          <th>Step</th>
+          <th>Key Takeaway</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>dict</td><td>1</td><td>O(1) key-value lookup; more scalable than parallel lists.</td></tr>
+        <tr><td>.items()</td><td>2</td><td>Iterates key-value pairs simultaneously via tuple unpacking.</td></tr>
+        <tr><td>f-strings</td><td>2</td><td>Embed expressions directly in strings with :.2f for currency formatting.</td></tr>
+        <tr><td>while True + break</td><td>3</td><td>User-driven loop that exits on explicit sentinel input ("done").</td></tr>
+        <tr><td>continue</td><td>3</td><td>Skips remainder of loop body and restarts from the top immediately.</td></tr>
+        <tr><td>try / except</td><td>4</td><td>Catches runtime errors (e.g. float("abc")) and recovers gracefully.</td></tr>
+        <tr><td>raise ValueError</td><td>4</td><td>Manually triggers an exception for logically invalid values.</td></tr>
+        <tr><td>list of tuples</td><td>5</td><td>Mutable container holding immutable fixed-width records.</td></tr>
+        <tr><td>.append()</td><td>5</td><td>Adds items to the end of a list in O(1) amortized time.</td></tr>
+        <tr><td>in operator</td><td>6</td><td>Safe O(1) key membership check that prevents KeyError.</td></tr>
+        <tr><td>Arithmetic</td><td>7</td><td>Named intermediate variables improve readability and debuggability.</td></tr>
+        <tr><td>__name__ guard</td><td>8</td><td>Enables import without triggering execution; mandatory best practice.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="section" id="tips" aria-labelledby="tips-heading">
+    <div class="section-heading" id="tips-heading">
+      Pro Tips &amp; Extensions <span class="tag-inline">Go Further</span>
+    </div>
+    <div class="content-grid">
+      <div class="content-card">
+        <span class="icon">🗄️</span>
+        <h4>Persist Your Data</h4>
+        <p>Save the shopping cart to a JSON file with <code>json.dump()</code> so records survive program restarts. This is the simplest form of data persistence in Python.</p>
+      </div>
+      <div class="content-card">
+        <span class="icon">🧪</span>
+        <h4>Write Unit Tests</h4>
+        <p>Use <code>pytest</code> to test <code>get_discount()</code> and <code>calculate_total()</code> in isolation. The <code>__name__</code> guard makes this possible without triggering the full program.</p>
+      </div>
+      <div class="content-card">
+        <span class="icon">🖥️</span>
+        <h4>Build a Web Version</h4>
+        <p>Port the logic to Flask or FastAPI to serve a REST API. The functions translate almost 1:1 — <code>calculate_total()</code> becomes a POST endpoint accepting JSON cart data.</p>
+      </div>
+      <div class="content-card">
+        <span class="icon">📊</span>
+        <h4>Add Sales Analytics</h4>
+        <p>Track which fruits sell most with <code>collections.Counter</code>. After 10 transactions, you'll have real data to optimize your inventory stocking decisions.</p>
+      </div>
+      <div class="content-card">
+        <span class="icon">🔐</span>
+        <h4>Hash Discount Codes</h4>
+        <p>In a real system, discount codes would be stored as bcrypt hashes, not plaintext. Look into <code>hashlib</code> for a Python-native hashing approach.</p>
+      </div>
+      <div class="content-card">
+        <span class="icon">🌐</span>
+        <h4>Load Prices from API</h4>
+        <p>Replace the hardcoded <code>fruits</code> dict with a <code>requests.get()</code> call to a price API. This makes the program dynamic and always up to date.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="mistakes" aria-labelledby="mistakes-heading">
+    <div class="section-heading" id="mistakes-heading">
+      Common Beginner Mistakes <span class="tag-inline">Avoid These</span>
+    </div>
+    <div class="intro-prose">
+      <p>Even experienced developers make these errors when first working with Python data structures and control flow. Recognizing them in your own code is a critical skill — and each mistake below maps directly to a concept covered in this guide.</p>
+    </div>
+    <div class="step-panels" style="margin-bottom:28px;">
+      <div class="panel panel-why">
+        <div class="panel-label"><span class="icon">◆</span> Mistake 1 — Using a list instead of a dictionary for lookups</div>
+        <p>Many beginners store fruit names and prices in two separate parallel lists and then use <code>list.index()</code> to find a price. This is O(n) for every search and breaks the moment the two lists fall out of sync. A dictionary is always the right choice when you need to map keys to values — its hash table implementation guarantees O(1) average lookups regardless of how many items you store.</p>
+      </div>
+      <div class="panel panel-how">
+        <div class="panel-label"><span class="icon">◆</span> Mistake 2 — Catching bare <code>except:</code> instead of <code>except ValueError:</code></div>
+        <p>Writing <code>except:</code> without specifying an exception type will silently swallow every error in your program — including <code>KeyboardInterrupt</code>, <code>SystemExit</code>, and memory errors — making bugs nearly impossible to debug. Always catch the most specific exception type possible. In this program, <code>except ValueError</code> handles only the case where <code>float()</code> receives non-numeric input, leaving all other errors free to propagate and be noticed.</p>
+      </div>
+      <div class="panel panel-sig">
+        <div class="panel-label"><span class="icon">◆</span> Mistake 3 — Forgetting <code>if __name__ == "__main__"</code></div>
+        <p>Omitting the entry guard means that any test file or other module that imports your functions will immediately trigger the full interactive program. This makes automated testing impossible and confuses other developers consuming your code. Even for small scripts, always wrap top-level execution code in this guard. It costs one line and saves enormous debugging time later.</p>
+      </div>
+      <div class="panel panel-why">
+        <div class="panel-label"><span class="icon">◆</span> Mistake 4 — Mutating a list while iterating over it</div>
+        <p>If you tried to remove items from <code>shopping_cart</code> inside the same <code>for</code> loop that reads it, Python would skip elements unpredictably. The correct pattern is to either iterate over a copy (<code>for item in shopping_cart[:]</code>), collect indices to remove and delete after, or rebuild the list using a list comprehension that filters out unwanted items. This program avoids the problem by only appending inside the loop — a safe operation.</p>
+      </div>
+      <div class="panel panel-how">
+        <div class="panel-label"><span class="icon">◆</span> Mistake 5 — Comparing floats with <code>==</code></div>
+        <p>Floating-point arithmetic in binary can produce tiny rounding errors. Writing <code>if total_cost == 100.00</code> may fail even when the value appears correct in a print statement. For currency calculations, use Python's <code>decimal.Decimal</code> type when exact precision is required, or compare with a small tolerance using <code>abs(a - b) &lt; 0.001</code>. The program uses <code>:.2f</code> formatting for display, which rounds correctly for human reading but doesn't fix the underlying float representation.</p>
+      </div>
+      <div class="panel panel-sig">
+        <div class="panel-label"><span class="icon">◆</span> Mistake 6 — Using <code>input()</code> without stripping whitespace</div>
+        <p>A user who accidentally types a space before or after their fruit name — <code>" mangoes"</code> instead of <code>"mangoes"</code> — will get an "Invalid fruit selection" error even though they typed the right word. This program uses <code>.lower()</code> for case normalization, but adding <code>.strip()</code> as well (<code>input(...).strip().lower()</code>) defends against leading and trailing whitespace. In production systems, always sanitize user input before validation.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="deepdive" aria-labelledby="deepdive-heading">
+    <div class="section-heading" id="deepdive-heading">
+      Python Concepts Deep Dive <span class="tag-inline">Go Deeper</span>
+    </div>
+    <div class="intro-prose">
+      <p>The concepts in this program have layers of depth that a single tutorial cannot fully cover. Below are the most important things to explore next for each major concept — treat this as a structured learning roadmap beyond this guide.</p>
+    </div>
+    <div class="content-grid">
+      <div class="content-card">
+        <span class="icon">🗄️</span>
+        <h4>Dictionary Internals</h4>
+        <p>Python's <code>dict</code> is a hash table. Understanding hash collisions, load factors, and why insertion order is preserved since Python 3.7 will make you a far more confident user of this structure. Read about <code>defaultdict</code>, <code>Counter</code>, and <code>ChainMap</code> from the <code>collections</code> module — they solve 80% of real-world dictionary challenges cleanly.</p>
+      </div>
+      <div class="content-card">
+        <span class="icon">🛡️</span>
+        <h4>Exception Hierarchy</h4>
+        <p><code>ValueError</code> is just one node in Python's exception tree. <code>Exception</code> is the parent of all built-in non-system-exiting exceptions. Learning when to raise <code>TypeError</code> vs <code>ValueError</code> vs a custom <code>InvalidQuantityError</code> — and how to use <code>raise ... from ...`</code> for exception chaining — is essential for writing maintainable, debuggable code.</p>
+      </div>
+      <div class="content-card">
+        <span class="icon">🔤</span>
+        <h4>Format Specification Mini-Language</h4>
+        <p>The <code>:.2f</code> in f-strings is part of Python's format specification mini-language. You can also pad strings with <code>:&lt;20</code>, right-align numbers with <code>:&gt;10</code>, display percentages with <code>:.1%</code>, and format large numbers with thousands separators using <code>:,</code>. Mastering this eliminates most manual string manipulation in display code.</p>
+      </div>
+      <div class="content-card">
+        <span class="icon">📦</span>
+        <h4>Named Tuples</h4>
+        <p>The shopping cart in this program stores <code>(fruit, quantity, cost)</code> tuples where fields are accessed by index. Python's <code>collections.namedtuple</code> or <code>typing.NamedTuple</code> lets you access fields by name — <code>item.fruit</code> instead of <code>item[0]</code> — dramatically improving readability in larger codebases at zero memory cost.</p>
+      </div>
+      <div class="content-card">
+        <span class="icon">⚡</span>
+        <h4>Generator Expressions</h4>
+        <p>When calculating totals from the shopping cart, a generator expression is more memory-efficient than building a full list: <code>total = sum(cost for _, _, cost in cart)</code>. For large carts, generators process one item at a time without holding everything in memory — a critical distinction at scale.</p>
+      </div>
+      <div class="content-card">
+        <span class="icon">🧪</span>
+        <h4>Testing with pytest</h4>
+        <p>The <code>__name__</code> guard makes this program fully testable. With <code>pytest</code> and <code>unittest.mock.patch('builtins.input')</code>, you can simulate user input and verify that <code>get_discount()</code> returns the correct percentage for known codes — without ever needing a human at a keyboard. This is how production Python code is validated.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="comments-section" id="comments" aria-labelledby="comments-heading">
+    <div class="section-heading" id="comments-heading">
+      Discussion <span class="tag-inline">Comments</span>
+    </div>
+
+    <div class="comment-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="comment-name">Your Name</label>
+          <input type="text" id="comment-name" placeholder="e.g. Maria Santos" autocomplete="name"/>
+        </div>
+        <div class="form-group">
+          <label for="comment-email">Email Address</label>
+          <input type="email" id="comment-email" placeholder="your@email.com" autocomplete="email"/>
+        </div>
+      </div>
+      <div class="form-group full" style="margin-bottom:14px;">
+        <label for="comment-text">Your Comment</label>
+        <textarea id="comment-text" rows="4" placeholder="Share your thoughts, questions, or insights about this Python guide..."></textarea>
+      </div>
+      <button class="btn-primary" id="submitComment">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        Post Comment
+      </button>
+      <div class="comment-status" id="commentStatus"></div>
+    </div>
+
+    <div class="comment-list" id="commentList">
+      <div class="comment-item">
+        <div class="comment-meta">
+          <div class="comment-avatar">JR</div>
+          <span class="comment-author">Juan Reyes</span>
+          <span class="comment-date">March 2025</span>
+        </div>
+        <p class="comment-text">This is the clearest explanation of Python dictionaries I've found. The O(1) vs O(n) comparison made it click for me instantly. Thank you!</p>
+      </div>
+      <div class="comment-item">
+        <div class="comment-meta">
+          <div class="comment-avatar" style="background:linear-gradient(135deg,#10b981,#06b6d4);">AL</div>
+          <span class="comment-author">Ana Lim</span>
+          <span class="comment-date">February 2025</span>
+        </div>
+        <p class="comment-text">I love that you used a Philippine market example — it makes the code feel relevant to my experience. The while True + break pattern was something I'd been confused about for months.</p>
+      </div>
+      <div class="comment-item">
+        <div class="comment-meta">
+          <div class="comment-avatar" style="background:linear-gradient(135deg,#f59e0b,#ef4444);">MG</div>
+          <span class="comment-author">Marco Garcia</span>
+          <span class="comment-date">January 2025</span>
+        </div>
+        <p class="comment-text">The __name__ guard section alone saved my project. I had no idea why importing was triggering execution. Excellent write-up!</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="follow-section" id="follow" aria-labelledby="follow-heading">
+    <div class="section-heading" id="follow-heading">
+      Follow Valleys &amp; Bytes <span class="tag-inline">Stay Connected</span>
+    </div>
+    <div class="intro-prose" style="margin-bottom:20px;">
+      <p>Stay up to date with new Python tutorials, code breakdowns, and programming insights by following us on your preferred platform. We post new guides weekly.</p>
+    </div>
+    <div class="social-grid">
+      <a href="https://www.facebook.com/@Glenn-Junsay-Pansensoy" target="_blank" rel="noopener noreferrer" class="social-card social-fb" aria-label="Follow on Facebook">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        <span class="social-name">Facebook</span>
+        <span class="social-handle">@Glenn Junsay Pansensoy</span>
+      </a>
+      <a href="https://www.linkedin.com/in/glenn-pansensoy-6288453a2" target="_blank" rel="noopener noreferrer" class="social-card social-li" aria-label="Follow on LinkedIn">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        <span class="social-name">LinkedIn</span>
+        <span class="social-handle">@GlennPansensoy</span>
+      </a>
+      <a href="https://x.com/@GlennPansensoy" target="_blank" rel="noopener noreferrer" class="social-card social-x" aria-label="Follow on X (Twitter)">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        <span class="social-name">X (Twitter)</span>
+        <span class="social-handle">@GlennPansensoy</span>
+      </a>
+      <a href="https://www.youtube.com/c/@GlennPansensoy" target="_blank" rel="noopener noreferrer" class="social-card social-yt" aria-label="Subscribe on YouTube">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        <span class="social-name">YouTube</span>
+        <span class="social-handle">@GlennPansensoy</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="related-heading">
+    <div class="section-heading" id="related-heading">
+      Related Python Guides <span class="tag-inline">More Learning</span>
+    </div>
+    <div class="content-grid">
+      <div class="content-card">
+        <span class="icon">📦</span>
+        <h4>Python Lists vs Tuples</h4>
+        <p>When should you choose a tuple over a list? This guide dives deep into mutability, performance, and when immutability is your friend in data modeling.</p>
+      </div>
+      <div class="content-card">
+        <span class="icon">🔁</span>
+        <h4>Mastering Python Loops</h4>
+        <p>A complete breakdown of for, while, nested loops, list comprehensions, and when to use each. Includes common pitfalls like off-by-one errors and infinite loops.</p>
+      </div>
+      <div class="content-card">
+        <span class="icon">⚠️</span>
+        <h4>Exception Handling Patterns</h4>
+        <p>Beyond try/except — learn about finally, else clauses, custom exceptions, exception chaining, and the art of catching the right exception at the right level.</p>
+      </div>
+      <div class="content-card">
+        <span class="icon">🔤</span>
+        <h4>f-Strings Mastered</h4>
+        <p>From basic variable insertion to format specifiers, nested expressions, and Python 3.12 improvements. Format numbers, dates, and complex objects with precision.</p>
+      </div>
+      <div class="content-card">
+        <span class="icon">🏗️</span>
+        <h4>Python Functions Deep Dive</h4>
+        <p>Default arguments, *args, **kwargs, closures, decorators, and lambda functions — everything you need to write reusable, clean Python code.</p>
+      </div>
+      <div class="content-card">
+        <span class="icon">🗺️</span>
+        <h4>Dictionary Advanced Usage</h4>
+        <p>defaultdict, Counter, dict comprehensions, nested dicts, and merging strategies. Elevate your dictionary skills from beginner to professional.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="subscribe-section" id="subscribe" aria-labelledby="subscribe-heading">
+    <div class="section-heading" id="subscribe-heading">
+      Subscribe to Valleys &amp; Bytes <span class="tag-inline">Weekly Updates</span>
+    </div>
+    <div class="subscribe-box">
+      <h3>📬 Never Miss a New Python Guide</h3>
+      <p>Join thousands of developers who get our weekly deep-dives on Python, programming concepts, and real-world project breakdowns delivered directly to their inbox. No spam, ever.</p>
+      <div class="subscribe-form">
+        <input type="email" id="subEmail" placeholder="your@email.com" autocomplete="email"/>
+        <button class="btn-primary" id="subscribeBtn">Subscribe</button>
+      </div>
+      <p class="subscribe-privacy">🔒 Your email is safe with us. Unsubscribe anytime. No spam.</p>
+      <div class="subscribe-status" id="subscribeStatus"></div>
+    </div>
+  </section>
+
+  <section class="outro-section" aria-labelledby="outro-heading">
+    <div class="section-heading" id="outro-heading" style="margin-bottom:20px;">
+      Conclusion <span class="tag-inline">Closing Thoughts</span>
+    </div>
+    <p>
+      Congratulations on completing this deep dive into the Philippine Fruit Retail Python program. What began as a simple command-line script turned out to be a comprehensive tour through the most important concepts in beginner-to-intermediate Python programming.
+    </p>
+    <p>
+      The beauty of this program is that every design decision was made deliberately. Dictionaries weren't chosen arbitrarily — they were chosen because hash tables provide constant-time lookups that lists cannot match. The <code>while True</code> loop wasn't a lazy choice — it was the <em>correct</em> pattern for user-driven indefinite input. The <code>try/except</code> block wasn't defensive paranoia — it was production-grade resilience that separates hobby scripts from real software.
+    </p>
+
+    <div class="outro-highlights">
+      <div class="highlight-item">
+        <span class="highlight-icon">🗄️</span>
+        <div class="highlight-text">
+          <strong>Dictionaries = Speed</strong>
+          O(1) hash table lookups make price retrieval instant at any scale.
+        </div>
+      </div>
+      <div class="highlight-item">
+        <span class="highlight-icon">🔁</span>
+        <div class="highlight-text">
+          <strong>while True + break</strong>
+          The standard Python idiom for user-driven indefinite loops.
+        </div>
+      </div>
+      <div class="highlight-item">
+        <span class="highlight-icon">🛡️</span>
+        <div class="highlight-text">
+          <strong>try/except = Resilience</strong>
+          Graceful error handling is the difference between a demo and real software.
+        </div>
+      </div>
+      <div class="highlight-item">
+        <span class="highlight-icon">📦</span>
+        <div class="highlight-text">
+          <strong>List of Tuples</strong>
+          Mutable containers of immutable records — data integrity by design.
+        </div>
+      </div>
+      <div class="highlight-item">
+        <span class="highlight-icon">🔐</span>
+        <div class="highlight-text">
+          <strong>__name__ Guard</strong>
+          Mandatory best practice that enables imports, testing, and reuse.
+        </div>
+      </div>
+      <div class="highlight-item">
+        <span class="highlight-icon">🎯</span>
+        <div class="highlight-text">
+          <strong>Functions = Reusability</strong>
+          Isolating logic into named functions is the foundation of all clean code.
+        </div>
+      </div>
+    </div>
+
+    <p>
+      As your next step, we encourage you to extend this program yourself. Add a new fruit, implement a loyalty points system, or port the logic to a web API. The best way to solidify these concepts is to write code that breaks them and then figure out why. Every bug you fix teaches you something a tutorial never could.
+    </p>
+    <p>
+      Happy coding — and as they say on the islands, <em>salamat</em> for reading. 🇵🇭
+    </p>
+  </section>
+
+  <div class="return-bar" style="margin: 0 0 48px;">
+    <a href="abstraction.html" class="return-btn">
+      <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Return to Abstraction Hub
+    </a>
+  </div>
+
+</div>
+
+<footer role="contentinfo">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <h3>🏔 Valleys &amp; Bytes</h3>
+        <p>In-depth programming guides and code breakdowns for developers at every level. Our mission is to make complex concepts accessible through real-world examples and clear explanations.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Python Guides</h4>
+        <a href="#" class="footer-btn">📘 Dictionaries</a>
+        <a href="#" class="footer-btn">🔁 Loops &amp; Control Flow</a>
+        <a href="#" class="footer-btn">⚠️ Error Handling</a>
+        <a href="#" class="footer-btn">🧩 Functions</a>
+        <a href="#" class="footer-btn">🗄️ Data Structures</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Pages</h4>
+        <a href="about-author.html" class="footer-btn">👤 About the Author</a>
+        <a href="about-guide.html" class="footer-btn">📄 About this Page</a>
+        <a href="#comments" class="footer-btn">💬 Leave a Comment</a>
+        <a href="#subscribe" class="footer-btn">📬 Newsletter</a>
+        <a href="#follow" class="footer-btn">🌐 Social Media</a>
+      </div>
+
+      <div class="footer-col footer-col-legal">
+        <h4>Legal</h4>
+        <div class="footer-legal-stack">
+          <a href="oop-privacy.html" class="footer-legal-btn"><span class="btn-dot"></span>Privacy Policy</a>
+          <a href="oop-terms.html" class="footer-legal-btn"><span class="btn-dot"></span>Terms of Service</a>
+          <a href="oop-cookie.html" class="footer-legal-btn"><span class="btn-dot"></span>Cookie Policy</a>
+          <a href="about-author.html" class="footer-legal-btn"><span class="btn-dot"></span>About the Author</a>
+          <a href="about-guide.html" class="footer-legal-btn"><span class="btn-dot"></span>About this Page</a>
+          <a href="oop-contact.html" class="footer-legal-btn"><span class="btn-dot"></span>Contact Information</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span class="footer-copy" style="color:white;">© 2025 Valleys &amp; Bytes · code-sense.pansensoyglenn.workers.dev · All rights reserved.Built with data precision and Created through intensive information authentication.</span>
+    </div>
+  </div>
+</footer>
+
+<button class="back-top" id="backTop" aria-label="Back to top">↑</button>
+
+<script>
+const hamburger = document.getElementById('hamburger');
+const navDrawer = document.getElementById('navDrawer');
+const navOverlay = document.getElementById('navOverlay');
+
+function toggleNav(open) {
+  hamburger.classList.toggle('open', open);
+  hamburger.setAttribute('aria-expanded', open);
+  navDrawer.classList.toggle('open', open);
+  navOverlay.classList.toggle('show', open);
+}
+
+hamburger.addEventListener('click', () => toggleNav(!navDrawer.classList.contains('open')));
+navOverlay.addEventListener('click', () => toggleNav(false));
+navDrawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => toggleNav(false)));
+
+const bar = document.getElementById('reading-progress-bar');
+window.addEventListener('scroll', () => {
+  const total = document.documentElement.scrollHeight - window.innerHeight;
+  bar.style.width = (window.scrollY / total * 100) + '%';
+});
+
+const backTop = document.getElementById('backTop');
+window.addEventListener('scroll', () => {
+  backTop.classList.toggle('visible', window.scrollY > 400);
+});
+backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+const WORKER_URL = 'https://code-sense.pansensoyglenn.workers.dev';
+const PAGE_ID = 'fruit-html';
+
+async function loadComments() {
+  try {
+    const res = await fetch(`${WORKER_URL}/api/comments?page=${PAGE_ID}`);
+    if (!res.ok) return;
+    const data = await res.json();
+    if (data && data.comments && data.comments.length > 0) {
+      const list = document.getElementById('commentList');
+      const colors = ['linear-gradient(135deg,#3b82f6,#8b5cf6)', 'linear-gradient(135deg,#10b981,#06b6d4)', 'linear-gradient(135deg,#f59e0b,#ef4444)', 'linear-gradient(135deg,#8b5cf6,#ec4899)'];
+      data.comments.slice(-20).reverse().forEach((c, i) => {
+        const initials = (c.name || 'AN').split(' ').map(w => w[0]).join('').toUpperCase().slice(0,2);
+        const div = document.createElement('div');
+        div.className = 'comment-item';
+        div.innerHTML = `<div class="comment-meta"><div class="comment-avatar" style="background:${colors[i%colors.length]}">${initials}</div><span class="comment-author">${escHtml(c.name)}</span><span class="comment-date">${c.date || ''}</span></div><p class="comment-text">${escHtml(c.text)}</p>`;
+        list.prepend(div);
+      });
+    }
+  } catch(e) { }
+}
+
+document.getElementById('submitComment').addEventListener('click', async () => {
+  const name = document.getElementById('comment-name').value.trim();
+  const email = document.getElementById('comment-email').value.trim();
+  const text = document.getElementById('comment-text').value.trim();
+  const status = document.getElementById('commentStatus');
+
+  if (!name || !text) {
+    showStatus(status, 'error', '⚠ Please fill in your name and comment.');
+    return;
+  }
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    showStatus(status, 'error', '⚠ Please enter a valid email address.');
+    return;
+  }
+
+  const btn = document.getElementById('submitComment');
+  btn.disabled = true;
+  btn.textContent = 'Posting...';
+
+  try {
+    const res = await fetch(`${WORKER_URL}/api/comments`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ page: PAGE_ID, name, email, text, date: new Date().toLocaleDateString('en-US', { month:'long', year:'numeric' }) })
+    });
+    if (res.ok) {
+      showStatus(status, 'success', '✓ Your comment has been posted! Thank you for sharing.');
+      document.getElementById('comment-name').value = '';
+      document.getElementById('comment-email').value = '';
+      document.getElementById('comment-text').value = '';
+      const initials = name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0,2);
+      const div = document.createElement('div');
+      div.className = 'comment-item';
+      div.innerHTML = `<div class="comment-meta"><div class="comment-avatar">${initials}</div><span class="comment-author">${escHtml(name)}</span><span class="comment-date">Just now</span></div><p class="comment-text">${escHtml(text)}</p>`;
+      document.getElementById('commentList').prepend(div);
+    } else {
+      showStatus(status, 'error', '⚠ Could not post comment. Please try again later.');
+    }
+  } catch(e) {
+    showStatus(status, 'error', '⚠ Network error. Please check your connection.');
+  }
+
+  btn.disabled = false;
+  btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Post Comment';
+});
+
+document.getElementById('subscribeBtn').addEventListener('click', async () => {
+  const email = document.getElementById('subEmail').value.trim();
+  const status = document.getElementById('subscribeStatus');
+
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    showStatus(status, 'error', '⚠ Please enter a valid email address.');
+    return;
+  }
+
+  const btn = document.getElementById('subscribeBtn');
+  btn.disabled = true;
+  btn.textContent = 'Subscribing...';
+
+  try {
+    const res = await fetch(`${WORKER_URL}/api/subscribe`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, source: PAGE_ID, date: new Date().toISOString() })
+    });
+    if (res.ok) {
+      showStatus(status, 'success', '✓ You\'re subscribed! Welcome to Valleys & Bytes. Check your inbox for a confirmation.');
+      document.getElementById('subEmail').value = '';
+    } else {
+      showStatus(status, 'error', '⚠ Subscription failed. Please try again later.');
+    }
+  } catch(e) {
+    showStatus(status, 'error', '⚠ Network error. Please try again.');
+  }
+
+  btn.disabled = false;
+  btn.textContent = 'Subscribe';
+});
+
+function showStatus(el, type, msg) {
+  el.className = 'comment-status ' + type;
+  el.textContent = msg;
+  el.style.display = 'block';
+  setTimeout(() => { el.style.display = 'none'; }, 5000);
+}
+
+function escHtml(str) {
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');
+}
+
+loadComments();
+</script>
+</body>
+</html>
