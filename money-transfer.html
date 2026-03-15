@@ -1,0 +1,2240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Money Transfer System — OOP Code Breakdown | Valleys &amp; Bytes</title>
+<meta name="description" content="A comprehensive breakdown of a Python Money Transfer System using Object-Oriented Programming. Learn inheritance, encapsulation, abstraction, and polymorphism through real code examples.">
+<meta name="keywords" content="Python OOP, money transfer system, inheritance, encapsulation, polymorphism, abstraction, Python tutorial, code breakdown, Glenn Pansensoy">
+<meta name="author" content="Glenn Pansensoy">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://code-sense.pansensoyglenn.workers.dev/">
+
+<meta property="og:title" content="Money Transfer System — OOP Code Breakdown | Valleys &amp; Bytes">
+<meta property="og:description" content="Deep-dive into Python OOP concepts through a real Money Transfer System. Covers inheritance, encapsulation, and more.">
+<meta property="og:url" content="https://code-sense.pansensoyglenn.workers.dev/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Valleys &amp; Bytes">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Money Transfer System — OOP Code Breakdown">
+<meta name="twitter:description" content="Python OOP deep-dive: inheritance, encapsulation, polymorphism explained with a real Money Transfer System.">
+<meta name="twitter:creator" content="@GlennPansensoy">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "Money Transfer System — OOP Code Breakdown",
+  "description": "A comprehensive breakdown of a Python Money Transfer System using Object-Oriented Programming principles including inheritance, encapsulation, abstraction, and polymorphism.",
+  "author": {
+    "@type": "Person",
+    "name": "Glenn Pansensoy",
+    "url": "https://www.linkedin.com/in/glenn-pansensoy-6288453a2",
+    "sameAs": [
+      "https://www.linkedin.com/in/glenn-pansensoy-6288453a2",
+      "https://www.facebook.com/@Glenn-Junsay-Pansensoy",
+      "https://x.com/@GlennPansensoy",
+      "https://www.youtube.com/c/@GlennPansensoy"
+    ]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Valleys & Bytes",
+    "url": "https://code-sense.pansensoyglenn.workers.dev/"
+  },
+  "datePublished": "2025-01-01",
+  "dateModified": "2025-01-01",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://code-sense.pansensoyglenn.workers.dev/"
+  },
+  "about": {
+    "@type": "Thing",
+    "name": "Object-Oriented Programming in Python"
+  },
+  "teaches": ["Object-Oriented Programming", "Python Inheritance", "Encapsulation", "Polymorphism", "Abstraction"],
+  "programmingLanguage": "Python",
+  "keywords": "Python, OOP, inheritance, money transfer, encapsulation, polymorphism, abstraction"
+}
+</script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4575646748966866" crossorigin="anonymous"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --obsidian-bg:     #0d0f12;
+  --obsidian-surface:#13161c;
+  --obsidian-card:   #1a1e28;
+  --obsidian-border: #252a38;
+  --obsidian-hover:  #1f2535;
+  --py-blue-dark:    #1a3a5c;
+  --py-blue:         #306998;
+  --py-blue-mid:     #4b8bbe;
+  --py-blue-light:   #5aa0d4;
+  --py-yellow:       #ffd43b;
+  --py-yellow-dim:   #c9a227;
+  --text-primary:    #e8eaf2;
+  --text-secondary:  #8b93a8;
+  --text-muted:      #555d72;
+  --code-green:      #6abf7b;
+  --code-orange:     #e5954a;
+  --code-purple:     #b48ead;
+  --code-red:        #e06c75;
+  --code-string:     #98c379;
+  --glow-blue:       rgba(75,139,190,0.18);
+  --glow-yellow:     rgba(255,212,59,0.12);
+  --accent-gold:     #ffd43b;
+  --success:         #6abf7b;
+  --danger:          #e06c75;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--obsidian-bg);
+  color: var(--text-primary);
+  font-family: 'Syne', sans-serif;
+  line-height: 1.7;
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-size: 0.8rem;
+}
+
+p { font-size: 0.8rem; text-align: justify; }
+h1 { font-size: 1rem; }
+h2, h3 { font-size: 0.9rem; }
+h4, h5, h6 { font-size: 0.85rem; }
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(75,139,190,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(75,139,190,0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(13,15,18,0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--obsidian-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  height: 56px;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.brand-text {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 1.1rem;
+  background: linear-gradient(135deg, var(--py-blue-light), var(--py-yellow));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.02em;
+}
+
+.brand-sep {
+  color: var(--text-muted);
+  font-size: 1.2rem;
+  -webkit-text-fill-color: var(--text-muted);
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  border: 1px solid var(--obsidian-border);
+  border-radius: 8px;
+  background: var(--obsidian-card);
+  gap: 5px;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+.hamburger:hover { border-color: var(--py-blue-mid); background: var(--obsidian-hover); }
+.hamburger span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: var(--text-secondary);
+  border-radius: 2px;
+  transition: all 0.3s;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.mobile-menu {
+  position: fixed;
+  top: 56px;
+  right: -320px;
+  width: 300px;
+  height: calc(100vh - 56px);
+  background: var(--obsidian-surface);
+  border-left: 1px solid var(--obsidian-border);
+  z-index: 999;
+  transition: right 0.35s cubic-bezier(0.4,0,0.2,1);
+  overflow-y: auto;
+  padding: 20px 16px;
+}
+.mobile-menu.open { right: 0; }
+
+.menu-section-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--py-blue-mid);
+  margin-bottom: 10px;
+  margin-top: 20px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--obsidian-border);
+}
+.menu-section-title:first-child { margin-top: 0; }
+
+.menu-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 14px;
+  margin-bottom: 6px;
+  background: var(--obsidian-card);
+  border: 1px solid var(--obsidian-border);
+  border-radius: 10px;
+  color: var(--text-secondary);
+  font-family: 'Syne', sans-serif;
+  font-size: 0.82rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s;
+  text-align: left;
+}
+.menu-btn:hover {
+  background: var(--obsidian-hover);
+  border-color: rgba(75,139,190,0.4);
+  color: var(--py-blue-light);
+  transform: translateX(-4px);
+}
+.menu-btn .btn-icon { font-size: 1rem; flex-shrink: 0; }
+
+.menu-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 998;
+}
+.menu-overlay.show { display: block; }
+
+.hero {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 48px 20px 36px;
+  border-bottom: 1px solid var(--obsidian-border);
+  overflow: hidden;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  top: -80px; left: 50%; transform: translateX(-50%);
+  width: 700px; height: 400px;
+  background: radial-gradient(ellipse, rgba(75,139,190,0.22) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(48,105,152,0.2);
+  border: 1px solid rgba(75,139,190,0.35);
+  border-radius: 999px;
+  padding: 6px 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--py-blue-light);
+  letter-spacing: 0.06em;
+  margin-bottom: 24px;
+}
+.hero-badge::before { content: '🐍'; font-size: 14px; }
+
+.hero h1 {
+  font-size: clamp(1.6rem, 5vw, 2.8rem);
+  font-weight: 800;
+  line-height: 1.1;
+  background: linear-gradient(135deg, var(--text-primary) 30%, var(--py-blue-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 16px;
+}
+.hero p { color: var(--text-secondary); font-size: 0.85rem; max-width: 640px; margin: 0 auto; }
+
+.wrapper {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 16px 60px;
+}
+
+.ad-banner {
+  margin: 20px 0;
+  border: 1px solid var(--obsidian-border);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--obsidian-card);
+  padding: 4px;
+}
+
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 32px 0 14px;
+}
+.section-label span {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--py-blue-mid);
+  white-space: nowrap;
+}
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--obsidian-border), transparent);
+}
+
+.toc {
+  background: var(--obsidian-card);
+  border: 1px solid var(--obsidian-border);
+  border-radius: 14px;
+  padding: 16px;
+  margin: 16px 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 8px;
+}
+.toc-title {
+  grid-column: 1/-1;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--py-blue-mid);
+  font-family: 'JetBrains Mono', monospace;
+  margin-bottom: 8px;
+}
+.toc a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.8rem;
+  padding: 8px 10px;
+  border-radius: 8px;
+  transition: all 0.2s;
+  border: 1px solid transparent;
+}
+.toc a:hover {
+  color: var(--py-blue-light);
+  background: var(--obsidian-hover);
+  border-color: var(--obsidian-border);
+  transform: translateX(3px);
+}
+
+.card {
+  background: var(--obsidian-card);
+  border: 1px solid var(--obsidian-border);
+  border-radius: 16px;
+  padding: 18px;
+  margin-bottom: 18px;
+  transition: border-color 0.25s, box-shadow 0.25s;
+  animation: fadeUp 0.4s ease both;
+}
+.card:hover {
+  border-color: rgba(75,139,190,0.4);
+  box-shadow: 0 0 0 1px rgba(75,139,190,0.08), 0 8px 40px rgba(0,0,0,0.4);
+}
+.card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 14px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--obsidian-border);
+}
+.card-icon {
+  width: 46px; height: 46px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+  background: rgba(48,105,152,0.18);
+  border: 1px solid rgba(75,139,190,0.25);
+}
+.card-header-text h2 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+.card-header-text .sub {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  color: var(--py-blue-mid);
+}
+
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 14px;
+}
+@media(max-width:600px) { .two-col { grid-template-columns: 1fr; } }
+
+.mini-box {
+  background: var(--obsidian-surface);
+  border: 1px solid var(--obsidian-border);
+  border-radius: 10px;
+  padding: 14px;
+}
+.mini-box h4 {
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--py-blue-mid);
+  font-family: 'JetBrains Mono', monospace;
+  margin-bottom: 8px;
+}
+.mini-box p, .mini-box ul { font-size: 0.78rem; color: var(--text-secondary); text-align: justify; }
+.mini-box ul { padding-left: 18px; }
+.mini-box li { margin-bottom: 6px; }
+
+pre {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  line-height: 1.75;
+  background: #0a0c10;
+  border: 1px solid var(--obsidian-border);
+  border-radius: 12px;
+  padding: 16px;
+  overflow-x: auto;
+  position: relative;
+}
+pre::before {
+  content: attr(data-lang);
+  position: absolute;
+  top: 12px; right: 16px;
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.kw  { color: #c678dd; }
+.cls { color: #e5c07b; }
+.fn  { color: #61afef; }
+.st  { color: var(--code-string); }
+.cm  { color: #5c6370; font-style: italic; }
+.nu  { color: #d19a66; }
+.bi  { color: #56b6c2; }
+.op  { color: var(--py-yellow); }
+.dec { color: var(--code-orange); }
+.slf { color: #e06c75; }
+
+.step-box {
+  background: var(--obsidian-surface);
+  border: 1px solid var(--obsidian-border);
+  border-left: 3px solid var(--py-blue);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 12px;
+  position: relative;
+}
+.step-number {
+  position: absolute;
+  top: -10px;
+  left: 14px;
+  background: var(--py-blue);
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+.step-box h4 {
+  font-size: 0.8rem;
+  color: var(--py-yellow);
+  margin-bottom: 8px;
+  margin-top: 4px;
+}
+.step-box p { font-size: 0.78rem; color: var(--text-secondary); }
+
+.tag {
+  display: inline-block;
+  background: rgba(48,105,152,0.2);
+  border: 1px solid rgba(75,139,190,0.3);
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  color: var(--py-blue-light);
+  margin-right: 4px;
+  margin-bottom: 4px;
+}
+.tag.yellow { background: rgba(255,212,59,0.1); border-color: rgba(255,212,59,0.25); color: var(--py-yellow); }
+.tag.green  { background: rgba(106,191,123,0.1); border-color: rgba(106,191,123,0.25); color: var(--code-green); }
+.concepts { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+
+.flow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0;
+  margin: 14px 0;
+  padding: 14px;
+  background: var(--obsidian-surface);
+  border: 1px solid var(--obsidian-border);
+  border-radius: 12px;
+  overflow-x: auto;
+}
+.flow-step { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.flow-box {
+  background: var(--py-blue-dark);
+  border: 1px solid var(--py-blue);
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--py-blue-light);
+  white-space: nowrap;
+  text-align: center;
+}
+.flow-arrow { padding: 0 8px; color: var(--py-yellow); font-size: 1rem; display: flex; align-items: center; }
+.flow-label { font-size: 0.62rem; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; }
+
+.full-source pre { border-color: rgba(75,139,190,0.3); }
+
+.intro-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+.intro-pill {
+  background: var(--obsidian-surface);
+  border: 1px solid var(--obsidian-border);
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+  transition: all 0.2s;
+}
+.intro-pill:hover { border-color: rgba(75,139,190,0.5); transform: translateY(-2px); }
+.intro-pill .emoji { font-size: 2rem; margin-bottom: 8px; display: block; }
+.intro-pill h4 { font-size: 0.82rem; color: var(--py-yellow); margin-bottom: 6px; }
+.intro-pill p { font-size: 0.75rem; color: var(--text-secondary); text-align: center; }
+
+.inheritance-tree {
+  background: var(--obsidian-surface);
+  border: 1px solid var(--obsidian-border);
+  border-radius: 12px;
+  padding: 20px;
+  margin: 14px 0;
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+}
+.tree-node {
+  display: inline-block;
+  background: var(--py-blue-dark);
+  border: 2px solid var(--py-blue);
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-size: 0.8rem;
+  color: var(--py-yellow);
+  font-weight: 700;
+}
+.tree-node.child {
+  background: rgba(48,105,152,0.15);
+  border-color: var(--py-blue-mid);
+  color: var(--py-blue-light);
+  font-weight: 400;
+}
+.tree-children { display: flex; justify-content: center; gap: 40px; margin-top: 6px; position: relative; }
+.tree-connector {
+  width: 2px;
+  height: 30px;
+  background: var(--py-blue-mid);
+  margin: 0 auto;
+  position: relative;
+}
+.tree-connector::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 8px;
+  background: var(--py-blue-mid);
+  border-radius: 50%;
+}
+.tree-h-line {
+  position: absolute;
+  top: 0;
+  left: 25%;
+  width: 50%;
+  height: 2px;
+  background: var(--py-blue-mid);
+}
+.tree-child-col { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+
+.share-section {
+  background: var(--obsidian-card);
+  border: 1px solid var(--obsidian-border);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.share-section h3 {
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+.share-section p {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+  text-align: center;
+}
+.share-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-family: 'Syne', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: #fff;
+}
+.share-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
+.share-btn.facebook  { background: #1877f2; border-color: #1877f2; }
+.share-btn.linkedin  { background: #0a66c2; border-color: #0a66c2; }
+.share-btn.twitter   { background: #000; border-color: #333; }
+.share-btn.whatsapp  { background: #25d366; border-color: #25d366; }
+.share-btn.youtube   { background: #ff0000; border-color: #ff0000; }
+.share-btn.telegram  { background: #0088cc; border-color: #0088cc; }
+.share-btn svg { width: 16px; height: 16px; fill: currentColor; flex-shrink: 0; }
+
+.share-msg-result {
+  margin-top: 16px;
+  background: var(--obsidian-surface);
+  border: 1px solid var(--obsidian-border);
+  border-radius: 10px;
+  padding: 14px;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  text-align: left;
+  display: none;
+}
+.share-msg-result.visible { display: block; }
+.share-msg-result strong { color: var(--py-yellow); }
+
+.follow-section {
+  background: var(--obsidian-card);
+  border: 1px solid var(--obsidian-border);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.follow-section h3 { font-size: 0.95rem; margin-bottom: 6px; color: var(--text-primary); }
+.follow-section p { font-size: 0.78rem; color: var(--text-secondary); margin-bottom: 20px; text-align: center; }
+.follow-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 10px;
+}
+.follow-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 12px;
+  border-radius: 12px;
+  text-decoration: none;
+  border: 1px solid var(--obsidian-border);
+  background: var(--obsidian-surface);
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-family: 'Syne', sans-serif;
+  font-weight: 600;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+.follow-btn:hover { transform: translateY(-3px); color: #fff; }
+.follow-btn.linkedin-btn:hover  { background: #0a66c2; border-color: #0a66c2; }
+.follow-btn.facebook-btn:hover  { background: #1877f2; border-color: #1877f2; }
+.follow-btn.twitter-btn:hover   { background: #111; border-color: #333; }
+.follow-btn.youtube-btn:hover   { background: #ff0000; border-color: #ff0000; }
+.follow-btn svg { width: 28px; height: 28px; fill: currentColor; }
+
+.comment-section {
+  background: var(--obsidian-card);
+  border: 1px solid var(--obsidian-border);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 20px;
+}
+.comment-section h3 { font-size: 0.95rem; margin-bottom: 16px; color: var(--text-primary); }
+
+.reaction-bar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.reaction-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--obsidian-border);
+  background: var(--obsidian-surface);
+  color: var(--text-secondary);
+  font-family: 'Syne', sans-serif;
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: 600;
+}
+.reaction-btn:hover { border-color: var(--py-yellow); color: var(--py-yellow); }
+.reaction-btn.active { background: rgba(255,212,59,0.12); border-color: var(--py-yellow); color: var(--py-yellow); }
+.reaction-btn.love.active { background: rgba(224,108,117,0.12); border-color: var(--danger); color: var(--danger); }
+
+.comment-form { margin-bottom: 24px; }
+.comment-form input,
+.comment-form textarea {
+  width: 100%;
+  background: var(--obsidian-surface);
+  border: 1px solid var(--obsidian-border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  color: var(--text-primary);
+  font-family: 'Syne', sans-serif;
+  font-size: 0.78rem;
+  margin-bottom: 10px;
+  resize: vertical;
+  transition: border-color 0.2s;
+}
+.comment-form input:focus,
+.comment-form textarea:focus {
+  outline: none;
+  border-color: var(--py-blue-mid);
+}
+.comment-form textarea { min-height: 90px; }
+.comment-form button {
+  background: var(--py-blue);
+  color: #fff;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 10px;
+  font-family: 'Syne', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.comment-form button:hover { background: var(--py-blue-mid); transform: translateY(-1px); }
+
+.comment-list { display: flex; flex-direction: column; gap: 14px; }
+.comment-item {
+  background: var(--obsidian-surface);
+  border: 1px solid var(--obsidian-border);
+  border-radius: 12px;
+  padding: 14px;
+  animation: fadeUp 0.3s ease both;
+}
+.comment-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.comment-avatar {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--py-blue), var(--py-yellow));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+}
+.comment-name { font-size: 0.8rem; font-weight: 700; color: var(--text-primary); }
+.comment-date { font-size: 0.68rem; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; }
+.comment-text { font-size: 0.78rem; color: var(--text-secondary); text-align: justify; }
+
+.subscribe-section {
+  background: linear-gradient(135deg, rgba(48,105,152,0.2), rgba(255,212,59,0.08));
+  border: 1px solid rgba(75,139,190,0.3);
+  border-radius: 16px;
+  padding: 28px 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.subscribe-section h3 { font-size: 0.95rem; color: var(--text-primary); margin-bottom: 8px; }
+.subscribe-section p { font-size: 0.78rem; color: var(--text-secondary); margin-bottom: 20px; text-align: center; }
+.subscribe-form {
+  display: flex;
+  gap: 10px;
+  max-width: 480px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+.subscribe-form input {
+  flex: 1;
+  min-width: 200px;
+  background: var(--obsidian-surface);
+  border: 1px solid var(--obsidian-border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  color: var(--text-primary);
+  font-family: 'Syne', sans-serif;
+  font-size: 0.78rem;
+}
+.subscribe-form input:focus { outline: none; border-color: var(--py-blue-mid); }
+.subscribe-form button {
+  background: var(--py-yellow);
+  color: #000;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-family: 'Syne', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.subscribe-form button:hover { background: var(--py-yellow-dim); transform: translateY(-1px); }
+.subscribe-msg {
+  margin-top: 12px;
+  font-size: 0.75rem;
+  color: var(--success);
+  display: none;
+}
+
+  footer {
+    background: #08090d;
+    border-top:1px solid rgba(55,118,171,0.12);
+    padding: clamp(40px,6vw,60px) clamp(1rem,4vw,2rem) clamp(20px,3vw,30px);
+    position:relative;
+    z-index:1;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .footer-grid {
+    max-width:1100px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+    gap: clamp(20px,3vw,40px);
+    margin-bottom:48px;
+  }
+
+  .footer-brand .logo { font-size:1.2rem; margin-bottom:14px; display:block; }
+
+  .footer-brand p {
+    color:var(--muted, #ffffff);
+    font-size:0.9rem;
+    line-height:1.6;
+    max-width:280px;
+    text-align: justify;
+  }
+
+  .footer-col h4 {
+    font-family:'Syne',sans-serif;
+    font-size:0.9rem;
+    font-weight:700;
+    color:var(--accent, #3776AB);
+    margin-bottom:16px;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+  }
+
+  .footer-col ul { list-style:none; display:flex; flex-direction:column; gap:8px; }
+
+  .footer-nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    width: 100%;
+    padding: 9px 14px;
+    background: rgba(55,118,171,0.0);
+    border: 1.5px solid rgba(55,118,171,0.14);
+    border-radius: 9px;
+    color: #ffffff;
+    text-decoration: none;
+    font-family: 'DM Sans', 'Syne', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.22s;
+    position: relative;
+    overflow: hidden;
+    text-align: left;
+  }
+  .footer-nav-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(55,118,171,0.1), transparent);
+    opacity: 0;
+    transition: opacity 0.22s;
+  }
+  .footer-nav-btn:hover {
+    border-color: #3776AB;
+    color: #8ec4e6;
+    transform: translateX(3px);
+    box-shadow: 0 2px 14px rgba(55,118,171,0.18);
+  }
+  .footer-nav-btn:hover::before { opacity: 1; }
+  .footer-nav-btn:active { transform: translateX(1px) scale(0.98); }
+  .footer-nav-icon { font-size: 0.85rem; flex-shrink: 0; position: relative; z-index: 1; }
+
+  .footer-bottom {
+    max-width:1100px;
+    margin:0 auto;
+    border-top:1px solid rgba(255,255,255,0.06);
+    padding-top:24px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:12px;
+  }
+
+  .footer-bottom p { color:#ffffff; font-size:0.82rem; }
+
+  .footer-socials { display:flex; gap:12px; }
+
+  .footer-social {
+    width:36px; height:36px;
+    border:1px solid rgba(55,118,171,0.2);
+    border-radius:8px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:0.9rem;
+    cursor:pointer;
+    transition:all 0.2s;
+    text-decoration:none;
+    color: #ffffff;
+  }
+  .footer-social:hover { border-color:#3776AB; box-shadow:0 0 20px rgba(55,118,171,0.25); }
+
+  @media(max-width:900px){ .footer-grid { grid-template-columns: 1fr 1fr 1fr; gap: 2rem; } }
+  @media(max-width:480px){ .footer-grid { grid-template-columns:1fr; } .footer-bottom { flex-direction: column; align-items: flex-start; gap: 16px; } }
+
+.value-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+  margin-top: 14px;
+}
+.value-card {
+  background: var(--obsidian-surface);
+  border: 1px solid var(--obsidian-border);
+  border-radius: 12px;
+  padding: 16px;
+  transition: all 0.2s;
+}
+.value-card:hover { border-color: rgba(75,139,190,0.4); transform: translateY(-2px); }
+.value-card .vc-icon { font-size: 1.8rem; margin-bottom: 10px; display: block; }
+.value-card h4 { font-size: 0.82rem; color: var(--py-yellow); margin-bottom: 6px; }
+.value-card p { font-size: 0.75rem; color: var(--text-secondary); }
+
+.outro-section {
+  background: linear-gradient(135deg, rgba(26,58,92,0.4), rgba(255,212,59,0.06));
+  border: 1px solid rgba(75,139,190,0.3);
+  border-radius: 20px;
+  padding: 36px 28px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.outro-section h2 { font-size: 1rem; color: var(--text-primary); margin-bottom: 12px; }
+.outro-section p { font-size: 0.8rem; color: var(--text-secondary); max-width: 580px; margin: 0 auto 10px; text-align: center; }
+
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(20px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+@media(max-width:480px) {
+  .wrapper { padding: 0 12px 40px; }
+  .hero { padding: 32px 14px 28px; }
+  .card { padding: 14px; }
+  .flow { overflow-x: auto; }
+  .share-buttons { gap: 8px; }
+  .share-btn { padding: 8px 13px; font-size: 0.72rem; }
+  .subscribe-form { flex-direction: column; }
+  .navbar { padding: 0 14px; }
+  .intro-grid { grid-template-columns: 1fr 1fr; }
+  .footer-top { grid-template-columns: 1fr; }
+  .follow-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+code {
+  font-family: 'JetBrains Mono', monospace;
+  background: rgba(75,139,190,0.12);
+  color: var(--py-blue-light);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 0.78em;
+}
+
+.highlight-box {
+  background: rgba(255,212,59,0.06);
+  border: 1px solid rgba(255,212,59,0.2);
+  border-left: 3px solid var(--py-yellow);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin: 14px 0;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  text-align: justify;
+}
+.highlight-box strong { color: var(--py-yellow); }
+
+@media (max-width: 768px) {
+  .navbar { padding: 0 12px; height: 52px; }
+  .brand-text { font-size: 0.95rem; }
+  .wrapper { padding: 0 12px 40px; }
+  .hero { padding: 32px 14px 24px; }
+  .hero h1 { font-size: clamp(1.3rem, 6vw, 2rem); }
+  .hero p { font-size: 0.78rem; }
+  .card { padding: 14px; margin-bottom: 14px; }
+  .card-header { gap: 10px; }
+  .card-icon { width: 38px; height: 38px; font-size: 18px; }
+  .toc { grid-template-columns: 1fr 1fr; padding: 12px; gap: 6px; }
+  .two-col { grid-template-columns: 1fr; }
+  .intro-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .value-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .flow { gap: 4px; padding: 10px; }
+  .flow-box { padding: 6px 10px; font-size: 0.65rem; }
+  .flow-arrow { padding: 0 4px; font-size: 0.85rem; }
+  .share-section { padding: 18px; }
+  .share-buttons { gap: 8px; }
+  .share-btn { padding: 8px 12px; font-size: 0.72rem; }
+  .follow-section { padding: 18px; }
+  .follow-grid { grid-template-columns: repeat(2, 1fr); }
+  .comment-section { padding: 18px; }
+  .subscribe-section { padding: 20px 16px; }
+  .subscribe-form { flex-direction: column; }
+  .reaction-bar { flex-wrap: wrap; gap: 8px; }
+  .outro-section { padding: 24px 16px; }
+  pre { font-size: 0.68rem; padding: 12px; }
+  .step-box { padding: 12px 14px; }
+  .inheritance-tree { padding: 14px; }
+  .tree-children { gap: 20px; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .footer-brand { grid-column: 1 / -1; }
+}
+
+@media (max-width: 400px) {
+  .toc { grid-template-columns: 1fr; }
+  .intro-grid { grid-template-columns: 1fr; }
+  .value-grid { grid-template-columns: 1fr; }
+  .follow-grid { grid-template-columns: 1fr 1fr; }
+  .share-btn { padding: 7px 10px; font-size: 0.7rem; }
+  .flow { flex-direction: column; align-items: flex-start; }
+  .flow-arrow { transform: rotate(90deg); }
+  .tree-children { gap: 10px; }
+  .footer-grid { grid-template-columns: 1fr; }
+}
+
+</style>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="Main navigation">
+  <a class="nav-brand" href="#" aria-label="Valleys &amp; Bytes Home">
+    <span class="brand-text">VALLEYS <span class="brand-sep">&</span> BYTES</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="menu-overlay" id="menuOverlay"></div>
+
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Navigation menu">
+  <div class="menu-section-title">📍 Navigation</div>
+  <a href="#intro" class="menu-btn" onclick="closeMenu()"><span class="btn-icon">📖</span> Introduction</a>
+  <a href="#inheritance" class="menu-btn" onclick="closeMenu()"><span class="btn-icon">🧬</span> Inheritance Deep-Dive</a>
+  <a href="#person" class="menu-btn" onclick="closeMenu()"><span class="btn-icon">👤</span> Person (Base Class)</a>
+  <a href="#sender" class="menu-btn" onclick="closeMenu()"><span class="btn-icon">📤</span> Sender Class</a>
+  <a href="#recipient" class="menu-btn" onclick="closeMenu()"><span class="btn-icon">📥</span> Recipient Class</a>
+  <a href="#transfer" class="menu-btn" onclick="closeMenu()"><span class="btn-icon">💸</span> MoneyTransfer</a>
+  <a href="#main" class="menu-btn" onclick="closeMenu()"><span class="btn-icon">▶️</span> main()</a>
+  <a href="#concepts" class="menu-btn" onclick="closeMenu()"><span class="btn-icon">🧠</span> Key Concepts</a>
+  <a href="#flow" class="menu-btn" onclick="closeMenu()"><span class="btn-icon">🔄</span> Execution Flow</a>
+  <a href="#source" class="menu-btn" onclick="closeMenu()"><span class="btn-icon">📄</span> Full Source</a>
+
+  <div class="menu-section-title">🌐 Connect</div>
+  <a href="https://www.linkedin.com/in/glenn-pansensoy-6288453a2" target="_blank" rel="noopener" class="menu-btn"><span class="btn-icon">💼</span> LinkedIn</a>
+  <a href="https://www.facebook.com/@Glenn-Junsay-Pansensoy" target="_blank" rel="noopener" class="menu-btn"><span class="btn-icon">📘</span> Facebook</a>
+  <a href="https://x.com/@GlennPansensoy" target="_blank" rel="noopener" class="menu-btn"><span class="btn-icon">🐦</span> Twitter / X</a>
+  <a href="https://www.youtube.com/c/@GlennPansensoy" target="_blank" rel="noopener" class="menu-btn"><span class="btn-icon">▶️</span> YouTube</a>
+
+  <div class="menu-section-title">📂 Pages</div>
+  <a href="about-guide.html" class="menu-btn"><span class="btn-icon">📋</span> About This Page</a>
+  <a href="about-author.html" class="menu-btn"><span class="btn-icon">👤</span> About the Author</a>
+  <a href="oop-contact.html" class="menu-btn"><span class="btn-icon">✉️</span> Contact</a>
+  <a href="oop-privacy.html" class="menu-btn"><span class="btn-icon">🔒</span> Privacy Policy</a>
+  <a href="oop-terms.html" class="menu-btn"><span class="btn-icon">📜</span> Terms of Service</a>
+</div>
+
+<header class="hero">
+  <div class="hero-badge">Python 3 · OOP · Money Transfer System</div>
+  <h1>Code Breakdown &amp;<br>Logical Explanation</h1>
+  <p>A deep-dive into every class, method, and concept used in the Money Transfer System — with special focus on how inheritance powers the entire design.</p>
+</header>
+
+<div class="wrapper">
+
+  <div class="ad-banner">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-4575646748966866"
+         data-ad-slot="4226674403"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <nav class="toc" aria-label="Table of contents">
+    <div class="toc-title">📑 Table of Contents</div>
+    <a href="#intro"><span>📖</span> Introduction</a>
+    <a href="#inheritance"><span>🧬</span> Inheritance Deep-Dive</a>
+    <a href="#person"><span>👤</span> Person (Base Class)</a>
+    <a href="#sender"><span>📤</span> Sender</a>
+    <a href="#recipient"><span>📥</span> Recipient</a>
+    <a href="#transfer"><span>💸</span> MoneyTransfer</a>
+    <a href="#main"><span>▶️</span> main()</a>
+    <a href="#concepts"><span>🧠</span> Key Concepts</a>
+    <a href="#flow"><span>🔄</span> Execution Flow</a>
+    <a href="#source"><span>📄</span> Full Source</a>
+  </nav>
+
+  <div class="section-label" id="intro"><span>// Introduction</span></div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">📖</div>
+      <div class="card-header-text">
+        <h2>What This Program Is All About</h2>
+        <div class="sub">A real-world Python application demonstrating OOP in action</div>
+      </div>
+    </div>
+    <p>The <strong>Money Transfer System</strong> is a console-based Python application that simulates the core logic behind a peer-to-peer money transfer service — think of it as the engine powering a simplified GCash, PayMaya, or Western Union. A sender provides their details, specifies an amount, and the system calculates a 2% service fee, generates a unique transaction code, prints a structured summary, and then notifies the recipient — all in a clean, object-oriented architecture.</p>
+
+    <div class="highlight-box">
+      <strong>Why does this matter?</strong> Because the same OOP patterns used here — inheritance, encapsulation, delegation — are exactly what you find in enterprise-grade fintech systems, banking APIs, and payment gateways used by millions daily. Learning this program isn't just about Python. It's about thinking like a software engineer.
+    </div>
+
+    <p>Every class has a clear responsibility. Every method does one thing well. The program is short enough to read in minutes but rich enough to demonstrate the <em>four pillars of OOP</em> in a meaningful context. Whether you're a student encountering Python for the first time or a developer revisiting the fundamentals, this breakdown will give you a clear map of how object-oriented thinking transforms a problem into an elegant solution.</p>
+
+    <div class="intro-grid">
+      <div class="intro-pill">
+        <span class="emoji">🏗️</span>
+        <h4>4 Classes</h4>
+        <p>Person, Sender, Recipient, MoneyTransfer — each with a focused role</p>
+      </div>
+      <div class="intro-pill">
+        <span class="emoji">💡</span>
+        <h4>4 OOP Pillars</h4>
+        <p>Encapsulation, Inheritance, Abstraction, and Polymorphism all present</p>
+      </div>
+      <div class="intro-pill">
+        <span class="emoji">🔐</span>
+        <h4>Private Methods</h4>
+        <p>Fee and code generation are hidden using Python's underscore convention</p>
+      </div>
+      <div class="intro-pill">
+        <span class="emoji">✅</span>
+        <h4>Input Validation</h4>
+        <p>A robust while loop with try/except ensures only valid data proceeds</p>
+      </div>
+      <div class="intro-pill">
+        <span class="emoji">🔗</span>
+        <h4>Delegation</h4>
+        <p>MoneyTransfer.execute() delegates notification to Recipient.notify()</p>
+      </div>
+      <div class="intro-pill">
+        <span class="emoji">🎲</span>
+        <h4>Unique Codes</h4>
+        <p>Every transaction gets a TXN + 6 random alphanumeric characters</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label" id="inheritance"><span>// Inheritance — The Heart of This Program</span></div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">🧬</div>
+      <div class="card-header-text">
+        <h2>Why Inheritance Is the Core of This Design</h2>
+        <div class="sub">The DRY principle · Code reuse · Hierarchical modeling</div>
+      </div>
+    </div>
+
+    <p>Inheritance is the mechanism by which one class acquires the properties and behaviors of another. In Python, it is declared simply by placing the parent class name in parentheses: <code>class Sender(Person)</code>. But understanding <em>why</em> a program uses inheritance — not just <em>how</em> — is what separates a beginner from a proficient developer.</p>
+
+    <div class="inheritance-tree" aria-label="Inheritance diagram">
+      <div class="tree-node">🧑 Person (Base / Parent Class)</div>
+      <div class="tree-connector"></div>
+      <div class="tree-children">
+        <div style="position:absolute;top:0;left:25%;width:50%;height:2px;background:var(--py-blue-mid);"></div>
+        <div class="tree-child-col">
+          <div class="tree-connector"></div>
+          <div class="tree-node child">📤 Sender<br><small style="font-size:0.6rem;color:var(--text-muted)">inherits everything</small></div>
+        </div>
+        <div class="tree-child-col">
+          <div class="tree-connector"></div>
+          <div class="tree-node child">📥 Recipient<br><small style="font-size:0.6rem;color:var(--text-muted)">inherits + adds notify()</small></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="mini-box">
+        <h4>🔑 What is Inherited?</h4>
+        <p>Both <code>Sender</code> and <code>Recipient</code> automatically receive <code>__init__</code> (which assigns <code>name</code> and <code>phone</code>) and <code>__str__</code> (which produces a readable string like <code>Alice (09171234567)</code>). This code is written <strong>once</strong> in <code>Person</code> and shared freely — no copy-pasting, no inconsistencies.</p>
+      </div>
+      <div class="mini-box">
+        <h4>🔍 What Differentiates Them?</h4>
+        <p><code>Sender</code> adds nothing — a sender only needs identity, so it is semantically complete with just the inherited data. <code>Recipient</code>, however, extends <code>Person</code> with a <code>notify()</code> method because receiving money carries an additional behavioral responsibility: alerting the receiver.</p>
+      </div>
+    </div>
+
+    <div class="step-box" style="margin-top:16px;">
+      <div class="step-number">Concept 1</div>
+      <h4>The Liskov Substitution Principle in Action</h4>
+      <p>Both <code>Sender</code> and <code>Recipient</code> can be used anywhere a <code>Person</code> is expected — because they <em>are</em> persons. This is the "IS-A" relationship. When <code>MoneyTransfer</code> calls <code>f"{self.sender}"</code>, it doesn't need to know whether <code>self.sender</code> is a <code>Sender</code> or <code>Person</code>. The <code>__str__</code> method works identically for both — this is polymorphism, a direct consequence of inheritance.</p>
+    </div>
+
+    <div class="step-box">
+      <div class="step-number">Concept 2</div>
+      <h4>The DRY Principle — Don't Repeat Yourself</h4>
+      <p>Without inheritance, you would duplicate <code>__init__</code> and <code>__str__</code> inside both <code>Sender</code> and <code>Recipient</code>. If the phone number format ever changes, you'd need to update it in two places — a maintenance nightmare. With inheritance, you change <code>Person</code> once and the effect cascades to all child classes automatically.</p>
+    </div>
+
+    <div class="step-box">
+      <div class="step-number">Concept 3</div>
+      <h4>Semantic Clarity Through Specialization</h4>
+      <p>Even though <code>Sender</code> has an empty body (just a docstring), it is semantically important. Using <code>Sender</code> vs. a raw <code>Person</code> tells every developer who reads the code: <em>this object is the initiator of a transfer</em>. This clarity prevents misuse and documents intent without a single comment.</p>
+    </div>
+
+    <div class="step-box">
+      <div class="step-number">Concept 4</div>
+      <h4>Extensibility — Open for Extension, Closed for Modification</h4>
+      <p>Want to add a <code>BusinessSender</code> with a VAT number? Simply create <code>class BusinessSender(Sender)</code>. Want a <code>VIPRecipient</code> with priority notifications? Extend <code>Recipient</code>. The base classes never need to change. This is the Open/Closed Principle — one of the SOLID pillars — naturally supported by this inheritance structure.</p>
+    </div>
+
+    <div class="concepts">
+      <span class="tag">single inheritance</span>
+      <span class="tag">IS-A relationship</span>
+      <span class="tag">DRY principle</span>
+      <span class="tag yellow">SOLID: Open/Closed</span>
+      <span class="tag green">polymorphism via __str__</span>
+      <span class="tag">semantic specialization</span>
+    </div>
+  </div>
+
+  <div class="section-label"><span>// Imports &amp; Setup</span></div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">📦</div>
+      <div class="card-header-text">
+        <h2>Module Imports</h2>
+        <div class="sub">import random · import string</div>
+      </div>
+    </div>
+    <pre data-lang="python"><span class="kw">import</span> random
+<span class="kw">import</span> string</pre>
+    <div class="two-col" style="margin-top:14px;">
+      <div class="mini-box">
+        <h4>⚙️ Role</h4>
+        <p>These are Python <strong>standard library</strong> modules loaded at the top so their functionality is available throughout the script without any installation.</p>
+      </div>
+      <div class="mini-box">
+        <h4>🔍 How they operate</h4>
+        <ul>
+          <li><strong>random</strong> — used by <code>random.choices()</code> to pick random characters for the transaction code.</li>
+          <li><strong>string</strong> — provides <code>string.ascii_uppercase</code> (A–Z) and <code>string.digits</code> (0–9) as ready-made character pools.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label" id="person"><span>// Class: Person</span></div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">👤</div>
+      <div class="card-header-text">
+        <h2>Person</h2>
+        <div class="sub">Base class · Blueprint for all people in the system</div>
+      </div>
+    </div>
+    <pre data-lang="python"><span class="kw">class</span> <span class="cls">Person</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="slf">self</span>, name, phone):
+        <span class="slf">self</span>.name  = name
+        <span class="slf">self</span>.phone = phone
+
+    <span class="kw">def</span> <span class="fn">__str__</span>(<span class="slf">self</span>):
+        <span class="kw">return</span> <span class="st">f"</span><span class="op">{</span><span class="slf">self</span>.name<span class="op">}</span><span class="st"> (</span><span class="op">{</span><span class="slf">self</span>.phone<span class="op">}</span><span class="st">)"</span></pre>
+
+    <div class="section-label" style="margin:14px 0 8px;"><span>Step-by-Step Explanation</span></div>
+
+    <div class="step-box">
+      <div class="step-number">Step 1</div>
+      <h4>Class Declaration</h4>
+      <p><code>class Person:</code> creates a new class with no parent (implicitly inherits from Python's <code>object</code>). This is the blueprint — no actual person exists yet, just the template.</p>
+    </div>
+    <div class="step-box">
+      <div class="step-number">Step 2</div>
+      <h4>The Constructor (__init__)</h4>
+      <p><code>def __init__(self, name, phone)</code> is called automatically when you write <code>Person("Alice", "09171234567")</code>. <code>self</code> refers to the newly created object instance. The two parameters are stored as <em>instance attributes</em>: <code>self.name</code> and <code>self.phone</code>.</p>
+    </div>
+    <div class="step-box">
+      <div class="step-number">Step 3</div>
+      <h4>The __str__ Dunder Method</h4>
+      <p>Defining <code>__str__</code> tells Python: "when you need to convert this object to a string — such as inside an f-string or a <code>print()</code> call — use this method." Returning <code>f"{self.name} ({self.phone})"</code> gives a clean, readable representation like <code>Alice (09171234567)</code>.</p>
+    </div>
+
+    <div class="two-col">
+      <div class="mini-box">
+        <h4>🎯 Role</h4>
+        <p>Acts as the <strong>parent/base class</strong>. Defines shared data (<code>name</code>, <code>phone</code>) and shared behaviour (<code>__str__</code>) that both <code>Sender</code> and <code>Recipient</code> inherit — avoiding code duplication.</p>
+      </div>
+      <div class="mini-box">
+        <h4>⚙️ How it operates</h4>
+        <ul>
+          <li><strong>__init__</strong> — runs automatically when <code>Person(...)</code> is called, assigning instance attributes.</li>
+          <li><strong>self</strong> — refers to the specific object being created or acted upon.</li>
+          <li><strong>__str__</strong> — a dunder method invoked automatically by <code>str()</code>, f-strings, and <code>print()</code>.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="concepts">
+      <span class="tag">OOP</span><span class="tag">__init__</span><span class="tag">__str__</span>
+      <span class="tag">instance attributes</span><span class="tag yellow">dunder methods</span>
+    </div>
+  </div>
+
+  <div class="section-label" id="sender"><span>// Class: Sender</span></div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">📤</div>
+      <div class="card-header-text">
+        <h2>Sender</h2>
+        <div class="sub">Child class of Person · Inherits everything, adds nothing extra</div>
+      </div>
+    </div>
+    <pre data-lang="python"><span class="kw">class</span> <span class="cls">Sender</span>(<span class="cls">Person</span>):
+    <span class="st">"""Sender class inheriting from Person."""</span></pre>
+
+    <div class="step-box" style="margin-top:14px;">
+      <div class="step-number">Step 1</div>
+      <h4>The Parentheses Signal Inheritance</h4>
+      <p>Writing <code>class Sender(Person)</code> tells Python that <code>Sender</code> is a subclass of <code>Person</code>. At class creation time, Python links the two via the Method Resolution Order (MRO). Any attribute or method lookup on a <code>Sender</code> instance that isn't found locally is automatically delegated to <code>Person</code>.</p>
+    </div>
+    <div class="step-box">
+      <div class="step-number">Step 2</div>
+      <h4>Docstring as Documentation</h4>
+      <p>The triple-quoted string <code>"""Sender class inheriting from Person."""</code> is a <em>docstring</em> — accessible via <code>Sender.__doc__</code>. It's the Python-idiomatic way to document classes and functions inline, and it also satisfies Python's requirement that the class body not be empty.</p>
+    </div>
+    <div class="step-box">
+      <div class="step-number">Step 3</div>
+      <h4>Implicit __init__ Inheritance</h4>
+      <p>Because <code>Sender</code> defines no <code>__init__</code>, Python automatically uses <code>Person.__init__</code> when you call <code>Sender("Bob", "09181234567")</code>. The sender object gets <code>name</code> and <code>phone</code> attributes without a single line of constructor code in <code>Sender</code> itself.</p>
+    </div>
+
+    <div class="two-col">
+      <div class="mini-box">
+        <h4>🎯 Role</h4>
+        <p>Represents the <strong>person initiating the transfer</strong>. Inherits <code>name</code>, <code>phone</code>, and <code>__str__</code> from <code>Person</code> without any overrides — a clean semantic distinction between a sender and a generic person.</p>
+      </div>
+      <div class="mini-box">
+        <h4>⚙️ Design Rationale</h4>
+        <p>An empty child class might seem redundant, but it serves a critical design purpose: it makes the code self-documenting. Seeing <code>sender = Sender(...)</code> tells any developer instantly what role this object plays — something that <code>person1 = Person(...)</code> would fail to communicate.</p>
+      </div>
+    </div>
+    <div class="concepts">
+      <span class="tag">inheritance</span><span class="tag">docstring</span><span class="tag green">no override</span>
+      <span class="tag yellow">MRO — Method Resolution Order</span>
+    </div>
+  </div>
+
+  <div class="section-label" id="recipient"><span>// Class: Recipient</span></div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">📥</div>
+      <div class="card-header-text">
+        <h2>Recipient</h2>
+        <div class="sub">Child class of Person · Extended with notification behaviour</div>
+      </div>
+    </div>
+    <pre data-lang="python"><span class="kw">class</span> <span class="cls">Recipient</span>(<span class="cls">Person</span>):
+    <span class="kw">def</span> <span class="fn">notify</span>(<span class="slf">self</span>, transaction_code, amount, sender_name):
+        <span class="bi">print</span>(<span class="st">"\n"</span> + <span class="st">"="</span>*<span class="nu">50</span>)
+        <span class="bi">print</span>(<span class="st">"NOTIFICATION FOR RECIPIENT"</span>)
+        <span class="bi">print</span>(<span class="st">"="</span>*<span class="nu">50</span>)
+        <span class="bi">print</span>(<span class="st">f"Hello </span><span class="op">{</span><span class="slf">self</span>.name<span class="op">}</span><span class="st">,"</span>)
+        <span class="bi">print</span>(<span class="st">f"You have received ₱</span><span class="op">{</span>amount<span class="op">:.2f}</span><span class="st"> from </span><span class="op">{</span>sender_name<span class="op">}</span><span class="st">."</span>)
+        <span class="bi">print</span>(<span class="st">f"Transaction Code: </span><span class="op">{</span>transaction_code<span class="op">}</span><span class="st">"</span>)
+        <span class="bi">print</span>(<span class="st">"="</span>*<span class="nu">50</span>)</pre>
+
+    <div class="step-box" style="margin-top:14px;">
+      <div class="step-number">Step 1</div>
+      <h4>Inheritance + Extension</h4>
+      <p>Like <code>Sender</code>, <code>Recipient</code> inherits everything from <code>Person</code>. Unlike <code>Sender</code>, it <em>extends</em> the parent by adding a new method. This is the canonical use of inheritance: take what you need from the parent, then specialize.</p>
+    </div>
+    <div class="step-box">
+      <div class="step-number">Step 2</div>
+      <h4>The notify() Method Signature</h4>
+      <p><code>notify(self, transaction_code, amount, sender_name)</code> — three pieces of external data are passed in because <code>Recipient</code> doesn't own them. The recipient knows only their own name (via inherited <code>self.name</code>). The transaction details come from <code>MoneyTransfer</code>, which calls this method after completing its calculations.</p>
+    </div>
+    <div class="step-box">
+      <div class="step-number">Step 3</div>
+      <h4>The :.2f Format Specifier</h4>
+      <p>Inside <code>f"You have received ₱{amount:.2f}"</code>, the <code>:.2f</code> is a format specification. It tells Python to display the float as a fixed-point number with exactly 2 decimal places — so <code>500.0</code> becomes <code>500.00</code>, and <code>1234.567</code> becomes <code>1234.57</code>. Essential for financial displays.</p>
+    </div>
+    <div class="step-box">
+      <div class="step-number">Step 4</div>
+      <h4>String Repetition for Visual Separators</h4>
+      <p><code>"=" * 50</code> is Python string multiplication — it repeats the character <code>=</code> exactly 50 times to create a visual divider line. This is more readable and maintainable than writing 50 equal signs manually.</p>
+    </div>
+
+    <div class="two-col">
+      <div class="mini-box">
+        <h4>🎯 Role</h4>
+        <p>Represents the <strong>person receiving money</strong>. Unlike <code>Sender</code>, a recipient carries extra behavior: alerting the receiver after the transaction completes.</p>
+      </div>
+      <div class="mini-box">
+        <h4>⚙️ How it operates</h4>
+        <ul>
+          <li><strong>notify()</strong> — called by <code>MoneyTransfer.execute()</code> at the end of the transaction.</li>
+          <li><strong>f-strings</strong> — embed runtime values directly into string literals.</li>
+          <li><strong>:.2f</strong> — formats floats to 2 decimal places for currency display.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="concepts">
+      <span class="tag">inheritance</span><span class="tag">f-strings</span>
+      <span class="tag">:.2f format spec</span><span class="tag yellow">string repetition</span>
+      <span class="tag green">method extension</span>
+    </div>
+  </div>
+
+  <div class="section-label" id="transfer"><span>// Class: MoneyTransfer</span></div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">💸</div>
+      <div class="card-header-text">
+        <h2>MoneyTransfer</h2>
+        <div class="sub">Core transaction engine · fee calculation · code generation · execution</div>
+      </div>
+    </div>
+    <pre data-lang="python"><span class="kw">class</span> <span class="cls">MoneyTransfer</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="slf">self</span>, sender, recipient, amount):
+        <span class="slf">self</span>.sender           = sender
+        <span class="slf">self</span>.recipient        = recipient
+        <span class="slf">self</span>.amount           = amount
+        <span class="slf">self</span>.fee              = <span class="slf">self</span>.<span class="fn">_calculate_fee</span>()
+        <span class="slf">self</span>.total            = <span class="slf">self</span>.amount + <span class="slf">self</span>.fee
+        <span class="slf">self</span>.transaction_code = <span class="slf">self</span>.<span class="fn">_generate_code</span>()
+
+    <span class="kw">def</span> <span class="fn">_calculate_fee</span>(<span class="slf">self</span>):
+        <span class="kw">return</span> (<span class="slf">self</span>.amount / <span class="nu">1000</span>) * <span class="nu">20</span>   <span class="cm"># 2% fee</span>
+
+    <span class="kw">def</span> <span class="fn">_generate_code</span>(<span class="slf">self</span>):
+        chars = string.ascii_uppercase + string.digits
+        <span class="kw">return</span> <span class="st">'TXN'</span> + <span class="st">''</span>.join(random.choices(chars, k=<span class="nu">6</span>))
+
+    <span class="kw">def</span> <span class="fn">execute</span>(<span class="slf">self</span>):
+        <span class="bi">print</span>(<span class="st">"\n"</span> + <span class="st">"-"</span>*<span class="nu">50</span>)
+        <span class="bi">print</span>(<span class="st">"TRANSACTION SUMMARY"</span>)
+        <span class="bi">print</span>(<span class="st">"-"</span>*<span class="nu">50</span>)
+        <span class="bi">print</span>(<span class="st">f"Sender:            </span><span class="op">{</span><span class="slf">self</span>.sender<span class="op">}</span><span class="st">"</span>)
+        <span class="bi">print</span>(<span class="st">f"Recipient:         </span><span class="op">{</span><span class="slf">self</span>.recipient<span class="op">}</span><span class="st">"</span>)
+        <span class="bi">print</span>(<span class="st">f"Amount to send:    ₱</span><span class="op">{</span><span class="slf">self</span>.amount<span class="op">:.2f}</span><span class="st">"</span>)
+        <span class="bi">print</span>(<span class="st">f"Transfer fee (2%): ₱</span><span class="op">{</span><span class="slf">self</span>.fee<span class="op">:.2f}</span><span class="st">"</span>)
+        <span class="bi">print</span>(<span class="st">f"Total to be paid:  ₱</span><span class="op">{</span><span class="slf">self</span>.total<span class="op">:.2f}</span><span class="st">"</span>)
+        <span class="bi">print</span>(<span class="st">f"Transaction Code:  </span><span class="op">{</span><span class="slf">self</span>.transaction_code<span class="op">}</span><span class="st">"</span>)
+        <span class="bi">print</span>(<span class="st">"-"</span>*<span class="nu">50</span>)
+        <span class="slf">self</span>.recipient.<span class="fn">notify</span>(
+            <span class="slf">self</span>.transaction_code,
+            <span class="slf">self</span>.amount,
+            <span class="slf">self</span>.sender.name
+        )</pre>
+
+    <div class="step-box" style="margin-top:14px;">
+      <div class="step-number">Step 1</div>
+      <h4>Composition: Storing Objects Inside Objects</h4>
+      <p><code>self.sender = sender</code> and <code>self.recipient = recipient</code> store <em>entire objects</em> as attributes. This is <strong>composition</strong> — <code>MoneyTransfer</code> is made up of a <code>Sender</code> and a <code>Recipient</code>. When <code>execute()</code> later calls <code>self.sender.name</code>, it's navigating into a nested object's attribute.</p>
+    </div>
+    <div class="step-box">
+      <div class="step-number">Step 2</div>
+      <h4>Private Methods and the Underscore Convention</h4>
+      <p>Methods starting with a single underscore (<code>_calculate_fee</code>, <code>_generate_code</code>) signal: "this is an internal implementation detail — don't call it from outside." Python doesn't enforce this, but every experienced developer respects the convention. These methods are called inside <code>__init__</code> so that calculations happen at object creation time.</p>
+    </div>
+    <div class="step-box">
+      <div class="step-number">Step 3</div>
+      <h4>The 2% Fee Formula Explained</h4>
+      <p><code>(self.amount / 1000) * 20</code> is mathematically identical to <code>amount * 0.02</code>. For an amount of ₱5,000: (5000 / 1000) × 20 = 5 × 20 = ₱100 fee. The formula can be read as "₱20 per ₱1,000 transferred."</p>
+    </div>
+    <div class="step-box">
+      <div class="step-number">Step 4</div>
+      <h4>Random Code Generation</h4>
+      <p><code>string.ascii_uppercase + string.digits</code> creates a pool of 36 characters (A–Z plus 0–9). <code>random.choices(chars, k=6)</code> picks 6 characters from this pool <em>with replacement</em> (the same character can appear more than once). <code>''.join(...)</code> merges the list into a single string. Prepending <code>'TXN'</code> gives codes like <code>TXNA3K9PQ2</code>.</p>
+    </div>
+    <div class="step-box">
+      <div class="step-number">Step 5</div>
+      <h4>The Delegation Pattern in execute()</h4>
+      <p>After printing the summary, <code>execute()</code> calls <code>self.recipient.notify(...)</code>. This is the <strong>delegation pattern</strong>: <code>MoneyTransfer</code> doesn't duplicate the notification logic — it delegates to the <code>Recipient</code> object, which owns that responsibility. Clean separation of concerns.</p>
+    </div>
+
+    <div class="two-col">
+      <div class="mini-box">
+        <h4>🎯 Role</h4>
+        <p>The <strong>brain of the system</strong>. Orchestrates the entire transaction — stores the parties involved, computes the fee, generates a unique ID, prints a summary, and triggers notification in one coordinated sequence.</p>
+      </div>
+      <div class="mini-box">
+        <h4>⚙️ Design Pattern</h4>
+        <p>This class follows the <em>Facade pattern</em> — it provides a single, simple interface (<code>transfer.execute()</code>) that hides the complexity of fee calculation, code generation, summary printing, and notification triggering beneath the surface.</p>
+      </div>
+    </div>
+    <div class="concepts">
+      <span class="tag">composition</span><span class="tag">private methods (_)</span>
+      <span class="tag">random.choices</span><span class="tag">string.join</span>
+      <span class="tag yellow">2% fee formula</span><span class="tag green">delegation pattern</span>
+    </div>
+  </div>
+
+  <div class="section-label" id="main"><span>// Function: main()</span></div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">▶️</div>
+      <div class="card-header-text">
+        <h2>main()</h2>
+        <div class="sub">Entry point · User I/O · Input validation loop</div>
+      </div>
+    </div>
+    <pre data-lang="python"><span class="kw">def</span> <span class="fn">main</span>():
+    <span class="bi">print</span>(<span class="st">"=== Money Transfer System (with fee) ==="</span>)
+
+    sender_name  = <span class="bi">input</span>(<span class="st">"Enter sender's name: "</span>).strip()
+    sender_phone = <span class="bi">input</span>(<span class="st">"Enter sender's phone number: "</span>).strip()
+    sender = <span class="cls">Sender</span>(sender_name, sender_phone)
+
+    recipient_name  = <span class="bi">input</span>(<span class="st">"Enter recipient's name: "</span>).strip()
+    recipient_phone = <span class="bi">input</span>(<span class="st">"Enter recipient's phone number: "</span>).strip()
+    recipient = <span class="cls">Recipient</span>(recipient_name, recipient_phone)
+
+    <span class="kw">while</span> <span class="bi">True</span>:
+        <span class="kw">try</span>:
+            amount = <span class="bi">float</span>(<span class="bi">input</span>(<span class="st">"\nEnter amount to send (₱): "</span>).strip())
+            <span class="kw">if</span> amount &lt;= <span class="nu">0</span>:
+                <span class="bi">print</span>(<span class="st">"Amount must be positive."</span>)
+                <span class="kw">continue</span>
+            <span class="kw">break</span>
+        <span class="kw">except</span> <span class="cls">ValueError</span>:
+            <span class="bi">print</span>(<span class="st">"Invalid input. Please enter a numeric value."</span>)
+
+    transfer = <span class="cls">MoneyTransfer</span>(sender, recipient, amount)
+    transfer.<span class="fn">execute</span>()
+
+<span class="kw">if</span> __name__ == <span class="st">"__main__"</span>:
+    <span class="fn">main</span>()</pre>
+
+    <div class="step-box" style="margin-top:14px;">
+      <div class="step-number">Step 1</div>
+      <h4>Collecting and Sanitizing Input</h4>
+      <p><code>input("prompt").strip()</code> — the <code>.strip()</code> method removes any leading or trailing whitespace characters (spaces, tabs, newlines) from the user's input. Without it, " Alice " and "Alice" would be treated as different names.</p>
+    </div>
+    <div class="step-box">
+      <div class="step-number">Step 2</div>
+      <h4>Instantiating Objects with Collected Data</h4>
+      <p><code>sender = Sender(sender_name, sender_phone)</code> — this is where the class blueprints come alive. <code>Sender.__init__</code> (inherited from <code>Person</code>) receives the collected strings and stores them as instance attributes on the new <code>sender</code> object.</p>
+    </div>
+    <div class="step-box">
+      <div class="step-number">Step 3</div>
+      <h4>The Validation Loop</h4>
+      <p><code>while True</code> creates an infinite loop that only exits via <code>break</code>. Inside, <code>try/except ValueError</code> catches the exception thrown when <code>float("abc")</code> is attempted. The <code>if amount &lt;= 0: continue</code> re-runs the loop if a non-positive number is entered. Only a valid positive float triggers <code>break</code>.</p>
+    </div>
+    <div class="step-box">
+      <div class="step-number">Step 4</div>
+      <h4>The __name__ == "__main__" Guard</h4>
+      <p>When Python runs a file directly, it sets the special variable <code>__name__</code> to <code>"__main__"</code>. When the file is <em>imported</em> as a module, <code>__name__</code> becomes the module's filename. This guard ensures <code>main()</code> only runs in direct execution, making the module safely importable and testable.</p>
+    </div>
+
+    <div class="two-col">
+      <div class="mini-box">
+        <h4>🎯 Role</h4>
+        <p>The <strong>entry point</strong> that glues everything together. Collects user input, instantiates <code>Sender</code> and <code>Recipient</code>, validates the amount, then hands everything to <code>MoneyTransfer</code>.</p>
+      </div>
+      <div class="mini-box">
+        <h4>⚙️ Key Techniques</h4>
+        <ul>
+          <li><strong>.strip()</strong> — sanitizes user input</li>
+          <li><strong>while True / break</strong> — retry loop for valid input</li>
+          <li><strong>try / except ValueError</strong> — prevents crash on bad input</li>
+          <li><strong>__name__ guard</strong> — safe execution control</li>
+        </ul>
+      </div>
+    </div>
+    <div class="concepts">
+      <span class="tag">input()</span><span class="tag">.strip()</span><span class="tag">while loop</span>
+      <span class="tag">try/except</span><span class="tag">ValueError</span>
+      <span class="tag yellow">__name__ guard</span>
+    </div>
+  </div>
+
+  <div class="section-label" id="concepts"><span>// Key OOP Concepts Used</span></div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">🧠</div>
+      <div class="card-header-text">
+        <h2>Object-Oriented Pillars</h2>
+        <div class="sub">Encapsulation · Inheritance · Abstraction · Polymorphism</div>
+      </div>
+    </div>
+    <div class="two-col">
+      <div class="mini-box">
+        <h4>🔒 Encapsulation</h4>
+        <p>Each class bundles its own data and methods. <code>MoneyTransfer</code> hides the fee formula and code generation behind private methods (<code>_calculate_fee</code>, <code>_generate_code</code>). Outside code doesn't need to know how they work — only that they do.</p>
+      </div>
+      <div class="mini-box">
+        <h4>🧬 Inheritance</h4>
+        <p>Both <code>Sender</code> and <code>Recipient</code> inherit from <code>Person</code>. This means <code>name</code>, <code>phone</code>, and <code>__str__</code> are written once but work for both child classes — the DRY principle (Don't Repeat Yourself) in action.</p>
+      </div>
+      <div class="mini-box">
+        <h4>🎭 Abstraction</h4>
+        <p><code>transfer.execute()</code> is a single clean call that hides the complexity of printing the summary and triggering notification. The caller doesn't care about the internal steps — just the outcome.</p>
+      </div>
+      <div class="mini-box">
+        <h4>🔀 Polymorphism (via __str__)</h4>
+        <p>When <code>f"{self.sender}"</code> is used in the summary, Python calls <code>__str__</code> automatically — the same way for both <code>Sender</code> and <code>Recipient</code> objects, because both inherit from <code>Person</code>. One interface, multiple types.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label" id="flow"><span>// Execution Flow</span></div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">🔄</div>
+      <div class="card-header-text">
+        <h2>Step-by-Step Runtime Flow</h2>
+        <div class="sub">From program start to final output</div>
+      </div>
+    </div>
+    <div class="flow" role="img" aria-label="Execution flow diagram">
+      <div class="flow-step"><div class="flow-box">Script starts</div><div class="flow-label">__name__ check</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="flow-box">main()</div><div class="flow-label">called</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="flow-box">Sender()</div><div class="flow-label">object created</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="flow-box">Recipient()</div><div class="flow-label">object created</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="flow-box">amount input</div><div class="flow-label">validated loop</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="flow-box">MoneyTransfer()</div><div class="flow-label">fee + code calc</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="flow-box">.execute()</div><div class="flow-label">summary printed</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="flow-box">recipient.notify()</div><div class="flow-label">notification shown</div></div>
+    </div>
+    <p>Every arrow represents a method call or object instantiation. The flow is strictly linear once valid input is received, with the only branching being the amount-validation loop that repeats until a positive numeric value is entered.</p>
+  </div>
+
+  <div class="section-label" id="source"><span>// Full Source Code</span></div>
+
+  <div class="card full-source">
+    <div class="card-header">
+      <div class="card-icon">📄</div>
+      <div class="card-header-text">
+        <h2>Complete Python Source</h2>
+        <div class="sub">money_transfer.py · 63 lines</div>
+      </div>
+    </div>
+    <pre data-lang="python"><span class="kw">import</span> random
+<span class="kw">import</span> string
+
+<span class="kw">class</span> <span class="cls">Person</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="slf">self</span>, name, phone):
+        <span class="slf">self</span>.name  = name
+        <span class="slf">self</span>.phone = phone
+
+    <span class="kw">def</span> <span class="fn">__str__</span>(<span class="slf">self</span>):
+        <span class="kw">return</span> <span class="st">f"</span><span class="op">{</span><span class="slf">self</span>.name<span class="op">}</span><span class="st"> (</span><span class="op">{</span><span class="slf">self</span>.phone<span class="op">}</span><span class="st">)"</span>
+
+<span class="kw">class</span> <span class="cls">Sender</span>(<span class="cls">Person</span>):
+    <span class="st">"""Sender class inheriting from Person."""</span>
+
+<span class="kw">class</span> <span class="cls">Recipient</span>(<span class="cls">Person</span>):
+    <span class="kw">def</span> <span class="fn">notify</span>(<span class="slf">self</span>, transaction_code, amount, sender_name):
+        <span class="bi">print</span>(<span class="st">"\n"</span> + <span class="st">"="</span>*<span class="nu">50</span>)
+        <span class="bi">print</span>(<span class="st">"NOTIFICATION FOR RECIPIENT"</span>)
+        <span class="bi">print</span>(<span class="st">"="</span>*<span class="nu">50</span>)
+        <span class="bi">print</span>(<span class="st">f"Hello </span><span class="op">{</span><span class="slf">self</span>.name<span class="op">}</span><span class="st">,"</span>)
+        <span class="bi">print</span>(<span class="st">f"You have received ₱</span><span class="op">{</span>amount<span class="op">:.2f}</span><span class="st"> from </span><span class="op">{</span>sender_name<span class="op">}</span><span class="st">."</span>)
+        <span class="bi">print</span>(<span class="st">f"Transaction Code: </span><span class="op">{</span>transaction_code<span class="op">}</span><span class="st">"</span>)
+        <span class="bi">print</span>(<span class="st">"="</span>*<span class="nu">50</span>)
+
+<span class="kw">class</span> <span class="cls">MoneyTransfer</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="slf">self</span>, sender, recipient, amount):
+        <span class="slf">self</span>.sender           = sender
+        <span class="slf">self</span>.recipient        = recipient
+        <span class="slf">self</span>.amount           = amount
+        <span class="slf">self</span>.fee              = <span class="slf">self</span>.<span class="fn">_calculate_fee</span>()
+        <span class="slf">self</span>.total            = <span class="slf">self</span>.amount + <span class="slf">self</span>.fee
+        <span class="slf">self</span>.transaction_code = <span class="slf">self</span>.<span class="fn">_generate_code</span>()
+
+    <span class="kw">def</span> <span class="fn">_calculate_fee</span>(<span class="slf">self</span>):
+        <span class="kw">return</span> (<span class="slf">self</span>.amount / <span class="nu">1000</span>) * <span class="nu">20</span>
+
+    <span class="kw">def</span> <span class="fn">_generate_code</span>(<span class="slf">self</span>):
+        chars = string.ascii_uppercase + string.digits
+        <span class="kw">return</span> <span class="st">'TXN'</span> + <span class="st">''</span>.join(random.choices(chars, k=<span class="nu">6</span>))
+
+    <span class="kw">def</span> <span class="fn">execute</span>(<span class="slf">self</span>):
+        <span class="bi">print</span>(<span class="st">"\n"</span> + <span class="st">"-"</span>*<span class="nu">50</span>)
+        <span class="bi">print</span>(<span class="st">"TRANSACTION SUMMARY"</span>)
+        <span class="bi">print</span>(<span class="st">"-"</span>*<span class="nu">50</span>)
+        <span class="bi">print</span>(<span class="st">f"Sender:            </span><span class="op">{</span><span class="slf">self</span>.sender<span class="op">}</span><span class="st">"</span>)
+        <span class="bi">print</span>(<span class="st">f"Recipient:         </span><span class="op">{</span><span class="slf">self</span>.recipient<span class="op">}</span><span class="st">"</span>)
+        <span class="bi">print</span>(<span class="st">f"Amount to send:    ₱</span><span class="op">{</span><span class="slf">self</span>.amount<span class="op">:.2f}</span><span class="st">"</span>)
+        <span class="bi">print</span>(<span class="st">f"Transfer fee (2%): ₱</span><span class="op">{</span><span class="slf">self</span>.fee<span class="op">:.2f}</span><span class="st">"</span>)
+        <span class="bi">print</span>(<span class="st">f"Total to be paid:  ₱</span><span class="op">{</span><span class="slf">self</span>.total<span class="op">:.2f}</span><span class="st">"</span>)
+        <span class="bi">print</span>(<span class="st">f"Transaction Code:  </span><span class="op">{</span><span class="slf">self</span>.transaction_code<span class="op">}</span><span class="st">"</span>)
+        <span class="bi">print</span>(<span class="st">"-"</span>*<span class="nu">50</span>)
+        <span class="slf">self</span>.recipient.<span class="fn">notify</span>(
+            <span class="slf">self</span>.transaction_code,
+            <span class="slf">self</span>.amount,
+            <span class="slf">self</span>.sender.name
+        )
+
+<span class="kw">def</span> <span class="fn">main</span>():
+    <span class="bi">print</span>(<span class="st">"=== Money Transfer System (with fee) ==="</span>)
+    <span class="bi">print</span>(<span class="st">"\n--- Sender Information ---"</span>)
+    sender_name  = <span class="bi">input</span>(<span class="st">"Enter sender's name: "</span>).strip()
+    sender_phone = <span class="bi">input</span>(<span class="st">"Enter sender's phone number: "</span>).strip()
+    sender = <span class="cls">Sender</span>(sender_name, sender_phone)
+    <span class="bi">print</span>(<span class="st">"\n--- Recipient Information ---"</span>)
+    recipient_name  = <span class="bi">input</span>(<span class="st">"Enter recipient's name: "</span>).strip()
+    recipient_phone = <span class="bi">input</span>(<span class="st">"Enter recipient's phone number: "</span>).strip()
+    recipient = <span class="cls">Recipient</span>(recipient_name, recipient_phone)
+    <span class="kw">while</span> <span class="bi">True</span>:
+        <span class="kw">try</span>:
+            amount = <span class="bi">float</span>(<span class="bi">input</span>(<span class="st">"\nEnter amount to send (₱): "</span>).strip())
+            <span class="kw">if</span> amount &lt;= <span class="nu">0</span>:
+                <span class="bi">print</span>(<span class="st">"Amount must be positive. Please try again."</span>)
+                <span class="kw">continue</span>
+            <span class="kw">break</span>
+        <span class="kw">except</span> <span class="cls">ValueError</span>:
+            <span class="bi">print</span>(<span class="st">"Invalid input. Please enter a numeric value."</span>)
+    transfer = <span class="cls">MoneyTransfer</span>(sender, recipient, amount)
+    transfer.<span class="fn">execute</span>()
+
+<span class="kw">if</span> __name__ == <span class="st">"__main__"</span>:
+    <span class="fn">main</span>()</pre>
+  </div>
+
+  <div class="section-label"><span>// Why This Matters — Real-World Connections</span></div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">🌐</div>
+      <div class="card-header-text">
+        <h2>From Console to Production — What This Code Teaches You</h2>
+        <div class="sub">Industry patterns hidden inside a 63-line Python program</div>
+      </div>
+    </div>
+    <p>The Money Transfer System may run in a terminal, but the patterns it demonstrates are the exact same ones powering multi-billion peso fintech platforms. Here's where each concept scales into the real world:</p>
+
+    <div class="value-grid">
+      <div class="value-card">
+        <span class="vc-icon">🏦</span>
+        <h4>Banking APIs</h4>
+        <p>The <code>Person → Sender/Recipient</code> hierarchy mirrors how banking systems model entities: base account holders extended into business accounts, premium accounts, and joint accounts.</p>
+      </div>
+      <div class="value-card">
+        <span class="vc-icon">🔑</span>
+        <h4>Transaction IDs</h4>
+        <p>The TXN code generation is a simplified version of UUID generation — every real-world payment system (Visa, GCash, Stripe) generates unique transaction IDs for traceability and audit trails.</p>
+      </div>
+      <div class="value-card">
+        <span class="vc-icon">💰</span>
+        <h4>Fee Engines</h4>
+        <p>The <code>_calculate_fee</code> method represents what fintech companies call a "fee engine." In production, this method would query a database of fee rules based on amount bands, transfer types, and user tiers.</p>
+      </div>
+      <div class="value-card">
+        <span class="vc-icon">📩</span>
+        <h4>Notification Systems</h4>
+        <p>The <code>notify()</code> method maps directly to SMS, email, and push notification services. In production, it would call an external API like Twilio, SendGrid, or Firebase Cloud Messaging.</p>
+      </div>
+      <div class="value-card">
+        <span class="vc-icon">🛡️</span>
+        <h4>Input Validation</h4>
+        <p>The validation loop mirrors server-side validation in web backends. Every production API validates amount ranges, user identity, account balance, and rate limits before processing any transaction.</p>
+      </div>
+      <div class="value-card">
+        <span class="vc-icon">🧩</span>
+        <h4>Microservices</h4>
+        <p>Each class in this program could become a separate microservice: a <em>User Service</em> (Person), a <em>Transaction Service</em> (MoneyTransfer), and a <em>Notification Service</em> (Recipient.notify). The separation of concerns is already baked in.</p>
+      </div>
+    </div>
+
+    <div class="highlight-box" style="margin-top:16px;">
+      <strong>Takeaway:</strong> Every complex system starts as a simple model. The programmer who truly understands these 63 lines has the mental framework to understand — and eventually build — systems that process millions of transactions per day.
+    </div>
+  </div>
+
+  <div class="section-label"><span>// Share This Article</span></div>
+
+  <div class="share-section">
+    <h3>📤 Spread the Knowledge</h3>
+    <p>If this breakdown helped you understand OOP and inheritance more clearly, imagine how many other learners are out there searching for exactly this kind of explanation. Sharing takes 10 seconds and could change someone's entire understanding of Python.</p>
+
+    <p style="font-size:0.75rem;color:var(--text-muted);margin-bottom:16px;text-align:center;">Get a personalized share message for each platform →</p>
+
+    <div class="share-buttons" id="shareButtons">
+      <button class="share-btn facebook" onclick="generateShare('facebook')">
+        <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        Facebook
+      </button>
+      <button class="share-btn linkedin" onclick="generateShare('linkedin')">
+        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </button>
+      <button class="share-btn twitter" onclick="generateShare('twitter')">
+        <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        X / Twitter
+      </button>
+      <button class="share-btn whatsapp" onclick="generateShare('whatsapp')">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp
+      </button>
+      <button class="share-btn youtube" onclick="generateShare('youtube')">
+        <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        YouTube
+      </button>
+      <button class="share-btn telegram" onclick="generateShare('telegram')">
+        <svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0012 0a12 12 0 00-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 01.171.325c.016.093.036.306.02.472-.18 1.898-.96 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+        Telegram
+      </button>
+    </div>
+
+    <div class="share-msg-result" id="shareMsgResult">
+      <strong>✨ Share Message:</strong>
+      <p id="shareMsgText" style="margin-top:8px;"></p>
+      <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;">
+        <button onclick="copyShareMessage()" style="background:var(--py-blue);color:#fff;border:none;padding:6px 14px;border-radius:6px;font-size:0.75rem;cursor:pointer;font-family:'Syne',sans-serif;">📋 Copy Message</button>
+        <button onclick="openShareLink()" id="openShareBtn" style="background:var(--obsidian-surface);color:var(--text-secondary);border:1px solid var(--obsidian-border);padding:6px 14px;border-radius:6px;font-size:0.75rem;cursor:pointer;font-family:'Syne',sans-serif;">🔗 Open Share Link</button>
+      </div>
+    </div>
+
+    <div style="margin-top:18px;padding:16px;background:var(--obsidian-surface);border:1px solid var(--obsidian-border);border-radius:12px;text-align:left;">
+      <p style="font-size:0.8rem;color:var(--text-primary);font-weight:700;margin-bottom:8px;">💡 Why Share This Article?</p>
+      <p style="font-size:0.78rem;color:var(--text-secondary);">Every week, thousands of CS students struggle with OOP concepts not because they're incapable, but because they can't find a breakdown that makes real-world sense. This article fills that gap. When you share it, you're not just promoting a post — you're handing a fellow learner the map they've been searching for. That's the kind of content worth spreading.</p>
+    </div>
+  </div>
+
+  <div class="section-label"><span>// Follow the Author</span></div>
+
+  <div class="follow-section">
+    <h3>👋 Stay Connected with Glenn Pansensoy</h3>
+    <p>Follow along for more Python breakdowns, OOP deep-dives, and software engineering insights delivered in a way that actually makes sense.</p>
+    <div class="follow-grid">
+      <a href="https://www.linkedin.com/in/glenn-pansensoy-6288453a2" target="_blank" rel="noopener noreferrer" class="follow-btn linkedin-btn">
+        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </a>
+      <a href="https://www.facebook.com/@Glenn-Junsay-Pansensoy" target="_blank" rel="noopener noreferrer" class="follow-btn facebook-btn">
+        <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        Facebook
+      </a>
+      <a href="https://x.com/@GlennPansensoy" target="_blank" rel="noopener noreferrer" class="follow-btn twitter-btn">
+        <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        Twitter / X
+      </a>
+      <a href="https://www.youtube.com/c/@GlennPansensoy" target="_blank" rel="noopener noreferrer" class="follow-btn youtube-btn">
+        <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        YouTube
+      </a>
+    </div>
+  </div>
+
+  <div class="section-label"><span>// Comments &amp; Reactions</span></div>
+
+  <div class="comment-section">
+    <h3>💬 Join the Discussion</h3>
+
+    <div class="reaction-bar">
+      <button class="reaction-btn love" id="loveBtn" onclick="toggleReaction('love')" aria-label="Love reaction">
+        ❤️ <span id="loveCount">12</span>
+      </button>
+      <button class="reaction-btn" id="likeBtn" onclick="toggleReaction('like')" aria-label="Like reaction">
+        👍 <span id="likeCount">34</span>
+      </button>
+      <button class="reaction-btn" id="mindblownBtn" onclick="toggleReaction('mindblown')" aria-label="Mind blown reaction">
+        🤯 <span id="mindblownCount">8</span>
+      </button>
+    </div>
+
+    <div class="comment-form" id="commentForm">
+      <input type="text" id="commentName" placeholder="Your name *" maxlength="60" aria-label="Your name">
+      <textarea id="commentText" placeholder="Share your thoughts, questions, or insights about this breakdown..." aria-label="Your comment"></textarea>
+      <button onclick="submitComment()">Post Comment</button>
+      <p id="commentMsg" style="font-size:0.72rem;color:var(--success);margin-top:8px;display:none;">✅ Comment posted! Thank you for contributing.</p>
+    </div>
+
+    <div class="comment-list" id="commentList">
+      <div class="comment-item">
+        <div class="comment-meta">
+          <div class="comment-avatar">MR</div>
+          <div>
+            <div class="comment-name">Maria Reyes</div>
+            <div class="comment-date">2025-06-10 · 14:32</div>
+          </div>
+        </div>
+        <div class="comment-text">The step-by-step explanation of the inheritance tree finally made it click for me. I've been struggling with this concept for weeks. The part about Sender being "semantically important" even with an empty body was eye-opening.</div>
+      </div>
+      <div class="comment-item">
+        <div class="comment-meta">
+          <div class="comment-avatar" style="background:linear-gradient(135deg,#306998,#6abf7b);">JC</div>
+          <div>
+            <div class="comment-name">James Castillo</div>
+            <div class="comment-date">2025-06-09 · 09:15</div>
+          </div>
+        </div>
+        <div class="comment-text">The connection between _generate_code here and UUID generation in production systems was a revelation. Now I see why every fintech app I use has those weird transaction IDs. Great practical bridge between learning and industry.</div>
+      </div>
+      <div class="comment-item">
+        <div class="comment-meta">
+          <div class="comment-avatar" style="background:linear-gradient(135deg,#ffd43b,#e5954a);">AL</div>
+          <div>
+            <div class="comment-name">Ana Lim</div>
+            <div class="comment-date">2025-06-08 · 18:47</div>
+          </div>
+        </div>
+        <div class="comment-text">Please write more of these! The formatting, color coding, and step-by-step breakdowns are exactly what textbooks should look like but never do. Subscribed and shared to my entire CS class group chat.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label"><span>// Closing Thoughts</span></div>
+
+  <div class="outro-section">
+    <h2>🎓 What You've Just Learned</h2>
+    <p>You didn't just read about a Python program. You walked through the architectural thinking of a software engineer — how to model real-world relationships as classes, how to share behavior through inheritance, how to protect internal logic through encapsulation, and how to build systems that are clean enough to extend without breaking.</p>
+    <p>The Money Transfer System is 63 lines of code. But the ideas inside it scale to millions. The programmer who deeply understands <em>why</em> each decision was made — not just <em>what</em> the code does — is the one who will one day build the systems that others use.</p>
+    <p>Keep learning. Keep questioning. And keep building.</p>
+    <div style="margin-top:20px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+      <a href="#intro" style="display:inline-flex;align-items:center;gap:6px;padding:10px 20px;background:var(--py-blue);color:#fff;border-radius:10px;text-decoration:none;font-size:0.78rem;font-weight:700;font-family:'Syne',sans-serif;">
+        ↑ Read Again
+      </a>
+      <a href="https://www.linkedin.com/in/glenn-pansensoy-6288453a2" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;padding:10px 20px;background:var(--obsidian-surface);border:1px solid var(--py-yellow);color:var(--py-yellow);border-radius:10px;text-decoration:none;font-size:0.78rem;font-weight:700;font-family:'Syne',sans-serif;">
+        💼 Connect with Glenn
+      </a>
+    </div>
+  </div>
+
+  <div class="section-label"><span>// Subscribe</span></div>
+
+  <div class="subscribe-section">
+    <h3>📬 Get More Breakdowns Like This</h3>
+    <p>Subscribe to receive new Python OOP guides, code breakdowns, and software engineering insights directly to your inbox. No spam. Unsubscribe anytime.</p>
+    <div class="subscribe-form">
+      <input type="email" id="subEmail" placeholder="your@email.com" aria-label="Email address">
+      <button onclick="handleSubscribe()">Subscribe Free</button>
+    </div>
+    <div class="subscribe-msg" id="subscribeMsg">🎉 You're subscribed! Watch your inbox for the next breakdown.</div>
+    <p style="font-size:0.68rem;color:var(--text-muted);margin-top:12px;text-align:center;">Join 1,200+ developers already learning with Valleys &amp; Bytes</p>
+  </div>
+
+</div>
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="logo"><span>VALLEYS</span><span class="amp">&amp;</span><span>BYTES</span></span>
+      <p>A developer knowledge hub dedicated to Python, clean code, and the craft of software engineering. From OOP to architecture — we break it down.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Learn</h4>
+      <ul>
+        <li><a href="#intro" class="footer-nav-btn"><span class="footer-nav-icon">🧠</span><span>Introduction</span></a></li>
+        <li><a href="#inheritance" class="footer-nav-btn"><span class="footer-nav-icon">🧬</span><span>Inheritance</span></a></li>
+        <li><a href="#concepts" class="footer-nav-btn"><span class="footer-nav-icon">🔷</span><span>OOP Concepts</span></a></li>
+        <li><a href="#flow" class="footer-nav-btn"><span class="footer-nav-icon">🔄</span><span>Execution Flow</span></a></li>
+        <li><a href="#source" class="footer-nav-btn"><span class="footer-nav-icon">📝</span><span>Full Source Code</span></a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Stores</h4>
+      <ul>
+        <li><a href="e-commerce.html" class="footer-nav-btn"><span class="footer-nav-icon">🛒</span><span>E-Commerce Hub</span></a></li>
+        <li><a href="fruit.html" class="footer-nav-btn"><span class="footer-nav-icon">🍎</span><span>Fruit Hub</span></a></li>
+        <li><a href="wine.html" class="footer-nav-btn"><span class="footer-nav-icon">🍷</span><span>Wine Shop</span></a></li>
+        <li><a href="rice.html" class="footer-nav-btn"><span class="footer-nav-icon">🌾</span><span>Rice Retail</span></a></li>
+        <li><a href="copra.html" class="footer-nav-btn"><span class="footer-nav-icon">🥥</span><span>Copra &amp; Rubber</span></a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Connect</h4>
+      <ul>
+        <li><a href="https://pansensoyglenn-dev.github.io/code-sense/" class="footer-nav-btn"><span class="footer-nav-icon">🐙</span><span>GitHub</span></a></li>
+        <li><a href="https://www.youtube.com/c/@GlennPansensoy" class="footer-nav-btn"><span class="footer-nav-icon">▶️</span><span>YouTube</span></a></li>
+        <li><a href="https://x.com/@GlennPansensoy" class="footer-nav-btn"><span class="footer-nav-icon">𝕏</span><span>Twitter / X</span></a></li>
+        <li><a href="https://www.linkedin.com/in/glenn-pansensoy-6288453a2" class="footer-nav-btn"><span class="footer-nav-icon">💼</span><span>LinkedIn</span></a></li>
+        <li><a href="#subscribe" class="footer-nav-btn"><span class="footer-nav-icon">📬</span><span>Newsletter</span></a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="oop-privacy.html" class="footer-nav-btn"><span class="footer-nav-icon">🔒</span><span>Data Privacy</span></a></li>
+        <li><a href="oop-terms.html" class="footer-nav-btn"><span class="footer-nav-icon">📋</span><span>Terms of Service</span></a></li>
+        <li><a href="oop-terms.html" class="footer-nav-btn"><span class="footer-nav-icon">🍪</span><span>Cookie Policy</span></a></li>
+        <li><a href="about-author.html" class="footer-nav-btn"><span class="footer-nav-icon">👤</span><span>About the Author</span></a></li>
+        <li><a href="about-guide.html" class="footer-nav-btn"><span class="footer-nav-icon">📖</span><span>About this Page</span></a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Valleys &amp; Bytes. Built with data precision and Created with information authentication. All rights reserved. By: Glenn Junsay Pansensoy</p>
+    <div class="footer-socials">
+      <a class="footer-social" href="https://pansensoyglenn-dev.github.io/code-sense/" title="GitHub">🐙</a>
+      <a class="footer-social" href="https://www.youtube.com/c/@GlennPansensoy" title="YouTube">▶️</a>
+      <a class="footer-social" href="https://x.com/@GlennPansensoy" title="Twitter/X">𝕏</a>
+      <a class="footer-social" href="https://www.linkedin.com/in/glenn-pansensoy-6288453a2" title="LinkedIn">💼</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+
+const hamburgerBtn = document.getElementById('hamburgerBtn');
+const mobileMenu   = document.getElementById('mobileMenu');
+const menuOverlay  = document.getElementById('menuOverlay');
+
+function openMenu() {
+  hamburgerBtn.classList.add('open');
+  mobileMenu.classList.add('open');
+  menuOverlay.classList.add('show');
+  hamburgerBtn.setAttribute('aria-expanded', 'true');
+}
+function closeMenu() {
+  hamburgerBtn.classList.remove('open');
+  mobileMenu.classList.remove('open');
+  menuOverlay.classList.remove('show');
+  hamburgerBtn.setAttribute('aria-expanded', 'false');
+}
+hamburgerBtn.addEventListener('click', () => {
+  mobileMenu.classList.contains('open') ? closeMenu() : openMenu();
+});
+menuOverlay.addEventListener('click', closeMenu);
+
+const reactions = { love: 12, like: 34, mindblown: 8 };
+const active    = { love: false, like: false, mindblown: false };
+
+function toggleReaction(type) {
+  const btn = document.getElementById(type + 'Btn');
+  const cnt = document.getElementById(type + 'Count');
+  if (active[type]) {
+    reactions[type]--;
+    btn.classList.remove('active');
+    active[type] = false;
+  } else {
+    reactions[type]++;
+    btn.classList.add('active');
+    active[type] = true;
+  }
+  cnt.textContent = reactions[type];
+}
+
+function submitComment() {
+  const name = document.getElementById('commentName').value.trim();
+  const text = document.getElementById('commentText').value.trim();
+  if (!name || !text) {
+    alert('Please enter your name and a comment.');
+    return;
+  }
+  const list = document.getElementById('commentList');
+  const now  = new Date().toISOString().slice(0,16).replace('T',' ');
+  const initials = name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0,2);
+  const colors = ['linear-gradient(135deg,#306998,#5aa0d4)', 'linear-gradient(135deg,#b48ead,#c678dd)', 'linear-gradient(135deg,#6abf7b,#4b8bbe)', 'linear-gradient(135deg,#e5954a,#ffd43b)'];
+  const color = colors[Math.floor(Math.random() * colors.length)];
+  const item = document.createElement('div');
+  item.className = 'comment-item';
+  item.innerHTML = `
+    <div class="comment-meta">
+      <div class="comment-avatar" style="background:${color};">${initials}</div>
+      <div>
+        <div class="comment-name">${escapeHtml(name)}</div>
+        <div class="comment-date">${now}</div>
+      </div>
+    </div>
+    <div class="comment-text">${escapeHtml(text)}</div>
+  `;
+  list.insertBefore(item, list.firstChild);
+  document.getElementById('commentName').value = '';
+  document.getElementById('commentText').value = '';
+  const msg = document.getElementById('commentMsg');
+  msg.style.display = 'block';
+  setTimeout(() => msg.style.display = 'none', 4000);
+}
+function escapeHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function fnlSubscribe() {
+  const email = document.getElementById('fnlEmail').value.trim();
+  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!re.test(email)) { alert('Please enter a valid email address.'); return; }
+  document.getElementById('fnlMsg').style.display = 'block';
+  document.getElementById('fnlEmail').value = '';
+  document.getElementById('fnlName').value = '';
+}
+function footerSubscribe() {
+  const email = document.getElementById('footerEmail').value.trim();
+  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!re.test(email)) { alert('Please enter a valid email address.'); return; }
+  document.getElementById('footerSubMsg').style.display = 'block';
+  document.getElementById('footerEmail').value = '';
+}
+function handleSubscribe() {
+  const email = document.getElementById('subEmail').value.trim();
+  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!re.test(email)) { alert('Please enter a valid email address.'); return; }
+  document.getElementById('subscribeMsg').style.display = 'block';
+  document.getElementById('subEmail').value = '';
+}
+
+const PAGE_URL   = 'https://code-sense.pansensoyglenn.workers.dev/';
+const PAGE_TITLE = 'Money Transfer System — OOP Code Breakdown | Valleys & Bytes';
+let currentSharePlatform = '';
+let currentShareUrl = '';
+
+const shareMessages = {
+  facebook: {
+    msg: '💻 Just discovered the clearest OOP breakdown I\'ve ever read. This Money Transfer System walkthrough explains inheritance, encapsulation, and polymorphism through actual Python code — not just theory. Check it out on Valleys & Bytes! #Python #OOP #Programming',
+    url: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(PAGE_URL)}`
+  },
+  linkedin: {
+    msg: 'If you\'ve ever struggled to connect OOP theory to real-world code, this article is for you. 📦 The Money Transfer System breakdown on Valleys & Bytes maps inheritance, encapsulation, and the delegation pattern to a working Python program — and then connects each pattern to how fintech systems work at scale. Genuinely worth a read. #Python #SoftwareEngineering #OOP #LearningAndDevelopment',
+    url: `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(PAGE_URL)}&title=${encodeURIComponent(PAGE_TITLE)}`
+  },
+  twitter: {
+    msg: 'Finally — an OOP tutorial that makes actual sense. 🐍\n\nThis Python Money Transfer breakdown covers:\n✅ Inheritance (with a real inheritance tree)\n✅ Encapsulation & private methods\n✅ The delegation pattern\n✅ Real-world fintech connections\n\nHighly recommend 👇',
+    url: `https://x.com/intent/tweet?text=${encodeURIComponent('🐍 Amazing OOP breakdown — Python Money Transfer System. Inheritance, encapsulation, polymorphism explained with real code. Check it out: ' + PAGE_URL + ' via @GlennPansensoy')}`
+  },
+  whatsapp: {
+    msg: `Hey! I just read this really clear Python OOP breakdown — it explains the Money Transfer System step by step, with actual code snippets and real-world connections. If you're learning Python or OOP, it's worth a read 👇\n${PAGE_URL}`,
+    url: `https://wa.me/?text=${encodeURIComponent('🐍 Check out this Python OOP breakdown — really clear explanation of inheritance and encapsulation through a Money Transfer System: ' + PAGE_URL)}`
+  },
+  youtube: {
+    msg: `📺 Check out Valleys & Bytes on YouTube for more Python and programming content!\n\nAlso, this article on the Money Transfer System OOP breakdown is an excellent companion read:\n${PAGE_URL}`,
+    url: `https://www.youtube.com/c/@GlennPansensoy`
+  },
+  telegram: {
+    msg: `🐍 Clear Python OOP breakdown:\n\n${PAGE_TITLE}\n\nCovers: inheritance, encapsulation, polymorphism, delegation pattern, and real-world fintech connections — all through a 63-line Python program.\n\n${PAGE_URL}`,
+    url: `https://t.me/share/url?url=${encodeURIComponent(PAGE_URL)}&text=${encodeURIComponent('🐍 Amazing Python OOP breakdown — Money Transfer System explained step by step. Highly recommend!')}`
+  }
+};
+
+function generateShare(platform) {
+  const data = shareMessages[platform];
+  if (!data) return;
+  currentSharePlatform = platform;
+  currentShareUrl = data.url;
+  document.getElementById('shareMsgText').textContent = data.msg;
+  const result = document.getElementById('shareMsgResult');
+  result.classList.add('visible');
+  result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function copyShareMessage() {
+  const text = document.getElementById('shareMsgText').textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = event.target;
+    btn.textContent = '✅ Copied!';
+    setTimeout(() => btn.textContent = '📋 Copy Message', 2000);
+  });
+}
+
+function openShareLink() {
+  if (currentShareUrl) window.open(currentShareUrl, '_blank', 'noopener,noreferrer');
+}
+</script>
+
+</body>
+</html>
