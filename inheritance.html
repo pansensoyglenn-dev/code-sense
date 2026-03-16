@@ -1,0 +1,2065 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Python OOP Inheritance — Complete Guide 2026 | Valleys & Bytes</title>
+  <meta name="description" content="Master Python OOP inheritance with deep dives into single, multiple, multilevel inheritance, MRO, abstract classes, mixins, and real-world applications. 10+ examples, cheatsheet, design patterns, and expert FAQ.">
+  <meta name="keywords" content="Python inheritance, OOP, super(), MRO, multiple inheritance, abstract base class, mixin, Python OOP tutorial, design patterns, composition vs inheritance, Python 2025">
+  <meta name="author" content="Glenn Junsay Pansensoy">
+  <link rel="canonical" href="https://code-sense.pansensoyglenn.workers.dev/inheritance.html">
+  
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Python OOP Inheritance — The Complete Guide (2026 Edition)">
+  <meta property="og:description" content="10+ real‑world examples, design patterns, MRO deep dive, and modern inheritance techniques. From zero to hero in Python OOP.">
+  <meta property="og:url" content="https://code-sense.pansensoyglenn.workers.dev/inheritance.html">
+  <meta property="og:image" content="https://code-sense.pansensoyglenn.workers.dev/images/og-python-inheritance.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Python OOP Inheritance illustration">
+  <meta property="og:site_name" content="Valleys & Bytes">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Python OOP Inheritance — Complete Guide">
+  <meta name="twitter:description" content="10+ examples, design patterns, MRO, and modern inheritance. The only guide you'll need.">
+  <meta name="twitter:image" content="https://code-sense.pansensoyglenn.workers.dev/images/og-python-inheritance.jpg">
+  <meta name="twitter:creator" content="@GlennPansensoy">
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Python OOP Inheritance — Complete Guide 2026",
+    "description": "Master Python OOP inheritance with deep dives into single, multiple, multilevel inheritance, MRO, abstract classes, mixins, and real-world applications. 10+ examples, cheatsheet, design patterns, and expert FAQ.",
+    "author": {
+      "@type": "Person",
+      "name": "Glenn Junsay Pansensoy",
+      "url": "https://code-sense.pansensoyglenn.workers.dev/about-author.html"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Valleys & Bytes",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://code-sense.pansensoyglenn.workers.dev/logo.png"
+      }
+    },
+    "datePublished": "2026-03-15",
+    "dateModified": "2026-03-15",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://code-sense.pansensoyglenn.workers.dev/inheritance.html"
+    },
+    "keywords": "Python inheritance, OOP, super(), MRO, multiple inheritance, abstract base class, mixin, design patterns"
+  }
+    const AI_URL='https://code-sense.pansensoyglenn.workers.dev/inheritance.html';
+    const aiCaptions={
+      twitter:{
+        professional:'Python OOP inheritance fully explained — MRO, super(), abstract classes, mixins, SOLID, design patterns & interview questions. '+AI_URL+' #Python #OOP #Programming',
+        enthusiastic:'🔥 The BEST Python inheritance guide!! MRO, SOLID, design patterns, quiz AND interview questions — ALL in one! Must bookmark! 🐍 '+AI_URL+' #Python',
+        casual:'found the most complete python inheritance guide — covers everything from super() to SOLID principles '+AI_URL+' #Python',
+        educational:'📚 Python OOP Inheritance: 5 types, MRO, ABCs, mixins, SOLID, 6 design patterns, interview questions. Full guide: '+AI_URL+' #Python #OOP',
+      },
+      linkedin:{
+        professional:'Sharing a comprehensive Python OOP inheritance resource covering MRO, super(), abstract classes, mixin patterns, SOLID principles, design patterns, real-world framework uses, performance tips, and interview questions. Recommended for all Python developers. '+AI_URL+' #Python #OOP #SoftwareEngineering',
+        enthusiastic:'🚀 The most complete Python inheritance guide available! MRO deep dive, SOLID principles, 6 design patterns, AND interview questions all in one place. Essential resource! '+AI_URL+' #Python #OOP',
+        casual:'Found a really comprehensive Python inheritance guide — covers everything from basics to SOLID and interview prep. Worth bookmarking! '+AI_URL+' #Python',
+        educational:'Python Inheritance complete guide: all 5 types, C3 MRO, super(), ABCs, mixin patterns, SOLID, design patterns, timeline, performance tips, and interview questions. '+AI_URL+' #Python #Education',
+      },
+      facebook:{
+        professional:'Sharing a comprehensive Python OOP inheritance guide — covers MRO, super(), abstract classes, SOLID principles, design patterns, and interview questions. '+AI_URL,
+        enthusiastic:'🐍🔥 The BEST Python inheritance guide!! SOLID, MRO, design patterns, quiz, interview questions — ALL in one page! '+AI_URL,
+        casual:'just read this python inheritance guide and everything finally clicked — MRO, super(), SOLID principles all explained 😄 '+AI_URL,
+        educational:'📚 Python OOP Inheritance — 5 types, MRO, abstract classes, SOLID principles, design patterns, interview questions and quiz. '+AI_URL,
+      },
+      whatsapp:{
+        professional:'Hi! Sharing a comprehensive Python OOP inheritance guide covering MRO, SOLID principles, design patterns, and interview questions. '+AI_URL,
+        enthusiastic:'OMG check this Python guide!! 🔥 Covers everything — SOLID, MRO, design patterns AND interview questions! So comprehensive! '+AI_URL,
+        casual:'hey found the best python inheritance guide — covers everything including SOLID and interview questions! '+AI_URL,
+        educational:'Python OOP Inheritance: 5 types, MRO, ABCs, SOLID, design patterns, interview Q&A. Full guide: '+AI_URL,
+      }
+    };
+    function aiGenerate(){
+      const platform=document.getElementById('aiPlatform').value;
+      const tone=document.getElementById('aiTone').value;
+      const loading=document.getElementById('aiLoading');
+      const output=document.getElementById('aiOutput');
+      const actions=document.getElementById('aiActions');
+      loading.classList.add('show');output.classList.remove('show');actions.classList.remove('show');
+      setTimeout(()=>{
+        const caption=(aiCaptions[platform]&&aiCaptions[platform][tone])||aiCaptions[platform]['professional']||'';
+        output.textContent=caption;output.classList.add('show');loading.classList.remove('show');
+        const enc=encodeURIComponent;
+        document.getElementById('aiFb').href='https://www.facebook.com/sharer/sharer.php?u='+enc(AI_URL)+'&quote='+enc(caption);
+        document.getElementById('aiTw').href='https://twitter.com/intent/tweet?text='+enc(caption);
+        document.getElementById('aiLi').href='https://www.linkedin.com/sharing/share-offsite/?url='+enc(AI_URL);
+        document.getElementById('aiWa').href='https://wa.me/?text='+enc(caption+' '+AI_URL);
+        actions.classList.add('show');
+      },800);
+    }
+    function aiCopy(){const text=document.getElementById('aiOutput').textContent;navigator.clipboard.writeText(text).then(()=>{const b=event.target;b.textContent='✅ Copied!';setTimeout(()=>b.textContent='📋 Copy',2000);});}
+
+  </script>
+  
+  
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4575646748966866" crossorigin="anonymous"></script>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Code+Pro:wght@400;600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:       #1a1a2e;
+      --bg2:      #16213e;
+      --bg3:      #0f3460;
+      --accent:   #4584f5;
+      --accent2:  #ffde57;
+      --accent3:  #7eb3ff;
+      --text:     #e8edf5;
+      --text-dim: #8fa3c8;
+      --border:   rgba(69,132,245,0.22);
+      --code-bg:  #12121f;
+      --card:     #1e2340;
+    }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;overflow-x:hidden;max-width:100vw;}
+    body{
+      background:var(--bg);
+      color:#ffffff;
+      font-family:'Lato',sans-serif;
+      font-size:10px;
+      line-height:1.7;
+      background-image:
+        radial-gradient(circle at 15% 20%, rgba(69,132,245,0.05) 0%, transparent 50%),
+        radial-gradient(circle at 85% 80%, rgba(255,222,87,0.04) 0%, transparent 50%),
+        linear-gradient(rgba(69,132,245,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(69,132,245,0.025) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 44px 44px, 44px 44px;
+    }
+    header{
+      position:sticky;top:0;z-index:1000;
+      background:rgba(26,26,46,0.97);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid var(--border);
+      padding:0 2rem;
+      display:flex;align-items:center;justify-content:space-between;
+      height:62px;
+    }
+    .logo{
+      font-family:'Playfair Display',serif;
+      font-size:1.35rem;font-weight:900;
+      background:linear-gradient(90deg,var(--accent),var(--accent2));
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+      letter-spacing:.04em;
+    }
+    .logo span{color:var(--accent2);-webkit-text-fill-color:var(--accent2);}
+    .hamburger{
+      display:flex;flex-direction:column;gap:5px;cursor:pointer;
+      background:none;border:none;padding:6px;
+    }
+    .hamburger span{
+      display:block;width:26px;height:2px;
+      background:var(--accent);border-radius:2px;
+      transition:all .3s;
+    }
+    .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+    .hamburger.open span:nth-child(2){opacity:0;}
+    .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+    .nav-overlay{
+      position:fixed;inset:0;background:rgba(15,15,32,0.98);
+      z-index:999;display:flex;flex-direction:column;
+      align-items:center;justify-content:flex-start;gap:0;
+      opacity:0;pointer-events:none;transition:opacity .35s;
+      overflow-y:auto;padding:1rem 0 1rem;
+    }
+    .nav-overlay.open{opacity:1;pointer-events:all;}
+    .nav-btn{
+      display:inline-flex;align-items:center;gap:.6rem;
+      background:none;border:1px solid var(--border);
+      color:#ffffff;font-family:'Lato',sans-serif;font-size:.82rem;
+      padding:.55rem 1.6rem;border-radius:6px;cursor:pointer;
+      text-decoration:none;transition:all .22s;width:240px;justify-content:flex-start;
+      margin:.22rem 0;flex-shrink:0;
+    }
+    .nav-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent);}
+    .nav-btn .icon{font-size:.95rem;}
+    .ad-top{
+      background:var(--bg2);border-bottom:1px solid var(--border);
+      padding:.5rem 1rem;text-align:center;
+    }
+    .hero{
+      text-align:center;padding:5rem 2rem 3.5rem;
+      background:linear-gradient(160deg,#1a1a2e 55%,#0f1f42);
+      position:relative;overflow:hidden;
+    }
+    .hero::before{
+      content:'';position:absolute;inset:0;
+      background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(69,132,245,.1),transparent);
+      pointer-events:none;
+    }
+    .hero-tag{
+      display:inline-block;background:rgba(69,132,245,.13);
+      color:var(--accent);font-size:.72rem;font-weight:700;letter-spacing:.15em;
+      text-transform:uppercase;padding:.35rem 1rem;border-radius:20px;
+      border:1px solid rgba(69,132,245,.35);margin-bottom:1.2rem;
+    }
+    .hero h1{
+      font-family:'Playfair Display',serif;
+      font-size:clamp(1.2rem,5vw,3.2rem);font-weight:900;
+      line-height:1.15;margin-bottom:1rem;
+    }
+    .hero h1 em{color:var(--accent);font-style:normal;}
+    .hero p{
+      font-size:.9rem;color:#ffffff;max-width:640px;margin:0 auto 2rem;
+      text-align:justify;
+    }
+    .hero-meta{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;}
+    .hero-meta span{font-size:.78rem;color:#ffffff;}
+    .hero-meta strong{color:var(--accent2);}
+    .container{max-width:860px;margin:0 auto;padding:0 1.5rem;}
+    .section{padding:3.5rem 0 2rem;}
+    h2.sec-title{
+      font-family:'Playfair Display',serif;
+      font-size:1.2rem;font-weight:700;
+      color:var(--accent);letter-spacing:.08em;text-transform:uppercase;
+      margin-bottom:.4rem;
+    }
+    h3.sec-sub{
+      font-family:'Playfair Display',serif;
+      font-size:1rem;font-weight:700;
+      color:var(--accent2);margin:1.6rem 0 .5rem;
+    }
+    p,li{font-size:0.9rem;text-align:justify;color:#ffffff;}
+    ul,ol{padding-left:1.4rem;margin:.5rem 0;}
+    li{margin-bottom:.35rem;}
+    strong{color:#ffffff;}
+    .divider{height:1px;background:var(--border);margin:2rem 0;}
+    .info-card{
+      background:var(--card);border:1px solid var(--border);
+      border-radius:10px;padding:1.4rem 1.6rem;margin:1.2rem 0;
+    }
+    .info-card h3{
+      font-family:'Playfair Display',serif;font-size:.9rem;
+      color:var(--accent2);margin-bottom:.6rem;
+    }
+    .highlight{
+      border-left:3px solid var(--accent);
+      background:rgba(69,132,245,.07);
+      padding:.8rem 1.2rem;border-radius:0 6px 6px 0;
+      margin:1rem 0;font-size:.8rem;color:#ffffff;text-align:justify;
+    }
+    .code-wrap{
+      background:var(--code-bg);border:1px solid var(--border);
+      border-radius:10px;margin:1.2rem 0;overflow:hidden;
+    }
+    .code-header{
+      display:flex;align-items:center;justify-content:space-between;
+      background:rgba(69,132,245,.07);padding:.55rem 1rem;
+      border-bottom:1px solid var(--border);
+    }
+    .code-header span{font-size:.72rem;color:var(--accent);font-family:'Source Code Pro',monospace;font-weight:600;}
+    .copy-btn{
+      background:none;border:1px solid var(--border);color:#ffffff;
+      font-size:.7rem;padding:.2rem .65rem;border-radius:4px;cursor:pointer;
+      font-family:'Lato',sans-serif;transition:all .2s;
+    }
+    .copy-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent);}
+    pre{
+      padding:1.2rem 1.1rem;overflow-x:auto;
+      font-family:'Source Code Pro',monospace;font-size:.76rem;line-height:1.65;
+      color:#c9d1d9;
+    }
+    .kw{color:#ff79c6;}
+    .fn{color:#50fa7b;}
+    .cl{color:#f1fa8c;}
+    .st{color:#f1fa8c;}
+    .cm{color:#6272a4;font-style:italic;}
+    .nb{color:#bd93f9;}
+    .op{color:#ff79c6;}
+    .num{color:#bd93f9;}
+    .apps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(200px,100%), 1fr));
+      gap: 1.2rem;
+      margin: 2.5rem 0 1.5rem;
+    }
+    .app-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 1.5rem 1rem;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none;
+      color: inherit;
+      transition: opacity 0.2s, transform 0.2s;
+      cursor: pointer;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      transition: all 0.2s ease;
+    }
+    .app-btn:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+      box-shadow: 0 0 28px rgba(69,132,245,0.2);
+    }
+    .app-logo {
+      width: 70px;
+      height: 70px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      flex-shrink: 0;
+      transition: transform 0.25s;
+      background: rgba(69,132,245,0.08);
+      border: 1px solid rgba(69,132,245,0.2);
+    }
+    .app-btn:hover .app-logo {
+      transform: scale(1.08) rotate(-2deg);
+      background: rgba(69,132,245,0.15);
+    }
+    .app-info {
+      text-align: center;
+      width: 100%;
+    }
+    .app-name {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--accent2);
+      margin-bottom: 0.25rem;
+    }
+    .app-desc {
+      font-size: 0.72rem;
+      color: #ffffff;
+      line-height: 1.5;
+      margin: 0 0 0.4rem;
+      text-align: justify;
+    }
+    .app-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.2rem;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.55rem;
+      padding: 0.2rem 0.7rem;
+      border-radius: 30px;
+      margin-top: 0.2rem;
+      background: rgba(69,132,245,0.12);
+      color: var(--accent3);
+      border: 1px solid rgba(69,132,245,0.3);
+    }
+    .share-box{
+      background:var(--card);border:1px solid var(--border);
+      border-radius:10px;padding:1.4rem 1.6rem;text-align:center;
+      margin:2rem 0;
+    }
+    .share-box p{font-size:.8rem;margin-bottom:1rem;text-align:center;}
+    .share-btns{display:flex;flex-wrap:wrap;gap:.65rem;justify-content:center;}
+    .share-btn{
+      display:inline-flex;align-items:center;gap:.45rem;
+      padding:.5rem 1.15rem;border-radius:6px;font-size:.78rem;
+      font-family:'Lato',sans-serif;font-weight:700;cursor:pointer;
+      border:none;transition:transform .15s,filter .15s;text-decoration:none;
+    }
+    .share-btn:hover{transform:translateY(-2px);filter:brightness(1.12);}
+    .sb-fb{background:#1877f2;color:#fff;}
+    .sb-li{background:#0a66c2;color:#fff;}
+    .sb-tw{background:#000;color:#fff;}
+    .sb-wa{background:#25d366;color:#fff;}
+    .sb-yt{background:#ff0000;color:#fff;}
+    .sb-tg{background:#0088cc;color:#fff;}
+    .comments-section{padding:2rem 0 3rem;}
+    .comments-section h2{font-size:1rem;margin-bottom:1.2rem;}
+    .comment-form{
+      background:var(--card);border:1px solid var(--border);
+      border-radius:10px;padding:1.4rem;margin-bottom:1.8rem;
+    }
+    .comment-form input,
+    .comment-form textarea{
+      width:100%;background:var(--bg2);border:1px solid var(--border);
+      color:#ffffff;padding:.65rem .9rem;border-radius:6px;
+      font-family:'Lato',sans-serif;font-size:.8rem;margin-bottom:.75rem;
+      outline:none;transition:border-color .2s;
+    }
+    .comment-form input:focus,
+    .comment-form textarea:focus{border-color:var(--accent);}
+    .comment-form textarea{resize:vertical;min-height:90px;}
+    .submit-btn{
+      background:var(--accent);color:#fff;font-weight:700;
+      border:none;padding:.6rem 1.6rem;border-radius:6px;
+      font-family:'Lato',sans-serif;font-size:.8rem;cursor:pointer;
+      transition:filter .2s;
+    }
+    .submit-btn:hover{filter:brightness(1.1);}
+    .comment-list{display:flex;flex-direction:column;gap:1rem;}
+    .comment-card{
+      background:var(--card);border:1px solid var(--border);
+      border-radius:10px;padding:1rem 1.2rem;
+    }
+    .comment-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem;}
+    .comment-author{font-size:.8rem;font-weight:700;color:var(--accent2);}
+    .comment-date{font-size:.72rem;color:#ffffff;}
+    .comment-text{font-size:.8rem;color:#ffffff;text-align:justify;}
+    .reaction-row{display:flex;gap:.7rem;margin-top:.65rem;}
+    .react-btn{
+      background:none;border:1px solid var(--border);color:#ffffff;
+      padding:.28rem .8rem;border-radius:20px;font-size:.74rem;cursor:pointer;
+      font-family:'Lato',sans-serif;transition:all .2s;display:flex;align-items:center;gap:.3rem;
+    }
+    .react-btn:hover,.react-btn.active{background:rgba(69,132,245,.12);color:var(--accent);border-color:var(--accent);}
+    .react-btn.like-active{background:rgba(255,222,87,.12);color:var(--accent2);border-color:var(--accent2);}
+    .follow-section{
+      background:linear-gradient(135deg,#16213e,#0f3460);
+      border:1px solid var(--border);border-radius:12px;
+      padding:2rem 1.6rem;text-align:center;margin:2rem 0;
+    }
+    .follow-section h2{font-size:1rem;margin-bottom:.4rem;color:var(--accent2);}
+    .follow-section p{font-size:.8rem;margin-bottom:1.2rem;text-align:center;}
+    .follow-btns{display:flex;flex-wrap:wrap;gap:.7rem;justify-content:center;}
+    .follow-btn{
+      display:inline-flex;align-items:center;gap:.5rem;
+      padding:.55rem 1.3rem;border-radius:6px;font-size:.78rem;
+      font-family:'Lato',sans-serif;font-weight:700;text-decoration:none;
+      transition:transform .15s,filter .15s;border:none;cursor:pointer;
+    }
+    .follow-btn:hover{transform:translateY(-2px);filter:brightness(1.12);}
+    .fb-btn{background:#1877f2;color:#fff;}
+    .li-btn{background:#0a66c2;color:#fff;}
+    .yt-btn{background:#ff0000;color:#fff;}
+    .tw-btn{background:#000;color:#fff;}
+    footer{
+      background:var(--bg2);border-top:1px solid var(--border);
+      padding:2.5rem 1.5rem 1.5rem;
+    }
+    .footer-grid{
+      max-width:860px;margin:0 auto;
+      display:grid;grid-template-columns:1fr 1fr;gap:2rem;
+      margin-bottom:1.8rem;
+    }
+    .footer-brand .logo{font-size:1.1rem;}
+    .footer-brand p{font-size:.75rem;color:#ffffff;margin-top:.6rem;text-align:justify;}
+    .footer-legal h4{font-size:.8rem;color:var(--accent);margin-bottom:.8rem;text-transform:uppercase;letter-spacing:.08em;}
+    .legal-links{display:flex;flex-direction:column;gap:.5rem;}
+    .legal-link{
+      display:flex;align-items:center;gap:.45rem;
+      background:none;border:1px solid var(--border);color:#ffffff;
+      font-size:.75rem;font-family:'Lato',sans-serif;
+      padding:.48rem .9rem;border-radius:5px;text-decoration:none;
+      cursor:pointer;transition:all .2s;text-align:left;width:100%;
+      box-sizing:border-box;
+    }
+    .legal-link:hover{border-color:var(--accent);color:var(--accent);background:rgba(69,132,245,.07);}
+    .footer-bottom{
+      max-width:860px;margin:0 auto;
+      border-top:1px solid var(--border);padding-top:1rem;
+      display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;
+    }
+    .footer-bottom p{font-size:.72rem;color:#ffffff;text-align:left;}
+    .footer-quick{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:.6rem;}
+    .footer-chip{
+      background:var(--bg3);border:1px solid var(--border);color:#ffffff;
+      font-size:.72rem;padding:.28rem .75rem;border-radius:20px;cursor:pointer;
+      font-family:'Lato',sans-serif;text-decoration:none;transition:all .2s;
+      display:inline-block;
+    }
+    .footer-chip:hover{background:var(--accent);color:#fff;border-color:var(--accent);}
+    .tbl-wrap{overflow-x:auto;margin:1rem 0;}
+    table{width:100%;border-collapse:collapse;font-size:.78rem;}
+    th{background:rgba(69,132,245,.12);color:var(--accent);padding:.55rem .8rem;text-align:left;border-bottom:1px solid var(--border);}
+    td{padding:.5rem .8rem;border-bottom:1px solid rgba(255,255,255,.04);color:#ffffff;text-align:justify;vertical-align:top;}
+    tr:hover td{background:rgba(255,255,255,.02);}
+    .outro{
+      background:linear-gradient(135deg,#16213e,#0f3460);
+      border:1px solid var(--border);border-radius:12px;
+      padding:2.2rem 1.8rem;margin:2rem 0;text-align:center;
+    }
+    .outro h2{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--accent2);margin-bottom:.8rem;}
+    .outro p{font-size:.8rem;max-width:580px;margin:0 auto;text-align:justify;}
+    .faq-list{display:flex;flex-direction:column;gap:.7rem;}
+    .faq-item{
+      background:var(--card);border:1px solid var(--border);
+      border-radius:10px;overflow:hidden;
+    }
+    .faq-q{
+      width:100%;display:flex;align-items:center;justify-content:space-between;
+      gap:1rem;background:none;border:none;color:#ffffff;
+      font-family:'Lato',sans-serif;font-size:.82rem;font-weight:700;
+      padding:1rem 1.2rem;cursor:pointer;text-align:left;
+      transition:background .2s;
+    }
+    .faq-q:hover{background:rgba(69,132,245,.07);}
+    .faq-q span:first-child{flex:1;}
+    .faq-arrow{
+      font-size:.7rem;color:var(--accent);flex-shrink:0;
+      transition:transform .3s;
+    }
+    .faq-q.open .faq-arrow{transform:rotate(180deg);}
+    .faq-a{
+      display:none;padding:0 1.2rem 1rem;
+      border-top:1px solid var(--border);
+    }
+    .faq-a p{font-size:.8rem;color:#ffffff;text-align:justify;margin-top:.75rem;}
+    .faq-a.visible{display:block;}
+
+    
+    .design-pattern-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
+      gap: 1.2rem;
+      margin: 1.5rem 0;
+    }
+    .pattern-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.2rem;
+    }
+    .pattern-card h4 { color: var(--accent2); margin-bottom: 0.5rem; font-size: 0.9rem; }
+    .pattern-card p { font-size: 0.75rem; margin-bottom: 0; }
+
+    
+    .progress-bar{
+      position:fixed;top:0;left:0;height:3px;
+      background:linear-gradient(90deg,var(--accent),var(--accent2));
+      width:0%;z-index:9999;transition:width .1s linear;
+    }
+    
+    .back-top{
+      position:fixed;bottom:1.5rem;right:1.5rem;
+      background:var(--accent);color:#fff;border:none;
+      width:42px;height:42px;border-radius:50%;font-size:1.1rem;
+      cursor:pointer;opacity:0;pointer-events:none;
+      transition:opacity .3s,transform .3s;z-index:500;
+      display:flex;align-items:center;justify-content:center;
+    }
+    .back-top.show{opacity:1;pointer-events:all;}
+    .back-top:hover{transform:translateY(-3px);}
+    
+    .insight-grid{
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));
+      gap:1rem;margin:1.5rem 0;
+    }
+    .insight-card{
+      background:var(--card);border:1px solid var(--border);
+      border-radius:10px;padding:1.2rem;
+      border-top:3px solid var(--accent);
+    }
+    .insight-card .icon{font-size:1.6rem;margin-bottom:.5rem;display:block;}
+    .insight-card h4{color:var(--accent2);font-size:.9rem;margin-bottom:.4rem;}
+    .insight-card p{font-size:.78rem;margin:0;}
+    
+    .quiz-card{
+      background:var(--card);border:1px solid var(--border);
+      border-radius:10px;padding:1.4rem;margin:.8rem 0;
+    }
+    .quiz-q{font-size:.82rem;font-weight:700;color:#ffffff;margin-bottom:.8rem;}
+    .quiz-options{display:flex;flex-direction:column;gap:.5rem;}
+    .quiz-opt{
+      background:var(--bg2);border:1px solid var(--border);
+      color:#ffffff;font-size:.78rem;
+      padding:.55rem 1rem;border-radius:6px;cursor:pointer;
+      font-family:'Lato',sans-serif;text-align:left;
+      transition:all .2s;
+    }
+    .quiz-opt:hover{border-color:var(--accent);color:#ffffff;}
+    .quiz-opt.correct{background:rgba(80,250,123,.1);border-color:#50fa7b;color:#50fa7b;}
+    .quiz-opt.wrong{background:rgba(255,85,85,.1);border-color:#ff5555;color:#ff5555;}
+    .quiz-result{font-size:.78rem;margin-top:.7rem;font-weight:700;min-height:1.2em;}
+    
+    .timeline{position:relative;padding-left:2rem;margin:1.5rem 0;}
+    .timeline::before{
+      content:'';position:absolute;left:.6rem;top:0;bottom:0;
+      width:2px;background:var(--border);
+    }
+    .tl-item{position:relative;margin-bottom:1.4rem;}
+    .tl-dot{
+      position:absolute;left:-1.55rem;top:.25rem;
+      width:12px;height:12px;border-radius:50%;
+      background:var(--accent);border:2px solid var(--bg);
+      flex-shrink:0;
+    }
+    .tl-title{font-size:.82rem;font-weight:700;color:var(--accent2);margin-bottom:.25rem;}
+    .tl-body{font-size:.78rem;color:#ffffff;text-align:justify;}
+    
+    .perf-grid{
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr));
+      gap:1rem;margin:1.5rem 0;
+    }
+    .perf-card{
+      background:var(--card);border:1px solid var(--border);
+      border-radius:10px;padding:1rem;
+    }
+    .perf-card .badge{
+      display:inline-block;font-size:.6rem;font-weight:700;
+      padding:.2rem .6rem;border-radius:20px;margin-bottom:.5rem;
+      letter-spacing:.08em;text-transform:uppercase;
+    }
+    .badge-fast{background:rgba(80,250,123,.15);color:#50fa7b;border:1px solid rgba(80,250,123,.3);}
+    .badge-caution{background:rgba(255,222,87,.15);color:var(--accent2);border:1px solid rgba(255,222,87,.3);}
+    .badge-avoid{background:rgba(255,85,85,.15);color:#ff5555;border:1px solid rgba(255,85,85,.3);}
+    .perf-card h4{font-size:.82rem;color:#ffffff;margin-bottom:.4rem;}
+    .perf-card p{font-size:.75rem;margin:0;}
+    
+    @media(max-width:768px){
+      .hero{padding:3.5rem 1.2rem 2.5rem;}
+      .hero h1{font-size:clamp(1.6rem,6vw,2.4rem);}
+      .hero p{font-size:.82rem;}
+      .container{padding:0 1rem;}
+      .section{padding:2.5rem 0 1.5rem;}
+      header{padding:0 1rem;}
+      .logo{font-size:1.1rem;}
+      .apps-grid{grid-template-columns:repeat(auto-fit,minmax(min(150px,100%),1fr));}
+      .app-logo{width:54px;height:54px;font-size:1.7rem;}
+      .app-name{font-size:.82rem;}
+      .app-desc{font-size:.68rem;}
+      pre{font-size:.7rem;padding:.9rem .8rem;}
+      .share-btns{gap:.5rem;}
+      .share-btn{font-size:.72rem;padding:.45rem .85rem;}
+      .follow-btns{gap:.5rem;}
+      .follow-btn{font-size:.72rem;padding:.48rem 1rem;}
+      table{font-size:.72rem;}
+      th,td{padding:.4rem .6rem;}
+      .design-pattern-grid{grid-template-columns:1fr;}
+      .insight-grid{grid-template-columns:1fr;}
+      .perf-grid{grid-template-columns:1fr;}
+      .nav-btn{width:92vw;max-width:320px;}
+      .outro{padding:1.6rem 1.2rem;}
+      .outro h2{font-size:1.05rem;}
+      .comment-form{padding:1rem;}
+      .info-card{padding:1rem 1.2rem;}
+      .footer-grid{grid-template-columns:1fr;}
+      .footer-bottom{flex-direction:column;text-align:center;}
+    }
+    @media(max-width:480px){
+      .hero h1{font-size:1.5rem;}
+      .hero-tag{font-size:.65rem;}
+      .hero-meta{gap:.7rem;flex-direction:column;align-items:center;}
+      .hero-meta span{font-size:.74rem;}
+      .apps-grid{grid-template-columns:1fr 1fr;}
+      .share-btns{flex-direction:column;align-items:center;}
+      .share-btn{width:100%;max-width:260px;justify-content:center;}
+      .follow-btns{flex-direction:column;align-items:center;}
+      .follow-btn{width:100%;max-width:260px;justify-content:center;}
+      .back-top{bottom:1rem;right:1rem;width:38px;height:38px;font-size:1rem;}
+      .tbl-wrap{font-size:.7rem;}
+      .faq-q{font-size:.78rem;padding:.8rem 1rem;}
+    }
+    @media(max-width:360px){
+      .apps-grid{grid-template-columns:1fr;}
+      header{height:54px;}
+    }
+  
+    .ai-share-box{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.4rem 1.6rem;text-align:left;margin:2rem 0;position:relative;overflow:hidden;}
+    .ai-share-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));}
+    .ai-share-box h2{font-size:1rem !important;margin-bottom:.5rem;}
+    .ai-share-box p{font-size:0.9rem;margin-bottom:1rem;}
+    .ai-controls{display:flex;gap:.65rem;flex-wrap:wrap;margin-bottom:1rem;align-items:center;}
+    .ai-sel{flex:1;min-width:130px;background:var(--bg2);border:1px solid var(--border);border-radius:6px;color:#ffffff;font-family:'Lato',sans-serif;font-size:0.9rem;padding:8px 12px;outline:none;cursor:pointer;}
+    .ai-sel:focus{border-color:var(--accent);}
+    .ai-gen-btn{background:var(--accent);color:#fff;border:none;padding:9px 20px;border-radius:6px;font-family:'Lato',sans-serif;font-size:0.9rem;font-weight:700;cursor:pointer;transition:all .2s;white-space:nowrap;display:inline-flex;align-items:center;gap:6px;}
+    .ai-gen-btn:hover{filter:brightness(1.15);transform:translateY(-1px);}
+    .ai-loading{display:none;align-items:center;gap:8px;color:#ffffff;font-size:0.9rem;margin-bottom:10px;}
+    .ai-loading.show{display:flex;}
+    .ai-spinner{width:13px;height:13px;border:2px solid rgba(255,255,255,0.25);border-top-color:var(--accent);border-radius:50%;animation:aiSpin .7s linear infinite;}
+    @keyframes aiSpin{to{transform:rotate(360deg);}}
+    .ai-output{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:14px;font-size:0.9rem;color:#ffffff;line-height:1.7;white-space:pre-wrap;word-break:break-word;margin-bottom:10px;display:none;text-align:justify;}
+    .ai-output.show{display:block;}
+    .ai-act-row{display:none;flex-wrap:wrap;gap:8px;}
+    .ai-act-row.show{display:flex;}
+    .ai-act{display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border-radius:6px;font-family:'Lato',sans-serif;font-size:0.9rem;font-weight:600;border:1px solid var(--border);background:var(--bg3);color:#ffffff;cursor:pointer;text-decoration:none;transition:all .2s;}
+    .ai-act:hover{transform:translateY(-1px);}
+    .ai-act.cp:hover{border-color:var(--accent2);color:var(--accent2);}
+    .ai-act.fb:hover{border-color:#1877f2;color:#6bb1ff;background:rgba(24,119,242,0.1);}
+    .ai-act.tw:hover{border-color:#1da1f2;color:#80ccff;background:rgba(29,161,242,0.1);}
+    .ai-act.li:hover{border-color:#0a66c2;color:#6baff5;background:rgba(10,102,194,0.1);}
+    .ai-act.wa:hover{border-color:#25d366;color:#25d366;background:rgba(37,211,102,0.1);}
+
+  </style>
+</head>
+<body>
+  <nav class="nav-overlay" id="navOverlay">
+    <a class="nav-btn" href="#intro"><span class="icon">📘</span> Introduction</a>
+    <a class="nav-btn" href="#significance"><span class="icon">🌟</span> Significance</a>
+    <a class="nav-btn" href="#processes"><span class="icon">⚙️</span> Processes & Methods</a>
+    <a class="nav-btn" href="#how-it-works"><span class="icon">🔬</span> How It Operates</a>
+    <a class="nav-btn" href="#samples"><span class="icon">💻</span> Sample Programs</a>
+    <a class="nav-btn" href="#advanced"><span class="icon">🚀</span> Advanced Concepts</a>
+    <a class="nav-btn" href="#design-patterns"><span class="icon">🧩</span> Design Patterns</a>
+    <a class="nav-btn" href="#composition"><span class="icon">🔗</span> Composition vs Inheritance</a>
+    <a class="nav-btn" href="#real-world"><span class="icon">🌐</span> Real-World Uses</a>
+    <a class="nav-btn" href="#metaclasses"><span class="icon">🧬</span> Metaclasses & Hooks</a>
+    <a class="nav-btn" href="#mistakes"><span class="icon">⚠️</span> Common Mistakes</a>
+    <a class="nav-btn" href="#cheatsheet"><span class="icon">📋</span> Cheatsheet</a>
+    <a class="nav-btn" href="#key-insights"><span class="icon">💡</span> Key Insights</a>
+    <a class="nav-btn" href="#evolution"><span class="icon">📅</span> Timeline</a>
+    <a class="nav-btn" href="#performance"><span class="icon">⚡</span> Performance</a>
+    <a class="nav-btn" href="#quiz"><span class="icon">🧠</span> Quiz</a>
+    <a class="nav-btn" href="#faq"><span class="icon">❓</span> FAQ</a>
+    <a class="nav-btn" href="#comments"><span class="icon">💬</span> Comments</a>
+    <a class="nav-btn" href="#follow"><span class="icon">👤</span> Follow</a>
+  </nav>
+
+  <header>
+    <div class="logo">Valleys <span>&</span> Bytes</div>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <div class="ad-top">
+    <ins class="adsbygoogle" style="display:block"
+         data-ad-client="ca-pub-4575646748966866"
+         data-ad-slot="4226674403"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <section class="hero">
+    <div class="hero-tag">Python · OOP · Inheritance · 2025</div>
+    <h1>Learning <em>Inheritance</em><br>in Python OOP</h1>
+    <p>A comprehensive deep‑dive into one of the four pillars of Object‑Oriented Programming — how inheritance structures code, promotes reuse, and models the real world in Python. Updated for 2025 with modern patterns.In Python, inheritance is one of the pillars of Object-Oriented Programming (OOP). It’s essentially a way to create a new class (the child) that takes on the attributes and methods of an existing class (the parent).
+ Think of it like biological inheritance: you might inherit your height from a parent, but you still have your own unique personality.</p>
+    <div class="hero-meta">
+      <span>✍️ By <strong>Glenn Junsay Pansensoy</strong></span>
+      <span>📅 <strong>March 2026</strong></span>
+      <span>🏷️ <strong>Python · OOP · Advanced</strong></span>
+    </div>
+  </section>
+
+  
+  <div class="progress-bar" id="progressBar"></div>
+  <button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
+
+  <div class="container">
+    <section class="section" id="intro">
+      <h2 class="sec-title">What is Inheritance?</h2>
+      <div class="divider"></div>
+      <p>In the realm of Object-Oriented Programming (OOP), <strong>inheritance</strong> is a fundamental mechanism that allows a class — known as a <em>child</em> or <em>subclass</em> — to acquire the properties, attributes, and behaviors of another class, referred to as the <em>parent</em> or <em>superclass</em>. This paradigm mirrors the biological concept of heredity, where offspring inherit traits from their parents while also developing their own distinct characteristics.</p>
+      <div class="highlight">
+        Inheritance establishes an <strong>IS-A relationship</strong> between classes. A Dog IS-A Animal. A Car IS-A Vehicle. A Manager IS-A Employee. This hierarchical structuring is the backbone of well-organized, maintainable software architecture.
+      </div>
+      <p>Python implements inheritance through a clean, readable syntax. When you define a class and pass another class inside its parentheses, the new class inherits everything from the parent. This is not merely code sharing — it is a semantic, structural, and behavioral contract that links classes in a meaningful hierarchy that reflects real-world relationships.</p>
+      <div class="info-card">
+        <h3>📌 Core Definition</h3>
+        <p>Inheritance is the OOP mechanism by which one class derives (or inherits) attributes and methods from another, enabling hierarchical classification, code reuse, and polymorphic behavior. In Python, all classes implicitly inherit from the built-in <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">object</code> class, making Python's inheritance model deeply unified and consistent.</p>
+      </div>
+      <p>Unlike procedural programming — where logic is scattered across functions with no inherent structure — inheritance brings <strong>order, hierarchy, and abstraction</strong> to your codebase. Once a parent class is defined with its attributes and methods, child classes can inherit, extend, and override that behavior freely, enabling you to write less code while achieving significantly more expressive and flexible programs.</p>
+    </section>
+
+    <section class="section" id="significance">
+      <h2 class="sec-title">Significance of Inheritance in Programming</h2>
+      <div class="divider"></div>
+      <p>Inheritance is not simply a convenience feature — it is one of the most powerful design tools available to software engineers. Its significance spans every level of software development, from small scripts to enterprise-scale systems.</p>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Benefit</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Code Reusability</strong></td><td>Write logic once in the parent class and reuse it across all child classes without duplication. Changes in the parent propagate automatically.</td></tr>
+            <tr><td><strong>Hierarchy Modeling</strong></td><td>Represents real-world classification systems naturally — animals, vehicles, employees, UI components — with precision and clarity.</td></tr>
+            <tr><td><strong>Polymorphism Enablement</strong></td><td>Allows child classes to override methods, enabling a single interface to represent different underlying forms (runtime polymorphism).</td></tr>
+            <tr><td><strong>Reduced Redundancy</strong></td><td>DRY (Don't Repeat Yourself) principle in action — shared logic lives in one place, reducing bugs and maintenance overhead.</td></tr>
+            <tr><td><strong>Extensibility</strong></td><td>Existing classes can be extended without modification, adhering to the Open/Closed Principle of SOLID design.</td></tr>
+            <tr><td><strong>Abstraction Support</strong></td><td>Abstract base classes define contracts that child classes must fulfill, enforcing consistent interfaces across a system.</td></tr>
+            <tr><td><strong>Maintainability</strong></td><td>Modifying core behavior in a single parent class updates all descendants simultaneously, reducing fragmentation.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="highlight">
+        Without inheritance, large codebases would devolve into a labyrinth of copy-pasted functions and duplicated logic — brittle, inconsistent, and nightmarish to maintain. Inheritance is the architecture that makes complex systems <strong>manageable</strong>.
+      </div>
+    </section>
+
+    <section class="section" id="processes">
+      <h2 class="sec-title">Processes & Methods of Inheritance</h2>
+      <div class="divider"></div>
+      <h3 class="sec-sub">Types of Inheritance in Python</h3>
+      <div class="info-card">
+        <h3>1. Single Inheritance</h3>
+        <p>One child class inherits from one parent class. This is the simplest and most common form. The child gains all the parent's attributes and methods and may add or override them as needed.</p>
+      </div>
+      <div class="info-card">
+        <h3>2. Multiple Inheritance</h3>
+        <p>A child class inherits from two or more parent classes simultaneously. Python supports this natively and resolves method conflicts using the <strong>Method Resolution Order (MRO)</strong> — specifically the C3 Linearization algorithm — accessible via <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">ClassName.__mro__</code>.</p>
+      </div>
+      <div class="info-card">
+        <h3>3. Multilevel Inheritance</h3>
+        <p>A chain of inheritance: Class C inherits from Class B, which itself inherits from Class A. This creates a lineage where C inherits from both B and A. The chain can be as deep as needed, though deeply nested hierarchies should be used with care to avoid complexity.</p>
+      </div>
+      <div class="info-card">
+        <h3>4. Hierarchical Inheritance</h3>
+        <p>Multiple child classes inherit from a single parent class. For example, both <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">Dog</code> and <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">Cat</code> may inherit from <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">Animal</code>. Each child shares the parent's interface but implements its own behaviors.</p>
+      </div>
+      <div class="info-card">
+        <h3>5. Hybrid Inheritance</h3>
+        <p>A combination of two or more types of inheritance. Python handles the ambiguity arising from hybrid patterns through its MRO. While powerful, hybrid inheritance should be carefully designed to avoid the "diamond problem."</p>
+      </div>
+      <h3 class="sec-sub">Key Built-in Tools & Methods</h3>
+      <ul>
+        <li><strong>super()</strong> — Returns a proxy to the parent class, enabling clean calls to overridden parent methods without hardcoding class names.</li>
+        <li><strong>isinstance(obj, Class)</strong> — Checks whether an object is an instance of a class or its subclass.</li>
+        <li><strong>issubclass(Child, Parent)</strong> — Returns True if the first argument is a subclass of the second.</li>
+        <li><strong>__init__</strong> — Constructor method; overriding it in a child class allows customized initialization while still calling the parent's via super().</li>
+        <li><strong>__mro__</strong> — The Method Resolution Order attribute; a tuple showing the order Python searches classes to resolve method calls.</li>
+        <li><strong>vars(obj)</strong> — Returns the <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">__dict__</code> attribute of the object, useful for inspecting inherited attributes.</li>
+      </ul>
+    </section>
+
+    <section class="section" id="how-it-works">
+      <h2 class="sec-title">How Inheritance Operates</h2>
+      <div class="divider"></div>
+      <p>When Python encounters a method call on an object, it begins a systematic search to locate that method. This search follows the <strong>Method Resolution Order (MRO)</strong> — a linearized sequence of classes built using the C3 algorithm at class creation time.</p>
+      <div class="highlight">
+        <strong>MRO Search Order:</strong> The current class → its parent classes (left to right) → their parents → and so on up to <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">object</code>. The first match found in this chain is executed.
+      </div>
+      <h3 class="sec-sub">Attribute Lookup Chain</h3>
+      <p>Python resolves attribute access through the following hierarchy:</p>
+      <ol>
+        <li>The instance's own <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">__dict__</code> (instance variables set in <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">__init__</code>)</li>
+        <li>The class's <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">__dict__</code> (class-level variables and methods)</li>
+        <li>Parent classes in MRO order, all the way up to <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">object</code></li>
+      </ol>
+      <h3 class="sec-sub">Method Overriding</h3>
+      <p>When a child class defines a method with the same name as a parent class method, it <strong>overrides</strong> the parent's version. Python will always call the most specific (lowest in the hierarchy) version of the method. The parent's version can still be accessed explicitly using <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">super()</code>.</p>
+      <h3 class="sec-sub">Constructor Inheritance</h3>
+      <p>If a child class does not define its own <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">__init__</code>, it inherits the parent's constructor automatically. If it does define one, the parent's constructor must be explicitly called using <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">super().__init__()</code> if the parent's initialization logic is still needed.</p>
+      <div class="info-card">
+        <h3>⚡ The Diamond Problem</h3>
+        <p>In multiple inheritance, if class D inherits from both B and C, and both B and C inherit from A, there is ambiguity about which A's methods D should use. Python's MRO (C3 Linearization) solves this elegantly by defining a consistent, deterministic resolution order, ensuring each class in the hierarchy is called exactly once.</p>
+      </div>
+    </section>
+
+    <section class="section" id="samples">
+      <h2 class="sec-title">Sample Programs with Explanations</h2>
+      <div class="divider"></div>
+
+      <h3 class="sec-sub">Example 1: Single Inheritance — Animal Hierarchy</h3>
+      <p>The most foundational example of inheritance: a generic <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">Animal</code> parent class with <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">Dog</code> and <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">Cat</code> child classes that inherit and override behaviors.</p>
+      <div class="code-wrap">
+        <div class="code-header">
+          <span>💻 python · single_inheritance.py</span>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+        <pre><span class="cm"># Parent (Base) Class</span>
+<span class="kw">class</span> <span class="cl">Animal</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nb">self</span>, name, species):
+        <span class="nb">self</span>.name = name
+        <span class="nb">self</span>.species = species
+
+    <span class="kw">def</span> <span class="fn">speak</span>(<span class="nb">self</span>):
+        <span class="kw">return</span> <span class="st">f"{self.name} makes a sound."</span>
+
+    <span class="kw">def</span> <span class="fn">describe</span>(<span class="nb">self</span>):
+        <span class="kw">return</span> <span class="st">f"{self.name} is a {self.species}."</span>
+
+<span class="cm"># Child Class — inherits from Animal</span>
+<span class="kw">class</span> <span class="cl">Dog</span>(<span class="cl">Animal</span>):
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nb">self</span>, name, breed):
+        <span class="nb">super</span>().<span class="fn">__init__</span>(name, <span class="st">"Canis lupus familiaris"</span>)
+        <span class="nb">self</span>.breed = breed
+
+    <span class="kw">def</span> <span class="fn">speak</span>(<span class="nb">self</span>):         <span class="cm"># METHOD OVERRIDE</span>
+        <span class="kw">return</span> <span class="st">f"{self.name} barks: Woof!"</span>
+
+    <span class="kw">def</span> <span class="fn">fetch</span>(<span class="nb">self</span>, item):   <span class="cm"># NEW method in child</span>
+        <span class="kw">return</span> <span class="st">f"{self.name} fetches the {item}!"</span>
+
+<span class="cm"># Another Child Class</span>
+<span class="kw">class</span> <span class="cl">Cat</span>(<span class="cl">Animal</span>):
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nb">self</span>, name, indoor):
+        <span class="nb">super</span>().<span class="fn">__init__</span>(name, <span class="st">"Felis catus"</span>)
+        <span class="nb">self</span>.indoor = indoor
+
+    <span class="kw">def</span> <span class="fn">speak</span>(<span class="nb">self</span>):
+        <span class="kw">return</span> <span class="st">f"{self.name} meows: Meow!"</span>
+
+<span class="cm"># ── Usage ──</span>
+dog = <span class="cl">Dog</span>(<span class="st">"Rex"</span>, <span class="st">"German Shepherd"</span>)
+cat = <span class="cl">Cat</span>(<span class="st">"Luna"</span>, indoor=<span class="kw">True</span>)
+
+<span class="fn">print</span>(dog.describe())
+<span class="fn">print</span>(dog.speak())
+<span class="fn">print</span>(dog.fetch(<span class="st">"ball"</span>))
+<span class="fn">print</span>(cat.speak())
+<span class="fn">print</span>(<span class="fn">isinstance</span>(dog, <span class="cl">Animal</span>))</pre>
+      </div>
+      <div class="highlight">
+        <strong>Key Concepts Shown:</strong> The <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">super().__init__()</code> call forwards initialization to the parent. <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">speak()</code> is overridden in both children — Python calls the most specific version. <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">describe()</code> is inherited unchanged. <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">fetch()</code> is a new capability added only in the child.
+      </div>
+
+      <h3 class="sec-sub">Example 2: Multilevel Inheritance — Vehicle Chain</h3>
+      <p>Demonstrates a three-tier inheritance chain where capabilities are built up progressively through each level of the hierarchy.</p>
+      <div class="code-wrap">
+        <div class="code-header">
+          <span>💻 python · multilevel_inheritance.py</span>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+        <pre><span class="kw">class</span> <span class="cl">Vehicle</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nb">self</span>, make, year):
+        <span class="nb">self</span>.make = make
+        <span class="nb">self</span>.year = year
+
+    <span class="kw">def</span> <span class="fn">info</span>(<span class="nb">self</span>):
+        <span class="kw">return</span> <span class="st">f"{self.year} {self.make}"</span>
+
+<span class="kw">class</span> <span class="cl">Car</span>(<span class="cl">Vehicle</span>):           <span class="cm"># Level 2</span>
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nb">self</span>, make, year, doors):
+        <span class="nb">super</span>().<span class="fn">__init__</span>(make, year)
+        <span class="nb">self</span>.doors = doors
+
+    <span class="kw">def</span> <span class="fn">door_count</span>(<span class="nb">self</span>):
+        <span class="kw">return</span> <span class="st">f"Doors: {self.doors}"</span>
+
+<span class="kw">class</span> <span class="cl">ElectricCar</span>(<span class="cl">Car</span>):       <span class="cm"># Level 3</span>
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nb">self</span>, make, year, doors, battery_kwh):
+        <span class="nb">super</span>().<span class="fn">__init__</span>(make, year, doors)
+        <span class="nb">self</span>.battery_kwh = battery_kwh
+
+    <span class="kw">def</span> <span class="fn">battery_info</span>(<span class="nb">self</span>):
+        <span class="kw">return</span> <span class="st">f"Battery: {self.battery_kwh} kWh"</span>
+
+    <span class="kw">def</span> <span class="fn">info</span>(<span class="nb">self</span>):              <span class="cm"># Override + extend</span>
+        base = <span class="nb">super</span>().<span class="fn">info</span>()
+        <span class="kw">return</span> <span class="st">f"{base} [Electric]"</span>
+
+<span class="cm"># ── Usage ──</span>
+tesla = <span class="cl">ElectricCar</span>(<span class="st">"Tesla Model 3"</span>, <span class="num">2024</span>, <span class="num">4</span>, <span class="num">82</span>)
+<span class="fn">print</span>(tesla.info())
+<span class="fn">print</span>(tesla.door_count())
+<span class="fn">print</span>(tesla.battery_info())
+<span class="fn">print</span>(<span class="cl">ElectricCar</span>.__mro__)</pre>
+      </div>
+
+      <h3 class="sec-sub">Example 3: Multiple Inheritance — Mixin Pattern</h3>
+      <p>A powerful real-world pattern: using lightweight mixin classes to compose capabilities without deep hierarchies.</p>
+      <div class="code-wrap">
+        <div class="code-header">
+          <span>💻 python · multiple_inheritance_mixin.py</span>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+        <pre><span class="kw">class</span> <span class="cl">JSONMixin</span>:
+    <span class="kw">def</span> <span class="fn">to_json</span>(<span class="nb">self</span>):
+        <span class="kw">import</span> json
+        <span class="kw">return</span> json.dumps(<span class="nb">self</span>.__dict__, indent=<span class="num">2</span>)
+
+<span class="kw">class</span> <span class="cl">LogMixin</span>:
+    <span class="kw">def</span> <span class="fn">log</span>(<span class="nb">self</span>, msg):
+        <span class="fn">print</span>(<span class="st">f"[LOG] {self.__class__.__name__}: {msg}"</span>)
+
+<span class="kw">class</span> <span class="cl">Person</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nb">self</span>, name, age):
+        <span class="nb">self</span>.name = name
+        <span class="nb">self</span>.age = age
+
+    <span class="kw">def</span> <span class="fn">greet</span>(<span class="nb">self</span>):
+        <span class="kw">return</span> <span class="st">f"Hi, I am {self.name}, age {self.age}."</span>
+
+<span class="cm"># Employee inherits Person + two mixins</span>
+<span class="kw">class</span> <span class="cl">Employee</span>(<span class="cl">JSONMixin</span>, <span class="cl">LogMixin</span>, <span class="cl">Person</span>):
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nb">self</span>, name, age, role, salary):
+        <span class="nb">super</span>().<span class="fn">__init__</span>(name, age)
+        <span class="nb">self</span>.role = role
+        <span class="nb">self</span>.salary = salary
+
+<span class="cm"># ── Usage ──</span>
+emp = <span class="cl">Employee</span>(<span class="st">"Glenn"</span>, <span class="num">30</span>, <span class="st">"Python Dev"</span>, <span class="num">85000</span>)
+<span class="fn">print</span>(emp.greet())
+emp.log(<span class="st">"Created successfully"</span>)
+<span class="fn">print</span>(emp.to_json())</pre>
+      </div>
+
+      <h3 class="sec-sub">Example 4: Abstract Base Classes (ABC)</h3>
+      <p>Python's <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">abc</code> module allows definition of abstract classes that enforce implementation contracts on child classes — a powerful pattern for large team codebases.</p>
+      <div class="code-wrap">
+        <div class="code-header">
+          <span>💻 python · abstract_inheritance.py</span>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+        <pre><span class="kw">from</span> abc <span class="kw">import</span> ABC, abstractmethod
+
+<span class="kw">class</span> <span class="cl">Shape</span>(<span class="cl">ABC</span>):
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nb">self</span>, color):
+        <span class="nb">self</span>.color = color
+
+    <span class="nb">@abstractmethod</span>
+    <span class="kw">def</span> <span class="fn">area</span>(<span class="nb">self</span>):
+        <span class="kw">pass</span>
+
+    <span class="nb">@abstractmethod</span>
+    <span class="kw">def</span> <span class="fn">perimeter</span>(<span class="nb">self</span>):
+        <span class="kw">pass</span>
+
+    <span class="kw">def</span> <span class="fn">describe</span>(<span class="nb">self</span>):  <span class="cm"># Concrete method</span>
+        <span class="kw">return</span> (<span class="st">f"I am a {self.color} {self.__class__.__name__} | "</span>
+                <span class="st">f"Area={self.area():.2f}, Perimeter={self.perimeter():.2f}"</span>)
+
+<span class="kw">class</span> <span class="cl">Circle</span>(<span class="cl">Shape</span>):
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nb">self</span>, color, radius):
+        <span class="nb">super</span>().<span class="fn">__init__</span>(color)
+        <span class="nb">self</span>.radius = radius
+
+    <span class="kw">def</span> <span class="fn">area</span>(<span class="nb">self</span>):
+        <span class="kw">import</span> math
+        <span class="kw">return</span> math.pi * <span class="nb">self</span>.radius ** <span class="num">2</span>
+
+    <span class="kw">def</span> <span class="fn">perimeter</span>(<span class="nb">self</span>):
+        <span class="kw">import</span> math
+        <span class="kw">return</span> <span class="num">2</span> * math.pi * <span class="nb">self</span>.radius
+
+<span class="kw">class</span> <span class="cl">Rectangle</span>(<span class="cl">Shape</span>):
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nb">self</span>, color, width, height):
+        <span class="nb">super</span>().<span class="fn">__init__</span>(color)
+        <span class="nb">self</span>.width = width; <span class="nb">self</span>.height = height
+
+    <span class="kw">def</span> <span class="fn">area</span>(<span class="nb">self</span>): <span class="kw">return</span> <span class="nb">self</span>.width * <span class="nb">self</span>.height
+    <span class="kw">def</span> <span class="fn">perimeter</span>(<span class="nb">self</span>): <span class="kw">return</span> <span class="num">2</span> * (<span class="nb">self</span>.width + <span class="nb">self</span>.height)
+
+shapes = [<span class="cl">Circle</span>(<span class="st">"red"</span>, <span class="num">5</span>), <span class="cl">Rectangle</span>(<span class="st">"blue"</span>, <span class="num">4</span>, <span class="num">6</span>)]
+<span class="kw">for</span> s <span class="kw">in</span> shapes:
+    <span class="fn">print</span>(s.describe())</pre>
+      </div>
+      <div class="highlight">
+        <strong>Abstract classes cannot be instantiated directly.</strong> Attempting <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">Shape("red")</code> raises a <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">TypeError</code>. This enforces that every shape <em>must</em> provide its own <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">area()</code> and <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">perimeter()</code> implementations — an invaluable contract in large codebases.
+      </div>
+    </section>
+
+    <section class="section" id="advanced">
+      <h2 class="sec-title">Advanced Concepts & Best Practices</h2>
+      <div class="divider"></div>
+
+      <h3 class="sec-sub">Property Inheritance & Encapsulation</h3>
+      <div class="code-wrap">
+        <div class="code-header">
+          <span>💻 python · property_inheritance.py</span>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+        <pre><span class="kw">class</span> <span class="cl">BankAccount</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nb">self</span>, owner, balance=<span class="num">0</span>):
+        <span class="nb">self</span>.owner = owner
+        <span class="nb">self</span>._balance = balance
+
+    <span class="nb">@property</span>
+    <span class="kw">def</span> <span class="fn">balance</span>(<span class="nb">self</span>):
+        <span class="kw">return</span> <span class="nb">self</span>._balance
+
+    <span class="kw">def</span> <span class="fn">deposit</span>(<span class="nb">self</span>, amt):
+        <span class="kw">if</span> amt > <span class="num">0</span>: <span class="nb">self</span>._balance += amt
+
+    <span class="kw">def</span> <span class="fn">withdraw</span>(<span class="nb">self</span>, amt):
+        <span class="kw">if</span> <span class="num">0</span> < amt <= <span class="nb">self</span>._balance:
+            <span class="nb">self</span>._balance -= amt
+        <span class="kw">else</span>: <span class="kw">raise</span> <span class="cl">ValueError</span>(<span class="st">"Insufficient funds"</span>)
+
+<span class="kw">class</span> <span class="cl">SavingsAccount</span>(<span class="cl">BankAccount</span>):
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nb">self</span>, owner, balance, interest_rate):
+        <span class="nb">super</span>().<span class="fn">__init__</span>(owner, balance)
+        <span class="nb">self</span>.interest_rate = interest_rate
+
+    <span class="kw">def</span> <span class="fn">apply_interest</span>(<span class="nb">self</span>):
+        interest = <span class="nb">self</span>._balance * <span class="nb">self</span>.interest_rate
+        <span class="nb">self</span>.deposit(interest)
+        <span class="kw">return</span> <span class="st">f"Interest applied: +${interest:.2f}"</span>
+
+acct = <span class="cl">SavingsAccount</span>(<span class="st">"Glenn"</span>, <span class="num">1000</span>, <span class="num">0.05</span>)
+acct.deposit(<span class="num">500</span>)
+<span class="fn">print</span>(acct.apply_interest())
+<span class="fn">print</span>(<span class="st">f"Balance: ${acct.balance}"</span>)</pre>
+      </div>
+
+      <h3 class="sec-sub">Composition vs. Inheritance: When to Choose</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Use Inheritance When…</th><th>Use Composition When…</th></tr></thead>
+          <tbody>
+            <tr><td>There is a clear IS-A relationship (Dog IS-A Animal)</td><td>There is a HAS-A relationship (Car HAS-A Engine)</td></tr>
+            <tr><td>You want to extend and override behavior</td><td>You want to combine behaviors flexibly at runtime</td></tr>
+            <tr><td>The hierarchy is stable and unlikely to change</td><td>You need maximum flexibility and loose coupling</td></tr>
+            <tr><td>You need polymorphism through a common interface</td><td>You want to avoid deep, fragile class hierarchies</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="info-card">
+        <h3>💡 Pro Tips</h3>
+        <ul style="list-style:none;padding:0;">
+          <li style="margin-bottom:.5rem;">✅ Always call <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">super().__init__()</code> in child constructors to avoid uninitialized parent state.</li>
+          <li style="margin-bottom:.5rem;">✅ Favor shallow hierarchies (2-3 levels) over deep chains to maintain readability.</li>
+          <li style="margin-bottom:.5rem;">✅ Use <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">@abstractmethod</code> to document and enforce required interfaces in base classes.</li>
+          <li style="margin-bottom:.5rem;">✅ Inspect MRO with <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">ClassName.__mro__</code> whenever multiple inheritance is involved.</li>
+          <li>✅ Follow the Liskov Substitution Principle: child classes should be substitutable for parent classes without breaking the program.</li>
+        </ul>
+      </div>
+    </section>
+
+    
+    <section class="section" id="design-patterns">
+      <h2 class="sec-title">🧩 Design Patterns Powered by Inheritance</h2>
+      <div class="divider"></div>
+      <p>Many classic Gang of Four design patterns leverage inheritance to achieve flexibility and reuse. Here are three essential ones every Python developer should know.</p>
+      <div class="design-pattern-grid">
+        <div class="pattern-card">
+          <h4>Template Method</h4>
+          <p>Define the skeleton of an algorithm in a base class method, letting subclasses override specific steps without changing the algorithm’s structure. Used extensively in AI frameworks (e.g., PyTorch `nn.Module`).</p>
+        </div>
+        <div class="pattern-card">
+          <h4>Factory Method</h4>
+          <p>Define an interface for creating an object, but let subclasses decide which class to instantiate. The base class may provide default creation logic that subclasses override.</p>
+        </div>
+        <div class="pattern-card">
+          <h4>Strategy (with inheritance)</h4>
+          <p>While often implemented with composition, strategy can also use inheritance when families of algorithms share common code. A base strategy class defines the interface, concrete strategies inherit and implement.</p>
+        </div>
+      </div>
+      <div class="highlight">
+        <strong>Key insight:</strong> Inheritance enables the <em>Template Method</em> pattern – one of the most common patterns in framework design. You'll find it in Django class‑based views, scikit‑learn estimators, and almost every major Python library.
+      </div>
+    </section>
+
+    
+    <section class="section" id="composition">
+      <h2 class="sec-title">🔗 Composition vs Inheritance – When to Choose</h2>
+      <div class="divider"></div>
+      <p>The classic design principle "favor composition over inheritance" is often misunderstood. Let's clarify with concrete Python examples and a decision flowchart.</p>
+      <div class="info-card">
+        <h3>✅ Use inheritance when:</h3>
+        <ul>
+          <li>You have a clear <strong>IS‑A</strong> relationship (e.g., `Circle` is a `Shape`).</li>
+          <li>You need to override or extend behavior in multiple related classes.</li>
+          <li>Polymorphism through a common interface is required.</li>
+          <li>The hierarchy is stable and not expected to change frequently.</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h3>🔄 Use composition when:</h3>
+        <ul>
+          <li>You have a <strong>HAS‑A</strong> relationship (e.g., `Car` has an `Engine`).</li>
+          <li>You want to mix behaviors from multiple sources without deep hierarchies.</li>
+          <li>Behaviors need to be changed at runtime (composition allows swapping components).</li>
+          <li>You want to avoid fragile base class problems.</li>
+        </ul>
+      </div>
+      <div class="code-wrap">
+        <div class="code-header"><span>💻 composition_example.py</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+        <pre><span class="kw">class</span> <span class="cl">Engine</span>:
+    <span class="kw">def</span> <span class="fn">start</span>(<span class="nb">self</span>): <span class="kw">return</span> <span class="st">"Engine started"</span>
+
+<span class="kw">class</span> <span class="cl">Wheels</span>:
+    <span class="kw">def</span> <span class="fn">rotate</span>(<span class="nb">self</span>): <span class="kw">return</span> <span class="st">"Wheels rotating"</span>
+
+<span class="kw">class</span> <span class="cl">Car</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nb">self</span>):
+        <span class="nb">self</span>.engine = <span class="cl">Engine</span>()
+        <span class="nb">self</span>.wheels = <span class="cl">Wheels</span>()
+    <span class="kw">def</span> <span class="fn">drive</span>(<span class="nb">self</span>):
+        <span class="kw">return</span> <span class="st">f"{self.engine.start()} and {self.wheels.rotate()}"</span>
+
+car = <span class="cl">Car</span>()
+<span class="fn">print</span>(car.drive())</pre>
+      </div>
+    </section>
+
+    
+    <section class="section" id="solid">
+      <h2 class="sec-title">🏗️ SOLID Principles &amp; Inheritance</h2>
+      <div class="divider"></div>
+      <p>The SOLID principles are five object-oriented design guidelines that produce codebases that are easy to maintain, extend, and test. Inheritance is directly involved in three of them.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:1rem;margin:1.5rem 0;">
+        <div class="info-card"><h3>🔒 S — Single Responsibility</h3><p>Each class should have one reason to change. In an inheritance hierarchy, parent classes should not accumulate unrelated responsibilities — split them into mixins or separate base classes.</p></div>
+        <div class="info-card"><h3>🔓 O — Open/Closed</h3><p>Classes should be open for extension, closed for modification. Inheritance is the primary mechanism: extend by subclassing, don't modify the working parent. This is why Django uses class-based views.</p></div>
+        <div class="info-card"><h3>🔄 L — Liskov Substitution</h3><p>Child classes must be substitutable for their parent without breaking the program. If <code>Dog</code> overrides <code>speak()</code>, it must still return a string — not raise a different exception or change the return type.</p></div>
+        <div class="info-card"><h3>🧩 D — Dependency Inversion</h3><p>Depend on abstractions, not concretions. Abstract Base Classes (<code>ABC</code>) are the Python tool for this. Code to the <code>Shape</code> interface, not to <code>Circle</code> specifically — then any shape works.</p></div>
+      </div>
+      <div class="highlight"><strong>Liskov Substitution in practice:</strong> If you ever write <code>if isinstance(obj, SpecificChild):</code> inside code that is supposed to work with the parent type, you are likely violating LSP. Redesign your hierarchy so the parent interface is sufficient for all cases.</div>
+    </section>
+
+    <section class="section" id="interview">
+      <h2 class="sec-title">🎯 Interview Questions</h2>
+      <div class="divider"></div>
+      <p>These are the most frequently asked Python inheritance questions in technical interviews. Study the question, think through your answer, then expand to reveal the ideal response.</p>
+      <div class="faq-list" style="margin-top:1.2rem;">
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>What is the difference between isinstance() and type()?</span><span class="faq-arrow">▾</span></button><div class="faq-a"><p><code>type(obj) is ClassName</code> returns True only if the object is exactly that class — not a subclass. <code>isinstance(obj, ClassName)</code> returns True for the class itself OR any subclass. In OOP code, <code>isinstance()</code> is almost always correct because it respects the inheritance hierarchy. Using <code>type()</code> for comparisons breaks Liskov Substitution and is a code smell.</p></div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>Explain Python's MRO and C3 linearization.</span><span class="faq-arrow">▾</span></button><div class="faq-a"><p>The MRO defines the order in which Python searches classes for a method. C3 linearization guarantees: (1) a class always appears before its parents, (2) parent classes appear in listing order, and (3) no class appears before classes that depend on it. Inspect it with <code>ClassName.__mro__</code>. For <code>class D(B, C)</code> where B and C both inherit A, the MRO is D → B → C → A → object.</p></div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>When would you use composition over inheritance?</span><span class="faq-arrow">▾</span></button><div class="faq-a"><p>Use composition when (1) the relationship is HAS-A, not IS-A, (2) you want to change behaviour at runtime by swapping components, (3) you need to combine behaviours from multiple sources without forcing a deep hierarchy, or (4) you want to avoid the fragile base class problem. The test: "Can you substitute a child for the parent everywhere?" If no, you likely need composition.</p></div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>What is the Liskov Substitution Principle?</span><span class="faq-arrow">▾</span></button><div class="faq-a"><p>LSP states that wherever a parent class is used, a child class should work correctly without the calling code knowing the difference. Child classes must honour the parent's contract — accept the same input types, return compatible output types, and not raise exceptions the parent doesn't raise. Violating LSP typically causes bugs that are notoriously hard to trace.</p></div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>How do abstract base classes differ from regular base classes?</span><span class="faq-arrow">▾</span></button><div class="faq-a"><p>Regular base classes can be instantiated directly. ABCs created with <code>class MyABC(ABC):</code> cannot — attempting raises <code>TypeError</code>. Methods decorated with <code>@abstractmethod</code> must be implemented by every concrete subclass. ABCs are Python's formal mechanism for defining and enforcing interfaces — not just by convention.</p></div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>What is the diamond problem and how does Python solve it?</span><span class="faq-arrow">▾</span></button><div class="faq-a"><p>When class D inherits from both B and C, and both inherit from A, it's ambiguous which A's methods D should use — and A's <code>__init__</code> might be called twice. Python solves it with C3 linearization, producing a single consistent MRO where each class appears exactly once. Combined with cooperative <code>super()</code> calls, each method is called exactly once in the correct order.</p></div></div>
+      </div>
+    </section>
+
+<section class="section" id="real-world">
+      <h2 class="sec-title">Real-World Use Cases of Inheritance</h2>
+      <div class="divider"></div>
+      <p>Inheritance is not confined to textbook examples — it powers the frameworks, libraries, and systems that professional developers work with every day. Understanding where and how inheritance is used in the real world deepens your ability to recognize patterns, read codebases, and design your own architectures with confidence.</p>
+      <div class="info-card">
+        <h3>🌐 Web Frameworks — Django & Flask</h3>
+        <p>Django's entire view system is built on inheritance. Every view you write extends <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">View</code> or one of its descendants like <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">ListView</code>, <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">DetailView</code>, or <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">CreateView</code>. These class-based views inherit HTTP method handlers, context injection, template rendering, and permission checks — all from the base class. Django's model system similarly uses inheritance for model proxying, abstract models, and multi-table inheritance, allowing you to share fields and validators across related database tables.</p>
+      </div>
+      <div class="info-card">
+        <h3>🖥️ GUI Toolkits — Tkinter, PyQt, wxPython</h3>
+        <p>Every GUI widget in Tkinter inherits from <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">Widget</code>. When you subclass <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">tk.Frame</code> to create a custom panel, you inherit geometry management, event binding, and rendering logic. PyQt5 applications subclass <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">QMainWindow</code> or <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">QWidget</code> — overriding <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">paintEvent()</code>, <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">keyPressEvent()</code>, and other slot methods to inject custom behavior while the parent handles the entire window lifecycle.</p>
+      </div>
+      <div class="info-card">
+        <h3>🧪 Testing Frameworks — unittest</h3>
+        <p>Python's built-in <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">unittest</code> module is a masterclass in hierarchical inheritance. Every test suite you write extends <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">unittest.TestCase</code>, inheriting assertion methods (<code style="color:var(--accent);font-family:'Source Code Pro',monospace;">assertEqual</code>, <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">assertRaises</code>), lifecycle hooks (<code style="color:var(--accent);font-family:'Source Code Pro',monospace;">setUp</code>, <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">tearDown</code>), and the test runner protocol. You override only what you need; the rest runs by inheritance.</p>
+      </div>
+      <div class="info-card">
+        <h3>🤖 Machine Learning — Scikit-learn & PyTorch</h3>
+        <p>In Scikit-learn, all estimators inherit from <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">BaseEstimator</code> and one or more mixins like <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">ClassifierMixin</code> or <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">TransformerMixin</code>. This gives every custom model <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">get_params()</code>, <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">set_params()</code>, and pipeline compatibility for free. In PyTorch, every neural network you build subclasses <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">nn.Module</code>, inheriting parameter registration, device management, and gradient tracking — you only need to implement <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">forward()</code>.</p>
+      </div>
+      <div class="info-card">
+        <h3>🎮 Game Development — Pygame & Arcade</h3>
+        <p>Game entities like players, enemies, projectiles, and pickups all share a common <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">Sprite</code> base class. Each entity type subclasses it and overrides <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">update()</code> and <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">draw()</code>. The game loop can then call <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">update()</code> on every sprite uniformly, regardless of type — a perfect demonstration of polymorphism enabled by inheritance.</p>
+      </div>
+      <div class="info-card">
+        <h3>☁️ Cloud & DevOps — Boto3, CLI Frameworks, and Infrastructure SDKs</h3>
+        <p>Amazon Web Services' Python SDK (Boto3) models every AWS resource through an inheritance hierarchy rooted in <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">ServiceResource</code>. When you call <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">boto3.resource('s3')</code>, you're working with a class that inherits resource management, retry logic, and credential handling from shared base classes. CLI frameworks like Click and Typer use class-based command groups that inherit argument parsing, help formatting, and error handling from a common base. Infrastructure-as-code tools — like Pulumi's Python SDK — model cloud resources as class hierarchies where <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">Resource</code> → <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">CustomResource</code> → specific providers. Every cloud resource automatically gets drift detection, dependency tracking, and deployment lifecycle management — written once in the base class, available everywhere through inheritance.</p>
+      </div>
+      <div class="info-card">
+        <h3>🗄️ Database ORMs — SQLAlchemy & Django Models</h3>
+        <p>SQLAlchemy's declarative ORM lets you define every database table as a Python class inheriting from <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">Base</code>. Column definitions, relationships, and query methods are inherited while each model adds only its own fields and business logic. Django's model inheritance goes further: single-table inheritance maps all subclasses to one table, joined-table inheritance gives each subclass its own table with a foreign key join, and abstract inheritance shares field definitions without creating a database table at all. Understanding these strategies is essential when modeling users, admins, premium subscribers, and guest accounts — all sharing common attributes but diverging in permissions and behavior. The inheritance design choice at the ORM layer directly determines query performance and schema flexibility for years to come.</p>
+      </div>
+    </section>
+
+    
+
+    
+
+    
+    <section class="section" id="metaclasses">
+      <h2 class="sec-title">🧬 Beyond Basics: Metaclasses & __init_subclass__</h2>
+      <div class="divider"></div>
+      <p>Python offers powerful hooks to customize class creation. Understanding them elevates your inheritance mastery.</p>
+      <div class="code-wrap">
+        <div class="code-header"><span>💻 init_subclass_hook.py</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+        <pre><span class="kw">class</span> <span class="cl">PluginBase</span>:
+    _registry = {}
+    <span class="kw">def</span> <span class="fn">__init_subclass__</span>(cls, plugin_name=None, **kwargs):
+        <span class="nb">super</span>().<span class="fn">__init_subclass__</span>(**kwargs)
+        <span class="kw">if</span> plugin_name <span class="kw">is not</span> <span class="kw">None</span>:
+            <span class="cl">PluginBase</span>._registry[plugin_name] = cls
+
+<span class="kw">class</span> <span class="cl">LoggingPlugin</span>(<span class="cl">PluginBase</span>, plugin_name=<span class="st">"logger"</span>):
+    <span class="kw">def</span> <span class="fn">run</span>(<span class="nb">self</span>): <span class="kw">return</span> <span class="st">"Logging"</span>
+
+<span class="fn">print</span>(<span class="cl">PluginBase</span>._registry)  <span class="cm"># {'logger': <class '__main__.LoggingPlugin'>}</span></pre>
+      </div>
+    </section>
+
+    <section class="section" id="mistakes">
+      <h2 class="sec-title">Common Mistakes & How to Avoid Them</h2>
+      <div class="divider"></div>
+      <p>Even experienced developers make avoidable errors with inheritance. Understanding these pitfalls is as valuable as understanding the feature itself — knowing what not to do is half the battle of writing clean, maintainable object-oriented Python.</p>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Mistake</th><th>Symptom</th><th>Correct Approach</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Forgetting super().__init__()</strong></td><td>Parent attributes undefined in child; <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">AttributeError</code> at runtime</td><td>Always call <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">super().__init__(...)</code> as the first line of a child constructor</td></tr>
+            <tr><td><strong>Deep inheritance chains (5+ levels)</strong></td><td>Code becomes unreadable; changes in base class unexpectedly break leaf classes</td><td>Prefer shallow hierarchies; use composition or mixins to share behavior beyond 3 levels</td></tr>
+            <tr><td><strong>Overriding without calling super()</strong></td><td>Parent's method logic is silently skipped; subtle bugs in logging, validation, or cleanup</td><td>When extending (not replacing) parent behavior, call <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">super().method()</code> inside the override</td></tr>
+            <tr><td><strong>Violating Liskov Substitution</strong></td><td>Child class cannot be used where parent is expected; <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">TypeError</code> or broken behavior</td><td>Ensure child classes accept the same inputs and produce compatible outputs as the parent</td></tr>
+            <tr><td><strong>Inheriting for code reuse alone</strong></td><td>Forced IS-A relationships that don't reflect reality; brittle hierarchy</td><td>Use inheritance only for genuine IS-A relationships; use composition for shared utilities</td></tr>
+            <tr><td><strong>Ignoring MRO in multiple inheritance</strong></td><td>Wrong method version called; <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">TypeError: Cannot create consistent MRO</code></td><td>Inspect <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">ClassName.__mro__</code> to verify resolution order; design hierarchies to avoid conflicts</td></tr>
+            <tr><td><strong>Mutable default class attributes</strong></td><td>All instances share the same list/dict; mutations in one instance affect all others</td><td>Initialize mutable attributes in <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">__init__</code>, never as class-level defaults</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section" id="cheatsheet">
+      <h2 class="sec-title">Quick Reference Cheatsheet</h2>
+      <div class="divider"></div>
+      <p>A concise reference for the most important inheritance syntax, built-ins, and patterns in Python. Bookmark this section — you'll return to it often.</p>
+      <div class="code-wrap">
+        <div class="code-header">
+          <span>💻 python · inheritance_cheatsheet.py</span>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+        <pre><span class="cm"># ══════════════════════════════════════════════════════
+# PYTHON INHERITANCE CHEATSHEET — Valleys & Bytes
+# ══════════════════════════════════════════════════════</span>
+
+<span class="cm"># 1. Basic Inheritance</span>
+<span class="kw">class</span> <span class="cl">Child</span>(<span class="cl">Parent</span>): <span class="kw">pass</span>
+
+<span class="cm"># 2. Call Parent Constructor</span>
+<span class="kw">def</span> <span class="fn">__init__</span>(<span class="nb">self</span>, x, y):
+    <span class="nb">super</span>().<span class="fn">__init__</span>(x)
+    <span class="nb">self</span>.y = y
+
+<span class="cm"># 3. Multiple Inheritance</span>
+<span class="kw">class</span> <span class="cl">Child</span>(<span class="cl">ParentA</span>, <span class="cl">ParentB</span>): <span class="kw">pass</span>
+
+<span class="cm"># 4. Inspect MRO</span>
+<span class="fn">print</span>(<span class="cl">Child</span>.__mro__)
+<span class="fn">print</span>(Child.mro())
+
+<span class="cm"># 5. Override + Extend (call parent version)</span>
+<span class="kw">def</span> <span class="fn">method</span>(<span class="nb">self</span>):
+    result = <span class="nb">super</span>().<span class="fn">method</span>()
+    <span class="kw">return</span> result + <span class="st">" (extended)"</span>
+
+<span class="cm"># 6. Abstract Base Class</span>
+<span class="kw">from</span> abc <span class="kw">import</span> ABC, abstractmethod
+<span class="kw">class</span> <span class="cl">Base</span>(<span class="cl">ABC</span>):
+    <span class="nb">@abstractmethod</span>
+    <span class="kw">def</span> <span class="fn">must_implement</span>(<span class="nb">self</span>): <span class="kw">pass</span>
+
+<span class="cm"># 7. Type Checking</span>
+<span class="fn">isinstance</span>(obj, <span class="cl">ParentClass</span>)
+<span class="fn">issubclass</span>(<span class="cl">Child</span>, <span class="cl">Parent</span>)
+<span class="fn">type</span>(obj) <span class="kw">is</span> <span class="cl">Child</span>
+
+<span class="cm"># 8. Mixin Pattern</span>
+<span class="kw">class</span> <span class="cl">LogMixin</span>:
+    <span class="kw">def</span> <span class="fn">log</span>(<span class="nb">self</span>, msg): <span class="fn">print</span>(<span class="st">f"[{self.__class__.__name__}] {msg}"</span>)
+<span class="kw">class</span> <span class="cl">MyService</span>(<span class="cl">LogMixin</span>, <span class="cl">BaseService</span>): <span class="kw">pass</span>
+
+<span class="cm"># 9. __init_subclass__ (hook on subclassing)</span>
+<span class="kw">class</span> <span class="cl">Plugin</span>:
+    _registry = {}
+    <span class="kw">def</span> <span class="fn">__init_subclass__</span>(cls, plugin_name, **kw):
+        <span class="nb">super</span>().<span class="fn">__init_subclass__</span>(**kw)
+        <span class="cl">Plugin</span>._registry[plugin_name] = cls
+
+<span class="cm"># 10. dataclass inheritance</span>
+<span class="kw">from</span> dataclasses <span class="kw">import</span> dataclass
+<span class="nb">@dataclass</span>
+<span class="kw">class</span> <span class="cl">Animal</span>: name: str; age: int
+<span class="nb">@dataclass</span>
+<span class="kw">class</span> <span class="cl">Dog</span>(<span class="cl">Animal</span>): breed: str</pre>
+      </div>
+    </section>
+
+    
+    
+    <section class="section" id="pro-patterns">
+      <h2 class="sec-title">🛠️ Professional Patterns & Real Recipes</h2>
+      <div class="divider"></div>
+      <p>Beyond the fundamentals, professional Python developers rely on a handful of recurring patterns that appear in almost every substantial codebase. Each pattern solves a specific class of design problem using inheritance as its core mechanism.</p>
+
+      <h3 class="sec-sub">The Mixin Pattern — Adding Behaviors Without Deep Hierarchies</h3>
+      <p>Mixins are small, focused classes that add a single capability. They carry no <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">__init__</code> and no instance state — just methods. Multiple mixins can be stacked onto any class, giving you flexible horizontal reuse without forcing an artificial parent-child relationship.</p>
+      <div class="code-wrap">
+        <div class="code-header"><span>💻 python · mixin_pattern.py</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+        <pre><span class="kw">class</span> <span class="cl">SerializeMixin</span>:
+    <span class="kw">def</span> <span class="fn">to_dict</span>(<span class="nb">self</span>):
+        <span class="kw">return</span> <span class="nb">self</span>.__dict__.copy()
+
+    <span class="kw">def</span> <span class="fn">to_json</span>(<span class="nb">self</span>):
+        <span class="kw">import</span> json
+        <span class="kw">return</span> json.dumps(<span class="nb">self</span>.to_dict(), indent=<span class="num">2</span>)
+
+<span class="kw">class</span> <span class="cl">ValidationMixin</span>:
+    <span class="kw">def</span> <span class="fn">validate</span>(<span class="nb">self</span>):
+        <span class="kw">for</span> field, value <span class="kw">in</span> <span class="nb">self</span>.__dict__.items():
+            <span class="kw">if</span> value <span class="kw">is</span> <span class="kw">None</span>:
+                <span class="kw">raise</span> <span class="cl">ValueError</span>(<span class="st">f"{field} cannot be None"</span>)
+        <span class="kw">return</span> <span class="kw">True</span>
+
+<span class="kw">class</span> <span class="cl">LogMixin</span>:
+    <span class="kw">def</span> <span class="fn">log</span>(<span class="nb">self</span>, msg):
+        <span class="fn">print</span>(<span class="st">f"[{self.__class__.__name__}] {msg}"</span>)
+
+<span class="kw">class</span> <span class="cl">Product</span>(<span class="cl">SerializeMixin</span>, <span class="cl">ValidationMixin</span>, <span class="cl">LogMixin</span>):
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nb">self</span>, name, price):
+        <span class="nb">self</span>.name = name
+        <span class="nb">self</span>.price = price
+
+p = <span class="cl">Product</span>(<span class="st">"Laptop"</span>, <span class="num">45000</span>)
+p.validate()
+p.log(<span class="st">"Product created"</span>)
+<span class="fn">print</span>(p.to_json())</pre>
+      </div>
+      <div class="highlight">
+        Convention: always name mixins with the <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">Mixin</code> suffix and list them <em>before</em> the base class in the inheritance list — <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">class Product(SerializeMixin, ValidationMixin, BaseProduct)</code>. This ordering ensures mixin methods take precedence and the MRO resolves cleanly.
+      </div>
+
+      <h3 class="sec-sub">Registry Pattern — Auto-Tracking Subclasses</h3>
+      <p>The registry pattern uses <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">__init_subclass__</code> to automatically record every new subclass in a central dictionary. This is the foundation of plugin systems, command dispatchers, and format converters used in frameworks like Pydantic, SQLAlchemy, and Celery.</p>
+      <div class="code-wrap">
+        <div class="code-header"><span>💻 python · registry_pattern.py</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+        <pre><span class="kw">class</span> <span class="cl">PaymentMethod</span>:
+    _registry = {}
+    <span class="kw">def</span> <span class="fn">__init_subclass__</span>(cls, method_name=<span class="kw">None</span>, **kw):
+        <span class="nb">super</span>().<span class="fn">__init_subclass__</span>(**kw)
+        <span class="kw">if</span> method_name:
+            <span class="cl">PaymentMethod</span>._registry[method_name] = cls
+
+    <span class="kw">def</span> <span class="fn">pay</span>(<span class="nb">self</span>, amount): <span class="kw">raise</span> <span class="cl">NotImplementedError</span>
+
+<span class="kw">class</span> <span class="cl">GCashPayment</span>(<span class="cl">PaymentMethod</span>, method_name=<span class="st">"gcash"</span>):
+    <span class="kw">def</span> <span class="fn">pay</span>(<span class="nb">self</span>, amount):
+        <span class="kw">return</span> <span class="st">f"GCash: sent ₱{amount:.2f}"</span>
+
+<span class="kw">class</span> <span class="cl">PayPalPayment</span>(<span class="cl">PaymentMethod</span>, method_name=<span class="st">"paypal"</span>):
+    <span class="kw">def</span> <span class="fn">pay</span>(<span class="nb">self</span>, amount):
+        <span class="kw">return</span> <span class="st">f"PayPal: transferred ${amount:.2f}"</span>
+
+method = <span class="cl">PaymentMethod</span>._registry[<span class="st">"gcash"</span>]()
+<span class="fn">print</span>(method.pay(<span class="num">500</span>))
+<span class="fn">print</span>(<span class="cl">PaymentMethod</span>._registry)</pre>
+      </div>
+
+      <h3 class="sec-sub">Cooperative Multiple Inheritance — The Correct Way</h3>
+      <p>When every class in a multiple-inheritance chain calls <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">super()</code> — even mixins — Python's MRO ensures each class is invoked exactly once, in the correct order. This is called <strong>cooperative multiple inheritance</strong> and it is the key to making complex hierarchies work reliably.</p>
+      <div class="code-wrap">
+        <div class="code-header"><span>💻 python · cooperative_MI.py</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+        <pre><span class="kw">class</span> <span class="cl">Base</span>:
+    <span class="kw">def</span> <span class="fn">process</span>(<span class="nb">self</span>):
+        <span class="kw">return</span> [<span class="st">"Base"</span>]
+
+<span class="kw">class</span> <span class="cl">Validator</span>(<span class="cl">Base</span>):
+    <span class="kw">def</span> <span class="fn">process</span>(<span class="nb">self</span>):
+        result = <span class="nb">super</span>().<span class="fn">process</span>()
+        result.append(<span class="st">"Validated"</span>)
+        <span class="kw">return</span> result
+
+<span class="kw">class</span> <span class="cl">Logger</span>(<span class="cl">Base</span>):
+    <span class="kw">def</span> <span class="fn">process</span>(<span class="nb">self</span>):
+        result = <span class="nb">super</span>().<span class="fn">process</span>()
+        result.append(<span class="st">"Logged"</span>)
+        <span class="kw">return</span> result
+
+<span class="kw">class</span> <span class="cl">Service</span>(<span class="cl">Logger</span>, <span class="cl">Validator</span>):
+    <span class="kw">def</span> <span class="fn">process</span>(<span class="nb">self</span>):
+        result = <span class="nb">super</span>().<span class="fn">process</span>()
+        result.append(<span class="st">"Service"</span>)
+        <span class="kw">return</span> result
+
+s = <span class="cl">Service</span>()
+<span class="fn">print</span>(s.process())
+<span class="fn">print</span>(<span class="cl">Service</span>.__mro__)</pre>
+      </div>
+      <div class="highlight">
+        Output: <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">['Base', 'Validated', 'Logged', 'Service']</code> — each class in the chain fires exactly once, in MRO order. This predictability is why <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">super()</code> in every class — not just the leaf — is non-negotiable in cooperative inheritance.
+      </div>
+
+      <h3 class="sec-sub">The Template Method Pattern in Practice</h3>
+      <p>The Template Method defines the skeleton of an algorithm in a parent class method, then lets child classes fill in specific steps by overriding hook methods. It is one of the most frequently occurring patterns in Python frameworks — you'll find it in Django views, Scrapy spiders, unittest fixtures, and virtually every well-designed class-based library.</p>
+      <div class="code-wrap">
+        <div class="code-header"><span>💻 python · template_method.py</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+        <pre><span class="kw">from</span> abc <span class="kw">import</span> ABC, abstractmethod
+
+<span class="kw">class</span> <span class="cl">DataPipeline</span>(<span class="cl">ABC</span>):
+    <span class="kw">def</span> <span class="fn">run</span>(<span class="nb">self</span>):
+        raw      = <span class="nb">self</span>.extract()
+        cleaned  = <span class="nb">self</span>.transform(raw)
+        count    = <span class="nb">self</span>.load(cleaned)
+        <span class="kw">return</span> <span class="st">f"Pipeline complete. {count} records loaded."</span>
+
+    <span class="nb">@abstractmethod</span>
+    <span class="kw">def</span> <span class="fn">extract</span>(<span class="nb">self</span>): <span class="kw">pass</span>
+
+    <span class="nb">@abstractmethod</span>
+    <span class="kw">def</span> <span class="fn">transform</span>(<span class="nb">self</span>, data): <span class="kw">pass</span>
+
+    <span class="nb">@abstractmethod</span>
+    <span class="kw">def</span> <span class="fn">load</span>(<span class="nb">self</span>, data): <span class="kw">pass</span>
+
+<span class="kw">class</span> <span class="cl">CSVPipeline</span>(<span class="cl">DataPipeline</span>):
+    <span class="kw">def</span> <span class="fn">extract</span>(<span class="nb">self</span>): <span class="kw">return</span> [<span class="st">"row1"</span>, <span class="st">"row2"</span>, <span class="st">"row3"</span>]
+    <span class="kw">def</span> <span class="fn">transform</span>(<span class="nb">self</span>, data): <span class="kw">return</span> [r.upper() <span class="kw">for</span> r <span class="kw">in</span> data]
+    <span class="kw">def</span> <span class="fn">load</span>(<span class="nb">self</span>, data): <span class="fn">print</span>(data); <span class="kw">return</span> <span class="fn">len</span>(data)
+
+<span class="fn">print</span>(<span class="cl">CSVPipeline</span>().run())</pre>
+      </div>
+    </section>
+
+    <section class="section" id="key-insights">
+      <h2 class="sec-title">💡 Key Insights at a Glance</h2>
+      <div class="divider"></div>
+      <p>These distilled insights represent the most important lessons from years of Python OOP practice. Keep them in mind every time you design a class hierarchy.</p>
+      <div class="insight-grid">
+        <div class="insight-card">
+          <span class="icon">🔑</span>
+          <h4>super() is Non-Negotiable</h4>
+          <p>Always use <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">super()</code> over hard-coding parent names. It respects MRO, future-proofs your code, and enables cooperative multiple inheritance cleanly.</p>
+        </div>
+        <div class="insight-card">
+          <span class="icon">🌳</span>
+          <h4>Shallow Beats Deep</h4>
+          <p>Hierarchies deeper than 3–4 levels become architectural debt. Prefer mixins and composition to share code without coupling your design to a brittle inheritance chain.</p>
+        </div>
+        <div class="insight-card">
+          <span class="icon">🔬</span>
+          <h4>Abstract Classes = Contracts</h4>
+          <p>Use ABCs to define non-negotiable interfaces. They document intent, prevent accidental instantiation, and give your team clear extension points backed by Python's enforcement.</p>
+        </div>
+        <div class="insight-card">
+          <span class="icon">🧩</span>
+          <h4>Mixins Stay Stateless</h4>
+          <p>Well-designed mixins carry no instance state of their own — only methods. This keeps them composable, reusable, and free of unexpected side-effects across inheritance chains.</p>
+        </div>
+        <div class="insight-card">
+          <span class="icon">⚡</span>
+          <h4>MRO Is Your Map</h4>
+          <p>Print <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">ClassName.__mro__</code> whenever you're debugging method resolution in multiple inheritance. Never guess — verify the order explicitly.</p>
+        </div>
+        <div class="insight-card">
+          <span class="icon">🏗️</span>
+          <h4>Design for Substitution</h4>
+          <p>The Liskov Substitution Principle is the litmus test for good inheritance. If you need <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">isinstance</code> checks to handle a subclass differently, your hierarchy needs redesigning.</p>
+        </div>
+      </div>
+    </section>
+
+    
+    <section class="section" id="evolution">
+      <h2 class="sec-title">📅 Python Inheritance: A Historical Timeline</h2>
+      <div class="divider"></div>
+      <p>Python's inheritance model has evolved significantly across versions. Understanding this history helps you write maximally modern, idiomatic code.</p>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-title">Python 2.2 (2001) — New-Style Classes</div>
+          <div class="tl-body">Introduced new-style classes by inheriting from <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">object</code>. Before this, classic classes had a different and inconsistent MRO. New-style classes unified the type system and brought the C3 linearization algorithm for predictable MRO.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-title">Python 2.6 / 3.0 (2008) — abc Module</div>
+          <div class="tl-body">The <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">abc</code> module was added, providing <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">ABC</code> and <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">@abstractmethod</code>. Abstract Base Classes could now define enforceable contracts. Python 3.0 removed classic classes entirely — all classes became new-style implicitly.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-title">Python 3.6 (2016) — __init_subclass__</div>
+          <div class="tl-body">PEP 487 introduced <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">__init_subclass__</code>, a clean hook called whenever the class is subclassed. This enabled plugin architectures and class registries without metaclasses, dramatically reducing boilerplate.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-title">Python 3.7 (2018) — Dataclass Inheritance</div>
+          <div class="tl-body">PEP 557 introduced <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">@dataclass</code>, which supports inheritance naturally. Parent dataclass fields are inherited in MRO order, making data modeling hierarchies concise, readable, and auto-generating <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">__init__</code>, <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">__repr__</code>, and <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">__eq__</code>.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-title">Python 3.10+ (2021–) — Type Narrowing & Pattern Matching</div>
+          <div class="tl-body">Structural pattern matching (<code style="color:var(--accent);font-family:'Source Code Pro',monospace;">match/case</code>) introduced class patterns that work beautifully with inheritance hierarchies. Type checkers like mypy and pyright gained richer support for generic classes and covariant/contravariant type parameters in hierarchies.</div>
+        </div>
+      </div>
+    </section>
+
+    
+    <section class="section" id="performance">
+      <h2 class="sec-title">⚡ Performance Considerations in Inheritance</h2>
+      <div class="divider"></div>
+      <p>Inheritance has real performance implications. Understanding them helps you write Python OOP code that is not only elegant but also fast — critical in data-intensive and high-throughput applications.</p>
+      <div class="perf-grid">
+        <div class="perf-card">
+          <span class="badge badge-fast">Fast</span>
+          <h4>__slots__ in Hierarchies</h4>
+          <p>Using <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">__slots__</code> in base and child classes eliminates per-instance <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">__dict__</code>, reducing memory by 40–60% per object. Critical for classes instantiated millions of times.</p>
+        </div>
+        <div class="perf-card">
+          <span class="badge badge-caution">Caution</span>
+          <h4>Deep MRO Lookup</h4>
+          <p>Very deep hierarchies (5+ levels) increase method resolution time slightly. Python caches MRO lookups, so this is rarely a bottleneck, but it impacts readability more than performance in practice.</p>
+        </div>
+        <div class="perf-card">
+          <span class="badge badge-fast">Fast</span>
+          <h4>C Extension Subclassing</h4>
+          <p>Subclassing built-in types like <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">list</code>, <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">dict</code>, and <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">int</code> gives you C-speed operations while adding Python-level customization — the best of both worlds.</p>
+        </div>
+        <div class="perf-card">
+          <span class="badge badge-avoid">Avoid</span>
+          <h4>Heavy __init__ in Base</h4>
+          <p>Expensive logic in a base <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">__init__</code> runs for every subclass instantiation. Use lazy initialization (<code style="color:var(--accent);font-family:'Source Code Pro',monospace;">@property</code> or <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">__slots__</code>) for expensive computed attributes instead.</p>
+        </div>
+        <div class="perf-card">
+          <span class="badge badge-fast">Fast</span>
+          <h4>@classmethod Factories</h4>
+          <p>Class methods as alternative constructors are inherited for free. They allow subclass-aware object creation (<code style="color:var(--accent);font-family:'Source Code Pro',monospace;">cls()</code> instead of <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">Base()</code>), making factory methods polymorphic with zero overhead.</p>
+        </div>
+        <div class="perf-card">
+          <span class="badge badge-caution">Caution</span>
+          <h4>Multiple Inheritance Overhead</h4>
+          <p>While the MRO lookup itself is fast (cached), designing with many mixins increases cognitive complexity and potential for subtle bugs. Profile before attributing slowness to MI — it's rarely the cause.</p>
+        </div>
+      </div>
+      <div class="code-wrap" style="margin-top:1.5rem;">
+        <div class="code-header"><span>💻 python · slots_inheritance.py</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+        <pre><span class="kw">class</span> <span class="cl">Point</span>:
+    <span class="fn">__slots__</span> = (<span class="st">'x'</span>, <span class="st">'y'</span>)    <span class="cm"># no __dict__, no __weakref__</span>
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nb">self</span>, x, y):
+        <span class="nb">self</span>.x = x; <span class="nb">self</span>.y = y
+
+<span class="kw">class</span> <span class="cl">Point3D</span>(<span class="cl">Point</span>):
+    <span class="fn">__slots__</span> = (<span class="st">'z'</span>,)          <span class="cm"># only add NEW slots</span>
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nb">self</span>, x, y, z):
+        <span class="nb">super</span>().<span class="fn">__init__</span>(x, y)
+        <span class="nb">self</span>.z = z
+
+p = <span class="cl">Point3D</span>(<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>)
+<span class="fn">print</span>(p.x, p.y, p.z)          <span class="cm"># 1 2 3</span>
+<span class="cm"># Memory: ~3× smaller than dict-based equivalent</span></pre>
+      </div>
+    </section>
+
+    
+    <section class="section" id="quiz">
+      <h2 class="sec-title">🧠 Knowledge Check — Quick Quiz</h2>
+      <div class="divider"></div>
+      <p>Test your understanding of Python inheritance with these targeted questions. Click an option to reveal the answer and explanation.</p>
+
+      <div class="quiz-card">
+        <div class="quiz-q">Q1. What does <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">super().__init__()</code> do in a child class constructor?</div>
+        <div class="quiz-options">
+          <button class="quiz-opt" onclick="quizAnswer(this,'wrong')">A. Creates a new instance of the parent class</button>
+          <button class="quiz-opt" onclick="quizAnswer(this,'correct')">B. Calls the parent class's __init__ following the MRO</button>
+          <button class="quiz-opt" onclick="quizAnswer(this,'wrong')">C. Returns the parent class object</button>
+          <button class="quiz-opt" onclick="quizAnswer(this,'wrong')">D. Overrides the parent constructor permanently</button>
+        </div>
+        <div class="quiz-result"></div>
+      </div>
+
+      <div class="quiz-card">
+        <div class="quiz-q">Q2. What algorithm does Python use to determine Method Resolution Order (MRO)?</div>
+        <div class="quiz-options">
+          <button class="quiz-opt" onclick="quizAnswer(this,'wrong')">A. Depth-First Search (DFS)</button>
+          <button class="quiz-opt" onclick="quizAnswer(this,'wrong')">B. Breadth-First Search (BFS)</button>
+          <button class="quiz-opt" onclick="quizAnswer(this,'correct')">C. C3 Linearization</button>
+          <button class="quiz-opt" onclick="quizAnswer(this,'wrong')">D. Topological Sort</button>
+        </div>
+        <div class="quiz-result"></div>
+      </div>
+
+      <div class="quiz-card">
+        <div class="quiz-q">Q3. Which inheritance type is best described by "a class inheriting from two or more parent classes simultaneously"?</div>
+        <div class="quiz-options">
+          <button class="quiz-opt" onclick="quizAnswer(this,'wrong')">A. Multilevel Inheritance</button>
+          <button class="quiz-opt" onclick="quizAnswer(this,'correct')">B. Multiple Inheritance</button>
+          <button class="quiz-opt" onclick="quizAnswer(this,'wrong')">C. Hierarchical Inheritance</button>
+          <button class="quiz-opt" onclick="quizAnswer(this,'wrong')">D. Hybrid Inheritance</button>
+        </div>
+        <div class="quiz-result"></div>
+      </div>
+
+      <div class="quiz-card">
+        <div class="quiz-q">Q4. What principle states that objects of a subclass should be usable wherever the parent class is expected?</div>
+        <div class="quiz-options">
+          <button class="quiz-opt" onclick="quizAnswer(this,'wrong')">A. Open/Closed Principle</button>
+          <button class="quiz-opt" onclick="quizAnswer(this,'wrong')">B. Single Responsibility Principle</button>
+          <button class="quiz-opt" onclick="quizAnswer(this,'correct')">C. Liskov Substitution Principle</button>
+          <button class="quiz-opt" onclick="quizAnswer(this,'wrong')">D. Interface Segregation Principle</button>
+        </div>
+        <div class="quiz-result"></div>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <h2 class="sec-title">Frequently Asked Questions (FAQ)</h2>
+      <div class="divider"></div>
+      <p>These are the most common questions developers ask when learning Python inheritance — from beginners encountering their first <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">super()</code> call to intermediate developers designing their first class hierarchy.</p>
+      <div class="faq-list" id="faqList">
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            <span>What is the difference between <code>super()</code> and directly calling the parent class name?</span>
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-a">
+            <p>Calling <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">super()</code> is almost always preferred over hardcoding the parent class name (e.g., <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">Parent.__init__(self, ...)</code>). The key reason is that <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">super()</code> respects the Method Resolution Order (MRO), which matters critically in multiple inheritance. If you hardcode <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">Parent.__init__</code>, the MRO is bypassed and cooperative multiple inheritance breaks. Additionally, <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">super()</code> means your code automatically adapts if the hierarchy is restructured — you never have to update hardcoded class names. Use <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">super()</code> consistently and you'll never regret it.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            <span>Can a child class inherit from multiple parents with conflicting methods?</span>
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-a">
+            <p>Yes, and Python resolves this deterministically using the C3 Linearization algorithm. The class listed first in the parentheses of the child class definition takes precedence. For example, in <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">class C(A, B)</code>, if both A and B define <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">method()</code>, Python calls A's version. You can always call a specific parent's version explicitly with <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">A.method(self)</code> or inspect the resolution order with <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">C.__mro__</code>. The key is to design your class hierarchy so that conflicts are intentional and well-understood, not accidental.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            <span>What is the Liskov Substitution Principle and why does it matter for inheritance?</span>
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-a">
+            <p>The Liskov Substitution Principle (LSP) — the "L" in SOLID — states that objects of a subclass must be usable wherever objects of the parent class are expected, without altering the correctness of the program. In practical terms: if you have a function that accepts a <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">Bird</code>, it should work correctly whether you pass a <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">Sparrow</code> or a <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">Penguin</code>. Violating LSP — for example, having a <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">Penguin</code> subclass raise a <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">NotImplementedError</code> for <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">fly()</code> — signals a design flaw: <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">Penguin</code> should not inherit from a <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">FlyingBird</code> class. LSP violations lead to fragile code full of <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">isinstance</code> checks — a classic sign that the hierarchy needs rethinking.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            <span>Should I always prefer inheritance over composition?</span>
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-a">
+            <p>No — a widely cited principle in software design is "favor composition over inheritance." The guideline is: use inheritance when a genuine IS-A relationship exists and you need polymorphism through a shared interface. Use composition (HAS-A) when you simply want to reuse functionality. For example, a <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">Car</code> HAS-A <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">Engine</code> — it should contain an engine object, not inherit from it. Composition is more flexible because behaviors can be swapped at runtime. Inheritance creates a permanent, compile-time coupling that can make refactoring painful if the hierarchy turns out to be wrong. Use inheritance with intention; reach for composition when in doubt.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            <span>How does inheritance work with Python dataclasses?</span>
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-a">
+            <p>Python's <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">@dataclass</code> decorator supports inheritance naturally. A child dataclass inherits all fields from the parent and adds its own. The generated <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">__init__</code> includes parent fields first, then child fields — in MRO order. One important caveat: if a parent dataclass has fields with default values, child fields without defaults must not appear after them (this would violate Python's rule that parameters without defaults cannot follow those with defaults). To handle complex cases, use <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">field(default_factory=...)</code> and be mindful of field ordering. In Python 3.10+, <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">@dataclass(kw_only=True)</code> resolves most ordering conflicts elegantly.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+    <section class="section" id="business-hubs">
+      <h2 class="sec-title">🚀 Our Python‑Powered Ventures</h2>
+      <p style="margin-bottom:1rem; font-size:.8rem; color:#ffffff;">Real‑world apps built with OOP — click to explore each microsite and see inheritance in action.</p>
+      <div class="apps-grid">
+
+        <a href="money-transfer.html" class="app-btn">
+          <div class="app-logo">💸</div>
+          <div class="app-info">
+            <div class="app-name">Money-Transfer</div>
+            <p class="app-desc">A fully documented Python OOP console application that simulates a real-world peer-to-peer money transfer system — similar to GCash, PayMaya, or Western Union. This project walks through a <code>Person</code> base class inherited by <code>Sender</code> and <code>Recipient</code> subclasses, demonstrating encapsulation of transaction fees, unique code generation, and delegated notification. Every line of the 63-line program is explained with step-by-step reasoning, so you understand not just what the code does, but why each design decision was made. Ideal for students preparing for OOP exams and developers wanting to see inheritance applied to fintech patterns.</p>
+            <span class="app-tag">💳 Peer-to-Peer Transfer · OOP · Inheritance</span>
+          </div>
+        </a>
+
+        <a href="e-farm.html" class="app-btn">
+          <div class="app-logo">🌾</div>
+          <div class="app-info">
+            <div class="app-name">e-Vegetable Marketplace</div>
+            <p class="app-desc">A Python command-line marketplace application that bridges Filipino farmers and buyers in a digital trading environment — culturally grounded in the Philippine agricultural context. Built with five cooperating OOP classes: <code>User</code> (base), <code>Farmer</code> and <code>Buyer</code> (child classes via single inheritance), <code>ProductListing</code> (standalone), and <code>Marketplace</code> (static catalog). Covers <code>super().__init__()</code>, class variables, instance variables, <code>__str__</code> dunder methods, <code>@staticmethod</code>, module-level global state, input validation loops, and tuple unpacking — all explained in plain language. Features GCash, PayPal, and PayMaya payment simulation, plus a 10-product seed dataset that loads on startup so buyers can explore immediately.</p>
+            <span class="app-tag">🌿 Farm-to-Buyer · Philippine Context · 5 Classes</span>
+          </div>
+        </a>
+
+        <a href="e-shop.html" class="app-btn">
+          <div class="app-logo">🛒</div>
+          <div class="app-info">
+            <div class="app-name">NetShop</div>
+            <p class="app-desc">A Python e-commerce simulation for electronics and digital goods, built around an abstract <code>Product</code> base class with concrete subclasses for <code>PhysicalProduct</code>, <code>DigitalProduct</code>, and <code>BundleProduct</code>. Demonstrates how abstract base classes enforce a consistent catalog interface across entirely different product types — physical items require shipping logic while digital items use download delivery. The inventory management system uses class-level stock tracking and the <code>@classmethod</code> factory pattern to instantiate products from catalog data. Shows how real e-commerce platforms like Lazada and Shopee model their product hierarchies using these exact OOP principles.</p>
+            <span class="app-tag">🖥️ Electronics · Digital Goods · Abstract Classes</span>
+          </div>
+        </a>
+
+        <a href="e-auto.html" class="app-btn">
+          <div class="app-logo">🚗</div>
+          <div class="app-info">
+            <div class="app-name">Autofy</div>
+            <p class="app-desc">An automotive parts and customization platform that models a full vehicle class hierarchy using multilevel inheritance: <code>Vehicle</code> → <code>MotorVehicle</code> → <code>Car</code> / <code>Truck</code> / <code>SUV</code>. Each level of the hierarchy adds attributes and behaviors specific to that vehicle type — fuel systems at the motor level, passenger capacity at the car level, load ratings at the truck level. The parts catalog uses <code>isinstance()</code> checks to ensure compatibility: brake pads for an SUV won't show up in a motorcycle search. Demonstrates MRO inspection, property inheritance with validation, and how the Open/Closed Principle allows adding new vehicle types without touching existing code. A practical mirror of how automotive ERP systems like SAP classify their vehicle catalogs.</p>
+            <span class="app-tag">🔧 Auto Parts · Multilevel Hierarchy · MRO</span>
+          </div>
+        </a>
+
+        <a href="seedlings.html" class="app-btn">
+          <div class="app-logo">🌱</div>
+          <div class="app-info">
+            <div class="app-name">Seeds & Garden Hub</div>
+            <p class="app-desc">A premium seeds and gardening supply platform that showcases the mixin pattern in action — one of the most powerful but underused tools in Python OOP. Products inherit from a base <code>GardenProduct</code> class and optionally mix in <code>OrganicMixin</code>, <code>SeasonsAvailabilityMixin</code>, and <code>BulkDiscountMixin</code> depending on their category. This means a single packet of tomato seeds can be organic, seasonal, and bulk-discounted by simply inheriting from three mixins alongside its base class — no duplication, no rigid hierarchy. Demonstrates how real-world product management systems use mixin-based composition to handle the combinatorial explosion of product attribute combinations cleanly.</p>
+            <span class="app-tag">🌿 Organic · Mixin Pattern · Product Variants</span>
+          </div>
+        </a>
+
+        <a href="restaurant.html" class="app-btn">
+          <div class="app-logo">🍽️</div>
+          <div class="app-info">
+            <div class="app-name">RestoBar</div>
+            <p class="app-desc">A restaurant point-of-sale and inventory system built on a hierarchical menu item class structure: <code>MenuItem</code> base → <code>FoodItem</code>, <code>BeverageItem</code>, <code>ComboMeal</code> children. Each subclass inherits pricing, tax calculation, and display formatting from the base, then overrides preparation time and kitchen routing logic for their category. The order management engine uses polymorphism to process any mix of food and beverage items through a single <code>process_order()</code> call — a textbook example of Liskov Substitution in a real hospitality context. Also features table session management with abstract property classes and staff role differentiation via hierarchical inheritance, mirroring how enterprise POS systems like Lightspeed and Toast actually model their data.</p>
+            <span class="app-tag">🍴 POS System · Polymorphism · Order Management</span>
+          </div>
+        </a>
+
+        <a href="rental.html" class="app-btn">
+          <div class="app-logo">🛵</div>
+          <div class="app-info">
+            <div class="app-name">MotorBike & Boat Rentals</div>
+            <p class="app-desc">A vehicle rental platform that models both land and water vehicles using multiple inheritance — a scenario where a jet-ski logically inherits from both <code>Watercraft</code> and <code>MotorVehicle</code>. This project is specifically designed to make the diamond problem tangible: when both parent classes define a <code>calculate_rental_rate()</code> method, Python's MRO determines which version runs. You'll learn to inspect <code>__mro__</code>, understand why cooperative multiple inheritance with <code>super()</code> is essential, and see how real vehicle-sharing platforms like Grab and Airbnb Experiences handle multi-category item classification. Rental availability, insurance tier selection, and damage deposit logic are all modeled through the class hierarchy.</p>
+            <span class="app-tag">🌊 Multiple Inheritance · Diamond Problem · MRO</span>
+          </div>
+        </a>
+
+        <a href="hostel.html" class="app-btn">
+          <div class="app-logo">🏨</div>
+          <div class="app-info">
+            <div class="app-name">Hostel Biz</div>
+            <p class="app-desc">A hostel and budget accommodation management system built around an abstract <code>Accommodation</code> base class that enforces a consistent booking interface across diverse property types: dormitory beds, private rooms, studio apartments, and family suites. Each room type inherits base check-in/check-out logic and overrides occupancy rules, amenity bundles, and dynamic pricing algorithms. The guest management module uses hierarchical inheritance to distinguish <code>WalkInGuest</code>, <code>BookingGuest</code>, and <code>MemberGuest</code>, each with progressively richer privilege sets. Demonstrates how property management systems like Hostelworld and Booking.com model their inventory and guest profiles using these exact abstract property class patterns — from single-room guesthouses to multi-property chains.</p>
+            <span class="app-tag">🛏️ Booking System · Abstract Properties · Multi-Room</span>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+    <div class="ai-share-box">
+      <h2 class="sec-title">🤖 AI Caption Generator</h2>
+      <p>Pick your platform and tone — get a ready-to-post caption for this Python OOP Inheritance guide.</p>
+      <div class="ai-controls">
+        <select class="ai-sel" id="aiPlatform">
+          <option value="twitter">Twitter / X</option>
+          <option value="linkedin">LinkedIn</option>
+          <option value="facebook">Facebook</option>
+          <option value="whatsapp">WhatsApp</option>
+        </select>
+        <select class="ai-sel" id="aiTone">
+          <option value="professional">Professional</option>
+          <option value="enthusiastic">Enthusiastic</option>
+          <option value="casual">Casual</option>
+          <option value="educational">Educational</option>
+        </select>
+        <button class="ai-gen-btn" onclick="aiGenerate()">✨ Generate Caption</button>
+      </div>
+      <div class="ai-loading" id="aiLoading"><div class="ai-spinner"></div>Crafting your caption…</div>
+      <div class="ai-output" id="aiOutput"></div>
+      <div class="ai-act-row" id="aiActions">
+        <button class="ai-act cp" onclick="aiCopy()">📋 Copy</button>
+        <a class="ai-act fb" id="aiFb" href="#" target="_blank" rel="noopener">📘 Facebook</a>
+        <a class="ai-act tw" id="aiTw" href="#" target="_blank" rel="noopener">🐦 X / Twitter</a>
+        <a class="ai-act li" id="aiLi" href="#" target="_blank" rel="noopener">💼 LinkedIn</a>
+        <a class="ai-act wa" id="aiWa" href="#" target="_blank" rel="noopener">💬 WhatsApp</a>
+      </div>
+    </div>
+
+    <div class="follow-section" id="follow">
+      <h2>Follow Glenn Pansensoy</h2>
+      <p>Stay updated with the latest tutorials, guides, and programming content. Follow across platforms:</p>
+      <div class="follow-btns">
+        <a class="follow-btn fb-btn" href="https://www.facebook.com/@Glenn-Junsay-Pansensoy" target="_blank" rel="noopener">📘 Facebook</a>
+        <a class="follow-btn li-btn" href="https://www.linkedin.com/in/glenn-pansensoy-6288453a2" target="_blank" rel="noopener">💼 LinkedIn</a>
+        <a class="follow-btn yt-btn" href="https://www.youtube.com/c/@GlennPansensoy" target="_blank" rel="noopener">▶ YouTube</a>
+        <a class="follow-btn tw-btn" href="https://www.x.com/@GlennPansensoy" target="_blank" rel="noopener">🐦 Twitter / X</a>
+      </div>
+    </div>
+
+    <section class="comments-section" id="comments">
+      <h2 class="sec-title">Comments & Discussion</h2>
+      <div class="divider"></div>
+      <div class="comment-form">
+        <input type="text" id="commName" placeholder="Your name *" maxlength="60">
+        <input type="email" id="commEmail" placeholder="Email (optional)">
+        <textarea id="commText" placeholder="Share your thoughts, questions, or feedback…"></textarea>
+        <button class="submit-btn" onclick="submitComment()">Post Comment</button>
+      </div>
+      <div class="comment-list" id="commentList"></div>
+    </section>
+
+    <div class="outro">
+      <h2>You've Mastered the Foundations of Inheritance!</h2>
+      <p>Inheritance is far more than a programming convenience — it is a powerful abstraction mechanism that allows us to model the hierarchical complexity of the real world in code. By mastering single, multilevel, multiple, and hierarchical inheritance in Python, alongside abstract base classes, mixins, and the MRO, you gain the ability to architect software that is clean, extensible, and a pleasure to maintain. Keep experimenting, keep building, and remember: great code tells a story — and inheritance is one of its most expressive chapters. Happy coding, and may your hierarchies always be well-designed! 🚀</p>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">Valleys <span style="-webkit-text-fill-color:var(--accent2);color:var(--accent2);">&</span> Bytes</div>
+        <p>A programming education resource dedicated to clear, practical, and comprehensive guides for developers at every level. From foundational OOP concepts to advanced system design — we've got you covered.</p>
+        <div class="footer-quick">
+          <a class="footer-chip" href="#intro">Introduction</a>
+          <a class="footer-chip" href="#significance">Significance</a>
+          <a class="footer-chip" href="#processes">Methods</a>
+          <a class="footer-chip" href="#samples">Examples</a>
+          <a class="footer-chip" href="#advanced">Advanced</a>
+          <a class="footer-chip" href="#design-patterns">Patterns</a>
+          <a class="footer-chip" href="#composition">Composition</a>
+          <a class="footer-chip" href="#real-world">Real-World</a>
+          <a class="footer-chip" href="#metaclasses">Metaclasses</a>
+          <a class="footer-chip" href="#mistakes">Mistakes</a>
+          <a class="footer-chip" href="#cheatsheet">Cheatsheet</a>
+          <a class="footer-chip" href="#key-insights">Key Insights</a>
+          <a class="footer-chip" href="#evolution">Timeline</a>
+          <a class="footer-chip" href="#performance">Performance</a>
+          <a class="footer-chip" href="#quiz">Quiz</a>
+          <a class="footer-chip" href="#faq">FAQ</a>
+          <a class="footer-chip" href="#comments">Comments</a>
+          <a class="footer-chip" href="#follow">Follow</a>
+        </div>
+      </div>
+      <div class="footer-legal">
+        <h4>Legal & Info</h4>
+        <div class="legal-links">
+          <a class="legal-link" href="oop-privacy.html">🔒 Privacy Policy</a>
+          <a class="legal-link" href="oop-terms.html">📋 Terms of Service</a>
+          <a class="legal-link" href="oop-cookie.html">🍪 Cookie Policy</a>
+          <a class="legal-link" href="about-guide.html">📖 About this Page</a>
+          <a class="legal-link" href="about-author.html">👤 About the Author</a>
+          <a class="legal-link" href="oop-contact.html">✉️ Contact Information</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Valleys & Bytes · Glenn Pansensoy · All rights reserved.</p>
+      <p style="font-size:.7rem;color:#ffffff;">Built with data precision and Created through intensive information authentication for the Python community</p>
+    </div>
+  </footer>
+
+  <script>
+
+    const progressBar = document.getElementById('progressBar');
+    const backTop = document.getElementById('backTop');
+    window.addEventListener('scroll', () => {
+      const scrolled = window.scrollY;
+      const total = document.documentElement.scrollHeight - window.innerHeight;
+      progressBar.style.width = (total > 0 ? (scrolled / total) * 100 : 0) + '%';
+      backTop.classList.toggle('show', scrolled > 400);
+    });
+
+    function quizAnswer(btn, verdict) {
+      const card = btn.closest('.quiz-card');
+      const opts = card.querySelectorAll('.quiz-opt');
+      opts.forEach(o => o.disabled = true);
+      btn.classList.add(verdict);
+      const result = card.querySelector('.quiz-result');
+      if (verdict === 'correct') {
+        result.style.color = '#50fa7b';
+        result.textContent = '✅ Correct! Well done.';
+      } else {
+        result.style.color = '#ff5555';
+        result.textContent = '❌ Not quite — try reviewing the relevant section above.';
+
+        opts.forEach(o => { if (o.getAttribute('onclick').includes("'correct'")) o.classList.add('correct'); });
+      }
+    }
+
+    function toggleFaq(btn) {
+      const answer = btn.nextElementSibling;
+      const isOpen = answer.classList.contains('visible');
+      document.querySelectorAll('.faq-a').forEach(a => a.classList.remove('visible'));
+      document.querySelectorAll('.faq-q').forEach(b => b.classList.remove('open'));
+      if (!isOpen) {
+        answer.classList.add('visible');
+        btn.classList.add('open');
+      }
+    }
+    const ham = document.getElementById('hamburger');
+    const nav = document.getElementById('navOverlay');
+    ham.addEventListener('click', () => {
+      ham.classList.toggle('open');
+      nav.classList.toggle('open');
+    });
+    nav.querySelectorAll('.nav-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        ham.classList.remove('open');
+        nav.classList.remove('open');
+      });
+    });
+
+    function copyCode(btn) {
+      const pre = btn.closest('.code-wrap').querySelector('pre');
+      navigator.clipboard.writeText(pre.innerText).then(() => {
+        btn.textContent = 'Copied!';
+        setTimeout(() => btn.textContent = 'Copy', 1800);
+      });
+    }
+
+    function shareOn(platform) {
+      const url = encodeURIComponent(window.location.href);
+      const text = encodeURIComponent("Master Python OOP Inheritance with this comprehensive guide by Glenn Pansensoy at Valleys & Bytes!");
+      const links = {
+        facebook: `https://www.facebook.com/sharer/sharer.php?u=${url}`,
+        linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${url}`,
+        twitter:  `https://twitter.com/intent/tweet?text=${text}&url=${url}`,
+        whatsapp: `https://api.whatsapp.com/send?text=${text}%20${url}`,
+        youtube:  `https://www.youtube.com/c/@GlennPansensoy`,
+        telegram: `https://t.me/share/url?url=${url}&text=${text}`
+      };
+      window.open(links[platform], '_blank', 'width=600,height=500,noopener');
+    }
+
+    let comments = JSON.parse(localStorage.getItem('vb_comments') || '[]');
+    const seedComments = [
+      { id: 1, name: "Maria Santos", date: "2025-01-15", text: "Excellent guide! The abstract base class example really clicked for me. Super() was always confusing before this.", likes: 12, loves: 5 },
+      { id: 2, name: "Carlos Reyes", date: "2025-02-03", text: "The mixin pattern explanation is gold. I've been using inheritance wrong in my Django projects. This helped a ton.", likes: 8, loves: 3 }
+    ];
+    if (!comments.length) comments = seedComments;
+    function renderComments() {
+      const list = document.getElementById('commentList');
+      if (!list) return;
+      list.innerHTML = '';
+      comments.forEach(c => {
+        const div = document.createElement('div');
+        div.className = 'comment-card';
+        div.innerHTML = `
+          <div class="comment-meta">
+            <span class="comment-author">${escHtml(c.name)}</span>
+            <span class="comment-date">${c.date}</span>
+          </div>
+          <p class="comment-text">${escHtml(c.text)}</p>
+          <div class="reaction-row">
+            <button class="react-btn ${c._liked?'like-active':''}" onclick="react(${c.id},'like')">
+              👍 Like <span class="rc-like">${c.likes}</span>
+            </button>
+            <button class="react-btn ${c._loved?'active':''}" onclick="react(${c.id},'love')">
+              ❤️ Love <span class="rc-love">${c.loves}</span>
+            </button>
+          </div>`;
+        list.appendChild(div);
+      });
+    }
+    function submitComment() {
+      const name = document.getElementById('commName').value.trim();
+      const text = document.getElementById('commText').value.trim();
+      if (!name || !text) { alert('Please fill in your name and comment.'); return; }
+      const now = new Date();
+      comments.unshift({
+        id: Date.now(), name, text,
+        date: now.toISOString().split('T')[0],
+        likes: 0, loves: 0
+      });
+      localStorage.setItem('vb_comments', JSON.stringify(comments));
+      document.getElementById('commName').value = '';
+      document.getElementById('commEmail').value = '';
+      document.getElementById('commText').value = '';
+      renderComments();
+    }
+    function react(id, type) {
+      const c = comments.find(x => x.id === id);
+      if (!c) return;
+      if (type === 'like') { c._liked = !c._liked; c.likes += c._liked ? 1 : -1; }
+      else { c._loved = !c._loved; c.loves += c._loved ? 1 : -1; }
+      localStorage.setItem('vb_comments', JSON.stringify(comments));
+      renderComments();
+    }
+    function escHtml(s) {
+      return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+    renderComments();
+    const AI_URL='https://code-sense.pansensoyglenn.workers.dev/inheritance.html';
+    const aiCaptions={
+      twitter:{
+        professional:'Python OOP inheritance fully explained — MRO, super(), abstract classes, mixins, SOLID, design patterns & interview questions. '+AI_URL+' #Python #OOP #Programming',
+        enthusiastic:'🔥 The BEST Python inheritance guide!! MRO, SOLID, design patterns, quiz AND interview questions — ALL in one! Must bookmark! 🐍 '+AI_URL+' #Python',
+        casual:'found the most complete python inheritance guide — covers everything from super() to SOLID principles '+AI_URL+' #Python',
+        educational:'📚 Python OOP Inheritance: 5 types, MRO, ABCs, mixins, SOLID, 6 design patterns, interview questions. Full guide: '+AI_URL+' #Python #OOP',
+      },
+      linkedin:{
+        professional:'Sharing a comprehensive Python OOP inheritance resource covering MRO, super(), abstract classes, mixin patterns, SOLID principles, design patterns, real-world framework uses, performance tips, and interview questions. Recommended for all Python developers. '+AI_URL+' #Python #OOP #SoftwareEngineering',
+        enthusiastic:'🚀 The most complete Python inheritance guide available! MRO deep dive, SOLID principles, 6 design patterns, AND interview questions all in one place. Essential resource! '+AI_URL+' #Python #OOP',
+        casual:'Found a really comprehensive Python inheritance guide — covers everything from basics to SOLID and interview prep. Worth bookmarking! '+AI_URL+' #Python',
+        educational:'Python Inheritance complete guide: all 5 types, C3 MRO, super(), ABCs, mixin patterns, SOLID, design patterns, timeline, performance tips, and interview questions. '+AI_URL+' #Python #Education',
+      },
+      facebook:{
+        professional:'Sharing a comprehensive Python OOP inheritance guide — covers MRO, super(), abstract classes, SOLID principles, design patterns, and interview questions. '+AI_URL,
+        enthusiastic:'🐍🔥 The BEST Python inheritance guide!! SOLID, MRO, design patterns, quiz, interview questions — ALL in one page! '+AI_URL,
+        casual:'just read this python inheritance guide and everything finally clicked — MRO, super(), SOLID principles all explained 😄 '+AI_URL,
+        educational:'📚 Python OOP Inheritance — 5 types, MRO, abstract classes, SOLID principles, design patterns, interview questions and quiz. '+AI_URL,
+      },
+      whatsapp:{
+        professional:'Hi! Sharing a comprehensive Python OOP inheritance guide covering MRO, SOLID principles, design patterns, and interview questions. '+AI_URL,
+        enthusiastic:'OMG check this Python guide!! 🔥 Covers everything — SOLID, MRO, design patterns AND interview questions! So comprehensive! '+AI_URL,
+        casual:'hey found the best python inheritance guide — covers everything including SOLID and interview questions! '+AI_URL,
+        educational:'Python OOP Inheritance: 5 types, MRO, ABCs, SOLID, design patterns, interview Q&A. Full guide: '+AI_URL,
+      }
+    };
+    function aiGenerate(){
+      const platform=document.getElementById('aiPlatform').value;
+      const tone=document.getElementById('aiTone').value;
+      const loading=document.getElementById('aiLoading');
+      const output=document.getElementById('aiOutput');
+      const actions=document.getElementById('aiActions');
+      loading.classList.add('show');output.classList.remove('show');actions.classList.remove('show');
+      setTimeout(()=>{
+        const caption=(aiCaptions[platform]&&aiCaptions[platform][tone])||aiCaptions[platform]['professional']||'';
+        output.textContent=caption;output.classList.add('show');loading.classList.remove('show');
+        const enc=encodeURIComponent;
+        document.getElementById('aiFb').href='https://www.facebook.com/sharer/sharer.php?u='+enc(AI_URL)+'&quote='+enc(caption);
+        document.getElementById('aiTw').href='https://twitter.com/intent/tweet?text='+enc(caption);
+        document.getElementById('aiLi').href='https://www.linkedin.com/sharing/share-offsite/?url='+enc(AI_URL);
+        document.getElementById('aiWa').href='https://wa.me/?text='+enc(caption+' '+AI_URL);
+        actions.classList.add('show');
+      },800);
+    }
+    function aiCopy(){const text=document.getElementById('aiOutput').textContent;navigator.clipboard.writeText(text).then(()=>{const b=event.target;b.textContent='✅ Copied!';setTimeout(()=>b.textContent='📋 Copy',2000);});}
+
+  </script>
+</body>
+</html>
