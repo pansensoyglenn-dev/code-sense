@@ -1,0 +1,1652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>CornRice.py — Python OOP Inheritance Guide | Valleys &amp; Bytes</title>
+<meta name="description" content="Master Python OOP inheritance with CornRice.py — a complete, beginner-friendly guide to base classes, method overriding, polymorphism, and input validation through a real Filipino agri-market app. Full source code included.">
+<meta name="keywords" content="Python inheritance tutorial, Python OOP guide, method overriding Python, polymorphism Python, base class Python, CornRice, Filipino agri market Python, Python input validation, Python class hierarchy, Philippines coding tutorial, Valleys and Bytes, Glenn Junsay Pansensoy">
+<meta name="author" content="Glenn Junsay Pansensoy">
+<meta name="robots" content="index, follow">
+<meta name="color-scheme" content="dark">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="canonical" href="https://code-sense.pansensoyglenn.workers.dev/corn-rice.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CornRice.py — Python OOP Inheritance Guide">
+<meta property="og:description" content="Step-by-step Python OOP documentation: single inheritance, method overriding, polymorphism, and full source code for a Filipino corn and rice agri-market.">
+<meta property="og:url" content="https://code-sense.pansensoyglenn.workers.dev/corn-rice.html">
+<meta property="og:site_name" content="Valleys &amp; Bytes">
+<meta property="og:image" content="/og-corn-rice.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:alt" content="CornRice.py — Python OOP Inheritance Guide banner">
+<meta property="og:locale" content="en_PH">
+<meta property="article:author" content="Glenn Junsay Pansensoy">
+<meta property="article:published_time" content="2026-03-16T00:00:00+08:00">
+<meta property="article:modified_time" content="2026-03-16T00:00:00+08:00">
+<meta property="article:section" content="Programming Tutorial">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@GlennPansensoy">
+<meta name="twitter:creator" content="@GlennPansensoy">
+<meta name="twitter:title" content="CornRice.py — Python OOP Inheritance Guide">
+<meta name="twitter:description" content="Complete Python OOP tutorial: single inheritance, method overriding, polymorphism, and a working Filipino corn and rice agri-market with receipt generation.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "CornRice.py — Python OOP Inheritance Guide",
+  "description": "A comprehensive step-by-step documentation of CornRice.py, a Python OOP command-line agri-market demonstrating single inheritance, method overriding, polymorphism, and input validation.",
+  "author": {
+    "@type": "Person",
+    "name": "Glenn Junsay Pansensoy",
+    "url": "https://www.linkedin.com/in/glenn-pansensoy-6288453a2",
+    "sameAs": [
+      "https://www.linkedin.com/in/glenn-pansensoy-6288453a2",
+      "https://www.facebook.com/@Glenn-Junsay-Pansensoy",
+      "https://x.com/@GlennPansensoy",
+      "https://www.youtube.com/c/@GlennPansensoy"
+    ]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Valleys & Bytes",
+    "url": "https://code-sense.pansensoyglenn.workers.dev"
+  },
+  "datePublished": "2026-03-16",
+  "dateModified": "2026-03-16",
+  "mainEntityOfPage": "https://code-sense.pansensoyglenn.workers.dev/corn-rice.html",
+  "programmingLanguage": "Python",
+  "proficiencyLevel": "Beginner",
+  "keywords": ["Python","OOP","Inheritance","Method Overriding","Polymorphism","Base Class","Input Validation","Philippines","Agri Market","Corn","Rice"],
+  "articleSection": "Programming Tutorial",
+  "teaches": ["Python OOP","Single Inheritance","Method Overriding","Polymorphism","Base Classes","Input Validation","try/except","DRY Principle"]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is CornRice.py?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "CornRice.py is a Python command-line agri-market application that simulates a Filipino corn and rice shop. It showcases single inheritance by having Corn and Rice inherit from a shared Product base class. Both child classes override the display() method to prepend a category label, while inheriting calculate_total() unchanged. The program handles product selection, quantity input, and receipt generation with full error handling."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between overriding and overloading in Python?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Method overriding means a child class provides its own implementation of a method that already exists in a parent class — which is exactly what Corn and Rice do with display(). Method overloading (defining the same method name with different parameter counts) is not natively supported in Python; the last definition of a method name always wins. Python achieves flexible argument handling through default parameter values and *args/**kwargs instead."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does Corn not define __init__?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "When a child class does not define its own __init__, Python automatically uses the parent's __init__ through inheritance. Since Corn and Rice need exactly the same constructor parameters as Product (name and price), there is no reason to repeat that code. This is the DRY principle — Don't Repeat Yourself — in action. The child classes only override display() because that is the one behaviour that genuinely differs between them."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does polymorphism work in the product loop?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The products list holds a mix of Corn and Rice objects. The for loop calls product.display() on each item without checking what type it is. Python dispatches to Corn.display() for Corn objects and Rice.display() for Rice objects automatically. This is runtime polymorphism — the same method call produces different output depending on the object's actual type, without any isinstance checks in the calling code."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why is calculate_total() defined only in Product?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "calculate_total() is identical for every product — it always multiplies price by quantity. There is no reason for Corn or Rice to override it. Defining it once in Product and letting child classes inherit it is the DRY principle applied to methods. If the pricing formula ever changes (e.g., adding a bulk discount), one edit to Product.calculate_total() applies automatically to all products."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does the try/except block protect the program?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The try/except ValueError catches two categories of bad input: non-integer text entered where a number is expected (int() raises ValueError on 'abc'), and out-of-range product numbers or non-positive quantities (which raise ValueError manually via raise). The bare except Exception clause catches any other unexpected error. Together they ensure the program never crashes with an unhandled traceback, instead printing a friendly message and exiting cleanly."
+      }
+    }
+  ]
+}
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4575646748966866" crossorigin="anonymous"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;600;700;800&family=Literata:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;600;700;800&family=Literata:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --obs-900: #0a0a12;
+  --obs-800: #0f0f1e;
+  --obs-700: #151528;
+  --obs-600: #1e1e38;
+  --obs-500: #252545;
+  --obs-400: #2e2e58;
+  --obs-300: #3a3a72;
+  --blue-bright: #4b8bbe;
+  --blue-mid:    #3a6e99;
+  --blue-dark:   #264d6e;
+  --blue-glow:   rgba(75,139,190,0.25);
+  --blue-pale:   rgba(75,139,190,0.08);
+  --yellow:      #ffd43b;
+  --yellow-dim:  rgba(255,212,59,0.15);
+  --purple-bright: #bd93f9;
+  --purple-mid:    #9b72d4;
+  --purple-dark:   #6a4a9c;
+  --purple-glow:   rgba(189,147,249,0.2);
+  --purple-pale:   rgba(189,147,249,0.07);
+  --text-primary:   #ffffff;
+  --text-secondary: #ffffff;
+  --text-muted:     #c0c8e0;
+  --text-code:      #79c0ff;
+  --syn-kw:   #ff79c6;
+  --syn-cl:   #8be9fd;
+  --syn-fn:   #50fa7b;
+  --syn-st:   #f1fa8c;
+  --syn-cm:   #6272a4;
+  --syn-nm:   #bd93f9;
+  --syn-dc:   #ffd43b;
+  --surface-1: var(--obs-800);
+  --surface-2: var(--obs-700);
+  --surface-3: var(--obs-600);
+  --border:    rgba(75,139,190,0.18);
+  --border-pu: rgba(189,147,249,0.18);
+  --glow-blue: 0 0 30px rgba(75,139,190,0.15);
+  --glow-pu:   0 0 30px rgba(189,147,249,0.12);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 10px; overflow-x: hidden; max-width: 100vw; }
+body {
+  font-family: 'Literata', Georgia, serif;
+  background: var(--obs-900);
+  color: #ffffff;
+  overflow-x: hidden;
+  max-width: 100vw;
+  line-height: 1.7;
+}
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--obs-800); }
+::-webkit-scrollbar-thumb { background: var(--blue-dark); border-radius: 3px; }
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0;
+  background-image:
+    linear-gradient(rgba(75,139,190,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(75,139,190,0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  animation: gridShift 60s linear infinite;
+}
+@keyframes gridShift { from{background-position:0 0} to{background-position:48px 48px} }
+
+.navbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  height: 64px;
+  background: rgba(10,10,18,0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 28px;
+}
+.brand {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.4rem; font-weight: 800; letter-spacing: -0.5px;
+  text-decoration: none; display: flex; align-items: center; gap: 8px;
+}
+.brand-valleys { color: var(--blue-bright); }
+.brand-amp { color: #ffffff; font-weight: 400; margin: 0 2px; }
+.brand-bytes { color: var(--purple-bright); }
+.brand-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--yellow); animation: pulse 2s ease infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.7)} }
+.hamburger {
+  display: flex; flex-direction: column; gap: 5px;
+  background: none; border: 1px solid var(--border);
+  padding: 10px 12px; border-radius: 8px; cursor: pointer; transition: all 0.2s;
+}
+.hamburger:hover { border-color: var(--blue-bright); background: var(--blue-pale); }
+.hamburger span { display: block; width: 20px; height: 2px; background: #ffffff; border-radius: 2px; transition: all 0.3s; }
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.drawer {
+  position: fixed; top: 64px; right: 0; bottom: 0; z-index: 999;
+  width: 300px; background: var(--obs-800); border-left: 1px solid var(--border);
+  transform: translateX(100%); transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+  overflow-y: auto; padding: 24px 20px;
+}
+.drawer.open { transform: translateX(0); }
+.drawer-overlay {
+  position: fixed; inset: 0; z-index: 998;
+  background: rgba(0,0,0,0.5); opacity: 0; pointer-events: none; transition: opacity 0.3s;
+}
+.drawer-overlay.open { opacity: 1; pointer-events: all; }
+.drawer-section { margin-bottom: 28px; }
+.drawer-section-label {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; letter-spacing: 2px;
+  text-transform: uppercase; color: #ffffff; margin-bottom: 10px; padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+}
+.drawer-btn {
+  display: flex; align-items: center; gap: 12px; width: 100%;
+  padding: 11px 14px; margin-bottom: 4px; background: var(--obs-700);
+  border: 1px solid var(--border); border-radius: 8px; color: #ffffff;
+  font-family: 'Syne', sans-serif; font-size: 0.8rem;
+  cursor: pointer; text-decoration: none; transition: all 0.2s; text-align: left;
+}
+.drawer-btn:hover { background: var(--blue-pale); border-color: var(--blue-bright); color: var(--blue-bright); }
+.drawer-btn .ico { font-size: 1.4rem; width: 22px; text-align: center; }
+
+.ad-banner { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+.ad-label { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #ffffff; letter-spacing: 1px; text-align: center; margin-bottom: 4px; }
+
+.hero {
+  position: relative; z-index: 1; min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 100px 0 80px; overflow: hidden;
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(75,139,190,0.12) 0%, transparent 70%),
+              radial-gradient(ellipse 60% 40% at 80% 80%, rgba(189,147,249,0.08) 0%, transparent 60%);
+}
+.hero-inner {
+  max-width: 1100px; margin: 0 auto; padding: 0 40px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; width: 100%;
+}
+.hero-left { display: flex; flex-direction: column; align-items: flex-start; }
+.hero-right { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
+.hero-particles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.particle { position: absolute; border-radius: 50%; animation: floatParticle linear infinite; }
+@keyframes floatParticle {
+  0%   { transform: translateY(100vh) scale(0); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 0.3; }
+  100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+}
+.hero-eyebrow {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--blue-bright);
+  background: rgba(75,139,190,0.1); border: 1px solid rgba(75,139,190,0.3);
+  padding: 6px 18px; border-radius: 20px; margin-bottom: 20px; display: inline-block;
+  animation: fadeUp 0.8s ease both;
+}
+.hero-title {
+  font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 800;
+  line-height: 1.1; text-align: left; color: #ffffff;
+  animation: fadeUp 0.9s ease 0.1s both; letter-spacing: -0.5px;
+}
+.hero-title .hl-blue { color: var(--blue-bright); }
+.hero-title .hl-pu   { color: var(--purple-bright); }
+.hero-title .hl-y    { color: var(--yellow); }
+.hero-title-sub {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #ffffff;
+  margin-top: 12px; letter-spacing: 1px; animation: fadeUp 0.95s ease 0.15s both;
+}
+.hero-subtitle {
+  font-size: 0.9rem; font-weight: 300; color: #ffffff; text-align: justify;
+  line-height: 1.7; animation: fadeUp 1s ease 0.2s both;
+  border-left: 3px solid var(--blue-dark); padding-left: 18px;
+}
+.hero-tags { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-start; animation: fadeUp 1s ease 0.3s both; }
+.hero-tag {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;
+  padding: 4px 12px; border-radius: 5px;
+  border: 1px solid var(--border-pu); color: var(--purple-bright);
+  background: var(--purple-pale); letter-spacing: 0.5px;
+}
+.hero-cta { display: flex; gap: 12px; flex-wrap: wrap; justify-content: flex-start; animation: fadeUp 1s ease 0.4s both; }
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px; padding: 13px 28px; border-radius: 8px;
+  background: linear-gradient(135deg, var(--blue-mid), var(--purple-dark));
+  color: #ffffff; font-family: 'Syne', sans-serif; font-size: 0.8rem; font-weight: 600;
+  text-decoration: none; border: none; cursor: pointer; transition: all 0.25s;
+  box-shadow: 0 4px 20px rgba(75,139,190,0.3);
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(75,139,190,0.4); }
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 8px; padding: 13px 28px; border-radius: 8px;
+  background: transparent; border: 1px solid var(--border); color: #ffffff;
+  font-family: 'Syne', sans-serif; font-size: 0.8rem; font-weight: 600;
+  text-decoration: none; cursor: pointer; transition: all 0.25s;
+}
+.btn-secondary:hover { border-color: var(--purple-bright); color: var(--purple-bright); background: var(--purple-pale); }
+.scroll-indicator {
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  color: #ffffff; font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem; letter-spacing: 2px; margin-top: 60px; align-self: center;
+  animation: fadeUp 1.1s ease 0.5s both;
+}
+.scroll-indicator .arrow { animation: bounce 2s ease infinite; font-size: 1.4rem; }
+@keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(8px)} }
+@keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+.toc-nav {
+  position: sticky; top: 64px; z-index: 100;
+  background: rgba(10,10,18,0.95); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border); padding: 0 28px;
+  display: flex; align-items: center; overflow-x: auto; scrollbar-width: none;
+}
+.toc-nav::-webkit-scrollbar { display: none; }
+.toc-link {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;
+  color: #ffffff; text-decoration: none; letter-spacing: 1px;
+  text-transform: uppercase; padding: 14px 12px; white-space: nowrap;
+  border-bottom: 2px solid transparent; transition: all 0.2s;
+}
+.toc-link:hover, .toc-link.active { color: var(--blue-bright); border-bottom-color: var(--blue-bright); }
+
+.container { max-width: 980px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+.section { margin-top: 72px; opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.section.visible { opacity: 1; transform: translateY(0); }
+.sec-header { display: flex; align-items: center; gap: 16px; margin-bottom: 28px; flex-wrap: wrap; }
+.sec-num {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--yellow);
+  letter-spacing: 2px; background: var(--yellow-dim); border: 1px solid rgba(255,212,59,0.3);
+  padding: 4px 12px; border-radius: 4px; white-space: nowrap;
+}
+.sec-title {
+  font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 700; color: #ffffff;
+  border-bottom: 2px solid var(--blue-dark); padding-bottom: 6px; flex: 1;
+}
+.sec-title .accent-blue { color: var(--blue-bright); }
+.sec-title .accent-pu   { color: var(--purple-bright); }
+
+.prose {
+  font-size: 0.9rem; line-height: 1.85; color: #ffffff;
+  max-width: 820px; text-align: justify;
+}
+.prose strong { color: #ffffff; font-weight: 600; }
+.prose + .prose { margin-top: 14px; }
+.prose em { color: var(--purple-bright); font-style: italic; }
+
+.code-block {
+  background: var(--obs-800); border: 1px solid var(--border);
+  border-radius: 10px; overflow: hidden; margin: 24px 0; box-shadow: var(--glow-blue); position: relative;
+}
+.code-block::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--blue-bright), var(--purple-bright), transparent);
+}
+.code-header {
+  background: rgba(255,255,255,0.03); border-bottom: 1px solid var(--border);
+  padding: 10px 18px; display: flex; align-items: center; gap: 8px;
+}
+.tdk-r { width:10px;height:10px;border-radius:50%;background:#ff5f57; }
+.tdk-y { width:10px;height:10px;border-radius:50%;background:#febc2e; }
+.tdk-g { width:10px;height:10px;border-radius:50%;background:#28c840; }
+.code-lbl { font-family:'JetBrains Mono',monospace; font-size:0.8rem; color:#ffffff; margin-left:6px; letter-spacing:0.5px; }
+.copy-btn {
+  margin-left: auto; font-family:'JetBrains Mono',monospace; font-size:0.8rem;
+  color: var(--blue-bright); background: var(--blue-pale);
+  border: 1px solid rgba(75,139,190,0.3); padding: 3px 10px; border-radius: 4px;
+  cursor: pointer; transition: all 0.2s;
+}
+.copy-btn:hover { background: var(--blue-dark); color: white; }
+.code-body { padding: 22px 24px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+pre { font-family:'JetBrains Mono',monospace; font-size:0.8rem; line-height:1.75; color:#cdd9e5; tab-size:4; white-space: pre; }
+.kw{color:var(--syn-kw)} .cl{color:var(--syn-cl)} .fn{color:var(--syn-fn)}
+.st{color:var(--syn-st)} .cm{color:var(--syn-cm);font-style:italic} .nm{color:var(--syn-nm)}
+.dc{color:var(--syn-dc)} .op{color:var(--syn-kw)}
+
+.table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 20px 0; border-radius: 10px; border: 1px solid var(--border); }
+table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+thead tr { background: linear-gradient(135deg, var(--obs-500), var(--obs-400)); }
+thead th {
+  color: var(--blue-bright); font-family:'JetBrains Mono',monospace;
+  font-size: 0.8rem; letter-spacing: 1.5px; text-transform: uppercase;
+  padding: 13px 18px; text-align: left; font-weight: 400; border-bottom: 1px solid var(--border);
+}
+tbody tr { border-bottom: 1px solid rgba(75,139,190,0.08); transition: background 0.15s; }
+tbody tr:last-child { border-bottom: none; }
+tbody tr:hover { background: var(--blue-pale); }
+tbody td { padding: 13px 18px; line-height: 1.6; vertical-align: top; color: #ffffff; font-size: 0.8rem; text-align: justify; }
+tbody td:first-child {
+  font-family:'JetBrains Mono',monospace; font-size:0.8rem; color: var(--purple-bright);
+  font-weight: 500; background: rgba(189,147,249,0.04);
+  border-right: 1px solid var(--border-pu); white-space: nowrap; text-align: left;
+}
+
+.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px,1fr)); gap: 14px; margin: 20px 0; }
+.card {
+  background: var(--obs-700); border: 1px solid var(--border); border-radius: 10px;
+  padding: 20px; border-top: 3px solid var(--blue-dark); transition: all 0.2s;
+}
+.card:hover { border-top-color: var(--blue-bright); transform: translateY(-2px); box-shadow: var(--glow-blue); }
+.card.pu { border-top-color: var(--purple-dark); }
+.card.pu:hover { border-top-color: var(--purple-bright); box-shadow: var(--glow-pu); }
+.card-label { font-family:'JetBrains Mono',monospace; font-size:0.8rem; color: var(--blue-bright); letter-spacing:2px; text-transform:uppercase; margin-bottom:8px; }
+.card.pu .card-label { color: var(--purple-bright); }
+.card-value { font-size: 0.9rem; line-height: 1.6; color: #ffffff; text-align: justify; }
+code { font-family:'JetBrains Mono',monospace; font-size:0.8rem; background: rgba(75,139,190,0.12); color: var(--text-code); padding: 2px 7px; border-radius: 4px; }
+
+.steps { display: flex; flex-direction: column; gap: 0; margin: 20px 0; }
+.step { display: flex; gap: 18px; padding: 18px 0; border-bottom: 1px dashed rgba(75,139,190,0.15); }
+.step:last-child { border-bottom: none; }
+.step-num {
+  width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0;
+  background: linear-gradient(135deg, var(--blue-dark), var(--purple-dark));
+  color: white; font-family:'JetBrains Mono',monospace; font-size:1rem;
+  display: flex; align-items: center; justify-content: center;
+  margin-top: 2px; box-shadow: 0 2px 10px rgba(75,139,190,0.3);
+}
+.step-head { font-family:'Syne',sans-serif; font-weight:600; font-size:0.9rem; margin-bottom:6px; color:#ffffff; }
+.step-body { font-size: 0.9rem; line-height: 1.75; color: #ffffff; text-align: justify; }
+
+.callout {
+  border-radius: 8px; padding: 16px 20px; margin: 16px 0;
+  display: flex; gap: 14px; align-items: flex-start; font-size: 0.9rem; line-height: 1.7;
+}
+.callout-blue { background: rgba(75,139,190,0.08); border-left: 3px solid var(--blue-bright); }
+.callout-pu   { background: var(--purple-pale); border-left: 3px solid var(--purple-bright); }
+.callout-warn { background: rgba(255,212,59,0.06); border-left: 3px solid var(--yellow); }
+.callout-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+.callout-text { color: #ffffff; text-align: justify; font-size: 0.9rem; }
+.callout-text strong { color: #ffffff; }
+
+.flow {
+  display: flex; flex-wrap: wrap; align-items: stretch; margin: 20px 0;
+  background: var(--obs-700); border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
+}
+.flow-item {
+  flex: 1; min-width: 120px; padding: 18px 14px; text-align: center;
+  border-right: 1px solid var(--border); position: relative; transition: background 0.2s;
+}
+.flow-item:hover { background: var(--blue-pale); }
+.flow-item:last-child { border-right: none; }
+.flow-item::after { content:'›'; position:absolute; right:-8px; top:50%; transform:translateY(-50%); color: var(--blue-mid); font-size:1.4rem; z-index:1; }
+.flow-item:last-child::after { display: none; }
+.flow-icon { font-size: 2rem; display: block; margin-bottom: 6px; }
+.flow-lbl { font-family:'JetBrains Mono',monospace; font-size:0.8rem; color: var(--blue-bright); letter-spacing:1px; text-transform:uppercase; }
+.flow-desc { font-size: 0.9rem; color: #ffffff; margin-top: 4px; line-height: 1.4; }
+
+.subsec { margin-top: 36px; }
+.subsec-title {
+  font-family:'Syne',sans-serif; font-size: 1rem; font-weight:700;
+  color: #ffffff; margin-bottom: 14px; display: flex; align-items: center; gap: 10px;
+}
+.subsec-title::before { content:''; display:block; width:3px; height:18px; background: linear-gradient(var(--blue-bright), var(--purple-bright)); border-radius:2px; }
+
+.divider { height: 1px; margin: 64px 0 0; background: linear-gradient(to right, transparent, var(--blue-dark), var(--purple-dark), transparent); }
+
+.faq-item { border: 1px solid var(--border); border-radius: 8px; margin-bottom: 8px; overflow: hidden; background: var(--obs-700); transition: border-color 0.2s; }
+.faq-item:hover { border-color: var(--blue-bright); }
+.faq-q {
+  padding: 16px 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+  font-family:'Syne',sans-serif; font-size: 1rem; font-weight:600; color: #ffffff;
+  user-select: none; background: none; border: none; width: 100%; text-align: left; transition: color 0.2s;
+}
+.faq-q:hover { color: var(--blue-bright); }
+.faq-arrow { color: var(--blue-bright); font-size: 1.4rem; transition: transform 0.3s; flex-shrink: 0; }
+.faq-item.open .faq-arrow { transform: rotate(180deg); }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+.faq-item.open .faq-a { max-height: 600px; }
+.faq-a-inner { padding: 0 20px 18px; font-size: 0.9rem; line-height: 1.8; color: #ffffff; border-top: 1px solid var(--border); padding-top: 14px; text-align: justify; }
+
+.reactions {
+  display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
+  padding: 20px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin: 28px 0;
+}
+.reaction-btn {
+  display: flex; align-items: center; gap: 8px; background: var(--obs-700); border: 1px solid var(--border);
+  color: #ffffff; padding: 9px 18px; border-radius: 24px; font-family:'Syne',sans-serif;
+  font-size: 0.8rem; cursor: pointer; transition: all 0.2s;
+}
+.reaction-btn:hover, .reaction-btn.active { background: var(--blue-pale); border-color: var(--blue-bright); color: var(--blue-bright); }
+.reaction-btn.love-btn:hover, .reaction-btn.love-btn.active { background: rgba(255,80,120,0.1); border-color: #ff5078; color: #ff5078; }
+.reaction-count { font-family:'JetBrains Mono',monospace; font-size:0.8rem; }
+
+.comments-section { margin-top: 28px; }
+.comment-form { background: var(--obs-700); border: 1px solid var(--border); border-radius: 10px; padding: 22px; margin-bottom: 24px; }
+.comment-form h3 { font-family:'Syne',sans-serif; font-size: 1rem; margin-bottom: 16px; color: #ffffff; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+.form-input, .form-textarea {
+  background: var(--obs-800); border: 1px solid var(--border); border-radius: 6px;
+  color: #ffffff; font-family:'Literata',serif; font-size: 0.8rem;
+  padding: 10px 14px; width: 100%; outline: none; transition: border-color 0.2s;
+}
+.form-input:focus, .form-textarea:focus { border-color: var(--blue-bright); }
+.form-textarea { resize: vertical; min-height: 100px; display: block; margin-bottom: 12px; }
+.submit-btn {
+  background: linear-gradient(135deg, var(--blue-mid), var(--purple-dark));
+  color: white; border: none; padding: 10px 24px; border-radius: 6px;
+  font-family:'Syne',sans-serif; font-size: 0.8rem; font-weight:600; cursor: pointer; transition: all 0.2s;
+}
+.submit-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+.comment-list { display: flex; flex-direction: column; gap: 14px; }
+.comment-item { background: var(--obs-700); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; }
+.comment-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+.comment-avatar {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--blue-dark), var(--purple-dark));
+  display: flex; align-items: center; justify-content: center;
+  font-family:'JetBrains Mono',monospace; font-size:1.2rem; color:white; font-weight:700; flex-shrink:0;
+}
+.comment-name { font-family:'Syne',sans-serif; font-size:0.9rem; font-weight:600; color:#ffffff; }
+.comment-date { font-family:'JetBrains Mono',monospace; font-size:0.8rem; color:#ffffff; }
+.comment-body { font-size: 0.9rem; line-height: 1.7; color: #ffffff; text-align: justify; }
+.comment-like { display:flex; align-items:center; gap:6px; margin-top:10px; background:none; border:1px solid var(--border); color:#ffffff; padding:4px 12px; border-radius:12px; cursor:pointer; font-size:0.8rem; transition:all 0.2s; }
+.comment-like:hover { color:#ff5078; border-color:#ff5078; background:rgba(255,80,120,0.08); }
+
+.follow-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); gap: 12px; margin: 20px 0; }
+.follow-btn {
+  display: flex; align-items: center; gap: 12px; background: var(--obs-700);
+  border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px;
+  color: #ffffff; font-family:'Syne',sans-serif; font-size: 0.8rem; font-weight:600;
+  cursor: pointer; text-decoration: none; transition: all 0.25s;
+}
+.follow-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
+.follow-btn.linkedin:hover { border-color:#0a66c2; background:rgba(10,102,194,0.1); color:#4b9be6; }
+.follow-btn.facebook:hover { border-color:#1877f2; background:rgba(24,119,242,0.1); color:#5b9fec; }
+.follow-btn.twitter:hover  { border-color:#1da1f2; background:rgba(29,161,242,0.1); color:#6bb8f2; }
+.follow-btn.youtube:hover  { border-color:#ff0000; background:rgba(255,0,0,0.08); color:#ff6666; }
+.follow-icon { font-size: 1.6rem; }
+.follow-lbl { display: flex; flex-direction: column; gap: 1px; }
+.follow-platform { font-size: 0.8rem; color: #ffffff; font-weight:400; }
+
+.subscribe-card {
+  background: linear-gradient(135deg, var(--obs-600), var(--obs-500));
+  border: 1px solid var(--border); border-radius: 14px;
+  padding: 40px 36px; margin: 28px 0; text-align: center;
+  position: relative; overflow: hidden;
+}
+.subscribe-card::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:2px;
+  background: linear-gradient(90deg, var(--blue-bright), var(--purple-bright));
+}
+.subscribe-title { font-family:'Syne',sans-serif; font-size:1rem; font-weight:700; margin-bottom:8px; color:#ffffff; }
+.subscribe-sub { color:#ffffff; margin-bottom:24px; font-size:0.9rem; text-align:justify; max-width:500px; margin-left:auto; margin-right:auto; }
+.sub-form { display:flex; gap:10px; max-width:480px; margin:0 auto; flex-wrap:wrap; justify-content:center; }
+.sub-input {
+  flex:1; min-width:200px; background: var(--obs-800); border:1px solid var(--border);
+  border-radius:8px; color:#ffffff; font-family:'Literata',serif; font-size:0.8rem;
+  padding:11px 16px; outline:none; transition:border-color 0.2s;
+}
+.sub-input:focus { border-color: var(--blue-bright); }
+.sub-btn {
+  background: linear-gradient(135deg, var(--blue-mid), var(--purple-dark));
+  color:white; border:none; padding:11px 24px; border-radius:8px;
+  font-family:'Syne',sans-serif; font-size:0.8rem; font-weight:600;
+  cursor:pointer; transition:all 0.2s; white-space:nowrap;
+}
+.sub-btn:hover { opacity:0.85; transform:translateY(-1px); }
+.sub-note { font-size:0.8rem; color:#ffffff; margin-top:12px; }
+
+.share-row { display:flex; flex-wrap:wrap; gap:10px; margin:20px 0; }
+.share-btn {
+  display:inline-flex; align-items:center; gap:8px; padding:9px 18px; border-radius:8px;
+  font-family:'Syne',sans-serif; font-size:0.8rem; font-weight:600;
+  border:1px solid var(--border); background: var(--obs-700); color:#ffffff;
+  cursor:pointer; text-decoration:none; transition:all 0.2s;
+}
+.share-btn:hover { transform:translateY(-2px); }
+.share-btn.fb:hover { border-color:#1877f2; background:rgba(24,119,242,0.1); color:#6bb1ff; }
+.share-btn.tw:hover { border-color:#1da1f2; background:rgba(29,161,242,0.1); color:#80ccff; }
+.share-btn.li:hover { border-color:#0a66c2; background:rgba(10,102,194,0.1); color:#6baff5; }
+.share-btn.cp:hover { border-color:var(--yellow); background:var(--yellow-dim); color:var(--yellow); }
+
+.outro-card {
+  background: linear-gradient(135deg, var(--obs-600) 0%, var(--obs-700) 100%);
+  border: 1px solid var(--border-pu); border-radius: 14px; padding: 48px 36px;
+  text-align: center; margin: 48px 0; position: relative; overflow: hidden;
+}
+.outro-card::after {
+  content: '</>'; position:absolute; right:32px; bottom:16px;
+  font-family:'JetBrains Mono',monospace; font-size:5rem;
+  color: rgba(189,147,249,0.06); font-weight:700; user-select:none; pointer-events:none;
+}
+.outro-title { font-family:'Syne',sans-serif; font-size:1.2rem; font-weight:800; color:#ffffff; margin-bottom:14px; }
+.outro-body { color:#ffffff; font-size:0.9rem; max-width:620px; margin:0 auto 14px; line-height:1.8; text-align:justify; }
+
+footer { background: var(--obs-800); border-top: 1px solid var(--border); padding: 60px 24px 32px; margin-top: 80px; }
+.footer-inner { max-width: 980px; margin: 0 auto; }
+.footer-top { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+.footer-brand { font-family:'Syne',sans-serif; font-size:1rem; font-weight:800; margin-bottom:10px; }
+.footer-tagline { font-size: 0.9rem; color: #ffffff; line-height:1.6; text-align:justify; }
+.footer-col-title { font-family:'JetBrains Mono',monospace; font-size:0.8rem; letter-spacing:2px; color: var(--blue-bright); text-transform:uppercase; margin-bottom:14px; }
+.footer-btn {
+  display:flex; align-items:center; gap:8px; background:none; border:1px solid transparent;
+  color:#ffffff; padding:7px 10px; border-radius:6px; font-family:'Syne',sans-serif; font-size:0.8rem;
+  cursor:pointer; text-decoration:none; width:100%; margin-bottom:2px; transition:all 0.2s; text-align:left;
+}
+.footer-btn:hover { border-color: var(--border); color:#ffffff; background: var(--obs-700); }
+.footer-btn .ico { font-size:1.2rem; width:18px; }
+.footer-bottom { border-top:1px solid var(--border); padding-top:24px; display:flex; flex-wrap:wrap; gap:16px; justify-content:space-between; align-items:center; }
+.footer-copy { font-family:'JetBrains Mono',monospace; font-size:0.8rem; color:#ffffff; }
+.footer-links-row { display:flex; gap:8px; flex-wrap:wrap; }
+.footer-link-btn {
+  background: var(--obs-700); border:1px solid var(--border); color:#ffffff;
+  padding:5px 12px; border-radius:5px; font-family:'JetBrains Mono',monospace;
+  font-size:0.8rem; letter-spacing:0.5px; cursor:pointer; text-decoration:none; transition:all 0.2s;
+}
+.footer-link-btn:hover { border-color: var(--blue-bright); color: var(--blue-bright); }
+
+.sticky-share { position:fixed; right:16px; top:50%; transform:translateY(-50%); z-index:200; display:flex; flex-direction:column; gap:8px; }
+.ss-btn {
+  width:40px; height:40px; border-radius:8px; background: var(--obs-700);
+  border:1px solid var(--border); display:flex; align-items:center; justify-content:center;
+  cursor:pointer; font-size:1.4rem; transition:all 0.2s; text-decoration:none; color:#ffffff;
+}
+.ss-btn:hover { transform:scale(1.12); border-color: var(--blue-bright); background: var(--blue-pale); color: var(--blue-bright); }
+
+#progress-bar {
+  position:fixed; top:64px; left:0; height:2px; z-index:1001;
+  background: linear-gradient(90deg, var(--blue-bright), var(--purple-bright));
+  width:0%; transition:width 0.1s linear;
+}
+
+.toast {
+  position:fixed; bottom:28px; left:50%; transform:translateX(-50%) translateY(60px);
+  background: var(--obs-600); border:1px solid var(--blue-bright);
+  color:#ffffff; padding:10px 22px; border-radius:8px;
+  font-family:'JetBrains Mono',monospace; font-size:0.8rem;
+  transition:transform 0.3s ease; z-index:2000; pointer-events:none;
+}
+.toast.show { transform:translateX(-50%) translateY(0); }
+
+.ai-share-section { background: var(--obs-700); border: 1px solid var(--border-pu); border-radius: 14px; padding: 28px; margin: 28px 0; }
+.ai-share-title { font-family:'Syne',sans-serif; font-size:1rem; font-weight:700; color:#ffffff; margin-bottom:8px; }
+.ai-share-desc { font-size:0.9rem; color:#ffffff; margin-bottom:16px; text-align:justify; }
+.ai-share-input-row { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; }
+.ai-share-select { flex:1; min-width:140px; background:var(--obs-800); border:1px solid var(--border); border-radius:8px; color:#ffffff; font-family:'Syne',sans-serif; font-size:0.8rem; padding:10px 14px; outline:none; cursor:pointer; }
+.ai-share-select:focus { border-color:var(--blue-bright); }
+.ai-share-gen-btn { background:linear-gradient(135deg,var(--blue-mid),var(--purple-dark)); color:#ffffff; border:none; padding:10px 22px; border-radius:8px; font-family:'Syne',sans-serif; font-size:0.8rem; font-weight:600; cursor:pointer; transition:all 0.2s; white-space:nowrap; }
+.ai-share-gen-btn:hover { opacity:0.85; transform:translateY(-1px); }
+.ai-share-output { background:var(--obs-800); border:1px solid var(--border); border-radius:8px; padding:16px; min-height:70px; font-size:0.9rem; color:#ffffff; line-height:1.7; white-space:pre-wrap; word-break:break-word; margin-bottom:12px; display:none; text-align:justify; }
+.ai-share-output.visible { display:block; }
+.ai-share-loading { display:none; align-items:center; gap:10px; color:#ffffff; font-size:0.8rem; margin-bottom:12px; }
+.ai-share-loading.visible { display:flex; }
+.ai-share-spinner { width:18px; height:18px; border:2px solid var(--border); border-top-color:var(--blue-bright); border-radius:50%; animation:spin 0.8s linear infinite; }
+@keyframes spin { to{transform:rotate(360deg)} }
+.ai-share-action-row { display:flex; gap:8px; flex-wrap:wrap; }
+.ai-share-action-btn { display:inline-flex; align-items:center; gap:6px; padding:8px 16px; border-radius:8px; font-family:'Syne',sans-serif; font-size:0.8rem; font-weight:600; border:1px solid var(--border); background:var(--obs-700); color:#ffffff; cursor:pointer; text-decoration:none; transition:all 0.2s; }
+.ai-share-action-btn:hover { transform:translateY(-1px); }
+.ai-share-action-btn.fb:hover { border-color:#1877f2; background:rgba(24,119,242,0.1); color:#6bb1ff; }
+.ai-share-action-btn.tw:hover { border-color:#1da1f2; background:rgba(29,161,242,0.1); color:#80ccff; }
+.ai-share-action-btn.li:hover { border-color:#0a66c2; background:rgba(10,102,194,0.1); color:#6baff5; }
+.ai-share-action-btn.cp:hover { border-color:var(--yellow); background:var(--yellow-dim); color:var(--yellow); }
+
+@media (max-width: 900px) {
+  .hero-inner { grid-template-columns: 1fr; gap: 32px; padding: 0 24px; text-align: center; }
+  .hero-left { align-items: center; }
+  .hero-right { align-items: center; }
+  .hero-title { text-align: center; }
+  .hero-subtitle { text-align: justify; border-left: none; padding-left: 0; border-top: 3px solid var(--blue-dark); padding-top: 16px; }
+  .hero-tags { justify-content: center; }
+  .hero-cta { justify-content: center; }
+  .scroll-indicator { margin-top: 36px; }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 24px; }
+  .card-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 768px) {
+  .navbar { padding: 0 16px; }
+  .hero { padding: 90px 0 60px; }
+  .toc-nav { padding: 0 8px; }
+  .toc-link { font-size: 0.7rem; padding: 10px 8px; letter-spacing: 0.5px; }
+  .container { padding: 0 16px; }
+  .section { margin-top: 48px; }
+  .footer-top { grid-template-columns: 1fr; gap: 20px; }
+  .form-row { grid-template-columns: 1fr; }
+  .sticky-share { display: none; }
+  .card-grid { grid-template-columns: 1fr; }
+  .flow-item { min-width: 100%; border-right: none; border-bottom: 1px solid var(--border); }
+  .flow-item::after { content: '↓'; right: 50%; bottom: -10px; top: unset; transform: translateX(50%); }
+  .step { gap: 12px; }
+  .step-num { width: 28px; height: 28px; font-size: 11px; }
+  .follow-grid { grid-template-columns: 1fr 1fr; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .reactions { flex-wrap: wrap; gap: 8px; }
+  .share-row { gap: 8px; }
+  .code-body { padding: 14px 12px; }
+  .subscribe-card { padding: 28px 18px; }
+  .sub-form { flex-direction: column; }
+  .sub-input, .sub-btn { width: 100%; }
+  .outro-card { padding: 28px 18px; }
+  .btn-primary, .btn-secondary { width: 100%; max-width: 280px; justify-content: center; }
+}
+@media (max-width: 480px) {
+  .navbar { padding: 0 12px; }
+  .container { padding: 0 12px; }
+  .hero-inner { padding: 0 16px; }
+  .drawer { width: 280px; }
+  .hero-cta { flex-direction: column; align-items: center; }
+  .follow-grid { grid-template-columns: 1fr; }
+  .comment-form { padding: 16px; }
+  .table-wrap { font-size: 0.75rem; }
+  thead th { font-size: 0.75rem; padding: 8px 10px; }
+  tbody td { padding: 8px 10px; font-size: 0.75rem; }
+}
+</style>
+</head>
+<body>
+<div id="progress-bar"></div>
+<nav class="navbar">
+  <a href="https://code-sense.pansensoyglenn.workers.dev" class="brand">
+    <span class="brand-valleys">VALLEYS</span>
+    <span class="brand-amp">&amp;</span>
+    <span class="brand-bytes">BYTES</span>
+    <span class="brand-dot"></span>
+  </a>
+  <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+<div class="drawer" id="drawer" role="navigation" aria-label="Site menu">
+  <div class="drawer-section">
+    <div class="drawer-section-label">Navigate</div>
+    <a class="drawer-btn" href="#intro"><span class="ico">📖</span>Introduction</a>
+    <a class="drawer-btn" href="#s1"><span class="ico">🗂️</span>Program Overview</a>
+    <a class="drawer-btn" href="#s2"><span class="ico">⚙️</span>The Product Base Class</a>
+    <a class="drawer-btn" href="#s3"><span class="ico">🌽</span>The Corn Class</a>
+    <a class="drawer-btn" href="#s4"><span class="ico">🍚</span>The Rice Class</a>
+    <a class="drawer-btn" href="#s5"><span class="ico">🔄</span>Polymorphism in the Loop</a>
+    <a class="drawer-btn" href="#s6"><span class="ico">🛡️</span>Input Validation &amp; Errors</a>
+    <a class="drawer-btn" href="#s7"><span class="ico">🧾</span>Receipt Generation</a>
+    <a class="drawer-btn" href="#s8"><span class="ico">🔐</span>__name__ Guard</a>
+    <a class="drawer-btn" href="#bestpractices"><span class="ico">⚠️</span>Best Practices</a>
+    <a class="drawer-btn" href="#source"><span class="ico">💻</span>Full Source</a>
+    <a class="drawer-btn" href="#faq"><span class="ico">❓</span>FAQ</a>
+  </div>
+  <div class="drawer-section">
+    <div class="drawer-section-label">Community</div>
+    <a class="drawer-btn" href="#comments"><span class="ico">💬</span>Comments</a>
+    <a class="drawer-btn" href="#follow"><span class="ico">👥</span>Follow</a>
+    <a class="drawer-btn" href="#subscribe"><span class="ico">✉️</span>Subscribe</a>
+  </div>
+  <div class="drawer-section">
+    <div class="drawer-section-label">Site Pages</div>
+    <a class="drawer-btn" href="about-guide.html"><span class="ico">📄</span>About this Page</a>
+    <a class="drawer-btn" href="about-author.html"><span class="ico">🧑‍💻</span>About the Author</a>
+    <a class="drawer-btn" href="oop-contact.html"><span class="ico">📬</span>Contact</a>
+    <a class="drawer-btn" href="oop-privacy.html"><span class="ico">🔒</span>Privacy Policy</a>
+    <a class="drawer-btn" href="oop-terms.html"><span class="ico">📜</span>Terms of Service</a>
+    <a class="drawer-btn" href="oop-cookie.html"><span class="ico">🍪</span>Cookie Policy</a>
+  </div>
+</div>
+<div style="padding:78px 24px 0;position:relative;z-index:1;">
+  <div class="ad-banner">
+    <div class="ad-label">ADVERTISEMENT</div>
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4575646748966866" data-ad-slot="4226674403" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+</div>
+
+<section class="hero" id="top">
+  <div class="hero-particles" id="particles"></div>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-eyebrow">Python · Inheritance · OOP · Philippines</div>
+      <h3 class="hero-title">
+        <span class="hl-blue">Corn</span><span class="hl-y">Rice</span><span class="hl-pu">.py</span>
+      </h3>
+      <div class="hero-title-sub">Python OOP · Inheritance &amp; Polymorphism Guide</div>
+    </div>
+    <div class="hero-right">
+      <p class="hero-subtitle">
+        A complete walkthrough of single inheritance, method overriding, and runtime polymorphism — explained step by step through a real Filipino corn and rice agri-market application. Every class, every method call, every design decision explained.
+      </p>
+      <div class="hero-tags">
+        <span class="hero-tag">🌽 Corn &amp; Rice Market</span>
+        <span class="hero-tag">🧱 1 Base + 2 Child Classes</span>
+        <span class="hero-tag">🔁 Method Overriding</span>
+        <span class="hero-tag">🦆 Runtime Polymorphism</span>
+        <span class="hero-tag">🛡️ Error Handling</span>
+        <span class="hero-tag">🐍 Python 3</span>
+      </div>
+      <div class="hero-cta">
+        <a href="#intro" class="btn-primary">📖 Start Reading</a>
+        <a href="#source" class="btn-secondary">💻 View Source Code</a>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <span>SCROLL TO EXPLORE</span>
+    <span class="arrow">↓</span>
+  </div>
+</section>
+
+<nav class="toc-nav" id="toc">
+  <a class="toc-link" href="#intro">Intro</a>
+  <a class="toc-link" href="#s1">Overview</a>
+  <a class="toc-link" href="#s2">Product</a>
+  <a class="toc-link" href="#s3">Corn</a>
+  <a class="toc-link" href="#s4">Rice</a>
+  <a class="toc-link" href="#s5">Polymorphism</a>
+  <a class="toc-link" href="#s6">Validation</a>
+  <a class="toc-link" href="#s7">Receipt</a>
+  <a class="toc-link" href="#s8">Guard</a>
+  <a class="toc-link" href="#bestpractices">Best Practices</a>
+  <a class="toc-link" href="#source">Code</a>
+  <a class="toc-link" href="#faq">FAQ</a>
+</nav>
+
+<div class="container">
+
+  <!-- INTRODUCTION -->
+  <div class="section" id="intro">
+    <div class="sec-header">
+      <span class="sec-num">INTRODUCTION</span>
+      <h2 class="sec-title">What Is <span class="accent-blue">CornRice.py</span> and Why Does It Matter?</h2>
+    </div>
+    <p class="prose">
+      Walk into any palengke in the Philippines and you will find stalls selling both mais (corn) and bigas (rice) side by side. Both are grains, both are priced per kilogram, and both can be purchased in varying quantities — yet corn is corn and rice is rice. They share a common nature but differ in how they present themselves. This is exactly the intuition behind <strong>CornRice.py</strong>, and it is also the intuition behind one of the most fundamental concepts in object-oriented programming: <strong>inheritance with method overriding</strong>.
+    </p>
+    <p class="prose" style="margin-top:14px;">
+      In this program, a single <code>Product</code> base class captures everything that is common to all items for sale — a name, a price, the ability to display itself, and the ability to calculate a total for a given quantity. Two child classes, <code>Corn</code> and <code>Rice</code>, inherit all of this but override just one method — <code>display()</code> — to prepend their own category label. That one override is enough to enable <strong>runtime polymorphism</strong>: a loop can call <code>product.display()</code> on every item in a mixed list and each object produces the right output for its own type, without a single <code>if</code> or <code>isinstance</code> check in sight.
+    </p>
+    <p class="prose" style="margin-top:14px;">
+      This guide walks through every line in a logical, progressive order. It explains not just <em>what</em> the code does but <em>why</em> every decision was made — from why <code>Corn</code> does not need its own <code>__init__</code>, to how <code>calculate_total()</code> is inherited without repetition, to exactly what happens inside the <code>try/except</code> block and why two exception types are caught separately.
+    </p>
+    <div class="callout callout-blue" style="margin-top:24px;">
+      <span class="callout-icon">🐍</span>
+      <div class="callout-text">
+        <strong>What you will learn from this guide:</strong> Defining a base class with shared state and behaviour, single inheritance with <code>class Child(Parent)</code> syntax, inheriting a constructor without repeating it, overriding a specific method in a child class, runtime polymorphism through a polymorphic list, <code>enumerate()</code> for numbered display, <code>try/except ValueError</code> with a manual <code>raise</code>, and the <code>if __name__ == "__main__"</code> entry guard — all in one cohesive, runnable Filipino agri-market program.
+      </div>
+    </div>
+    <div class="callout callout-warn" style="margin-top:16px;">
+      <span class="callout-icon">💡</span>
+      <div class="callout-text">
+        <strong>Who this guide is for:</strong> Python beginners who understand variables and functions and are ready to learn their first object-oriented program. No prior knowledge of classes is assumed — every concept is explained from the ground up using the context of a real Filipino agri-market.
+      </div>
+    </div>
+  </div>
+
+  <div class="ad-banner" style="margin-top:40px;padding:0;">
+    <div class="ad-label">ADVERTISEMENT</div>
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4575646748966866" data-ad-slot="4226674403" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+  <div class="divider"></div>
+
+  <!-- SECTION 1 — OVERVIEW -->
+  <div class="section" id="s1">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 01</span>
+      <h2 class="sec-title">Program <span class="accent-pu">Overview</span></h2>
+    </div>
+    <p class="prose">
+      CornRice.py is built around three classes and one <code>main()</code> function. The class hierarchy is intentionally simple: one parent and two children. Before diving into the individual sections, it helps to see the full picture of how these classes relate and how data flows from program startup to a printed receipt.
+    </p>
+    <div class="card-grid" style="margin-top:20px;">
+      <div class="card">
+        <div class="card-label">Class 1 — Product</div>
+        <div class="card-value">The base class for every item in the shop. Holds <code>name</code> and <code>price</code>. Provides <code>display()</code> for a plain formatted string and <code>calculate_total(quantity)</code> for the total cost. All products inherit from it.</div>
+      </div>
+      <div class="card pu">
+        <div class="card-label">Class 2 — Corn</div>
+        <div class="card-value">Inherits from <code>Product</code>. Does not define <code>__init__</code> — uses <code>Product</code>'s constructor directly. Overrides only <code>display()</code> to prepend the <code>[CORN VARIETY]</code> category label.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Class 3 — Rice</div>
+        <div class="card-value">Mirrors <code>Corn</code> exactly in structure. Overrides <code>display()</code> to prepend <code>[RICE VARIETY]</code>. Together with <code>Corn</code>, it demonstrates polymorphism — same method call, different label.</div>
+      </div>
+      <div class="card pu">
+        <div class="card-label">main() — Entry Point</div>
+        <div class="card-value">Creates a mixed list of <code>Corn</code> and <code>Rice</code> objects, displays them with <code>enumerate()</code>, takes user input, validates it, calculates the total, and prints a formatted receipt — all within a <code>try/except</code> block.</div>
+      </div>
+    </div>
+    <div class="flow" style="margin-top:24px;">
+      <div class="flow-item"><span class="flow-icon">🚀</span><span class="flow-lbl">Start</span><div class="flow-desc">main() → 8 products created in a mixed list</div></div>
+      <div class="flow-item"><span class="flow-icon">📋</span><span class="flow-lbl">Display</span><div class="flow-desc">Polymorphic loop prints numbered catalog</div></div>
+      <div class="flow-item"><span class="flow-icon">🔢</span><span class="flow-lbl">Select</span><div class="flow-desc">User picks product number and quantity</div></div>
+      <div class="flow-item"><span class="flow-icon">✅</span><span class="flow-lbl">Validate</span><div class="flow-desc">try/except catches invalid or out-of-range input</div></div>
+      <div class="flow-item"><span class="flow-icon">🧾</span><span class="flow-lbl">Receipt</span><div class="flow-desc">calculate_total() → formatted receipt printed</div></div>
+    </div>
+  </div>
+  <div class="divider"></div>
+
+  <!-- SECTION 2 — PRODUCT BASE CLASS -->
+  <div class="section" id="s2">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 02</span>
+      <h2 class="sec-title">The <span class="accent-blue">Product</span> Base Class</h2>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><div class="tdk-r"></div><div class="tdk-y"></div><div class="tdk-g"></div><span class="code-lbl">class Product</span><button class="copy-btn" onclick="copyCode(this)" aria-label="Copy code">Copy</button></div>
+      <div class="code-body"><pre><span class="kw">class</span> <span class="cl">Product</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nm">self</span>, name: <span class="cl">str</span>, price: <span class="cl">float</span>):
+        <span class="nm">self</span>.name = name
+        <span class="nm">self</span>.price = price
+
+    <span class="kw">def</span> <span class="fn">display</span>(<span class="nm">self</span>) -> <span class="cl">str</span>:
+        <span class="kw">return</span> <span class="st">f"{self.name} - ₱{self.price:.2f} per kilogram"</span>
+
+    <span class="kw">def</span> <span class="fn">calculate_total</span>(<span class="nm">self</span>, quantity: <span class="cl">int</span>) -> <span class="cl">float</span>:
+        <span class="kw">return</span> <span class="nm">self</span>.price * quantity</pre></div>
+    </div>
+    <p class="prose">
+      The <code>Product</code> class is the root of the entire hierarchy. It answers one fundamental question: what must every item for sale have in common? The answer is three things — a display name (<code>name</code>), a price in Philippine Pesos (<code>price</code>), the ability to format itself as a readable string (<code>display()</code>), and the ability to calculate a purchase total for any quantity (<code>calculate_total()</code>). These are defined exactly once here and inherited automatically by every child class.
+    </p>
+    <p class="prose" style="margin-top:14px;">
+      The type annotations (<code>name: str</code>, <code>price: float</code>) are informational — Python does not enforce them at runtime — but they serve as built-in documentation that tells any reader exactly what types are expected. The format specifier <code>:.2f</code> in <code>display()</code> ensures the price always appears with exactly two decimal places regardless of the actual float value, producing consistent output like <code>₱35.00</code> rather than <code>₱35.0</code>.
+    </p>
+    <div class="table-wrap" style="margin-top:20px;">
+      <table>
+        <thead><tr><th>Member</th><th>Type</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td>name</td><td>str</td><td>Human-readable product name used in display and receipt output</td></tr>
+          <tr><td>price</td><td>float</td><td>Unit price in Philippine Pesos per kilogram, used in total calculation</td></tr>
+          <tr><td>display()</td><td>→ str</td><td>Returns a formatted catalog string; overridden by child classes</td></tr>
+          <tr><td>calculate_total(quantity)</td><td>→ float</td><td>Returns price × quantity; inherited unchanged by all children</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout callout-blue" style="margin-top:16px;">
+      <span class="callout-icon">🏗️</span>
+      <div class="callout-text">
+        <strong>Why not put category labels in Product.display()?</strong> Because <code>Product</code> does not know what category it is — that knowledge belongs to the child classes. Putting category logic in the base class would mean every future product type must modify the base class, or that <code>Product</code> would need to hold a category attribute. Letting each child override <code>display()</code> keeps the base class clean and each child class self-contained.
+      </div>
+    </div>
+  </div>
+  <div class="divider"></div>
+
+  <!-- SECTION 3 — CORN -->
+  <div class="section" id="s3">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 03</span>
+      <h2 class="sec-title">The <span class="accent-pu">Corn</span> Class — Inheriting and Overriding</h2>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><div class="tdk-r"></div><div class="tdk-y"></div><div class="tdk-g"></div><span class="code-lbl">class Corn(Product)</span><button class="copy-btn" onclick="copyCode(this)" aria-label="Copy code">Copy</button></div>
+      <div class="code-body"><pre><span class="kw">class</span> <span class="cl">Corn</span>(<span class="cl">Product</span>):
+    <span class="kw">def</span> <span class="fn">display</span>(<span class="nm">self</span>) -> <span class="cl">str</span>:
+        <span class="kw">return</span> <span class="st">f"[CORN VARIETY] {self.name} - ₱{self.price:.2f} per kilogram"</span></pre></div>
+    </div>
+    <p class="prose">
+      The class declaration <code>Corn(Product)</code> is the syntax for single inheritance. The parentheses hold the parent class. From this one line, <code>Corn</code> automatically inherits <code>__init__</code>, the <code>name</code> and <code>price</code> attributes, the inherited <code>display()</code> from <code>Product</code>, and <code>calculate_total()</code> — everything <code>Product</code> has. The only thing <code>Corn</code> does is replace <code>display()</code> with its own version.
+    </p>
+    <p class="prose" style="margin-top:14px;">
+      Crucially, <code>Corn</code> does <em>not</em> define <code>__init__</code>. This is intentional and correct. When Python looks for <code>__init__</code> on a <code>Corn</code> instance and does not find it defined in <code>Corn</code>, it walks up the inheritance chain and finds <code>Product.__init__</code>. That method runs exactly as written in <code>Product</code>, setting <code>self.name</code> and <code>self.price</code> on the <code>Corn</code> instance. This means <code>Corn("Yellow Corn (Mais Dilaw)", 35.00)</code> works perfectly — no code duplication required.
+    </p>
+    <div class="callout callout-pu" style="margin-top:16px;">
+      <span class="callout-icon">♻️</span>
+      <div class="callout-text">
+        <strong>DRY Principle — Don't Repeat Yourself:</strong> Without inheritance, you would need to copy the <code>__init__</code> body and <code>calculate_total()</code> into both <code>Corn</code> and <code>Rice</code>. If the pricing formula ever changed — say, adding a seasonal surcharge — you would have to update it in three places and risk getting them out of sync. With inheritance, there is one single source of truth in <code>Product</code> that both children share automatically.
+      </div>
+    </div>
+    <div class="subsec">
+      <div class="subsec-title">What exactly does Corn override vs. inherit?</div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Member</th><th>Source</th><th>Behaviour</th></tr></thead>
+        <tbody>
+          <tr><td>__init__</td><td>Inherited from Product</td><td>Sets self.name and self.price — no change needed</td></tr>
+          <tr><td>display()</td><td>Overridden in Corn</td><td>Prepends [CORN VARIETY] to the output string</td></tr>
+          <tr><td>calculate_total()</td><td>Inherited from Product</td><td>Returns self.price × quantity — no change needed</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="divider"></div>
+
+  <!-- SECTION 4 — RICE -->
+  <div class="section" id="s4">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 04</span>
+      <h2 class="sec-title">The <span class="accent-blue">Rice</span> Class — Parallel Structure</h2>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><div class="tdk-r"></div><div class="tdk-y"></div><div class="tdk-g"></div><span class="code-lbl">class Rice(Product)</span><button class="copy-btn" onclick="copyCode(this)" aria-label="Copy code">Copy</button></div>
+      <div class="code-body"><pre><span class="kw">class</span> <span class="cl">Rice</span>(<span class="cl">Product</span>):
+    <span class="kw">def</span> <span class="fn">display</span>(<span class="nm">self</span>) -> <span class="cl">str</span>:
+        <span class="kw">return</span> <span class="st">f"[RICE VARIETY] {self.name} - ₱{self.price:.2f} per kilogram"</span></pre></div>
+    </div>
+    <p class="prose">
+      <code>Rice</code> is structurally identical to <code>Corn</code>. It inherits from <code>Product</code>, does not define <code>__init__</code>, and overrides only <code>display()</code> — this time prepending <code>[RICE VARIETY]</code>. This parallel structure is deliberate. When two classes differ in only one behaviour, they should be identical in structure everywhere else. Any future programmer reading the code immediately understands the pattern: the category label is the only thing that distinguishes <code>Corn</code> from <code>Rice</code>, and both live entirely in their respective <code>display()</code> overrides.
+    </p>
+    <div class="callout callout-blue" style="margin-top:16px;">
+      <span class="callout-icon">⚖️</span>
+      <div class="callout-text">
+        <strong>Corn vs. Rice — the only difference:</strong> <code>Corn.display()</code> returns a string starting with <code>[CORN VARIETY]</code>. <code>Rice.display()</code> returns a string starting with <code>[RICE VARIETY]</code>. That is the entire difference between these two classes. Everything else — constructor, attributes, <code>calculate_total()</code> — is identical because both inherit it unchanged from <code>Product</code>. This is inheritance working exactly as intended.
+      </div>
+    </div>
+    <div class="card-grid" style="margin-top:20px;">
+      <div class="card"><div class="card-label">Corn Products (3)</div><div class="card-value">Yellow Corn (₱35.00), White Corn (₱38.00), Sweet Corn (₱52.00). All tagged <code>[CORN VARIETY]</code> in the catalog display.</div></div>
+      <div class="card pu"><div class="card-label">Rice Products (5)</div><div class="card-value">Sinandomeng (₱45.00), Dinorado (₱48.00), Jasmine (₱55.00), Brown Rice (₱62.00), Red Rice (₱70.00). All tagged <code>[RICE VARIETY]</code>.</div></div>
+    </div>
+  </div>
+  <div class="divider"></div>
+
+  <!-- SECTION 5 — POLYMORPHISM IN THE LOOP -->
+  <div class="section" id="s5">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 05</span>
+      <h2 class="sec-title"><span class="accent-pu">Polymorphism</span> — One Loop, Many Forms</h2>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><div class="tdk-r"></div><div class="tdk-y"></div><div class="tdk-g"></div><span class="code-lbl">main() — Product list and polymorphic display loop</span><button class="copy-btn" onclick="copyCode(this)" aria-label="Copy code">Copy</button></div>
+      <div class="code-body"><pre>    products = [
+        <span class="cl">Corn</span>(<span class="st">"Yellow Corn (Mais Dilaw)"</span>, <span class="nm">35.00</span>),
+        <span class="cl">Corn</span>(<span class="st">"White Corn (Mais Puti)"</span>, <span class="nm">38.00</span>),
+        <span class="cl">Corn</span>(<span class="st">"Sweet Corn (Mais Matamis)"</span>, <span class="nm">52.00</span>),
+        <span class="cl">Rice</span>(<span class="st">"Sinandomeng Rice"</span>, <span class="nm">45.00</span>),
+        <span class="cl">Rice</span>(<span class="st">"Dinorado Rice"</span>, <span class="nm">48.00</span>),
+        <span class="cl">Rice</span>(<span class="st">"Jasmine Rice (Aromatic)"</span>, <span class="nm">55.00</span>),
+        <span class="cl">Rice</span>(<span class="st">"Brown Rice (Pinoy Brown)"</span>, <span class="nm">62.00</span>),
+        <span class="cl">Rice</span>(<span class="st">"Red Rice (Red Malagkit)"</span>, <span class="nm">70.00</span>),
+    ]
+
+    <span class="kw">for</span> i, product <span class="kw">in</span> <span class="fn">enumerate</span>(products, <span class="nm">1</span>):
+        <span class="fn">print</span>(<span class="st">f"{i:2d}. {product.display()}"</span>)</pre></div>
+    </div>
+    <p class="prose">
+      The <code>products</code> list holds a mix of <code>Corn</code> and <code>Rice</code> objects. Python's type system allows this because both are subclasses of <code>Product</code> — they share a common interface. The <code>for</code> loop calls <code>product.display()</code> on every item without ever checking what type it is. This is <strong>runtime polymorphism</strong>: Python dispatches to <code>Corn.display()</code> for the first three items and to <code>Rice.display()</code> for the last five, producing the correct prefixed output each time.
+    </p>
+    <p class="prose" style="margin-top:14px;">
+      The <code>enumerate(products, 1)</code> call deserves attention. <code>enumerate()</code> wraps any iterable and yields <code>(index, item)</code> tuples. The second argument <code>1</code> sets the starting index, so the catalog is numbered 1 through 8 rather than 0 through 7 — exactly what a human-facing menu should show. The format specifier <code>:2d</code> right-aligns the number in a two-character field, so item 1 and item 10 align neatly in the terminal.
+    </p>
+    <div class="callout callout-warn" style="margin-top:16px;">
+      <span class="callout-icon">💡</span>
+      <div class="callout-text">
+        <strong>Without polymorphism — what the loop would look like:</strong> If <code>display()</code> was not overridden, the loop would need to check the type of each item manually: <code>if isinstance(product, Corn): print("[CORN VARIETY] ...")</code>. Every new product category would require a new <code>elif</code> branch inside the loop. With polymorphism, the loop never needs to change — adding a new class with its own <code>display()</code> override automatically works.
+      </div>
+    </div>
+  </div>
+  <div class="divider"></div>
+
+  <!-- SECTION 6 — INPUT VALIDATION -->
+  <div class="section" id="s6">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 06</span>
+      <h2 class="sec-title"><span class="accent-blue">Input Validation</span> — Guarding Against Bad Data</h2>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><div class="tdk-r"></div><div class="tdk-y"></div><div class="tdk-g"></div><span class="code-lbl">main() — Input, validation, and error handling</span><button class="copy-btn" onclick="copyCode(this)" aria-label="Copy code">Copy</button></div>
+      <div class="code-body"><pre>    <span class="kw">try</span>:
+        choice = <span class="cl">int</span>(<span class="fn">input</span>(<span class="st">"\n🔢 Enter the number of the product you want: "</span>)) - <span class="nm">1</span>
+
+        <span class="kw">if</span> choice < <span class="nm">0</span> <span class="kw">or</span> choice >= <span class="fn">len</span>(products):
+            <span class="kw">raise</span> <span class="cl">ValueError</span>(<span class="st">"Invalid product number!"</span>)
+
+        selected_product = products[choice]
+        quantity = <span class="cl">int</span>(<span class="fn">input</span>(<span class="st">f"📦 Enter quantity for {selected_product.name} (in kg): "</span>))
+
+        <span class="kw">if</span> quantity <= <span class="nm">0</span>:
+            <span class="kw">raise</span> <span class="cl">ValueError</span>(<span class="st">"Quantity must be greater than zero!"</span>)
+
+        total_cost = selected_product.<span class="fn">calculate_total</span>(quantity)
+        <span class="cm"># ... receipt printing ...</span>
+
+    <span class="kw">except</span> <span class="cl">ValueError</span> <span class="kw">as</span> e:
+        <span class="fn">print</span>(<span class="st">f"\n❌ Invalid input! {e}"</span>)
+        <span class="fn">print</span>(<span class="st">"Please run the program again and enter valid numbers."</span>)
+    <span class="kw">except</span> <span class="cl">Exception</span>:
+        <span class="fn">print</span>(<span class="st">"\n❌ Unexpected error. Please try again."</span>)</pre></div>
+    </div>
+    <p class="prose">
+      The entire interactive section of the program is wrapped in a <code>try/except</code> block. This is the standard Python pattern for protecting user-facing input code. The block has three distinct layers of validation, each guarding a different category of invalid input.
+    </p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div>
+          <div class="step-head">int() raises ValueError on non-numeric text</div>
+          <div class="step-body">When the user types "abc" or leaves the field blank, <code>int(input(...))</code> raises <code>ValueError</code> automatically. The program catches it in the <code>except ValueError</code> clause, prints a friendly message, and stops — no crash, no traceback.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div>
+          <div class="step-head">Explicit range check raises ValueError manually</div>
+          <div class="step-body">Even if the user enters a valid integer, it might be out of range — for example, 0 or 99. The <code>if choice &lt; 0 or choice &gt;= len(products)</code> check catches this and manually raises <code>ValueError("Invalid product number!")</code>. Using <code>raise ValueError</code> deliberately slots this logic into the same exception handler, keeping all input-error messaging in one place.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div>
+          <div class="step-head">Quantity validation raises ValueError manually</div>
+          <div class="step-body">A quantity of 0 or a negative number would produce a meaningless or negative total cost. The <code>if quantity &lt;= 0</code> check catches this with another explicit <code>raise ValueError("Quantity must be greater than zero!")</code>, printing a specific message so the user knows exactly what went wrong.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div>
+          <div class="step-head">Bare except catches anything else</div>
+          <div class="step-body">The final <code>except Exception</code> clause is a safety net for truly unexpected errors — file system issues, memory problems, or anything else that is not a <code>ValueError</code>. It does not print the exception message (which could expose confusing technical details to users) but simply signals that something went wrong and asks the user to try again.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="divider"></div>
+
+  <!-- SECTION 7 — RECEIPT -->
+  <div class="section" id="s7">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 07</span>
+      <h2 class="sec-title">The <span class="accent-pu">Receipt</span> — Polymorphism in the Output</h2>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><div class="tdk-r"></div><div class="tdk-y"></div><div class="tdk-g"></div><span class="code-lbl">main() — Receipt printing</span><button class="copy-btn" onclick="copyCode(this)" aria-label="Copy code">Copy</button></div>
+      <div class="code-body"><pre>        <span class="fn">print</span>(<span class="st">"\n"</span> + <span class="st">"="</span> * <span class="nm">60</span>)
+        <span class="fn">print</span>(<span class="st">"🧾 OFFICIAL RECEIPT - Pinoy AgriMart"</span>)
+        <span class="fn">print</span>(<span class="st">"="</span> * <span class="nm">60</span>)
+        <span class="fn">print</span>(<span class="st">f"Product     : {selected_product.display()}"</span>)
+        <span class="fn">print</span>(<span class="st">f"Quantity    : {quantity} kg"</span>)
+        <span class="fn">print</span>(<span class="st">f"Unit Price  : ₱{selected_product.price:.2f}"</span>)
+        <span class="fn">print</span>(<span class="st">f"Total Cost  : ₱{total_cost:.2f}"</span>)
+        <span class="fn">print</span>(<span class="st">"="</span> * <span class="nm">60</span>)
+        <span class="fn">print</span>(<span class="st">"Thank you for shopping with us! 🇵🇭 Mabuhay!"</span>)</pre></div>
+    </div>
+    <p class="prose">
+      The receipt calls <code>selected_product.display()</code> again — the same polymorphic method used in the catalog loop. This is significant: the receipt does not need to know whether the selected product is a <code>Corn</code> or <code>Rice</code>. If the user selected Sinandomeng Rice, the receipt line reads <code>[RICE VARIETY] Sinandomeng Rice - ₱45.00 per kilogram</code>. If they selected Sweet Corn, it reads <code>[CORN VARIETY] Sweet Corn (Mais Matamis) - ₱52.00 per kilogram</code>. The same one line of receipt code handles both cases through polymorphism.
+    </p>
+    <p class="prose" style="margin-top:14px;">
+      The total cost is computed by <code>selected_product.calculate_total(quantity)</code> — the method defined once in <code>Product</code> and inherited by both <code>Corn</code> and <code>Rice</code>. Whether the selected item is corn or rice is completely irrelevant to the calculation. This is the DRY principle in practice: one method, zero duplication, correct results for every product type.
+    </p>
+    <div class="callout callout-pu" style="margin-top:16px;">
+      <span class="callout-icon">🧾</span>
+      <div class="callout-text">
+        <strong>Sample receipt output — 3 kg of Jasmine Rice:</strong> The receipt would display <code>[RICE VARIETY] Jasmine Rice (Aromatic) - ₱55.00 per kilogram</code> as the product line, <code>Quantity: 3 kg</code>, <code>Unit Price: ₱55.00</code>, and <code>Total Cost: ₱165.00</code>. The <code>[RICE VARIETY]</code> prefix in the product line comes from <code>Rice.display()</code> — polymorphism at work inside the receipt itself.
+      </div>
+    </div>
+  </div>
+  <div class="divider"></div>
+
+  <!-- SECTION 8 — __name__ GUARD -->
+  <div class="section" id="s8">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 08</span>
+      <h2 class="sec-title">The <span class="accent-blue">__name__</span> Guard — Safe Entry Point</h2>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><div class="tdk-r"></div><div class="tdk-y"></div><div class="tdk-g"></div><span class="code-lbl">CornRice.py — Final Lines</span><button class="copy-btn" onclick="copyCode(this)" aria-label="Copy code">Copy</button></div>
+      <div class="code-body"><pre><span class="kw">if</span> __name__ == <span class="st">"__main__"</span>:
+    <span class="fn">main</span>()</pre></div>
+    </div>
+    <p class="prose">
+      The <code>if __name__ == "__main__"</code> guard is a Python idiom that prevents <code>main()</code> from running when the file is imported as a module into another script. When Python runs a file directly from the terminal, it sets the special variable <code>__name__</code> to the string <code>"__main__"</code>. When the same file is imported by another script (<code>import corn_rice</code>), Python sets <code>__name__</code> to the module's filename instead, so the condition is <code>False</code> and <code>main()</code> never runs.
+    </p>
+    <p class="prose" style="margin-top:14px;">
+      This matters for reusability. If you later wanted to write a unit test that imports the <code>Product</code>, <code>Corn</code>, and <code>Rice</code> classes to test them in isolation, the test would import this file. Without the guard, importing the file would immediately start the interactive shopping session — which is not what a test runner expects. The guard ensures the classes are importable without side effects, making the code modular and testable.
+    </p>
+  </div>
+  <div class="divider"></div>
+
+  <!-- BEST PRACTICES -->
+  <div class="section" id="bestpractices">
+    <div class="sec-header">
+      <span class="sec-num">BEST PRACTICES</span>
+      <h2 class="sec-title">Design <span class="accent-pu">Principles</span> in CornRice.py</h2>
+    </div>
+    <div class="card-grid">
+      <div class="card"><div class="card-label">DRY — Don't Repeat Yourself</div><div class="card-value"><code>__init__</code> and <code>calculate_total()</code> are written exactly once in <code>Product</code> and inherited by both children. There is no copy of these methods in <code>Corn</code> or <code>Rice</code>. If the formula changes, one edit fixes everything.</div></div>
+      <div class="card pu"><div class="card-label">Single Responsibility</div><div class="card-value">Each class has one job. <code>Product</code> defines what a product is. <code>Corn</code> describes how a corn product displays itself. <code>Rice</code> describes how a rice product displays itself. <code>main()</code> orchestrates the user experience. No class does more than its role requires.</div></div>
+      <div class="card"><div class="card-label">Open/Closed</div><div class="card-value">The catalog loop and receipt code are open for extension — adding a <code>Vegetable(Product)</code> class with its own <code>display()</code> override requires zero changes to <code>main()</code>'s loop or receipt section. Both are closed for modification.</div></div>
+      <div class="card pu"><div class="card-label">Specific Error Messages</div><div class="card-value">Each <code>raise ValueError</code> carries a specific message string: <code>"Invalid product number!"</code> and <code>"Quantity must be greater than zero!"</code>. These messages surface via <code>except ValueError as e</code>, giving the user actionable feedback rather than a generic error.</div></div>
+      <div class="card"><div class="card-label">Type Annotations</div><div class="card-value">Every method parameter and return type is annotated: <code>name: str</code>, <code>price: float</code>, <code>quantity: int</code>, <code>-> str</code>, <code>-> float</code>. These serve as built-in documentation and enable static type checkers like <code>mypy</code> to catch type errors before the program runs.</div></div>
+      <div class="card pu"><div class="card-label">Enumerate for Menus</div><div class="card-value">Using <code>enumerate(products, 1)</code> instead of a manual counter variable is the idiomatic Python way to produce numbered lists. It produces cleaner code, avoids off-by-one errors, and automatically adapts if products are added or removed.</div></div>
+    </div>
+  </div>
+  <div class="divider"></div>
+
+  <!-- FULL SOURCE -->
+  <div class="section" id="source">
+    <div class="sec-header">
+      <span class="sec-num">FULL SOURCE</span>
+      <h2 class="sec-title">Complete <span class="accent-blue">CornRice.py</span> Source Code</h2>
+    </div>
+    <p class="prose">The complete, runnable source code. Save it as <code>corn_rice.py</code> and run it with <code>python corn_rice.py</code>.</p>
+    <div class="code-block">
+      <div class="code-header"><div class="tdk-r"></div><div class="tdk-y"></div><div class="tdk-g"></div><span class="code-lbl">corn_rice.py — Full Source</span><button class="copy-btn" onclick="copyCode(this)" aria-label="Copy code">Copy</button></div>
+      <div class="code-body"><pre><span class="kw">class</span> <span class="cl">Product</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nm">self</span>, name: <span class="cl">str</span>, price: <span class="cl">float</span>):
+        <span class="nm">self</span>.name = name
+        <span class="nm">self</span>.price = price
+
+    <span class="kw">def</span> <span class="fn">display</span>(<span class="nm">self</span>) -> <span class="cl">str</span>:
+        <span class="kw">return</span> <span class="st">f"{self.name} - ₱{self.price:.2f} per kilogram"</span>
+
+    <span class="kw">def</span> <span class="fn">calculate_total</span>(<span class="nm">self</span>, quantity: <span class="cl">int</span>) -> <span class="cl">float</span>:
+        <span class="kw">return</span> <span class="nm">self</span>.price * quantity
+
+
+<span class="kw">class</span> <span class="cl">Corn</span>(<span class="cl">Product</span>):
+    <span class="kw">def</span> <span class="fn">display</span>(<span class="nm">self</span>) -> <span class="cl">str</span>:
+        <span class="kw">return</span> <span class="st">f"[CORN VARIETY] {self.name} - ₱{self.price:.2f} per kilogram"</span>
+
+
+<span class="kw">class</span> <span class="cl">Rice</span>(<span class="cl">Product</span>):
+    <span class="kw">def</span> <span class="fn">display</span>(<span class="nm">self</span>) -> <span class="cl">str</span>:
+        <span class="kw">return</span> <span class="st">f"[RICE VARIETY] {self.name} - ₱{self.price:.2f} per kilogram"</span>
+
+
+<span class="kw">def</span> <span class="fn">main</span>():
+    <span class="fn">print</span>(<span class="st">"="</span> * <span class="nm">60</span>)
+    <span class="fn">print</span>(<span class="st">"🇵🇭 Welcome to Pinoy AgriMart - Fresh Corn &amp; Rice Shop (Philippines)"</span>)
+    <span class="fn">print</span>(<span class="st">"We sell high-quality local corn and rice varieties!"</span>)
+    <span class="fn">print</span>(<span class="st">"All prices are in Philippine Pesos (₱) per kilogram."</span>)
+    <span class="fn">print</span>(<span class="st">"="</span> * <span class="nm">60</span>)
+    <span class="fn">print</span>(<span class="st">"\n📋 AVAILABLE PRODUCTS:\n"</span>)
+
+    products = [
+        <span class="cl">Corn</span>(<span class="st">"Yellow Corn (Mais Dilaw)"</span>,    <span class="nm">35.00</span>),
+        <span class="cl">Corn</span>(<span class="st">"White Corn (Mais Puti)"</span>,      <span class="nm">38.00</span>),
+        <span class="cl">Corn</span>(<span class="st">"Sweet Corn (Mais Matamis)"</span>,   <span class="nm">52.00</span>),
+        <span class="cl">Rice</span>(<span class="st">"Sinandomeng Rice"</span>,            <span class="nm">45.00</span>),
+        <span class="cl">Rice</span>(<span class="st">"Dinorado Rice"</span>,               <span class="nm">48.00</span>),
+        <span class="cl">Rice</span>(<span class="st">"Jasmine Rice (Aromatic)"</span>,     <span class="nm">55.00</span>),
+        <span class="cl">Rice</span>(<span class="st">"Brown Rice (Pinoy Brown)"</span>,    <span class="nm">62.00</span>),
+        <span class="cl">Rice</span>(<span class="st">"Red Rice (Red Malagkit)"</span>,     <span class="nm">70.00</span>),
+    ]
+
+    <span class="kw">for</span> i, product <span class="kw">in</span> <span class="fn">enumerate</span>(products, <span class="nm">1</span>):
+        <span class="fn">print</span>(<span class="st">f"{i:2d}. {product.display()}"</span>)
+
+    <span class="fn">print</span>(<span class="st">"\n"</span> + <span class="st">"="</span> * <span class="nm">60</span>)
+
+    <span class="kw">try</span>:
+        choice = <span class="cl">int</span>(<span class="fn">input</span>(<span class="st">"\n🔢 Enter the number of the product you want: "</span>)) - <span class="nm">1</span>
+
+        <span class="kw">if</span> choice < <span class="nm">0</span> <span class="kw">or</span> choice >= <span class="fn">len</span>(products):
+            <span class="kw">raise</span> <span class="cl">ValueError</span>(<span class="st">"Invalid product number!"</span>)
+
+        selected_product = products[choice]
+        quantity = <span class="cl">int</span>(<span class="fn">input</span>(<span class="st">f"📦 Enter quantity for {selected_product.name} (in kg): "</span>))
+
+        <span class="kw">if</span> quantity <= <span class="nm">0</span>:
+            <span class="kw">raise</span> <span class="cl">ValueError</span>(<span class="st">"Quantity must be greater than zero!"</span>)
+
+        total_cost = selected_product.<span class="fn">calculate_total</span>(quantity)
+
+        <span class="fn">print</span>(<span class="st">"\n"</span> + <span class="st">"="</span> * <span class="nm">60</span>)
+        <span class="fn">print</span>(<span class="st">"🧾 OFFICIAL RECEIPT - Pinoy AgriMart"</span>)
+        <span class="fn">print</span>(<span class="st">"="</span> * <span class="nm">60</span>)
+        <span class="fn">print</span>(<span class="st">f"Product     : {selected_product.display()}"</span>)
+        <span class="fn">print</span>(<span class="st">f"Quantity    : {quantity} kg"</span>)
+        <span class="fn">print</span>(<span class="st">f"Unit Price  : ₱{selected_product.price:.2f}"</span>)
+        <span class="fn">print</span>(<span class="st">f"Total Cost  : ₱{total_cost:.2f}"</span>)
+        <span class="fn">print</span>(<span class="st">"="</span> * <span class="nm">60</span>)
+        <span class="fn">print</span>(<span class="st">"Thank you for shopping with us! 🇵🇭 Mabuhay!"</span>)
+
+    <span class="kw">except</span> <span class="cl">ValueError</span> <span class="kw">as</span> e:
+        <span class="fn">print</span>(<span class="st">f"\n❌ Invalid input! {e}"</span>)
+        <span class="fn">print</span>(<span class="st">"Please run the program again and enter valid numbers."</span>)
+    <span class="kw">except</span> <span class="cl">Exception</span>:
+        <span class="fn">print</span>(<span class="st">"\n❌ Unexpected error. Please try again."</span>)
+
+
+<span class="kw">if</span> __name__ == <span class="st">"__main__"</span>:
+    <span class="fn">main</span>()</pre></div>
+    </div>
+  </div>
+  <div class="divider"></div>
+
+  <!-- REACTIONS -->
+  <div class="section visible" id="reactions-section" style="margin-top:40px;">
+    <div class="reactions">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:0.8rem;color:#ffffff;">Was this helpful?</span>
+      <button class="reaction-btn love-btn" id="loveBtn" onclick="react('love')" aria-label="Love reaction">❤️ <span class="reaction-count" id="loveCount">28</span> Love</button>
+      <button class="reaction-btn" id="likeBtn" onclick="react('like')" aria-label="Helpful reaction">👍 <span class="reaction-count" id="likeCount">54</span> Helpful</button>
+      <button class="reaction-btn" id="mindBlownBtn" onclick="react('mindBlown')" aria-label="Mind-blown reaction">🤯 <span class="reaction-count" id="mindBlownCount">16</span> Mind-blown</button>
+      <button class="reaction-btn" id="bookmarkBtn" onclick="react('bookmark')" aria-label="Save reaction">🔖 <span class="reaction-count" id="bookmarkCount">39</span> Saved</button>
+    </div>
+  </div>
+  <div class="section visible" style="margin-top:8px;">
+    <div class="subsec-title" style="margin-bottom:14px;">Share This Guide</div>
+    <div class="share-row">
+      <a class="share-btn fb" href="https://www.facebook.com/sharer/sharer.php?u=https://code-sense.pansensoyglenn.workers.dev/corn-rice.html" target="_blank" rel="noopener"><span>📘</span> Facebook</a>
+      <a class="share-btn tw" href="https://twitter.com/intent/tweet?text=CornRice+Python+OOP+Inheritance+Guide&url=https://code-sense.pansensoyglenn.workers.dev/corn-rice.html&via=GlennPansensoy" target="_blank" rel="noopener"><span>🐦</span> Twitter / X</a>
+      <a class="share-btn li" href="https://www.linkedin.com/sharing/share-offsite/?url=https://code-sense.pansensoyglenn.workers.dev/corn-rice.html" target="_blank" rel="noopener"><span>💼</span> LinkedIn</a>
+      <button class="share-btn cp" onclick="copyLink()" aria-label="Copy page link"><span>🔗</span> Copy Link</button>
+    </div>
+
+    <div class="ai-share-section">
+      <div class="ai-share-title">✨ AI-Powered Share Caption</div>
+      <p class="ai-share-desc">Generate a ready-to-post social media caption for this guide. Pick your platform and tone, then click Generate.</p>
+      <div class="ai-share-input-row">
+        <select class="ai-share-select" id="aiSharePlatform" aria-label="Select platform">
+          <option>Twitter/X</option>
+          <option>LinkedIn</option>
+          <option>Facebook</option>
+          <option>WhatsApp</option>
+        </select>
+        <select class="ai-share-select" id="aiShareTone" aria-label="Select tone">
+          <option value="enthusiastic">Enthusiastic</option>
+          <option value="professional">Professional</option>
+          <option value="casual">Casual</option>
+          <option value="educational">Educational</option>
+        </select>
+        <button class="ai-share-gen-btn" id="aiShareBtn" onclick="generateAIShare()" aria-label="Generate caption">✨ Generate Caption</button>
+      </div>
+      <div class="ai-share-loading" id="aiShareLoading"><div class="ai-share-spinner"></div><span>Generating caption…</span></div>
+      <div class="ai-share-output" id="aiShareOutput"></div>
+      <div class="ai-share-action-row" id="aiShareActions" style="display:none;">
+        <a class="ai-share-action-btn fb" id="aiFbBtn" href="#" target="_blank" rel="noopener">📘 Share on Facebook</a>
+        <a class="ai-share-action-btn tw" id="aiTwBtn" href="#" target="_blank" rel="noopener">🐦 Share on Twitter</a>
+        <a class="ai-share-action-btn li" id="aiLiBtn" href="#" target="_blank" rel="noopener">💼 Share on LinkedIn</a>
+        <button class="ai-share-action-btn cp" onclick="copyAICaption()">📋 Copy Caption</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="ad-banner" style="margin-top:40px;padding:0;">
+    <div class="ad-label">ADVERTISEMENT</div>
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4575646748966866" data-ad-slot="4226674403" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+  <div class="divider"></div>
+
+  <!-- FAQ -->
+  <div class="section" id="faq">
+    <div class="sec-header">
+      <span class="sec-num">FAQ</span>
+      <h2 class="sec-title">Frequently Asked <span class="accent-pu">Questions</span></h2>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <button class="faq-q">What is CornRice.py? <span class="faq-arrow">▾</span></button>
+      <div class="faq-a"><div class="faq-a-inner">CornRice.py is a Python command-line agri-market application that simulates a Filipino corn and rice shop. It demonstrates single inheritance by having <code>Corn</code> and <code>Rice</code> inherit from a shared <code>Product</code> base class. Both child classes override <code>display()</code> to prepend a category label, while inheriting <code>__init__</code> and <code>calculate_total()</code> unchanged. The program handles product selection, quantity input, receipt generation, and full error handling through a <code>try/except</code> block.</div></div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <button class="faq-q">Why does Corn not define __init__? <span class="faq-arrow">▾</span></button>
+      <div class="faq-a"><div class="faq-a-inner">When a child class does not define its own <code>__init__</code>, Python automatically uses the parent's through the Method Resolution Order. Since <code>Corn</code> and <code>Rice</code> need exactly the same constructor parameters as <code>Product</code> — just a name and a price — there is no reason to rewrite that code. This is the DRY principle in action. Defining a duplicate <code>__init__</code> in <code>Corn</code> would be noise that adds maintenance burden without adding any value.</div></div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <button class="faq-q">What is method overriding and how does it work here? <span class="faq-arrow">▾</span></button>
+      <div class="faq-a"><div class="faq-a-inner">Method overriding means a child class provides its own implementation of a method that already exists in a parent class. In CornRice.py, both <code>Corn</code> and <code>Rice</code> override <code>display()</code>. When Python calls <code>display()</code> on a <code>Corn</code> instance, it finds <code>Corn.display()</code> first in the Method Resolution Order and uses it. The <code>Product.display()</code> version is skipped entirely. This is what allows each class to produce its own category-labelled output from the same method call.</div></div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <button class="faq-q">How does polymorphism work in the product loop? <span class="faq-arrow">▾</span></button>
+      <div class="faq-a"><div class="faq-a-inner">The <code>products</code> list holds a mix of <code>Corn</code> and <code>Rice</code> objects. The <code>for</code> loop calls <code>product.display()</code> on each item without checking what type it is. Python dispatches to <code>Corn.display()</code> for <code>Corn</code> objects and to <code>Rice.display()</code> for <code>Rice</code> objects automatically at runtime. This is polymorphism — the same method call produces different output depending on the object's actual type, with no <code>isinstance</code> checks or <code>if/elif</code> branches in the calling code.</div></div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <button class="faq-q">Why is calculate_total() defined only in Product? <span class="faq-arrow">▾</span></button>
+      <div class="faq-a"><div class="faq-a-inner"><code>calculate_total()</code> is identical for every product — it always multiplies <code>self.price</code> by the given quantity. There is no meaningful difference between how corn and rice calculate their totals. Defining it once in <code>Product</code> and letting both child classes inherit it is the DRY principle applied to methods. If the pricing formula ever changes — for example, to add a bulk discount — one edit in <code>Product</code> applies automatically to all product types.</div></div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <button class="faq-q">Can I extend this program with a new product category? <span class="faq-arrow">▾</span></button>
+      <div class="faq-a"><div class="faq-a-inner">Yes — and no changes to the loop or receipt code are needed. Simply define a new class that inherits from <code>Product</code>, such as <code>class Vegetable(Product)</code>, and override <code>display()</code> to return a string starting with <code>[VEGETABLE]</code>. Add instances to the <code>products</code> list and the catalog loop, product selection, and receipt generation all work immediately with the new type. This is the open/closed principle — the program is open for extension and closed for modification.</div></div>
+    </div>
+  </div>
+  <div class="divider"></div>
+
+  <!-- OUTRO -->
+  <div class="section" id="outro">
+    <div class="outro-card">
+      <div class="outro-title">🌽 Ready to Extend CornRice.py?</div>
+      <p class="outro-body">Now that you understand single inheritance and method overriding in CornRice.py, try adding a <code>Vegetable(Product)</code> class with a <code>[VEGETABLE]</code> prefix, a <code>Legume</code> class for beans and peanuts, or a shopping cart that lets the user buy multiple products in one session. Each extension requires zero changes to the existing catalog loop or receipt code — that is the power of inheritance and polymorphism.</p>
+      <div class="hero-cta" style="justify-content:center;">
+        <a href="#intro" class="btn-primary">↑ Read Again</a>
+        <a href="#source" class="btn-secondary">💻 Copy Source Code</a>
+      </div>
+    </div>
+  </div>
+  <div class="divider"></div>
+
+  <!-- COMMENTS -->
+  <div class="section" id="comments">
+    <div class="sec-header">
+      <span class="sec-num">COMMUNITY</span>
+      <h2 class="sec-title">Comments &amp; <span class="accent-blue">Discussion</span></h2>
+    </div>
+    <div class="comments-section">
+      <div class="comment-form">
+        <h3>💬 Leave a Comment</h3>
+        <div class="form-row">
+          <input class="form-input" type="text" id="c-name" placeholder="Your name" maxlength="50">
+          <input class="form-input" type="email" id="c-email" placeholder="Email (not published)" maxlength="100">
+        </div>
+        <textarea class="form-textarea" id="c-body" placeholder="Share your thoughts, questions, or experiences learning Python OOP through this Filipino agri-market example..." maxlength="1000"></textarea>
+        <button class="submit-btn" onclick="postComment()" aria-label="Post comment">Post Comment →</button>
+        <p style="font-size:0.8rem;color:#ffffff;margin-top:10px;">💡 Comments are stored locally in this session. Be respectful and constructive.</p>
+      </div>
+      <div class="comment-list" id="commentList">
+        <div class="comment-item">
+          <div class="comment-meta"><div class="comment-avatar">M</div><div><div class="comment-name">Maria Santos</div><div class="comment-date">March 2026</div></div></div>
+          <div class="comment-body">The explanation of why Corn does not need its own __init__ was exactly what I was looking for. I always copied the constructor into every child class out of habit. Understanding that Python walks up the MRO to find it automatically was a lightbulb moment for me.</div>
+          <button class="comment-like" onclick="likeComment(this)">❤️ <span>11</span></button>
+        </div>
+        <div class="comment-item">
+          <div class="comment-meta"><div class="comment-avatar" style="background:linear-gradient(135deg,#2d7a35,#1a4d1e)">B</div><div><div class="comment-name">Ben Villanueva</div><div class="comment-date">March 2026</div></div></div>
+          <div class="comment-body">Using a Filipino palengke as the context for inheritance made it so much more intuitive than the usual Animal/Dog examples. I immediately understood why Corn and Rice share a base class but each need their own display label. Sobrang ganda ng tutorial na ito!</div>
+          <button class="comment-like" onclick="likeComment(this)">❤️ <span>17</span></button>
+        </div>
+        <div class="comment-item">
+          <div class="comment-meta"><div class="comment-avatar" style="background:linear-gradient(135deg,#9b72d4,#6a4a9c)">C</div><div><div class="comment-name">Carina Dela Cruz</div><div class="comment-date">March 2026</div></div></div>
+          <div class="comment-body">The section on why calculate_total() lives only in Product really drove the DRY principle home for me. I already knew not to repeat yourself, but this example showed me exactly which methods should be in the base class versus the children. Great practical guide!</div>
+          <button class="comment-like" onclick="likeComment(this)">❤️ <span>9</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="divider"></div>
+
+  <!-- FOLLOW -->
+  <div class="section" id="follow">
+    <div class="sec-header">
+      <span class="sec-num">CONNECT</span>
+      <h2 class="sec-title">Follow <span class="accent-pu">Glenn Junsay Pansensoy</span></h2>
+    </div>
+    <p class="prose" style="margin-bottom:20px;">Stay connected for more Python guides, OOP tutorials, and tech content from the Philippines. Follow on your preferred platform:</p>
+    <div class="follow-grid">
+      <a class="follow-btn linkedin" href="https://www.linkedin.com/in/glenn-pansensoy-6288453a2" target="_blank" rel="noopener"><span class="follow-icon">💼</span><div class="follow-lbl"><span>Follow</span><span class="follow-platform">LinkedIn</span></div></a>
+      <a class="follow-btn facebook" href="https://www.facebook.com/@Glenn-Junsay-Pansensoy" target="_blank" rel="noopener"><span class="follow-icon">📘</span><div class="follow-lbl"><span>Follow</span><span class="follow-platform">Facebook</span></div></a>
+      <a class="follow-btn twitter" href="https://x.com/@GlennPansensoy" target="_blank" rel="noopener"><span class="follow-icon">🐦</span><div class="follow-lbl"><span>Follow</span><span class="follow-platform">X / Twitter</span></div></a>
+      <a class="follow-btn youtube" href="https://www.youtube.com/c/@GlennPansensoy" target="_blank" rel="noopener"><span class="follow-icon">▶️</span><div class="follow-lbl"><span>Subscribe</span><span class="follow-platform">YouTube</span></div></a>
+    </div>
+  </div>
+  <div class="divider"></div>
+
+  <!-- SUBSCRIBE -->
+  <div class="section" id="subscribe">
+    <div class="subscribe-card">
+      <div class="subscribe-title">📬 Stay in the Loop</div>
+      <p class="subscribe-sub">Get new Python tutorials, OOP guides, and tech articles from Valleys &amp; Bytes delivered to your inbox — no spam, ever.</p>
+      <div class="sub-form">
+        <input class="sub-input" type="email" id="subEmail" placeholder="your@email.com" aria-label="Email address">
+        <button class="sub-btn" onclick="subscribe()">Subscribe →</button>
+      </div>
+      <p class="sub-note">🔒 No spam. Unsubscribe any time.</p>
+    </div>
+  </div>
+
+</div><!-- end .container -->
+
+<div class="sticky-share" aria-label="Quick share">
+  <button class="ss-btn" onclick="copyLink()" aria-label="Copy link" title="Copy link">🔗</button>
+  <a class="ss-btn" href="https://www.facebook.com/sharer/sharer.php?u=https://code-sense.pansensoyglenn.workers.dev/corn-rice.html" target="_blank" rel="noopener" aria-label="Share on Facebook" title="Share on Facebook">📘</a>
+  <a class="ss-btn" href="https://twitter.com/intent/tweet?text=Python+OOP+Inheritance+—+CornRice.py+%F0%9F%90%8D+https://code-sense.pansensoyglenn.workers.dev/corn-rice.html" target="_blank" rel="noopener" aria-label="Share on Twitter" title="Share on Twitter">🐦</a>
+  <a class="ss-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https://code-sense.pansensoyglenn.workers.dev/corn-rice.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn" title="Share on LinkedIn">💼</a>
+</div>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand"><span style="color:var(--blue-bright)">VALLEYS</span> <span style="color:#ffffff">&amp;</span> <span style="color:var(--purple-bright)">BYTES</span></div>
+        <p class="footer-tagline">Python tutorials, OOP guides, and tech content from the Philippines — explained clearly, documented thoroughly.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Navigate</div>
+        <a class="footer-btn" href="#intro"><span class="ico">📖</span>Introduction</a>
+        <a class="footer-btn" href="#s1"><span class="ico">🗂️</span>Program Overview</a>
+        <a class="footer-btn" href="#s2"><span class="ico">🧱</span>Product Base Class</a>
+        <a class="footer-btn" href="#s5"><span class="ico">🔄</span>Polymorphism</a>
+        <a class="footer-btn" href="#source"><span class="ico">💻</span>Full Source Code</a>
+        <a class="footer-btn" href="#faq"><span class="ico">❓</span>FAQ</a>
+      </div>
+      <div>
+        <div class="footer-col-title">Site</div>
+        <a class="footer-btn" href="about-guide.html"><span class="ico">📄</span>About this Page</a>
+        <a class="footer-btn" href="about-author.html"><span class="ico">🧑‍💻</span>About the Author</a>
+        <a class="footer-btn" href="oop-contact.html"><span class="ico">📬</span>Contact</a>
+        <a class="footer-btn" href="oop-privacy.html"><span class="ico">🔒</span>Privacy Policy</a>
+        <a class="footer-btn" href="oop-terms.html"><span class="ico">📜</span>Terms of Service</a>
+        <a class="footer-btn" href="oop-cookie.html"><span class="ico">🍪</span>Cookie Policy</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Valleys &amp; Bytes — Glenn Junsay Pansensoy. All rights reserved. Built with data precision and created through intensive information authentication. <span style="color:var(--blue-bright)">code-sense.pansensoyglenn.workers.dev</span></div>
+      <div class="footer-links-row">
+        <a class="footer-link-btn" href="oop-privacy.html">Privacy</a>
+        <a class="footer-link-btn" href="oop-terms.html">Terms</a>
+        <a class="footer-link-btn" href="oop-cookie.html">Cookies</a>
+        <a class="footer-link-btn" href="oop-contact.html">Contact</a>
+        <button class="footer-link-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ Top</button>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  if(!window.matchMedia('(min-width:768px)').matches)return;
+  const c=document.getElementById('particles');
+  if(!c)return;
+  const colors=['rgba(75,139,190,0.6)','rgba(189,147,249,0.5)','rgba(255,212,59,0.4)','rgba(80,250,123,0.4)'];
+  for(let i=0;i<25;i++){
+    const p=document.createElement('div');
+    p.className='particle';
+    const s=Math.random()*4+2;
+    p.style.cssText=`width:${s}px;height:${s}px;left:${Math.random()*100}%;background:${colors[Math.floor(Math.random()*colors.length)]};animation-duration:${Math.random()*15+10}s;animation-delay:${Math.random()*-20}s;`;
+    c.appendChild(p);
+  }
+})();
+const hamburger=document.getElementById('hamburger');
+const drawer=document.getElementById('drawer');
+const overlay=document.getElementById('drawerOverlay');
+function openDrawer(){drawer.classList.add('open');overlay.classList.add('open');hamburger.classList.add('open');hamburger.setAttribute('aria-expanded','true');}
+function closeDrawer(){drawer.classList.remove('open');overlay.classList.remove('open');hamburger.classList.remove('open');hamburger.setAttribute('aria-expanded','false');}
+hamburger.addEventListener('click',()=>drawer.classList.contains('open')?closeDrawer():openDrawer());
+drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeDrawer));
+const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:0.07});
+document.querySelectorAll('.section').forEach(s=>obs.observe(s));
+const bar=document.getElementById('progress-bar');
+window.addEventListener('scroll',()=>{const h=document.documentElement;bar.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100+'%';},{passive:true});
+const tocLinks=document.querySelectorAll('.toc-link');
+const sections=document.querySelectorAll('.section[id],section[id]');
+window.addEventListener('scroll',()=>{let cur='';sections.forEach(s=>{if(window.scrollY>=s.offsetTop-120)cur=s.id;});tocLinks.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+cur);});},{passive:true});
+function copyCode(btn){const pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(()=>{btn.textContent='Copied!';setTimeout(()=>btn.textContent='Copy',2000);});}
+function copyLink(){navigator.clipboard.writeText(window.location.href).then(()=>showToast('🔗 Link copied to clipboard!'));}
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000);}
+function toggleFaq(item){const wasOpen=item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(f=>f.classList.remove('open'));if(!wasOpen)item.classList.add('open');}
+const reactions={love:28,like:54,mindBlown:16,bookmark:39};const reacted={};
+function react(type){const btn=document.getElementById(type+'Btn');const countEl=document.getElementById(type+'Count');if(reacted[type]){reactions[type]--;btn.classList.remove('active');reacted[type]=false;}else{reactions[type]++;btn.classList.add('active');reacted[type]=true;showToast('Thanks for your reaction! 🙌');}countEl.textContent=reactions[type];}
+function postComment(){const name=document.getElementById('c-name').value.trim();const body=document.getElementById('c-body').value.trim();if(!name||!body){showToast('Please fill in your name and comment.');return;}const list=document.getElementById('commentList');const initial=name.charAt(0).toUpperCase();const colors=['linear-gradient(135deg,#3a6e99,#6a4a9c)','linear-gradient(135deg,#2d7a35,#1a4d1e)','linear-gradient(135deg,#9b72d4,#264d6e)'];const bg=colors[Math.floor(Math.random()*colors.length)];const el=document.createElement('div');el.className='comment-item';el.style.animation='fadeUp 0.4s ease both';el.innerHTML=`<div class="comment-meta"><div class="comment-avatar" style="background:${bg}">${initial}</div><div><div class="comment-name">${name}</div><div class="comment-date">Just now</div></div></div><div class="comment-body">${body}</div><button class="comment-like" onclick="likeComment(this)">❤️ <span>0</span></button>`;list.insertBefore(el,list.firstChild);document.getElementById('c-name').value='';document.getElementById('c-body').value='';showToast('Comment posted! Thank you.');}
+function likeComment(btn){const span=btn.querySelector('span');let n=parseInt(span.textContent);if(btn.dataset.liked){n--;btn.dataset.liked='';}else{n++;btn.dataset.liked='1';}span.textContent=n;}
+function subscribe(){const e=document.getElementById('subEmail').value.trim();if(!e||!e.includes('@')){showToast('Please enter a valid email.');return;}document.getElementById('subEmail').value='';showToast('Subscribed! Welcome to Valleys & Bytes.');}
+
+function generateAIShare(){
+  const platform=document.getElementById('aiSharePlatform').value;
+  const tone=document.getElementById('aiShareTone').value;
+  const btn=document.getElementById('aiShareBtn');
+  const loading=document.getElementById('aiShareLoading');
+  const output=document.getElementById('aiShareOutput');
+  const actions=document.getElementById('aiShareActions');
+  const pageUrl='https://code-sense.pansensoyglenn.workers.dev/corn-rice.html';
+
+  btn.disabled=true; btn.textContent='Generating…';
+  loading.classList.add('visible');
+  output.classList.remove('visible');
+  actions.style.display='none';
+
+  const templates={
+    'Twitter/X':{
+      enthusiastic:[
+        `🔥 This Python OOP tutorial hit different!\n\nCornRice.py explains inheritance and method overriding through a Filipino corn & rice shop 🌽🍚🐍\n\nPerfect for beginners who want to see OOP in a real-world context 👇\n${pageUrl}\n\n#Python #OOP #LearnPython #Philippines #Programming`,
+        `🌽🍚 Inheritance finally makes SENSE!\n\nCornRice.py — Product base class, Corn & Rice child classes, runtime polymorphism, and error handling all in one Filipino agri-market app!\n\n${pageUrl}\n\n#Python #OOP #100DaysOfCode #CodeNewbie`,
+      ],
+      professional:[
+        `Clear Python OOP resource covering single inheritance and method overriding.\n\nCornRice.py demonstrates the Product base class, Corn and Rice child classes, runtime polymorphism, and try/except validation through a Filipino agri-market application.\n\n${pageUrl}\n\n#Python #SoftwareEngineering #OOP #PythonDev`,
+        `A practical Python inheritance walkthrough using a Filipino corn and rice shop as context.\n\nCovers method overriding, the DRY principle, polymorphic dispatch, and input validation — with complete source code.\n\n${pageUrl}\n#Python #Programming #TechEducation`,
+      ],
+      casual:[
+        `yo if you're learning Python OOP this one is super beginner-friendly 🌽🐍\n\ncorn-rice.py — inheritance explained with a Filipino palengke lol but actually really clear\n\n${pageUrl}\n\n#Python #coding`,
+        `ngl this python tutorial is one of the clearest explanations of inheritance I've read 🍚😅\n\ncheck it out ${pageUrl}\n\n#Python #LearnToCode #OOP`,
+      ],
+      educational:[
+        `📚 Learning Python OOP? Start with this.\n\nCornRice.py teaches:\n✅ Base classes and single inheritance\n✅ Method overriding\n✅ Runtime polymorphism\n✅ DRY principle\n✅ try/except input validation\n\nAll in one real Filipino agri-market project.\n${pageUrl}\n\n#Python #Education #OOP #LearnPython`,
+        `Python inheritance, made clear. 🎓\n\nThis CornRice.py guide walks through every class, every override, and every design decision in a Filipino corn and rice market app.\n\n${pageUrl}\n\n#Python #OOP #PythonTips #Programming`,
+      ],
+    },
+    'LinkedIn':{
+      enthusiastic:[
+        `🚀 Excited to share this Python OOP beginner guide!\n\nCornRice.py teaches single inheritance, method overriding, and runtime polymorphism through a real Filipino agri-market application. Every design decision is explained — from why Corn doesn't need its own __init__ to how the product loop dispatches polymorphically.\n\n🌽 Check it out: ${pageUrl}\n\n#Python #OOP #Inheritance #SoftwareDevelopment #Philippines`,
+        `💡 Found a Python tutorial that made inheritance intuitive!\n\nCornRice.py uses a Filipino palengke to teach base classes, method overriding, polymorphism, and input validation in one cohesive project.\n\n${pageUrl}\n\n#Python #Programming #OOP #TechEducation`,
+      ],
+      professional:[
+        `For developers looking to introduce Python OOP to beginners, I recommend this walkthrough of CornRice.py.\n\nThe guide covers single inheritance design, method overriding, the DRY principle, runtime polymorphism via a mixed product list, and try/except input validation — with full source code.\n\n${pageUrl}\n\n#Python #SoftwareEngineering #OOP #PythonDevelopment #Education`,
+        `Technical walkthrough: Python Single Inheritance with CornRice.py\n\nThis guide explains how Corn and Rice inherit from Product, why only display() is overridden, how calculate_total() is shared via the DRY principle, and how polymorphism eliminates type-checking in the product loop.\n\n${pageUrl}\n\n#Python #OOP #Engineering #Programming`,
+      ],
+      casual:[
+        `Stumbled across this Python OOP tutorial and it's genuinely one of the clearest I've read 😄\n\nIt teaches inheritance using a Filipino corn and rice shop — sounds simple but the explanations are thorough. Great for anyone starting their OOP journey!\n\n${pageUrl}\n\n#Python #Learning #Programming #OOP`,
+        `Sometimes the best context for learning comes from the most familiar places 🇵🇭🌽\n\nThis CornRice.py guide from the Philippines made Python inheritance click for me through a simple palengke example.\n\n${pageUrl}\n\n#Python #Tech #Coding #OOP`,
+      ],
+      educational:[
+        `📖 Python Single Inheritance — A Beginner's Guide\n\nCornRice.py demonstrates how to:\n• Design a base class with shared state and behaviour\n• Inherit a constructor without repeating it\n• Override specific methods in child classes\n• Apply the DRY principle to shared methods\n• Handle input errors with try/except ValueError\n\nFull source code included.\n\n${pageUrl}\n\n#Python #OOP #Education #SoftwareDevelopment #ProgrammingTutorial`,
+        `Sharing this Python inheritance guide for beginner developers and educators.\n\nCornRice.py uses a Filipino agri-market to teach single inheritance, method overriding, runtime polymorphism, and error handling in one runnable program.\n\n${pageUrl}\n\n#Python #Education #Programming #OOP #Philippines`,
+      ],
+    },
+    'Facebook':{
+      enthusiastic:[
+        `🌽🍚🐍 OH WOW — this Python tutorial is perfect for beginners!\n\nCornRice.py explains inheritance and polymorphism through a Filipino corn and rice shop. I finally understand why you override methods instead of copying code!\n\nIf you're learning Python, this is a must-read 👇\n${pageUrl}`,
+        `🔥 Best Python inheritance guide I've read!\n\nCornRice.py walks through EVERY line of a real agri-market app — explaining base classes, method overriding, polymorphism, and error handling from scratch.\n\nSharing because it's just that good 🙌\n${pageUrl}`,
+      ],
+      professional:[
+        `Sharing a practical Python OOP tutorial for beginners in my network.\n\nCornRice.py provides a complete walkthrough of single inheritance, method overriding, runtime polymorphism, and try/except validation — with full source code and clear explanations for each design decision.\n\n${pageUrl}`,
+        `For my fellow Python developers and educators — this CornRice.py guide is an excellent beginner reference for understanding inheritance, the DRY principle, and polymorphic dispatch in a simple, clear example.\n\n${pageUrl}`,
+      ],
+      casual:[
+        `sharing this python tutorial because it finally made inheritance make sense to me 😂🌽\n\nbase classes and method overriding explained with a Filipino palengke — simple but really effective! great read.\n\n${pageUrl}`,
+        `my classmate sent me this python OOP guide and I ended up reading the whole thing 😅\n\nif you're learning classes in Python, this one is super clear and practical!\n${pageUrl}`,
+      ],
+      educational:[
+        `📚 For students and self-taught developers learning Python OOP:\n\nCornRice.py is a step-by-step guide covering single inheritance, method overriding, runtime polymorphism, and input validation — all through a real Filipino agri-market application.\n\nFull source code included. Highly recommended!\n${pageUrl}`,
+        `Great learning resource for Python Object-Oriented Programming:\n\n✅ Single Inheritance\n✅ Method Overriding\n✅ Runtime Polymorphism\n✅ DRY Principle\n✅ try/except Validation\n\nAll in one real project: ${pageUrl}`,
+      ],
+    },
+    'WhatsApp':{
+      enthusiastic:[
+        `Hey! 🌽🍚🐍 You HAVE to check out this Python tutorial — it finally made inheritance click for me!\n\nCornRice.py teaches OOP through a Filipino corn and rice market. Base classes, method overriding, polymorphism — all explained step by step.\n\n👉 ${pageUrl}`,
+        `Bro/Sis check this out! 🔥 Best Python OOP guide for beginners — covers inheritance, method overriding, and polymorphism through a real Filipino agri-market app. Super clear!\n\n${pageUrl}`,
+      ],
+      professional:[
+        `Hi — sharing a beginner Python OOP resource you might find useful. CornRice.py is a clear walkthrough of single inheritance, method overriding, polymorphism, and error handling with full source code.\n\n${pageUrl}`,
+        `Thought you'd appreciate this — a clear Python inheritance guide with real-world Filipino context and complete source code: ${pageUrl}`,
+      ],
+      casual:[
+        `yo check this python tutorial 😄 explains inheritance with a corn and rice shop lol but actually super solid. worth a read!\n\n${pageUrl}`,
+        `sending this python guide your way — it's the one that finally made method overriding and polymorphism make sense to me 😅🌽\n\n${pageUrl}`,
+      ],
+      educational:[
+        `Sharing a Python OOP tutorial that covers:\n• Single Inheritance\n• Method Overriding\n• Runtime Polymorphism\n• DRY Principle\n• Input Validation with try/except\n\nAll through a real Filipino agri-market project 👇\n${pageUrl}`,
+        `Clear Python inheritance guide — step-by-step walkthrough of base classes, method overriding, and polymorphism with explanations for every design decision.\n\n${pageUrl}`,
+      ],
+    },
+  };
+
+  setTimeout(()=>{
+    const pool=templates[platform][tone];
+    const caption=pool[Math.floor(Math.random()*pool.length)];
+    output.textContent=caption;
+    output.classList.add('visible');
+    loading.classList.remove('visible');
+    const encodedText=encodeURIComponent(caption);
+    document.getElementById('aiFbBtn').href='https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(pageUrl)+'&quote='+encodedText;
+    document.getElementById('aiTwBtn').href='https://twitter.com/intent/tweet?text='+encodedText;
+    document.getElementById('aiLiBtn').href='https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(pageUrl);
+    actions.style.display='flex';
+    btn.disabled=false; btn.textContent='✨ Generate Caption';
+  }, 900);
+}
+function copyAICaption(){
+  const text=document.getElementById('aiShareOutput').textContent;
+  navigator.clipboard.writeText(text).then(()=>showToast('✅ Caption copied to clipboard!'));
+}
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor=>{anchor.addEventListener('click',function(e){const href=this.getAttribute('href');if(href==='#'||href==='')return;const target=document.querySelector(href);if(target){e.preventDefault();target.scrollIntoView({behavior:'smooth',block:'start'});}});});
+</script>
+</body>
+</html>
