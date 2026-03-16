@@ -1,0 +1,1883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>SeedlingSphere.py — Python Multiple Inheritance OOP Guide | Valleys &amp; Bytes</title>
+<meta name="description" content="Master Python multiple inheritance with SeedlingSphere.py — a complete, beginner-friendly guide to mixins, MRO, polymorphism, and JSON persistence through a real Filipino seedling marketplace app. Full source code included.">
+<meta name="keywords" content="Python multiple inheritance tutorial, Python OOP guide, mixin class Python, Method Resolution Order Python, polymorphism Python, SeedlingSphere, seedling marketplace Python, Python JSON persistence, Python class hierarchy, Philippines coding tutorial, Valleys and Bytes, Glenn Junsay Pansensoy">
+<meta name="author" content="Glenn Junsay Pansensoy">
+<meta name="robots" content="index, follow">
+<meta name="color-scheme" content="dark">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="canonical" href="https://code-sense.pansensoyglenn.workers.dev/seedlings.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SeedlingSphere.py — Python Multiple Inheritance OOP Guide">
+<meta property="og:description" content="Step-by-step Python OOP documentation: multiple inheritance, mixin classes, MRO, polymorphism, and full source code for a Filipino seedling marketplace.">
+<meta property="og:url" content="https://code-sense.pansensoyglenn.workers.dev/seedlings.html">
+<meta property="og:site_name" content="Valleys &amp; Bytes">
+<meta property="og:image" content="/og-seedlings.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:alt" content="SeedlingSphere.py — Python Multiple Inheritance OOP Guide banner">
+<meta property="og:locale" content="en_PH">
+<meta property="article:author" content="Glenn Junsay Pansensoy">
+<meta property="article:published_time" content="2026-03-14T00:00:00+08:00">
+<meta property="article:modified_time" content="2026-03-14T00:00:00+08:00">
+<meta property="article:section" content="Programming Tutorial">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@GlennPansensoy">
+<meta name="twitter:creator" content="@GlennPansensoy">
+<meta name="twitter:title" content="SeedlingSphere.py — Python Multiple Inheritance OOP Guide">
+<meta name="twitter:description" content="Complete Python OOP tutorial: multiple inheritance, mixins, MRO, and a working seedling marketplace with JSON persistence.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "SeedlingSphere.py — Python Multiple Inheritance OOP Guide",
+  "description": "A comprehensive step-by-step documentation of SeedlingSphere.py, a Python OOP command-line marketplace demonstrating multiple inheritance, mixin classes, MRO, polymorphism, and JSON persistence.",
+  "author": {
+    "@type": "Person",
+    "name": "Glenn Junsay Pansensoy",
+    "url": "https://www.linkedin.com/in/glenn-pansensoy-6288453a2",
+    "sameAs": [
+      "https://www.linkedin.com/in/glenn-pansensoy-6288453a2",
+      "https://www.facebook.com/@Glenn-Junsay-Pansensoy",
+      "https://x.com/@GlennPansensoy",
+      "https://www.youtube.com/c/@GlennPansensoy"
+    ]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Valleys & Bytes",
+    "url": "https://code-sense.pansensoyglenn.workers.dev"
+  },
+  "datePublished": "2026-03-14",
+  "dateModified": "2026-03-14",
+  "mainEntityOfPage": "https://code-sense.pansensoyglenn.workers.dev/seedlings.html",
+  "programmingLanguage": "Python",
+  "proficiencyLevel": "Beginner",
+  "keywords": ["Python","OOP","Multiple Inheritance","Mixin","MRO","Polymorphism","JSON","Philippines","Seedling Marketplace"],
+  "articleSection": "Programming Tutorial",
+  "teaches": ["Python OOP","Multiple Inheritance","Mixin Classes","Method Resolution Order","Polymorphism","JSON Persistence","DRY Principle"]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is SeedlingSphere.py?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "SeedlingSphere.py is a Python command-line marketplace application that simulates an online seedling store in the Philippines. It showcases multiple inheritance by having FruitTreeSeedling and VegetableSeedling inherit from both Product and the PlantCare mixin. It includes a shopping cart, polymorphic order display, and JSON receipt generation."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why use multiple inheritance instead of composition?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Multiple inheritance expresses an is-a relationship with two distinct parents. A seedling is a Product and also has PlantCare behaviour; inheritance makes care methods directly available without delegation boilerplate. Python's MRO (C3 linearization) resolves method conflicts predictably."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does Python's Method Resolution Order work in SeedlingSphere?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The MRO is determined by C3 linearization. For FruitTreeSeedling(Product, PlantCare), the MRO is: FruitTreeSeedling → Product → PlantCare → object. When a method is called, Python searches this chain in order and uses the first match. You can inspect it with FruitTreeSeedling.__mro__."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the PlantCare mixin and why is it a mixin?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "PlantCare is a mixin class that adds growth_days, care_tip, and get_care_info() to any class that inherits from it. It is called a mixin because it is not intended to be instantiated on its own — it exists purely to donate behaviour to another class. This follows the Single Responsibility Principle."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does the shopping cart work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The cart is a dictionary mapping product codes to (product_object, quantity) tuples. A generator expression inside next() finds products by code without a manual loop. The cart accumulates quantities, calculates subtotals, adds a fixed delivery fee, and saves everything as a JSON receipt file."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why are parent constructors called explicitly in FruitTreeSeedling?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Python does not automatically call parent constructors when a child class overrides __init__. Without explicit Product.__init__(self, ...) and PlantCare.__init__(self, ...) calls, attributes like code, name, price, growth_days, and care_tip would never be set, causing AttributeError at runtime."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What does ensure_ascii=False do in the JSON output?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "By default, json.dump() escapes all non-ASCII characters. Setting ensure_ascii=False allows the Philippine Peso symbol ₱ and any Filipino characters to appear as-is in the output file, making the receipt human-readable without escape sequences."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I extend SeedlingSphere with new seedling types?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Any new seedling class (e.g., HerbSeedling) only needs to inherit from Product and PlantCare, call both parent constructors, add its own unique attribute, and implement get_full_info(). The main() cart loop and JSON serialization will work with it immediately because of polymorphism."
+      }
+    }
+  ]
+}
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4575646748966866" crossorigin="anonymous"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;600;700;800&family=Literata:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;600;700;800&family=Literata:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --obs-900: #0a0a12;
+  --obs-800: #0f0f1e;
+  --obs-700: #151528;
+  --obs-600: #1e1e38;
+  --obs-500: #252545;
+  --obs-400: #2e2e58;
+  --obs-300: #3a3a72;
+  --blue-bright: #4b8bbe;
+  --blue-mid:    #3a6e99;
+  --blue-dark:   #264d6e;
+  --blue-glow:   rgba(75,139,190,0.25);
+  --blue-pale:   rgba(75,139,190,0.08);
+  --yellow:      #ffd43b;
+  --yellow-dim:  rgba(255,212,59,0.15);
+  --purple-bright: #bd93f9;
+  --purple-mid:    #9b72d4;
+  --purple-dark:   #6a4a9c;
+  --purple-glow:   rgba(189,147,249,0.2);
+  --purple-pale:   rgba(189,147,249,0.07);
+  --text-primary:   #ffffff;
+  --text-secondary: #ffffff;
+  --text-muted:     #c0c8e0;
+  --text-code:      #79c0ff;
+  --syn-kw:   #ff79c6;
+  --syn-cl:   #8be9fd;
+  --syn-fn:   #50fa7b;
+  --syn-st:   #f1fa8c;
+  --syn-cm:   #6272a4;
+  --syn-nm:   #bd93f9;
+  --syn-dc:   #ffd43b;
+  --surface-1: var(--obs-800);
+  --surface-2: var(--obs-700);
+  --surface-3: var(--obs-600);
+  --border:    rgba(75,139,190,0.18);
+  --border-pu: rgba(189,147,249,0.18);
+  --glow-blue: 0 0 30px rgba(75,139,190,0.15);
+  --glow-pu:   0 0 30px rgba(189,147,249,0.12);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 10px; overflow-x: hidden; max-width: 100vw; }
+body {
+  font-family: 'Literata', Georgia, serif;
+  background: var(--obs-900);
+  color: #ffffff;
+  overflow-x: hidden;
+  max-width: 100vw;
+  line-height: 1.7;
+}
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--obs-800); }
+::-webkit-scrollbar-thumb { background: var(--blue-dark); border-radius: 3px; }
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0;
+  background-image:
+    linear-gradient(rgba(75,139,190,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(75,139,190,0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  animation: gridShift 60s linear infinite;
+}
+@keyframes gridShift { from{background-position:0 0} to{background-position:48px 48px} }
+
+
+.navbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  height: 64px;
+  background: rgba(10,10,18,0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 28px;
+}
+.brand {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.4rem; font-weight: 800; letter-spacing: -0.5px;
+  text-decoration: none; display: flex; align-items: center; gap: 8px;
+}
+.brand-valleys { color: var(--blue-bright); }
+.brand-amp { color: #ffffff; font-weight: 400; margin: 0 2px; }
+.brand-bytes { color: var(--purple-bright); }
+.brand-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--yellow); animation: pulse 2s ease infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.7)} }
+.hamburger {
+  display: flex; flex-direction: column; gap: 5px;
+  background: none; border: 1px solid var(--border);
+  padding: 10px 12px; border-radius: 8px; cursor: pointer; transition: all 0.2s;
+}
+.hamburger:hover { border-color: var(--blue-bright); background: var(--blue-pale); }
+.hamburger span { display: block; width: 20px; height: 2px; background: #ffffff; border-radius: 2px; transition: all 0.3s; }
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+
+.drawer {
+  position: fixed; top: 64px; right: 0; bottom: 0; z-index: 999;
+  width: 300px; background: var(--obs-800); border-left: 1px solid var(--border);
+  transform: translateX(100%); transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+  overflow-y: auto; padding: 24px 20px;
+}
+.drawer.open { transform: translateX(0); }
+.drawer-overlay {
+  position: fixed; inset: 0; z-index: 998;
+  background: rgba(0,0,0,0.5); opacity: 0; pointer-events: none; transition: opacity 0.3s;
+}
+.drawer-overlay.open { opacity: 1; pointer-events: all; }
+.drawer-section { margin-bottom: 28px; }
+.drawer-section-label {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; letter-spacing: 2px;
+  text-transform: uppercase; color: #ffffff; margin-bottom: 10px; padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+}
+.drawer-btn {
+  display: flex; align-items: center; gap: 12px; width: 100%;
+  padding: 11px 14px; margin-bottom: 4px; background: var(--obs-700);
+  border: 1px solid var(--border); border-radius: 8px; color: #ffffff;
+  font-family: 'Syne', sans-serif; font-size: 0.8rem;
+  cursor: pointer; text-decoration: none; transition: all 0.2s; text-align: left;
+}
+.drawer-btn:hover { background: var(--blue-pale); border-color: var(--blue-bright); color: var(--blue-bright); }
+.drawer-btn .ico { font-size: 1.4rem; width: 22px; text-align: center; }
+
+
+.ad-banner { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+.ad-label { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #ffffff; letter-spacing: 1px; text-align: center; margin-bottom: 4px; }
+
+
+.hero {
+  position: relative; z-index: 1; min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 100px 0 80px; overflow: hidden;
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(75,139,190,0.12) 0%, transparent 70%),
+              radial-gradient(ellipse 60% 40% at 80% 80%, rgba(189,147,249,0.08) 0%, transparent 60%);
+}
+.hero-inner {
+  max-width: 1100px; margin: 0 auto; padding: 0 40px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; width: 100%;
+}
+.hero-left { display: flex; flex-direction: column; align-items: flex-start; }
+.hero-right { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
+.hero-particles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.particle { position: absolute; border-radius: 50%; animation: floatParticle linear infinite; }
+@keyframes floatParticle {
+  0%   { transform: translateY(100vh) scale(0); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 0.3; }
+  100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+}
+.hero-eyebrow {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--blue-bright);
+  background: rgba(75,139,190,0.1); border: 1px solid rgba(75,139,190,0.3);
+  padding: 6px 18px; border-radius: 20px; margin-bottom: 20px; display: inline-block;
+  animation: fadeUp 0.8s ease both;
+}
+.hero-title {
+  font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 800;
+  line-height: 1.1; text-align: left; color: #ffffff;
+  animation: fadeUp 0.9s ease 0.1s both; letter-spacing: -0.5px;
+}
+.hero-title .hl-blue { color: var(--blue-bright); }
+.hero-title .hl-pu   { color: var(--purple-bright); }
+.hero-title .hl-y    { color: var(--yellow); }
+.hero-title-sub {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #ffffff;
+  margin-top: 12px; letter-spacing: 1px; animation: fadeUp 0.95s ease 0.15s both;
+}
+.hero-subtitle {
+  font-size: 0.9rem; font-weight: 300; color: #ffffff; text-align: justify;
+  line-height: 1.7; animation: fadeUp 1s ease 0.2s both;
+  border-left: 3px solid var(--blue-dark); padding-left: 18px;
+}
+.hero-tags { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-start; animation: fadeUp 1s ease 0.3s both; }
+.hero-tag {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;
+  padding: 4px 12px; border-radius: 5px;
+  border: 1px solid var(--border-pu); color: var(--purple-bright);
+  background: var(--purple-pale); letter-spacing: 0.5px;
+}
+.hero-cta { display: flex; gap: 12px; flex-wrap: wrap; justify-content: flex-start; animation: fadeUp 1s ease 0.4s both; }
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px; padding: 13px 28px; border-radius: 8px;
+  background: linear-gradient(135deg, var(--blue-mid), var(--purple-dark));
+  color: #ffffff; font-family: 'Syne', sans-serif; font-size: 0.8rem; font-weight: 600;
+  text-decoration: none; border: none; cursor: pointer; transition: all 0.25s;
+  box-shadow: 0 4px 20px rgba(75,139,190,0.3);
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(75,139,190,0.4); }
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 8px; padding: 13px 28px; border-radius: 8px;
+  background: transparent; border: 1px solid var(--border); color: #ffffff;
+  font-family: 'Syne', sans-serif; font-size: 0.8rem; font-weight: 600;
+  text-decoration: none; cursor: pointer; transition: all 0.25s;
+}
+.btn-secondary:hover { border-color: var(--purple-bright); color: var(--purple-bright); background: var(--purple-pale); }
+.scroll-indicator {
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  color: #ffffff; font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem; letter-spacing: 2px; margin-top: 60px; align-self: center;
+  animation: fadeUp 1.1s ease 0.5s both;
+}
+.scroll-indicator .arrow { animation: bounce 2s ease infinite; font-size: 1.4rem; }
+@keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(8px)} }
+@keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+
+.toc-nav {
+  position: sticky; top: 64px; z-index: 100;
+  background: rgba(10,10,18,0.95); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border); padding: 0 28px;
+  display: flex; align-items: center; overflow-x: auto; scrollbar-width: none;
+}
+.toc-nav::-webkit-scrollbar { display: none; }
+.toc-link {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;
+  color: #ffffff; text-decoration: none; letter-spacing: 1px;
+  text-transform: uppercase; padding: 14px 12px; white-space: nowrap;
+  border-bottom: 2px solid transparent; transition: all 0.2s;
+}
+.toc-link:hover, .toc-link.active { color: var(--blue-bright); border-bottom-color: var(--blue-bright); }
+
+
+.container { max-width: 980px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+.section { margin-top: 72px; opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.section.visible { opacity: 1; transform: translateY(0); }
+.sec-header { display: flex; align-items: center; gap: 16px; margin-bottom: 28px; flex-wrap: wrap; }
+.sec-num {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--yellow);
+  letter-spacing: 2px; background: var(--yellow-dim); border: 1px solid rgba(255,212,59,0.3);
+  padding: 4px 12px; border-radius: 4px; white-space: nowrap;
+}
+.sec-title {
+  font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 700; color: #ffffff;
+  border-bottom: 2px solid var(--blue-dark); padding-bottom: 6px; flex: 1;
+}
+.sec-title .accent-blue { color: var(--blue-bright); }
+.sec-title .accent-pu   { color: var(--purple-bright); }
+
+
+.prose {
+  font-size: 0.9rem; line-height: 1.85; color: #ffffff;
+  max-width: 820px; text-align: justify;
+}
+.prose strong { color: #ffffff; font-weight: 600; }
+.prose + .prose { margin-top: 14px; }
+.prose em { color: var(--purple-bright); font-style: italic; }
+
+
+.code-block {
+  background: var(--obs-800); border: 1px solid var(--border);
+  border-radius: 10px; overflow: hidden; margin: 24px 0; box-shadow: var(--glow-blue); position: relative;
+}
+.code-block::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--blue-bright), var(--purple-bright), transparent);
+}
+.code-header {
+  background: rgba(255,255,255,0.03); border-bottom: 1px solid var(--border);
+  padding: 10px 18px; display: flex; align-items: center; gap: 8px;
+}
+.tdk-r { width:10px;height:10px;border-radius:50%;background:#ff5f57; }
+.tdk-y { width:10px;height:10px;border-radius:50%;background:#febc2e; }
+.tdk-g { width:10px;height:10px;border-radius:50%;background:#28c840; }
+.code-lbl { font-family:'JetBrains Mono',monospace; font-size:0.8rem; color:#ffffff; margin-left:6px; letter-spacing:0.5px; }
+.copy-btn {
+  margin-left: auto; font-family:'JetBrains Mono',monospace; font-size:0.8rem;
+  color: var(--blue-bright); background: var(--blue-pale);
+  border: 1px solid rgba(75,139,190,0.3); padding: 3px 10px; border-radius: 4px;
+  cursor: pointer; transition: all 0.2s;
+}
+.copy-btn:hover { background: var(--blue-dark); color: white; }
+.code-body { padding: 22px 24px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+pre { font-family:'JetBrains Mono',monospace; font-size:0.8rem; line-height:1.75; color:#cdd9e5; tab-size:4; white-space: pre; }
+.kw{color:var(--syn-kw)} .cl{color:var(--syn-cl)} .fn{color:var(--syn-fn)}
+.st{color:var(--syn-st)} .cm{color:var(--syn-cm);font-style:italic} .nm{color:var(--syn-nm)}
+.dc{color:var(--syn-dc)} .op{color:var(--syn-kw)}
+
+
+.table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 20px 0; border-radius: 10px; border: 1px solid var(--border); }
+table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+thead tr { background: linear-gradient(135deg, var(--obs-500), var(--obs-400)); }
+thead th {
+  color: var(--blue-bright); font-family:'JetBrains Mono',monospace;
+  font-size: 0.8rem; letter-spacing: 1.5px; text-transform: uppercase;
+  padding: 13px 18px; text-align: left; font-weight: 400; border-bottom: 1px solid var(--border);
+}
+tbody tr { border-bottom: 1px solid rgba(75,139,190,0.08); transition: background 0.15s; }
+tbody tr:last-child { border-bottom: none; }
+tbody tr:hover { background: var(--blue-pale); }
+tbody td { padding: 13px 18px; line-height: 1.6; vertical-align: top; color: #ffffff; font-size: 0.8rem; text-align: justify; }
+tbody td:first-child {
+  font-family:'JetBrains Mono',monospace; font-size:0.8rem; color: var(--purple-bright);
+  font-weight: 500; background: rgba(189,147,249,0.04);
+  border-right: 1px solid var(--border-pu); white-space: nowrap; text-align: left;
+}
+
+
+.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px,1fr)); gap: 14px; margin: 20px 0; }
+.card {
+  background: var(--obs-700); border: 1px solid var(--border); border-radius: 10px;
+  padding: 20px; border-top: 3px solid var(--blue-dark); transition: all 0.2s;
+}
+.card:hover { border-top-color: var(--blue-bright); transform: translateY(-2px); box-shadow: var(--glow-blue); }
+.card.pu { border-top-color: var(--purple-dark); }
+.card.pu:hover { border-top-color: var(--purple-bright); box-shadow: var(--glow-pu); }
+.card-label { font-family:'JetBrains Mono',monospace; font-size:0.8rem; color: var(--blue-bright); letter-spacing:2px; text-transform:uppercase; margin-bottom:8px; }
+.card.pu .card-label { color: var(--purple-bright); }
+.card-value { font-size: 0.9rem; line-height: 1.6; color: #ffffff; text-align: justify; }
+code { font-family:'JetBrains Mono',monospace; font-size:0.8rem; background: rgba(75,139,190,0.12); color: var(--text-code); padding: 2px 7px; border-radius: 4px; }
+
+
+.steps { display: flex; flex-direction: column; gap: 0; margin: 20px 0; }
+.step { display: flex; gap: 18px; padding: 18px 0; border-bottom: 1px dashed rgba(75,139,190,0.15); }
+.step:last-child { border-bottom: none; }
+.step-num {
+  width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0;
+  background: linear-gradient(135deg, var(--blue-dark), var(--purple-dark));
+  color: white; font-family:'JetBrains Mono',monospace; font-size:1rem;
+  display: flex; align-items: center; justify-content: center;
+  margin-top: 2px; box-shadow: 0 2px 10px rgba(75,139,190,0.3);
+}
+.step-head { font-family:'Syne',sans-serif; font-weight:600; font-size:0.9rem; margin-bottom:6px; color:#ffffff; }
+.step-body { font-size: 0.9rem; line-height: 1.75; color: #ffffff; text-align: justify; }
+
+
+.callout {
+  border-radius: 8px; padding: 16px 20px; margin: 16px 0;
+  display: flex; gap: 14px; align-items: flex-start; font-size: 0.9rem; line-height: 1.7;
+}
+.callout-blue { background: rgba(75,139,190,0.08); border-left: 3px solid var(--blue-bright); }
+.callout-pu   { background: var(--purple-pale); border-left: 3px solid var(--purple-bright); }
+.callout-warn { background: rgba(255,212,59,0.06); border-left: 3px solid var(--yellow); }
+.callout-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+.callout-text { color: #ffffff; text-align: justify; font-size: 0.9rem; }
+.callout-text strong { color: #ffffff; }
+
+
+.flow {
+  display: flex; flex-wrap: wrap; align-items: stretch; margin: 20px 0;
+  background: var(--obs-700); border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
+}
+.flow-item {
+  flex: 1; min-width: 120px; padding: 18px 14px; text-align: center;
+  border-right: 1px solid var(--border); position: relative; transition: background 0.2s;
+}
+.flow-item:hover { background: var(--blue-pale); }
+.flow-item:last-child { border-right: none; }
+.flow-item::after { content:'›'; position:absolute; right:-8px; top:50%; transform:translateY(-50%); color: var(--blue-mid); font-size:1.4rem; z-index:1; }
+.flow-item:last-child::after { display: none; }
+.flow-icon { font-size: 2rem; display: block; margin-bottom: 6px; }
+.flow-lbl { font-family:'JetBrains Mono',monospace; font-size:0.8rem; color: var(--blue-bright); letter-spacing:1px; text-transform:uppercase; }
+.flow-desc { font-size: 0.9rem; color: #ffffff; margin-top: 4px; line-height: 1.4; }
+
+
+.subsec { margin-top: 36px; }
+.subsec-title {
+  font-family:'Syne',sans-serif; font-size: 1rem; font-weight:700;
+  color: #ffffff; margin-bottom: 14px; display: flex; align-items: center; gap: 10px;
+}
+.subsec-title::before { content:''; display:block; width:3px; height:18px; background: linear-gradient(var(--blue-bright), var(--purple-bright)); border-radius:2px; }
+
+
+.divider { height: 1px; margin: 64px 0 0; background: linear-gradient(to right, transparent, var(--blue-dark), var(--purple-dark), transparent); }
+
+
+.faq-item { border: 1px solid var(--border); border-radius: 8px; margin-bottom: 8px; overflow: hidden; background: var(--obs-700); transition: border-color 0.2s; }
+.faq-item:hover { border-color: var(--blue-bright); }
+.faq-q {
+  padding: 16px 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+  font-family:'Syne',sans-serif; font-size: 1rem; font-weight:600; color: #ffffff;
+  user-select: none; background: none; border: none; width: 100%; text-align: left; transition: color 0.2s;
+}
+.faq-q:hover { color: var(--blue-bright); }
+.faq-arrow { color: var(--blue-bright); font-size: 1.4rem; transition: transform 0.3s; flex-shrink: 0; }
+.faq-item.open .faq-arrow { transform: rotate(180deg); }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+.faq-item.open .faq-a { max-height: 600px; }
+.faq-a-inner { padding: 0 20px 18px; font-size: 0.9rem; line-height: 1.8; color: #ffffff; border-top: 1px solid var(--border); padding-top: 14px; text-align: justify; }
+
+
+.reactions {
+  display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
+  padding: 20px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin: 28px 0;
+}
+.reaction-btn {
+  display: flex; align-items: center; gap: 8px; background: var(--obs-700); border: 1px solid var(--border);
+  color: #ffffff; padding: 9px 18px; border-radius: 24px; font-family:'Syne',sans-serif;
+  font-size: 0.8rem; cursor: pointer; transition: all 0.2s;
+}
+.reaction-btn:hover, .reaction-btn.active { background: var(--blue-pale); border-color: var(--blue-bright); color: var(--blue-bright); }
+.reaction-btn.love-btn:hover, .reaction-btn.love-btn.active { background: rgba(255,80,120,0.1); border-color: #ff5078; color: #ff5078; }
+.reaction-count { font-family:'JetBrains Mono',monospace; font-size:0.8rem; }
+
+.comments-section { margin-top: 28px; }
+.comment-form { background: var(--obs-700); border: 1px solid var(--border); border-radius: 10px; padding: 22px; margin-bottom: 24px; }
+.comment-form h3 { font-family:'Syne',sans-serif; font-size: 1rem; margin-bottom: 16px; color: #ffffff; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+.form-input, .form-textarea {
+  background: var(--obs-800); border: 1px solid var(--border); border-radius: 6px;
+  color: #ffffff; font-family:'Literata',serif; font-size: 0.8rem;
+  padding: 10px 14px; width: 100%; outline: none; transition: border-color 0.2s;
+}
+.form-input:focus, .form-textarea:focus { border-color: var(--blue-bright); }
+.form-textarea { resize: vertical; min-height: 100px; display: block; margin-bottom: 12px; }
+.submit-btn {
+  background: linear-gradient(135deg, var(--blue-mid), var(--purple-dark));
+  color: white; border: none; padding: 10px 24px; border-radius: 6px;
+  font-family:'Syne',sans-serif; font-size: 0.8rem; font-weight:600; cursor: pointer; transition: all 0.2s;
+}
+.submit-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+.comment-list { display: flex; flex-direction: column; gap: 14px; }
+.comment-item { background: var(--obs-700); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; }
+.comment-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+.comment-avatar {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--blue-dark), var(--purple-dark));
+  display: flex; align-items: center; justify-content: center;
+  font-family:'JetBrains Mono',monospace; font-size:1.2rem; color:white; font-weight:700; flex-shrink:0;
+}
+.comment-name { font-family:'Syne',sans-serif; font-size:0.9rem; font-weight:600; color:#ffffff; }
+.comment-date { font-family:'JetBrains Mono',monospace; font-size:0.8rem; color:#ffffff; }
+.comment-body { font-size: 0.9rem; line-height: 1.7; color: #ffffff; text-align: justify; }
+.comment-like { display:flex; align-items:center; gap:6px; margin-top:10px; background:none; border:1px solid var(--border); color:#ffffff; padding:4px 12px; border-radius:12px; cursor:pointer; font-size:0.8rem; transition:all 0.2s; }
+.comment-like:hover { color:#ff5078; border-color:#ff5078; background:rgba(255,80,120,0.08); }
+
+.follow-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); gap: 12px; margin: 20px 0; }
+.follow-btn {
+  display: flex; align-items: center; gap: 12px; background: var(--obs-700);
+  border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px;
+  color: #ffffff; font-family:'Syne',sans-serif; font-size: 0.8rem; font-weight:600;
+  cursor: pointer; text-decoration: none; transition: all 0.25s;
+}
+.follow-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
+.follow-btn.linkedin:hover { border-color:#0a66c2; background:rgba(10,102,194,0.1); color:#4b9be6; }
+.follow-btn.facebook:hover { border-color:#1877f2; background:rgba(24,119,242,0.1); color:#5b9fec; }
+.follow-btn.twitter:hover  { border-color:#1da1f2; background:rgba(29,161,242,0.1); color:#6bb8f2; }
+.follow-btn.youtube:hover  { border-color:#ff0000; background:rgba(255,0,0,0.08); color:#ff6666; }
+.follow-icon { font-size: 1.6rem; }
+.follow-lbl { display: flex; flex-direction: column; gap: 1px; }
+.follow-platform { font-size: 0.8rem; color: #ffffff; font-weight:400; }
+
+
+.subscribe-card {
+  background: linear-gradient(135deg, var(--obs-600), var(--obs-500));
+  border: 1px solid var(--border); border-radius: 14px;
+  padding: 40px 36px; margin: 28px 0; text-align: center;
+  position: relative; overflow: hidden;
+}
+.subscribe-card::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:2px;
+  background: linear-gradient(90deg, var(--blue-bright), var(--purple-bright));
+}
+.subscribe-title { font-family:'Syne',sans-serif; font-size:1rem; font-weight:700; margin-bottom:8px; color:#ffffff; }
+.subscribe-sub { color:#ffffff; margin-bottom:24px; font-size:0.9rem; text-align:justify; max-width:500px; margin-left:auto; margin-right:auto; }
+.sub-form { display:flex; gap:10px; max-width:480px; margin:0 auto; flex-wrap:wrap; justify-content:center; }
+.sub-input {
+  flex:1; min-width:200px; background: var(--obs-800); border:1px solid var(--border);
+  border-radius:8px; color:#ffffff; font-family:'Literata',serif; font-size:0.8rem;
+  padding:11px 16px; outline:none; transition:border-color 0.2s;
+}
+.sub-input:focus { border-color: var(--blue-bright); }
+.sub-btn {
+  background: linear-gradient(135deg, var(--blue-mid), var(--purple-dark));
+  color:white; border:none; padding:11px 24px; border-radius:8px;
+  font-family:'Syne',sans-serif; font-size:0.8rem; font-weight:600;
+  cursor:pointer; transition:all 0.2s; white-space:nowrap;
+}
+.sub-btn:hover { opacity:0.85; transform:translateY(-1px); }
+.sub-note { font-size:0.8rem; color:#ffffff; margin-top:12px; }
+
+
+.share-row { display:flex; flex-wrap:wrap; gap:10px; margin:20px 0; }
+.share-btn {
+  display:inline-flex; align-items:center; gap:8px; padding:9px 18px; border-radius:8px;
+  font-family:'Syne',sans-serif; font-size:0.8rem; font-weight:600;
+  border:1px solid var(--border); background: var(--obs-700); color:#ffffff;
+  cursor:pointer; text-decoration:none; transition:all 0.2s;
+}
+.share-btn:hover { transform:translateY(-2px); }
+.share-btn.fb:hover { border-color:#1877f2; background:rgba(24,119,242,0.1); color:#6bb1ff; }
+.share-btn.tw:hover { border-color:#1da1f2; background:rgba(29,161,242,0.1); color:#80ccff; }
+.share-btn.li:hover { border-color:#0a66c2; background:rgba(10,102,194,0.1); color:#6baff5; }
+.share-btn.cp:hover { border-color:var(--yellow); background:var(--yellow-dim); color:var(--yellow); }
+
+
+.outro-card {
+  background: linear-gradient(135deg, var(--obs-600) 0%, var(--obs-700) 100%);
+  border: 1px solid var(--border-pu); border-radius: 14px; padding: 48px 36px;
+  text-align: center; margin: 48px 0; position: relative; overflow: hidden;
+}
+.outro-card::after {
+  content: '</>'; position:absolute; right:32px; bottom:16px;
+  font-family:'JetBrains Mono',monospace; font-size:5rem;
+  color: rgba(189,147,249,0.06); font-weight:700; user-select:none; pointer-events:none;
+}
+.outro-title { font-family:'Syne',sans-serif; font-size:1.2rem; font-weight:800; color:#ffffff; margin-bottom:14px; }
+.outro-body { color:#ffffff; font-size:0.9rem; max-width:620px; margin:0 auto 14px; line-height:1.8; text-align:justify; }
+
+
+footer { background: var(--obs-800); border-top: 1px solid var(--border); padding: 60px 24px 32px; margin-top: 80px; }
+.footer-inner { max-width: 980px; margin: 0 auto; }
+.footer-top { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+.footer-brand { font-family:'Syne',sans-serif; font-size:1rem; font-weight:800; margin-bottom:10px; }
+.footer-tagline { font-size: 0.9rem; color: #ffffff; line-height:1.6; text-align:justify; }
+.footer-col-title { font-family:'JetBrains Mono',monospace; font-size:0.8rem; letter-spacing:2px; color: var(--blue-bright); text-transform:uppercase; margin-bottom:14px; }
+.footer-btn {
+  display:flex; align-items:center; gap:8px; background:none; border:1px solid transparent;
+  color:#ffffff; padding:7px 10px; border-radius:6px; font-family:'Syne',sans-serif; font-size:0.8rem;
+  cursor:pointer; text-decoration:none; width:100%; margin-bottom:2px; transition:all 0.2s; text-align:left;
+}
+.footer-btn:hover { border-color: var(--border); color:#ffffff; background: var(--obs-700); }
+.footer-btn .ico { font-size:1.2rem; width:18px; }
+.footer-bottom { border-top:1px solid var(--border); padding-top:24px; display:flex; flex-wrap:wrap; gap:16px; justify-content:space-between; align-items:center; }
+.footer-copy { font-family:'JetBrains Mono',monospace; font-size:0.8rem; color:#ffffff; }
+.footer-links-row { display:flex; gap:8px; flex-wrap:wrap; }
+.footer-link-btn {
+  background: var(--obs-700); border:1px solid var(--border); color:#ffffff;
+  padding:5px 12px; border-radius:5px; font-family:'JetBrains Mono',monospace;
+  font-size:0.8rem; letter-spacing:0.5px; cursor:pointer; text-decoration:none; transition:all 0.2s;
+}
+.footer-link-btn:hover { border-color: var(--blue-bright); color: var(--blue-bright); }
+
+
+.sticky-share { position:fixed; right:16px; top:50%; transform:translateY(-50%); z-index:200; display:flex; flex-direction:column; gap:8px; }
+.ss-btn {
+  width:40px; height:40px; border-radius:8px; background: var(--obs-700);
+  border:1px solid var(--border); display:flex; align-items:center; justify-content:center;
+  cursor:pointer; font-size:1.4rem; transition:all 0.2s; text-decoration:none; color:#ffffff;
+}
+.ss-btn:hover { transform:scale(1.12); border-color: var(--blue-bright); background: var(--blue-pale); color: var(--blue-bright); }
+
+
+#progress-bar {
+  position:fixed; top:64px; left:0; height:2px; z-index:1001;
+  background: linear-gradient(90deg, var(--blue-bright), var(--purple-bright));
+  width:0%; transition:width 0.1s linear;
+}
+
+
+.toast {
+  position:fixed; bottom:28px; left:50%; transform:translateX(-50%) translateY(60px);
+  background: var(--obs-600); border:1px solid var(--blue-bright);
+  color:#ffffff; padding:10px 22px; border-radius:8px;
+  font-family:'JetBrains Mono',monospace; font-size:0.8rem;
+  transition:transform 0.3s ease; z-index:2000; pointer-events:none;
+}
+.toast.show { transform:translateX(-50%) translateY(0); }
+
+
+@media (max-width: 900px) {
+  .hero-inner { grid-template-columns: 1fr; gap: 32px; padding: 0 24px; text-align: center; }
+  .hero-left { align-items: center; }
+  .hero-right { align-items: center; }
+  .hero-title { text-align: center; }
+  .hero-subtitle { text-align: justify; border-left: none; padding-left: 0; border-top: 3px solid var(--blue-dark); padding-top: 16px; }
+  .hero-tags { justify-content: center; }
+  .hero-cta { justify-content: center; }
+  .scroll-indicator { margin-top: 36px; }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 24px; }
+  .card-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 768px) {
+  .navbar { padding: 0 16px; }
+  .hero { padding: 90px 0 60px; }
+  .toc-nav { padding: 0 8px; }
+  .toc-link { font-size: 0.7rem; padding: 10px 8px; letter-spacing: 0.5px; }
+  .container { padding: 0 16px; }
+  .section { margin-top: 48px; }
+  .footer-top { grid-template-columns: 1fr; gap: 20px; }
+  .form-row { grid-template-columns: 1fr; }
+  .sticky-share { display: none; }
+  .card-grid { grid-template-columns: 1fr; }
+  .flow-item { min-width: 100%; border-right: none; border-bottom: 1px solid var(--border); }
+  .flow-item::after { content: '↓'; right: 50%; bottom: -10px; top: unset; transform: translateX(50%); }
+  .step { gap: 12px; }
+  .step-num { width: 28px; height: 28px; font-size: 11px; }
+  .follow-grid { grid-template-columns: 1fr 1fr; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .reactions { flex-wrap: wrap; gap: 8px; }
+  .share-row { gap: 8px; }
+  .code-body { padding: 14px 12px; }
+  .subscribe-card { padding: 28px 18px; }
+  .sub-form { flex-direction: column; }
+  .sub-input, .sub-btn { width: 100%; }
+  .outro-card { padding: 28px 18px; }
+  .btn-primary, .btn-secondary { width: 100%; max-width: 280px; justify-content: center; }
+}
+@media (max-width: 480px) {
+  .navbar { padding: 0 12px; }
+  .container { padding: 0 12px; }
+  .hero-inner { padding: 0 16px; }
+  .drawer { width: 280px; }
+  .hero-cta { flex-direction: column; align-items: center; }
+  .follow-grid { grid-template-columns: 1fr; }
+  .comment-form { padding: 16px; }
+  .table-wrap { font-size: 0.75rem; }
+  thead th { font-size: 0.75rem; padding: 8px 10px; }
+  tbody td { padding: 8px 10px; font-size: 0.75rem; }
+}
+
+.ai-share-section { background: var(--obs-700); border: 1px solid var(--border-pu); border-radius: 14px; padding: 28px; margin: 28px 0; }
+.ai-share-title { font-family:'Syne',sans-serif; font-size:1rem; font-weight:700; color:#ffffff; margin-bottom:8px; }
+.ai-share-desc { font-size:0.9rem; color:#ffffff; margin-bottom:16px; text-align:justify; }
+.ai-share-input-row { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; }
+.ai-share-select { flex:1; min-width:140px; background:var(--obs-800); border:1px solid var(--border); border-radius:8px; color:#ffffff; font-family:'Syne',sans-serif; font-size:0.8rem; padding:10px 14px; outline:none; cursor:pointer; }
+.ai-share-select:focus { border-color:var(--blue-bright); }
+.ai-share-gen-btn { background:linear-gradient(135deg,var(--blue-mid),var(--purple-dark)); color:#ffffff; border:none; padding:10px 22px; border-radius:8px; font-family:'Syne',sans-serif; font-size:0.8rem; font-weight:600; cursor:pointer; transition:all 0.2s; white-space:nowrap; }
+.ai-share-gen-btn:hover { opacity:0.85; transform:translateY(-1px); }
+.ai-share-output { background:var(--obs-800); border:1px solid var(--border); border-radius:8px; padding:16px; min-height:70px; font-size:0.9rem; color:#ffffff; line-height:1.7; white-space:pre-wrap; word-break:break-word; margin-bottom:12px; display:none; text-align:justify; }
+.ai-share-output.visible { display:block; }
+.ai-share-loading { display:none; align-items:center; gap:10px; color:#ffffff; font-size:0.8rem; margin-bottom:12px; }
+.ai-share-loading.visible { display:flex; }
+.ai-share-spinner { width:18px; height:18px; border:2px solid var(--border); border-top-color:var(--blue-bright); border-radius:50%; animation:spin 0.8s linear infinite; }
+@keyframes spin { to{transform:rotate(360deg)} }
+.ai-share-action-row { display:flex; gap:8px; flex-wrap:wrap; }
+.ai-share-action-btn { display:inline-flex; align-items:center; gap:6px; padding:8px 16px; border-radius:8px; font-family:'Syne',sans-serif; font-size:0.8rem; font-weight:600; border:1px solid var(--border); background:var(--obs-700); color:#ffffff; cursor:pointer; text-decoration:none; transition:all 0.2s; }
+.ai-share-action-btn:hover { transform:translateY(-1px); }
+.ai-share-action-btn.fb:hover { border-color:#1877f2; background:rgba(24,119,242,0.1); color:#6bb1ff; }
+.ai-share-action-btn.tw:hover { border-color:#1da1f2; background:rgba(29,161,242,0.1); color:#80ccff; }
+.ai-share-action-btn.li:hover { border-color:#0a66c2; background:rgba(10,102,194,0.1); color:#6baff5; }
+.ai-share-action-btn.cp:hover { border-color:var(--yellow); background:var(--yellow-dim); color:var(--yellow); }
+</style>
+</head>
+<body>
+<div id="progress-bar"></div>
+<nav class="navbar">
+  <a href="https://code-sense.pansensoyglenn.workers.dev" class="brand">
+    <span class="brand-valleys">VALLEYS</span>
+    <span class="brand-amp">&amp;</span>
+    <span class="brand-bytes">BYTES</span>
+  </a>
+  <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+<div class="drawer" id="drawer" role="navigation" aria-label="Site menu">
+  <div class="drawer-section">
+    <div class="drawer-section-label">Navigate</div>
+    <a class="drawer-btn" href="#intro"><span class="ico">📖</span>Introduction</a>
+    <a class="drawer-btn" href="#s1"><span class="ico">🗂️</span>Program Overview</a>
+    <a class="drawer-btn" href="#s2"><span class="ico">⚙️</span>Imports</a>
+    <a class="drawer-btn" href="#s3"><span class="ico">🏷️</span>Product Class</a>
+    <a class="drawer-btn" href="#s4"><span class="ico">🌱</span>PlantCare Mixin</a>
+    <a class="drawer-btn" href="#s5"><span class="ico">🍎</span>FruitTreeSeedling</a>
+    <a class="drawer-btn" href="#s6"><span class="ico">🥬</span>VegetableSeedling</a>
+    <a class="drawer-btn" href="#s7"><span class="ico">👤</span>Customer Class</a>
+    <a class="drawer-btn" href="#s8"><span class="ico">🏪</span>create_products()</a>
+    <a class="drawer-btn" href="#s9"><span class="ico">🛒</span>main() &amp; Cart</a>
+    <a class="drawer-btn" href="#s10"><span class="ico">💾</span>JSON Persistence</a>
+    <a class="drawer-btn" href="#s11"><span class="ico">🔐</span>__name__ Guard</a>
+    <a class="drawer-btn" href="#mro"><span class="ico">🔬</span>MRO Deep Dive</a>
+    <a class="drawer-btn" href="#bestpractices"><span class="ico">⚠️</span>Best Practices</a>
+    <a class="drawer-btn" href="#extend"><span class="ico">🧪</span>Challenges</a>
+    <a class="drawer-btn" href="#source"><span class="ico">💻</span>Full Source</a>
+    <a class="drawer-btn" href="#faq"><span class="ico">❓</span>FAQ</a>
+  </div>
+  <div class="drawer-section">
+    <div class="drawer-section-label">Community</div>
+    <a class="drawer-btn" href="#comments"><span class="ico">💬</span>Comments</a>
+    <a class="drawer-btn" href="#follow"><span class="ico">👥</span>Follow</a>
+    <a class="drawer-btn" href="#subscribe"><span class="ico">✉️</span>Subscribe</a>
+  </div>
+  <div class="drawer-section">
+    <div class="drawer-section-label">Site Pages</div>
+    <a class="drawer-btn" href="about-guide.html"><span class="ico">📄</span>About this Page</a>
+    <a class="drawer-btn" href="about-author.html"><span class="ico">🧑‍💻</span>About the Author</a>
+    <a class="drawer-btn" href="oop-contact.html"><span class="ico">📬</span>Contact</a>
+    <a class="drawer-btn" href="oop-privacy.html"><span class="ico">🔒</span>Privacy Policy</a>
+    <a class="drawer-btn" href="oop-terms.html"><span class="ico">📜</span>Terms of Service</a>
+    <a class="drawer-btn" href="oop-cookie.html"><span class="ico">🍪</span>Cookie Policy</a>
+  </div>
+</div>
+<div style="padding:78px 24px 0;position:relative;z-index:1;">
+  <div class="ad-banner">
+    <div class="ad-label">ADVERTISEMENT</div>
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4575646748966866" data-ad-slot="4226674403" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+</div>
+<section class="hero" id="top">
+  <div class="hero-particles" id="particles"></div>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-eyebrow">Python · Multiple Inheritance · OOP · Philippines</div>
+      <h3 class="hero-title">
+        <span class="hl-blue">Seedling</span><span class="hl-y">Sphere</span><span class="hl-pu">.py</span>
+      </h3>
+      <div class="hero-title-sub">Python OOP · Multiple Inheritance Guide</div>
+    </div>
+    <div class="hero-right">
+      <p class="hero-subtitle">
+        A complete walkthrough of multiple inheritance, mixin classes, MRO, polymorphism, and JSON persistence — explained step by step through a real Filipino seedling marketplace application. Every class, every method, every design decision explained.
+      </p>
+      <div class="hero-tags">
+        <span class="hero-tag">🧱 4 Classes + Mixin</span>
+        <span class="hero-tag">🔗 Multiple Inheritance</span>
+        <span class="hero-tag">🌱 40 Seedlings</span>
+        <span class="hero-tag">💾 JSON Receipt</span>
+        <span class="hero-tag">🔁 14 Sections</span>
+        <span class="hero-tag">🐍 Python 3</span>
+      </div>
+      <div class="hero-cta">
+        <a href="#intro" class="btn-primary">📖 Start Reading</a>
+        <a href="#source" class="btn-secondary">💻 View Source Code</a>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <span>SCROLL TO EXPLORE</span>
+    <span class="arrow">↓</span>
+  </div>
+</section>
+<nav class="toc-nav" id="toc">
+  <a class="toc-link" href="#intro">Intro</a>
+  <a class="toc-link" href="#s1">Overview</a>
+  <a class="toc-link" href="#s2">Imports</a>
+  <a class="toc-link" href="#s3">Product</a>
+  <a class="toc-link" href="#s4">PlantCare</a>
+  <a class="toc-link" href="#s5">FruitTree</a>
+  <a class="toc-link" href="#s6">Vegetable</a>
+  <a class="toc-link" href="#s7">Customer</a>
+  <a class="toc-link" href="#s8">Products</a>
+  <a class="toc-link" href="#s9">main()</a>
+  <a class="toc-link" href="#s10">JSON</a>
+  <a class="toc-link" href="#s11">Guard</a>
+  <a class="toc-link" href="#mro">MRO</a>
+  <a class="toc-link" href="#bestpractices">Best Practices</a>
+  <a class="toc-link" href="#extend">Challenges</a>
+  <a class="toc-link" href="#source">Code</a>
+  <a class="toc-link" href="#faq">FAQ</a>
+</nav>
+<div class="container">
+  <div class="section" id="intro">
+    <div class="sec-header">
+      <span class="sec-num">INTRODUCTION</span>
+      <h2 class="sec-title">What Is <span class="accent-blue">SeedlingSphere.py</span> and Why Does It Matter?</h2>
+    </div>
+    <p class="prose">
+      Imagine a digital nursery where Filipino farmers can browse fruit tree seedlings and vegetable seedlings, add them to a shopping cart, and receive a printed JSON receipt — all from the command line. That is exactly what <strong>SeedlingSphere.py</strong> simulates. But beyond its practical purpose as a marketplace simulator, the program is a carefully crafted demonstration of one of the most powerful and frequently misunderstood features in Python's object-oriented programming toolkit: <strong>multiple inheritance</strong>.
+    </p>
+    <p class="prose" style="margin-top:14px;">
+      In most beginner Python tutorials, classes inherit from a single parent. A <code>Dog</code> class inherits from <code>Animal</code>. A <code>Car</code> class inherits from <code>Vehicle</code>. This is clean and intuitive. But the real world is not always so simple. A seedling is simultaneously a <strong>product</strong> that can be bought and sold, <em>and</em> a <strong>living plant</strong> that has specific growth requirements and care instructions. Should we cram all of this into one bloated base class? Should we duplicate care attributes across every seedling type? Neither option is good. Multiple inheritance solves this elegantly by letting a single class inherit from two independent parents at once.
+    </p>
+    <p class="prose" style="margin-top:14px;">
+      In this program, <code>FruitTreeSeedling</code> and <code>VegetableSeedling</code> both inherit from <code>Product</code> — which defines what any sellable item looks like — and from <code>PlantCare</code> — a mixin class that contributes growth and care information. Neither parent knows about the other. Together, they form a complete seedling object that can be added to a cart, priced, displayed, and saved to a JSON file. This is the power of multiple inheritance in action.
+    </p>
+    <p class="prose" style="margin-top:14px;">
+      This guide walks through every line of the program in a logical, progressive order. It explains not just <em>what</em> the code does, but <em>why</em> each decision was made — from why explicit parent constructor calls are required, to how Python's Method Resolution Order (MRO) determines which method is called when two parents define the same name, to why the <code>hasattr</code> check in the cart summary is important for future extensibility.
+    </p>
+    <div class="callout callout-blue" style="margin-top:24px;">
+      <span class="callout-icon">🐍</span>
+      <div class="callout-text">
+        <strong>What you will learn from this guide:</strong> Multiple inheritance syntax and semantics, explicit parent constructor calls, designing mixin classes following the Single Responsibility Principle, polymorphism via <code>get_full_info()</code>, generator expressions with <code>next()</code> and default fallback, JSON serialization with <code>ensure_ascii=False</code>, input validation with <code>try/except ValueError</code>, and the <code>if __name__ == "__main__"</code> entry guard — all demonstrated in one cohesive, real-world program.
+      </div>
+    </div>
+    <div class="callout callout-warn" style="margin-top:16px;">
+      <span class="callout-icon">💡</span>
+      <div class="callout-text">
+        <strong>Who this guide is for:</strong> Python learners who are comfortable with basic classes and single inheritance, and are ready to take the next step into multiple inheritance and mixin design. No framework knowledge is required — only core Python 3 is used throughout.
+      </div>
+    </div>
+  </div>
+  <div class="ad-banner" style="margin-top:40px;padding:0;">
+    <div class="ad-label">ADVERTISEMENT</div>
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4575646748966866" data-ad-slot="4226674403" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+  <div class="divider"></div>
+  <div class="section" id="s1">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 01</span>
+      <h2 class="sec-title">Program <span class="accent-pu">Overview</span></h2>
+    </div>
+    <p class="prose">
+      SeedlingSphere is built around four key classes and one mixin. Before diving into individual sections, it helps enormously to see the full picture of how these classes relate to each other and how data flows through the program from startup to receipt generation.
+    </p>
+    <div class="card-grid" style="margin-top:20px;">
+      <div class="card"><div class="card-label">Class 1 — Product</div><div class="card-value">The base class for any sellable item. Stores <code>code</code>, <code>name</code>, and <code>price</code>. Provides <code>__str__</code> for formatted display. All sellable things in this program inherit from it.</div></div>
+      <div class="card pu"><div class="card-label">Class 2 — PlantCare (Mixin)</div><div class="card-value">Provides <code>growth_days</code>, <code>care_tip</code>, and <code>get_care_info()</code>. Not intended to stand alone. Designed to be mixed into seedling classes alongside <code>Product</code>.</div></div>
+      <div class="card"><div class="card-label">Class 3 — FruitTreeSeedling</div><div class="card-value">Inherits from both <code>Product</code> and <code>PlantCare</code>. Adds <code>fruit_type</code>. Implements <code>get_full_info()</code> with a fruit-tree label and emoji.</div></div>
+      <div class="card pu"><div class="card-label">Class 4 — VegetableSeedling</div><div class="card-value">Mirrors <code>FruitTreeSeedling</code> with <code>veg_type</code> instead. Demonstrates polymorphism — both classes implement the same interface, but with different output.</div></div>
+      <div class="card"><div class="card-label">Class 5 — Customer</div><div class="card-value">A simple data container for the buyer's name and phone number. Used to personalise the receipt and generate a unique JSON filename.</div></div>
+    </div>
+    <div class="flow" style="margin-top:24px;">
+      <div class="flow-item"><span class="flow-icon">🚀</span><span class="flow-lbl">Start</span><div class="flow-desc">main() → create_products() → 40 items loaded</div></div>
+      <div class="flow-item"><span class="flow-icon">👤</span><span class="flow-lbl">Register</span><div class="flow-desc">Customer enters name &amp; phone</div></div>
+      <div class="flow-item"><span class="flow-icon">🛒</span><span class="flow-lbl">Cart</span><div class="flow-desc">Select codes, input quantities</div></div>
+      <div class="flow-item"><span class="flow-icon">📊</span><span class="flow-lbl">Summary</span><div class="flow-desc">Polymorphic info display + totals</div></div>
+      <div class="flow-item"><span class="flow-icon">💾</span><span class="flow-lbl">JSON</span><div class="flow-desc">Receipt saved as order_phone.json</div></div>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="section" id="s2">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 02</span>
+      <h2 class="sec-title"><span class="accent-blue">import json, datetime</span> — The First Lines</h2>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><div class="tdk-r"></div><div class="tdk-y"></div><div class="tdk-g"></div><span class="code-lbl">SeedlingSphere — Lines 1–2</span><button class="copy-btn" onclick="copyCode(this)" aria-label="Copy code">Copy</button></div>
+      <div class="code-body"><pre><span class="kw">import</span> json
+<span class="kw">from</span> datetime <span class="kw">import</span> datetime</pre></div>
+    </div>
+    <p class="prose">Both modules are part of Python's standard library — no <code>pip install</code> is required. The <code>json</code> module handles reading and writing structured data as text files, which is the backbone of the receipt system. The <code>datetime</code> class from the <code>datetime</code> module provides the current date and time to timestamp each order. Using <code>from datetime import datetime</code> (rather than <code>import datetime</code>) means we can call <code>datetime.now()</code> directly without the redundant <code>datetime.datetime.now()</code> prefix.</p>
+    <div class="card-grid">
+      <div class="card"><div class="card-label">json module</div><div class="card-value">Used via <code>json.dump()</code> to write the order dictionary to a <code>.json</code> file. The <code>indent=2</code> argument formats the output with readable indentation, and <code>ensure_ascii=False</code> preserves the ₱ peso symbol rather than escaping it to a Unicode sequence.</div></div>
+      <div class="card pu"><div class="card-label">datetime class</div><div class="card-value">Called as <code>datetime.now().strftime("%Y-%m-%d %H:%M:%S")</code> to produce a clean, sortable timestamp string like <code>2026-03-14 10:45:22</code> that is embedded in the JSON receipt so every order is uniquely timestamped.</div></div>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="section" id="s3">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 03</span>
+      <h2 class="sec-title">The <span class="accent-pu">Product</span> Class — Base for All Items</h2>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><div class="tdk-r"></div><div class="tdk-y"></div><div class="tdk-g"></div><span class="code-lbl">class Product</span><button class="copy-btn" onclick="copyCode(this)" aria-label="Copy code">Copy</button></div>
+      <div class="code-body"><pre><span class="kw">class</span> <span class="cl">Product</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nm">self</span>, code: <span class="cl">int</span>, name: <span class="cl">str</span>, price: <span class="cl">float</span>):
+        <span class="nm">self</span>.code = code
+        <span class="nm">self</span>.name = name
+        <span class="nm">self</span>.price = price
+
+    <span class="kw">def</span> <span class="fn">__str__</span>(<span class="nm">self</span>):
+        <span class="kw">return</span> <span class="st">f"</span>{<span class="nm">self</span>.code:<span class="nm">02d</span>}<span class="st">: </span>{<span class="nm">self</span>.name}<span class="st"> - ₱</span>{<span class="nm">self</span>.price:<span class="nm">,.2f</span>}<span class="st">"</span></pre></div>
+    </div>
+    <p class="prose">The <code>Product</code> class is the root of the sellable-item hierarchy. It answers one fundamental question: what must every item for sale have in common? The answer in this system is three things — a unique numeric identifier (<code>code</code>), a display name (<code>name</code>), and a price in Philippine Pesos (<code>price</code>). These are defined once here and inherited by every child class automatically.</p>
+    <p class="prose" style="margin-top:14px;">The type annotations (<code>code: int</code>, <code>name: str</code>, <code>price: float</code>) are purely informational — Python does not enforce them at runtime — but they serve as built-in documentation that tells any reader exactly what types are expected. The <code>__str__</code> dunder method is called automatically whenever the object is passed to <code>print()</code> or used in an f-string. The format specifiers <code>02d</code> (zero-padded two-digit integer) and <code>,.2f</code> (comma-separated float with two decimal places) ensure the catalog output is consistently aligned and professional-looking regardless of the values.</p>
+    <div class="table-wrap" style="margin-top:20px;">
+      <table>
+        <thead><tr><th>Attribute</th><th>Type</th><th>Purpose</th><th>Example Value</th></tr></thead>
+        <tbody>
+          <tr><td>code</td><td>int</td><td>Unique 1–40 product identifier used by the cart lookup</td><td>1, 21</td></tr>
+          <tr><td>name</td><td>str</td><td>Human-readable display name printed in the catalog and receipt</td><td>"Mango Seedling"</td></tr>
+          <tr><td>price</td><td>float</td><td>Unit price in Philippine Pesos, multiplied by quantity for totals</td><td>150.0, 45.0</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="section" id="s4">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 04</span>
+      <h2 class="sec-title"><span class="accent-blue">PlantCare</span> — The Mixin Class</h2>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><div class="tdk-r"></div><div class="tdk-y"></div><div class="tdk-g"></div><span class="code-lbl">class PlantCare</span><button class="copy-btn" onclick="copyCode(this)" aria-label="Copy code">Copy</button></div>
+      <div class="code-body"><pre><span class="kw">class</span> <span class="cl">PlantCare</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nm">self</span>, growth_days: <span class="cl">int</span>, care_tip: <span class="cl">str</span>):
+        <span class="nm">self</span>.growth_days = growth_days
+        <span class="nm">self</span>.care_tip = care_tip
+
+    <span class="kw">def</span> <span class="fn">get_care_info</span>(<span class="nm">self</span>) -> <span class="cl">str</span>:
+        <span class="kw">return</span> <span class="st">f"🌱 Ready in </span>{<span class="nm">self</span>.growth_days}<span class="st"> days | Care: </span>{<span class="nm">self</span>.care_tip}<span class="st">"</span></pre></div>
+    </div>
+    <p class="prose">A <strong>mixin</strong> is a class that is designed not to be instantiated on its own, but to be inherited alongside another class to donate a specific set of attributes and behaviours. <code>PlantCare</code> is a textbook mixin — it has no business being a standalone object. A "PlantCare" by itself means nothing. But when combined with <code>Product</code> to form a seedling, it makes the seedling object richer without polluting the <code>Product</code> class with agriculture-specific data that non-plant products would never need.</p>
+    <p class="prose" style="margin-top:14px;">The <code>growth_days</code> attribute tells the buyer how many days it takes from planting before the seedling is mature. The <code>care_tip</code> is a brief plain-English instruction (e.g., "Full sun, water twice weekly"). The <code>get_care_info()</code> method formats these two attributes into a single emoji-prefixed string. This method is called inside <code>get_full_info()</code> in both seedling classes, demonstrating how a mixin's methods integrate naturally into the broader class through regular method calls.</p>
+    <div class="callout callout-pu" style="margin-top:16px;">
+      <span class="callout-icon">🧩</span>
+      <div class="callout-text"><strong>Single Responsibility Principle:</strong> By keeping care information in its own class, <code>PlantCare</code> has one job and does it well. If you later need to change how care info is formatted — say, adding a watering frequency field — you make that change in one place. Every seedling class inheriting from <code>PlantCare</code> benefits immediately without any other modifications.</div>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="section" id="s5">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 05</span>
+      <h2 class="sec-title"><span class="accent-pu">FruitTreeSeedling</span> — Multiple Inheritance in Action</h2>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><div class="tdk-r"></div><div class="tdk-y"></div><div class="tdk-g"></div><span class="code-lbl">class FruitTreeSeedling(Product, PlantCare)</span><button class="copy-btn" onclick="copyCode(this)" aria-label="Copy code">Copy</button></div>
+      <div class="code-body"><pre><span class="kw">class</span> <span class="cl">FruitTreeSeedling</span>(<span class="cl">Product</span>, <span class="cl">PlantCare</span>):
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nm">self</span>, code: <span class="cl">int</span>, name: <span class="cl">str</span>, price: <span class="cl">float</span>,
+                 growth_days: <span class="cl">int</span>, care_tip: <span class="cl">str</span>, fruit_type: <span class="cl">str</span>):
+        <span class="cl">Product</span>.<span class="fn">__init__</span>(<span class="nm">self</span>, code, name, price)
+        <span class="cl">PlantCare</span>.<span class="fn">__init__</span>(<span class="nm">self</span>, growth_days, care_tip)
+        <span class="nm">self</span>.fruit_type = fruit_type
+
+    <span class="kw">def</span> <span class="fn">__str__</span>(<span class="nm">self</span>):
+        <span class="kw">return</span> <span class="st">f"</span>{<span class="nm">self</span>.code:<span class="nm">02d</span>}<span class="st">: </span>{<span class="nm">self</span>.name}<span class="st"> (</span>{<span class="nm">self</span>.fruit_type}<span class="st"> Tree) - ₱</span>{<span class="nm">self</span>.price:<span class="nm">,.2f</span>}<span class="st">"</span>
+
+    <span class="kw">def</span> <span class="fn">get_full_info</span>(<span class="nm">self</span>) -> <span class="cl">str</span>:
+        <span class="kw">return</span> <span class="st">f"🍎 FRUIT TREE: </span>{<span class="nm">self</span>.fruit_type}<span class="st"> | "</span> + <span class="nm">self</span>.<span class="fn">get_care_info</span>()</pre></div>
+    </div>
+    <p class="prose">The class declaration <code>FruitTreeSeedling(Product, PlantCare)</code> is the syntax for multiple inheritance. The parentheses hold a comma-separated list of parent classes. The order matters — it determines the Method Resolution Order, which is explained in depth in the MRO section below.</p>
+    <p class="prose" style="margin-top:14px;">The most critical lines in this constructor are the two explicit parent calls: <code>Product.__init__(self, code, name, price)</code> and <code>PlantCare.__init__(self, growth_days, care_tip)</code>. Because <code>FruitTreeSeedling</code> overrides <code>__init__</code>, Python will not automatically run the parent constructors. Without these explicit calls, none of the parent attributes would be set on the object. You would get an <code>AttributeError</code> the moment you tried to access <code>self.code</code> or <code>self.growth_days</code>. Always call parent constructors explicitly in multiple-inheritance scenarios where each parent has its own unique constructor parameters.</p>
+    <p class="prose" style="margin-top:14px;">After both parents are initialised, the constructor adds its own unique attribute <code>fruit_type</code> (e.g., "Mango", "Avocado"). The <code>__str__</code> override includes this in the display string. The <code>get_full_info()</code> method combines a fruit-tree-specific label with the formatted care string from <code>PlantCare.get_care_info()</code> — a direct demonstration of how a child class calls an inherited mixin method.</p>
+    <div class="subsec">
+      <div class="subsec-title">Why not use super() here?</div>
+      <p class="prose">In single inheritance, <code>super().__init__()</code> cleanly delegates to the one parent. In multiple inheritance where the two parents have different, non-overlapping constructor parameters, explicit calls (<code>Product.__init__(...)</code> and <code>PlantCare.__init__(...)</code>) are clearer and safer. Using <code>super()</code> in multiple inheritance requires all classes in the chain to be designed with <code>super()</code> in mind and to accept compatible <code>**kwargs</code> signatures — a pattern called "cooperative multiple inheritance" that is powerful but adds complexity beyond the scope of this beginner demonstration.</p>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="section" id="s6">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 06</span>
+      <h2 class="sec-title"><span class="accent-blue">VegetableSeedling</span> — Polymorphism Through Parallel Design</h2>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><div class="tdk-r"></div><div class="tdk-y"></div><div class="tdk-g"></div><span class="code-lbl">class VegetableSeedling(Product, PlantCare)</span><button class="copy-btn" onclick="copyCode(this)" aria-label="Copy code">Copy</button></div>
+      <div class="code-body"><pre><span class="kw">class</span> <span class="cl">VegetableSeedling</span>(<span class="cl">Product</span>, <span class="cl">PlantCare</span>):
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nm">self</span>, code: <span class="cl">int</span>, name: <span class="cl">str</span>, price: <span class="cl">float</span>,
+                 growth_days: <span class="cl">int</span>, care_tip: <span class="cl">str</span>, veg_type: <span class="cl">str</span>):
+        <span class="cl">Product</span>.<span class="fn">__init__</span>(<span class="nm">self</span>, code, name, price)
+        <span class="cl">PlantCare</span>.<span class="fn">__init__</span>(<span class="nm">self</span>, growth_days, care_tip)
+        <span class="nm">self</span>.veg_type = veg_type
+
+    <span class="kw">def</span> <span class="fn">__str__</span>(<span class="nm">self</span>):
+        <span class="kw">return</span> <span class="st">f"</span>{<span class="nm">self</span>.code:<span class="nm">02d</span>}<span class="st">: </span>{<span class="nm">self</span>.name}<span class="st"> (</span>{<span class="nm">self</span>.veg_type}<span class="st">) - ₱</span>{<span class="nm">self</span>.price:<span class="nm">,.2f</span>}<span class="st">"</span>
+
+    <span class="kw">def</span> <span class="fn">get_full_info</span>(<span class="nm">self</span>) -> <span class="cl">str</span>:
+        <span class="kw">return</span> <span class="st">f"🥬 VEGETABLE: </span>{<span class="nm">self</span>.veg_type}<span class="st"> | "</span> + <span class="nm">self</span>.<span class="fn">get_care_info</span>()</pre></div>
+    </div>
+    <p class="prose">The structure of <code>VegetableSeedling</code> is intentionally parallel to <code>FruitTreeSeedling</code>. This parallelism is not accidental — it is the design pattern that enables <strong>polymorphism</strong>. When the cart summary loop calls <code>prod.get_full_info()</code>, it does not check whether <code>prod</code> is a fruit tree or a vegetable. It simply calls the method. Python's runtime dispatches to the correct class automatically: if the object is a <code>FruitTreeSeedling</code>, the fruit-tree version runs; if it is a <code>VegetableSeedling</code>, the vegetable version runs.</p>
+    <p class="prose" style="margin-top:14px;">The key difference is <code>veg_type</code> instead of <code>fruit_type</code>, and the different emoji and label in <code>get_full_info()</code> (🥬 VEGETABLE vs 🍎 FRUIT TREE). Everything else — the parent classes, the constructor call pattern, the <code>get_care_info()</code> delegation — is identical. This is DRY in practice: shared behaviour lives in the parents; only what is unique to each class lives in the class itself.</p>
+  </div>
+  <div class="divider"></div>
+  <div class="section" id="s7">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 07</span>
+      <h2 class="sec-title">The <span class="accent-pu">Customer</span> Class — Simple Data Container</h2>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><div class="tdk-r"></div><div class="tdk-y"></div><div class="tdk-g"></div><span class="code-lbl">class Customer</span><button class="copy-btn" onclick="copyCode(this)" aria-label="Copy code">Copy</button></div>
+      <div class="code-body"><pre><span class="kw">class</span> <span class="cl">Customer</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nm">self</span>, name: <span class="cl">str</span>, phone: <span class="cl">str</span>):
+        <span class="nm">self</span>.name = name.<span class="fn">strip</span>()
+        <span class="nm">self</span>.phone = phone.<span class="fn">strip</span>()
+
+    <span class="kw">def</span> <span class="fn">__str__</span>(<span class="nm">self</span>):
+        <span class="kw">return</span> <span class="st">f"Customer: </span>{<span class="nm">self</span>.name}<span class="st"> | Phone: </span>{<span class="nm">self</span>.phone}<span class="st">"</span></pre></div>
+    </div>
+    <p class="prose">The <code>Customer</code> class is simple by design — it is a value object whose sole purpose is to bundle a buyer's name and phone number together for use in the receipt. The <code>.strip()</code> calls on both attributes silently remove any leading or trailing whitespace that might have crept in from the user's <code>input()</code> entry. This is a small but important validation step — without it, a phone number typed as <code>" +639123456789 "</code> (with spaces) would produce a JSON filename with spaces in it, which is problematic on some operating systems. The <code>__str__</code> method produces a clean, human-readable summary line that is printed directly on the receipt.</p>
+  </div>
+  <div class="divider"></div>
+  <div class="section" id="s8">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 08</span>
+      <h2 class="sec-title"><span class="accent-blue">create_products()</span> — Building the 40-Item Catalog</h2>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><div class="tdk-r"></div><div class="tdk-y"></div><div class="tdk-g"></div><span class="code-lbl">create_products()</span><button class="copy-btn" onclick="copyCode(this)" aria-label="Copy code">Copy</button></div>
+      <div class="code-body"><pre><span class="kw">def</span> <span class="fn">create_products</span>():
+    products = []
+    fruit_data = [
+        (<span class="nm">1</span>,  <span class="st">"Mango Seedling"</span>,       <span class="nm">150</span>, <span class="nm">180</span>, <span class="st">"Full sun, water twice weekly"</span>,       <span class="st">"Mango"</span>),
+        (<span class="nm">2</span>,  <span class="st">"Avocado Seedling"</span>,     <span class="nm">200</span>, <span class="nm">365</span>, <span class="st">"Partial shade, well-drained soil"</span>,    <span class="st">"Avocado"</span>),
+        (<span class="nm">3</span>,  <span class="st">"Banana Seedling"</span>,      <span class="nm">120</span>, <span class="nm">270</span>, <span class="st">"High moisture, full sun"</span>,             <span class="st">"Banana"</span>),
+    ]
+    <span class="kw">for</span> data <span class="kw">in</span> fruit_data:
+        products.<span class="fn">append</span>(<span class="cl">FruitTreeSeedling</span>(*data))
+
+    veg_data = [
+        (<span class="nm">21</span>, <span class="st">"Tomato Seedling"</span>,      <span class="nm">45</span>,  <span class="nm">60</span>,  <span class="st">"Full sun, stake when 30cm tall"</span>,      <span class="st">"Tomato"</span>),
+        (<span class="nm">22</span>, <span class="st">"Ampalaya Seedling"</span>,    <span class="nm">35</span>,  <span class="nm">55</span>,  <span class="st">"Trellis required, full sun"</span>,          <span class="st">"Bitter Gourd"</span>),
+        (<span class="nm">23</span>, <span class="st">"Eggplant Seedling"</span>,    <span class="nm">40</span>,  <span class="nm">70</span>,  <span class="st">"Full sun, moderate watering"</span>,        <span class="st">"Eggplant"</span>),
+    ]
+    <span class="kw">for</span> data <span class="kw">in</span> veg_data:
+        products.<span class="fn">append</span>(<span class="cl">VegetableSeedling</span>(*data))
+    <span class="kw">return</span> products</pre></div>
+    </div>
+    <p class="prose">This function is the data layer of the program. It defines the full product catalog as two lists of plain Python tuples — one for fruits (codes 1–20) and one for vegetables (codes 21–40) — and then converts each tuple into the corresponding object by iterating over the lists. The <code>*data</code> syntax unpacks the tuple, passing each element as a separate positional argument to the constructor. This is equivalent to calling <code>FruitTreeSeedling(1, "Mango Seedling", 150, 180, "Full sun, water twice weekly", "Mango")</code> but much more compact.</p>
+    <p class="prose" style="margin-top:14px;">The decision to keep the product data as tuples rather than hard-coding 40 individual object instantiations is a DRY principle in practice — the construction logic is written once in the loop, and adding a new product is as simple as adding one tuple to the list. In a production system, this function could be replaced by a JSON or database loader without changing a single line elsewhere in the program.</p>
+    <div class="callout callout-blue" style="margin-top:16px;">
+      <span class="callout-icon">📦</span>
+      <div class="callout-text"><strong>Tuple unpacking with *:</strong> The <code>*data</code> operator in <code>FruitTreeSeedling(*data)</code> "splats" the tuple into individual arguments. It works because the tuple has exactly six elements in the same order as the constructor parameters. If the tuple had one extra or one fewer element, Python would raise a <code>TypeError</code> — which also makes it a useful implicit validation that your data matches the expected schema.</div>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="section" id="s9">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 09</span>
+      <h2 class="sec-title">The <span class="accent-pu">main()</span> Function — Putting It All Together</h2>
+    </div>
+    <p class="prose"><code>main()</code> is the orchestrator. It does not contain any class definitions or complex algorithms — its job is to wire together the objects and functions defined above into a complete user experience: register a customer, display the catalog, manage the cart, display the order summary, and save the receipt.</p>
+    <div class="subsec">
+      <div class="subsec-title">Customer Registration</div>
+      <div class="code-block">
+        <div class="code-body"><pre>name = <span class="fn">input</span>(<span class="st">"Enter your Full Name: "</span>).<span class="fn">strip</span>()
+phone = <span class="fn">input</span>(<span class="st">"Enter your Phone Number (+63): "</span>).<span class="fn">strip</span>()
+customer = <span class="cl">Customer</span>(name, phone)
+<span class="fn">print</span>(<span class="st">f"\n✅ Registration successful! Welcome, </span>{customer.name}<span class="st">!\n"</span>)</pre></div>
+      </div>
+      <p class="prose">The <code>.strip()</code> calls here (before passing to the <code>Customer</code> constructor) provide a first layer of whitespace cleanup. The <code>Customer</code> class also strips inside its constructor, which is redundant but safe — defensive programming that prevents surprises if <code>Customer</code> is ever instantiated elsewhere without prior stripping.</p>
+    </div>
+    <div class="subsec">
+      <div class="subsec-title">Cart Loop with Generator Lookup</div>
+      <div class="code-block">
+        <div class="code-body"><pre>cart = {}
+<span class="kw">while True</span>:
+    <span class="kw">try</span>:
+        code = <span class="fn">int</span>(<span class="fn">input</span>(<span class="st">"\nEnter product code (0 to checkout): "</span>))
+        <span class="kw">if</span> code == <span class="nm">0</span>: <span class="kw">break</span>
+        product = <span class="fn">next</span>((p <span class="kw">for</span> p <span class="kw">in</span> products <span class="kw">if</span> p.code == code), <span class="kw">None</span>)
+        <span class="kw">if not</span> product:
+            <span class="fn">print</span>(<span class="st">"❌ Invalid code! Try again."</span>); <span class="kw">continue</span>
+        qty = <span class="fn">int</span>(<span class="fn">input</span>(<span class="st">f"Quantity for </span>{product.name}<span class="st">: "</span>))
+        <span class="kw">if</span> qty &lt; <span class="nm">1</span>:
+            <span class="fn">print</span>(<span class="st">"❌ Quantity must be at least 1."</span>); <span class="kw">continue</span>
+        <span class="kw">if</span> code <span class="kw">in</span> cart:
+            cart[code] = (product, cart[code][<span class="nm">1</span>] + qty)
+        <span class="kw">else</span>:
+            cart[code] = (product, qty)
+        <span class="fn">print</span>(<span class="st">f"✅ Added </span>{qty}<span class="st">x </span>{product.name}<span class="st"> to cart!"</span>)
+    <span class="kw">except</span> <span class="cl">ValueError</span>:
+        <span class="fn">print</span>(<span class="st">"❌ Please enter a valid number."</span>)</pre></div>
+      </div>
+      <p class="prose">The <code>cart</code> dictionary maps product codes (integers) to <code>(product_object, quantity)</code> tuples. Using the product code as the key ensures that if the user adds the same product twice, the quantities are summed rather than creating a duplicate entry — see the <code>if code in cart</code> branch. The <code>next()</code> generator expression is a clean, one-line product lookup: it creates a lazy generator that scans the products list and returns the first item whose <code>code</code> matches, or <code>None</code> if nothing is found. The <code>try/except ValueError</code> wraps the entire input block so that if the user types a non-numeric value for either the code or quantity, the program prints a friendly error and continues the loop rather than crashing.</p>
+    </div>
+    <div class="subsec">
+      <div class="subsec-title">Polymorphic Order Summary</div>
+      <div class="code-block">
+        <div class="code-body"><pre><span class="kw">for</span> prod, qty <span class="kw">in</span> cart.values():
+    item_total = prod.price * qty
+    subtotal += item_total
+    <span class="fn">print</span>(<span class="st">f"</span>{qty}<span class="st">x </span>{prod.name}<span class="st"> @ ₱</span>{prod.price:<span class="nm">,.2f</span>}<span class="st"> = ₱</span>{item_total:<span class="nm">,.2f</span>}<span class="st">"</span>)
+    <span class="fn">print</span>(<span class="st">f"   └─ </span>{prod.<span class="fn">get_full_info</span>() <span class="kw">if</span> <span class="fn">hasattr</span>(prod, <span class="st">'get_full_info'</span>) <span class="kw">else</span> <span class="st">''</span>}<span class="st">"</span>)</pre></div>
+      </div>
+      <p class="prose">The <code>hasattr(prod, 'get_full_info')</code> check is a future-proofing technique. Currently, all products in the catalog are seedlings, so all have <code>get_full_info()</code>. But if you later add a non-plant product (e.g., a <code>GardeningTool</code> class that inherits only from <code>Product</code> without <code>PlantCare</code>), this check prevents a crash. The loop itself is the clearest demonstration of polymorphism in the entire program — the same <code>prod.get_full_info()</code> call produces different output depending on whether <code>prod</code> is a <code>FruitTreeSeedling</code> or a <code>VegetableSeedling</code>, with no explicit type-checking required.</p>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="section" id="s10">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 10</span>
+      <h2 class="sec-title">Saving the Order as <span class="accent-blue">JSON</span></h2>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><div class="tdk-r"></div><div class="tdk-y"></div><div class="tdk-g"></div><span class="code-lbl">JSON receipt generation</span><button class="copy-btn" onclick="copyCode(this)" aria-label="Copy code">Copy</button></div>
+      <div class="code-body"><pre>order_data = {
+    <span class="st">"timestamp"</span>: datetime.<span class="fn">now</span>().<span class="fn">strftime</span>(<span class="st">"%Y-%m-%d %H:%M:%S"</span>),
+    <span class="st">"customer"</span>: {<span class="st">"name"</span>: customer.name, <span class="st">"phone"</span>: customer.phone},
+    <span class="st">"items"</span>: [
+        {
+            <span class="st">"code"</span>:     prod.code,
+            <span class="st">"name"</span>:     prod.name,
+            <span class="st">"qty"</span>:      qty,
+            <span class="st">"price"</span>:    prod.price,
+            <span class="st">"subtotal"</span>: prod.price * qty,
+            <span class="st">"type"</span>: <span class="st">"Fruit Tree"</span> <span class="kw">if</span> <span class="fn">isinstance</span>(prod, <span class="cl">FruitTreeSeedling</span>) <span class="kw">else</span> <span class="st">"Vegetable"</span>
+        }
+        <span class="kw">for</span> prod, qty <span class="kw">in</span> cart.values()
+    ],
+    <span class="st">"subtotal"</span>: subtotal,
+    <span class="st">"shipping"</span>: shipping,
+    <span class="st">"total"</span>:    total
+}
+filename = <span class="st">f"order_</span>{customer.phone.<span class="fn">replace</span>(<span class="st">'+'</span>, <span class="st">''</span>)}<span class="st">.json"</span>
+<span class="kw">with</span> <span class="fn">open</span>(filename, <span class="st">"w"</span>, encoding=<span class="st">"utf-8"</span>) <span class="kw">as</span> f:
+    json.<span class="fn">dump</span>(order_data, f, indent=<span class="nm">2</span>, ensure_ascii=<span class="cl">False</span>)</pre></div>
+    </div>
+    <p class="prose">The <code>order_data</code> dictionary is a plain Python structure — strings, numbers, lists, and nested dicts — that maps exactly to the JSON format. The items list is built using a list comprehension, which is both compact and readable. The <code>isinstance(prod, FruitTreeSeedling)</code> check adds a human-readable <code>"type"</code> field to each item in the JSON, making the receipt file self-documenting.</p>
+    <p class="prose" style="margin-top:14px;">The filename is derived from the customer's phone number with the <code>+</code> prefix stripped (phone numbers from the Philippines start with <code>+63</code>, and <code>+</code> is not valid in most filenames). The <code>with open(...) as f:</code> context manager ensures the file is properly closed even if an exception occurs during writing. The <code>encoding="utf-8"</code> argument and <code>ensure_ascii=False</code> work together: UTF-8 encoding supports the full Unicode character set including ₱, and <code>ensure_ascii=False</code> tells <code>json.dump</code> to write those characters as-is rather than as <code>\u20b1</code> escape sequences.</p>
+  </div>
+  <div class="divider"></div>
+  <div class="section" id="s11">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 11</span>
+      <h2 class="sec-title"><span class="accent-pu">if __name__ == '__main__'</span> — The Entry Guard</h2>
+    </div>
+    <div class="code-block">
+      <div class="code-body"><pre><span class="kw">if</span> __name__ == <span class="st">"__main__"</span>:
+    <span class="fn">main</span>()</pre></div>
+    </div>
+    <p class="prose">Every Python file has a built-in variable called <code>__name__</code>. When the file is run directly (e.g., <code>python seedlings.py</code>), Python sets <code>__name__</code> to the string <code>"__main__"</code>. When the file is imported as a module by another script (e.g., <code>import seedlings</code>), Python sets <code>__name__</code> to the filename without the extension (i.e., <code>"seedlings"</code>).</p>
+    <p class="prose" style="margin-top:14px;">This two-line guard at the bottom of the file ensures that <code>main()</code> — with all its interactive <code>input()</code> calls and print statements — only runs when you explicitly execute the script. If another developer wants to import and reuse the <code>Product</code>, <code>FruitTreeSeedling</code>, or <code>Customer</code> classes in their own project, they can do so without accidentally triggering the entire marketplace interaction. This is considered best practice in any Python program that is both runnable and importable.</p>
+  </div>
+  <div class="divider"></div>
+  <div class="section" id="mro">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 12</span>
+      <h2 class="sec-title">Python's <span class="accent-blue">MRO</span> — Method Resolution Order Deep Dive</h2>
+    </div>
+    <p class="prose">When Python encounters a method call on an object that uses multiple inheritance, it must decide which class to look in first. This decision is governed by the <strong>Method Resolution Order</strong> — a deterministic algorithm called C3 linearization. Understanding it is essential for writing correct multiple-inheritance code and for debugging subtle bugs that can arise when two parent classes define the same method name.</p>
+    <div class="subsec">
+      <div class="subsec-title">The MRO for FruitTreeSeedling</div>
+      <div class="code-block">
+        <div class="code-body"><pre><span class="fn">print</span>(<span class="cl">FruitTreeSeedling</span>.__mro__)</pre></div>
+      </div>
+      <p class="prose">The MRO is a tuple of classes in the exact order Python will search when looking up any attribute or method on a <code>FruitTreeSeedling</code> instance. When you call <code>fruit.get_care_info()</code>, Python looks first in <code>FruitTreeSeedling</code> (not found), then in <code>Product</code> (not found), then in <code>PlantCare</code> (found — this version runs). If <code>PlantCare</code> had not defined it, Python would continue to <code>object</code> — the ultimate base class all Python classes inherit from.</p>
+    </div>
+    <div class="subsec">
+      <div class="subsec-title">What if Both Parents Define the Same Method?</div>
+      <p class="prose">Suppose both <code>Product</code> and <code>PlantCare</code> defined a method called <code>describe()</code>. Which one would run when you call <code>fruit.describe()</code>? According to the MRO above, Python checks <code>FruitTreeSeedling</code> first, then <code>Product</code>. Since <code>Product</code> comes before <code>PlantCare</code> in the MRO, <code>Product.describe()</code> would run. You can override this by defining <code>describe()</code> inside <code>FruitTreeSeedling</code> itself, or by explicitly calling <code>PlantCare.describe(self)</code>.</p>
+      <div class="code-block">
+        <div class="code-body"><pre>fruit = <span class="cl">FruitTreeSeedling</span>(...)
+fruit.<span class="fn">describe</span>()
+<span class="cl">PlantCare</span>.<span class="fn">describe</span>(fruit)</pre></div>
+      </div>
+    </div>
+    <div class="subsec">
+      <div class="subsec-title">Why the Order in (Product, PlantCare) Matters</div>
+      <p class="prose">The order of base classes in the class definition determines the MRO. <code>FruitTreeSeedling(Product, PlantCare)</code> places <code>Product</code> before <code>PlantCare</code>. This means if a name is defined in both parents, <code>Product</code>'s version wins. Had we written <code>FruitTreeSeedling(PlantCare, Product)</code>, <code>PlantCare</code>'s version would win. In SeedlingSphere, the two parents have no method names in common (except those inherited from <code>object</code>), so the order does not affect runtime behaviour — but it is still good practice to put the "primary" parent first.</p>
+    </div>
+    <div class="callout callout-warn" style="margin-top:16px;">
+      <span class="callout-icon">⚠️</span>
+      <div class="callout-text"><strong>The Diamond Problem:</strong> If class D inherits from B and C, and both B and C inherit from A, you have a diamond. Python's C3 MRO resolves this without ambiguity, but it requires careful design. In SeedlingSphere, this situation does not arise because <code>Product</code> and <code>PlantCare</code> are independent and both inherit from <code>object</code> directly. This is the safest and most common multiple-inheritance pattern.</div>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="section" id="bestpractices">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 13</span>
+      <h2 class="sec-title">Common <span class="accent-pu">Mistakes</span> &amp; Best Practices</h2>
+    </div>
+    <p class="prose">Learning multiple inheritance is as much about understanding what <em>not</em> to do as it is about knowing the correct syntax. The following patterns cover the most common pitfalls beginners encounter when applying the techniques demonstrated in SeedlingSphere.</p>
+    <div class="steps" style="margin-top:20px;">
+      <div class="step">
+        <div class="step-num">✗</div>
+        <div>
+          <div class="step-head">Forgetting to call both parent constructors</div>
+          <p class="step-body">When you override <code>__init__</code> in a multiple-inheritance child class, you must explicitly call each parent constructor that has attributes you need. If you omit <code>PlantCare.__init__(self, growth_days, care_tip)</code>, then <code>self.growth_days</code> and <code>self.care_tip</code> will never exist on the object. Accessing them later will raise an <code>AttributeError</code> that can be confusing to debug because the attribute appears to exist in the class definition. Always call all parent constructors before setting the child's own attributes.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">✗</div>
+        <div>
+          <div class="step-head">Using a mixin as a standalone class</div>
+          <p class="step-body"><code>PlantCare</code> is designed to be mixed in, not instantiated alone. Calling <code>PlantCare(90, "Water daily")</code> technically works in Python, but the resulting object has no name, code, or price — it is meaningless in the context of the marketplace. Mixins should be treated as incomplete classes. A common convention is to name them with a "Mixin" suffix (e.g., <code>PlantCareMixin</code>) to signal their intent. You can also add a check in the mixin's <code>__init__</code> that raises a <code>TypeError</code> if called on a plain <code>PlantCare</code> instance, though SeedlingSphere keeps this simple for clarity.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">✗</div>
+        <div>
+          <div class="step-head">Ignoring the second argument to next()</div>
+          <p class="step-body">The generator expression <code>next((p for p in products if p.code == code), None)</code> uses <code>None</code> as a default. If you write <code>next((p for p in products if p.code == code))</code> without a default, and the user types a code that does not exist, Python raises a <code>StopIteration</code> exception — which would crash the program. Always provide a default (usually <code>None</code>) and check for it immediately after, as the code does with <code>if not product: continue</code>.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">✓</div>
+        <div>
+          <div class="step-head">Use isinstance() for type-specific logic in shared loops</div>
+          <p class="step-body">In the JSON generation step, <code>isinstance(prod, FruitTreeSeedling)</code> correctly identifies the product type without breaking polymorphism elsewhere. Use <code>isinstance()</code> when you genuinely need type-specific logic (like labelling the JSON type field). Do <em>not</em> use it to call type-specific methods in the summary loop — that is what polymorphism is for. Reserve <code>isinstance()</code> for places where the type distinction has a meaningful, non-polymorphic purpose.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">✓</div>
+        <div>
+          <div class="step-head">Wrap input-parsing in try/except ValueError</div>
+          <p class="step-body">Any time you call <code>int(input(...))</code> or <code>float(input(...))</code>, you risk a <code>ValueError</code> if the user types letters or symbols. SeedlingSphere wraps the entire cart input block in a single <code>try/except ValueError</code> that covers both the code and quantity inputs. This is cleaner than two separate try/except blocks and ensures the loop continues gracefully regardless of which input caused the error.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">✓</div>
+        <div>
+          <div class="step-head">Keep each class focused on one concern</div>
+          <p class="step-body"><code>Product</code> knows about pricing. <code>PlantCare</code> knows about growth. <code>Customer</code> knows about the buyer. <code>main()</code> orchestrates them. None of these classes knows about the others' internals. This clean separation — often called the Single Responsibility Principle — makes each class easy to test, easy to change, and easy to reuse in other projects. When you are tempted to add a JSON-writing method inside <code>Customer</code> or a cart management method inside <code>Product</code>, resist: put that logic in the function that already manages the relevant workflow.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="section" id="extend">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 14</span>
+      <h2 class="sec-title">Try It <span class="accent-blue">Yourself</span> — Extension Challenges</h2>
+    </div>
+    <p class="prose">The best way to solidify your understanding of multiple inheritance is to extend SeedlingSphere yourself. Each challenge below builds directly on a concept covered in this guide, from beginner additions to architecture-level redesigns.</p>
+    <div class="card-grid" style="margin-top:20px;">
+      <div class="card">
+        <div class="card-label">🟢 Beginner — Add HerbSeedling</div>
+        <div class="card-value">Create a <code>HerbSeedling</code> class that inherits from <code>Product</code> and <code>PlantCare</code>. Add a <code>herb_type</code> attribute (e.g., "Basil", "Pandan"). Override <code>__str__</code> and implement <code>get_full_info()</code> with a 🌿 herb emoji. Add 10 herb entries to <code>create_products()</code> with codes 41–50. The cart and JSON system should handle them automatically — no other changes needed.</div>
+      </div>
+      <div class="card pu">
+        <div class="card-label">🟢 Beginner — Add a stock system</div>
+        <div class="card-value">Add a <code>stock</code> attribute to <code>Product.__init__</code>. In <code>main()</code>, validate that the requested quantity does not exceed available stock before adding to the cart. If it does, print a warning and prompt the user to enter a smaller quantity. Deduct from stock when an item is successfully added to the cart.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">🟡 Intermediate — Discount mixin</div>
+        <div class="card-value">Create a <code>Discountable</code> mixin with a <code>discount_pct</code> attribute (default 0) and an <code>apply_discount(pct)</code> method that validates the value is between 0 and 100. Add a <code>discounted_price()</code> method. Modify <code>FruitTreeSeedling</code> to also inherit from <code>Discountable</code> — giving it three parents. Apply a 15% seasonal discount to all mango seedlings before the cart loop. Observe how the MRO changes with three parents.</div>
+      </div>
+      <div class="card pu">
+        <div class="card-label">🟡 Intermediate — Load from JSON</div>
+        <div class="card-value">Replace the hard-coded tuples in <code>create_products()</code> with a loader that reads from a <code>products.json</code> file. Write a factory function <code>create_item(data)</code> that reads a <code>"type"</code> field ("fruit" or "vegetable") and returns the correct object. Write a companion <code>save_products(products)</code> function that serializes the catalog back to the JSON file, preserving all attributes including care info.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">🔴 Advanced — Cart persistence</div>
+        <div class="card-value">Save the cart state to a <code>cart_&lt;phone&gt;.json</code> file after each item is added. On program start, check if a saved cart exists for the registered phone number. If it does, offer to restore it or start fresh. This requires serializing and deserializing product objects — you will need a factory function to reconstruct them from the JSON data.</div>
+      </div>
+      <div class="card pu">
+        <div class="card-label">⚫ Expert — CLI with argparse</div>
+        <div class="card-value">Refactor <code>main()</code> to support command-line arguments using the <code>argparse</code> module. Add flags like <code>--list</code> (display full catalog without entering the cart), <code>--search &lt;query&gt;</code> (filter products by name), and <code>--order &lt;json_file&gt;</code> (replay a saved JSON order). This transforms the interactive program into a scriptable tool.</div>
+      </div>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="section" id="source">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 15</span>
+      <h2 class="sec-title">Complete <span class="accent-blue">Source Code</span></h2>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><div class="tdk-r"></div><div class="tdk-y"></div><div class="tdk-g"></div><span class="code-lbl">SeedlingSphere.py — Full Source</span><button class="copy-btn" onclick="copyCode(this)" aria-label="Copy code">Copy</button></div>
+      <div class="code-body"><pre><span class="kw">import</span> json
+<span class="kw">from</span> datetime <span class="kw">import</span> datetime
+
+<span class="kw">class</span> <span class="cl">Product</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nm">self</span>, code: <span class="cl">int</span>, name: <span class="cl">str</span>, price: <span class="cl">float</span>):
+        <span class="nm">self</span>.code = code
+        <span class="nm">self</span>.name = name
+        <span class="nm">self</span>.price = price
+    <span class="kw">def</span> <span class="fn">__str__</span>(<span class="nm">self</span>):
+        <span class="kw">return</span> <span class="st">f"</span>{<span class="nm">self</span>.code:<span class="nm">02d</span>}<span class="st">: </span>{<span class="nm">self</span>.name}<span class="st"> - ₱</span>{<span class="nm">self</span>.price:<span class="nm">,.2f</span>}<span class="st">"</span>
+
+<span class="kw">class</span> <span class="cl">PlantCare</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nm">self</span>, growth_days: <span class="cl">int</span>, care_tip: <span class="cl">str</span>):
+        <span class="nm">self</span>.growth_days = growth_days
+        <span class="nm">self</span>.care_tip = care_tip
+    <span class="kw">def</span> <span class="fn">get_care_info</span>(<span class="nm">self</span>) -> <span class="cl">str</span>:
+        <span class="kw">return</span> <span class="st">f"🌱 Ready in </span>{<span class="nm">self</span>.growth_days}<span class="st"> days | Care: </span>{<span class="nm">self</span>.care_tip}<span class="st">"</span>
+
+<span class="kw">class</span> <span class="cl">FruitTreeSeedling</span>(<span class="cl">Product</span>, <span class="cl">PlantCare</span>):
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nm">self</span>, code, name, price, growth_days, care_tip, fruit_type):
+        <span class="cl">Product</span>.<span class="fn">__init__</span>(<span class="nm">self</span>, code, name, price)
+        <span class="cl">PlantCare</span>.<span class="fn">__init__</span>(<span class="nm">self</span>, growth_days, care_tip)
+        <span class="nm">self</span>.fruit_type = fruit_type
+    <span class="kw">def</span> <span class="fn">__str__</span>(<span class="nm">self</span>):
+        <span class="kw">return</span> <span class="st">f"</span>{<span class="nm">self</span>.code:<span class="nm">02d</span>}<span class="st">: </span>{<span class="nm">self</span>.name}<span class="st"> (</span>{<span class="nm">self</span>.fruit_type}<span class="st"> Tree) - ₱</span>{<span class="nm">self</span>.price:<span class="nm">,.2f</span>}<span class="st">"</span>
+    <span class="kw">def</span> <span class="fn">get_full_info</span>(<span class="nm">self</span>) -> <span class="cl">str</span>:
+        <span class="kw">return</span> <span class="st">f"🍎 FRUIT TREE: </span>{<span class="nm">self</span>.fruit_type}<span class="st"> | "</span> + <span class="nm">self</span>.<span class="fn">get_care_info</span>()
+
+<span class="kw">class</span> <span class="cl">VegetableSeedling</span>(<span class="cl">Product</span>, <span class="cl">PlantCare</span>):
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nm">self</span>, code, name, price, growth_days, care_tip, veg_type):
+        <span class="cl">Product</span>.<span class="fn">__init__</span>(<span class="nm">self</span>, code, name, price)
+        <span class="cl">PlantCare</span>.<span class="fn">__init__</span>(<span class="nm">self</span>, growth_days, care_tip)
+        <span class="nm">self</span>.veg_type = veg_type
+    <span class="kw">def</span> <span class="fn">__str__</span>(<span class="nm">self</span>):
+        <span class="kw">return</span> <span class="st">f"</span>{<span class="nm">self</span>.code:<span class="nm">02d</span>}<span class="st">: </span>{<span class="nm">self</span>.name}<span class="st"> (</span>{<span class="nm">self</span>.veg_type}<span class="st">) - ₱</span>{<span class="nm">self</span>.price:<span class="nm">,.2f</span>}<span class="st">"</span>
+    <span class="kw">def</span> <span class="fn">get_full_info</span>(<span class="nm">self</span>) -> <span class="cl">str</span>:
+        <span class="kw">return</span> <span class="st">f"🥬 VEGETABLE: </span>{<span class="nm">self</span>.veg_type}<span class="st"> | "</span> + <span class="nm">self</span>.<span class="fn">get_care_info</span>()
+
+<span class="kw">class</span> <span class="cl">Customer</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nm">self</span>, name: <span class="cl">str</span>, phone: <span class="cl">str</span>):
+        <span class="nm">self</span>.name = name.<span class="fn">strip</span>()
+        <span class="nm">self</span>.phone = phone.<span class="fn">strip</span>()
+    <span class="kw">def</span> <span class="fn">__str__</span>(<span class="nm">self</span>):
+        <span class="kw">return</span> <span class="st">f"Customer: </span>{<span class="nm">self</span>.name}<span class="st"> | Phone: </span>{<span class="nm">self</span>.phone}<span class="st">"</span>
+
+<span class="kw">def</span> <span class="fn">create_products</span>():
+    products = []
+    fruit_data = [
+        (<span class="nm">1</span>,<span class="st">"Mango Seedling"</span>,<span class="nm">150</span>,<span class="nm">180</span>,<span class="st">"Full sun, water twice weekly"</span>,<span class="st">"Mango"</span>),
+        (<span class="nm">2</span>,<span class="st">"Avocado Seedling"</span>,<span class="nm">200</span>,<span class="nm">365</span>,<span class="st">"Partial shade, well-drained soil"</span>,<span class="st">"Avocado"</span>),
+        (<span class="nm">3</span>,<span class="st">"Banana Seedling"</span>,<span class="nm">120</span>,<span class="nm">270</span>,<span class="st">"High moisture, full sun"</span>,<span class="st">"Banana"</span>),
+        (<span class="nm">4</span>,<span class="st">"Coconut Seedling"</span>,<span class="nm">180</span>,<span class="nm">365</span>,<span class="st">"Sandy soil, coastal areas"</span>,<span class="st">"Coconut"</span>),
+        (<span class="nm">5</span>,<span class="st">"Papaya Seedling"</span>,<span class="nm">85</span>,<span class="nm">90</span>,<span class="st">"Full sun, avoid waterlogging"</span>,<span class="st">"Papaya"</span>),
+        (<span class="nm">6</span>,<span class="st">"Calamansi Seedling"</span>,<span class="nm">110</span>,<span class="nm">150</span>,<span class="st">"Full sun, acidic soil"</span>,<span class="st">"Calamansi"</span>),
+        (<span class="nm">7</span>,<span class="st">"Guava Seedling"</span>,<span class="nm">90</span>,<span class="nm">120</span>,<span class="st">"Drought tolerant, full sun"</span>,<span class="st">"Guava"</span>),
+        (<span class="nm">8</span>,<span class="st">"Lanzones Seedling"</span>,<span class="nm">250</span>,<span class="nm">730</span>,<span class="st">"Partial shade, humid climate"</span>,<span class="st">"Lanzones"</span>),
+        (<span class="nm">9</span>,<span class="st">"Rambutan Seedling"</span>,<span class="nm">220</span>,<span class="nm">548</span>,<span class="st">"Tropical humid, full sun"</span>,<span class="st">"Rambutan"</span>),
+        (<span class="nm">10</span>,<span class="st">"Durian Seedling"</span>,<span class="nm">350</span>,<span class="nm">1095</span>,<span class="st">"Deep well-drained soil, full sun"</span>,<span class="st">"Durian"</span>),
+        (<span class="nm">11</span>,<span class="st">"Jackfruit Seedling"</span>,<span class="nm">160</span>,<span class="nm">548</span>,<span class="st">"Full sun, deep loamy soil"</span>,<span class="st">"Jackfruit"</span>),
+        (<span class="nm">12</span>,<span class="st">"Pomelo Seedling"</span>,<span class="nm">175</span>,<span class="nm">365</span>,<span class="st">"Full sun, well-drained"</span>,<span class="st">"Pomelo"</span>),
+        (<span class="nm">13</span>,<span class="st">"Star Apple Seedling"</span>,<span class="nm">140</span>,<span class="nm">365</span>,<span class="st">"Full sun, moderate watering"</span>,<span class="st">"Star Apple"</span>),
+        (<span class="nm">14</span>,<span class="st">"Soursop Seedling"</span>,<span class="nm">195</span>,<span class="nm">365</span>,<span class="st">"Tropical, avoid frost"</span>,<span class="st">"Soursop"</span>),
+        (<span class="nm">15</span>,<span class="st">"Santol Seedling"</span>,<span class="nm">130</span>,<span class="nm">365</span>,<span class="st">"Full sun, any soil type"</span>,<span class="st">"Santol"</span>),
+        (<span class="nm">16</span>,<span class="st">"Pineapple Seedling"</span>,<span class="nm">75</span>,<span class="nm">540</span>,<span class="st">"Full sun, sandy loam"</span>,<span class="st">"Pineapple"</span>),
+        (<span class="nm">17</span>,<span class="st">"Starfruit Seedling"</span>,<span class="nm">165</span>,<span class="nm">300</span>,<span class="st">"Full sun, loamy soil"</span>,<span class="st">"Starfruit"</span>),
+        (<span class="nm">18</span>,<span class="st">"Chico Seedling"</span>,<span class="nm">145</span>,<span class="nm">365</span>,<span class="st">"Full sun, coastal"</span>,<span class="st">"Chico"</span>),
+        (<span class="nm">19</span>,<span class="st">"Mangosteen Seedling"</span>,<span class="nm">300</span>,<span class="nm">912</span>,<span class="st">"Partial shade, humid"</span>,<span class="st">"Mangosteen"</span>),
+        (<span class="nm">20</span>,<span class="st">"Tamarind Seedling"</span>,<span class="nm">100</span>,<span class="nm">548</span>,<span class="st">"Drought resistant, full sun"</span>,<span class="st">"Tamarind"</span>),
+    ]
+    <span class="kw">for</span> data <span class="kw">in</span> fruit_data:
+        products.<span class="fn">append</span>(<span class="cl">FruitTreeSeedling</span>(*data))
+    veg_data = [
+        (<span class="nm">21</span>,<span class="st">"Tomato Seedling"</span>,<span class="nm">45</span>,<span class="nm">60</span>,<span class="st">"Full sun, stake when 30cm tall"</span>,<span class="st">"Tomato"</span>),
+        (<span class="nm">22</span>,<span class="st">"Ampalaya Seedling"</span>,<span class="nm">35</span>,<span class="nm">55</span>,<span class="st">"Trellis required, full sun"</span>,<span class="st">"Bitter Gourd"</span>),
+        (<span class="nm">23</span>,<span class="st">"Eggplant Seedling"</span>,<span class="nm">40</span>,<span class="nm">70</span>,<span class="st">"Full sun, moderate watering"</span>,<span class="st">"Eggplant"</span>),
+        (<span class="nm">24</span>,<span class="st">"Bell Pepper Seedling"</span>,<span class="nm">55</span>,<span class="nm">80</span>,<span class="st">"Full sun, fertile soil"</span>,<span class="st">"Bell Pepper"</span>),
+        (<span class="nm">25</span>,<span class="st">"Cabbage Seedling"</span>,<span class="nm">30</span>,<span class="nm">65</span>,<span class="st">"Cool climate, consistent moisture"</span>,<span class="st">"Cabbage"</span>),
+        (<span class="nm">26</span>,<span class="st">"Kangkong Seedling"</span>,<span class="nm">25</span>,<span class="nm">21</span>,<span class="st">"Flooded or moist soil, full sun"</span>,<span class="st">"Water Spinach"</span>),
+        (<span class="nm">27</span>,<span class="st">"Okra Seedling"</span>,<span class="nm">30</span>,<span class="nm">50</span>,<span class="st">"Full sun, warm climate"</span>,<span class="st">"Okra"</span>),
+        (<span class="nm">28</span>,<span class="st">"Sitaw Seedling"</span>,<span class="nm">28</span>,<span class="nm">45</span>,<span class="st">"Trellis required, full sun"</span>,<span class="st">"String Beans"</span>),
+        (<span class="nm">29</span>,<span class="st">"Squash Seedling"</span>,<span class="nm">32</span>,<span class="nm">55</span>,<span class="st">"Full sun, ample space"</span>,<span class="st">"Squash"</span>),
+        (<span class="nm">30</span>,<span class="st">"Pechay Seedling"</span>,<span class="nm">20</span>,<span class="nm">25</span>,<span class="st">"Partial shade, consistent watering"</span>,<span class="st">"Bok Choy"</span>),
+        (<span class="nm">31</span>,<span class="st">"Malunggay Seedling"</span>,<span class="nm">50</span>,<span class="nm">90</span>,<span class="st">"Full sun, drought tolerant"</span>,<span class="st">"Moringa"</span>),
+        (<span class="nm">32</span>,<span class="st">"Ginger Seedling"</span>,<span class="nm">60</span>,<span class="nm">210</span>,<span class="st">"Partial shade, rich moist soil"</span>,<span class="st">"Ginger"</span>),
+        (<span class="nm">33</span>,<span class="st">"Garlic Seedling"</span>,<span class="nm">45</span>,<span class="nm">150</span>,<span class="st">"Full sun, well-drained sandy soil"</span>,<span class="st">"Garlic"</span>),
+        (<span class="nm">34</span>,<span class="st">"Onion Seedling"</span>,<span class="nm">35</span>,<span class="nm">120</span>,<span class="st">"Full sun, loose fertile soil"</span>,<span class="st">"Onion"</span>),
+        (<span class="nm">35</span>,<span class="st">"Sweet Potato Seedling"</span>,<span class="nm">28</span>,<span class="nm">90</span>,<span class="st">"Full sun, sandy loam"</span>,<span class="st">"Sweet Potato"</span>),
+        (<span class="nm">36</span>,<span class="st">"Cassava Seedling"</span>,<span class="nm">25</span>,<span class="nm">270</span>,<span class="st">"Full sun, drought tolerant"</span>,<span class="st">"Cassava"</span>),
+        (<span class="nm">37</span>,<span class="st">"Chili Pepper Seedling"</span>,<span class="nm">38</span>,<span class="nm">75</span>,<span class="st">"Full sun, warm dry climate"</span>,<span class="st">"Chili"</span>),
+        (<span class="nm">38</span>,<span class="st">"Lettuce Seedling"</span>,<span class="nm">30</span>,<span class="nm">30</span>,<span class="st">"Cool climate, partial shade"</span>,<span class="st">"Lettuce"</span>),
+        (<span class="nm">39</span>,<span class="st">"Celery Seedling"</span>,<span class="nm">42</span>,<span class="nm">90</span>,<span class="st">"Cool humid, consistent watering"</span>,<span class="st">"Celery"</span>),
+        (<span class="nm">40</span>,<span class="st">"Corn Seedling"</span>,<span class="nm">35</span>,<span class="nm">75</span>,<span class="st">"Full sun, nitrogen-rich soil"</span>,<span class="st">"Corn"</span>),
+    ]
+    <span class="kw">for</span> data <span class="kw">in</span> veg_data:
+        products.<span class="fn">append</span>(<span class="cl">VegetableSeedling</span>(*data))
+    <span class="kw">return</span> products
+
+<span class="kw">def</span> <span class="fn">main</span>():
+    <span class="fn">print</span>(<span class="st">"="</span>*<span class="nm">70</span>)
+    <span class="fn">print</span>(<span class="st">"🌱 SEEDLINGSPHERE - Philippine Online Seedling Marketplace 🌱"</span>)
+    <span class="fn">print</span>(<span class="st">"   Multiple Inheritance OOP Demo | Fruit Trees + Vegetables"</span>)
+    <span class="fn">print</span>(<span class="st">"="</span>*<span class="nm">70</span>)
+    <span class="fn">print</span>(<span class="st">"\n📝 CUSTOMER REGISTRATION"</span>)
+    name = <span class="fn">input</span>(<span class="st">"Enter your Full Name: "</span>).<span class="fn">strip</span>()
+    phone = <span class="fn">input</span>(<span class="st">"Enter your Phone Number (+63): "</span>).<span class="fn">strip</span>()
+    customer = <span class="cl">Customer</span>(name, phone)
+    <span class="fn">print</span>(<span class="st">f"\n✅ Welcome, </span>{customer.name}<span class="st">!\n"</span>)
+    products = <span class="fn">create_products</span>()
+    <span class="fn">print</span>(<span class="st">"📋 AVAILABLE SEEDLINGS"</span>)
+    <span class="fn">print</span>(<span class="st">"-"</span>*<span class="nm">70</span>)
+    <span class="kw">for</span> p <span class="kw">in</span> products:
+        <span class="fn">print</span>(p)
+    <span class="fn">print</span>(<span class="st">"-"</span>*<span class="nm">70</span>)
+    cart = {}
+    <span class="kw">while True</span>:
+        <span class="kw">try</span>:
+            code = <span class="fn">int</span>(<span class="fn">input</span>(<span class="st">"\nEnter product code (0 to checkout): "</span>))
+            <span class="kw">if</span> code == <span class="nm">0</span>: <span class="kw">break</span>
+            product = <span class="fn">next</span>((p <span class="kw">for</span> p <span class="kw">in</span> products <span class="kw">if</span> p.code == code), <span class="kw">None</span>)
+            <span class="kw">if not</span> product:
+                <span class="fn">print</span>(<span class="st">"❌ Invalid code!"</span>); <span class="kw">continue</span>
+            qty = <span class="fn">int</span>(<span class="fn">input</span>(<span class="st">f"Quantity for </span>{product.name}<span class="st">: "</span>))
+            <span class="kw">if</span> qty &lt; <span class="nm">1</span>:
+                <span class="fn">print</span>(<span class="st">"❌ Quantity must be at least 1."</span>); <span class="kw">continue</span>
+            cart[code] = (product, cart[code][<span class="nm">1</span>] + qty) <span class="kw">if</span> code <span class="kw">in</span> cart <span class="kw">else</span> (product, qty)
+            <span class="fn">print</span>(<span class="st">f"✅ Added </span>{qty}<span class="st">x </span>{product.name}<span class="st"> to cart!"</span>)
+        <span class="kw">except</span> <span class="cl">ValueError</span>:
+            <span class="fn">print</span>(<span class="st">"❌ Please enter a valid number."</span>)
+    <span class="kw">if not</span> cart:
+        <span class="fn">print</span>(<span class="st">"🛍️ No items in cart. Thank you!"</span>); <span class="kw">return</span>
+    subtotal = <span class="nm">0.0</span>
+    <span class="fn">print</span>(<span class="st">"\n🛒 ORDER SUMMARY"</span>)
+    <span class="fn">print</span>(<span class="st">"-"</span>*<span class="nm">70</span>)
+    <span class="kw">for</span> prod, qty <span class="kw">in</span> cart.values():
+        item_total = prod.price * qty
+        subtotal += item_total
+        <span class="fn">print</span>(<span class="st">f"</span>{qty}<span class="st">x </span>{prod.name}<span class="st"> @ ₱</span>{prod.price:<span class="nm">,.2f</span>}<span class="st"> = ₱</span>{item_total:<span class="nm">,.2f</span>}<span class="st">"</span>)
+        <span class="fn">print</span>(<span class="st">f"   └─ </span>{prod.<span class="fn">get_full_info</span>() <span class="kw">if</span> <span class="fn">hasattr</span>(prod,<span class="st">'get_full_info'</span>) <span class="kw">else</span> <span class="st">''</span>}<span class="st">"</span>)
+    shipping = <span class="nm">80.0</span>
+    total = subtotal + shipping
+    <span class="fn">print</span>(<span class="st">"-"</span>*<span class="nm">70</span>)
+    <span class="fn">print</span>(<span class="st">f"Subtotal  : ₱</span>{subtotal:<span class="nm">,.2f</span>}<span class="st">"</span>)
+    <span class="fn">print</span>(<span class="st">f"Delivery  : ₱</span>{shipping:<span class="nm">,.2f</span>}<span class="st">"</span>)
+    <span class="fn">print</span>(<span class="st">f"TOTAL     : ₱</span>{total:<span class="nm">,.2f</span>}<span class="st">"</span>)
+    order_data = {
+        <span class="st">"timestamp"</span>: datetime.<span class="fn">now</span>().<span class="fn">strftime</span>(<span class="st">"%Y-%m-%d %H:%M:%S"</span>),
+        <span class="st">"customer"</span>: {<span class="st">"name"</span>: customer.name, <span class="st">"phone"</span>: customer.phone},
+        <span class="st">"items"</span>: [
+            {<span class="st">"code"</span>: prod.code, <span class="st">"name"</span>: prod.name, <span class="st">"qty"</span>: qty,
+             <span class="st">"price"</span>: prod.price, <span class="st">"subtotal"</span>: prod.price*qty,
+             <span class="st">"type"</span>: <span class="st">"Fruit Tree"</span> <span class="kw">if</span> <span class="fn">isinstance</span>(prod,<span class="cl">FruitTreeSeedling</span>) <span class="kw">else</span> <span class="st">"Vegetable"</span>}
+            <span class="kw">for</span> prod, qty <span class="kw">in</span> cart.values()
+        ],
+        <span class="st">"subtotal"</span>: subtotal, <span class="st">"shipping"</span>: shipping, <span class="st">"total"</span>: total
+    }
+    filename = <span class="st">f"order_</span>{customer.phone.<span class="fn">replace</span>(<span class="st">'+'</span>,<span class="st">''</span>)}<span class="st">.json"</span>
+    <span class="kw">with</span> <span class="fn">open</span>(filename, <span class="st">"w"</span>, encoding=<span class="st">"utf-8"</span>) <span class="kw">as</span> f:
+        json.<span class="fn">dump</span>(order_data, f, indent=<span class="nm">2</span>, ensure_ascii=<span class="cl">False</span>)
+    <span class="fn">print</span>(<span class="st">f"\n✅ Receipt saved: </span>{filename}<span class="st">"</span>)
+    <span class="fn">print</span>(<span class="st">"📦 Your seedlings will be delivered in 3–5 days!"</span>)
+    <span class="fn">print</span>(<span class="st">"Thank you for shopping at SeedlingSphere! 🌱"</span>)
+
+<span class="kw">if</span> __name__ == <span class="st">"__main__"</span>:
+    <span class="fn">main</span>()</pre></div>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="section visible" id="reactions" style="margin-top:40px;">
+    <div class="reactions">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:0.8rem;color:#ffffff;">Was this helpful?</span>
+      <button class="reaction-btn love-btn" id="loveBtn" onclick="react('love')" aria-label="Love reaction">❤️ <span class="reaction-count" id="loveCount">24</span> Love</button>
+      <button class="reaction-btn" id="likeBtn" onclick="react('like')" aria-label="Helpful reaction">👍 <span class="reaction-count" id="likeCount">61</span> Helpful</button>
+      <button class="reaction-btn" id="mindBlownBtn" onclick="react('mindBlown')" aria-label="Mind-blown reaction">🤯 <span class="reaction-count" id="mindBlownCount">18</span> Mind-blown</button>
+      <button class="reaction-btn" id="bookmarkBtn" onclick="react('bookmark')" aria-label="Save reaction">🔖 <span class="reaction-count" id="bookmarkCount">33</span> Saved</button>
+    </div>
+  </div>
+  <div class="section visible" style="margin-top:8px;">
+    <div class="subsec-title" style="margin-bottom:14px;">Share This Guide</div>
+    <div class="share-row">
+      <a class="share-btn fb" href="https://www.facebook.com/sharer/sharer.php?u=https://code-sense.pansensoyglenn.workers.dev/seedlings.html" target="_blank" rel="noopener"><span>📘</span> Facebook</a>
+      <a class="share-btn tw" href="https://twitter.com/intent/tweet?text=SeedlingSphere+Python+Multiple+Inheritance+Guide&url=https://code-sense.pansensoyglenn.workers.dev/seedlings.html&via=GlennPansensoy" target="_blank" rel="noopener"><span>🐦</span> Twitter / X</a>
+      <a class="share-btn li" href="https://www.linkedin.com/sharing/share-offsite/?url=https://code-sense.pansensoyglenn.workers.dev/seedlings.html" target="_blank" rel="noopener"><span>💼</span> LinkedIn</a>
+      <button class="share-btn cp" onclick="copyLink()" aria-label="Copy page link"><span>🔗</span> Copy Link</button>
+    </div>
+  </div>
+  <div class="ad-banner" style="margin-top:40px;padding:0;">
+    <div class="ad-label">ADVERTISEMENT</div>
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4575646748966866" data-ad-slot="4226674403" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+  <div class="divider"></div>
+  <div class="section" id="faq">
+    <div class="sec-header">
+      <span class="sec-num">FAQ</span>
+      <h2 class="sec-title">Frequently Asked <span class="accent-pu">Questions</span></h2>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <button class="faq-q">What is SeedlingSphere.py? <span class="faq-arrow">▾</span></button>
+      <div class="faq-a"><div class="faq-a-inner">SeedlingSphere.py is a Python command-line marketplace application that simulates an online seedling store in the Philippines. It demonstrates multiple inheritance by having <code>FruitTreeSeedling</code> and <code>VegetableSeedling</code> inherit from both <code>Product</code> and the <code>PlantCare</code> mixin. It includes a shopping cart, polymorphic order display, and JSON receipt generation — making it a practical, end-to-end OOP demonstration rather than a theoretical exercise.</div></div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <button class="faq-q">Why use multiple inheritance instead of composition? <span class="faq-arrow">▾</span></button>
+      <div class="faq-a"><div class="faq-a-inner">Multiple inheritance expresses an "is-a" relationship with two distinct parents — a seedling <em>is a</em> product and <em>is a</em> plant-care item. Composition would model this as "has-a": the seedling <em>has a</em> PlantCare object. Inheritance is chosen here because the care methods (<code>get_care_info()</code>) are most naturally accessed directly on the seedling object rather than through a nested attribute. That said, composition is often preferred in larger systems to avoid the complexity of multiple inheritance — there is no single right answer, only context-dependent trade-offs.</div></div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <button class="faq-q">How does Python's MRO work in this program? <span class="faq-arrow">▾</span></button>
+      <div class="faq-a"><div class="faq-a-inner">The MRO for <code>FruitTreeSeedling(Product, PlantCare)</code> is determined by C3 linearization and produces the order: <code>FruitTreeSeedling → Product → PlantCare → object</code>. You can verify this by running <code>print(FruitTreeSeedling.__mro__)</code>. When any method is called on a <code>FruitTreeSeedling</code> instance, Python searches this chain from left to right and uses the first matching implementation. Because <code>Product</code> and <code>PlantCare</code> define different method names, there are no conflicts in this program — but understanding the MRO is essential for cases where conflicts could arise.</div></div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <button class="faq-q">What is the PlantCare mixin and why is it a mixin? <span class="faq-arrow">▾</span></button>
+      <div class="faq-a"><div class="faq-a-inner"><code>PlantCare</code> is called a mixin because it is not designed to be instantiated independently — it has no meaning as a standalone object. A mixin exists solely to donate a specific set of attributes and methods to other classes through inheritance. Naming conventions like <code>PlantCareMixin</code> (with an explicit "Mixin" suffix) are common in professional codebases to signal this intent clearly. The benefit of the mixin design is that the same care logic can be reused by any future plant class (e.g., <code>HerbSeedling</code>, <code>FlowerSeedling</code>) without code duplication.</div></div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <button class="faq-q">Why are parent constructors called explicitly rather than using super()? <span class="faq-arrow">▾</span></button>
+      <div class="faq-a"><div class="faq-a-inner">In single inheritance, <code>super().__init__()</code> cleanly delegates to the one parent. In multiple inheritance where the two parents have different, non-overlapping constructor parameters, explicit calls (<code>Product.__init__(self, ...)</code> and <code>PlantCare.__init__(self, ...)</code>) are clearer and less error-prone. Using <code>super()</code> in multiple inheritance properly requires all classes to use <code>super()</code> and pass compatible <code>**kwargs</code> signatures — a pattern known as "cooperative multiple inheritance". This is powerful but adds design complexity. Explicit calls are the safer, more readable choice for a beginner demonstration.</div></div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <button class="faq-q">How does the shopping cart work? <span class="faq-arrow">▾</span></button>
+      <div class="faq-a"><div class="faq-a-inner">The <code>cart</code> dictionary maps product codes (integers) to <code>(product_object, quantity)</code> tuples. Using the code as the key ensures that ordering the same product twice adds the quantities rather than creating a duplicate entry. A generator expression inside <code>next()</code> searches the products list by code in a single line. The cart loop is wrapped in <code>try/except ValueError</code> to handle non-numeric input gracefully. When the user enters 0, the loop ends and the checkout and receipt generation begin.</div></div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <button class="faq-q">What does ensure_ascii=False do? <span class="faq-arrow">▾</span></button>
+      <div class="faq-a"><div class="faq-a-inner">By default, <code>json.dump()</code> escapes all non-ASCII characters as Unicode sequences (e.g., the Philippine Peso sign ₱ becomes <code>\u20b1</code>). Setting <code>ensure_ascii=False</code> tells the JSON encoder to write those characters as-is. Combined with <code>encoding="utf-8"</code> on the file open, this produces a JSON receipt file where ₱ appears correctly, making the file human-readable without needing to decode escape sequences.</div></div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <button class="faq-q">Can I add more seedling types without changing main()? <span class="faq-arrow">▾</span></button>
+      <div class="faq-a"><div class="faq-a-inner">Yes — this is exactly the power of polymorphism. Any new class that inherits from both <code>Product</code> and <code>PlantCare</code> and implements <code>get_full_info()</code> will work seamlessly with the existing cart loop, the polymorphic summary, and the JSON serialization (though the <code>isinstance</code> type-field logic in the JSON would need updating for a third type). Simply add instances of the new class to the list returned by <code>create_products()</code>.</div></div>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="section" id="comments">
+    <div class="sec-header">
+      <span class="sec-num">COMMUNITY</span>
+      <h2 class="sec-title">Comments &amp; <span class="accent-blue">Discussion</span></h2>
+    </div>
+    <div class="comments-section">
+      <div class="comment-form">
+        <h3>💬 Leave a Comment</h3>
+        <div class="form-row">
+          <input class="form-input" type="text" id="c-name" placeholder="Your name" maxlength="50">
+          <input class="form-input" type="email" id="c-email" placeholder="Email (not published)" maxlength="100">
+        </div>
+        <textarea class="form-textarea" id="c-body" placeholder="Share your thoughts, questions, or experiences with multiple inheritance..." maxlength="1000"></textarea>
+        <button class="submit-btn" onclick="postComment()" aria-label="Post comment">Post Comment →</button>
+        <p style="font-size:0.8rem;color:#ffffff;margin-top:10px;">💡 Comments are stored locally in this session. Be respectful and constructive.</p>
+      </div>
+      <div class="comment-list" id="commentList">
+        <div class="comment-item">
+          <div class="comment-meta"><div class="comment-avatar">A</div><div><div class="comment-name">Anna Reyes</div><div class="comment-date">March 2026</div></div></div>
+          <div class="comment-body">The explanation about explicit parent constructor calls finally made multiple inheritance click for me. I kept forgetting to call both parents and wondering why attributes were missing. The step-by-step walkthrough here is exactly what I needed. Thank you!</div>
+          <button class="comment-like" onclick="likeComment(this)">❤️ <span>12</span></button>
+        </div>
+        <div class="comment-item">
+          <div class="comment-meta"><div class="comment-avatar" style="background:linear-gradient(135deg,#2d7a35,#1a4d1e)">M</div><div><div class="comment-name">Miguel Torres</div><div class="comment-date">March 2026</div></div></div>
+          <div class="comment-body">The generator expression with next() and a default of None is a pattern I'm definitely adopting in all my input-validation loops. Much cleaner than a for-loop with a break and a flag variable. This guide is packed with practical patterns beyond just the OOP lesson.</div>
+          <button class="comment-like" onclick="likeComment(this)">❤️ <span>8</span></button>
+        </div>
+        <div class="comment-item">
+          <div class="comment-meta"><div class="comment-avatar" style="background:linear-gradient(135deg,#9b72d4,#6a4a9c)">S</div><div><div class="comment-name">Sofia Lim</div><div class="comment-date">March 2026</div></div></div>
+          <div class="comment-body">Brilliant guide! I'm using this as a study reference for my Python OOP exam. The MRO deep-dive section is something I've never seen explained this clearly before. The PlantCare mixin is a perfect, minimal example of the Single Responsibility Principle in practice.</div>
+          <button class="comment-like" onclick="likeComment(this)">❤️ <span>15</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="section" id="follow">
+    <div class="sec-header">
+      <span class="sec-num">CONNECT</span>
+      <h2 class="sec-title">Follow <span class="accent-pu">Glenn Junsay Pansensoy</span></h2>
+    </div>
+    <p class="prose" style="margin-bottom:20px;">Stay connected for more Python guides, OOP tutorials, and tech content from the Philippines. Follow on your preferred platform:</p>
+    <div class="follow-grid">
+      <a class="follow-btn linkedin" href="https://www.linkedin.com/in/glenn-pansensoy-6288453a2" target="_blank" rel="noopener"><span class="follow-icon">💼</span><div class="follow-lbl"><span>Follow</span><span class="follow-platform">LinkedIn</span></div></a>
+      <a class="follow-btn facebook" href="https://www.facebook.com/@Glenn-Junsay-Pansensoy" target="_blank" rel="noopener"><span class="follow-icon">📘</span><div class="follow-lbl"><span>Follow</span><span class="follow-platform">Facebook</span></div></a>
+      <a class="follow-btn twitter" href="https://x.com/@GlennPansensoy" target="_blank" rel="noopener"><span class="follow-icon">🐦</span><div class="follow-lbl"><span>Follow</span><span class="follow-platform">X / Twitter</span></div></a>
+      <a class="follow-btn youtube" href="https://www.youtube.com/c/@GlennPansensoy" target="_blank" rel="noopener"><span class="follow-icon">▶️</span><div class="follow-lbl"><span>Subscribe</span><span class="follow-platform">YouTube</span></div></a>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="section" id="subscribe">
+    <div class="subscribe-card">
+      <div class="subscribe-title">📬 Stay in the Loop</div>
+      <p class="subscribe-sub">Get new Python tutorials, OOP guides, and tech articles from Valleys &amp; Bytes delivered to your inbox — no spam, ever.</p>
+      <div class="sub-form">
+        <input class="sub-input" type="email" id="subEmail" placeholder="your@email.com">
+        <button class="sub-btn" onclick="subscribe()" aria-label="Subscribe to newsletter">Subscribe Free →</button>
+      </div>
+      <p class="sub-note">🔒 No spam. Unsubscribe anytime. Your email is never shared.</p>
+    </div>
+  </div>
+  <div class="ad-banner" style="padding:0;margin-top:32px;">
+    <div class="ad-label">ADVERTISEMENT</div>
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4575646748966866" data-ad-slot="4226674403" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+  <div class="divider"></div>
+  <div class="section" id="outro">
+    <div class="outro-card">
+      <div class="outro-title">🎓 You've Reached the End — But Your Journey Continues</div>
+      <p class="outro-body">You have just walked through every line of <strong>SeedlingSphere.py</strong> — from a single import statement to a fully functional marketplace with multiple inheritance, mixin design, polymorphism, and JSON persistence. You now understand not just what the code does, but why each pattern was chosen and when you should — and should not — apply it.</p>
+      <p class="outro-body">Multiple inheritance is a powerful tool, but it must be used with intention. This guide has shown you how to call parent constructors explicitly, how to design a mixin that follows the Single Responsibility Principle, and how Python's MRO guarantees predictable behaviour even when two parents share a method name. The same principles appear in Django's class-based views, SQLAlchemy's mixins, and many professional Python libraries.</p>
+      <p class="outro-body">Your next step? Take the extension challenges seriously. Add a <code>HerbSeedling</code> class. Implement the discount mixin. Load the catalog from JSON. Each challenge will deepen your understanding and give you code you can point to with pride.</p>
+      <div style="margin-top:28px;display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
+        <a href="#intro" class="btn-primary">🔁 Read Again</a>
+        <a href="#source" class="btn-secondary">💻 Copy Source</a>
+      </div>
+    </div>
+  </div>
+  <div class="section" id="ai-share">
+    <div class="ai-share-section">
+      <div class="ai-share-title">🤖 AI-Powered Social Share</div>
+      <p class="ai-share-desc">Let AI craft the perfect caption for sharing this article. Pick your platform and tone, then generate a ready-to-post message tailored for your audience.</p>
+      <div class="ai-share-input-row">
+        <select class="ai-share-select" id="aiSharePlatform">
+          <option value="Twitter/X">Twitter / X</option>
+          <option value="LinkedIn">LinkedIn</option>
+          <option value="Facebook">Facebook</option>
+          <option value="WhatsApp">WhatsApp</option>
+        </select>
+        <select class="ai-share-select" id="aiShareTone">
+          <option value="enthusiastic">Enthusiastic</option>
+          <option value="professional">Professional</option>
+          <option value="casual">Casual</option>
+          <option value="educational">Educational</option>
+        </select>
+        <button class="ai-share-gen-btn" onclick="generateAIShare()" id="aiShareBtn">✨ Generate Caption</button>
+      </div>
+      <div class="ai-share-loading" id="aiShareLoading"><div class="ai-share-spinner"></div>AI is crafting your caption…</div>
+      <div class="ai-share-output" id="aiShareOutput"></div>
+      <div class="ai-share-action-row" id="aiShareActions" style="display:none;">
+        <button class="ai-share-action-btn cp" onclick="copyAICaption()" id="aiCopyBtn">📋 Copy Caption</button>
+        <a class="ai-share-action-btn fb" id="aiFbBtn" href="#" target="_blank" rel="noopener">📘 Share on Facebook</a>
+        <a class="ai-share-action-btn tw" id="aiTwBtn" href="#" target="_blank" rel="noopener">🐦 Share on X</a>
+        <a class="ai-share-action-btn li" id="aiLiBtn" href="#" target="_blank" rel="noopener">💼 Share on LinkedIn</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="sticky-share">
+  <a class="ss-btn" href="https://www.facebook.com/sharer/sharer.php?u=https://code-sense.pansensoyglenn.workers.dev/seedlings.html" target="_blank" rel="noopener" title="Share on Facebook">📘</a>
+  <a class="ss-btn" href="https://twitter.com/intent/tweet?url=https://code-sense.pansensoyglenn.workers.dev/seedlings.html&via=GlennPansensoy" target="_blank" rel="noopener" title="Share on X">🐦</a>
+  <a class="ss-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https://code-sense.pansensoyglenn.workers.dev/seedlings.html" target="_blank" rel="noopener" title="Share on LinkedIn">💼</a>
+  <button class="ss-btn" onclick="copyLink()" title="Copy link" aria-label="Copy link">🔗</button>
+  <button class="ss-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top" aria-label="Back to top">↑</button>
+</div>
+<div class="toast" id="toast"></div>
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand"><span style="color:var(--blue-bright)">VALLEYS</span><span style="color:#ffffff;font-weight:400"> &amp; </span><span style="color:var(--purple-bright)">BYTES</span></div>
+        <p class="footer-tagline">Python tutorials, OOP guides, and developer content from the Philippines. Written by <strong style="color:#ffffff">Glenn Junsay Pansensoy</strong>.</p>
+        <div class="follow-grid" style="margin-top:16px;gap:8px;">
+          <a class="footer-btn" href="https://www.linkedin.com/in/glenn-pansensoy-6288453a2" target="_blank" rel="noopener"><span class="ico">💼</span>LinkedIn</a>
+          <a class="footer-btn" href="https://www.facebook.com/@Glenn-Junsay-Pansensoy" target="_blank" rel="noopener"><span class="ico">📘</span>Facebook</a>
+          <a class="footer-btn" href="https://x.com/@GlennPansensoy" target="_blank" rel="noopener"><span class="ico">🐦</span>X / Twitter</a>
+          <a class="footer-btn" href="https://www.youtube.com/c/@GlennPansensoy" target="_blank" rel="noopener"><span class="ico">▶️</span>YouTube</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Navigate</div>
+        <a class="footer-btn" href="#intro"><span class="ico">📖</span>Introduction</a>
+        <a class="footer-btn" href="#s1"><span class="ico">🗂️</span>Overview</a>
+        <a class="footer-btn" href="#s3"><span class="ico">🏷️</span>Product</a>
+        <a class="footer-btn" href="#s4"><span class="ico">🌱</span>PlantCare</a>
+        <a class="footer-btn" href="#s5"><span class="ico">🍎</span>FruitTree</a>
+        <a class="footer-btn" href="#s6"><span class="ico">🥬</span>Vegetable</a>
+        <a class="footer-btn" href="#mro"><span class="ico">🔬</span>MRO Deep Dive</a>
+        <a class="footer-btn" href="#source"><span class="ico">💻</span>Source Code</a>
+        <a class="footer-btn" href="#faq"><span class="ico">❓</span>FAQ</a>
+      </div>
+      <div>
+        <div class="footer-col-title">Site Pages</div>
+        <a class="footer-btn" href="about-guide.html"><span class="ico">📄</span>About this Page</a>
+        <a class="footer-btn" href="about-author.html"><span class="ico">🧑‍💻</span>About the Author</a>
+        <a class="footer-btn" href="oop-contact.html"><span class="ico">📬</span>Contact</a>
+        <a class="footer-btn" href="oop-privacy.html"><span class="ico">🔒</span>Privacy Policy</a>
+        <a class="footer-btn" href="oop-terms.html"><span class="ico">📜</span>Terms of Service</a>
+        <a class="footer-btn" href="oop-cookie.html"><span class="ico">🍪</span>Cookie Policy</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Valleys &amp; Bytes — Glenn Junsay Pansensoy. All rights reserved. Built with data precision and Created through intensive information authentication.<span style="color:var(--blue-bright)">code-sense.pansensoyglenn.workers.dev</span></div>
+      <div class="footer-links-row">
+        <a class="footer-link-btn" href="oop-privacy.html">Privacy</a>
+        <a class="footer-link-btn" href="oop-terms.html">Terms</a>
+        <a class="footer-link-btn" href="oop-cookie.html">Cookies</a>
+        <a class="footer-link-btn" href="oop-contact.html">Contact</a>
+        <button class="footer-link-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ Top</button>
+      </div>
+    </div>
+  </div>
+</footer>
+<script>
+(function(){
+  if(!window.matchMedia('(min-width:768px)').matches)return;
+  const c=document.getElementById('particles');
+  if(!c)return;
+  const colors=['rgba(75,139,190,0.6)','rgba(189,147,249,0.5)','rgba(255,212,59,0.4)','rgba(80,250,123,0.4)'];
+  for(let i=0;i<25;i++){
+    const p=document.createElement('div');
+    p.className='particle';
+    const s=Math.random()*4+2;
+    p.style.cssText=`width:${s}px;height:${s}px;left:${Math.random()*100}%;background:${colors[Math.floor(Math.random()*colors.length)]};animation-duration:${Math.random()*15+10}s;animation-delay:${Math.random()*-20}s;`;
+    c.appendChild(p);
+  }
+})();
+const hamburger=document.getElementById('hamburger');
+const drawer=document.getElementById('drawer');
+const overlay=document.getElementById('drawerOverlay');
+function openDrawer(){drawer.classList.add('open');overlay.classList.add('open');hamburger.classList.add('open');hamburger.setAttribute('aria-expanded','true');}
+function closeDrawer(){drawer.classList.remove('open');overlay.classList.remove('open');hamburger.classList.remove('open');hamburger.setAttribute('aria-expanded','false');}
+hamburger.addEventListener('click',()=>drawer.classList.contains('open')?closeDrawer():openDrawer());
+drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeDrawer));
+const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:0.07});
+document.querySelectorAll('.section').forEach(s=>obs.observe(s));
+const bar=document.getElementById('progress-bar');
+window.addEventListener('scroll',()=>{const h=document.documentElement;bar.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100+'%';},{passive:true});
+const tocLinks=document.querySelectorAll('.toc-link');
+const sections=document.querySelectorAll('.section[id],section[id]');
+window.addEventListener('scroll',()=>{let cur='';sections.forEach(s=>{if(window.scrollY>=s.offsetTop-120)cur=s.id;});tocLinks.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+cur);});},{passive:true});
+function copyCode(btn){const pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(()=>{btn.textContent='Copied!';setTimeout(()=>btn.textContent='Copy',2000);});}
+function copyLink(){navigator.clipboard.writeText(window.location.href).then(()=>showToast('🔗 Link copied to clipboard!'));}
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000);}
+function toggleFaq(item){const wasOpen=item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(f=>f.classList.remove('open'));if(!wasOpen)item.classList.add('open');}
+const reactions={love:24,like:61,mindBlown:18,bookmark:33};const reacted={};
+function react(type){const btn=document.getElementById(type+'Btn');const countEl=document.getElementById(type+'Count');if(reacted[type]){reactions[type]--;btn.classList.remove('active');reacted[type]=false;}else{reactions[type]++;btn.classList.add('active');reacted[type]=true;showToast('Thanks for your reaction! 🙌');}countEl.textContent=reactions[type];}
+function postComment(){const name=document.getElementById('c-name').value.trim();const body=document.getElementById('c-body').value.trim();if(!name||!body){showToast('Please fill in your name and comment.');return;}const list=document.getElementById('commentList');const initial=name.charAt(0).toUpperCase();const colors=['linear-gradient(135deg,#3a6e99,#6a4a9c)','linear-gradient(135deg,#2d7a35,#1a4d1e)','linear-gradient(135deg,#9b72d4,#264d6e)'];const bg=colors[Math.floor(Math.random()*colors.length)];const el=document.createElement('div');el.className='comment-item';el.style.animation='fadeUp 0.4s ease both';el.innerHTML=`<div class="comment-meta"><div class="comment-avatar" style="background:${bg}">${initial}</div><div><div class="comment-name">${name}</div><div class="comment-date">Just now</div></div></div><div class="comment-body">${body}</div><button class="comment-like" onclick="likeComment(this)">❤️ <span>0</span></button>`;list.insertBefore(el,list.firstChild);document.getElementById('c-name').value='';document.getElementById('c-body').value='';showToast('Comment posted! Thank you.');}
+function likeComment(btn){const span=btn.querySelector('span');let n=parseInt(span.textContent);if(btn.dataset.liked){n--;btn.dataset.liked='';}else{n++;btn.dataset.liked='1';}span.textContent=n;}
+function subscribe(){const e=document.getElementById('subEmail').value.trim();if(!e||!e.includes('@')){showToast('Please enter a valid email.');return;}document.getElementById('subEmail').value='';showToast('Subscribed! Welcome to Valleys & Bytes.');}
+
+function generateAIShare(){
+  const platform=document.getElementById('aiSharePlatform').value;
+  const tone=document.getElementById('aiShareTone').value;
+  const btn=document.getElementById('aiShareBtn');
+  const loading=document.getElementById('aiShareLoading');
+  const output=document.getElementById('aiShareOutput');
+  const actions=document.getElementById('aiShareActions');
+  const pageUrl='https://code-sense.pansensoyglenn.workers.dev/seedlings.html';
+
+  btn.disabled=true; btn.textContent='Generating…';
+  loading.classList.add('visible');
+  output.classList.remove('visible');
+  actions.style.display='none';
+
+  const templates={
+    'Twitter/X':{
+      enthusiastic:[
+        `🔥 Just discovered the BEST Python OOP tutorial!\n\nSeedlingSphere.py breaks down multiple inheritance, mixins, MRO & polymorphism through a real Filipino seedling marketplace 🌱🐍\n\nPerfect for devs leveling up their OOP game 👇\n${pageUrl}\n\n#Python #OOP #LearnPython #Programming #PythonTutorial`,
+        `🌱 Multiple inheritance finally makes SENSE!\n\nThis SeedlingSphere.py guide is a game-changer for Python learners. MRO, mixin classes, JSON persistence — all in one real-world project!\n\n${pageUrl}\n\n#Python #OOP #100DaysOfCode #CodeNewbie`,
+      ],
+      professional:[
+        `Excellent resource for Python developers exploring multiple inheritance.\n\nSeedlingSphere.py demonstrates mixins, MRO (C3 linearization), polymorphism, and JSON persistence through a practical marketplace application.\n\nHighly recommended for intermediate learners.\n${pageUrl}\n\n#Python #SoftwareEngineering #OOP #PythonDev`,
+        `A well-structured deep dive into Python's multiple inheritance model.\n\nCovers FruitTreeSeedling, VegetableSeedling, PlantCare mixin, and the full MRO chain — with complete source code.\n\n${pageUrl}\n#Python #Programming #TechEducation`,
+      ],
+      casual:[
+        `yo if you're learning Python OOP this one slaps 🐍\n\nseedlingsphere.py — multiple inheritance explained with a Filipino plant market lol but actually really good\n\n${pageUrl}\n\n#Python #coding`,
+        `ngl this python tutorial lowkey taught me more about mixins than my whole bootcamp 😅🌿\n\ncheck it out ${pageUrl}\n\n#Python #LearnToCode #OOP`,
+      ],
+      educational:[
+        `📚 Learning Python OOP? Start here.\n\nSeedlingSphere.py teaches:\n✅ Multiple Inheritance\n✅ Mixin classes (SRP)\n✅ MRO / C3 linearization\n✅ Polymorphism\n✅ JSON persistence\n\nAll in one real-world project.\n${pageUrl}\n\n#Python #Education #OOP #LearnPython`,
+        `Python multiple inheritance, demystified. 🎓\n\nThis guide walks through every class, every constructor call, and every design decision in a Filipino seedling marketplace app.\n\n${pageUrl}\n\n#Python #OOP #PythonTips #Programming`,
+      ],
+    },
+    'LinkedIn':{
+      enthusiastic:[
+        `🚀 Excited to share this incredible Python OOP resource!\n\nSeedlingSphere.py is a comprehensive guide that teaches multiple inheritance, mixin classes, Method Resolution Order, and JSON persistence — all through a real Filipino seedling marketplace application.\n\nWhether you're a beginner ready to go beyond single inheritance or a developer brushing up on design patterns, this guide explains not just WHAT the code does, but WHY every decision was made.\n\n🌱 Check it out here: ${pageUrl}\n\n#Python #OOP #MultipleInheritance #SoftwareDevelopment #LearningAndDevelopment #Philippines`,
+        `💡 Found a Python tutorial that actually changed how I think about class design!\n\nSeedlingSphere.py covers multiple inheritance, mixin architecture, C3 MRO linearization, and polymorphism in one cohesive project. It's the kind of guide I wish I had when I was learning OOP.\n\n${pageUrl}\n\n#Python #Programming #OOP #TechEducation #SoftwareEngineering`,
+      ],
+      professional:[
+        `For developers looking to deepen their understanding of Python's object-oriented model, I recommend this thorough walkthrough of SeedlingSphere.py.\n\nThe guide covers multiple inheritance design patterns, explicit parent constructor calls, mixin class architecture following the Single Responsibility Principle, and C3 linearization (MRO). Full source code is included.\n\nA valuable reference for anyone building maintainable Python systems.\n\n${pageUrl}\n\n#Python #SoftwareEngineering #OOP #PythonDevelopment #CleanCode`,
+        `Technical deep dive: Python Multiple Inheritance with SeedlingSphere.py\n\nThis guide methodically explains how FruitTreeSeedling and VegetableSeedling inherit from both Product and the PlantCare mixin, how the MRO resolves method conflicts, and how polymorphism eliminates type-checking in the cart loop.\n\nRecommended reading for Python developers and engineering teams.\n\n${pageUrl}\n\n#Python #OOP #Engineering #Programming`,
+      ],
+      casual:[
+        `Stumbled across this Python tutorial and couldn't stop reading 😄\n\nIt teaches multiple inheritance using a Filipino seedling marketplace — sounds niche but the explanations are crystal clear. MRO, mixins, JSON receipts — all covered step by step.\n\nWorth bookmarking if you're growing your Python skills! 🌱\n\n${pageUrl}\n\n#Python #Learning #Programming #OOP`,
+        `Sometimes the best tutorials come from unexpected places 🇵🇭🌿\n\nThis SeedlingSphere.py guide from the Philippines walks through Python OOP in a way that finally made multiple inheritance click for me.\n\n${pageUrl}\n\n#Python #Tech #Coding #OOP`,
+      ],
+      educational:[
+        `📖 Python Multiple Inheritance — A Comprehensive Guide\n\nSeedlingSphere.py demonstrates how to:\n• Design mixin classes following the Single Responsibility Principle\n• Call parent constructors explicitly in multi-inheritance hierarchies\n• Understand C3 linearization and the Python MRO\n• Apply polymorphism to eliminate conditional type-checking\n• Persist structured data with json.dump() and ensure_ascii=False\n\nFull source code and detailed explanations included.\n\n${pageUrl}\n\n#Python #OOP #Education #SoftwareDevelopment #ProgrammingTutorial`,
+        `Sharing this excellent Python OOP resource for developers and educators.\n\nThe guide uses a Filipino seedling marketplace to teach 7 core concepts: multiple inheritance, mixin design, MRO, polymorphism, generator expressions, JSON persistence, and the __name__ guard — all in one cohesive program.\n\n${pageUrl}\n\n#Python #Education #Programming #OOP #Philippines`,
+      ],
+    },
+    'Facebook':{
+      enthusiastic:[
+        `🌱🐍 OH WOW — this Python tutorial just blew my mind!\n\nSeedlingSphere.py explains multiple inheritance, mixin classes, and the Method Resolution Order through a Filipino seedling marketplace app. I finally understand why and when to use multiple inheritance!\n\nIf you're learning Python, this is a must-read 👇\n${pageUrl}`,
+        `🔥 Best Python OOP guide I've read this year!\n\nSeedlingSphere.py walks through EVERY line of a real marketplace app — explaining multiple inheritance, mixins, MRO, polymorphism, and JSON receipts from scratch.\n\nSharing because it's just that good 🙌\n${pageUrl}`,
+      ],
+      professional:[
+        `Sharing a well-crafted Python OOP tutorial for developers in my network.\n\nSeedlingSphere.py provides a complete walkthrough of multiple inheritance, mixin class design, Method Resolution Order, and JSON persistence — with full source code and clear explanations for each design decision.\n\n${pageUrl}`,
+        `For my fellow Python developers — this SeedlingSphere.py guide is an excellent reference for understanding multiple inheritance patterns, explicit constructor calls, and C3 MRO linearization in practice.\n\n${pageUrl}`,
+      ],
+      casual:[
+        `sharing this python tutorial because it actually made sense to me 😂🌿\n\nmultiple inheritance explained with a plant shop — weird but it works! great read if you're learning OOP.\n\n${pageUrl}`,
+        `my friend sent me this python guide and i ended up reading the whole thing 😅\n\nif you're into coding or want to understand how Python classes really work, check it out!\n${pageUrl}`,
+      ],
+      educational:[
+        `📚 For students and self-taught developers learning Python OOP:\n\nSeedlingSphere.py is a step-by-step guide covering multiple inheritance, mixin classes, MRO, polymorphism, and JSON persistence — all demonstrated through a real command-line application.\n\nFull source code included. Highly recommended!\n${pageUrl}`,
+        `Great learning resource for anyone studying Python Object-Oriented Programming:\n\n✅ Multiple Inheritance\n✅ Mixin Classes (SRP)\n✅ Method Resolution Order\n✅ Polymorphism\n✅ JSON Persistence\n\nAll in one real-world project: ${pageUrl}`,
+      ],
+    },
+    'WhatsApp':{
+      enthusiastic:[
+        `Hey! 🌱🐍 You HAVE to check out this Python tutorial — it finally made multiple inheritance click for me!\n\nSeedlingSphere.py teaches OOP through a Filipino seedling marketplace. MRO, mixins, polymorphism — all explained step by step with full source code.\n\n👉 ${pageUrl}`,
+        `Bro/Sis check this out! 🔥 Best Python OOP guide I've found — covers multiple inheritance, mixin classes, and JSON persistence through a real project. Super clear explanations!\n\n${pageUrl}`,
+      ],
+      professional:[
+        `Hi — sharing a Python OOP resource you might find useful. SeedlingSphere.py is a comprehensive walkthrough of multiple inheritance, mixin design, MRO, and JSON persistence with full source code.\n\n${pageUrl}`,
+        `Thought you'd appreciate this — a thorough Python multiple inheritance guide with real-world context and complete source code: ${pageUrl}`,
+      ],
+      casual:[
+        `yo check this python tutorial 😄 explains multiple inheritance with a plant shop lol but actually really solid. worth a read!\n\n${pageUrl}`,
+        `sending this python guide your way — it's the one that finally made OOP make sense to me 😅🌿\n\n${pageUrl}`,
+      ],
+      educational:[
+        `Sharing a Python OOP tutorial that covers:\n• Multiple Inheritance\n• Mixin Classes\n• Method Resolution Order\n• Polymorphism\n• JSON Persistence\n\nAll through a real project with full source code 👇\n${pageUrl}`,
+        `Good learning resource for Python OOP — step-by-step guide through multiple inheritance, mixins, and MRO with explanations for every design decision.\n\n${pageUrl}`,
+      ],
+    },
+  };
+
+  setTimeout(()=>{
+    const pool=templates[platform][tone];
+    const caption=pool[Math.floor(Math.random()*pool.length)];
+    output.textContent=caption;
+    output.classList.add('visible');
+    loading.classList.remove('visible');
+    const encodedText=encodeURIComponent(caption);
+    document.getElementById('aiFbBtn').href='https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(pageUrl)+'&quote='+encodedText;
+    document.getElementById('aiTwBtn').href='https://twitter.com/intent/tweet?text='+encodedText;
+    document.getElementById('aiLiBtn').href='https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(pageUrl);
+    actions.style.display='flex';
+    btn.disabled=false; btn.textContent='✨ Generate Caption';
+  }, 900);
+}
+function copyAICaption(){
+  const text=document.getElementById('aiShareOutput').textContent;
+  navigator.clipboard.writeText(text).then(()=>showToast('✅ Caption copied to clipboard!'));
+}
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor=>{anchor.addEventListener('click',function(e){const href=this.getAttribute('href');if(href==='#'||href==='')return;const target=document.querySelector(href);if(target){e.preventDefault();target.scrollIntoView({behavior:'smooth',block:'start'});}});});
+</script>
+</body>
+</html>
