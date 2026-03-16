@@ -1,0 +1,1957 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Ticketing.py — Python Polymorphism OOP Guide | Valleys &amp; Bytes</title>
+<meta name="description" content="Master Python polymorphism with Ticketing.py — a complete, beginner-friendly guide to Protocols, duck typing, polymorphic dispatch, and dataclasses through a real airline ticketing app. Full source code included.">
+<meta name="keywords" content="Python polymorphism tutorial, Python OOP guide, Protocol class Python, duck typing Python, dataclass Python, ticketing system Python, Python structural subtyping, Python typing module, Python class hierarchy, Philippines coding tutorial, Valleys and Bytes, Glenn Junsay Pansensoy">
+<meta name="author" content="Glenn Junsay Pansensoy">
+<meta name="robots" content="index, follow">
+<meta name="color-scheme" content="dark">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="canonical" href="https://code-sense.pansensoyglenn.workers.dev/ticketing.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ticketing.py — Python Polymorphism OOP Guide">
+<meta property="og:description" content="Step-by-step Python OOP documentation: polymorphism, Protocol-based duck typing, dataclasses, and full source code for a real airline ticketing simulator.">
+<meta property="og:url" content="https://code-sense.pansensoyglenn.workers.dev/ticketing.html">
+<meta property="og:site_name" content="Valleys &amp; Bytes">
+<meta property="og:image" content="/og-ticketing.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:alt" content="Ticketing.py — Python Polymorphism OOP Guide banner">
+<meta property="og:locale" content="en_PH">
+<meta property="article:author" content="Glenn Junsay Pansensoy">
+<meta property="article:published_time" content="2026-03-16T00:00:00+08:00">
+<meta property="article:modified_time" content="2026-03-16T00:00:00+08:00">
+<meta property="article:section" content="Programming Tutorial">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@GlennPansensoy">
+<meta name="twitter:creator" content="@GlennPansensoy">
+<meta name="twitter:title" content="Ticketing.py — Python Polymorphism OOP Guide">
+<meta name="twitter:description" content="Complete Python OOP tutorial: polymorphism, Protocol-based duck typing, dataclasses, and a working airline ticketing system.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "Ticketing.py — Python Polymorphism OOP Guide",
+  "description": "A comprehensive step-by-step documentation of Ticketing.py, a Python OOP command-line airline ticketing application demonstrating polymorphism, Protocol-based structural subtyping, dataclasses, and polymorphic dispatch.",
+  "author": {
+    "@type": "Person",
+    "name": "Glenn Junsay Pansensoy",
+    "url": "https://www.linkedin.com/in/glenn-pansensoy-6288453a2",
+    "sameAs": [
+      "https://www.linkedin.com/in/glenn-pansensoy-6288453a2",
+      "https://www.facebook.com/@Glenn-Junsay-Pansensoy",
+      "https://x.com/@GlennPansensoy",
+      "https://www.youtube.com/c/@GlennPansensoy"
+    ]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Valleys & Bytes",
+    "url": "https://code-sense.pansensoyglenn.workers.dev"
+  },
+  "datePublished": "2026-03-16",
+  "dateModified": "2026-03-16",
+  "mainEntityOfPage": "https://code-sense.pansensoyglenn.workers.dev/ticketing.html",
+  "programmingLanguage": "Python",
+  "proficiencyLevel": "Beginner",
+  "keywords": ["Python","OOP","Polymorphism","Protocol","Duck Typing","Dataclass","Structural Subtyping","Airline Ticketing","Philippines"],
+  "articleSection": "Programming Tutorial",
+  "teaches": ["Python OOP","Polymorphism","Protocol Classes","Duck Typing","Dataclasses","Structural Subtyping","Polymorphic Dispatch","Type Annotations"]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is Ticketing.py?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ticketing.py is a Python command-line airline ticketing application that simulates booking a flight. It showcases polymorphism by having PayPal, CreditCard, and CashAtAirport all satisfy the PaymentMethod Protocol, and SimpleConsoleTicket and DetailedTicket both satisfy the TicketPresenter Protocol. The Booking dataclass calls payment.confirm_payment() and presenter.generate() without knowing the concrete type — pure polymorphic dispatch."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between a Protocol and an abstract base class?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "An abstract base class (ABC) requires explicit inheritance — a subclass must declare class MyClass(MyABC). A Protocol uses structural subtyping (duck typing) — any class that implements the required methods satisfies the Protocol automatically, with no inheritance needed. Protocols are checked by type checkers like mypy at development time, not at runtime by Python itself."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why use @dataclass for PayPal, CreditCard, and Booking?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The @dataclass decorator auto-generates __init__, __repr__, and __eq__ from annotated class-level fields. Classes like PayPal and CreditCard have no stored fields, so @dataclass simply marks them as data-oriented objects. Booking uses dataclass fields for all passenger data and uses __post_init__ to run derived calculations after the auto-generated __init__ has set all fields."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does polymorphism eliminate type-checking in Booking?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Without polymorphism, confirm_and_issue() would need an if/elif chain: if isinstance(payment, PayPal): ... elif isinstance(payment, CreditCard): .... With polymorphism, it simply calls self.payment.confirm_payment() and self.presenter.generate(). Python dispatches to the correct implementation automatically. Adding a new payment method or ticket style requires zero changes inside Booking."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is __post_init__ and when does it run?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "__post_init__ is a special method recognised by @dataclass. It is called automatically immediately after the generated __init__ has set all annotated fields. In Booking, __post_init__ uses the already-set name, origin, and destination to derive ticket_id, base_fare, and total — values that depend on the constructor inputs but cannot be computed before them."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I add a new payment method without modifying Booking?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes — this is the open/closed principle in action. Any new class that implements name() -> str and confirm_payment(amount, description) -> bool satisfies the PaymentMethod Protocol. Pass an instance to Booking and it works immediately. Booking.confirm_and_issue() never needs to be touched."
+      }
+    }
+  ]
+}
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4575646748966866" crossorigin="anonymous"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;600;700;800&family=Literata:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;600;700;800&family=Literata:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --obs-900: #0a0a12;
+  --obs-800: #0f0f1e;
+  --obs-700: #151528;
+  --obs-600: #1e1e38;
+  --obs-500: #252545;
+  --obs-400: #2e2e58;
+  --obs-300: #3a3a72;
+  --blue-bright: #4b8bbe;
+  --blue-mid:    #3a6e99;
+  --blue-dark:   #264d6e;
+  --blue-glow:   rgba(75,139,190,0.25);
+  --blue-pale:   rgba(75,139,190,0.08);
+  --yellow:      #ffd43b;
+  --yellow-dim:  rgba(255,212,59,0.15);
+  --purple-bright: #bd93f9;
+  --purple-mid:    #9b72d4;
+  --purple-dark:   #6a4a9c;
+  --purple-glow:   rgba(189,147,249,0.2);
+  --purple-pale:   rgba(189,147,249,0.07);
+  --text-primary:   #ffffff;
+  --text-secondary: #ffffff;
+  --text-muted:     #c0c8e0;
+  --text-code:      #79c0ff;
+  --syn-kw:   #ff79c6;
+  --syn-cl:   #8be9fd;
+  --syn-fn:   #50fa7b;
+  --syn-st:   #f1fa8c;
+  --syn-cm:   #6272a4;
+  --syn-nm:   #bd93f9;
+  --syn-dc:   #ffd43b;
+  --surface-1: var(--obs-800);
+  --surface-2: var(--obs-700);
+  --surface-3: var(--obs-600);
+  --border:    rgba(75,139,190,0.18);
+  --border-pu: rgba(189,147,249,0.18);
+  --glow-blue: 0 0 30px rgba(75,139,190,0.15);
+  --glow-pu:   0 0 30px rgba(189,147,249,0.12);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 10px; overflow-x: hidden; max-width: 100vw; }
+body {
+  font-family: 'Literata', Georgia, serif;
+  background: var(--obs-900);
+  color: #ffffff;
+  overflow-x: hidden;
+  max-width: 100vw;
+  line-height: 1.7;
+}
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--obs-800); }
+::-webkit-scrollbar-thumb { background: var(--blue-dark); border-radius: 3px; }
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0;
+  background-image:
+    linear-gradient(rgba(75,139,190,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(75,139,190,0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  animation: gridShift 60s linear infinite;
+}
+@keyframes gridShift { from{background-position:0 0} to{background-position:48px 48px} }
+
+.navbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  height: 64px;
+  background: rgba(10,10,18,0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 28px;
+}
+.brand {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.4rem; font-weight: 800; letter-spacing: -0.5px;
+  text-decoration: none; display: flex; align-items: center; gap: 8px;
+}
+.brand-valleys { color: var(--blue-bright); }
+.brand-amp { color: #ffffff; font-weight: 400; margin: 0 2px; }
+.brand-bytes { color: var(--purple-bright); }
+.brand-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--yellow); animation: pulse 2s ease infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.7)} }
+.hamburger {
+  display: flex; flex-direction: column; gap: 5px;
+  background: none; border: 1px solid var(--border);
+  padding: 10px 12px; border-radius: 8px; cursor: pointer; transition: all 0.2s;
+}
+.hamburger:hover { border-color: var(--blue-bright); background: var(--blue-pale); }
+.hamburger span { display: block; width: 20px; height: 2px; background: #ffffff; border-radius: 2px; transition: all 0.3s; }
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.drawer {
+  position: fixed; top: 64px; right: 0; bottom: 0; z-index: 999;
+  width: 300px; background: var(--obs-800); border-left: 1px solid var(--border);
+  transform: translateX(100%); transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+  overflow-y: auto; padding: 24px 20px;
+}
+.drawer.open { transform: translateX(0); }
+.drawer-overlay {
+  position: fixed; inset: 0; z-index: 998;
+  background: rgba(0,0,0,0.5); opacity: 0; pointer-events: none; transition: opacity 0.3s;
+}
+.drawer-overlay.open { opacity: 1; pointer-events: all; }
+.drawer-section { margin-bottom: 28px; }
+.drawer-section-label {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; letter-spacing: 2px;
+  text-transform: uppercase; color: #ffffff; margin-bottom: 10px; padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+}
+.drawer-btn {
+  display: flex; align-items: center; gap: 12px; width: 100%;
+  padding: 11px 14px; margin-bottom: 4px; background: var(--obs-700);
+  border: 1px solid var(--border); border-radius: 8px; color: #ffffff;
+  font-family: 'Syne', sans-serif; font-size: 0.8rem;
+  cursor: pointer; text-decoration: none; transition: all 0.2s; text-align: left;
+}
+.drawer-btn:hover { background: var(--blue-pale); border-color: var(--blue-bright); color: var(--blue-bright); }
+.drawer-btn .ico { font-size: 1.4rem; width: 22px; text-align: center; }
+
+.ad-banner { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+.ad-label { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #ffffff; letter-spacing: 1px; text-align: center; margin-bottom: 4px; }
+
+.hero {
+  position: relative; z-index: 1; min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 100px 0 80px; overflow: hidden;
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(75,139,190,0.12) 0%, transparent 70%),
+              radial-gradient(ellipse 60% 40% at 80% 80%, rgba(189,147,249,0.08) 0%, transparent 60%);
+}
+.hero-inner {
+  max-width: 1100px; margin: 0 auto; padding: 0 40px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; width: 100%;
+}
+.hero-left { display: flex; flex-direction: column; align-items: flex-start; }
+.hero-right { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
+.hero-particles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.particle { position: absolute; border-radius: 50%; animation: floatParticle linear infinite; }
+@keyframes floatParticle {
+  0%   { transform: translateY(100vh) scale(0); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 0.3; }
+  100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+}
+.hero-eyebrow {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--blue-bright);
+  background: rgba(75,139,190,0.1); border: 1px solid rgba(75,139,190,0.3);
+  padding: 6px 18px; border-radius: 20px; margin-bottom: 20px; display: inline-block;
+  animation: fadeUp 0.8s ease both;
+}
+.hero-title {
+  font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 800;
+  line-height: 1.1; text-align: left; color: #ffffff;
+  animation: fadeUp 0.9s ease 0.1s both; letter-spacing: -0.5px;
+}
+.hero-title .hl-blue { color: var(--blue-bright); }
+.hero-title .hl-pu   { color: var(--purple-bright); }
+.hero-title .hl-y    { color: var(--yellow); }
+.hero-title-sub {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #ffffff;
+  margin-top: 12px; letter-spacing: 1px; animation: fadeUp 0.95s ease 0.15s both;
+}
+.hero-subtitle {
+  font-size: 0.9rem; font-weight: 300; color: #ffffff; text-align: justify;
+  line-height: 1.7; animation: fadeUp 1s ease 0.2s both;
+  border-left: 3px solid var(--blue-dark); padding-left: 18px;
+}
+.hero-tags { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-start; animation: fadeUp 1s ease 0.3s both; }
+.hero-tag {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;
+  padding: 4px 12px; border-radius: 5px;
+  border: 1px solid var(--border-pu); color: var(--purple-bright);
+  background: var(--purple-pale); letter-spacing: 0.5px;
+}
+.hero-cta { display: flex; gap: 12px; flex-wrap: wrap; justify-content: flex-start; animation: fadeUp 1s ease 0.4s both; }
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px; padding: 13px 28px; border-radius: 8px;
+  background: linear-gradient(135deg, var(--blue-mid), var(--purple-dark));
+  color: #ffffff; font-family: 'Syne', sans-serif; font-size: 0.8rem; font-weight: 600;
+  text-decoration: none; border: none; cursor: pointer; transition: all 0.25s;
+  box-shadow: 0 4px 20px rgba(75,139,190,0.3);
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(75,139,190,0.4); }
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 8px; padding: 13px 28px; border-radius: 8px;
+  background: transparent; border: 1px solid var(--border); color: #ffffff;
+  font-family: 'Syne', sans-serif; font-size: 0.8rem; font-weight: 600;
+  text-decoration: none; cursor: pointer; transition: all 0.25s;
+}
+.btn-secondary:hover { border-color: var(--purple-bright); color: var(--purple-bright); background: var(--purple-pale); }
+.scroll-indicator {
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  color: #ffffff; font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem; letter-spacing: 2px; margin-top: 60px; align-self: center;
+  animation: fadeUp 1.1s ease 0.5s both;
+}
+.scroll-indicator .arrow { animation: bounce 2s ease infinite; font-size: 1.4rem; }
+@keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(8px)} }
+@keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+.toc-nav {
+  position: sticky; top: 64px; z-index: 100;
+  background: rgba(10,10,18,0.95); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border); padding: 0 28px;
+  display: flex; align-items: center; overflow-x: auto; scrollbar-width: none;
+}
+.toc-nav::-webkit-scrollbar { display: none; }
+.toc-link {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;
+  color: #ffffff; text-decoration: none; letter-spacing: 1px;
+  text-transform: uppercase; padding: 14px 12px; white-space: nowrap;
+  border-bottom: 2px solid transparent; transition: all 0.2s;
+}
+.toc-link:hover, .toc-link.active { color: var(--blue-bright); border-bottom-color: var(--blue-bright); }
+
+.container { max-width: 980px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+.section { margin-top: 72px; opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.section.visible { opacity: 1; transform: translateY(0); }
+.sec-header { display: flex; align-items: center; gap: 16px; margin-bottom: 28px; flex-wrap: wrap; }
+.sec-num {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--yellow);
+  letter-spacing: 2px; background: var(--yellow-dim); border: 1px solid rgba(255,212,59,0.3);
+  padding: 4px 12px; border-radius: 4px; white-space: nowrap;
+}
+.sec-title {
+  font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 700; color: #ffffff;
+  border-bottom: 2px solid var(--blue-dark); padding-bottom: 6px; flex: 1;
+}
+.sec-title .accent-blue { color: var(--blue-bright); }
+.sec-title .accent-pu   { color: var(--purple-bright); }
+
+.prose {
+  font-size: 0.9rem; line-height: 1.85; color: #ffffff;
+  max-width: 820px; text-align: justify;
+}
+.prose strong { color: #ffffff; font-weight: 600; }
+.prose + .prose { margin-top: 14px; }
+.prose em { color: var(--purple-bright); font-style: italic; }
+
+.code-block {
+  background: var(--obs-800); border: 1px solid var(--border);
+  border-radius: 10px; overflow: hidden; margin: 24px 0; box-shadow: var(--glow-blue); position: relative;
+}
+.code-block::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--blue-bright), var(--purple-bright), transparent);
+}
+.code-header {
+  background: rgba(255,255,255,0.03); border-bottom: 1px solid var(--border);
+  padding: 10px 18px; display: flex; align-items: center; gap: 8px;
+}
+.tdk-r { width:10px;height:10px;border-radius:50%;background:#ff5f57; }
+.tdk-y { width:10px;height:10px;border-radius:50%;background:#febc2e; }
+.tdk-g { width:10px;height:10px;border-radius:50%;background:#28c840; }
+.code-lbl { font-family:'JetBrains Mono',monospace; font-size:0.8rem; color:#ffffff; margin-left:6px; letter-spacing:0.5px; }
+.copy-btn {
+  margin-left: auto; font-family:'JetBrains Mono',monospace; font-size:0.8rem;
+  color: var(--blue-bright); background: var(--blue-pale);
+  border: 1px solid rgba(75,139,190,0.3); padding: 3px 10px; border-radius: 4px;
+  cursor: pointer; transition: all 0.2s;
+}
+.copy-btn:hover { background: var(--blue-dark); color: white; }
+.code-body { padding: 22px 24px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+pre { font-family:'JetBrains Mono',monospace; font-size:0.8rem; line-height:1.75; color:#cdd9e5; tab-size:4; white-space: pre; }
+.kw{color:var(--syn-kw)} .cl{color:var(--syn-cl)} .fn{color:var(--syn-fn)}
+.st{color:var(--syn-st)} .cm{color:var(--syn-cm);font-style:italic} .nm{color:var(--syn-nm)}
+.dc{color:var(--syn-dc)} .op{color:var(--syn-kw)}
+
+.table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 20px 0; border-radius: 10px; border: 1px solid var(--border); }
+table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+thead tr { background: linear-gradient(135deg, var(--obs-500), var(--obs-400)); }
+thead th {
+  color: var(--blue-bright); font-family:'JetBrains Mono',monospace;
+  font-size: 0.8rem; letter-spacing: 1.5px; text-transform: uppercase;
+  padding: 13px 18px; text-align: left; font-weight: 400; border-bottom: 1px solid var(--border);
+}
+tbody tr { border-bottom: 1px solid rgba(75,139,190,0.08); transition: background 0.15s; }
+tbody tr:last-child { border-bottom: none; }
+tbody tr:hover { background: var(--blue-pale); }
+tbody td { padding: 13px 18px; line-height: 1.6; vertical-align: top; color: #ffffff; font-size: 0.8rem; text-align: justify; }
+tbody td:first-child {
+  font-family:'JetBrains Mono',monospace; font-size:0.8rem; color: var(--purple-bright);
+  font-weight: 500; background: rgba(189,147,249,0.04);
+  border-right: 1px solid var(--border-pu); white-space: nowrap; text-align: left;
+}
+
+.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px,1fr)); gap: 14px; margin: 20px 0; }
+.card {
+  background: var(--obs-700); border: 1px solid var(--border); border-radius: 10px;
+  padding: 20px; border-top: 3px solid var(--blue-dark); transition: all 0.2s;
+}
+.card:hover { border-top-color: var(--blue-bright); transform: translateY(-2px); box-shadow: var(--glow-blue); }
+.card.pu { border-top-color: var(--purple-dark); }
+.card.pu:hover { border-top-color: var(--purple-bright); box-shadow: var(--glow-pu); }
+.card-label { font-family:'JetBrains Mono',monospace; font-size:0.8rem; color: var(--blue-bright); letter-spacing:2px; text-transform:uppercase; margin-bottom:8px; }
+.card.pu .card-label { color: var(--purple-bright); }
+.card-value { font-size: 0.9rem; line-height: 1.6; color: #ffffff; text-align: justify; }
+code { font-family:'JetBrains Mono',monospace; font-size:0.8rem; background: rgba(75,139,190,0.12); color: var(--text-code); padding: 2px 7px; border-radius: 4px; }
+
+.steps { display: flex; flex-direction: column; gap: 0; margin: 20px 0; }
+.step { display: flex; gap: 18px; padding: 18px 0; border-bottom: 1px dashed rgba(75,139,190,0.15); }
+.step:last-child { border-bottom: none; }
+.step-num {
+  width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0;
+  background: linear-gradient(135deg, var(--blue-dark), var(--purple-dark));
+  color: white; font-family:'JetBrains Mono',monospace; font-size:1rem;
+  display: flex; align-items: center; justify-content: center;
+  margin-top: 2px; box-shadow: 0 2px 10px rgba(75,139,190,0.3);
+}
+.step-head { font-family:'Syne',sans-serif; font-weight:600; font-size:0.9rem; margin-bottom:6px; color:#ffffff; }
+.step-body { font-size: 0.9rem; line-height: 1.75; color: #ffffff; text-align: justify; }
+
+.callout {
+  border-radius: 8px; padding: 16px 20px; margin: 16px 0;
+  display: flex; gap: 14px; align-items: flex-start; font-size: 0.9rem; line-height: 1.7;
+}
+.callout-blue { background: rgba(75,139,190,0.08); border-left: 3px solid var(--blue-bright); }
+.callout-pu   { background: var(--purple-pale); border-left: 3px solid var(--purple-bright); }
+.callout-warn { background: rgba(255,212,59,0.06); border-left: 3px solid var(--yellow); }
+.callout-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+.callout-text { color: #ffffff; text-align: justify; font-size: 0.9rem; }
+.callout-text strong { color: #ffffff; }
+
+.flow {
+  display: flex; flex-wrap: wrap; align-items: stretch; margin: 20px 0;
+  background: var(--obs-700); border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
+}
+.flow-item {
+  flex: 1; min-width: 120px; padding: 18px 14px; text-align: center;
+  border-right: 1px solid var(--border); position: relative; transition: background 0.2s;
+}
+.flow-item:hover { background: var(--blue-pale); }
+.flow-item:last-child { border-right: none; }
+.flow-item::after { content:'›'; position:absolute; right:-8px; top:50%; transform:translateY(-50%); color: var(--blue-mid); font-size:1.4rem; z-index:1; }
+.flow-item:last-child::after { display: none; }
+.flow-icon { font-size: 2rem; display: block; margin-bottom: 6px; }
+.flow-lbl { font-family:'JetBrains Mono',monospace; font-size:0.8rem; color: var(--blue-bright); letter-spacing:1px; text-transform:uppercase; }
+.flow-desc { font-size: 0.9rem; color: #ffffff; margin-top: 4px; line-height: 1.4; }
+
+.subsec { margin-top: 36px; }
+.subsec-title {
+  font-family:'Syne',sans-serif; font-size: 1rem; font-weight:700;
+  color: #ffffff; margin-bottom: 14px; display: flex; align-items: center; gap: 10px;
+}
+.subsec-title::before { content:''; display:block; width:3px; height:18px; background: linear-gradient(var(--blue-bright), var(--purple-bright)); border-radius:2px; }
+
+.divider { height: 1px; margin: 64px 0 0; background: linear-gradient(to right, transparent, var(--blue-dark), var(--purple-dark), transparent); }
+
+.faq-item { border: 1px solid var(--border); border-radius: 8px; margin-bottom: 8px; overflow: hidden; background: var(--obs-700); transition: border-color 0.2s; }
+.faq-item:hover { border-color: var(--blue-bright); }
+.faq-q {
+  padding: 16px 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+  font-family:'Syne',sans-serif; font-size: 1rem; font-weight:600; color: #ffffff;
+  user-select: none; background: none; border: none; width: 100%; text-align: left; transition: color 0.2s;
+}
+.faq-q:hover { color: var(--blue-bright); }
+.faq-arrow { color: var(--blue-bright); font-size: 1.4rem; transition: transform 0.3s; flex-shrink: 0; }
+.faq-item.open .faq-arrow { transform: rotate(180deg); }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+.faq-item.open .faq-a { max-height: 600px; }
+.faq-a-inner { padding: 0 20px 18px; font-size: 0.9rem; line-height: 1.8; color: #ffffff; border-top: 1px solid var(--border); padding-top: 14px; text-align: justify; }
+
+.reactions {
+  display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
+  padding: 20px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin: 28px 0;
+}
+.reaction-btn {
+  display: flex; align-items: center; gap: 8px; background: var(--obs-700); border: 1px solid var(--border);
+  color: #ffffff; padding: 9px 18px; border-radius: 24px; font-family:'Syne',sans-serif;
+  font-size: 0.8rem; cursor: pointer; transition: all 0.2s;
+}
+.reaction-btn:hover, .reaction-btn.active { background: var(--blue-pale); border-color: var(--blue-bright); color: var(--blue-bright); }
+.reaction-btn.love-btn:hover, .reaction-btn.love-btn.active { background: rgba(255,80,120,0.1); border-color: #ff5078; color: #ff5078; }
+.reaction-count { font-family:'JetBrains Mono',monospace; font-size:0.8rem; }
+
+.comments-section { margin-top: 28px; }
+.comment-form { background: var(--obs-700); border: 1px solid var(--border); border-radius: 10px; padding: 22px; margin-bottom: 24px; }
+.comment-form h3 { font-family:'Syne',sans-serif; font-size: 1rem; margin-bottom: 16px; color: #ffffff; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+.form-input, .form-textarea {
+  background: var(--obs-800); border: 1px solid var(--border); border-radius: 6px;
+  color: #ffffff; font-family:'Literata',serif; font-size: 0.8rem;
+  padding: 10px 14px; width: 100%; outline: none; transition: border-color 0.2s;
+}
+.form-input:focus, .form-textarea:focus { border-color: var(--blue-bright); }
+.form-textarea { resize: vertical; min-height: 100px; display: block; margin-bottom: 12px; }
+.submit-btn {
+  background: linear-gradient(135deg, var(--blue-mid), var(--purple-dark));
+  color: white; border: none; padding: 10px 24px; border-radius: 6px;
+  font-family:'Syne',sans-serif; font-size: 0.8rem; font-weight:600; cursor: pointer; transition: all 0.2s;
+}
+.submit-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+.comment-list { display: flex; flex-direction: column; gap: 14px; }
+.comment-item { background: var(--obs-700); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; }
+.comment-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+.comment-avatar {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--blue-dark), var(--purple-dark));
+  display: flex; align-items: center; justify-content: center;
+  font-family:'JetBrains Mono',monospace; font-size:1.2rem; color:white; font-weight:700; flex-shrink:0;
+}
+.comment-name { font-family:'Syne',sans-serif; font-size:0.9rem; font-weight:600; color:#ffffff; }
+.comment-date { font-family:'JetBrains Mono',monospace; font-size:0.8rem; color:#ffffff; }
+.comment-body { font-size: 0.9rem; line-height: 1.7; color: #ffffff; text-align: justify; }
+.comment-like { display:flex; align-items:center; gap:6px; margin-top:10px; background:none; border:1px solid var(--border); color:#ffffff; padding:4px 12px; border-radius:12px; cursor:pointer; font-size:0.8rem; transition:all 0.2s; }
+.comment-like:hover { color:#ff5078; border-color:#ff5078; background:rgba(255,80,120,0.08); }
+
+.follow-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); gap: 12px; margin: 20px 0; }
+.follow-btn {
+  display: flex; align-items: center; gap: 12px; background: var(--obs-700);
+  border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px;
+  color: #ffffff; font-family:'Syne',sans-serif; font-size: 0.8rem; font-weight:600;
+  cursor: pointer; text-decoration: none; transition: all 0.25s;
+}
+.follow-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
+.follow-btn.linkedin:hover { border-color:#0a66c2; background:rgba(10,102,194,0.1); color:#4b9be6; }
+.follow-btn.facebook:hover { border-color:#1877f2; background:rgba(24,119,242,0.1); color:#5b9fec; }
+.follow-btn.twitter:hover  { border-color:#1da1f2; background:rgba(29,161,242,0.1); color:#6bb8f2; }
+.follow-btn.youtube:hover  { border-color:#ff0000; background:rgba(255,0,0,0.08); color:#ff6666; }
+.follow-icon { font-size: 1.6rem; }
+.follow-lbl { display: flex; flex-direction: column; gap: 1px; }
+.follow-platform { font-size: 0.8rem; color: #ffffff; font-weight:400; }
+
+.subscribe-card {
+  background: linear-gradient(135deg, var(--obs-600), var(--obs-500));
+  border: 1px solid var(--border); border-radius: 14px;
+  padding: 40px 36px; margin: 28px 0; text-align: center;
+  position: relative; overflow: hidden;
+}
+.subscribe-card::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:2px;
+  background: linear-gradient(90deg, var(--blue-bright), var(--purple-bright));
+}
+.subscribe-title { font-family:'Syne',sans-serif; font-size:1rem; font-weight:700; margin-bottom:8px; color:#ffffff; }
+.subscribe-sub { color:#ffffff; margin-bottom:24px; font-size:0.9rem; text-align:justify; max-width:500px; margin-left:auto; margin-right:auto; }
+.sub-form { display:flex; gap:10px; max-width:480px; margin:0 auto; flex-wrap:wrap; justify-content:center; }
+.sub-input {
+  flex:1; min-width:200px; background: var(--obs-800); border:1px solid var(--border);
+  border-radius:8px; color:#ffffff; font-family:'Literata',serif; font-size:0.8rem;
+  padding:11px 16px; outline:none; transition:border-color 0.2s;
+}
+.sub-input:focus { border-color: var(--blue-bright); }
+.sub-btn {
+  background: linear-gradient(135deg, var(--blue-mid), var(--purple-dark));
+  color:white; border:none; padding:11px 24px; border-radius:8px;
+  font-family:'Syne',sans-serif; font-size:0.8rem; font-weight:600;
+  cursor:pointer; transition:all 0.2s; white-space:nowrap;
+}
+.sub-btn:hover { opacity:0.85; transform:translateY(-1px); }
+.sub-note { font-size:0.8rem; color:#ffffff; margin-top:12px; }
+
+.share-row { display:flex; flex-wrap:wrap; gap:10px; margin:20px 0; }
+.share-btn {
+  display:inline-flex; align-items:center; gap:8px; padding:9px 18px; border-radius:8px;
+  font-family:'Syne',sans-serif; font-size:0.8rem; font-weight:600;
+  border:1px solid var(--border); background: var(--obs-700); color:#ffffff;
+  cursor:pointer; text-decoration:none; transition:all 0.2s;
+}
+.share-btn:hover { transform:translateY(-2px); }
+.share-btn.fb:hover { border-color:#1877f2; background:rgba(24,119,242,0.1); color:#6bb1ff; }
+.share-btn.tw:hover { border-color:#1da1f2; background:rgba(29,161,242,0.1); color:#80ccff; }
+.share-btn.li:hover { border-color:#0a66c2; background:rgba(10,102,194,0.1); color:#6baff5; }
+.share-btn.cp:hover { border-color:var(--yellow); background:var(--yellow-dim); color:var(--yellow); }
+
+.outro-card {
+  background: linear-gradient(135deg, var(--obs-600) 0%, var(--obs-700) 100%);
+  border: 1px solid var(--border-pu); border-radius: 14px; padding: 48px 36px;
+  text-align: center; margin: 48px 0; position: relative; overflow: hidden;
+}
+.outro-card::after {
+  content: '</>'; position:absolute; right:32px; bottom:16px;
+  font-family:'JetBrains Mono',monospace; font-size:5rem;
+  color: rgba(189,147,249,0.06); font-weight:700; user-select:none; pointer-events:none;
+}
+.outro-title { font-family:'Syne',sans-serif; font-size:1.2rem; font-weight:800; color:#ffffff; margin-bottom:14px; }
+.outro-body { color:#ffffff; font-size:0.9rem; max-width:620px; margin:0 auto 14px; line-height:1.8; text-align:justify; }
+
+footer { background: var(--obs-800); border-top: 1px solid var(--border); padding: 60px 24px 32px; margin-top: 80px; }
+.footer-inner { max-width: 980px; margin: 0 auto; }
+.footer-top { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+.footer-brand { font-family:'Syne',sans-serif; font-size:1rem; font-weight:800; margin-bottom:10px; }
+.footer-tagline { font-size: 0.9rem; color: #ffffff; line-height:1.6; text-align:justify; }
+.footer-col-title { font-family:'JetBrains Mono',monospace; font-size:0.8rem; letter-spacing:2px; color: var(--blue-bright); text-transform:uppercase; margin-bottom:14px; }
+.footer-btn {
+  display:flex; align-items:center; gap:8px; background:none; border:1px solid transparent;
+  color:#ffffff; padding:7px 10px; border-radius:6px; font-family:'Syne',sans-serif; font-size:0.8rem;
+  cursor:pointer; text-decoration:none; width:100%; margin-bottom:2px; transition:all 0.2s; text-align:left;
+}
+.footer-btn:hover { border-color: var(--border); color:#ffffff; background: var(--obs-700); }
+.footer-btn .ico { font-size:1.2rem; width:18px; }
+.footer-bottom { border-top:1px solid var(--border); padding-top:24px; display:flex; flex-wrap:wrap; gap:16px; justify-content:space-between; align-items:center; }
+.footer-copy { font-family:'JetBrains Mono',monospace; font-size:0.8rem; color:#ffffff; }
+.footer-links-row { display:flex; gap:8px; flex-wrap:wrap; }
+.footer-link-btn {
+  background: var(--obs-700); border:1px solid var(--border); color:#ffffff;
+  padding:5px 12px; border-radius:5px; font-family:'JetBrains Mono',monospace;
+  font-size:0.8rem; letter-spacing:0.5px; cursor:pointer; text-decoration:none; transition:all 0.2s;
+}
+.footer-link-btn:hover { border-color: var(--blue-bright); color: var(--blue-bright); }
+
+.sticky-share { position:fixed; right:16px; top:50%; transform:translateY(-50%); z-index:200; display:flex; flex-direction:column; gap:8px; }
+.ss-btn {
+  width:40px; height:40px; border-radius:8px; background: var(--obs-700);
+  border:1px solid var(--border); display:flex; align-items:center; justify-content:center;
+  cursor:pointer; font-size:1.4rem; transition:all 0.2s; text-decoration:none; color:#ffffff;
+}
+.ss-btn:hover { transform:scale(1.12); border-color: var(--blue-bright); background: var(--blue-pale); color: var(--blue-bright); }
+
+#progress-bar {
+  position:fixed; top:64px; left:0; height:2px; z-index:1001;
+  background: linear-gradient(90deg, var(--blue-bright), var(--purple-bright));
+  width:0%; transition:width 0.1s linear;
+}
+
+.toast {
+  position:fixed; bottom:28px; left:50%; transform:translateX(-50%) translateY(60px);
+  background: var(--obs-600); border:1px solid var(--blue-bright);
+  color:#ffffff; padding:10px 22px; border-radius:8px;
+  font-family:'JetBrains Mono',monospace; font-size:0.8rem;
+  transition:transform 0.3s ease; z-index:2000; pointer-events:none;
+}
+.toast.show { transform:translateX(-50%) translateY(0); }
+
+.ai-share-section { background: var(--obs-700); border: 1px solid var(--border-pu); border-radius: 14px; padding: 28px; margin: 28px 0; }
+.ai-share-title { font-family:'Syne',sans-serif; font-size:1rem; font-weight:700; color:#ffffff; margin-bottom:8px; }
+.ai-share-desc { font-size:0.9rem; color:#ffffff; margin-bottom:16px; text-align:justify; }
+.ai-share-input-row { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; }
+.ai-share-select { flex:1; min-width:140px; background:var(--obs-800); border:1px solid var(--border); border-radius:8px; color:#ffffff; font-family:'Syne',sans-serif; font-size:0.8rem; padding:10px 14px; outline:none; cursor:pointer; }
+.ai-share-select:focus { border-color:var(--blue-bright); }
+.ai-share-gen-btn { background:linear-gradient(135deg,var(--blue-mid),var(--purple-dark)); color:#ffffff; border:none; padding:10px 22px; border-radius:8px; font-family:'Syne',sans-serif; font-size:0.8rem; font-weight:600; cursor:pointer; transition:all 0.2s; white-space:nowrap; }
+.ai-share-gen-btn:hover { opacity:0.85; transform:translateY(-1px); }
+.ai-share-output { background:var(--obs-800); border:1px solid var(--border); border-radius:8px; padding:16px; min-height:70px; font-size:0.9rem; color:#ffffff; line-height:1.7; white-space:pre-wrap; word-break:break-word; margin-bottom:12px; display:none; text-align:justify; }
+.ai-share-output.visible { display:block; }
+.ai-share-loading { display:none; align-items:center; gap:10px; color:#ffffff; font-size:0.8rem; margin-bottom:12px; }
+.ai-share-loading.visible { display:flex; }
+.ai-share-spinner { width:18px; height:18px; border:2px solid var(--border); border-top-color:var(--blue-bright); border-radius:50%; animation:spin 0.8s linear infinite; }
+@keyframes spin { to{transform:rotate(360deg)} }
+.ai-share-action-row { display:flex; gap:8px; flex-wrap:wrap; }
+.ai-share-action-btn { display:inline-flex; align-items:center; gap:6px; padding:8px 16px; border-radius:8px; font-family:'Syne',sans-serif; font-size:0.8rem; font-weight:600; border:1px solid var(--border); background:var(--obs-700); color:#ffffff; cursor:pointer; text-decoration:none; transition:all 0.2s; }
+.ai-share-action-btn:hover { transform:translateY(-1px); }
+.ai-share-action-btn.fb:hover { border-color:#1877f2; background:rgba(24,119,242,0.1); color:#6bb1ff; }
+.ai-share-action-btn.tw:hover { border-color:#1da1f2; background:rgba(29,161,242,0.1); color:#80ccff; }
+.ai-share-action-btn.li:hover { border-color:#0a66c2; background:rgba(10,102,194,0.1); color:#6baff5; }
+.ai-share-action-btn.cp:hover { border-color:var(--yellow); background:var(--yellow-dim); color:var(--yellow); }
+
+@media (max-width: 900px) {
+  .hero-inner { grid-template-columns: 1fr; gap: 32px; padding: 0 24px; text-align: center; }
+  .hero-left { align-items: center; }
+  .hero-right { align-items: center; }
+  .hero-title { text-align: center; }
+  .hero-subtitle { text-align: justify; border-left: none; padding-left: 0; border-top: 3px solid var(--blue-dark); padding-top: 16px; }
+  .hero-tags { justify-content: center; }
+  .hero-cta { justify-content: center; }
+  .scroll-indicator { margin-top: 36px; }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 24px; }
+  .card-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 768px) {
+  .navbar { padding: 0 16px; }
+  .hero { padding: 90px 0 60px; }
+  .toc-nav { padding: 0 8px; }
+  .toc-link { font-size: 0.7rem; padding: 10px 8px; letter-spacing: 0.5px; }
+  .container { padding: 0 16px; }
+  .section { margin-top: 48px; }
+  .footer-top { grid-template-columns: 1fr; gap: 20px; }
+  .form-row { grid-template-columns: 1fr; }
+  .sticky-share { display: none; }
+  .card-grid { grid-template-columns: 1fr; }
+  .flow-item { min-width: 100%; border-right: none; border-bottom: 1px solid var(--border); }
+  .flow-item::after { content: '↓'; right: 50%; bottom: -10px; top: unset; transform: translateX(50%); }
+  .step { gap: 12px; }
+  .step-num { width: 28px; height: 28px; font-size: 11px; }
+  .follow-grid { grid-template-columns: 1fr 1fr; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .reactions { flex-wrap: wrap; gap: 8px; }
+  .share-row { gap: 8px; }
+  .code-body { padding: 14px 12px; }
+  .subscribe-card { padding: 28px 18px; }
+  .sub-form { flex-direction: column; }
+  .sub-input, .sub-btn { width: 100%; }
+  .outro-card { padding: 28px 18px; }
+  .btn-primary, .btn-secondary { width: 100%; max-width: 280px; justify-content: center; }
+}
+@media (max-width: 480px) {
+  .navbar { padding: 0 12px; }
+  .container { padding: 0 12px; }
+  .hero-inner { padding: 0 16px; }
+  .drawer { width: 280px; }
+  .hero-cta { flex-direction: column; align-items: center; }
+  .follow-grid { grid-template-columns: 1fr; }
+  .comment-form { padding: 16px; }
+  .table-wrap { font-size: 0.75rem; }
+  thead th { font-size: 0.75rem; padding: 8px 10px; }
+  tbody td { padding: 8px 10px; font-size: 0.75rem; }
+}
+</style>
+</head>
+<body>
+<div id="progress-bar"></div>
+<nav class="navbar">
+  <a href="https://code-sense.pansensoyglenn.workers.dev" class="brand">
+    <span class="brand-valleys">VALLEYS</span>
+    <span class="brand-amp">&amp;</span>
+    <span class="brand-bytes">BYTES</span>
+    <span class="brand-dot"></span>
+  </a>
+  <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+<div class="drawer" id="drawer" role="navigation" aria-label="Site menu">
+  <div class="drawer-section">
+    <div class="drawer-section-label">Navigate</div>
+    <a class="drawer-btn" href="#intro"><span class="ico">📖</span>Introduction</a>
+    <a class="drawer-btn" href="#s1"><span class="ico">🗂️</span>Program Overview</a>
+    <a class="drawer-btn" href="#s2"><span class="ico">⚙️</span>Imports</a>
+    <a class="drawer-btn" href="#s3"><span class="ico">🔌</span>PaymentMethod Protocol</a>
+    <a class="drawer-btn" href="#s4"><span class="ico">🎫</span>TicketPresenter Protocol</a>
+    <a class="drawer-btn" href="#s5"><span class="ico">💳</span>PayPal &amp; CreditCard</a>
+    <a class="drawer-btn" href="#s6"><span class="ico">💵</span>CashAtAirport</a>
+    <a class="drawer-btn" href="#s7"><span class="ico">🖨️</span>SimpleConsoleTicket</a>
+    <a class="drawer-btn" href="#s8"><span class="ico">📄</span>DetailedTicket</a>
+    <a class="drawer-btn" href="#s9"><span class="ico">📦</span>Booking Dataclass</a>
+    <a class="drawer-btn" href="#s10"><span class="ico">✈️</span>confirm_and_issue()</a>
+    <a class="drawer-btn" href="#s11"><span class="ico">🖥️</span>main() Function</a>
+    <a class="drawer-btn" href="#s12"><span class="ico">🔐</span>__name__ Guard</a>
+    <a class="drawer-btn" href="#poly"><span class="ico">🔬</span>Polymorphism Deep Dive</a>
+    <a class="drawer-btn" href="#bestpractices"><span class="ico">⚠️</span>Best Practices</a>
+    <a class="drawer-btn" href="#source"><span class="ico">💻</span>Full Source</a>
+    <a class="drawer-btn" href="#faq"><span class="ico">❓</span>FAQ</a>
+  </div>
+  <div class="drawer-section">
+    <div class="drawer-section-label">Community</div>
+    <a class="drawer-btn" href="#comments"><span class="ico">💬</span>Comments</a>
+    <a class="drawer-btn" href="#follow"><span class="ico">👥</span>Follow</a>
+    <a class="drawer-btn" href="#subscribe"><span class="ico">✉️</span>Subscribe</a>
+  </div>
+  <div class="drawer-section">
+    <div class="drawer-section-label">Site Pages</div>
+    <a class="drawer-btn" href="about-guide.html"><span class="ico">📄</span>About this Page</a>
+    <a class="drawer-btn" href="about-author.html"><span class="ico">🧑‍💻</span>About the Author</a>
+    <a class="drawer-btn" href="oop-contact.html"><span class="ico">📬</span>Contact</a>
+    <a class="drawer-btn" href="oop-privacy.html"><span class="ico">🔒</span>Privacy Policy</a>
+    <a class="drawer-btn" href="oop-terms.html"><span class="ico">📜</span>Terms of Service</a>
+    <a class="drawer-btn" href="oop-cookie.html"><span class="ico">🍪</span>Cookie Policy</a>
+  </div>
+</div>
+<div style="padding:78px 24px 0;position:relative;z-index:1;">
+  <div class="ad-banner">
+    <div class="ad-label">ADVERTISEMENT</div>
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4575646748966866" data-ad-slot="4226674403" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+</div>
+<section class="hero" id="top">
+  <div class="hero-particles" id="particles"></div>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-eyebrow">Python · Polymorphism · Protocol · OOP</div>
+      <h3 class="hero-title">
+        <span class="hl-blue">Ticketing</span><span class="hl-pu">.py</span>
+      </h3>
+      <div class="hero-title-sub">Python OOP · Polymorphism Guide</div>
+    </div>
+    <div class="hero-right">
+      <p class="hero-subtitle">
+        A complete walkthrough of polymorphism, Protocol-based structural subtyping, dataclasses, and polymorphic dispatch — explained step by step through a real airline ticketing simulator. Every class, every method, every design decision explained.
+      </p>
+      <div class="hero-tags">
+        <span class="hero-tag">✈️ Airline Ticketing</span>
+        <span class="hero-tag">🔌 2 Protocols</span>
+        <span class="hero-tag">💳 3 Payment Methods</span>
+        <span class="hero-tag">🎫 2 Ticket Styles</span>
+        <span class="hero-tag">🔁 12 Sections</span>
+        <span class="hero-tag">🐍 Python 3</span>
+      </div>
+      <div class="hero-cta">
+        <a href="#intro" class="btn-primary">📖 Start Reading</a>
+        <a href="#source" class="btn-secondary">💻 View Source Code</a>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <span>SCROLL TO EXPLORE</span>
+    <span class="arrow">↓</span>
+  </div>
+</section>
+<nav class="toc-nav" id="toc">
+  <a class="toc-link" href="#intro">Intro</a>
+  <a class="toc-link" href="#s1">Overview</a>
+  <a class="toc-link" href="#s2">Imports</a>
+  <a class="toc-link" href="#s3">PaymentMethod</a>
+  <a class="toc-link" href="#s4">TicketPresenter</a>
+  <a class="toc-link" href="#s5">PayPal/Card</a>
+  <a class="toc-link" href="#s6">Cash</a>
+  <a class="toc-link" href="#s7">SimpleTicket</a>
+  <a class="toc-link" href="#s8">DetailedTicket</a>
+  <a class="toc-link" href="#s9">Booking</a>
+  <a class="toc-link" href="#s10">confirm()</a>
+  <a class="toc-link" href="#s11">main()</a>
+  <a class="toc-link" href="#s12">Guard</a>
+  <a class="toc-link" href="#poly">Polymorphism</a>
+  <a class="toc-link" href="#source">Code</a>
+  <a class="toc-link" href="#faq">FAQ</a>
+</nav>
+<div class="container">
+  <div class="section" id="intro">
+    <div class="sec-header">
+      <span class="sec-num">INTRODUCTION</span>
+      <h2 class="sec-title">What Is <span class="accent-blue">Ticketing.py</span> and Why Does It Matter?</h2>
+    </div>
+    <p class="prose">
+      Imagine stepping up to an airline booking counter. You can pay with PayPal, a credit card, or cash at the airport. Your ticket can be printed as a clean one-liner summary or as a full e-ticket with every detail. The booking agent does not care which — they process your payment and hand you your ticket regardless. This is exactly what <strong>Ticketing.py</strong> simulates. And the mechanism that makes the booking agent indifferent to which payment method or ticket format you choose is one of the most important concepts in all of object-oriented programming: <strong>polymorphism</strong>.
+    </p>
+    <p class="prose" style="margin-top:14px;">
+      Polymorphism means <em>many forms</em>. In Python, it means that a single piece of code — a method call like <code>self.payment.confirm_payment()</code> — can trigger completely different behaviour depending on which object is behind <code>self.payment</code> at runtime. The <code>Booking</code> class does not need an <code>if/elif</code> chain to check whether payment is a <code>PayPal</code>, <code>CreditCard</code>, or <code>CashAtAirport</code> object. It simply calls <code>confirm_payment()</code> and Python dispatches to the right implementation automatically. That is polymorphism in action.
+    </p>
+    <p class="prose" style="margin-top:14px;">
+      This program implements polymorphism using Python's <strong>Protocol</strong> class from the <code>typing</code> module. Unlike abstract base classes, Protocols do not require explicit inheritance — any class that implements the right method signatures automatically satisfies the Protocol. This is called <em>structural subtyping</em> or duck typing. Combined with the <code>@dataclass</code> decorator, which eliminates boilerplate constructor code, this program is a focused, practical demonstration of modern Python OOP design.
+    </p>
+    <div class="callout callout-blue" style="margin-top:24px;">
+      <span class="callout-icon">🐍</span>
+      <div class="callout-text">
+        <strong>What you will learn from this guide:</strong> Defining structural interfaces with <code>Protocol</code>, duck typing and structural subtyping, the <code>@dataclass</code> decorator and <code>__post_init__</code>, polymorphic dispatch eliminating <code>isinstance</code> checks, the open/closed principle in practice, route-based fare calculation with a dictionary lookup, and the <code>if __name__ == "__main__"</code> entry guard — all demonstrated in one cohesive, runnable program.
+      </div>
+    </div>
+    <div class="callout callout-warn" style="margin-top:16px;">
+      <span class="callout-icon">💡</span>
+      <div class="callout-text">
+        <strong>Who this guide is for:</strong> Python learners who understand basic classes and want to understand how polymorphism and Protocols work in modern Python. No external libraries are needed — only <code>datetime</code>, <code>dataclasses</code>, and <code>typing</code> from the standard library are used throughout.
+      </div>
+    </div>
+  </div>
+  <div class="ad-banner" style="margin-top:40px;padding:0;">
+    <div class="ad-label">ADVERTISEMENT</div>
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4575646748966866" data-ad-slot="4226674403" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+  <div class="divider"></div>
+
+  <!-- SECTION 1 — OVERVIEW -->
+  <div class="section" id="s1">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 01</span>
+      <h2 class="sec-title">Program <span class="accent-pu">Overview</span></h2>
+    </div>
+    <p class="prose">
+      Ticketing.py is built around two Protocols and four concrete classes, all orchestrated by a <code>Booking</code> dataclass and a <code>main()</code> function. Before diving into individual sections, understanding the full picture of how these pieces relate to each other — and how data flows from user input to a printed ticket — is essential.
+    </p>
+    <div class="card-grid" style="margin-top:20px;">
+      <div class="card"><div class="card-label">Protocol 1 — PaymentMethod</div><div class="card-value">Defines the interface any payment class must satisfy: <code>name() → str</code> and <code>confirm_payment(amount, description) → bool</code>. No inheritance required — any class with these methods qualifies.</div></div>
+      <div class="card pu"><div class="card-label">Protocol 2 — TicketPresenter</div><div class="card-value">Defines the interface any ticket formatter must satisfy: <code>generate(booking) → str</code>. Allows the <code>Booking</code> class to generate tickets without knowing whether the format is simple or detailed.</div></div>
+      <div class="card"><div class="card-label">PayPal / CreditCard / Cash</div><div class="card-value">Three concrete classes that each satisfy the <code>PaymentMethod</code> Protocol by implementing both required methods with different logic: redirect URL, 3D Secure simulation, and cash counter instructions.</div></div>
+      <div class="card pu"><div class="card-label">SimpleConsoleTicket / DetailedTicket</div><div class="card-value">Two concrete classes satisfying <code>TicketPresenter</code>. One returns a compact ASCII-art receipt; the other returns a full e-ticket with contact, full date, and base fare breakdown.</div></div>
+      <div class="card"><div class="card-label">Booking — The Dataclass</div><div class="card-value">Holds all passenger and booking data. Uses <code>__post_init__</code> to auto-generate <code>ticket_id</code>, look up <code>base_fare</code> from a routes dictionary, and calculate <code>total</code>. Calls both Protocols via <code>confirm_and_issue()</code>.</div></div>
+    </div>
+    <div class="flow" style="margin-top:24px;">
+      <div class="flow-item"><span class="flow-icon">🖥️</span><span class="flow-lbl">Input</span><div class="flow-desc">main() collects name, email, route, passengers</div></div>
+      <div class="flow-item"><span class="flow-icon">💳</span><span class="flow-lbl">Payment</span><div class="flow-desc">User picks PayPal / Card / Cash — polymorphic object created</div></div>
+      <div class="flow-item"><span class="flow-icon">🎫</span><span class="flow-lbl">Style</span><div class="flow-desc">User picks Simple or Detailed — polymorphic presenter created</div></div>
+      <div class="flow-item"><span class="flow-icon">📦</span><span class="flow-lbl">Booking</span><div class="flow-desc">Dataclass auto-calculates fare &amp; ticket ID</div></div>
+      <div class="flow-item"><span class="flow-icon">✅</span><span class="flow-lbl">Issue</span><div class="flow-desc">confirm_and_issue() dispatches polymorphically — no if/elif</div></div>
+    </div>
+  </div>
+  <div class="divider"></div>
+
+  <!-- SECTION 2 — IMPORTS -->
+  <div class="section" id="s2">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 02</span>
+      <h2 class="sec-title"><span class="accent-blue">import datetime, dataclasses, typing</span> — The First Lines</h2>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><div class="tdk-r"></div><div class="tdk-y"></div><div class="tdk-g"></div><span class="code-lbl">Ticketing.py — Lines 1–3</span><button class="copy-btn" onclick="copyCode(this)" aria-label="Copy code">Copy</button></div>
+      <div class="code-body"><pre><span class="kw">import</span> datetime
+<span class="kw">from</span> dataclasses <span class="kw">import</span> dataclass
+<span class="kw">from</span> typing <span class="kw">import</span> Protocol</pre></div>
+    </div>
+    <p class="prose">All three modules are part of Python's standard library — no <code>pip install</code> is needed. <code>datetime</code> provides date arithmetic for the default departure date. <code>dataclass</code> is a decorator that auto-generates <code>__init__</code>, <code>__repr__</code>, and <code>__eq__</code> from annotated class fields. <code>Protocol</code> enables structural subtyping — defining interfaces that classes satisfy implicitly by implementing the right methods.</p>
+    <div class="card-grid">
+      <div class="card"><div class="card-label">datetime module</div><div class="card-value">Used as <code>datetime.date.today() + datetime.timedelta(days=1)</code> to set a sensible default departure date. Also used in <code>strftime()</code> calls inside each ticket presenter to format the date for display.</div></div>
+      <div class="card pu"><div class="card-label">dataclass decorator</div><div class="card-value">Applied to <code>PayPal</code>, <code>CreditCard</code>, <code>CashAtAirport</code>, <code>SimpleConsoleTicket</code>, <code>DetailedTicket</code>, and <code>Booking</code>. It removes the need to write <code>def __init__(self, ...):</code> manually for any of these classes.</div></div>
+      <div class="card"><div class="card-label">Protocol class</div><div class="card-value">Used to define <code>PaymentMethod</code> and <code>TicketPresenter</code>. Any class that provides the methods listed in these Protocols automatically satisfies them — no <code>class PayPal(PaymentMethod)</code> declaration needed.</div></div>
+    </div>
+  </div>
+  <div class="divider"></div>
+
+  <!-- SECTION 3 — PaymentMethod Protocol -->
+  <div class="section" id="s3">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 03</span>
+      <h2 class="sec-title">The <span class="accent-pu">PaymentMethod</span> Protocol</h2>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><div class="tdk-r"></div><div class="tdk-y"></div><div class="tdk-g"></div><span class="code-lbl">class PaymentMethod(Protocol)</span><button class="copy-btn" onclick="copyCode(this)" aria-label="Copy code">Copy</button></div>
+      <div class="code-body"><pre><span class="kw">class</span> <span class="cl">PaymentMethod</span>(<span class="cl">Protocol</span>):
+    <span class="kw">def</span> <span class="fn">name</span>(<span class="nm">self</span>) -> <span class="cl">str</span>: ...
+    <span class="kw">def</span> <span class="fn">confirm_payment</span>(<span class="nm">self</span>, amount: <span class="cl">float</span>, description: <span class="cl">str</span>) -> <span class="cl">bool</span>: ...</pre></div>
+    </div>
+    <p class="prose"><code>PaymentMethod</code> is a <strong>structural interface</strong>. It declares exactly what any payment processor must be able to do, with no implementation details. The <code>...</code> (Ellipsis) body is the conventional way to write a Protocol method — it signals that the method exists as a contract, not as runnable code.</p>
+    <p class="prose" style="margin-top:14px;">The two required methods have precise contracts: <code>name()</code> must return a human-readable string identifying the payment method (used on the printed ticket), and <code>confirm_payment()</code> must accept an amount and description, interact with the user or an external service, and return <code>True</code> if payment was approved, <code>False</code> if not. The <code>Booking</code> class relies entirely on this contract — it never inspects the concrete type.</p>
+    <div class="callout callout-pu" style="margin-top:16px;">
+      <span class="callout-icon">🦆</span>
+      <div class="callout-text">
+        <strong>Duck typing in action:</strong> Python's philosophy is "if it walks like a duck and quacks like a duck, it's a duck." A class satisfies <code>PaymentMethod</code> not because it declares <code>class MyClass(PaymentMethod)</code>, but because it has a <code>name()</code> and a <code>confirm_payment()</code> method with the right signatures. The Protocol simply documents and type-checks this expectation.
+      </div>
+    </div>
+    <div class="table-wrap" style="margin-top:20px;">
+      <table>
+        <thead><tr><th>Method</th><th>Return</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td>name()</td><td>str</td><td>Returns a display name for the payment method used in ticket output</td></tr>
+          <tr><td>confirm_payment(amount, description)</td><td>bool</td><td>Presents payment to user/service, returns True if approved</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="divider"></div>
+
+  <!-- SECTION 4 — TicketPresenter Protocol -->
+  <div class="section" id="s4">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 04</span>
+      <h2 class="sec-title">The <span class="accent-blue">TicketPresenter</span> Protocol</h2>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><div class="tdk-r"></div><div class="tdk-y"></div><div class="tdk-g"></div><span class="code-lbl">class TicketPresenter(Protocol)</span><button class="copy-btn" onclick="copyCode(this)" aria-label="Copy code">Copy</button></div>
+      <div class="code-body"><pre><span class="kw">class</span> <span class="cl">TicketPresenter</span>(<span class="cl">Protocol</span>):
+    <span class="kw">def</span> <span class="fn">generate</span>(<span class="nm">self</span>, booking: <span class="st">'Booking'</span>) -> <span class="cl">str</span>: ...</pre></div>
+    </div>
+    <p class="prose"><code>TicketPresenter</code> is the second structural interface. It defines only a single method: <code>generate()</code>, which accepts a <code>Booking</code> object and returns a formatted ticket string. The <code>'Booking'</code> type hint is written as a string (a <em>forward reference</em>) because the <code>Booking</code> class is defined later in the file — Python resolves it lazily so no <code>NameError</code> occurs.</p>
+    <p class="prose" style="margin-top:14px;">With this single-method Protocol, the <code>Booking.confirm_and_issue()</code> method can call <code>self.presenter.generate(self)</code> and receive a completely different formatted string depending on whether the presenter is a <code>SimpleConsoleTicket</code> or a <code>DetailedTicket</code> — all without any branching logic inside <code>Booking</code> itself.</p>
+    <div class="callout callout-blue" style="margin-top:16px;">
+      <span class="callout-icon">📐</span>
+      <div class="callout-text">
+        <strong>Why separate Protocols for payment and presentation?</strong> Each Protocol follows the <strong>Single Responsibility Principle</strong> — it captures one and only one capability. This means a class can satisfy <code>PaymentMethod</code> without being a ticket formatter, and vice versa. It also makes the system easier to extend: a new payment method does not require any changes to ticket-related code.
+      </div>
+    </div>
+  </div>
+  <div class="divider"></div>
+
+  <!-- SECTION 5 — PayPal & CreditCard -->
+  <div class="section" id="s5">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 05</span>
+      <h2 class="sec-title"><span class="accent-blue">PayPal</span> &amp; <span class="accent-pu">CreditCard</span> — Payment Implementations</h2>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><div class="tdk-r"></div><div class="tdk-y"></div><div class="tdk-g"></div><span class="code-lbl">class PayPal / class CreditCard</span><button class="copy-btn" onclick="copyCode(this)" aria-label="Copy code">Copy</button></div>
+      <div class="code-body"><pre><span class="dc">@dataclass</span>
+<span class="kw">class</span> <span class="cl">PayPal</span>:
+    <span class="kw">def</span> <span class="fn">name</span>(<span class="nm">self</span>) -> <span class="cl">str</span>:
+        <span class="kw">return</span> <span class="st">"PayPal"</span>
+
+    <span class="kw">def</span> <span class="fn">confirm_payment</span>(<span class="nm">self</span>, amount: <span class="cl">float</span>, description: <span class="cl">str</span>) -> <span class="cl">bool</span>:
+        <span class="fn">print</span>(<span class="st">f"  → Opening PayPal → ${amount:,.2f}  ({description})"</span>)
+        <span class="fn">print</span>(<span class="st">"     (simulated redirect to paypal.com ...)"</span>)
+        ans = <span class="fn">input</span>(<span class="st">"     Did you complete the payment? [yes/no]: "</span>).<span class="fn">strip</span>().<span class="fn">lower</span>()
+        <span class="kw">return</span> ans <span class="kw">in</span> (<span class="st">"y"</span>, <span class="st">"yes"</span>, <span class="st">"1"</span>, <span class="st">"true"</span>)
+
+
+<span class="dc">@dataclass</span>
+<span class="kw">class</span> <span class="cl">CreditCard</span>:
+    <span class="kw">def</span> <span class="fn">name</span>(<span class="nm">self</span>) -> <span class="cl">str</span>:
+        <span class="kw">return</span> <span class="st">"Credit Card"</span>
+
+    <span class="kw">def</span> <span class="fn">confirm_payment</span>(<span class="nm">self</span>, amount: <span class="cl">float</span>, description: <span class="cl">str</span>) -> <span class="cl">bool</span>:
+        <span class="fn">print</span>(<span class="st">f"  → Card terminal: ${amount:,.2f}  ({description})"</span>)
+        <span class="fn">print</span>(<span class="st">"     (simulated 3D Secure / OTP screen ...)"</span>)
+        ans = <span class="fn">input</span>(<span class="st">"     Approve transaction? [yes/no]: "</span>).<span class="fn">strip</span>().<span class="fn">lower</span>()
+        <span class="kw">return</span> ans <span class="kw">in</span> (<span class="st">"y"</span>, <span class="st">"yes"</span>, <span class="st">"1"</span>, <span class="st">"true"</span>)</pre></div>
+    </div>
+    <p class="prose">Both <code>PayPal</code> and <code>CreditCard</code> are decorated with <code>@dataclass</code> even though neither has any stored fields. The decorator is still valid and harmless here — it generates a no-argument <code>__init__</code>, which means both can be instantiated with just <code>PayPal()</code> and <code>CreditCard()</code>. More importantly, it signals to the reader that these are data-oriented objects following a consistent pattern with the rest of the program.</p>
+    <p class="prose" style="margin-top:14px;">The polymorphism is clear here: <code>PayPal.confirm_payment()</code> simulates a browser redirect to paypal.com, while <code>CreditCard.confirm_payment()</code> simulates a 3D Secure OTP screen. Both accept the same arguments, both return a <code>bool</code>. From <code>Booking</code>'s perspective they are interchangeable — the behaviour difference is entirely encapsulated inside each class.</p>
+    <div class="callout callout-warn" style="margin-top:16px;">
+      <span class="callout-icon">💡</span>
+      <div class="callout-text">
+        <strong>The return value matters:</strong> <code>confirm_payment()</code> returning a <code>bool</code> is what lets <code>confirm_and_issue()</code> branch on success or failure. The truthy check <code>ans in ("y", "yes", "1", "true")</code> is deliberately generous — it accepts several common affirmative inputs rather than a strict equality check on a single string.
+      </div>
+    </div>
+  </div>
+  <div class="divider"></div>
+
+  <!-- SECTION 6 — CashAtAirport -->
+  <div class="section" id="s6">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 06</span>
+      <h2 class="sec-title"><span class="accent-pu">CashAtAirport</span> — Third Payment Option</h2>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><div class="tdk-r"></div><div class="tdk-y"></div><div class="tdk-g"></div><span class="code-lbl">class CashAtAirport</span><button class="copy-btn" onclick="copyCode(this)" aria-label="Copy code">Copy</button></div>
+      <div class="code-body"><pre><span class="dc">@dataclass</span>
+<span class="kw">class</span> <span class="cl">CashAtAirport</span>:
+    <span class="kw">def</span> <span class="fn">name</span>(<span class="nm">self</span>) -> <span class="cl">str</span>:
+        <span class="kw">return</span> <span class="st">"Cash at Airport"</span>
+
+    <span class="kw">def</span> <span class="fn">confirm_payment</span>(<span class="nm">self</span>, amount: <span class="cl">float</span>, description: <span class="cl">str</span>) -> <span class="cl">bool</span>:
+        <span class="fn">print</span>(<span class="st">f"  → Payment option: Pay ${amount:,.2f} cash at airport counter"</span>)
+        <span class="fn">print</span>(<span class="st">f"     Description: {description}"</span>)
+        ans = <span class="fn">input</span>(<span class="st">"     Will you pay cash at airport? [yes/no]: "</span>).<span class="fn">strip</span>().<span class="fn">lower</span>()
+        <span class="kw">return</span> ans <span class="kw">in</span> (<span class="st">"y"</span>, <span class="st">"yes"</span>, <span class="st">"1"</span>, <span class="st">"true"</span>)</pre></div>
+    </div>
+    <p class="prose"><code>CashAtAirport</code> is the third concrete implementation of <code>PaymentMethod</code>. Unlike <code>PayPal</code> and <code>CreditCard</code>, it does not simulate any electronic gateway — it displays the amount and description to the traveller and asks for a manual confirmation that they intend to pay at the counter. This is a meaningful difference in real-world behaviour, yet from <code>Booking</code>'s perspective it is completely invisible. This is the power of the Protocol: three radically different payment flows share a single interface.</p>
+    <div class="card-grid" style="margin-top:16px;">
+      <div class="card"><div class="card-label">PayPal</div><div class="card-value">Simulates browser redirect. Prints paypal.com message. User confirms redirect completion.</div></div>
+      <div class="card pu"><div class="card-label">CreditCard</div><div class="card-value">Simulates 3D Secure OTP. Prints terminal amount. User approves or declines transaction.</div></div>
+      <div class="card"><div class="card-label">CashAtAirport</div><div class="card-value">No gateway. Shows counter instructions. User confirms intent to pay cash at the airport.</div></div>
+    </div>
+  </div>
+  <div class="divider"></div>
+
+  <!-- SECTION 7 — SimpleConsoleTicket -->
+  <div class="section" id="s7">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 07</span>
+      <h2 class="sec-title"><span class="accent-blue">SimpleConsoleTicket</span> — Compact Ticket Format</h2>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><div class="tdk-r"></div><div class="tdk-y"></div><div class="tdk-g"></div><span class="code-lbl">class SimpleConsoleTicket</span><button class="copy-btn" onclick="copyCode(this)" aria-label="Copy code">Copy</button></div>
+      <div class="code-body"><pre><span class="dc">@dataclass</span>
+<span class="kw">class</span> <span class="cl">SimpleConsoleTicket</span>:
+    <span class="kw">def</span> <span class="fn">generate</span>(<span class="nm">self</span>, booking: <span class="st">'Booking'</span>) -> <span class="cl">str</span>:
+        dt = booking.departure_date.<span class="fn">strftime</span>(<span class="st">"%b %d, %Y"</span>)
+        <span class="kw">return</span> <span class="st">f"""
+╔══════════════════════════════════════════════╗
+║             BOOKING CONFIRMED                ║
+╚══════════════════════════════════════════════╝
+Ticket      : {booking.ticket_id}
+Passenger   : {booking.name}
+Route       : {booking.origin} → {booking.destination}
+Date        : {dt}
+Passengers  : {booking.passengers}
+Total       : ${booking.total:,.2f}
+Paid via    : {booking.payment.name()}
+        """</span></pre></div>
+    </div>
+    <p class="prose"><code>SimpleConsoleTicket</code> satisfies the <code>TicketPresenter</code> Protocol by implementing <code>generate()</code>. It uses a multiline f-string with Unicode box-drawing characters to produce a compact, visually distinct confirmation receipt. The date is formatted with <code>strftime("%b %d, %Y")</code> to produce output like <em>Mar 17, 2026</em>.</p>
+    <p class="prose" style="margin-top:14px;">Notice that this class accesses <code>booking.payment.name()</code> — it calls the <code>PaymentMethod</code> Protocol through the <code>Booking</code> object. This means both Protocols cooperate at ticket-generation time: the presenter needs the payment name for the receipt, and the payment object provides it polymorphically. The class does not care whether payment is PayPal, CreditCard, or Cash — it calls <code>.name()</code> and gets the right string.</p>
+  </div>
+  <div class="divider"></div>
+
+  <!-- SECTION 8 — DetailedTicket -->
+  <div class="section" id="s8">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 08</span>
+      <h2 class="sec-title"><span class="accent-pu">DetailedTicket</span> — Full E-Ticket Format</h2>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><div class="tdk-r"></div><div class="tdk-y"></div><div class="tdk-g"></div><span class="code-lbl">class DetailedTicket</span><button class="copy-btn" onclick="copyCode(this)" aria-label="Copy code">Copy</button></div>
+      <div class="code-body"><pre><span class="dc">@dataclass</span>
+<span class="kw">class</span> <span class="cl">DetailedTicket</span>:
+    <span class="kw">def</span> <span class="fn">generate</span>(<span class="nm">self</span>, booking: <span class="st">'Booking'</span>) -> <span class="cl">str</span>:
+        dt = booking.departure_date.<span class="fn">strftime</span>(<span class="st">"%A, %B %d, %Y  %I:%M %p"</span>)
+        <span class="kw">return</span> <span class="st">f"""
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+          E-TICKET  •  {booking.ticket_id}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Passenger name     : {booking.name}
+Contact            : {booking.email}
+Flight             : {booking.origin} → {booking.destination}
+Travel date        : {dt}
+Number of passengers : {booking.passengers}
+Base fare          : ${booking.base_fare:,.2f}
+Total amount       : ${booking.total:,.2f}
+Payment method     : {booking.payment.name()}
+Status             : CONFIRMED
+
+Thank you for choosing our airline. Safe travels!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        """</span></pre></div>
+    </div>
+    <p class="prose"><code>DetailedTicket</code> also satisfies <code>TicketPresenter</code> through its <code>generate()</code> implementation. It displays significantly more information: the passenger's email, the full weekday-and-time date (<code>strftime("%A, %B %d, %Y  %I:%M %p")</code> produces output like <em>Tuesday, March 17, 2026  12:00 AM</em>), and the <code>base_fare</code> broken out separately from the total.</p>
+    <div class="subsec">
+      <div class="subsec-title">SimpleConsoleTicket vs. DetailedTicket — Side-by-Side</div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Field</th><th>SimpleConsoleTicket</th><th>DetailedTicket</th></tr></thead>
+        <tbody>
+          <tr><td>Ticket ID</td><td>✅</td><td>✅</td></tr>
+          <tr><td>Passenger name</td><td>✅</td><td>✅</td></tr>
+          <tr><td>Email contact</td><td>❌</td><td>✅</td></tr>
+          <tr><td>Route</td><td>✅</td><td>✅</td></tr>
+          <tr><td>Date format</td><td>Mar 17, 2026</td><td>Tuesday, March 17, 2026 12:00 AM</td></tr>
+          <tr><td>Base fare</td><td>❌</td><td>✅</td></tr>
+          <tr><td>Total</td><td>✅</td><td>✅</td></tr>
+          <tr><td>Payment method</td><td>✅</td><td>✅</td></tr>
+          <tr><td>Status line</td><td>❌</td><td>CONFIRMED</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="divider"></div>
+
+  <!-- SECTION 9 — Booking Dataclass -->
+  <div class="section" id="s9">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 09</span>
+      <h2 class="sec-title">The <span class="accent-blue">Booking</span> Dataclass</h2>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><div class="tdk-r"></div><div class="tdk-y"></div><div class="tdk-g"></div><span class="code-lbl">@dataclass class Booking — Fields &amp; __post_init__</span><button class="copy-btn" onclick="copyCode(this)" aria-label="Copy code">Copy</button></div>
+      <div class="code-body"><pre><span class="dc">@dataclass</span>
+<span class="kw">class</span> <span class="cl">Booking</span>:
+    name:       <span class="cl">str</span>
+    email:      <span class="cl">str</span>
+    origin:     <span class="cl">str</span>
+    destination: <span class="cl">str</span>
+    passengers: <span class="cl">int</span>
+    payment:    <span class="cl">PaymentMethod</span>
+    presenter:  <span class="cl">TicketPresenter</span>
+
+    ticket_id:      <span class="cl">str</span>   = <span class="st">""</span>
+    total:          <span class="cl">float</span> = <span class="nm">0.0</span>
+    base_fare:      <span class="cl">float</span> = <span class="nm">0.0</span>
+    departure_date: datetime.date = datetime.date.today() + datetime.timedelta(days=<span class="nm">1</span>)
+
+    <span class="kw">def</span> <span class="fn">__post_init__</span>(<span class="nm">self</span>):
+        <span class="nm">self</span>.ticket_id = <span class="st">f"TK-{abs(hash(self.name + self.origin)) % 1000000:06d}"</span>
+        <span class="nm">self</span>.base_fare = <span class="nm">self</span>.<span class="fn">_calculate_base_fare</span>()
+        <span class="nm">self</span>.total = <span class="nm">self</span>.base_fare * <span class="nm">self</span>.passengers
+
+    <span class="kw">def</span> <span class="fn">_calculate_base_fare</span>(<span class="nm">self</span>) -> <span class="cl">float</span>:
+        routes = {
+            (<span class="st">"Manila"</span>, <span class="st">"Cebu"</span>): <span class="nm">78.0</span>,
+            (<span class="st">"Manila"</span>, <span class="st">"Davao"</span>): <span class="nm">105.0</span>,
+            (<span class="st">"Manila"</span>, <span class="st">"Singapore"</span>): <span class="nm">295.0</span>,
+            (<span class="st">"Manila"</span>, <span class="st">"Tokyo"</span>): <span class="nm">540.0</span>,
+            (<span class="st">"Zamboanga"</span>, <span class="st">"Manila"</span>): <span class="nm">92.0</span>,
+        }
+        key = (<span class="nm">self</span>.origin.<span class="fn">title</span>(), <span class="nm">self</span>.destination.<span class="fn">title</span>())
+        <span class="kw">return</span> routes.<span class="fn">get</span>(key, <span class="nm">180.0</span>)</pre></div>
+    </div>
+    <p class="prose">The <code>Booking</code> dataclass is the core of the program. It holds all passenger and booking data as annotated fields. Fields without default values — <code>name</code>, <code>email</code>, <code>origin</code>, <code>destination</code>, <code>passengers</code>, <code>payment</code>, and <code>presenter</code> — are required arguments to the generated <code>__init__</code>. Fields with defaults — <code>ticket_id</code>, <code>total</code>, <code>base_fare</code>, and <code>departure_date</code> — do not need to be passed; they are either computed in <code>__post_init__</code> or use sensible defaults.</p>
+    <div class="subsec">
+      <div class="subsec-title">__post_init__ — Running Logic After Field Assignment</div>
+    </div>
+    <p class="prose"><code>__post_init__</code> is called automatically by <code>@dataclass</code> immediately after <code>__init__</code> has set all fields. This is the right place to compute derived values that depend on constructor inputs. Here it generates a deterministic ticket ID from a hash of the passenger name and origin city, looks up the base fare from the routes dictionary, and multiplies it by the passenger count to set the total.</p>
+    <div class="callout callout-blue" style="margin-top:16px;">
+      <span class="callout-icon">🔑</span>
+      <div class="callout-text">
+        <strong>Why hash for the ticket ID?</strong> <code>abs(hash(self.name + self.origin)) % 1000000</code> produces a deterministic six-digit number from the name and origin string. The same inputs always produce the same ticket ID, which makes the system predictable in testing. The <code>:06d</code> format specifier zero-pads the number to exactly six digits, producing IDs like <code>TK-042718</code>.
+      </div>
+    </div>
+    <div class="table-wrap" style="margin-top:20px;">
+      <table>
+        <thead><tr><th>Field</th><th>Type</th><th>Source</th></tr></thead>
+        <tbody>
+          <tr><td>name</td><td>str</td><td>Required — passed from main()</td></tr>
+          <tr><td>email</td><td>str</td><td>Required — passed from main()</td></tr>
+          <tr><td>origin / destination</td><td>str</td><td>Required — user input, normalized with .title()</td></tr>
+          <tr><td>passengers</td><td>int</td><td>Required — validated 1–9 in main()</td></tr>
+          <tr><td>payment</td><td>PaymentMethod</td><td>Required — polymorphic object from main()</td></tr>
+          <tr><td>presenter</td><td>TicketPresenter</td><td>Required — polymorphic object from main()</td></tr>
+          <tr><td>ticket_id</td><td>str</td><td>Derived in __post_init__ via hash</td></tr>
+          <tr><td>base_fare</td><td>float</td><td>Derived in __post_init__ via route lookup</td></tr>
+          <tr><td>total</td><td>float</td><td>base_fare × passengers in __post_init__</td></tr>
+          <tr><td>departure_date</td><td>date</td><td>Default: today + 1 day</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="divider"></div>
+
+  <!-- SECTION 10 — confirm_and_issue -->
+  <div class="section" id="s10">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 10</span>
+      <h2 class="sec-title"><span class="accent-pu">confirm_and_issue()</span> — Polymorphism at Work</h2>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><div class="tdk-r"></div><div class="tdk-y"></div><div class="tdk-g"></div><span class="code-lbl">Booking.confirm_and_issue()</span><button class="copy-btn" onclick="copyCode(this)" aria-label="Copy code">Copy</button></div>
+      <div class="code-body"><pre>    <span class="kw">def</span> <span class="fn">confirm_and_issue</span>(<span class="nm">self</span>) -> <span class="kw">None</span>:
+        description = <span class="st">f"{self.origin} → {self.destination} • {self.passengers} pax"</span>
+
+        <span class="fn">print</span>(<span class="st">f"\nTotal to pay: ${self.total:,.2f}"</span>)
+        <span class="fn">print</span>(<span class="st">f"Using: {self.payment.name()}\n"</span>)
+
+        <span class="kw">if</span> <span class="nm">self</span>.payment.<span class="fn">confirm_payment</span>(<span class="nm">self</span>.total, description):
+            <span class="fn">print</span>(<span class="st">"\n"</span> + <span class="nm">self</span>.presenter.<span class="fn">generate</span>(<span class="nm">self</span>))
+            <span class="fn">print</span>(<span class="st">"→ E-ticket sent to"</span>, <span class="nm">self</span>.email)
+        <span class="kw">else</span>:
+            <span class="fn">print</span>(<span class="st">"\nBooking not completed – payment was not confirmed."</span>)</pre></div>
+    </div>
+    <p class="prose">This method is where polymorphism pays off completely. The entire payment and ticket-generation logic is four lines of meaningful code — no <code>isinstance</code> checks, no <code>if payment_type == "paypal"</code> branches. The method simply tells <code>self.payment</code> to confirm the payment and tells <code>self.presenter</code> to generate the ticket. Python handles the dispatch to the right concrete implementation automatically.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div>
+          <div class="step-head">Build description string</div>
+          <div class="step-body">A human-readable route and passenger count summary is assembled as <code>description</code> to pass into the payment confirmation for display in the payment terminal simulation.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div>
+          <div class="step-head">Print total and payment method</div>
+          <div class="step-body">The user is shown the total amount and which payment method is being used. <code>self.payment.name()</code> dispatches polymorphically — it returns "PayPal", "Credit Card", or "Cash at Airport" depending on the object.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div>
+          <div class="step-head">confirm_payment() dispatch</div>
+          <div class="step-body"><code>self.payment.confirm_payment(self.total, description)</code> dispatches to the correct implementation. Each class shows its own UI (redirect, OTP screen, or cash instructions) and returns a bool.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div>
+          <div class="step-head">generate() dispatch — if payment approved</div>
+          <div class="step-body">If the bool is truthy, <code>self.presenter.generate(self)</code> dispatches to the correct ticket formatter. The result — either a compact receipt or a full e-ticket — is printed immediately.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="divider"></div>
+
+  <!-- SECTION 11 — main() -->
+  <div class="section" id="s11">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 11</span>
+      <h2 class="sec-title">The <span class="accent-blue">main()</span> Function — Input, Selection, Dispatch</h2>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><div class="tdk-r"></div><div class="tdk-y"></div><div class="tdk-g"></div><span class="code-lbl">def main()</span><button class="copy-btn" onclick="copyCode(this)" aria-label="Copy code">Copy</button></div>
+      <div class="code-body"><pre><span class="kw">def</span> <span class="fn">main</span>():
+    <span class="fn">print</span>(<span class="st">"\n"</span> + <span class="st">"═"</span>*<span class="nm">60</span>)
+    <span class="fn">print</span>(<span class="st">"       POLYMORPHISM-FOCUSED TICKETING DEMO"</span>)
+    <span class="fn">print</span>(<span class="st">"═"</span>*<span class="nm">60</span>)
+
+    name  = <span class="fn">input</span>(<span class="st">"Full name             : "</span>).<span class="fn">strip</span>() <span class="kw">or</span> <span class="st">"Guest"</span>
+    email = <span class="fn">input</span>(<span class="st">"Email                 : "</span>).<span class="fn">strip</span>()
+    orig  = <span class="fn">input</span>(<span class="st">"From                  : "</span>).<span class="fn">strip</span>()
+    dest  = <span class="fn">input</span>(<span class="st">"To                    : "</span>).<span class="fn">strip</span>()
+
+    <span class="kw">while</span> <span class="kw">True</span>:
+        <span class="kw">try</span>:
+            pax = <span class="cl">int</span>(<span class="fn">input</span>(<span class="st">"Passengers (1–9)      : "</span>))
+            <span class="kw">if</span> <span class="nm">1</span> <= pax <= <span class="nm">9</span>: <span class="kw">break</span>
+        <span class="kw">except</span>:
+            <span class="kw">pass</span>
+        <span class="fn">print</span>(<span class="st">"Enter number 1–9 please."</span>)
+
+    ch = <span class="fn">input</span>(<span class="st">"Choose payment [1=PayPal 2=Card 3=Cash] → "</span>).<span class="fn">strip</span>()
+    <span class="kw">if</span>   ch == <span class="st">"1"</span>: payment = <span class="cl">PayPal</span>()
+    <span class="kw">elif</span> ch == <span class="st">"2"</span>: payment = <span class="cl">CreditCard</span>()
+    <span class="kw">else</span>:          payment = <span class="cl">CashAtAirport</span>()
+
+    style = <span class="fn">input</span>(<span class="st">"Ticket style [1=Simple 2=Detailed] → "</span>).<span class="fn">strip</span>()
+    presenter = <span class="cl">SimpleConsoleTicket</span>() <span class="kw">if</span> style != <span class="st">"2"</span> <span class="kw">else</span> <span class="cl">DetailedTicket</span>()
+
+    booking = <span class="cl">Booking</span>(
+        name=name, email=email, origin=orig, destination=dest,
+        passengers=pax, payment=payment, presenter=presenter,
+    )
+    booking.<span class="fn">confirm_and_issue</span>()</pre></div>
+    </div>
+    <p class="prose"><code>main()</code> is the entry point that wires everything together. Its job is to collect user inputs, instantiate the correct polymorphic objects, and hand them off to <code>Booking</code>. Notice that after the payment and presenter objects are created, <code>main()</code> never references their concrete types again — it passes them as abstract Protocol-satisfying objects to <code>Booking</code>. All further behaviour is delegated through polymorphism.</p>
+    <div class="callout callout-blue" style="margin-top:16px;">
+      <span class="callout-icon">🔒</span>
+      <div class="callout-text">
+        <strong>Input validation for passenger count:</strong> The <code>while True / try / except</code> loop is a classic Python validation pattern. Wrapping <code>int(input(...))</code> in a <code>try</code> block catches a <code>ValueError</code> if the user enters non-numeric text (e.g., "two"). The range check <code>1 &lt;= pax &lt;= 9</code> rejects out-of-range integers. The loop repeats until a valid integer is entered, at which point <code>break</code> exits.
+      </div>
+    </div>
+  </div>
+  <div class="divider"></div>
+
+  <!-- SECTION 12 — __name__ Guard -->
+  <div class="section" id="s12">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 12</span>
+      <h2 class="sec-title">The <span class="accent-pu">__name__</span> Guard — Safe Entry Point</h2>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><div class="tdk-r"></div><div class="tdk-y"></div><div class="tdk-g"></div><span class="code-lbl">Ticketing.py — Final Lines</span><button class="copy-btn" onclick="copyCode(this)" aria-label="Copy code">Copy</button></div>
+      <div class="code-body"><pre><span class="kw">if</span> __name__ == <span class="st">"__main__"</span>:
+    <span class="kw">try</span>:
+        <span class="fn">main</span>()
+    <span class="kw">except</span> <span class="cl">KeyboardInterrupt</span>:
+        <span class="fn">print</span>(<span class="st">"\n\nCancelled."</span>)
+    <span class="fn">print</span>(<span class="st">"\nThank you! ✈️"</span>)</pre></div>
+    </div>
+    <p class="prose">The <code>if __name__ == "__main__"</code> guard is a Python idiom that prevents <code>main()</code> from running when the file is imported as a module into another script. When Python runs a file directly, it sets <code>__name__</code> to the string <code>"__main__"</code>. When the same file is imported, <code>__name__</code> becomes the module's file name instead, so the condition is <code>False</code> and <code>main()</code> is never called.</p>
+    <p class="prose" style="margin-top:14px;">The <code>try/except KeyboardInterrupt</code> wrapper gracefully handles the user pressing <kbd>Ctrl+C</kbd> mid-booking. Without it, Python would print an ugly traceback. With it, the program prints <code>Cancelled.</code> and then the thank-you message, leaving the terminal in a clean state. The thank-you line runs regardless of whether the booking was completed, cancelled, or interrupted.</p>
+  </div>
+  <div class="divider"></div>
+
+  <!-- POLYMORPHISM DEEP DIVE -->
+  <div class="section" id="poly">
+    <div class="sec-header">
+      <span class="sec-num">DEEP DIVE</span>
+      <h2 class="sec-title"><span class="accent-blue">Polymorphism</span> — The Full Picture</h2>
+    </div>
+    <p class="prose">Polymorphism in Ticketing.py operates at two independent axes simultaneously: the <em>payment axis</em> (3 implementations of <code>PaymentMethod</code>) and the <em>presentation axis</em> (2 implementations of <code>TicketPresenter</code>). Because both axes are independent, the program supports 3 × 2 = 6 distinct booking flows — all handled by exactly the same <code>confirm_and_issue()</code> code.</p>
+    <div class="flow" style="margin-top:24px;">
+      <div class="flow-item"><span class="flow-icon">💳</span><span class="flow-lbl">PayPal</span><div class="flow-desc">→ confirms via redirect simulation</div></div>
+      <div class="flow-item"><span class="flow-icon">💳</span><span class="flow-lbl">CreditCard</span><div class="flow-desc">→ confirms via OTP simulation</div></div>
+      <div class="flow-item"><span class="flow-icon">💵</span><span class="flow-lbl">CashAtAirport</span><div class="flow-desc">→ confirms via intent declaration</div></div>
+    </div>
+    <div class="flow" style="margin-top:12px;">
+      <div class="flow-item"><span class="flow-icon">🎫</span><span class="flow-lbl">SimpleTicket</span><div class="flow-desc">→ compact ASCII box receipt</div></div>
+      <div class="flow-item"><span class="flow-icon">📄</span><span class="flow-lbl">DetailedTicket</span><div class="flow-desc">→ full e-ticket with all fields</div></div>
+    </div>
+    <div class="callout callout-pu" style="margin-top:24px;">
+      <span class="callout-icon">🔓</span>
+      <div class="callout-text">
+        <strong>Open/Closed Principle:</strong> Ticketing.py is <em>open for extension, closed for modification</em>. To add a fourth payment method (e.g., <code>GCash</code>), simply write a new class with <code>name()</code> and <code>confirm_payment()</code>. To add a third ticket style (e.g., <code>PDFTicket</code>), simply write a class with <code>generate()</code>. Neither <code>Booking</code> nor any existing class needs to be changed. This is the open/closed principle in practice, enabled by polymorphism.
+      </div>
+    </div>
+    <div class="subsec">
+      <div class="subsec-title">Without Polymorphism — The Alternative</div>
+    </div>
+    <p class="prose">To understand why polymorphism matters, consider what <code>confirm_and_issue()</code> would look like without it. Every new payment method or ticket style would require modifying this core method — violating the open/closed principle and making the method increasingly complex and fragile with every addition.</p>
+    <div class="code-block">
+      <div class="code-header"><div class="tdk-r"></div><div class="tdk-y"></div><div class="tdk-g"></div><span class="code-lbl">❌ Without Polymorphism — Fragile, Unscalable</span></div>
+      <div class="code-body"><pre><span class="cm"># BAD — Must be modified every time a new payment or ticket type is added</span>
+<span class="kw">def</span> <span class="fn">confirm_and_issue</span>(<span class="nm">self</span>):
+    <span class="kw">if</span> <span class="fn">isinstance</span>(<span class="nm">self</span>.payment, <span class="cl">PayPal</span>):
+        <span class="cm"># PayPal-specific logic</span>
+        paid = paypal_redirect(<span class="nm">self</span>.total)
+    <span class="kw">elif</span> <span class="fn">isinstance</span>(<span class="nm">self</span>.payment, <span class="cl">CreditCard</span>):
+        <span class="cm"># CreditCard-specific logic</span>
+        paid = card_terminal(<span class="nm">self</span>.total)
+    <span class="kw">elif</span> <span class="fn">isinstance</span>(<span class="nm">self</span>.payment, <span class="cl">CashAtAirport</span>):
+        <span class="cm"># Cash-specific logic</span>
+        paid = cash_counter(<span class="nm">self</span>.total)
+    <span class="cm"># Adding GCash? Must add another elif here. Fragile.</span>
+
+    <span class="kw">if</span> paid:
+        <span class="kw">if</span> <span class="fn">isinstance</span>(<span class="nm">self</span>.presenter, <span class="cl">SimpleConsoleTicket</span>):
+            <span class="fn">print</span>(simple_format(<span class="nm">self</span>))
+        <span class="kw">elif</span> <span class="fn">isinstance</span>(<span class="nm">self</span>.presenter, <span class="cl">DetailedTicket</span>):
+            <span class="fn">print</span>(detailed_format(<span class="nm">self</span>))
+        <span class="cm"># Adding PDFTicket? Must add another elif here too.</span></pre></div>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><div class="tdk-r"></div><div class="tdk-y"></div><div class="tdk-g"></div><span class="code-lbl">✅ With Polymorphism — Clean, Extensible</span></div>
+      <div class="code-body"><pre><span class="cm"># GOOD — Never needs to be modified when new types are added</span>
+<span class="kw">def</span> <span class="fn">confirm_and_issue</span>(<span class="nm">self</span>):
+    <span class="kw">if</span> <span class="nm">self</span>.payment.<span class="fn">confirm_payment</span>(<span class="nm">self</span>.total, description):
+        <span class="fn">print</span>(<span class="nm">self</span>.presenter.<span class="fn">generate</span>(<span class="nm">self</span>))
+    <span class="kw">else</span>:
+        <span class="fn">print</span>(<span class="st">"Payment not confirmed."</span>)</pre></div>
+    </div>
+  </div>
+  <div class="divider"></div>
+
+  <!-- BEST PRACTICES -->
+  <div class="section" id="bestpractices">
+    <div class="sec-header">
+      <span class="sec-num">BEST PRACTICES</span>
+      <h2 class="sec-title">Design <span class="accent-pu">Principles</span> in Ticketing.py</h2>
+    </div>
+    <div class="card-grid">
+      <div class="card"><div class="card-label">Program to Interfaces</div><div class="card-value">Both <code>payment</code> and <code>presenter</code> fields in <code>Booking</code> are typed as their Protocols, not their concrete classes. This is the fundamental OOP principle: depend on abstractions, not concrete implementations.</div></div>
+      <div class="card pu"><div class="card-label">Single Responsibility</div><div class="card-value">Each Protocol captures one capability. Each dataclass does one job. <code>Booking</code> orchestrates; payment classes confirm payments; presenter classes format tickets. No class does more than its role demands.</div></div>
+      <div class="card"><div class="card-label">Open/Closed</div><div class="card-value">The program is open for extension (add <code>GCash</code>, <code>PDFTicket</code>) and closed for modification (no existing class needs changing). This is achieved entirely through polymorphism.</div></div>
+      <div class="card pu"><div class="card-label">Encapsulation</div><div class="card-value">The <code>_calculate_base_fare()</code> method is private (prefixed with <code>_</code>). Fare logic is encapsulated inside <code>Booking</code> and is not accessible from outside. This protects the internal calculation from external interference.</div></div>
+      <div class="card"><div class="card-label">Defensive Defaults</div><div class="card-value">The route lookup uses <code>routes.get(key, 180.0)</code> — if the entered route is not in the dictionary, a default fare of $180.00 is used rather than raising a <code>KeyError</code>. This makes the program robust to unfamiliar routes.</div></div>
+      <div class="card pu"><div class="card-label">Consistent Validation</div><div class="card-value">The <code>while True / try / except</code> loop pattern for the passenger count is reusable. The same pattern should be applied to any future numeric input (e.g., luggage count or seat selection) to keep validation consistent.</div></div>
+    </div>
+  </div>
+  <div class="divider"></div>
+
+  <!-- FULL SOURCE -->
+  <div class="section" id="source">
+    <div class="sec-header">
+      <span class="sec-num">FULL SOURCE</span>
+      <h2 class="sec-title">Complete <span class="accent-blue">Ticketing.py</span> Source Code</h2>
+    </div>
+    <p class="prose">The complete, runnable source code for Ticketing.py. Copy it, save it as <code>ticketing.py</code>, and run it with <code>python ticketing.py</code>.</p>
+    <div class="code-block">
+      <div class="code-header"><div class="tdk-r"></div><div class="tdk-y"></div><div class="tdk-g"></div><span class="code-lbl">ticketing.py — Full Source</span><button class="copy-btn" onclick="copyCode(this)" aria-label="Copy code">Copy</button></div>
+      <div class="code-body"><pre><span class="kw">import</span> datetime
+<span class="kw">from</span> dataclasses <span class="kw">import</span> dataclass
+<span class="kw">from</span> typing <span class="kw">import</span> Protocol
+
+
+<span class="kw">class</span> <span class="cl">PaymentMethod</span>(<span class="cl">Protocol</span>):
+    <span class="kw">def</span> <span class="fn">name</span>(<span class="nm">self</span>) -> <span class="cl">str</span>: ...
+    <span class="kw">def</span> <span class="fn">confirm_payment</span>(<span class="nm">self</span>, amount: <span class="cl">float</span>, description: <span class="cl">str</span>) -> <span class="cl">bool</span>: ...
+
+
+<span class="kw">class</span> <span class="cl">TicketPresenter</span>(<span class="cl">Protocol</span>):
+    <span class="kw">def</span> <span class="fn">generate</span>(<span class="nm">self</span>, booking: <span class="st">'Booking'</span>) -> <span class="cl">str</span>: ...
+
+
+<span class="dc">@dataclass</span>
+<span class="kw">class</span> <span class="cl">PayPal</span>:
+    <span class="kw">def</span> <span class="fn">name</span>(<span class="nm">self</span>) -> <span class="cl">str</span>:
+        <span class="kw">return</span> <span class="st">"PayPal"</span>
+
+    <span class="kw">def</span> <span class="fn">confirm_payment</span>(<span class="nm">self</span>, amount: <span class="cl">float</span>, description: <span class="cl">str</span>) -> <span class="cl">bool</span>:
+        <span class="fn">print</span>(<span class="st">f"  → Opening PayPal → ${amount:,.2f}  ({description})"</span>)
+        <span class="fn">print</span>(<span class="st">"     (simulated redirect to paypal.com ...)"</span>)
+        ans = <span class="fn">input</span>(<span class="st">"     Did you complete the payment? [yes/no]: "</span>).<span class="fn">strip</span>().<span class="fn">lower</span>()
+        <span class="kw">return</span> ans <span class="kw">in</span> (<span class="st">"y"</span>, <span class="st">"yes"</span>, <span class="st">"1"</span>, <span class="st">"true"</span>)
+
+
+<span class="dc">@dataclass</span>
+<span class="kw">class</span> <span class="cl">CreditCard</span>:
+    <span class="kw">def</span> <span class="fn">name</span>(<span class="nm">self</span>) -> <span class="cl">str</span>:
+        <span class="kw">return</span> <span class="st">"Credit Card"</span>
+
+    <span class="kw">def</span> <span class="fn">confirm_payment</span>(<span class="nm">self</span>, amount: <span class="cl">float</span>, description: <span class="cl">str</span>) -> <span class="cl">bool</span>:
+        <span class="fn">print</span>(<span class="st">f"  → Card terminal: ${amount:,.2f}  ({description})"</span>)
+        <span class="fn">print</span>(<span class="st">"     (simulated 3D Secure / OTP screen ...)"</span>)
+        ans = <span class="fn">input</span>(<span class="st">"     Approve transaction? [yes/no]: "</span>).<span class="fn">strip</span>().<span class="fn">lower</span>()
+        <span class="kw">return</span> ans <span class="kw">in</span> (<span class="st">"y"</span>, <span class="st">"yes"</span>, <span class="st">"1"</span>, <span class="st">"true"</span>)
+
+
+<span class="dc">@dataclass</span>
+<span class="kw">class</span> <span class="cl">CashAtAirport</span>:
+    <span class="kw">def</span> <span class="fn">name</span>(<span class="nm">self</span>) -> <span class="cl">str</span>:
+        <span class="kw">return</span> <span class="st">"Cash at Airport"</span>
+
+    <span class="kw">def</span> <span class="fn">confirm_payment</span>(<span class="nm">self</span>, amount: <span class="cl">float</span>, description: <span class="cl">str</span>) -> <span class="cl">bool</span>:
+        <span class="fn">print</span>(<span class="st">f"  → Payment option: Pay ${amount:,.2f} cash at airport counter"</span>)
+        <span class="fn">print</span>(<span class="st">f"     Description: {description}"</span>)
+        ans = <span class="fn">input</span>(<span class="st">"     Will you pay cash at airport? [yes/no]: "</span>).<span class="fn">strip</span>().<span class="fn">lower</span>()
+        <span class="kw">return</span> ans <span class="kw">in</span> (<span class="st">"y"</span>, <span class="st">"yes"</span>, <span class="st">"1"</span>, <span class="st">"true"</span>)
+
+
+<span class="dc">@dataclass</span>
+<span class="kw">class</span> <span class="cl">SimpleConsoleTicket</span>:
+    <span class="kw">def</span> <span class="fn">generate</span>(<span class="nm">self</span>, booking: <span class="st">'Booking'</span>) -> <span class="cl">str</span>:
+        dt = booking.departure_date.<span class="fn">strftime</span>(<span class="st">"%b %d, %Y"</span>)
+        <span class="kw">return</span> <span class="st">f"""
+╔══════════════════════════════════════════════╗
+║             BOOKING CONFIRMED                ║
+╚══════════════════════════════════════════════╝
+Ticket      : {booking.ticket_id}
+Passenger   : {booking.name}
+Route       : {booking.origin} → {booking.destination}
+Date        : {dt}
+Passengers  : {booking.passengers}
+Total       : ${booking.total:,.2f}
+Paid via    : {booking.payment.name()}
+        """</span>
+
+
+<span class="dc">@dataclass</span>
+<span class="kw">class</span> <span class="cl">DetailedTicket</span>:
+    <span class="kw">def</span> <span class="fn">generate</span>(<span class="nm">self</span>, booking: <span class="st">'Booking'</span>) -> <span class="cl">str</span>:
+        dt = booking.departure_date.<span class="fn">strftime</span>(<span class="st">"%A, %B %d, %Y  %I:%M %p"</span>)
+        <span class="kw">return</span> <span class="st">f"""
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+          E-TICKET  •  {booking.ticket_id}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Passenger name     : {booking.name}
+Contact            : {booking.email}
+Flight             : {booking.origin} → {booking.destination}
+Travel date        : {dt}
+Number of passengers : {booking.passengers}
+Base fare          : ${booking.base_fare:,.2f}
+Total amount       : ${booking.total:,.2f}
+Payment method     : {booking.payment.name()}
+Status             : CONFIRMED
+
+Thank you for choosing our airline. Safe travels!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        """</span>
+
+
+<span class="dc">@dataclass</span>
+<span class="kw">class</span> <span class="cl">Booking</span>:
+    name:       <span class="cl">str</span>
+    email:      <span class="cl">str</span>
+    origin:     <span class="cl">str</span>
+    destination: <span class="cl">str</span>
+    passengers: <span class="cl">int</span>
+    payment:    <span class="cl">PaymentMethod</span>
+    presenter:  <span class="cl">TicketPresenter</span>
+
+    ticket_id:      <span class="cl">str</span>   = <span class="st">""</span>
+    total:          <span class="cl">float</span> = <span class="nm">0.0</span>
+    base_fare:      <span class="cl">float</span> = <span class="nm">0.0</span>
+    departure_date: datetime.date = datetime.date.today() + datetime.timedelta(days=<span class="nm">1</span>)
+
+    <span class="kw">def</span> <span class="fn">__post_init__</span>(<span class="nm">self</span>):
+        <span class="nm">self</span>.ticket_id = <span class="st">f"TK-{abs(hash(self.name + self.origin)) % 1000000:06d}"</span>
+        <span class="nm">self</span>.base_fare = <span class="nm">self</span>.<span class="fn">_calculate_base_fare</span>()
+        <span class="nm">self</span>.total = <span class="nm">self</span>.base_fare * <span class="nm">self</span>.passengers
+
+    <span class="kw">def</span> <span class="fn">_calculate_base_fare</span>(<span class="nm">self</span>) -> <span class="cl">float</span>:
+        routes = {
+            (<span class="st">"Manila"</span>, <span class="st">"Cebu"</span>): <span class="nm">78.0</span>,
+            (<span class="st">"Manila"</span>, <span class="st">"Davao"</span>): <span class="nm">105.0</span>,
+            (<span class="st">"Manila"</span>, <span class="st">"Singapore"</span>): <span class="nm">295.0</span>,
+            (<span class="st">"Manila"</span>, <span class="st">"Tokyo"</span>): <span class="nm">540.0</span>,
+            (<span class="st">"Zamboanga"</span>, <span class="st">"Manila"</span>): <span class="nm">92.0</span>,
+        }
+        key = (<span class="nm">self</span>.origin.<span class="fn">title</span>(), <span class="nm">self</span>.destination.<span class="fn">title</span>())
+        <span class="kw">return</span> routes.<span class="fn">get</span>(key, <span class="nm">180.0</span>)
+
+    <span class="kw">def</span> <span class="fn">confirm_and_issue</span>(<span class="nm">self</span>) -> <span class="kw">None</span>:
+        description = <span class="st">f"{self.origin} → {self.destination} • {self.passengers} pax"</span>
+        <span class="fn">print</span>(<span class="st">f"\nTotal to pay: ${self.total:,.2f}"</span>)
+        <span class="fn">print</span>(<span class="st">f"Using: {self.payment.name()}\n"</span>)
+        <span class="kw">if</span> <span class="nm">self</span>.payment.<span class="fn">confirm_payment</span>(<span class="nm">self</span>.total, description):
+            <span class="fn">print</span>(<span class="st">"\n"</span> + <span class="nm">self</span>.presenter.<span class="fn">generate</span>(<span class="nm">self</span>))
+            <span class="fn">print</span>(<span class="st">"→ E-ticket sent to"</span>, <span class="nm">self</span>.email)
+        <span class="kw">else</span>:
+            <span class="fn">print</span>(<span class="st">"\nBooking not completed – payment was not confirmed."</span>)
+
+
+<span class="kw">def</span> <span class="fn">main</span>():
+    <span class="fn">print</span>(<span class="st">"\n"</span> + <span class="st">"═"</span>*<span class="nm">60</span>)
+    <span class="fn">print</span>(<span class="st">"       POLYMORPHISM-FOCUSED TICKETING DEMO"</span>)
+    <span class="fn">print</span>(<span class="st">"═"</span>*<span class="nm">60</span>)
+
+    name  = <span class="fn">input</span>(<span class="st">"Full name             : "</span>).<span class="fn">strip</span>() <span class="kw">or</span> <span class="st">"Guest"</span>
+    email = <span class="fn">input</span>(<span class="st">"Email                 : "</span>).<span class="fn">strip</span>()
+    orig  = <span class="fn">input</span>(<span class="st">"From                  : "</span>).<span class="fn">strip</span>()
+    dest  = <span class="fn">input</span>(<span class="st">"To                    : "</span>).<span class="fn">strip</span>()
+
+    <span class="kw">while</span> <span class="kw">True</span>:
+        <span class="kw">try</span>:
+            pax = <span class="cl">int</span>(<span class="fn">input</span>(<span class="st">"Passengers (1–9)      : "</span>))
+            <span class="kw">if</span> <span class="nm">1</span> <= pax <= <span class="nm">9</span>: <span class="kw">break</span>
+        <span class="kw">except</span>:
+            <span class="kw">pass</span>
+        <span class="fn">print</span>(<span class="st">"Enter number 1–9 please."</span>)
+
+    <span class="fn">print</span>(<span class="st">"\nPayment method:"</span>)
+    <span class="fn">print</span>(<span class="st">"  1 = PayPal"</span>)
+    <span class="fn">print</span>(<span class="st">"  2 = Credit Card"</span>)
+    <span class="fn">print</span>(<span class="st">"  3 = Cash at Airport"</span>)
+    ch = <span class="fn">input</span>(<span class="st">"Choose → "</span>).<span class="fn">strip</span>()
+
+    <span class="kw">if</span>   ch == <span class="st">"1"</span>: payment = <span class="cl">PayPal</span>()
+    <span class="kw">elif</span> ch == <span class="st">"2"</span>: payment = <span class="cl">CreditCard</span>()
+    <span class="kw">else</span>:          payment = <span class="cl">CashAtAirport</span>()
+
+    <span class="fn">print</span>(<span class="st">"\nTicket style:"</span>)
+    <span class="fn">print</span>(<span class="st">"  1 = Simple"</span>)
+    <span class="fn">print</span>(<span class="st">"  2 = Detailed"</span>)
+    style = <span class="fn">input</span>(<span class="st">"Choose → "</span>).<span class="fn">strip</span>()
+
+    presenter = <span class="cl">SimpleConsoleTicket</span>() <span class="kw">if</span> style != <span class="st">"2"</span> <span class="kw">else</span> <span class="cl">DetailedTicket</span>()
+
+    booking = <span class="cl">Booking</span>(
+        name=name, email=email, origin=orig, destination=dest,
+        passengers=pax, payment=payment, presenter=presenter,
+    )
+    booking.<span class="fn">confirm_and_issue</span>()
+
+
+<span class="kw">if</span> __name__ == <span class="st">"__main__"</span>:
+    <span class="kw">try</span>:
+        <span class="fn">main</span>()
+    <span class="kw">except</span> <span class="cl">KeyboardInterrupt</span>:
+        <span class="fn">print</span>(<span class="st">"\n\nCancelled."</span>)
+    <span class="fn">print</span>(<span class="st">"\nThank you! ✈️"</span>)</pre></div>
+    </div>
+  </div>
+  <div class="divider"></div>
+
+  <!-- REACTIONS -->
+  <div class="section" id="reactions-section">
+    <div class="reactions">
+      <span style="font-family:'Syne',sans-serif;font-size:0.9rem;color:#ffffff;font-weight:600;">Was this helpful?</span>
+      <button class="reaction-btn love-btn" id="loveBtn" onclick="react('love')" aria-label="Love reaction">❤️ Love <span class="reaction-count" id="loveCount">31</span></button>
+      <button class="reaction-btn" id="likeBtn" onclick="react('like')" aria-label="Like reaction">👍 Helpful <span class="reaction-count" id="likeCount">74</span></button>
+      <button class="reaction-btn" id="mindBlownBtn" onclick="react('mindBlown')" aria-label="Mind blown reaction">🤯 Mind Blown <span class="reaction-count" id="mindBlownCount">22</span></button>
+      <button class="reaction-btn" id="bookmarkBtn" onclick="react('bookmark')" aria-label="Bookmark reaction">🔖 Saved <span class="reaction-count" id="bookmarkCount">45</span></button>
+    </div>
+  </div>
+
+  <!-- SHARE -->
+  <div class="section" id="share-section">
+    <div class="sec-header">
+      <span class="sec-num">SHARE</span>
+      <h2 class="sec-title">Share This <span class="accent-blue">Guide</span></h2>
+    </div>
+    <div class="share-row">
+      <a class="share-btn fb" href="https://www.facebook.com/sharer/sharer.php?u=https://code-sense.pansensoyglenn.workers.dev/ticketing.html" target="_blank" rel="noopener" aria-label="Share on Facebook">📘 Facebook</a>
+      <a class="share-btn tw" href="https://twitter.com/intent/tweet?text=Python+Polymorphism+tutorial+—+Ticketing.py+%F0%9F%90%8D+https://code-sense.pansensoyglenn.workers.dev/ticketing.html" target="_blank" rel="noopener" aria-label="Share on Twitter">🐦 Twitter / X</a>
+      <a class="share-btn li" href="https://www.linkedin.com/sharing/share-offsite/?url=https://code-sense.pansensoyglenn.workers.dev/ticketing.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">💼 LinkedIn</a>
+      <button class="share-btn cp" onclick="copyLink()" aria-label="Copy link">🔗 Copy Link</button>
+    </div>
+
+    <div class="ai-share-section">
+      <div class="ai-share-title">✨ AI-Powered Share Caption</div>
+      <p class="ai-share-desc">Generate a ready-to-post social media caption for this guide. Pick your platform and tone, then click Generate.</p>
+      <div class="ai-share-input-row">
+        <select class="ai-share-select" id="aiSharePlatform" aria-label="Select platform">
+          <option>Twitter/X</option>
+          <option>LinkedIn</option>
+          <option>Facebook</option>
+          <option>WhatsApp</option>
+        </select>
+        <select class="ai-share-select" id="aiShareTone" aria-label="Select tone">
+          <option value="enthusiastic">Enthusiastic</option>
+          <option value="professional">Professional</option>
+          <option value="casual">Casual</option>
+          <option value="educational">Educational</option>
+        </select>
+        <button class="ai-share-gen-btn" id="aiShareBtn" onclick="generateAIShare()" aria-label="Generate caption">✨ Generate Caption</button>
+      </div>
+      <div class="ai-share-loading" id="aiShareLoading"><div class="ai-share-spinner"></div><span>Generating caption…</span></div>
+      <div class="ai-share-output" id="aiShareOutput"></div>
+      <div class="ai-share-action-row" id="aiShareActions" style="display:none;">
+        <a class="ai-share-action-btn fb" id="aiFbBtn" href="#" target="_blank" rel="noopener">📘 Share on Facebook</a>
+        <a class="ai-share-action-btn tw" id="aiTwBtn" href="#" target="_blank" rel="noopener">🐦 Share on Twitter</a>
+        <a class="ai-share-action-btn li" id="aiLiBtn" href="#" target="_blank" rel="noopener">💼 Share on LinkedIn</a>
+        <button class="ai-share-action-btn cp" onclick="copyAICaption()">📋 Copy Caption</button>
+      </div>
+    </div>
+  </div>
+  <div class="divider"></div>
+
+  <!-- FAQ -->
+  <div class="section" id="faq">
+    <div class="sec-header">
+      <span class="sec-num">FAQ</span>
+      <h2 class="sec-title">Frequently Asked <span class="accent-pu">Questions</span></h2>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <button class="faq-q">What is polymorphism in Python? <span class="faq-arrow">▾</span></button>
+      <div class="faq-a"><div class="faq-a-inner">Polymorphism means "many forms." In Python, it describes the ability of a single method call to produce different behaviour depending on the type of the object it is called on. In Ticketing.py, <code>self.payment.confirm_payment()</code> behaves differently for <code>PayPal</code>, <code>CreditCard</code>, and <code>CashAtAirport</code> — but <code>Booking</code> never needs to know which one it is dealing with. Python dispatches to the correct implementation automatically at runtime.</div></div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <button class="faq-q">What is a Protocol and how is it different from an ABC? <span class="faq-arrow">▾</span></button>
+      <div class="faq-a"><div class="faq-a-inner">An abstract base class (ABC) requires explicit inheritance — a subclass must declare <code>class MyClass(MyABC)</code> and will raise a <code>TypeError</code> at instantiation if abstract methods are not implemented. A <code>Protocol</code> uses structural subtyping — any class that implements the required methods automatically satisfies the Protocol, with no inheritance declaration needed. Protocols are checked by static type checkers like <code>mypy</code> at development time, not enforced by Python at runtime.</div></div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <button class="faq-q">Why does @dataclass appear on classes with no fields? <span class="faq-arrow">▾</span></button>
+      <div class="faq-a"><div class="faq-a-inner">Applied to a class with no annotated fields, <code>@dataclass</code> generates a zero-argument <code>__init__</code> and a <code>__repr__</code> that prints the class name. It is harmless and consistent — it signals that this class is a data-oriented object following the same pattern as <code>Booking</code>. It also means all classes can be instantiated with the same syntax: <code>PayPal()</code>, <code>CreditCard()</code>, <code>SimpleConsoleTicket()</code>, and so on.</div></div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <button class="faq-q">What is __post_init__ and when is it called? <span class="faq-arrow">▾</span></button>
+      <div class="faq-a"><div class="faq-a-inner"><code>__post_init__</code> is a special method recognised by <code>@dataclass</code>. It is called automatically immediately after the generated <code>__init__</code> has assigned all annotated fields. This makes it the correct place to compute derived values that depend on constructor inputs. In <code>Booking</code>, <code>__post_init__</code> generates the ticket ID from the name and origin, looks up the base fare from the routes dictionary, and calculates the total — all values that require the constructor fields to be set first.</div></div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <button class="faq-q">What is a forward reference in type hints? <span class="faq-arrow">▾</span></button>
+      <div class="faq-a"><div class="faq-a-inner">A forward reference is a type annotation written as a string rather than a direct class reference — for example, <code>'Booking'</code> instead of <code>Booking</code>. It is needed when the annotated type has not yet been defined at the point the annotation is parsed. In <code>TicketPresenter.generate(self, booking: 'Booking')</code>, <code>Booking</code> is defined later in the file, so the string form tells Python to resolve it lazily at type-checking time rather than immediately, preventing a <code>NameError</code>.</div></div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <button class="faq-q">Can I add a new payment method without touching Booking? <span class="faq-arrow">▾</span></button>
+      <div class="faq-a"><div class="faq-a-inner">Yes — this is the open/closed principle enabled by polymorphism. Any new class that implements <code>name() -> str</code> and <code>confirm_payment(amount, description) -> bool</code> automatically satisfies the <code>PaymentMethod</code> Protocol. Simply instantiate it and pass it to <code>Booking</code>. The <code>confirm_and_issue()</code> method never needs to be touched. The same principle applies to ticket presenters — implement <code>generate(booking) -> str</code> and it works immediately.</div></div>
+    </div>
+  </div>
+  <div class="divider"></div>
+
+  <!-- OUTRO CARD -->
+  <div class="section" id="outro">
+    <div class="outro-card">
+      <div class="outro-title">✈️ Ready to Extend Ticketing.py?</div>
+      <p class="outro-body">Now that you understand how polymorphism and Protocols work in Ticketing.py, try adding a <code>GCash</code> payment class, a <code>MobileTicket</code> presenter with emoji formatting, or a <code>LoyaltyDiscount</code> mixin that reduces the base fare. Each extension requires zero changes to <code>Booking</code> — that is the power of programming to interfaces.</p>
+      <div class="hero-cta" style="justify-content:center;">
+        <a href="#intro" class="btn-primary">↑ Read Again</a>
+        <a href="#source" class="btn-secondary">💻 Copy Source Code</a>
+      </div>
+    </div>
+  </div>
+  <div class="divider"></div>
+
+  <!-- COMMENTS -->
+  <div class="section" id="comments">
+    <div class="sec-header">
+      <span class="sec-num">COMMUNITY</span>
+      <h2 class="sec-title">Comments &amp; <span class="accent-blue">Discussion</span></h2>
+    </div>
+    <div class="comments-section">
+      <div class="comment-form">
+        <h3>💬 Leave a Comment</h3>
+        <div class="form-row">
+          <input class="form-input" type="text" id="c-name" placeholder="Your name" maxlength="50">
+          <input class="form-input" type="email" id="c-email" placeholder="Email (not published)" maxlength="100">
+        </div>
+        <textarea class="form-textarea" id="c-body" placeholder="Share your thoughts, questions, or experiences with polymorphism and Protocols in Python..." maxlength="1000"></textarea>
+        <button class="submit-btn" onclick="postComment()" aria-label="Post comment">Post Comment →</button>
+        <p style="font-size:0.8rem;color:#ffffff;margin-top:10px;">💡 Comments are stored locally in this session. Be respectful and constructive.</p>
+      </div>
+      <div class="comment-list" id="commentList">
+        <div class="comment-item">
+          <div class="comment-meta"><div class="comment-avatar">R</div><div><div class="comment-name">Rico Santos</div><div class="comment-date">March 2026</div></div></div>
+          <div class="comment-body">The side-by-side code comparison showing the polymorphic vs. non-polymorphic version of confirm_and_issue() finally made the whole concept click. I always knew isinstance checks were bad practice, but now I understand exactly why and how Protocol solves it cleanly.</div>
+          <button class="comment-like" onclick="likeComment(this)">❤️ <span>19</span></button>
+        </div>
+        <div class="comment-item">
+          <div class="comment-meta"><div class="comment-avatar" style="background:linear-gradient(135deg,#2d7a35,#1a4d1e)">L</div><div><div class="comment-name">Lena Cruz</div><div class="comment-date">March 2026</div></div></div>
+          <div class="comment-body">I never realized @dataclass and Protocol together are such a powerful combination. The __post_init__ section especially — I had no idea that was how you were supposed to compute derived fields. Using this as a reference for my own booking system at work.</div>
+          <button class="comment-like" onclick="likeComment(this)">❤️ <span>14</span></button>
+        </div>
+        <div class="comment-item">
+          <div class="comment-meta"><div class="comment-avatar" style="background:linear-gradient(135deg,#9b72d4,#6a4a9c)">J</div><div><div class="comment-name">Jun Reyes</div><div class="comment-date">March 2026</div></div></div>
+          <div class="comment-body">The 3×2 = 6 distinct booking flows point in the polymorphism deep dive section is brilliant. I never thought about it that way — two independent Protocol axes multiplying the number of supported combinations without any additional code in Booking. That is elegant design.</div>
+          <button class="comment-like" onclick="likeComment(this)">❤️ <span>27</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="divider"></div>
+
+  <!-- FOLLOW -->
+  <div class="section" id="follow">
+    <div class="sec-header">
+      <span class="sec-num">CONNECT</span>
+      <h2 class="sec-title">Follow <span class="accent-pu">Glenn Junsay Pansensoy</span></h2>
+    </div>
+    <p class="prose" style="margin-bottom:20px;">Stay connected for more Python guides, OOP tutorials, and tech content from the Philippines. Follow on your preferred platform:</p>
+    <div class="follow-grid">
+      <a class="follow-btn linkedin" href="https://www.linkedin.com/in/glenn-pansensoy-6288453a2" target="_blank" rel="noopener"><span class="follow-icon">💼</span><div class="follow-lbl"><span>Follow</span><span class="follow-platform">LinkedIn</span></div></a>
+      <a class="follow-btn facebook" href="https://www.facebook.com/@Glenn-Junsay-Pansensoy" target="_blank" rel="noopener"><span class="follow-icon">📘</span><div class="follow-lbl"><span>Follow</span><span class="follow-platform">Facebook</span></div></a>
+      <a class="follow-btn twitter" href="https://x.com/@GlennPansensoy" target="_blank" rel="noopener"><span class="follow-icon">🐦</span><div class="follow-lbl"><span>Follow</span><span class="follow-platform">X / Twitter</span></div></a>
+      <a class="follow-btn youtube" href="https://www.youtube.com/c/@GlennPansensoy" target="_blank" rel="noopener"><span class="follow-icon">▶️</span><div class="follow-lbl"><span>Subscribe</span><span class="follow-platform">YouTube</span></div></a>
+    </div>
+  </div>
+  <div class="divider"></div>
+
+  <!-- SUBSCRIBE -->
+  <div class="section" id="subscribe">
+    <div class="subscribe-card">
+      <div class="subscribe-title">📬 Stay in the Loop</div>
+      <p class="subscribe-sub">Get new Python tutorials, OOP guides, and tech articles from Valleys &amp; Bytes delivered to your inbox — no spam, ever.</p>
+      <div class="sub-form">
+        <input class="sub-input" type="email" id="subEmail" placeholder="your@email.com" aria-label="Email address">
+        <button class="sub-btn" onclick="subscribe()">Subscribe →</button>
+      </div>
+      <p class="sub-note">🔒 No spam. Unsubscribe any time.</p>
+    </div>
+  </div>
+</div>
+
+<div class="sticky-share" aria-label="Quick share">
+  <button class="ss-btn" onclick="copyLink()" aria-label="Copy link" title="Copy link">🔗</button>
+  <a class="ss-btn" href="https://www.facebook.com/sharer/sharer.php?u=https://code-sense.pansensoyglenn.workers.dev/ticketing.html" target="_blank" rel="noopener" aria-label="Share on Facebook" title="Share on Facebook">📘</a>
+  <a class="ss-btn" href="https://twitter.com/intent/tweet?text=Python+Polymorphism+—+Ticketing.py+%F0%9F%90%8D+https://code-sense.pansensoyglenn.workers.dev/ticketing.html" target="_blank" rel="noopener" aria-label="Share on Twitter" title="Share on Twitter">🐦</a>
+  <a class="ss-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https://code-sense.pansensoyglenn.workers.dev/ticketing.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn" title="Share on LinkedIn">💼</a>
+</div>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand"><span style="color:var(--blue-bright)">VALLEYS</span> <span style="color:#ffffff">&amp;</span> <span style="color:var(--purple-bright)">BYTES</span></div>
+        <p class="footer-tagline">Python tutorials, OOP guides, and tech content from the Philippines — explained clearly, documented thoroughly.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Navigate</div>
+        <a class="footer-btn" href="#intro"><span class="ico">📖</span>Introduction</a>
+        <a class="footer-btn" href="#s1"><span class="ico">🗂️</span>Program Overview</a>
+        <a class="footer-btn" href="#poly"><span class="ico">🔬</span>Polymorphism Deep Dive</a>
+        <a class="footer-btn" href="#source"><span class="ico">💻</span>Full Source Code</a>
+        <a class="footer-btn" href="#faq"><span class="ico">❓</span>FAQ</a>
+      </div>
+      <div>
+        <div class="footer-col-title">Site</div>
+        <a class="footer-btn" href="about-guide.html"><span class="ico">📄</span>About this Page</a>
+        <a class="footer-btn" href="about-author.html"><span class="ico">🧑‍💻</span>About the Author</a>
+        <a class="footer-btn" href="oop-contact.html"><span class="ico">📬</span>Contact</a>
+        <a class="footer-btn" href="oop-privacy.html"><span class="ico">🔒</span>Privacy Policy</a>
+        <a class="footer-btn" href="oop-terms.html"><span class="ico">📜</span>Terms of Service</a>
+        <a class="footer-btn" href="oop-cookie.html"><span class="ico">🍪</span>Cookie Policy</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Valleys &amp; Bytes — Glenn Junsay Pansensoy. All rights reserved. Built with data precision and created through intensive information authentication. <span style="color:var(--blue-bright)">code-sense.pansensoyglenn.workers.dev</span></div>
+      <div class="footer-links-row">
+        <a class="footer-link-btn" href="oop-privacy.html">Privacy</a>
+        <a class="footer-link-btn" href="oop-terms.html">Terms</a>
+        <a class="footer-link-btn" href="oop-cookie.html">Cookies</a>
+        <a class="footer-link-btn" href="oop-contact.html">Contact</a>
+        <button class="footer-link-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ Top</button>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  if(!window.matchMedia('(min-width:768px)').matches)return;
+  const c=document.getElementById('particles');
+  if(!c)return;
+  const colors=['rgba(75,139,190,0.6)','rgba(189,147,249,0.5)','rgba(255,212,59,0.4)','rgba(80,250,123,0.4)'];
+  for(let i=0;i<25;i++){
+    const p=document.createElement('div');
+    p.className='particle';
+    const s=Math.random()*4+2;
+    p.style.cssText=`width:${s}px;height:${s}px;left:${Math.random()*100}%;background:${colors[Math.floor(Math.random()*colors.length)]};animation-duration:${Math.random()*15+10}s;animation-delay:${Math.random()*-20}s;`;
+    c.appendChild(p);
+  }
+})();
+const hamburger=document.getElementById('hamburger');
+const drawer=document.getElementById('drawer');
+const overlay=document.getElementById('drawerOverlay');
+function openDrawer(){drawer.classList.add('open');overlay.classList.add('open');hamburger.classList.add('open');hamburger.setAttribute('aria-expanded','true');}
+function closeDrawer(){drawer.classList.remove('open');overlay.classList.remove('open');hamburger.classList.remove('open');hamburger.setAttribute('aria-expanded','false');}
+hamburger.addEventListener('click',()=>drawer.classList.contains('open')?closeDrawer():openDrawer());
+drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeDrawer));
+const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:0.07});
+document.querySelectorAll('.section').forEach(s=>obs.observe(s));
+const bar=document.getElementById('progress-bar');
+window.addEventListener('scroll',()=>{const h=document.documentElement;bar.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100+'%';},{passive:true});
+const tocLinks=document.querySelectorAll('.toc-link');
+const sections=document.querySelectorAll('.section[id],section[id]');
+window.addEventListener('scroll',()=>{let cur='';sections.forEach(s=>{if(window.scrollY>=s.offsetTop-120)cur=s.id;});tocLinks.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+cur);});},{passive:true});
+function copyCode(btn){const pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(()=>{btn.textContent='Copied!';setTimeout(()=>btn.textContent='Copy',2000);});}
+function copyLink(){navigator.clipboard.writeText(window.location.href).then(()=>showToast('🔗 Link copied to clipboard!'));}
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000);}
+function toggleFaq(item){const wasOpen=item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(f=>f.classList.remove('open'));if(!wasOpen)item.classList.add('open');}
+const reactions={love:31,like:74,mindBlown:22,bookmark:45};const reacted={};
+function react(type){const btn=document.getElementById(type+'Btn');const countEl=document.getElementById(type+'Count');if(reacted[type]){reactions[type]--;btn.classList.remove('active');reacted[type]=false;}else{reactions[type]++;btn.classList.add('active');reacted[type]=true;showToast('Thanks for your reaction! 🙌');}countEl.textContent=reactions[type];}
+function postComment(){const name=document.getElementById('c-name').value.trim();const body=document.getElementById('c-body').value.trim();if(!name||!body){showToast('Please fill in your name and comment.');return;}const list=document.getElementById('commentList');const initial=name.charAt(0).toUpperCase();const colors=['linear-gradient(135deg,#3a6e99,#6a4a9c)','linear-gradient(135deg,#2d7a35,#1a4d1e)','linear-gradient(135deg,#9b72d4,#264d6e)'];const bg=colors[Math.floor(Math.random()*colors.length)];const el=document.createElement('div');el.className='comment-item';el.style.animation='fadeUp 0.4s ease both';el.innerHTML=`<div class="comment-meta"><div class="comment-avatar" style="background:${bg}">${initial}</div><div><div class="comment-name">${name}</div><div class="comment-date">Just now</div></div></div><div class="comment-body">${body}</div><button class="comment-like" onclick="likeComment(this)">❤️ <span>0</span></button>`;list.insertBefore(el,list.firstChild);document.getElementById('c-name').value='';document.getElementById('c-body').value='';showToast('Comment posted! Thank you.');}
+function likeComment(btn){const span=btn.querySelector('span');let n=parseInt(span.textContent);if(btn.dataset.liked){n--;btn.dataset.liked='';}else{n++;btn.dataset.liked='1';}span.textContent=n;}
+function subscribe(){const e=document.getElementById('subEmail').value.trim();if(!e||!e.includes('@')){showToast('Please enter a valid email.');return;}document.getElementById('subEmail').value='';showToast('Subscribed! Welcome to Valleys & Bytes.');}
+
+function generateAIShare(){
+  const platform=document.getElementById('aiSharePlatform').value;
+  const tone=document.getElementById('aiShareTone').value;
+  const btn=document.getElementById('aiShareBtn');
+  const loading=document.getElementById('aiShareLoading');
+  const output=document.getElementById('aiShareOutput');
+  const actions=document.getElementById('aiShareActions');
+  const pageUrl='https://code-sense.pansensoyglenn.workers.dev/ticketing.html';
+
+  btn.disabled=true; btn.textContent='Generating…';
+  loading.classList.add('visible');
+  output.classList.remove('visible');
+  actions.style.display='none';
+
+  const templates={
+    'Twitter/X':{
+      enthusiastic:[
+        `🔥 This Python polymorphism guide is exactly what I needed!\n\nTicketing.py shows how Protocol-based duck typing eliminates isinstance checks through a real airline booking system ✈️🐍\n\nNo more messy if/elif chains — pure polymorphic dispatch.\n${pageUrl}\n\n#Python #OOP #LearnPython #Polymorphism`,
+        `✈️ Polymorphism finally makes SENSE!\n\nTicketing.py — Python Protocols, @dataclass, __post_init__, and clean dispatch in one real-world project.\n\nAll the theory applied to a working airline ticketing demo!\n\n${pageUrl}\n\n#Python #OOP #100DaysOfCode #CodeNewbie`,
+      ],
+      professional:[
+        `Thorough Python OOP resource covering polymorphism via Protocol-based structural subtyping.\n\nTicketing.py demonstrates PaymentMethod and TicketPresenter Protocols, @dataclass with __post_init__, and polymorphic dispatch eliminating isinstance.\n\n${pageUrl}\n\n#Python #SoftwareEngineering #OOP #PythonDev`,
+        `A well-structured walkthrough of Python polymorphism using @dataclass and Protocol.\n\nCovers PayPal, CreditCard, CashAtAirport, SimpleConsoleTicket, DetailedTicket, and the Booking dataclass — with complete source code.\n\n${pageUrl}\n#Python #Programming #TechEducation`,
+      ],
+      casual:[
+        `yo if you're learning Python OOP this polymorphism guide slaps ✈️🐍\n\nticket.py — Protocol-based duck typing explained with an airline booking app lol but actually super clear\n\n${pageUrl}\n\n#Python #coding`,
+        `ngl this tutorial lowkey changed how I write Python classes 😅✈️\n\nProtocols + dataclasses = clean polymorphism, no isinstance needed\n\n${pageUrl}\n\n#Python #LearnToCode #OOP`,
+      ],
+      educational:[
+        `📚 Learning Python OOP? This one's for you.\n\nTicketing.py teaches:\n✅ Protocol-based polymorphism\n✅ Structural subtyping (duck typing)\n✅ @dataclass + __post_init__\n✅ Open/Closed Principle\n✅ Polymorphic dispatch\n\nAll in one runnable project.\n${pageUrl}\n\n#Python #Education #OOP #LearnPython`,
+        `Python polymorphism via Protocol — demystified. 🎓\n\nThis guide walks through every class, every method call, and every design decision in a real airline ticketing app.\n\n${pageUrl}\n\n#Python #OOP #PythonTips #Programming`,
+      ],
+    },
+    'LinkedIn':{
+      enthusiastic:[
+        `🚀 Excited to share this Python OOP resource!\n\nTicketing.py is a complete guide that teaches polymorphism, Protocol-based structural subtyping, @dataclass with __post_init__, and the open/closed principle — all through a real airline ticketing application.\n\nWhether you're moving beyond basic classes or brushing up on OOP design patterns, this guide explains not just WHAT the code does, but WHY every decision was made.\n\n✈️ Check it out: ${pageUrl}\n\n#Python #OOP #Polymorphism #SoftwareDevelopment #LearningAndDevelopment`,
+        `💡 Found a Python tutorial that changed how I think about interface design!\n\nTicketing.py covers Protocol-based polymorphism, @dataclass, structural subtyping, and open/closed principle in one cohesive project. The kind of guide I wish I had when learning OOP.\n\n${pageUrl}\n\n#Python #Programming #OOP #TechEducation #SoftwareEngineering`,
+      ],
+      professional:[
+        `For developers looking to deepen their understanding of Python's polymorphism model, I recommend this thorough walkthrough of Ticketing.py.\n\nThe guide covers Protocol-based structural subtyping, @dataclass with __post_init__ derived fields, polymorphic dispatch eliminating isinstance checks, and the open/closed principle in practice. Full source code included.\n\n${pageUrl}\n\n#Python #SoftwareEngineering #OOP #PythonDevelopment #CleanCode`,
+        `Technical deep dive: Python Polymorphism with Ticketing.py\n\nThis guide methodically explains how PayPal, CreditCard, and CashAtAirport satisfy PaymentMethod Protocol, how __post_init__ computes derived booking fields, and how confirm_and_issue() dispatches polymorphically with zero isinstance checks.\n\n${pageUrl}\n\n#Python #OOP #Engineering #Programming`,
+      ],
+      casual:[
+        `Stumbled across this Python tutorial and couldn't stop reading 😄\n\nIt teaches polymorphism using an airline ticketing system — Protocols, @dataclass, and clean dispatch. Finally understood why isinstance checks are an anti-pattern!\n\nWorth bookmarking if you're growing your Python skills! ✈️\n\n${pageUrl}\n\n#Python #Learning #Programming #OOP`,
+        `Sometimes the best tutorials come from unexpected places 🇵🇭✈️\n\nThis Ticketing.py guide walks through Python OOP in a way that finally made Protocol-based polymorphism click for me.\n\n${pageUrl}\n\n#Python #Tech #Coding #OOP`,
+      ],
+      educational:[
+        `📖 Python Polymorphism — A Comprehensive Guide\n\nTicketing.py demonstrates how to:\n• Define structural interfaces with Protocol\n• Use @dataclass with __post_init__ for derived fields\n• Eliminate isinstance with polymorphic dispatch\n• Apply the open/closed principle\n• Validate user input with try/except loops\n\nFull source code and detailed explanations included.\n\n${pageUrl}\n\n#Python #OOP #Education #SoftwareDevelopment #ProgrammingTutorial`,
+        `Sharing this Python OOP resource for developers and educators.\n\nThe guide uses an airline ticketing simulator to teach 6 core concepts: polymorphism, Protocol interfaces, duck typing, @dataclass, __post_init__, and the open/closed principle — all in one cohesive program.\n\n${pageUrl}\n\n#Python #Education #Programming #OOP`,
+      ],
+    },
+    'Facebook':{
+      enthusiastic:[
+        `✈️🐍 OH WOW — this Python tutorial just changed how I write OOP code!\n\nTicketing.py explains polymorphism and Protocol-based duck typing through a real airline booking app. I finally understand why isinstance checks are an anti-pattern!\n\nIf you're learning Python, this is a must-read 👇\n${pageUrl}`,
+        `🔥 Best Python OOP guide I've read this year!\n\nTicketing.py walks through EVERY line of a real ticketing app — explaining polymorphism, Protocols, @dataclass, and __post_init__ from scratch.\n\nSharing because it's just that good 🙌\n${pageUrl}`,
+      ],
+      professional:[
+        `Sharing a well-crafted Python OOP tutorial for developers in my network.\n\nTicketing.py provides a complete walkthrough of Protocol-based polymorphism, @dataclass with __post_init__, and the open/closed principle — with full source code and clear explanations for each design decision.\n\n${pageUrl}`,
+        `For my fellow Python developers — this Ticketing.py guide is an excellent reference for understanding polymorphism, structural subtyping via Protocol, and clean object-oriented design in practice.\n\n${pageUrl}`,
+      ],
+      casual:[
+        `sharing this python tutorial because it actually made OOP click for me 😂✈️\n\npolymorphism explained with an airline booking system — Protocols instead of isinstance, clean dispatch, all of it. solid read!\n\n${pageUrl}`,
+        `my friend sent me this python guide and I ended up reading the whole thing 😅\n\nif you're into coding or want to understand how Python polymorphism really works, check it out!\n${pageUrl}`,
+      ],
+      educational:[
+        `📚 For students and self-taught developers learning Python OOP:\n\nTicketing.py is a step-by-step guide covering polymorphism, Protocol-based duck typing, @dataclass, __post_init__, and the open/closed principle — all demonstrated through a real command-line application.\n\nFull source code included. Highly recommended!\n${pageUrl}`,
+        `Great learning resource for anyone studying Python Object-Oriented Programming:\n\n✅ Polymorphism via Protocol\n✅ Structural subtyping (duck typing)\n✅ @dataclass + __post_init__\n✅ Open/Closed Principle\n✅ Clean polymorphic dispatch\n\nAll in one real-world project: ${pageUrl}`,
+      ],
+    },
+    'WhatsApp':{
+      enthusiastic:[
+        `Hey! ✈️🐍 You HAVE to check out this Python tutorial — it finally made polymorphism click for me!\n\nTicketing.py teaches Protocol-based duck typing through an airline booking app. isinstance checks eliminated, clean dispatch throughout.\n\n👉 ${pageUrl}`,
+        `Bro/Sis check this out! 🔥 Best Python OOP guide I've found — covers Protocol polymorphism, @dataclass, and open/closed principle in one runnable project. Super clear explanations!\n\n${pageUrl}`,
+      ],
+      professional:[
+        `Hi — sharing a Python OOP resource you might find useful. Ticketing.py is a comprehensive walkthrough of polymorphism via Protocol, @dataclass with __post_init__, and the open/closed principle with full source code.\n\n${pageUrl}`,
+        `Thought you'd appreciate this — a thorough Python polymorphism guide with real-world context and complete source code: ${pageUrl}`,
+      ],
+      casual:[
+        `yo check this python tutorial 😄 explains polymorphism with an airline booking app lol but actually really solid. protocols instead of isinstance — worth a read!\n\n${pageUrl}`,
+        `sending this python guide your way — it's the one that finally made Protocol-based OOP make sense to me 😅✈️\n\n${pageUrl}`,
+      ],
+      educational:[
+        `Sharing a Python OOP tutorial that covers:\n• Polymorphism via Protocol\n• Structural subtyping / duck typing\n• @dataclass with __post_init__\n• Open/Closed Principle\n• Polymorphic dispatch\n\nAll through a real project with full source code 👇\n${pageUrl}`,
+        `Good learning resource for Python OOP — step-by-step guide through polymorphism, Protocols, and @dataclass with explanations for every design decision.\n\n${pageUrl}`,
+      ],
+    },
+  };
+
+  setTimeout(()=>{
+    const pool=templates[platform][tone];
+    const caption=pool[Math.floor(Math.random()*pool.length)];
+    output.textContent=caption;
+    output.classList.add('visible');
+    loading.classList.remove('visible');
+    const encodedText=encodeURIComponent(caption);
+    document.getElementById('aiFbBtn').href='https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(pageUrl)+'&quote='+encodedText;
+    document.getElementById('aiTwBtn').href='https://twitter.com/intent/tweet?text='+encodedText;
+    document.getElementById('aiLiBtn').href='https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(pageUrl);
+    actions.style.display='flex';
+    btn.disabled=false; btn.textContent='✨ Generate Caption';
+  }, 900);
+}
+function copyAICaption(){
+  const text=document.getElementById('aiShareOutput').textContent;
+  navigator.clipboard.writeText(text).then(()=>showToast('✅ Caption copied to clipboard!'));
+}
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor=>{anchor.addEventListener('click',function(e){const href=this.getAttribute('href');if(href==='#'||href==='')return;const target=document.querySelector(href);if(target){e.preventDefault();target.scrollIntoView({behavior:'smooth',block:'start'});}});});
+</script>
+</body>
+</html>
