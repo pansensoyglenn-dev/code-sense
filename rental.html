@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>rental.py — Python OOP Booking System Guide | Valleys &amp; Bytes</title>
+<meta name="description" content="Master Python OOP with rental.py — a complete beginner guide to building an El Nido Rental Services booking system using inheritance, class variables, regex validation, and file I/O. Covers BaseService, MotorcycleRental, BoatBooking with full source code.">
+<meta name="keywords" content="Python OOP tutorial, Python inheritance, class variables Python, regex validation Python, file IO Python, El Nido booking system, Philippines coding tutorial, Valleys and Bytes, Glenn Junsay Pansensoy">
+<meta name="author" content="Glenn Junsay Pansensoy">
+<meta name="robots" content="index, follow">
+<meta name="color-scheme" content="dark">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="canonical" href="https://code-sense.pansensoyglenn.workers.dev/rental.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="rental.py — Python OOP Booking System Guide">
+<meta property="og:description" content="Step-by-step Python OOP documentation: inheritance, class variables, regex, file I/O, and full source code for an El Nido rental booking system.">
+<meta property="og:url" content="https://code-sense.pansensoyglenn.workers.dev/rental.html">
+<meta property="og:site_name" content="Valleys &amp; Bytes">
+<meta property="og:image" content="/og-rental.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:alt" content="rental.py — Python OOP Booking System Guide banner">
+<meta property="og:locale" content="en_PH">
+<meta property="article:author" content="Glenn Junsay Pansensoy">
+<meta property="article:published_time" content="2026-03-15T00:00:00+08:00">
+<meta property="article:modified_time" content="2026-03-15T00:00:00+08:00">
+<meta property="article:section" content="Programming Tutorial">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@GlennPansensoy">
+<meta name="twitter:creator" content="@GlennPansensoy">
+<meta name="twitter:title" content="rental.py — Python OOP Booking System Guide">
+<meta name="twitter:description" content="Complete Python OOP tutorial: build an El Nido rental booking system with class hierarchies, regex validation, and file I/O.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "rental.py — Python OOP El Nido Booking System Explained",
+  "description": "A comprehensive step-by-step documentation of rental.py, a Python OOP command-line booking system for El Nido Rental Services using inheritance, class variables, regex validation, and file I/O.",
+  "author": {
+    "@type": "Person",
+    "name": "Glenn Junsay Pansensoy",
+    "url": "https://www.linkedin.com/in/glenn-pansensoy-6288453a2",
+    "sameAs": [
+      "https://www.linkedin.com/in/glenn-pansensoy-6288453a2",
+      "https://www.facebook.com/@Glenn-Junsay-Pansensoy",
+      "https://x.com/@GlennPansensoy",
+      "https://www.youtube.com/c/@GlennPansensoy"
+    ]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Valleys & Bytes",
+    "url": "https://code-sense.pansensoyglenn.workers.dev"
+  },
+  "datePublished": "2026-03-15",
+  "dateModified": "2026-03-15",
+  "mainEntityOfPage": "https://code-sense.pansensoyglenn.workers.dev/rental.html",
+  "programmingLanguage": "Python",
+  "proficiencyLevel": "Beginner",
+  "keywords": ["Python","OOP","Inheritance","Class Variables","Regex","File IO","El Nido","Philippines","Booking System"],
+  "articleSection": "Programming Tutorial",
+  "teaches": ["Python OOP","Inheritance","Class Variables","Regex Validation","File I/O","DRY Principle","super()"]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is rental.py?",
+      "acceptedAnswer": {"@type":"Answer","text":"rental.py is a Python command-line booking system for El Nido Rental Services in Palawan, Philippines. It lets customers rent motorcycles (4 models at different daily rates) or book a private boat charter, collects validated customer details, processes a PayPal payment simulation, and saves an official receipt as a .txt file."}
+    },
+    {
+      "@type": "Question",
+      "name": "What Python OOP concepts does rental.py demonstrate?",
+      "acceptedAnswer": {"@type":"Answer","text":"It demonstrates class inheritance (MotorcycleRental and BoatBooking both inherit from BaseService), class variables (FLEET dictionary in MotorcycleRental), instance variables set in __init__, shared methods inherited from a parent class (get_customer_info, process_payment, generate_receipt), regex validation with re.match(), file I/O with open() and write(), and random reference code generation."}
+    },
+    {
+      "@type": "Question",
+      "name": "What is the FLEET class variable and why is it a class variable?",
+      "acceptedAnswer": {"@type":"Answer","text":"FLEET is a dictionary defined directly on the MotorcycleRental class body, outside any method. This makes it a class variable — shared by all instances of MotorcycleRental. It holds the 4 motorcycle options with their models and daily rates. Since these options are the same for every booking, there is no need to create a new copy per instance. Class variables are the right tool when data belongs to the class, not to individual objects."}
+    },
+    {
+      "@type": "Question",
+      "name": "How does regex validation work in get_customer_info()?",
+      "acceptedAnswer": {"@type":"Answer","text":"re.match(r'^\\+639\\d{9}$', self.phone_number) checks whether the phone number matches the Philippine mobile format exactly. The ^ anchor means the match must start at the beginning of the string. \\+639 matches a literal +639 prefix. \\d{9} matches exactly 9 digits. The $ anchor means the match must end there — no extra characters allowed. If the match fails, the while loop continues asking for a valid number."}
+    },
+    {
+      "@type": "Question",
+      "name": "Why does generate_receipt() write a .txt file instead of printing?",
+      "acceptedAnswer": {"@type":"Answer","text":"Writing to a file gives the customer a permanent record they can retrieve later — printing to the terminal disappears when the session ends. The receipt uses a unique reference code (ELNIDO-XXXXXX) as the filename, so each booking produces a distinct file. This models how real booking systems generate downloadable confirmation documents."}
+    },
+    {
+      "@type": "Question",
+      "name": "Can I run rental.py without installing anything?",
+      "acceptedAnswer": {"@type":"Answer","text":"Yes. rental.py uses only Python standard library modules: random, re, sys, and os. No pip install is required. You only need Python 3.6 or newer. Run: python rental.py in your terminal."}
+    }
+  ]
+}
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4575646748966866" crossorigin="anonymous"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;600;700;800&family=Literata:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;600;700;800&family=Literata:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --obs-900: #0a0a12; --obs-800: #0f0f1e; --obs-700: #151528;
+  --obs-600: #1e1e38; --obs-500: #252545; --obs-400: #2e2e58;
+  --blue-bright: #4b8bbe; --blue-mid: #3a6e99; --blue-dark: #264d6e;
+  --blue-pale: rgba(75,139,190,0.08);
+  --yellow: #ffd43b; --yellow-dim: rgba(255,212,59,0.15);
+  --purple-bright: #bd93f9; --purple-mid: #9b72d4; --purple-dark: #6a4a9c;
+  --purple-pale: rgba(189,147,249,0.07);
+  --text-code: #79c0ff;
+  --syn-kw: #ff79c6; --syn-cl: #8be9fd; --syn-fn: #50fa7b;
+  --syn-st: #f1fa8c; --syn-cm: #6272a4; --syn-nm: #bd93f9; --syn-dc: #ffd43b;
+  --border: rgba(75,139,190,0.18); --border-pu: rgba(189,147,249,0.18);
+  --glow-blue: 0 0 30px rgba(75,139,190,0.15);
+  --glow-pu: 0 0 30px rgba(189,147,249,0.12);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 10px; overflow-x: hidden; max-width: 100vw; }
+body { font-family: 'Literata', Georgia, serif; background: var(--obs-900); color: #ffffff; overflow-x: hidden; max-width: 100vw; line-height: 1.7; }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--obs-800); }
+::-webkit-scrollbar-thumb { background: var(--blue-dark); border-radius: 3px; }
+body::before {
+  content: ''; position: fixed; inset: 0; z-index: 0;
+  background-image: linear-gradient(rgba(75,139,190,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(75,139,190,0.03) 1px, transparent 1px);
+  background-size: 48px 48px; pointer-events: none; animation: gridShift 60s linear infinite;
+}
+@keyframes gridShift { from{background-position:0 0} to{background-position:48px 48px} }
+.navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; height: 64px; background: rgba(10,10,18,0.92); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 28px; }
+.brand { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 800; letter-spacing: -0.5px; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+.brand-valleys { color: var(--blue-bright); }
+.brand-amp { color: #ffffff; font-weight: 400; margin: 0 2px; }
+.brand-bytes { color: var(--purple-bright); }
+.brand-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--yellow); animation: pulse 2s ease infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.7)} }
+.hamburger { display: flex; flex-direction: column; gap: 5px; background: none; border: 1px solid var(--border); padding: 10px 12px; border-radius: 8px; cursor: pointer; transition: all 0.2s; }
+.hamburger:hover { border-color: var(--blue-bright); background: var(--blue-pale); }
+.hamburger span { display: block; width: 20px; height: 2px; background: #ffffff; border-radius: 2px; transition: all 0.3s; }
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.drawer { position: fixed; top: 64px; right: 0; bottom: 0; z-index: 999; width: 300px; background: var(--obs-800); border-left: 1px solid var(--border); transform: translateX(100%); transition: transform 0.35s cubic-bezier(0.4,0,0.2,1); overflow-y: auto; padding: 24px 20px; }
+.drawer.open { transform: translateX(0); }
+.drawer-overlay { position: fixed; inset: 0; z-index: 998; background: rgba(0,0,0,0.5); opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+.drawer-overlay.open { opacity: 1; pointer-events: all; }
+.drawer-section { margin-bottom: 28px; }
+.drawer-section-label { font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; color: #ffffff; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
+.drawer-btn { display: flex; align-items: center; gap: 12px; width: 100%; padding: 11px 14px; margin-bottom: 4px; background: var(--obs-700); border: 1px solid var(--border); border-radius: 8px; color: #ffffff; font-family: 'Syne', sans-serif; font-size: 0.9rem; cursor: pointer; text-decoration: none; transition: all 0.2s; text-align: left; }
+.drawer-btn:hover { background: var(--blue-pale); border-color: var(--blue-bright); color: var(--blue-bright); }
+.drawer-btn .ico { font-size: 1.2rem; width: 22px; text-align: center; }
+.ad-banner { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+.ad-label { font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: #ffffff; letter-spacing: 1px; text-align: center; margin-bottom: 4px; }
+.hero { position: relative; z-index: 1; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 100px 24px 60px; overflow: hidden; background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(75,139,190,0.12) 0%, transparent 70%), radial-gradient(ellipse 60% 40% at 80% 80%, rgba(189,147,249,0.08) 0%, transparent 60%); }
+.hero-particles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.particle { position: absolute; border-radius: 50%; animation: floatParticle linear infinite; }
+@keyframes floatParticle { 0%{transform:translateY(100vh) scale(0);opacity:0} 10%{opacity:1} 90%{opacity:0.3} 100%{transform:translateY(-10vh) scale(1);opacity:0} }
+.hero-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; letter-spacing: 4px; text-transform: uppercase; color: var(--blue-bright); background: rgba(75,139,190,0.1); border: 1px solid rgba(75,139,190,0.3); padding: 6px 20px; border-radius: 20px; margin-bottom: 28px; animation: fadeUp 0.8s ease both; }
+.hero-title { font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 800; line-height: 1.1; text-align: center; margin-bottom: 20px; color: #ffffff; animation: fadeUp 0.9s ease 0.1s both; letter-spacing: -0.5px; }
+.hero-title .hl-blue { color: var(--blue-bright); }
+.hero-title .hl-pu { color: var(--purple-bright); }
+.hero-title .hl-y { color: var(--yellow); }
+.hero-subtitle { font-size: 0.9rem; font-weight: 300; color: #ffffff; text-align: justify; max-width: 600px; line-height: 1.7; margin-bottom: 36px; animation: fadeUp 1s ease 0.2s both; border-left: 3px solid var(--blue-dark); padding-left: 18px; }
+.hero-tags { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 40px; animation: fadeUp 1s ease 0.3s both; }
+.hero-tag { font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; padding: 5px 14px; border-radius: 5px; border: 1px solid var(--border-pu); color: var(--purple-bright); background: var(--purple-pale); letter-spacing: 0.5px; }
+.hero-cta { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; animation: fadeUp 1s ease 0.4s both; }
+.btn-primary { display: inline-flex; align-items: center; gap: 8px; padding: 13px 28px; border-radius: 8px; background: linear-gradient(135deg, var(--blue-mid), var(--purple-dark)); color: #ffffff; font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 600; text-decoration: none; border: none; cursor: pointer; transition: all 0.25s; box-shadow: 0 4px 20px rgba(75,139,190,0.3); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(75,139,190,0.4); }
+.btn-secondary { display: inline-flex; align-items: center; gap: 8px; padding: 13px 28px; border-radius: 8px; background: transparent; border: 1px solid var(--border); color: #ffffff; font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 600; text-decoration: none; cursor: pointer; transition: all 0.25s; }
+.btn-secondary:hover { border-color: var(--purple-bright); color: var(--purple-bright); background: var(--purple-pale); }
+.scroll-indicator { position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; color: #ffffff; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; letter-spacing: 2px; }
+.scroll-indicator .arrow { animation: bounce 2s ease infinite; font-size: 1.2rem; }
+@keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(8px)} }
+@keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+.toc-nav { position: sticky; top: 64px; z-index: 100; background: rgba(10,10,18,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 0 28px; display: flex; align-items: center; overflow-x: auto; scrollbar-width: none; }
+.toc-nav::-webkit-scrollbar { display: none; }
+.toc-link { font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: #ffffff; text-decoration: none; letter-spacing: 1px; text-transform: uppercase; padding: 14px 12px; white-space: nowrap; border-bottom: 2px solid transparent; transition: all 0.2s; }
+.toc-link:hover, .toc-link.active { color: var(--blue-bright); border-bottom-color: var(--blue-bright); }
+.container { max-width: 980px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+.section { margin-top: 72px; opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.section.visible { opacity: 1; transform: translateY(0); }
+.sec-header { display: flex; align-items: center; gap: 16px; margin-bottom: 28px; flex-wrap: wrap; }
+.sec-num { font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: var(--yellow); letter-spacing: 2px; background: var(--yellow-dim); border: 1px solid rgba(255,212,59,0.3); padding: 4px 12px; border-radius: 4px; white-space: nowrap; }
+.sec-title { font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 700; color: #ffffff; border-bottom: 2px solid var(--blue-dark); padding-bottom: 6px; flex: 1; }
+.sec-title .accent-blue { color: var(--blue-bright); }
+.sec-title .accent-pu { color: var(--purple-bright); }
+.prose { font-size: 0.9rem; line-height: 1.85; color: #ffffff; max-width: 820px; text-align: justify; }
+.prose strong { color: #ffffff; font-weight: 600; }
+.prose + .prose { margin-top: 14px; }
+.prose em { color: var(--purple-bright); font-style: italic; }
+.code-block { background: var(--obs-800); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin: 24px 0; box-shadow: var(--glow-blue); position: relative; }
+.code-block::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--blue-bright), var(--purple-bright), transparent); }
+.code-header { background: rgba(255,255,255,0.03); border-bottom: 1px solid var(--border); padding: 10px 18px; display: flex; align-items: center; gap: 8px; }
+.tdk-r { width:10px;height:10px;border-radius:50%;background:#ff5f57; }
+.tdk-y { width:10px;height:10px;border-radius:50%;background:#febc2e; }
+.tdk-g { width:10px;height:10px;border-radius:50%;background:#28c840; }
+.code-lbl { font-family:'JetBrains Mono',monospace; font-size:0.9rem; color:#ffffff; margin-left:6px; letter-spacing:0.5px; }
+.copy-btn { margin-left: auto; font-family:'JetBrains Mono',monospace; font-size:0.9rem; color: var(--blue-bright); background: var(--blue-pale); border: 1px solid rgba(75,139,190,0.3); padding: 3px 10px; border-radius: 4px; cursor: pointer; transition: all 0.2s; }
+.copy-btn:hover { background: var(--blue-dark); color: white; }
+.code-body { padding: 22px 24px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+pre { font-family:'JetBrains Mono',monospace; font-size:0.9rem; line-height:1.75; color:#cdd9e5; tab-size:4; white-space:pre; }
+.kw{color:var(--syn-kw)} .cl{color:var(--syn-cl)} .fn{color:var(--syn-fn)}
+.st{color:var(--syn-st)} .cm{color:var(--syn-cm);font-style:italic} .nm{color:var(--syn-nm)}
+.dc{color:var(--syn-dc)} .op{color:var(--syn-kw)}
+.table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 20px 0; border-radius: 10px; border: 1px solid var(--border); }
+table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+thead tr { background: linear-gradient(135deg, var(--obs-500), var(--obs-400)); }
+thead th { color: var(--blue-bright); font-family:'JetBrains Mono',monospace; font-size: 0.9rem; letter-spacing: 1.5px; text-transform: uppercase; padding: 13px 18px; text-align: left; font-weight: 400; border-bottom: 1px solid var(--border); }
+tbody tr { border-bottom: 1px solid rgba(75,139,190,0.08); transition: background 0.15s; }
+tbody tr:last-child { border-bottom: none; }
+tbody tr:hover { background: var(--blue-pale); }
+tbody td { padding: 13px 18px; line-height: 1.6; vertical-align: top; color: #ffffff; font-size: 0.9rem; text-align: justify; }
+tbody td:first-child { font-family:'JetBrains Mono',monospace; font-size:0.9rem; color: var(--purple-bright); font-weight: 500; background: rgba(189,147,249,0.04); border-right: 1px solid var(--border-pu); white-space: nowrap; text-align: left; }
+.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px,1fr)); gap: 14px; margin: 20px 0; }
+.card { background: var(--obs-700); border: 1px solid var(--border); border-radius: 10px; padding: 20px; border-top: 3px solid var(--blue-dark); transition: all 0.2s; }
+.card:hover { border-top-color: var(--blue-bright); transform: translateY(-2px); box-shadow: var(--glow-blue); }
+.card.pu { border-top-color: var(--purple-dark); }
+.card.pu:hover { border-top-color: var(--purple-bright); box-shadow: var(--glow-pu); }
+.card-label { font-family:'JetBrains Mono',monospace; font-size:0.9rem; color: var(--blue-bright); letter-spacing:2px; text-transform:uppercase; margin-bottom:8px; }
+.card.pu .card-label { color: var(--purple-bright); }
+.card-value { font-size: 0.9rem; line-height: 1.6; color: #ffffff; text-align: justify; }
+code { font-family:'JetBrains Mono',monospace; font-size:0.9rem; background: rgba(75,139,190,0.12); color: var(--text-code); padding: 2px 7px; border-radius: 4px; }
+.steps { display: flex; flex-direction: column; gap: 0; margin: 20px 0; }
+.step { display: flex; gap: 18px; padding: 18px 0; border-bottom: 1px dashed rgba(75,139,190,0.15); }
+.step:last-child { border-bottom: none; }
+.step-num { width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0; background: linear-gradient(135deg, var(--blue-dark), var(--purple-dark)); color: white; font-family:'JetBrains Mono',monospace; font-size:0.9rem; display: flex; align-items: center; justify-content: center; margin-top: 2px; box-shadow: 0 2px 10px rgba(75,139,190,0.3); }
+.step-head { font-family:'Syne',sans-serif; font-weight:600; font-size:1rem; margin-bottom:6px; color:#ffffff; }
+.step-body { font-size: 0.9rem; line-height: 1.75; color: #ffffff; text-align: justify; }
+.callout { border-radius: 8px; padding: 16px 20px; margin: 16px 0; display: flex; gap: 14px; align-items: flex-start; font-size: 0.9rem; line-height: 1.7; }
+.callout-blue { background: rgba(75,139,190,0.08); border-left: 3px solid var(--blue-bright); }
+.callout-pu   { background: var(--purple-pale); border-left: 3px solid var(--purple-bright); }
+.callout-warn { background: rgba(255,212,59,0.06); border-left: 3px solid var(--yellow); }
+.callout-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+.callout-text { color: #ffffff; text-align: justify; }
+.callout-text strong { color: #ffffff; }
+.flow { display: flex; flex-wrap: wrap; align-items: stretch; margin: 20px 0; background: var(--obs-700); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+.flow-item { flex: 1; min-width: 120px; padding: 18px 14px; text-align: center; border-right: 1px solid var(--border); position: relative; transition: background 0.2s; }
+.flow-item:hover { background: var(--blue-pale); }
+.flow-item:last-child { border-right: none; }
+.flow-item::after { content:'›'; position:absolute; right:-8px; top:50%; transform:translateY(-50%); color: var(--blue-mid); font-size:1.4rem; z-index:1; }
+.flow-item:last-child::after { display: none; }
+.flow-icon { font-size: 2rem; display: block; margin-bottom: 6px; }
+.flow-lbl { font-family:'JetBrains Mono',monospace; font-size:0.9rem; color: var(--blue-bright); letter-spacing:1px; text-transform:uppercase; }
+.flow-desc { font-size: 0.9rem; color: #ffffff; margin-top: 4px; line-height: 1.4; }
+.subsec { margin-top: 36px; }
+.subsec-title { font-family:'Syne',sans-serif; font-size: 1rem; font-weight:700; color: #ffffff; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+.subsec-title::before { content:''; display:block; width:3px; height:18px; background: linear-gradient(var(--blue-bright), var(--purple-bright)); border-radius:2px; }
+.divider { height: 1px; margin: 64px 0 0; background: linear-gradient(to right, transparent, var(--blue-dark), var(--purple-dark), transparent); }
+.faq-item { border: 1px solid var(--border); border-radius: 8px; margin-bottom: 8px; overflow: hidden; background: var(--obs-700); transition: border-color 0.2s; }
+.faq-item:hover { border-color: var(--blue-bright); }
+.faq-q { padding: 16px 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-family:'Syne',sans-serif; font-size: 1rem; font-weight:600; color: #ffffff; user-select: none; background: none; border: none; width: 100%; text-align: left; transition: color 0.2s; }
+.faq-q:hover { color: var(--blue-bright); }
+.faq-arrow { color: var(--blue-bright); font-size: 1.4rem; transition: transform 0.3s; flex-shrink: 0; }
+.faq-item.open .faq-arrow { transform: rotate(180deg); }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+.faq-item.open .faq-a { max-height: 600px; }
+.faq-a-inner { padding: 0 20px 18px; font-size: 0.9rem; line-height: 1.8; color: #ffffff; border-top: 1px solid var(--border); padding-top: 14px; text-align: justify; }
+.reactions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; padding: 20px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin: 28px 0; }
+.reaction-btn { display: flex; align-items: center; gap: 8px; background: var(--obs-700); border: 1px solid var(--border); color: #ffffff; padding: 9px 18px; border-radius: 24px; font-family:'Syne',sans-serif; font-size: 0.9rem; cursor: pointer; transition: all 0.2s; }
+.reaction-btn:hover, .reaction-btn.active { background: var(--blue-pale); border-color: var(--blue-bright); color: var(--blue-bright); }
+.reaction-btn.love-btn:hover, .reaction-btn.love-btn.active { background: rgba(255,80,120,0.1); border-color: #ff5078; color: #ff5078; }
+.reaction-count { font-family:'JetBrains Mono',monospace; font-size:0.9rem; }
+.comments-section { margin-top: 28px; }
+.comment-form { background: var(--obs-700); border: 1px solid var(--border); border-radius: 10px; padding: 22px; margin-bottom: 24px; }
+.comment-form h3 { font-family:'Syne',sans-serif; font-size: 1rem; margin-bottom: 16px; color: #ffffff; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+.form-input, .form-textarea { background: var(--obs-800); border: 1px solid var(--border); border-radius: 6px; color: #ffffff; font-family:'Literata',serif; font-size: 0.9rem; padding: 10px 14px; width: 100%; outline: none; transition: border-color 0.2s; }
+.form-input:focus, .form-textarea:focus { border-color: var(--blue-bright); }
+.form-textarea { resize: vertical; min-height: 100px; display: block; margin-bottom: 12px; }
+.submit-btn { background: linear-gradient(135deg, var(--blue-mid), var(--purple-dark)); color: white; border: none; padding: 10px 24px; border-radius: 6px; font-family:'Syne',sans-serif; font-size: 0.9rem; font-weight:600; cursor: pointer; transition: all 0.2s; }
+.submit-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+.comment-list { display: flex; flex-direction: column; gap: 14px; }
+.comment-item { background: var(--obs-700); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; }
+.comment-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+.comment-avatar { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, var(--blue-dark), var(--purple-dark)); display: flex; align-items: center; justify-content: center; font-family:'JetBrains Mono',monospace; font-size:0.9rem; color:white; font-weight:700; flex-shrink:0; }
+.comment-name { font-family:'Syne',sans-serif; font-size:0.9rem; font-weight:600; color:#ffffff; }
+.comment-date { font-family:'JetBrains Mono',monospace; font-size:0.9rem; color:#ffffff; }
+.comment-body { font-size: 0.9rem; line-height: 1.7; color: #ffffff; text-align: justify; }
+.comment-like { display:flex; align-items:center; gap:6px; margin-top:10px; background:none; border:1px solid var(--border); color:#ffffff; padding:4px 12px; border-radius:12px; cursor:pointer; font-size:0.9rem; transition:all 0.2s; }
+.comment-like:hover { color:#ff5078; border-color:#ff5078; background:rgba(255,80,120,0.08); }
+.follow-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); gap: 12px; margin: 20px 0; }
+.follow-btn { display: flex; align-items: center; gap: 12px; background: var(--obs-700); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; color: #ffffff; font-family:'Syne',sans-serif; font-size: 0.9rem; font-weight:600; cursor: pointer; text-decoration: none; transition: all 0.25s; }
+.follow-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
+.follow-btn.linkedin:hover { border-color:#0a66c2; background:rgba(10,102,194,0.1); color:#4b9be6; }
+.follow-btn.facebook:hover { border-color:#1877f2; background:rgba(24,119,242,0.1); color:#5b9fec; }
+.follow-btn.twitter:hover  { border-color:#1da1f2; background:rgba(29,161,242,0.1); color:#6bb8f2; }
+.follow-btn.youtube:hover  { border-color:#ff0000; background:rgba(255,0,0,0.08); color:#ff6666; }
+.follow-icon { font-size: 1.6rem; }
+.follow-lbl { display: flex; flex-direction: column; gap: 1px; }
+.follow-platform { font-size: 0.9rem; color: #ffffff; font-weight:400; }
+.subscribe-card { background: linear-gradient(135deg, var(--obs-600), var(--obs-500)); border: 1px solid var(--border); border-radius: 14px; padding: 40px 36px; margin: 28px 0; text-align: center; position: relative; overflow: hidden; }
+.subscribe-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background: linear-gradient(90deg, var(--blue-bright), var(--purple-bright)); }
+.subscribe-title { font-family:'Syne',sans-serif; font-size:1rem; font-weight:700; margin-bottom:8px; color:#ffffff; }
+.subscribe-sub { color:#ffffff; margin-bottom:24px; font-size:0.9rem; text-align:justify; max-width:500px; margin-left:auto; margin-right:auto; }
+.sub-form { display:flex; gap:10px; max-width:480px; margin:0 auto; flex-wrap:wrap; justify-content:center; }
+.sub-input { flex:1; min-width:200px; background: var(--obs-800); border:1px solid var(--border); border-radius:8px; color:#ffffff; font-family:'Literata',serif; font-size:0.9rem; padding:11px 16px; outline:none; transition:border-color 0.2s; }
+.sub-input:focus { border-color: var(--blue-bright); }
+.sub-btn { background: linear-gradient(135deg, var(--blue-mid), var(--purple-dark)); color:white; border:none; padding:11px 24px; border-radius:8px; font-family:'Syne',sans-serif; font-size:0.9rem; font-weight:600; cursor:pointer; transition:all 0.2s; white-space:nowrap; }
+.sub-btn:hover { opacity:0.85; transform:translateY(-1px); }
+.sub-note { font-size:0.9rem; color:#ffffff; margin-top:12px; }
+.outro-card { background: linear-gradient(135deg, var(--obs-600) 0%, var(--obs-700) 100%); border: 1px solid var(--border-pu); border-radius: 14px; padding: 48px 36px; text-align: center; margin: 48px 0; position: relative; overflow: hidden; }
+.outro-card::after { content: '</>'; position:absolute; right:32px; bottom:16px; font-family:'JetBrains Mono',monospace; font-size:5rem; color: rgba(189,147,249,0.06); font-weight:700; user-select:none; pointer-events:none; }
+.outro-title { font-family:'Syne',sans-serif; font-size:1.2rem; font-weight:800; color:#ffffff; margin-bottom:14px; }
+.outro-body { color:#ffffff; font-size:0.9rem; max-width:620px; margin:0 auto 14px; line-height:1.8; text-align:justify; }
+footer { background: var(--obs-800); border-top: 1px solid var(--border); padding: 60px 24px 32px; margin-top: 80px; }
+.footer-inner { max-width: 980px; margin: 0 auto; }
+.footer-top { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+.footer-brand { font-family:'Syne',sans-serif; font-size:1rem; font-weight:800; margin-bottom:10px; }
+.footer-tagline { font-size: 0.9rem; color: #ffffff; line-height:1.6; text-align:justify; }
+.footer-col-title { font-family:'JetBrains Mono',monospace; font-size:0.9rem; letter-spacing:2px; color: var(--blue-bright); text-transform:uppercase; margin-bottom:14px; }
+.footer-btn { display:flex; align-items:center; gap:8px; background:none; border:1px solid transparent; color:#ffffff; padding:7px 10px; border-radius:6px; font-family:'Syne',sans-serif; font-size:0.9rem; cursor:pointer; text-decoration:none; width:100%; margin-bottom:2px; transition:all 0.2s; text-align:left; }
+.footer-btn:hover { border-color: var(--border); color:#ffffff; background: var(--obs-700); }
+.footer-btn .ico { font-size:1.2rem; width:18px; }
+.footer-bottom { border-top:1px solid var(--border); padding-top:24px; display:flex; flex-wrap:wrap; gap:16px; justify-content:space-between; align-items:center; }
+.footer-copy { font-family:'JetBrains Mono',monospace; font-size:0.9rem; color:#ffffff; }
+.footer-links-row { display:flex; gap:8px; flex-wrap:wrap; }
+.footer-link-btn { background: var(--obs-700); border:1px solid var(--border); color:#ffffff; padding:5px 12px; border-radius:5px; font-family:'JetBrains Mono',monospace; font-size:0.9rem; letter-spacing:0.5px; cursor:pointer; text-decoration:none; transition:all 0.2s; }
+.footer-link-btn:hover { border-color: var(--blue-bright); color: var(--blue-bright); }
+.sticky-share { position:fixed; right:16px; top:50%; transform:translateY(-50%); z-index:200; display:flex; flex-direction:column; gap:8px; }
+.ss-btn { width:40px; height:40px; border-radius:8px; background: var(--obs-700); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:1.2rem; transition:all 0.2s; text-decoration:none; color:#ffffff; }
+.ss-btn:hover { transform:scale(1.12); border-color: var(--blue-bright); background: var(--blue-pale); color: var(--blue-bright); }
+#progress-bar { position:fixed; top:64px; left:0; height:2px; z-index:1001; background: linear-gradient(90deg, var(--blue-bright), var(--purple-bright)); width:0%; transition:width 0.1s linear; }
+.toast { position:fixed; bottom:28px; left:50%; transform:translateX(-50%) translateY(60px); background: var(--obs-600); border:1px solid var(--blue-bright); color:#ffffff; padding:10px 22px; border-radius:8px; font-family:'JetBrains Mono',monospace; font-size:0.9rem; transition:transform 0.3s ease; z-index:2000; pointer-events:none; }
+.toast.show { transform:translateX(-50%) translateY(0); }
+.ai-share-section { background: var(--obs-700); border: 1px solid var(--border-pu); border-radius: 14px; padding: 24px; margin: 20px 0; position: relative; overflow: hidden; }
+.ai-share-section::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--blue-bright), var(--purple-bright)); }
+.ai-share-title { font-family:'Syne',sans-serif; font-size:1rem; font-weight:700; color:#ffffff; margin-bottom:6px; }
+.ai-share-desc { font-size:0.9rem; color:#ffffff; margin-bottom:16px; text-align:justify; }
+.ai-share-controls { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; align-items:center; }
+.ai-sel { flex:1; min-width:130px; background:var(--obs-800); border:1px solid var(--border); border-radius:8px; color:#ffffff; font-family:'Syne',sans-serif; font-size:0.9rem; padding:9px 12px; outline:none; cursor:pointer; }
+.ai-sel:focus { border-color:var(--blue-bright); }
+.ai-gen-btn { background:linear-gradient(135deg,var(--blue-mid),var(--purple-dark)); color:#fff; border:none; padding:10px 22px; border-radius:8px; font-family:'Syne',sans-serif; font-size:0.9rem; font-weight:700; cursor:pointer; transition:all 0.2s; white-space:nowrap; display:inline-flex; align-items:center; gap:8px; }
+.ai-gen-btn:hover { opacity:0.85; transform:translateY(-1px); }
+.ai-loading { display:none; align-items:center; gap:10px; color:#ffffff; font-family:'JetBrains Mono',monospace; font-size:0.9rem; margin-bottom:12px; }
+.ai-loading.show { display:flex; }
+.ai-spinner { width:14px; height:14px; border:2px solid rgba(255,255,255,0.25); border-top-color:var(--blue-bright); border-radius:50%; animation:aiSpin 0.7s linear infinite; }
+@keyframes aiSpin { to{transform:rotate(360deg);} }
+.ai-output { background:var(--obs-800); border:1px solid var(--border); border-radius:8px; padding:16px; font-size:0.9rem; color:#ffffff; line-height:1.7; white-space:pre-wrap; word-break:break-word; margin-bottom:12px; display:none; text-align:justify; }
+.ai-output.show { display:block; }
+.ai-actions { display:none; flex-wrap:wrap; gap:8px; }
+.ai-actions.show { display:flex; }
+.ai-act { display:inline-flex; align-items:center; gap:6px; padding:8px 16px; border-radius:8px; font-family:'Syne',sans-serif; font-size:0.9rem; font-weight:600; border:1px solid var(--border); background:var(--obs-700); color:#ffffff; cursor:pointer; text-decoration:none; transition:all 0.2s; }
+.ai-act:hover { transform:translateY(-1px); }
+.ai-act.cp:hover { border-color:var(--yellow); color:var(--yellow); }
+.ai-act.fb:hover { border-color:#1877f2; color:#6bb1ff; background:rgba(24,119,242,0.1); }
+.ai-act.tw:hover { border-color:#1da1f2; color:#80ccff; background:rgba(29,161,242,0.1); }
+.ai-act.li:hover { border-color:#0a66c2; color:#6baff5; background:rgba(10,102,194,0.1); }
+.ai-act.wa:hover { border-color:#25d366; color:#25d366; background:rgba(37,211,102,0.1); }
+@media (max-width: 900px) {
+  .hero-subtitle { border-left: none; padding-left: 0; border-top: 3px solid var(--blue-dark); padding-top: 16px; }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 24px; }
+  .card-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 768px) {
+  .navbar { padding: 0 16px; }
+  .container { padding: 0 16px; }
+  .section { margin-top: 48px; }
+  .footer-top { grid-template-columns: 1fr; gap: 20px; }
+  .form-row { grid-template-columns: 1fr; }
+  .sticky-share { display: none; }
+  .card-grid { grid-template-columns: 1fr; }
+  .flow-item { min-width: 100%; border-right: none; border-bottom: 1px solid var(--border); }
+  .flow-item::after { content: '↓'; right: 50%; bottom: -10px; top: unset; transform: translateX(50%); }
+  .step { gap: 12px; }
+  .follow-grid { grid-template-columns: 1fr 1fr; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .subscribe-card { padding: 28px 18px; }
+  .outro-card { padding: 28px 18px; }
+  .hero { padding: 90px 0 60px; }
+  .btn-primary, .btn-secondary { width: 100%; max-width: 280px; justify-content: center; }
+}
+@media (max-width: 480px) {
+  .navbar { padding: 0 12px; }
+  .container { padding: 0 12px; }
+  .hero-cta { flex-direction: column; align-items: center; }
+  .follow-grid { grid-template-columns: 1fr; }
+  .comment-form { padding: 16px; }
+  .drawer { width: 280px; }
+}
+</style>
+</head>
+<body>
+<div id="progress-bar"></div>
+<nav class="navbar">
+  <a href="https://code-sense.pansensoyglenn.workers.dev" class="brand">
+    <span class="brand-valleys">VALLEYS</span><span class="brand-amp">&amp;</span><span class="brand-bytes">BYTES</span>
+  </a>
+  <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+<div class="drawer" id="drawer" role="navigation" aria-label="Site menu">
+  <div class="drawer-section">
+    <div class="drawer-section-label">Navigate</div>
+    <a class="drawer-btn" href="#intro"><span class="ico">📖</span>Introduction</a>
+    <a class="drawer-btn" href="#s1"><span class="ico">🗂️</span>Program Overview</a>
+    <a class="drawer-btn" href="#s2"><span class="ico">📥</span>Imports</a>
+    <a class="drawer-btn" href="#s3"><span class="ico">🏛️</span>BaseService Class</a>
+    <a class="drawer-btn" href="#s4"><span class="ico">📝</span>get_customer_info()</a>
+    <a class="drawer-btn" href="#s5"><span class="ico">💳</span>process_payment()</a>
+    <a class="drawer-btn" href="#s6"><span class="ico">🧾</span>generate_receipt()</a>
+    <a class="drawer-btn" href="#s7"><span class="ico">🏍️</span>MotorcycleRental</a>
+    <a class="drawer-btn" href="#s8"><span class="ico">⛵</span>BoatBooking</a>
+    <a class="drawer-btn" href="#s9"><span class="ico">🔄</span>main() Loop</a>
+    <a class="drawer-btn" href="#s10"><span class="ico">🔐</span>__name__ Guard</a>
+    <a class="drawer-btn" href="#source"><span class="ico">💻</span>Full Source Code</a>
+    <a class="drawer-btn" href="#faq"><span class="ico">❓</span>FAQ</a>
+  </div>
+  <div class="drawer-section">
+    <div class="drawer-section-label">Community</div>
+    <a class="drawer-btn" href="#comments"><span class="ico">💬</span>Comments</a>
+    <a class="drawer-btn" href="#follow"><span class="ico">👥</span>Follow</a>
+    <a class="drawer-btn" href="#subscribe"><span class="ico">✉️</span>Subscribe</a>
+  </div>
+  <div class="drawer-section">
+    <div class="drawer-section-label">Site Pages</div>
+    <a class="drawer-btn" href="about-guide.html"><span class="ico">📄</span>About this Page</a>
+    <a class="drawer-btn" href="about-author.html"><span class="ico">🧑‍💻</span>About the Author</a>
+    <a class="drawer-btn" href="oop-contact.html"><span class="ico">📬</span>Contact</a>
+    <a class="drawer-btn" href="oop-privacy.html"><span class="ico">🔒</span>Privacy Policy</a>
+    <a class="drawer-btn" href="oop-terms.html"><span class="ico">📜</span>Terms of Service</a>
+    <a class="drawer-btn" href="oop-cookie.html"><span class="ico">🍪</span>Cookie Policy</a>
+  </div>
+</div>
+<div style="padding:78px 24px 0;position:relative;z-index:1;">
+  <div class="ad-banner">
+    <div class="ad-label">ADVERTISEMENT</div>
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4575646748966866" data-ad-slot="4226674403" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+</div>
+<section class="hero" id="top">
+  <div class="hero-particles" id="particles"></div>
+  <div class="hero-eyebrow">Python · OOP · Inheritance · El Nido · Philippines</div>
+  <h1 class="hero-title">
+    <span class="hl-blue">rental</span><span class="hl-pu">.py</span>
+  </h1>
+  <p class="hero-subtitle">A complete walkthrough of the El Nido Rental Services booking system — explaining BaseService, MotorcycleRental, and BoatBooking class hierarchies, regex phone validation, file I/O receipts, and random reference codes step by step.</p>
+  <div class="hero-tags">
+    <span class="hero-tag">🏛️ BaseService Parent</span>
+    <span class="hero-tag">🏍️ 4 Motorcycle Models</span>
+    <span class="hero-tag">⛵ Boat Charter</span>
+    <span class="hero-tag">📱 Regex Validation</span>
+    <span class="hero-tag">🧾 File I/O Receipt</span>
+    <span class="hero-tag">🐍 Python 3</span>
+  </div>
+  <div class="hero-cta">
+    <a href="#intro" class="btn-primary">📖 Start Reading</a>
+    <a href="#source" class="btn-secondary">💻 View Source Code</a>
+  </div>
+  <div class="scroll-indicator"><span>SCROLL TO EXPLORE</span><span class="arrow">↓</span></div>
+</section>
+<nav class="toc-nav" id="toc">
+  <a class="toc-link" href="#intro">Intro</a>
+  <a class="toc-link" href="#s1">Overview</a>
+  <a class="toc-link" href="#s2">Imports</a>
+  <a class="toc-link" href="#s3">BaseService</a>
+  <a class="toc-link" href="#s4">Customer</a>
+  <a class="toc-link" href="#s5">Payment</a>
+  <a class="toc-link" href="#s6">Receipt</a>
+  <a class="toc-link" href="#s7">Motorcycle</a>
+  <a class="toc-link" href="#s8">Boat</a>
+  <a class="toc-link" href="#s9">main()</a>
+  <a class="toc-link" href="#s10">Guard</a>
+  <a class="toc-link" href="#source">Code</a>
+  <a class="toc-link" href="#faq">FAQ</a>
+</nav>
+<div class="container">
+
+  <div class="section" id="intro">
+    <div class="sec-header">
+      <span class="sec-num">INTRODUCTION</span>
+      <h2 class="sec-title">What Is <span class="accent-blue">rental.py</span> and Why Does It Matter?</h2>
+    </div>
+    <p class="prose">Picture the sun-drenched shores of El Nido, Palawan — one of the most visited destinations in the Philippines. Tourists arrive daily wanting to explore hidden lagoons by boat or zip through mountain roads on rented motorcycles. Every booking requires the same foundation: collect the customer's name and phone number, confirm payment, and issue a receipt. <strong>rental.py</strong> is the Python system that handles all of it from the command line.</p>
+    <p class="prose" style="margin-top:14px;">The program's architecture is a clean demonstration of <strong>inheritance</strong>. Both services — motorcycle rental and boat booking — need customer registration, payment processing, and receipt generation. Rather than duplicating those three methods in every service class, they are written once in a parent class called <code>BaseService</code>, and both <code>MotorcycleRental</code> and <code>BoatBooking</code> inherit them automatically. Child classes only add what is uniquely theirs: <code>MotorcycleRental</code> adds a fleet dictionary and booking logic; <code>BoatBooking</code> adds hotel pickup input.</p>
+    <p class="prose" style="margin-top:14px;">This guide walks through every class and every method in order — explaining not just what the code does but why each pattern was chosen. You will understand class variables versus instance variables, regex phone validation, file I/O for receipt generation, random reference code creation, and the <code>if __name__ == "__main__"</code> guard, all through one cohesive, runnable program set in a place you can picture.</p>
+    <div class="callout callout-blue" style="margin-top:24px;">
+      <span class="callout-icon">🏝️</span>
+      <div class="callout-text"><strong>What you will learn:</strong> Inheritance and shared parent methods, class variables vs instance variables, <code>re.match()</code> for Philippine phone number validation, the <code>while True</code> / <code>break</code> input validation loop pattern, <code>random.randint()</code> for reference code generation, file I/O with <code>open()</code> and <code>write()</code> for receipt saving, f-string formatting for currency, and the <code>if __name__ == "__main__"</code> entry guard.</div>
+    </div>
+    <div class="callout callout-warn" style="margin-top:16px;">
+      <span class="callout-icon">💡</span>
+      <div class="callout-text"><strong>Who this is for:</strong> Python learners who understand variables and basic functions, and are ready to learn OOP inheritance through a real-world Philippines booking system. No external libraries required — runs on pure Python 3.</div>
+    </div>
+  </div>
+
+  <div class="ad-banner" style="margin-top:40px;padding:0;">
+    <div class="ad-label">ADVERTISEMENT</div>
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4575646748966866" data-ad-slot="4226674403" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section" id="s1">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 01</span>
+      <h2 class="sec-title">Program <span class="accent-pu">Overview</span></h2>
+    </div>
+    <p class="prose">rental.py is built around one parent class and two child classes. Understanding the structure before diving into the code makes every detail easier to grasp.</p>
+    <div class="card-grid" style="margin-top:20px;">
+      <div class="card"><div class="card-label">BaseService</div><div class="card-value">Parent class. Stores customer data as instance variables. Provides three shared methods: <code>get_customer_info()</code>, <code>process_payment()</code>, and <code>generate_receipt()</code>. Never instantiated directly.</div></div>
+      <div class="card pu"><div class="card-label">MotorcycleRental</div><div class="card-value">Child of BaseService. Adds a <code>FLEET</code> class variable (4 motorcycle models and rates) and a <code>run_booking()</code> method that handles fleet selection, day calculation, and calls the inherited methods.</div></div>
+      <div class="card"><div class="card-label">BoatBooking</div><div class="card-value">Child of BaseService. Adds a simple <code>run_booking()</code> method that collects the hotel pickup location and calls the inherited methods. Fixed price of PHP 5,000.</div></div>
+      <div class="card pu"><div class="card-label">main()</div><div class="card-value">A <code>while True</code> menu loop that lets users choose between motorcycle rental, boat booking, or exit. Instantiates the correct service class on each selection.</div></div>
+    </div>
+    <div class="flow" style="margin-top:24px;">
+      <div class="flow-item"><span class="flow-icon">📋</span><span class="flow-lbl">Menu</span><div class="flow-desc">Choose: Motorcycle or Boat</div></div>
+      <div class="flow-item"><span class="flow-icon">🔢</span><span class="flow-lbl">Select</span><div class="flow-desc">Pick model / confirm boat</div></div>
+      <div class="flow-item"><span class="flow-icon">📝</span><span class="flow-lbl">Register</span><div class="flow-desc">Name + phone validation</div></div>
+      <div class="flow-item"><span class="flow-icon">💳</span><span class="flow-lbl">Pay</span><div class="flow-desc">PayPal confirmation</div></div>
+      <div class="flow-item"><span class="flow-icon">🧾</span><span class="flow-lbl">Receipt</span><div class="flow-desc">Saved as .txt file</div></div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section" id="s2">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 02</span>
+      <h2 class="sec-title"><span class="accent-blue">Imports</span> — Standard Library Only</h2>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><div class="tdk-r"></div><div class="tdk-y"></div><div class="tdk-g"></div><span class="code-lbl">imports</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <div class="code-body"><pre><span class="kw">import</span> random
+<span class="kw">import</span> re
+<span class="kw">import</span> sys
+<span class="kw">import</span> os</pre></div>
+    </div>
+    <p class="prose">All four modules come from Python's standard library — no <code>pip install</code> is needed. <code>random</code> provides <code>randint()</code> for generating unique 6-digit reference codes. <code>re</code> provides <code>match()</code> for validating Philippine phone numbers against a regex pattern. <code>sys</code> and <code>os</code> are imported for completeness and potential terminal operations, though the core logic uses only <code>random</code> and <code>re</code>. This is a program that runs anywhere Python 3.6+ is installed.</p>
+    <div class="table-wrap" style="margin-top:20px;">
+      <table>
+        <thead><tr><th>Module</th><th>Used For</th><th>Key Function</th></tr></thead>
+        <tbody>
+          <tr><td>random</td><td>Generating unique booking reference codes</td><td>random.randint(100000, 999999)</td></tr>
+          <tr><td>re</td><td>Validating Philippine phone number format</td><td>re.match(r'^\+639\d{9}$', phone)</td></tr>
+          <tr><td>sys</td><td>Standard library import (available for exit/stream ops)</td><td>—</td></tr>
+          <tr><td>os</td><td>Standard library import (available for path/file ops)</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section" id="s3">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 03</span>
+      <h2 class="sec-title">The <span class="accent-pu">BaseService</span> Class</h2>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><div class="tdk-r"></div><div class="tdk-y"></div><div class="tdk-g"></div><span class="code-lbl">class BaseService — __init__</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <div class="code-body"><pre><span class="kw">class</span> <span class="cl">BaseService</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nm">self</span>):
+        <span class="nm">self</span>.first_name = <span class="st">""</span>
+        <span class="nm">self</span>.last_name  = <span class="st">""</span>
+        <span class="nm">self</span>.full_name  = <span class="st">""</span>
+        <span class="nm">self</span>.phone_number = <span class="st">""</span></pre></div>
+    </div>
+    <p class="prose"><code>BaseService</code> is the parent class of the entire system. Its <code>__init__</code> method initialises four instance variables — all empty strings — that will be populated later by <code>get_customer_info()</code>. Initialising attributes in <code>__init__</code> even when they start empty is a best practice: it declares upfront exactly what data every <code>BaseService</code> object (and by inheritance, every child object) will carry. Any method that accesses <code>self.full_name</code> can do so safely because the attribute is guaranteed to exist.</p>
+    <p class="prose" style="margin-top:14px;">Notice that <code>BaseService.__init__</code> takes no parameters beyond <code>self</code>. This is intentional — customer details are not known at object creation time. They are collected interactively later, which is why they are set to empty strings first and filled in by <code>get_customer_info()</code> during the booking flow.</p>
+    <div class="callout callout-blue" style="margin-top:16px;">
+      <span class="callout-icon">🔑</span>
+      <div class="callout-text"><strong>Key insight:</strong> Because <code>MotorcycleRental</code> and <code>BoatBooking</code> inherit from <code>BaseService</code> without defining their own <code>__init__</code>, Python automatically calls <code>BaseService.__init__(self)</code> when either child class is instantiated. The four empty string attributes are set on every booking object for free.</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section" id="s4">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 04</span>
+      <h2 class="sec-title"><span class="accent-blue">get_customer_info()</span> — Regex Phone Validation</h2>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><div class="tdk-r"></div><div class="tdk-y"></div><div class="tdk-g"></div><span class="code-lbl">get_customer_info()</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <div class="code-body"><pre>    <span class="kw">def</span> <span class="fn">get_customer_info</span>(<span class="nm">self</span>):
+        <span class="kw">while</span> <span class="cl">True</span>:
+            <span class="nm">self</span>.first_name = <span class="fn">input</span>(<span class="st">"Enter First Name: "</span>).<span class="fn">strip</span>().<span class="fn">capitalize</span>()
+            <span class="nm">self</span>.last_name  = <span class="fn">input</span>(<span class="st">"Enter Last Name:  "</span>).<span class="fn">strip</span>().<span class="fn">capitalize</span>()
+            <span class="kw">if</span> <span class="nm">self</span>.first_name <span class="kw">and</span> <span class="nm">self</span>.last_name:
+                <span class="kw">break</span>
+            <span class="fn">print</span>(<span class="st">"❌ Error: Both names are required."</span>)
+
+        <span class="kw">while</span> <span class="cl">True</span>:
+            <span class="fn">print</span>(<span class="st">"Format: +639XXXXXXXXX"</span>)
+            <span class="nm">self</span>.phone_number = <span class="fn">input</span>(<span class="st">"Enter Phone Number: "</span>).<span class="fn">strip</span>()
+            <span class="kw">if</span> re.<span class="fn">match</span>(<span class="st">r'^\+639\d{9}$'</span>, <span class="nm">self</span>.phone_number):
+                <span class="kw">break</span>
+            <span class="fn">print</span>(<span class="st">"❌ Error: Invalid format. Please use +639XXXXXXXXX."</span>)
+
+        <span class="nm">self</span>.full_name = <span class="st">f"</span>{<span class="nm">self</span>.first_name} {<span class="nm">self</span>.last_name}<span class="st">"</span>
+        <span class="kw">return</span> <span class="cl">True</span></pre></div>
+    </div>
+    <p class="prose">This method uses two separate <code>while True</code> loops — one for the name and one for the phone number. Each loop keeps asking until valid input is received, then breaks. This is the standard Python pattern for input validation: loop forever, break on success. The name loop checks that both <code>first_name</code> and <code>last_name</code> are non-empty strings (Python treats an empty string as falsy). The <code>.strip().capitalize()</code> chain removes leading/trailing whitespace and ensures the first letter is uppercase.</p>
+    <div class="subsec">
+      <div class="subsec-title">Understanding the Regex Pattern</div>
+      <p class="prose">The pattern <code>r'^\+639\d{9}$'</code> validates Philippine mobile numbers in international format:</p>
+      <div class="table-wrap" style="margin-top:14px;">
+        <table>
+          <thead><tr><th>Token</th><th>Meaning</th><th>Example Match</th></tr></thead>
+          <tbody>
+            <tr><td>^</td><td>Must start here — no characters before +639</td><td>+639…</td></tr>
+            <tr><td>\+</td><td>Literal plus sign (escaped because + has special meaning in regex)</td><td>+</td></tr>
+            <tr><td>639</td><td>Philippine country code + mobile prefix</td><td>639</td></tr>
+            <tr><td>\d{9}</td><td>Exactly 9 decimal digits</td><td>123456789</td></tr>
+            <tr><td>$</td><td>Must end here — no extra characters after the 9 digits</td><td>end</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="prose" style="margin-top:14px;">A valid number looks like <code>+639171234567</code>. The anchors <code>^</code> and <code>$</code> ensure the pattern matches the entire string — without them, <code>+639171234567extra</code> would also pass because the prefix matches. <code>re.match()</code> returns a match object (truthy) on success or <code>None</code> (falsy) on failure, which is why it works directly in the <code>if</code> condition.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section" id="s5">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 05</span>
+      <h2 class="sec-title"><span class="accent-pu">process_payment()</span> — PayPal Simulation</h2>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><div class="tdk-r"></div><div class="tdk-y"></div><div class="tdk-g"></div><span class="code-lbl">process_payment()</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <div class="code-body"><pre>    <span class="kw">def</span> <span class="fn">process_payment</span>(<span class="nm">self</span>, amount: <span class="cl">float</span>, service_name: <span class="cl">str</span>):
+        <span class="fn">print</span>(<span class="st">f"💳 SECURE CHECKOUT: </span>{service_name}<span class="st">"</span>)
+        <span class="fn">print</span>(<span class="st">f"Total Due: PHP </span>{amount:,.2f}<span class="st">"</span>)
+
+        <span class="kw">while</span> <span class="cl">True</span>:
+            confirm = <span class="fn">input</span>(<span class="st">"Confirm payment via PayPal? (Y/N): "</span>).<span class="fn">strip</span>().<span class="fn">upper</span>()
+            <span class="kw">if</span> confirm == <span class="st">'Y'</span>:
+                <span class="kw">return</span> <span class="st">f"ELNIDO-</span>{random.<span class="fn">randint</span>(<span class="nm">100000</span>, <span class="nm">999999</span>)}<span class="st">"</span>
+            <span class="kw">if</span> confirm == <span class="st">'N'</span>:
+                <span class="kw">return</span> <span class="cl">None</span>
+            <span class="fn">print</span>(<span class="st">"❌ Please enter 'Y' or 'N'."</span>)</pre></div>
+    </div>
+    <p class="prose">This method accepts the total <code>amount</code> and the <code>service_name</code> as parameters, displays the checkout summary, and enters a <code>while True</code> confirmation loop. Calling <code>.upper()</code> on the input normalises both <code>y</code> and <code>Y</code> to <code>'Y'</code>, making the comparison case-insensitive without extra logic.</p>
+    <p class="prose" style="margin-top:14px;">On confirmation, <code>random.randint(100000, 999999)</code> generates a 6-digit integer and embeds it in the reference code string <code>"ELNIDO-XXXXXX"</code>. This reference code is returned to the caller — it becomes the filename for the receipt and the identifier printed on it. On cancellation, the method returns <code>None</code>, which the calling code checks with <code>if token:</code> to skip receipt generation.</p>
+    <div class="callout callout-pu" style="margin-top:16px;">
+      <span class="callout-icon">🎲</span>
+      <div class="callout-text"><strong>Return value design:</strong> <code>process_payment()</code> returns either a reference code string or <code>None</code>. This two-outcome return value is a clean Python pattern — the caller decides what to do on each outcome without needing to catch exceptions. In a real system, this method would call a payment API and return the transaction ID from the provider.</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section" id="s6">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 06</span>
+      <h2 class="sec-title"><span class="accent-blue">generate_receipt()</span> — File I/O</h2>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><div class="tdk-r"></div><div class="tdk-y"></div><div class="tdk-g"></div><span class="code-lbl">generate_receipt()</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <div class="code-body"><pre>    <span class="kw">def</span> <span class="fn">generate_receipt</span>(<span class="nm">self</span>, service_details, total_amount, reference_code):
+        filename = <span class="st">f"Receipt_</span>{reference_code}<span class="st">.txt"</span>
+        receipt_content = <span class="st">f"""
+==========================================
+       EL NIDO RENTAL SERVICES
+       Official Booking Receipt
+==========================================
+Reference Code: </span>{reference_code}<span class="st">
+Customer:       </span>{<span class="nm">self</span>.full_name}<span class="st">
+Phone:          </span>{<span class="nm">self</span>.phone_number}<span class="st">
+------------------------------------------
+Service Details:
+</span>{service_details}<span class="st">
+------------------------------------------
+TOTAL PAID:     PHP </span>{total_amount:,.2f}<span class="st">
+Status:         PAID (via PayPal)
+------------------------------------------
+Thank you for booking with us!
+==========================================
+"""</span>
+        <span class="kw">with</span> <span class="fn">open</span>(filename, <span class="st">"w"</span>, encoding=<span class="st">"utf-8"</span>) <span class="kw">as</span> file:
+            file.<span class="fn">write</span>(receipt_content)
+        <span class="fn">print</span>(<span class="st">f"✅ SUCCESS! Receipt saved as: </span>{filename}<span class="st">"</span>)</pre></div>
+    </div>
+    <p class="prose">This method constructs the receipt as a multi-line f-string and writes it to a <code>.txt</code> file. The filename is derived from the reference code — <code>Receipt_ELNIDO-123456.txt</code> — so every booking produces a uniquely named file. The f-string uses <code>self.full_name</code> and <code>self.phone_number</code>, which are instance variables set earlier by <code>get_customer_info()</code>. The <code>service_details</code> parameter is passed in by the child class, allowing the same receipt template to serve both motorcycle and boat bookings.</p>
+    <p class="prose" style="margin-top:14px;">The <code>with open(filename, "w", encoding="utf-8") as file:</code> context manager is the correct Python pattern for file writing. The <code>with</code> block guarantees the file is properly closed after writing — even if an exception occurs mid-write. <code>encoding="utf-8"</code> ensures that any Unicode characters (like the ₱ peso symbol, if added later) write correctly on all operating systems.</p>
+    <div class="callout callout-warn" style="margin-top:16px;">
+      <span class="callout-icon">📁</span>
+      <div class="callout-text"><strong>Where is the file saved?</strong> The file is created in the current working directory — wherever you run <code>python rental.py</code> from. On Windows this might be <code>C:\Users\YourName\</code>, on macOS/Linux it will be the terminal's active directory. Each booking creates one new <code>Receipt_ELNIDO-XXXXXX.txt</code> file.</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section" id="s7">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 07</span>
+      <h2 class="sec-title">The <span class="accent-pu">MotorcycleRental</span> Class</h2>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><div class="tdk-r"></div><div class="tdk-y"></div><div class="tdk-g"></div><span class="code-lbl">class MotorcycleRental</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <div class="code-body"><pre><span class="kw">class</span> <span class="cl">MotorcycleRental</span>(<span class="cl">BaseService</span>):
+    FLEET = {
+        <span class="nm">1</span>: {<span class="st">"model"</span>: <span class="st">"Honda Click 125"</span>,    <span class="st">"rate"</span>: <span class="nm">500</span>},
+        <span class="nm">2</span>: {<span class="st">"model"</span>: <span class="st">"Yamaha Mio"</span>,          <span class="st">"rate"</span>: <span class="nm">800</span>},
+        <span class="nm">3</span>: {<span class="st">"model"</span>: <span class="st">"Suzuki Raider"</span>,       <span class="st">"rate"</span>: <span class="nm">1200</span>},
+        <span class="nm">4</span>: {<span class="st">"model"</span>: <span class="st">"Kawasaki Ninja 400"</span>,  <span class="st">"rate"</span>: <span class="nm">2000</span>}
+    }
+
+    <span class="kw">def</span> <span class="fn">run_booking</span>(<span class="nm">self</span>):
+        <span class="kw">for</span> k, v <span class="kw">in</span> <span class="nm">self</span>.FLEET.items():
+            <span class="fn">print</span>(<span class="st">f"</span>{k}<span class="st">. </span>{v[<span class="st">'model'</span>]}<span class="st"> - PHP </span>{v[<span class="st">'rate'</span>]}<span class="st">/day"</span>)
+
+        <span class="kw">while</span> <span class="cl">True</span>:
+            <span class="kw">try</span>:
+                choice = <span class="fn">int</span>(<span class="fn">input</span>(<span class="st">"Select Motorcycle (1-4): "</span>))
+                <span class="kw">if</span> choice <span class="kw">not in</span> <span class="nm">self</span>.FLEET:
+                    <span class="fn">print</span>(<span class="st">f"❌ '{choice}' is not available."</span>)
+                    <span class="kw">continue</span>
+                days = <span class="fn">int</span>(<span class="fn">input</span>(<span class="st">"Number of days: "</span>))
+                <span class="kw">if</span> days &lt; <span class="nm">1</span>:
+                    <span class="fn">print</span>(<span class="st">"❌ Minimum rental is 1 day."</span>)
+                    <span class="kw">continue</span>
+                <span class="kw">break</span>
+            <span class="kw">except</span> <span class="cl">ValueError</span>:
+                <span class="fn">print</span>(<span class="st">"❌ Invalid input. Please enter numbers only."</span>)
+
+        selected = <span class="nm">self</span>.FLEET[choice]
+        total = selected[<span class="st">'rate'</span>] * days
+
+        <span class="kw">if</span> <span class="nm">self</span>.<span class="fn">get_customer_info</span>():
+            token = <span class="nm">self</span>.<span class="fn">process_payment</span>(total, selected[<span class="st">'model'</span>])
+            <span class="kw">if</span> token:
+                details = <span class="st">f"Rental Item: </span>{selected[<span class="st">'model'</span>]}<span class="st">\nDuration:    </span>{days}<span class="st"> Day(s)"</span>
+                <span class="nm">self</span>.<span class="fn">generate_receipt</span>(details, total, token)</pre></div>
+    </div>
+    <p class="prose"><code>FLEET</code> is a <strong>class variable</strong> — defined directly in the class body, outside any method. This means it is shared across all instances of <code>MotorcycleRental</code>. There is no need to create a new copy of the fleet for every booking object, because the fleet options never change between bookings. This is the key distinction between class variables (shared, defined on the class) and instance variables (per-object, set in <code>__init__</code>).</p>
+    <p class="prose" style="margin-top:14px;">The <code>run_booking()</code> method wraps the selection and day-count inputs in a single <code>try/except ValueError</code> block. If the user types "abc", <code>int()</code> raises a <code>ValueError</code> which is caught and prints an error before looping again. The <code>choice not in self.FLEET</code> check validates the range. Once both inputs are valid, the total is calculated as <code>rate × days</code>, and the three inherited methods are called in sequence.</p>
+    <div class="table-wrap" style="margin-top:20px;">
+      <table>
+        <thead><tr><th>Code</th><th>Model</th><th>Daily Rate (PHP)</th><th>Category</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Honda Click 125</td><td>500</td><td>Economy scooter</td></tr>
+          <tr><td>2</td><td>Yamaha Mio</td><td>800</td><td>Mid-range scooter</td></tr>
+          <tr><td>3</td><td>Suzuki Raider</td><td>1,200</td><td>Sport underbone</td></tr>
+          <tr><td>4</td><td>Kawasaki Ninja 400</td><td>2,000</td><td>Premium sports bike</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section" id="s8">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 08</span>
+      <h2 class="sec-title">The <span class="accent-blue">BoatBooking</span> Class</h2>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><div class="tdk-r"></div><div class="tdk-y"></div><div class="tdk-g"></div><span class="code-lbl">class BoatBooking</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <div class="code-body"><pre><span class="kw">class</span> <span class="cl">BoatBooking</span>(<span class="cl">BaseService</span>):
+    <span class="kw">def</span> <span class="fn">run_booking</span>(<span class="nm">self</span>):
+        <span class="fn">print</span>(<span class="st">"\n⛵ PRIVATE BOAT CHARTER"</span>)
+        <span class="kw">if</span> <span class="nm">self</span>.<span class="fn">get_customer_info</span>():
+            hotel = <span class="fn">input</span>(<span class="st">"Enter Hotel Name for Pickup: "</span>).<span class="fn">strip</span>()
+            total = <span class="nm">5000.00</span>
+            token = <span class="nm">self</span>.<span class="fn">process_payment</span>(total, <span class="st">"Boat Tour"</span>)
+            <span class="kw">if</span> token:
+                details = <span class="st">f"Service:     Private Boat Charter\nPickup Loc:  </span>{hotel}<span class="st">"</span>
+                <span class="nm">self</span>.<span class="fn">generate_receipt</span>(details, total, token)</pre></div>
+    </div>
+    <p class="prose"><code>BoatBooking</code> is the simplest child class in the program — just 8 lines of actual logic. There is no fleet to select from, no day calculation, and no dynamic pricing. The service is a fixed private boat charter at PHP 5,000. The only unique input is the hotel name for pickup, which gets embedded in the receipt's service details.</p>
+    <p class="prose" style="margin-top:14px;">This simplicity illustrates an important design principle: child classes only need to define what is <em>unique</em> to them. Everything else — customer registration, payment, receipt generation — is handled by the parent. <code>BoatBooking</code> adds exactly one unique piece of data (hotel name) and one unique piece of logic (fixed price), and inherits all the rest.</p>
+    <div class="callout callout-blue" style="margin-top:16px;">
+      <span class="callout-icon">⚖️</span>
+      <div class="callout-text"><strong>MotorcycleRental vs BoatBooking:</strong> Both child classes call the same three inherited methods in the same order — <code>get_customer_info()</code>, then <code>process_payment()</code>, then <code>generate_receipt()</code>. The difference is entirely in what happens <em>before</em> those calls: motorcycle builds a fleet menu and calculates a variable total; boat collects a hotel name and uses a fixed total. This is polymorphism at its most practical.</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section" id="s9">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 09</span>
+      <h2 class="sec-title"><span class="accent-pu">main()</span> — The Menu Loop</h2>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><div class="tdk-r"></div><div class="tdk-y"></div><div class="tdk-g"></div><span class="code-lbl">main()</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <div class="code-body"><pre><span class="kw">def</span> <span class="fn">main</span>():
+    <span class="kw">while</span> <span class="cl">True</span>:
+        <span class="fn">print</span>(<span class="st">"═" * 45</span>)
+        <span class="fn">print</span>(<span class="st">f"{'EL NIDO BOOKING &amp; MANAGEMENT SYSTEM':^45}"</span>)
+        <span class="fn">print</span>(<span class="st">"═" * 45</span>)
+        <span class="fn">print</span>(<span class="st">"1. Rent a Motorcycle"</span>)
+        <span class="fn">print</span>(<span class="st">"2. Book a Boat"</span>)
+        <span class="fn">print</span>(<span class="st">"3. Exit System"</span>)
+
+        choice = <span class="fn">input</span>(<span class="st">"\nSelect Option: "</span>).<span class="fn">strip</span>()
+        <span class="kw">if</span> choice == <span class="st">"1"</span>:
+            <span class="cl">MotorcycleRental</span>().<span class="fn">run_booking</span>()
+        <span class="kw">elif</span> choice == <span class="st">"2"</span>:
+            <span class="cl">BoatBooking</span>().<span class="fn">run_booking</span>()
+        <span class="kw">elif</span> choice == <span class="st">"3"</span>:
+            <span class="fn">print</span>(<span class="st">"System closing. Maraming Salamat!"</span>)
+            <span class="kw">break</span>
+        <span class="kw">else</span>:
+            <span class="fn">print</span>(<span class="st">"❌ Invalid selection."</span>)</pre></div>
+    </div>
+    <p class="prose">The <code>main()</code> function is a <code>while True</code> loop that re-displays the menu after every completed booking, allowing multiple transactions in a single session. The <code>{....:^45}</code> f-string format specifier centres the title text within 45 characters — a neat formatting trick for terminal output.</p>
+    <p class="prose" style="margin-top:14px;">Notice the instantiation pattern: <code>MotorcycleRental().run_booking()</code> creates a fresh object and immediately calls <code>run_booking()</code> on it — all in one line. This means every booking gets a clean object with empty instance variables, so customer data from one booking never leaks into the next. The object is discarded after <code>run_booking()</code> returns.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section" id="s10">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 10</span>
+      <h2 class="sec-title"><span class="accent-blue">if __name__ == "__main__"</span> — The Entry Guard</h2>
+    </div>
+    <div class="code-block">
+      <div class="code-body"><pre><span class="kw">if</span> __name__ == <span class="st">"__main__"</span>:
+    <span class="fn">main</span>()</pre></div>
+    </div>
+    <p class="prose">This two-line guard ensures <code>main()</code> — with all its interactive <code>input()</code> calls and menu printing — only runs when you execute the script directly (<code>python rental.py</code>). If another developer imports <code>BaseService</code>, <code>MotorcycleRental</code>, or <code>BoatBooking</code> into their own project, the booking menu does not start automatically. The classes remain importable and testable without triggering the interactive session.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section" id="source">
+    <div class="sec-header">
+      <span class="sec-num">FULL SOURCE</span>
+      <h2 class="sec-title">Complete <span class="accent-pu">rental.py</span> Source Code</h2>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><div class="tdk-r"></div><div class="tdk-y"></div><div class="tdk-g"></div><span class="code-lbl">rental.py — Full Source</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <div class="code-body"><pre><span class="kw">import</span> random
+<span class="kw">import</span> re
+<span class="kw">import</span> sys
+<span class="kw">import</span> os
+
+<span class="kw">class</span> <span class="cl">BaseService</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nm">self</span>):
+        <span class="nm">self</span>.first_name = <span class="st">""</span>
+        <span class="nm">self</span>.last_name  = <span class="st">""</span>
+        <span class="nm">self</span>.full_name  = <span class="st">""</span>
+        <span class="nm">self</span>.phone_number = <span class="st">""</span>
+
+    <span class="kw">def</span> <span class="fn">get_customer_info</span>(<span class="nm">self</span>):
+        <span class="fn">print</span>(<span class="st">"\n" + "─" * 40</span>)
+        <span class="fn">print</span>(<span class="st">"📝 CUSTOMER REGISTRATION"</span>)
+        <span class="fn">print</span>(<span class="st">"─" * 40</span>)
+        <span class="kw">while</span> <span class="cl">True</span>:
+            <span class="nm">self</span>.first_name = <span class="fn">input</span>(<span class="st">"Enter First Name: "</span>).<span class="fn">strip</span>().<span class="fn">capitalize</span>()
+            <span class="nm">self</span>.last_name  = <span class="fn">input</span>(<span class="st">"Enter Last Name:  "</span>).<span class="fn">strip</span>().<span class="fn">capitalize</span>()
+            <span class="kw">if</span> <span class="nm">self</span>.first_name <span class="kw">and</span> <span class="nm">self</span>.last_name:
+                <span class="kw">break</span>
+            <span class="fn">print</span>(<span class="st">"❌ Error: Both names are required."</span>)
+        <span class="kw">while</span> <span class="cl">True</span>:
+            <span class="fn">print</span>(<span class="st">"Format: +639XXXXXXXXX"</span>)
+            <span class="nm">self</span>.phone_number = <span class="fn">input</span>(<span class="st">"Enter Phone Number: "</span>).<span class="fn">strip</span>()
+            <span class="kw">if</span> re.<span class="fn">match</span>(<span class="st">r'^\+639\d{9}$'</span>, <span class="nm">self</span>.phone_number):
+                <span class="kw">break</span>
+            <span class="fn">print</span>(<span class="st">"❌ Error: Invalid format. Please use +639XXXXXXXXX."</span>)
+        <span class="nm">self</span>.full_name = <span class="st">f"</span>{<span class="nm">self</span>.first_name} {<span class="nm">self</span>.last_name}<span class="st">"</span>
+        <span class="kw">return</span> <span class="cl">True</span>
+
+    <span class="kw">def</span> <span class="fn">process_payment</span>(<span class="nm">self</span>, amount: <span class="cl">float</span>, service_name: <span class="cl">str</span>):
+        <span class="fn">print</span>(<span class="st">"\n" + "─" * 40</span>)
+        <span class="fn">print</span>(<span class="st">f"💳 SECURE CHECKOUT: </span>{service_name}<span class="st">"</span>)
+        <span class="fn">print</span>(<span class="st">f"Total Due: PHP </span>{amount:,.2f}<span class="st">"</span>)
+        <span class="kw">while</span> <span class="cl">True</span>:
+            confirm = <span class="fn">input</span>(<span class="st">"Confirm payment via PayPal? (Y/N): "</span>).<span class="fn">strip</span>().<span class="fn">upper</span>()
+            <span class="kw">if</span> confirm == <span class="st">'Y'</span>:
+                <span class="kw">return</span> <span class="st">f"ELNIDO-</span>{random.<span class="fn">randint</span>(<span class="nm">100000</span>, <span class="nm">999999</span>)}<span class="st">"</span>
+            <span class="kw">if</span> confirm == <span class="st">'N'</span>:
+                <span class="kw">return</span> <span class="cl">None</span>
+            <span class="fn">print</span>(<span class="st">"❌ Please enter 'Y' or 'N'."</span>)
+
+    <span class="kw">def</span> <span class="fn">generate_receipt</span>(<span class="nm">self</span>, service_details, total_amount, reference_code):
+        filename = <span class="st">f"Receipt_</span>{reference_code}<span class="st">.txt"</span>
+        receipt_content = <span class="st">f"""
+==========================================
+       EL NIDO RENTAL SERVICES
+       Official Booking Receipt
+==========================================
+Reference Code: </span>{reference_code}<span class="st">
+Customer:       </span>{<span class="nm">self</span>.full_name}<span class="st">
+Phone:          </span>{<span class="nm">self</span>.phone_number}<span class="st">
+------------------------------------------
+Service Details:
+</span>{service_details}<span class="st">
+------------------------------------------
+TOTAL PAID:     PHP </span>{total_amount:,.2f}<span class="st">
+Status:         PAID (via PayPal)
+------------------------------------------
+Thank you for booking with us!
+Please present this receipt at pickup.
+==========================================
+"""</span>
+        <span class="kw">with</span> <span class="fn">open</span>(filename, <span class="st">"w"</span>, encoding=<span class="st">"utf-8"</span>) <span class="kw">as</span> file:
+            file.<span class="fn">write</span>(receipt_content)
+        <span class="fn">print</span>(<span class="st">f"\n✅ SUCCESS! Receipt saved as: </span>{filename}<span class="st">"</span>)
+
+<span class="kw">class</span> <span class="cl">MotorcycleRental</span>(<span class="cl">BaseService</span>):
+    FLEET = {
+        <span class="nm">1</span>: {<span class="st">"model"</span>: <span class="st">"Honda Click 125"</span>,   <span class="st">"rate"</span>: <span class="nm">500</span>},
+        <span class="nm">2</span>: {<span class="st">"model"</span>: <span class="st">"Yamaha Mio"</span>,         <span class="st">"rate"</span>: <span class="nm">800</span>},
+        <span class="nm">3</span>: {<span class="st">"model"</span>: <span class="st">"Suzuki Raider"</span>,      <span class="st">"rate"</span>: <span class="nm">1200</span>},
+        <span class="nm">4</span>: {<span class="st">"model"</span>: <span class="st">"Kawasaki Ninja 400"</span>, <span class="st">"rate"</span>: <span class="nm">2000</span>}
+    }
+    <span class="kw">def</span> <span class="fn">run_booking</span>(<span class="nm">self</span>):
+        <span class="fn">print</span>(<span class="st">"\n🏍️  MOTORCYCLE RENTAL SELECTION"</span>)
+        <span class="kw">for</span> k, v <span class="kw">in</span> <span class="nm">self</span>.FLEET.items():
+            <span class="fn">print</span>(<span class="st">f"</span>{k}<span class="st">. </span>{v[<span class="st">'model'</span>]}<span class="st"> - PHP </span>{v[<span class="st">'rate'</span>]}<span class="st">/day"</span>)
+        <span class="kw">while</span> <span class="cl">True</span>:
+            <span class="kw">try</span>:
+                choice = <span class="fn">int</span>(<span class="fn">input</span>(<span class="st">"\nSelect Motorcycle (1-4): "</span>))
+                <span class="kw">if</span> choice <span class="kw">not in</span> <span class="nm">self</span>.FLEET:
+                    <span class="fn">print</span>(<span class="st">f"❌ '{choice}' is not available."</span>)
+                    <span class="kw">continue</span>
+                days = <span class="fn">int</span>(<span class="fn">input</span>(<span class="st">"Number of days: "</span>))
+                <span class="kw">if</span> days &lt; <span class="nm">1</span>:
+                    <span class="fn">print</span>(<span class="st">"❌ Minimum rental is 1 day."</span>)
+                    <span class="kw">continue</span>
+                <span class="kw">break</span>
+            <span class="kw">except</span> <span class="cl">ValueError</span>:
+                <span class="fn">print</span>(<span class="st">"❌ Invalid input."</span>)
+        selected = <span class="nm">self</span>.FLEET[choice]
+        total = selected[<span class="st">'rate'</span>] * days
+        <span class="kw">if</span> <span class="nm">self</span>.<span class="fn">get_customer_info</span>():
+            token = <span class="nm">self</span>.<span class="fn">process_payment</span>(total, selected[<span class="st">'model'</span>])
+            <span class="kw">if</span> token:
+                details = <span class="st">f"Rental Item: </span>{selected[<span class="st">'model'</span>]}<span class="st">\nDuration:    </span>{days}<span class="st"> Day(s)"</span>
+                <span class="nm">self</span>.<span class="fn">generate_receipt</span>(details, total, token)
+
+<span class="kw">class</span> <span class="cl">BoatBooking</span>(<span class="cl">BaseService</span>):
+    <span class="kw">def</span> <span class="fn">run_booking</span>(<span class="nm">self</span>):
+        <span class="fn">print</span>(<span class="st">"\n⛵ PRIVATE BOAT CHARTER"</span>)
+        <span class="kw">if</span> <span class="nm">self</span>.<span class="fn">get_customer_info</span>():
+            hotel = <span class="fn">input</span>(<span class="st">"Enter Hotel Name for Pickup: "</span>).<span class="fn">strip</span>()
+            total = <span class="nm">5000.00</span>
+            token = <span class="nm">self</span>.<span class="fn">process_payment</span>(total, <span class="st">"Boat Tour"</span>)
+            <span class="kw">if</span> token:
+                details = <span class="st">f"Service:     Private Boat Charter\nPickup Loc:  </span>{hotel}<span class="st">"</span>
+                <span class="nm">self</span>.<span class="fn">generate_receipt</span>(details, total, token)
+
+<span class="kw">def</span> <span class="fn">main</span>():
+    <span class="kw">while</span> <span class="cl">True</span>:
+        <span class="fn">print</span>(<span class="st">"\n" + "═" * 45</span>)
+        <span class="fn">print</span>(<span class="st">f"{'EL NIDO BOOKING &amp; MANAGEMENT SYSTEM':^45}"</span>)
+        <span class="fn">print</span>(<span class="st">"═" * 45</span>)
+        <span class="fn">print</span>(<span class="st">"1. Rent a Motorcycle"</span>)
+        <span class="fn">print</span>(<span class="st">"2. Book a Boat"</span>)
+        <span class="fn">print</span>(<span class="st">"3. Exit System"</span>)
+        choice = <span class="fn">input</span>(<span class="st">"\nSelect Option: "</span>).<span class="fn">strip</span>()
+        <span class="kw">if</span> choice == <span class="st">"1"</span>:
+            <span class="cl">MotorcycleRental</span>().<span class="fn">run_booking</span>()
+        <span class="kw">elif</span> choice == <span class="st">"2"</span>:
+            <span class="cl">BoatBooking</span>().<span class="fn">run_booking</span>()
+        <span class="kw">elif</span> choice == <span class="st">"3"</span>:
+            <span class="fn">print</span>(<span class="st">"System closing. Maraming Salamat!"</span>)
+            <span class="kw">break</span>
+        <span class="kw">else</span>:
+            <span class="fn">print</span>(<span class="st">"❌ Invalid selection. Please choose 1, 2, or 3."</span>)
+
+<span class="kw">if</span> __name__ == <span class="st">"__main__"</span>:
+    <span class="fn">main</span>()</pre></div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section" id="faq">
+    <div class="sec-header">
+      <span class="sec-num">FAQ</span>
+      <h2 class="sec-title">Frequently Asked <span class="accent-pu">Questions</span></h2>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)"><button class="faq-q">What is rental.py? <span class="faq-arrow">▾</span></button><div class="faq-a"><div class="faq-a-inner">rental.py is a Python command-line booking system for El Nido Rental Services in Palawan, Philippines. It lets customers rent motorcycles (4 models) or book a private boat charter, validates Philippine phone numbers with regex, simulates PayPal payment, and saves an official receipt as a .txt file with a unique ELNIDO-XXXXXX reference code.</div></div></div>
+    <div class="faq-item" onclick="toggleFaq(this)"><button class="faq-q">What is the FLEET class variable and why is it a class variable? <span class="faq-arrow">▾</span></button><div class="faq-a"><div class="faq-a-inner">FLEET is a dictionary defined directly on the <code>MotorcycleRental</code> class body, outside any method. This makes it a class variable — shared by all instances. Since the motorcycle options are the same for every booking, there is no need to create a new copy per object. Class variables are the right tool when data belongs to the class, not to individual objects.</div></div></div>
+    <div class="faq-item" onclick="toggleFaq(this)"><button class="faq-q">How does the regex phone validation work? <span class="faq-arrow">▾</span></button><div class="faq-a"><div class="faq-a-inner">The pattern <code>r'^\+639\d{9}$'</code> validates Philippine mobile numbers. <code>^</code> anchors the start, <code>\+639</code> matches the literal +639 prefix, <code>\d{9}</code> matches exactly 9 digits, and <code>$</code> anchors the end. A valid number looks like <code>+639171234567</code>. The anchors are critical — without them, numbers with extra characters would also pass.</div></div></div>
+    <div class="faq-item" onclick="toggleFaq(this)"><button class="faq-q">Why does generate_receipt() write a file instead of just printing? <span class="faq-arrow">▾</span></button><div class="faq-a"><div class="faq-a-inner">Writing to a file gives the customer a permanent record — terminal output disappears when the session ends. Each booking produces a uniquely named <code>Receipt_ELNIDO-XXXXXX.txt</code> file in the current working directory, modelling how real booking systems generate downloadable confirmation documents.</div></div></div>
+    <div class="faq-item" onclick="toggleFaq(this)"><button class="faq-q">Why does BoatBooking not define __init__? <span class="faq-arrow">▾</span></button><div class="faq-a"><div class="faq-a-inner">Because it does not need to add any new instance variables. When <code>BoatBooking()</code> is instantiated, Python automatically uses <code>BaseService.__init__(self)</code>, which sets the four empty string attributes. <code>BoatBooking</code> inherits that setup for free. If it ever needed a new attribute — say, <code>self.boat_type</code> — it would then define its own <code>__init__</code> and call <code>super().__init__()</code>.</div></div></div>
+    <div class="faq-item" onclick="toggleFaq(this)"><button class="faq-q">How would I add a third service, like a kayak rental? <span class="faq-arrow">▾</span></button><div class="faq-a"><div class="faq-a-inner">Create a new class: <code>class KayakRental(BaseService)</code>. Add a <code>run_booking()</code> method that collects any kayak-specific inputs (e.g., duration in hours), calculates the total, then calls <code>self.get_customer_info()</code>, <code>self.process_payment(total, "Kayak Rental")</code>, and <code>self.generate_receipt(details, total, token)</code>. Add option "4" to the <code>main()</code> menu. That is all — no changes to <code>BaseService</code> needed.</div></div></div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section" id="reactions-section">
+    <div class="reactions">
+      <button id="lovBtn" class="reaction-btn love-btn" onclick="react('lov')">❤️ Love <span class="reaction-count" id="lovCount">28</span></button>
+      <button id="likBtn" class="reaction-btn" onclick="react('lik')">👍 Helpful <span class="reaction-count" id="likCount">54</span></button>
+      <button id="mblBtn" class="reaction-btn" onclick="react('mbl')">🤯 Mind Blown <span class="reaction-count" id="mblCount">19</span></button>
+      <button id="bmkBtn" class="reaction-btn" onclick="react('bmk')">🔖 Bookmarked <span class="reaction-count" id="bmkCount">36</span></button>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section" id="comments">
+    <div class="sec-header">
+      <span class="sec-num">COMMUNITY</span>
+      <h2 class="sec-title">Comments &amp; <span class="accent-blue">Discussion</span></h2>
+    </div>
+    <div class="comments-section">
+      <div class="comment-form">
+        <h3>💬 Leave a Comment</h3>
+        <div class="form-row">
+          <input class="form-input" type="text" id="c-name" placeholder="Your name" maxlength="50">
+          <input class="form-input" type="email" id="c-email" placeholder="Email (not published)" maxlength="100">
+        </div>
+        <textarea class="form-textarea" id="c-body" placeholder="Share your thoughts or questions about rental.py..." maxlength="1000"></textarea>
+        <button class="submit-btn" onclick="postComment()">Post Comment →</button>
+        <p style="font-size:0.9rem;color:#ffffff;margin-top:10px;">💡 Comments are stored locally in this session. Be respectful and constructive.</p>
+      </div>
+      <div class="comment-list" id="commentList">
+        <div class="comment-item">
+          <div class="comment-meta"><div class="comment-avatar">J</div><div><div class="comment-name">Juan dela Cruz</div><div class="comment-date">March 2026</div></div></div>
+          <div class="comment-body">The regex explanation finally made sense to me. I always copied patterns without understanding them — now I know exactly what each token does. The anchor ^ and $ part was the key insight I was missing.</div>
+          <button class="comment-like" onclick="likeComment(this)">❤️ <span>17</span></button>
+        </div>
+        <div class="comment-item">
+          <div class="comment-meta"><div class="comment-avatar" style="background:linear-gradient(135deg,#2d7a35,#1a4d1e)">S</div><div><div class="comment-name">Sofia Bautista</div><div class="comment-date">March 2026</div></div></div>
+          <div class="comment-body">The distinction between class variables and instance variables finally clicked here. FLEET is shared by all bookings because bikes don't change — but customer names must be per-object because each booking is different. Brilliant example.</div>
+          <button class="comment-like" onclick="likeComment(this)">❤️ <span>23</span></button>
+        </div>
+        <div class="comment-item">
+          <div class="comment-meta"><div class="comment-avatar" style="background:linear-gradient(135deg,#9b72d4,#264d6e)">K</div><div><div class="comment-name">Kevin Tan</div><div class="comment-date">March 2026</div></div></div>
+          <div class="comment-body">I like how the file I/O receipt section explains WHY you'd write to a file instead of just printing. Real-world context is what makes the difference between understanding and memorising.</div>
+          <button class="comment-like" onclick="likeComment(this)">❤️ <span>11</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section" id="follow">
+    <div class="sec-header">
+      <span class="sec-num">CONNECT</span>
+      <h2 class="sec-title">Follow <span class="accent-pu">Glenn Junsay Pansensoy</span></h2>
+    </div>
+    <p class="prose" style="margin-bottom:20px;">Stay connected for more Python guides, OOP tutorials, and tech content from the Philippines.</p>
+    <div class="follow-grid">
+      <a class="follow-btn linkedin" href="https://www.linkedin.com/in/glenn-pansensoy-6288453a2" target="_blank" rel="noopener"><span class="follow-icon">💼</span><div class="follow-lbl"><span>Follow</span><span class="follow-platform">LinkedIn</span></div></a>
+      <a class="follow-btn facebook" href="https://www.facebook.com/@Glenn-Junsay-Pansensoy" target="_blank" rel="noopener"><span class="follow-icon">📘</span><div class="follow-lbl"><span>Follow</span><span class="follow-platform">Facebook</span></div></a>
+      <a class="follow-btn twitter" href="https://x.com/@GlennPansensoy" target="_blank" rel="noopener"><span class="follow-icon">🐦</span><div class="follow-lbl"><span>Follow</span><span class="follow-platform">X / Twitter</span></div></a>
+      <a class="follow-btn youtube" href="https://www.youtube.com/c/@GlennPansensoy" target="_blank" rel="noopener"><span class="follow-icon">▶️</span><div class="follow-lbl"><span>Subscribe</span><span class="follow-platform">YouTube</span></div></a>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section" id="subscribe">
+    <div class="subscribe-card">
+      <div class="subscribe-title">📬 Stay in the Loop</div>
+      <p class="subscribe-sub">Get new Python tutorials, OOP guides, and tech articles from Valleys &amp; Bytes delivered to your inbox — no spam, ever.</p>
+      <div class="sub-form">
+        <input class="sub-input" type="email" id="subEmail" placeholder="your@email.com">
+        <button class="sub-btn" onclick="subscribe()">Subscribe Free →</button>
+      </div>
+      <p class="sub-note">🔒 No spam. Unsubscribe anytime. Your email is never shared.</p>
+    </div>
+  </div>
+
+  <div class="ad-banner" style="padding:0;margin-top:32px;">
+    <div class="ad-label">ADVERTISEMENT</div>
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4575646748966866" data-ad-slot="4226674403" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section" id="ai-share">
+    <div class="sec-header">
+      <span class="sec-num">SHARE</span>
+      <h2 class="sec-title">Found this helpful? <span class="accent-blue">Share it.</span></h2>
+    </div>
+    <div class="ai-share-section">
+      <div class="ai-share-title">🤖 AI Caption Generator</div>
+      <p class="ai-share-desc">Pick your platform and tone — get a ready-to-post caption crafted for this Python OOP guide.</p>
+      <div class="ai-share-controls">
+        <select class="ai-sel" id="aiPlatform">
+          <option value="twitter">Twitter / X</option>
+          <option value="linkedin">LinkedIn</option>
+          <option value="facebook">Facebook</option>
+          <option value="whatsapp">WhatsApp</option>
+        </select>
+        <select class="ai-sel" id="aiTone">
+          <option value="professional">Professional</option>
+          <option value="enthusiastic">Enthusiastic</option>
+          <option value="casual">Casual</option>
+          <option value="educational">Educational</option>
+        </select>
+        <button class="ai-gen-btn" onclick="aiGenerate()">✨ Generate Caption</button>
+      </div>
+      <div class="ai-loading" id="aiLoading"><div class="ai-spinner"></div>Crafting your caption…</div>
+      <div class="ai-output" id="aiOutput"></div>
+      <div class="ai-actions" id="aiActions">
+        <button class="ai-act cp" onclick="aiCopy()">📋 Copy</button>
+        <a class="ai-act fb" id="aiFb" href="#" target="_blank" rel="noopener">📘 Facebook</a>
+        <a class="ai-act tw" id="aiTw" href="#" target="_blank" rel="noopener">🐦 X / Twitter</a>
+        <a class="ai-act li" id="aiLi" href="#" target="_blank" rel="noopener">💼 LinkedIn</a>
+        <a class="ai-act wa" id="aiWa" href="#" target="_blank" rel="noopener">💬 WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section" id="outro">
+    <div class="outro-card">
+      <div class="outro-title">🏝️ You've Reached the End — But Your Journey Continues</div>
+      <p class="outro-body">You have just walked through every line of <strong>rental.py</strong> — from the shared <code>BaseService</code> parent to the two specialised child classes, from regex phone validation to file I/O receipts. You now understand not just what each pattern does, but why it was chosen: inheritance to eliminate duplication, class variables for shared fleet data, instance variables for per-booking customer data, and the entry guard to keep classes importable.</p>
+      <p class="outro-body" style="margin-top:12px;">The same architecture scales directly to real production systems. A hotel booking platform has a <code>BaseBooking</code> with shared checkout logic, and child classes for room types. A tour operator has shared payment and receipt handling, with children for island-hopping, scuba diving, and trekking. In every case the pattern is identical: write shared logic once in a parent, let children define only what is unique to them.</p>
+      <p class="outro-body" style="margin-top:12px;">Your next step? Extend the program. Add a <code>KayakRental</code> class. Add an <code>ATV</code> rental with hourly pricing. Add a discount system for multi-day bookings. Add input validation for hotel names. Each extension reinforces everything you learned here — and builds toward a portfolio project you can be proud of.</p>
+      <div style="margin-top:28px;display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
+        <a href="#intro" class="btn-primary">🔁 Read Again</a>
+        <a href="#source" class="btn-secondary">💻 Copy Source</a>
+        <button class="btn-secondary" onclick="copyLink()">🔗 Share This</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="sticky-share">
+  <a class="ss-btn" href="https://www.facebook.com/sharer/sharer.php?u=https://code-sense.pansensoyglenn.workers.dev/rental.html" target="_blank" rel="noopener" title="Share on Facebook">📘</a>
+  <a class="ss-btn" href="https://twitter.com/intent/tweet?url=https://code-sense.pansensoyglenn.workers.dev/rental.html&via=GlennPansensoy" target="_blank" rel="noopener" title="Share on X">🐦</a>
+  <a class="ss-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https://code-sense.pansensoyglenn.workers.dev/rental.html" target="_blank" rel="noopener" title="Share on LinkedIn">💼</a>
+  <button class="ss-btn" onclick="copyLink()" title="Copy link">🔗</button>
+  <button class="ss-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+</div>
+<div class="toast" id="toast"></div>
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand"><span style="color:var(--blue-bright)">VALLEYS</span><span style="color:#ffffff;font-weight:400"> &amp; </span><span style="color:var(--purple-bright)">BYTES</span></div>
+        <p class="footer-tagline">Python tutorials, OOP guides, and developer content from the Philippines. Written by <strong style="color:#ffffff">Glenn Junsay Pansensoy</strong>.</p>
+        <div class="follow-grid" style="margin-top:16px;gap:8px;">
+          <a class="footer-btn" href="https://www.linkedin.com/in/glenn-pansensoy-6288453a2" target="_blank" rel="noopener"><span class="ico">💼</span>LinkedIn</a>
+          <a class="footer-btn" href="https://www.facebook.com/@Glenn-Junsay-Pansensoy" target="_blank" rel="noopener"><span class="ico">📘</span>Facebook</a>
+          <a class="footer-btn" href="https://x.com/@GlennPansensoy" target="_blank" rel="noopener"><span class="ico">🐦</span>X / Twitter</a>
+          <a class="footer-btn" href="https://www.youtube.com/c/@GlennPansensoy" target="_blank" rel="noopener"><span class="ico">▶️</span>YouTube</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Navigate</div>
+        <a class="footer-btn" href="#intro"><span class="ico">📖</span>Introduction</a>
+        <a class="footer-btn" href="#s1"><span class="ico">🗂️</span>Overview</a>
+        <a class="footer-btn" href="#s3"><span class="ico">🏛️</span>BaseService</a>
+        <a class="footer-btn" href="#s4"><span class="ico">📝</span>Customer Info</a>
+        <a class="footer-btn" href="#s7"><span class="ico">🏍️</span>Motorcycle Rental</a>
+        <a class="footer-btn" href="#s8"><span class="ico">⛵</span>Boat Booking</a>
+        <a class="footer-btn" href="#source"><span class="ico">💻</span>Source Code</a>
+        <a class="footer-btn" href="#faq"><span class="ico">❓</span>FAQ</a>
+      </div>
+      <div>
+        <div class="footer-col-title">Site Pages</div>
+        <a class="footer-btn" href="about-guide.html"><span class="ico">📄</span>About this Page</a>
+        <a class="footer-btn" href="about-author.html"><span class="ico">🧑‍💻</span>About the Author</a>
+        <a class="footer-btn" href="oop-contact.html"><span class="ico">📬</span>Contact</a>
+        <a class="footer-btn" href="oop-privacy.html"><span class="ico">🔒</span>Privacy Policy</a>
+        <a class="footer-btn" href="oop-terms.html"><span class="ico">📜</span>Terms of Service</a>
+        <a class="footer-btn" href="oop-cookie.html"><span class="ico">🍪</span>Cookie Policy</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Valleys &amp; Bytes — Glenn Junsay Pansensoy. All rights reserved. | <span style="color:var(--blue-bright)">code-sense.pansensoyglenn.workers.dev</span></div>
+      <div class="footer-links-row">
+        <a class="footer-link-btn" href="oop-privacy.html">Privacy</a>
+        <a class="footer-link-btn" href="oop-terms.html">Terms</a>
+        <a class="footer-link-btn" href="oop-cookie.html">Cookies</a>
+        <a class="footer-link-btn" href="oop-contact.html">Contact</a>
+        <button class="footer-link-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ Top</button>
+      </div>
+    </div>
+  </div>
+</footer>
+<script>
+(function(){
+  if(!window.matchMedia('(min-width:768px)').matches)return;
+  const c=document.getElementById('particles');if(!c)return;
+  const colors=['rgba(75,139,190,0.6)','rgba(189,147,249,0.5)','rgba(255,212,59,0.4)','rgba(80,250,123,0.4)'];
+  for(let i=0;i<25;i++){const p=document.createElement('div');p.className='particle';const s=Math.random()*4+2;p.style.cssText=`width:${s}px;height:${s}px;left:${Math.random()*100}%;background:${colors[Math.floor(Math.random()*colors.length)]};animation-duration:${Math.random()*15+10}s;animation-delay:${Math.random()*-20}s;`;c.appendChild(p);}
+})();
+const hamburger=document.getElementById('hamburger');
+const drawer=document.getElementById('drawer');
+const overlay=document.getElementById('drawerOverlay');
+function openDrawer(){drawer.classList.add('open');overlay.classList.add('open');hamburger.classList.add('open');hamburger.setAttribute('aria-expanded','true');}
+function closeDrawer(){drawer.classList.remove('open');overlay.classList.remove('open');hamburger.classList.remove('open');hamburger.setAttribute('aria-expanded','false');}
+hamburger.addEventListener('click',()=>drawer.classList.contains('open')?closeDrawer():openDrawer());
+drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeDrawer));
+const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:0.07});
+document.querySelectorAll('.section').forEach(s=>obs.observe(s));
+const bar=document.getElementById('progress-bar');
+window.addEventListener('scroll',()=>{const h=document.documentElement;bar.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100+'%';},{passive:true});
+const tocLinks=document.querySelectorAll('.toc-link');
+const sections=document.querySelectorAll('.section[id],section[id]');
+window.addEventListener('scroll',()=>{let cur='';sections.forEach(s=>{if(window.scrollY>=s.offsetTop-120)cur=s.id;});tocLinks.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+cur);});},{passive:true});
+function copyCode(btn){const pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(()=>{btn.textContent='Copied!';setTimeout(()=>btn.textContent='Copy',2000);});}
+function copyLink(){navigator.clipboard.writeText(window.location.href).then(()=>showToast('🔗 Link copied to clipboard!'));}
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000);}
+function toggleFaq(item){const wasOpen=item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(f=>f.classList.remove('open'));if(!wasOpen)item.classList.add('open');}
+const reactions={lov:28,lik:54,mbl:19,bmk:36};const reacted={};
+function react(type){const btn=document.getElementById(type+'Btn');const countEl=document.getElementById(type+'Count');if(reacted[type]){reactions[type]--;btn.classList.remove('active');reacted[type]=false;}else{reactions[type]++;btn.classList.add('active');reacted[type]=true;showToast('Thanks for your reaction! 🙌');}countEl.textContent=reactions[type];}
+function postComment(){const name=document.getElementById('c-name').value.trim();const body=document.getElementById('c-body').value.trim();if(!name||!body){showToast('Please fill in your name and comment.');return;}const list=document.getElementById('commentList');const initial=name.charAt(0).toUpperCase();const colors=['linear-gradient(135deg,#3a6e99,#6a4a9c)','linear-gradient(135deg,#2d7a35,#1a4d1e)','linear-gradient(135deg,#9b72d4,#264d6e)'];const bg=colors[Math.floor(Math.random()*colors.length)];const el=document.createElement('div');el.className='comment-item';el.style.animation='fadeUp 0.4s ease both';el.innerHTML=`<div class="comment-meta"><div class="comment-avatar" style="background:${bg}">${initial}</div><div><div class="comment-name">${name}</div><div class="comment-date">Just now</div></div></div><div class="comment-body">${body}</div><button class="comment-like" onclick="likeComment(this)">❤️ <span>0</span></button>`;list.insertBefore(el,list.firstChild);document.getElementById('c-name').value='';document.getElementById('c-body').value='';showToast('Comment posted! Thank you.');}
+function likeComment(btn){const span=btn.querySelector('span');let n=parseInt(span.textContent);if(btn.dataset.liked){n--;btn.dataset.liked='';}else{n++;btn.dataset.liked='1';}span.textContent=n;}
+function subscribe(){const e=document.getElementById('subEmail').value.trim();if(!e||!e.includes('@')){showToast('Please enter a valid email.');return;}document.getElementById('subEmail').value='';showToast('Subscribed! Welcome to Valleys & Bytes.');}
+document.querySelectorAll('a[href^="#"]').forEach(anchor=>{anchor.addEventListener('click',function(e){const href=this.getAttribute('href');if(href==='#'||href==='')return;const target=document.querySelector(href);if(target){e.preventDefault();target.scrollIntoView({behavior:'smooth',block:'start'});}});});
+const AI_URL='https://code-sense.pansensoyglenn.workers.dev/rental.html';
+const aiCaptions={
+  twitter:{
+    professional:'Python OOP through a real El Nido 🏝️ booking system — rental.py teaches inheritance, class variables, regex validation & file I/O. BaseService → MotorcycleRental / BoatBooking. '+AI_URL+' #Python #OOP #LearnPython',
+    enthusiastic:'🔥 This Python guide builds an ACTUAL El Nido booking system!! Motorcycles, boats, regex phone validation, file receipts — all with OOP inheritance! 🏍️⛵ '+AI_URL+' #Python #LearnPython',
+    casual:'found this python tutorial that builds a booking system in El Nido Palawan 🏝️ explains class variables and regex really well '+AI_URL+' #Python #coding',
+    educational:'📚 Python OOP via rental.py:\n✅ Inheritance (BaseService)\n✅ Class vs Instance Variables\n✅ Regex Validation (re.match)\n✅ File I/O Receipts\n✅ Random Reference Codes\n\n'+AI_URL+' #Python #OOP',
+  },
+  linkedin:{
+    professional:'Sharing a well-crafted Python OOP tutorial — rental.py builds an El Nido Rental Services booking system demonstrating inheritance, class variables, regex phone validation with re.match(), file I/O for receipt generation, and the while True / break input validation pattern. Recommended for Python learners. '+AI_URL+' #Python #OOP #Programming',
+    enthusiastic:'🚀 Brilliant Python OOP guide! rental.py builds a real El Nido booking system — motorcycle fleet + boat charter — with regex validation, file receipts, and clean inheritance. Such a practical example! '+AI_URL+' #Python #OOP #Philippines',
+    casual:'Found a great Python OOP tutorial set in El Nido, Palawan 🏝️ — rental.py teaches inheritance, regex and file I/O through a real booking system. Worth reading! '+AI_URL+' #Python #Learning',
+    educational:'Python OOP resource: rental.py covers inheritance (BaseService → MotorcycleRental/BoatBooking), class vs instance variables, re.match() regex validation, file I/O with context managers, random reference code generation, and input validation loops. Full source code. '+AI_URL+' #Python #OOP #Education',
+  },
+  facebook:{
+    professional:'Sharing a great Python OOP tutorial — rental.py builds an El Nido booking system teaching inheritance, class variables, regex validation and file I/O receipts. Full source code included. '+AI_URL,
+    enthusiastic:'🏝️🐍 This Python tutorial builds a REAL El Nido booking system! Motorcycle rentals, boat charters, regex phone validation, and file receipts — all with OOP! '+AI_URL,
+    casual:'just read this python tutorial set in El Nido Palawan and it made class variables and inheritance finally make sense 😄 check it out! '+AI_URL,
+    educational:'📚 Python OOP Tutorial: rental.py — inheritance, class variables, regex (re.match), file I/O, and input validation through an El Nido booking system. Full source code. '+AI_URL,
+  },
+  whatsapp:{
+    professional:'Hi! Sharing a Python OOP tutorial — rental.py builds an El Nido booking system teaching inheritance, class variables, regex validation and file I/O. Clear explanations with full source code. '+AI_URL,
+    enthusiastic:'Check this Python tutorial!! 🏝️🔥 Builds a booking system in El Nido — motorcycles, boats, regex phone validation! Really clear OOP explanation! '+AI_URL,
+    casual:'hey found this python tutorial set in El Nido — explains class variables and inheritance through a booking system, actually really clear! '+AI_URL,
+    educational:'Python OOP guide: rental.py — inheritance, class variables, regex, file I/O through an El Nido Palawan booking system. Full source: '+AI_URL,
+  }
+};
+function aiGenerate(){
+  const platform=document.getElementById('aiPlatform').value;
+  const tone=document.getElementById('aiTone').value;
+  const loading=document.getElementById('aiLoading');
+  const output=document.getElementById('aiOutput');
+  const actions=document.getElementById('aiActions');
+  loading.classList.add('show');output.classList.remove('show');actions.classList.remove('show');
+  setTimeout(()=>{
+    const caption=(aiCaptions[platform]&&aiCaptions[platform][tone])||aiCaptions[platform]['professional']||'';
+    output.textContent=caption;output.classList.add('show');loading.classList.remove('show');
+    const enc=encodeURIComponent;
+    document.getElementById('aiFb').href='https://www.facebook.com/sharer/sharer.php?u='+enc(AI_URL)+'&quote='+enc(caption);
+    document.getElementById('aiTw').href='https://twitter.com/intent/tweet?text='+enc(caption);
+    document.getElementById('aiLi').href='https://www.linkedin.com/sharing/share-offsite/?url='+enc(AI_URL);
+    document.getElementById('aiWa').href='https://wa.me/?text='+enc(caption+' '+AI_URL);
+    actions.classList.add('show');showToast('✨ Caption ready!');
+  },800);
+}
+function aiCopy(){const text=document.getElementById('aiOutput').textContent;navigator.clipboard.writeText(text).then(()=>showToast('📋 Caption copied!'));}
+</script>
+</body>
+</html>
