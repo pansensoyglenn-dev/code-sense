@@ -1,0 +1,1475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>e-shop.py — Python OOP E-Commerce Guide | Valleys &amp; Bytes</title>
+<meta name="description" content="Master Python OOP with e-shop.py — a hands-on beginner guide to building a Lazada/Shopee simulator with inheritance, polymorphism, and super(). Covers Product, PaymentProcessor, ShippingCompany classes with full source code.">
+<meta name="keywords" content="Python OOP tutorial, Python inheritance example, e-commerce Python, Lazada Shopee simulator, PaymentProcessor class, ShippingCompany class, super() Python, Philippines coding tutorial, Valleys and Bytes, Glenn Junsay Pansensoy">
+<meta name="author" content="Glenn Junsay Pansensoy">
+<meta name="robots" content="index, follow">
+<meta name="color-scheme" content="dark">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="canonical" href="https://code-sense.pansensoyglenn.workers.dev/e-shop.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="e-shop.py — Python OOP E-Commerce Guide">
+<meta property="og:description" content="Step-by-step Python OOP documentation: classes, inheritance, super(), and full source code for a Filipino e-commerce simulator.">
+<meta property="og:url" content="https://code-sense.pansensoyglenn.workers.dev/e-shop.html">
+<meta property="og:site_name" content="Valleys &amp; Bytes">
+<meta property="og:image" content="/og-eshop.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:alt" content="e-shop.py — Python OOP E-Commerce Guide banner">
+<meta property="og:locale" content="en_PH">
+<meta property="article:author" content="Glenn Junsay Pansensoy">
+<meta property="article:published_time" content="2026-03-15T00:00:00+08:00">
+<meta property="article:modified_time" content="2026-03-15T00:00:00+08:00">
+<meta property="article:section" content="Programming Tutorial">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@GlennPansensoy">
+<meta name="twitter:creator" content="@GlennPansensoy">
+<meta name="twitter:title" content="e-shop.py — Python OOP E-Commerce Guide">
+<meta name="twitter:description" content="Complete Python OOP tutorial: build a Lazada/Shopee simulator with class hierarchies, inheritance, super(), and polymorphism.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "e-shop.py — Python OOP E-Commerce Code Explained",
+  "description": "A comprehensive step-by-step documentation of e-shop.py, a Python OOP command-line Lazada/Shopee simulator using inheritance for payment and shipping class hierarchies.",
+  "author": {
+    "@type": "Person",
+    "name": "Glenn Junsay Pansensoy",
+    "url": "https://www.linkedin.com/in/glenn-pansensoy-6288453a2",
+    "sameAs": [
+      "https://www.linkedin.com/in/glenn-pansensoy-6288453a2",
+      "https://www.facebook.com/@Glenn-Junsay-Pansensoy",
+      "https://x.com/@GlennPansensoy",
+      "https://www.youtube.com/c/@GlennPansensoy"
+    ]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Valleys & Bytes",
+    "url": "https://code-sense.pansensoyglenn.workers.dev"
+  },
+  "datePublished": "2026-03-15",
+  "dateModified": "2026-03-15",
+  "mainEntityOfPage": "https://code-sense.pansensoyglenn.workers.dev/e-shop.html",
+  "programmingLanguage": "Python",
+  "proficiencyLevel": "Beginner",
+  "keywords": ["Python","OOP","Inheritance","E-Commerce","PaymentProcessor","ShippingCompany","super()","Philippines","Lazada","Shopee"],
+  "articleSection": "Programming Tutorial",
+  "teaches": ["Python OOP","Inheritance","super()","Polymorphism","Class Hierarchy Design","DRY Principle"]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is e-shop.py?",
+      "acceptedAnswer": {"@type": "Answer","text": "e-shop.py is a Python command-line Lazada/Shopee simulator. It lets users browse 20 products, add items to a cart, enter their details, choose a payment method (PayPal, PayMaya, GCash), and select a shipping company (J&T, LBC, Flash Express, Ninja Van). It demonstrates OOP inheritance through two separate class hierarchies: payment processors and shipping companies."}
+    },
+    {
+      "@type": "Question",
+      "name": "What Python OOP concepts does e-shop.py demonstrate?",
+      "acceptedAnswer": {"@type": "Answer","text": "It demonstrates class creation (__init__, __str__), single inheritance (PayPal/PayMaya/GCash from PaymentProcessor; JandT/LBC/FlashExpress/NinjaVan from ShippingCompany), super().__init__() to delegate to parent constructors, polymorphism (all payment processors respond to verify_payment(), all shippers to ship_order()), and the DRY principle (shared logic lives in the parent, not duplicated in children)."}
+    },
+    {
+      "@type": "Question",
+      "name": "Why does PayPal not override verify_payment()?",
+      "acceptedAnswer": {"@type": "Answer","text": "Because PayPal, PayMaya, and GCash all share identical payment logic — they just differ in name. The parent PaymentProcessor.verify_payment() already handles everything. Child classes only override __init__ to pass their specific name via super().__init__(name). This is inheritance at its cleanest: reuse without duplication."}
+    },
+    {
+      "@type": "Question",
+      "name": "What does super().__init__() do in this program?",
+      "acceptedAnswer": {"@type": "Answer","text": "super().__init__(name) calls the parent class constructor so the child class does not need to re-define self.name itself. For example, PayPal.__init__ calls super().__init__('PayPal'), which runs PaymentProcessor.__init__(self, 'PayPal'), setting self.name = 'PayPal'. Without super(), the child would not inherit the parent's attributes."}
+    },
+    {
+      "@type": "Question",
+      "name": "How does polymorphism work in e-shop.py?",
+      "acceptedAnswer": {"@type": "Answer","text": "The main() function calls processor.verify_payment(total) regardless of whether processor is a PayPal, PayMaya, or GCash object. Python looks up the method on whichever object is stored in processor at runtime. Because all three inherit verify_payment() from PaymentProcessor, the call works identically for all three. The same applies to shipper.ship_order(): all four shipping classes respond to the same method call."}
+    },
+    {
+      "@type": "Question",
+      "name": "Can I run e-shop.py without installing anything?",
+      "acceptedAnswer": {"@type": "Answer","text": "Yes. e-shop.py uses no third-party libraries — only Python's built-in input(), print(), and f-strings. You only need Python 3.6 or newer. Run: python e-shop.py in your terminal."}
+    }
+  ]
+}
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4575646748966866" crossorigin="anonymous"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;600;700;800&family=Literata:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;600;700;800&family=Literata:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --obs-900: #0a0a12;
+  --obs-800: #0f0f1e;
+  --obs-700: #151528;
+  --obs-600: #1e1e38;
+  --obs-500: #252545;
+  --obs-400: #2e2e58;
+  --obs-300: #3a3a72;
+  --blue-bright: #4b8bbe;
+  --blue-mid:    #3a6e99;
+  --blue-dark:   #264d6e;
+  --blue-glow:   rgba(75,139,190,0.25);
+  --blue-pale:   rgba(75,139,190,0.08);
+  --yellow:      #ffd43b;
+  --yellow-dim:  rgba(255,212,59,0.15);
+  --purple-bright: #bd93f9;
+  --purple-mid:    #9b72d4;
+  --purple-dark:   #6a4a9c;
+  --purple-glow:   rgba(189,147,249,0.2);
+  --purple-pale:   rgba(189,147,249,0.07);
+  --text-code:     #79c0ff;
+  --syn-kw:   #ff79c6;
+  --syn-cl:   #8be9fd;
+  --syn-fn:   #50fa7b;
+  --syn-st:   #f1fa8c;
+  --syn-cm:   #6272a4;
+  --syn-nm:   #bd93f9;
+  --syn-dc:   #ffd43b;
+  --surface-1: var(--obs-800);
+  --surface-2: var(--obs-700);
+  --surface-3: var(--obs-600);
+  --border:    rgba(75,139,190,0.18);
+  --border-pu: rgba(189,147,249,0.18);
+  --glow-blue: 0 0 30px rgba(75,139,190,0.15);
+  --glow-pu:   0 0 30px rgba(189,147,249,0.12);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 10px; overflow-x: hidden; max-width: 100vw; }
+body {
+  font-family: 'Literata', Georgia, serif;
+  background: var(--obs-900);
+  color: #ffffff;
+  overflow-x: hidden;
+  max-width: 100vw;
+  line-height: 1.7;
+}
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--obs-800); }
+::-webkit-scrollbar-thumb { background: var(--blue-dark); border-radius: 3px; }
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0;
+  background-image:
+    linear-gradient(rgba(75,139,190,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(75,139,190,0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  animation: gridShift 60s linear infinite;
+}
+@keyframes gridShift { from{background-position:0 0} to{background-position:48px 48px} }
+.navbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  height: 64px;
+  background: rgba(10,10,18,0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 28px;
+}
+.brand {
+  font-family: 'Syne', sans-serif;
+  font-size: 1rem; font-weight: 800; letter-spacing: -0.5px;
+  text-decoration: none; display: flex; align-items: center; gap: 8px;
+}
+.brand-valleys { color: var(--blue-bright); }
+.brand-amp { color: #ffffff; font-weight: 400; margin: 0 2px; }
+.brand-bytes { color: var(--purple-bright); }
+.brand-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--yellow); animation: pulse 2s ease infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.7)} }
+.hamburger {
+  display: flex; flex-direction: column; gap: 5px;
+  background: none; border: 1px solid var(--border);
+  padding: 10px 12px; border-radius: 8px; cursor: pointer; transition: all 0.2s;
+}
+.hamburger:hover { border-color: var(--blue-bright); background: var(--blue-pale); }
+.hamburger span { display: block; width: 20px; height: 2px; background: #ffffff; border-radius: 2px; transition: all 0.3s; }
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.drawer {
+  position: fixed; top: 64px; right: 0; bottom: 0; z-index: 999;
+  width: 300px; background: var(--obs-800); border-left: 1px solid var(--border);
+  transform: translateX(100%); transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+  overflow-y: auto; padding: 24px 20px;
+}
+.drawer.open { transform: translateX(0); }
+.drawer-overlay {
+  position: fixed; inset: 0; z-index: 998;
+  background: rgba(0,0,0,0.5); opacity: 0; pointer-events: none; transition: opacity 0.3s;
+}
+.drawer-overlay.open { opacity: 1; pointer-events: all; }
+.drawer-section { margin-bottom: 28px; }
+.drawer-section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase;
+  color: #ffffff; margin-bottom: 10px; padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+}
+.drawer-btn {
+  display: flex; align-items: center; gap: 12px; width: 100%;
+  padding: 11px 14px; margin-bottom: 4px; background: var(--obs-700);
+  border: 1px solid var(--border); border-radius: 8px; color: #ffffff;
+  font-family: 'Syne', sans-serif; font-size: 0.9rem;
+  cursor: pointer; text-decoration: none; transition: all 0.2s; text-align: left;
+}
+.drawer-btn:hover { background: var(--blue-pale); border-color: var(--blue-bright); color: var(--blue-bright); }
+.drawer-btn .ico { font-size: 1.2rem; width: 22px; text-align: center; }
+.ad-banner { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+.ad-label { font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: #ffffff; letter-spacing: 1px; text-align: center; margin-bottom: 4px; }
+.hero {
+  position: relative; z-index: 1; min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  padding: 100px 24px 60px; overflow: hidden;
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(75,139,190,0.12) 0%, transparent 70%),
+              radial-gradient(ellipse 60% 40% at 80% 80%, rgba(189,147,249,0.08) 0%, transparent 60%);
+}
+.hero-particles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.particle { position: absolute; border-radius: 50%; animation: floatParticle linear infinite; }
+@keyframes floatParticle {
+  0%   { transform: translateY(100vh) scale(0); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 0.3; }
+  100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+}
+.hero-eyebrow {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--blue-bright);
+  background: rgba(75,139,190,0.1); border: 1px solid rgba(75,139,190,0.3);
+  padding: 6px 20px; border-radius: 20px; margin-bottom: 28px;
+  animation: fadeUp 0.8s ease both;
+}
+.hero-title {
+  font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 800;
+  line-height: 1.1; text-align: center; margin-bottom: 20px; color: #ffffff;
+  animation: fadeUp 0.9s ease 0.1s both; letter-spacing: -0.5px;
+}
+.hero-title .hl-blue { color: var(--blue-bright); }
+.hero-title .hl-pu   { color: var(--purple-bright); }
+.hero-title .hl-y    { color: var(--yellow); }
+.hero-subtitle {
+  font-size: 0.9rem; font-weight: 300; color: #ffffff;
+  text-align: center; max-width: 600px; line-height: 1.7;
+  margin-bottom: 36px; animation: fadeUp 1s ease 0.2s both;
+  border-left: 3px solid var(--blue-dark); padding-left: 18px; text-align: justify;
+}
+.hero-tags { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 40px; animation: fadeUp 1s ease 0.3s both; }
+.hero-tag {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.9rem;
+  padding: 5px 14px; border-radius: 5px; border: 1px solid var(--border-pu);
+  color: var(--purple-bright); background: var(--purple-pale); letter-spacing: 0.5px;
+}
+.hero-cta { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; animation: fadeUp 1s ease 0.4s both; }
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px; padding: 13px 28px; border-radius: 8px;
+  background: linear-gradient(135deg, var(--blue-mid), var(--purple-dark));
+  color: #ffffff; font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 600;
+  text-decoration: none; border: none; cursor: pointer; transition: all 0.25s;
+  box-shadow: 0 4px 20px rgba(75,139,190,0.3);
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(75,139,190,0.4); }
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 8px; padding: 13px 28px; border-radius: 8px;
+  background: transparent; border: 1px solid var(--border); color: #ffffff;
+  font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 600;
+  text-decoration: none; cursor: pointer; transition: all 0.25s;
+}
+.btn-secondary:hover { border-color: var(--purple-bright); color: var(--purple-bright); background: var(--purple-pale); }
+.scroll-indicator {
+  position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  color: #ffffff; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; letter-spacing: 2px;
+}
+.scroll-indicator .arrow { animation: bounce 2s ease infinite; font-size: 1.2rem; }
+@keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(8px)} }
+@keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+.toc-nav {
+  position: sticky; top: 64px; z-index: 100;
+  background: rgba(10,10,18,0.95); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border); padding: 0 28px;
+  display: flex; align-items: center; gap: 0; overflow-x: auto; scrollbar-width: none;
+}
+.toc-nav::-webkit-scrollbar { display: none; }
+.toc-link {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.9rem;
+  color: #ffffff; text-decoration: none; letter-spacing: 1px; text-transform: uppercase;
+  padding: 14px 12px; white-space: nowrap; border-bottom: 2px solid transparent; transition: all 0.2s;
+}
+.toc-link:hover, .toc-link.active { color: var(--blue-bright); border-bottom-color: var(--blue-bright); }
+.container { max-width: 980px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+.section { margin-top: 72px; opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.section.visible { opacity: 1; transform: translateY(0); }
+.sec-header { display: flex; align-items: center; gap: 16px; margin-bottom: 28px; flex-wrap: wrap; }
+.sec-num {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: var(--yellow);
+  letter-spacing: 2px; background: var(--yellow-dim); border: 1px solid rgba(255,212,59,0.3);
+  padding: 4px 12px; border-radius: 4px; white-space: nowrap;
+}
+.sec-title {
+  font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 700; color: #ffffff;
+  border-bottom: 2px solid var(--blue-dark); padding-bottom: 6px; flex: 1;
+}
+.sec-title .accent-blue { color: var(--blue-bright); }
+.sec-title .accent-pu   { color: var(--purple-bright); }
+.prose { font-size: 0.9rem; line-height: 1.85; color: #ffffff; max-width: 820px; text-align: justify; }
+.prose strong { color: #ffffff; font-weight: 600; }
+.prose + .prose { margin-top: 14px; }
+.prose em { color: var(--purple-bright); font-style: italic; }
+.code-block {
+  background: var(--obs-800); border: 1px solid var(--border);
+  border-radius: 10px; overflow: hidden; margin: 24px 0; box-shadow: var(--glow-blue); position: relative;
+}
+.code-block::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--blue-bright), var(--purple-bright), transparent);
+}
+.code-header {
+  background: rgba(255,255,255,0.03); border-bottom: 1px solid var(--border);
+  padding: 10px 18px; display: flex; align-items: center; gap: 8px;
+}
+.tdk-r { width:10px;height:10px;border-radius:50%;background:#ff5f57; }
+.tdk-y { width:10px;height:10px;border-radius:50%;background:#febc2e; }
+.tdk-g { width:10px;height:10px;border-radius:50%;background:#28c840; }
+.code-lbl { font-family:'JetBrains Mono',monospace; font-size:0.9rem; color:#ffffff; margin-left:6px; letter-spacing:0.5px; }
+.copy-btn {
+  margin-left: auto; font-family:'JetBrains Mono',monospace; font-size:0.9rem;
+  color: var(--blue-bright); background: var(--blue-pale);
+  border: 1px solid rgba(75,139,190,0.3); padding: 3px 10px; border-radius: 4px;
+  cursor: pointer; transition: all 0.2s;
+}
+.copy-btn:hover { background: var(--blue-dark); color: white; }
+.code-body { padding: 22px 24px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+pre { font-family:'JetBrains Mono',monospace; font-size:0.9rem; line-height:1.75; color:#cdd9e5; tab-size:4; white-space: pre; }
+.kw{color:var(--syn-kw)} .cl{color:var(--syn-cl)} .fn{color:var(--syn-fn)}
+.st{color:var(--syn-st)} .cm{color:var(--syn-cm);font-style:italic} .nm{color:var(--syn-nm)}
+.dc{color:var(--syn-dc)} .op{color:var(--syn-kw)}
+.table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 20px 0; border-radius: 10px; border: 1px solid var(--border); }
+table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+thead tr { background: linear-gradient(135deg, var(--obs-500), var(--obs-400)); }
+thead th {
+  color: var(--blue-bright); font-family:'JetBrains Mono',monospace;
+  font-size: 0.9rem; letter-spacing: 1.5px; text-transform: uppercase;
+  padding: 13px 18px; text-align: left; font-weight: 400; border-bottom: 1px solid var(--border);
+}
+tbody tr { border-bottom: 1px solid rgba(75,139,190,0.08); transition: background 0.15s; }
+tbody tr:last-child { border-bottom: none; }
+tbody tr:hover { background: var(--blue-pale); }
+tbody td { padding: 13px 18px; line-height: 1.6; vertical-align: top; color: #ffffff; font-size: 0.9rem; text-align: justify; }
+tbody td:first-child {
+  font-family:'JetBrains Mono',monospace; font-size:0.9rem; color: var(--purple-bright);
+  font-weight: 500; background: rgba(189,147,249,0.04);
+  border-right: 1px solid var(--border-pu); white-space: nowrap; text-align: left;
+}
+.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px,1fr)); gap: 14px; margin: 20px 0; }
+.card {
+  background: var(--obs-700); border: 1px solid var(--border); border-radius: 10px;
+  padding: 20px; border-top: 3px solid var(--blue-dark); transition: all 0.2s;
+}
+.card:hover { border-top-color: var(--blue-bright); transform: translateY(-2px); box-shadow: var(--glow-blue); }
+.card.pu { border-top-color: var(--purple-dark); }
+.card.pu:hover { border-top-color: var(--purple-bright); box-shadow: var(--glow-pu); }
+.card-label { font-family:'JetBrains Mono',monospace; font-size:0.9rem; color: var(--blue-bright); letter-spacing:2px; text-transform:uppercase; margin-bottom:8px; }
+.card.pu .card-label { color: var(--purple-bright); }
+.card-value { font-size: 0.9rem; line-height: 1.6; color: #ffffff; text-align: justify; }
+code { font-family:'JetBrains Mono',monospace; font-size:0.9rem; background: rgba(75,139,190,0.12); color: var(--text-code); padding: 2px 7px; border-radius: 4px; }
+.steps { display: flex; flex-direction: column; gap: 0; margin: 20px 0; }
+.step { display: flex; gap: 18px; padding: 18px 0; border-bottom: 1px dashed rgba(75,139,190,0.15); }
+.step:last-child { border-bottom: none; }
+.step-num {
+  width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0;
+  background: linear-gradient(135deg, var(--blue-dark), var(--purple-dark));
+  color: white; font-family:'JetBrains Mono',monospace; font-size:0.9rem;
+  display: flex; align-items: center; justify-content: center;
+  margin-top: 2px; box-shadow: 0 2px 10px rgba(75,139,190,0.3);
+}
+.step-head { font-family:'Syne',sans-serif; font-weight:600; font-size:1rem; margin-bottom:6px; color:#ffffff; }
+.step-body { font-size: 0.9rem; line-height: 1.75; color: #ffffff; text-align: justify; }
+.callout {
+  border-radius: 8px; padding: 16px 20px; margin: 16px 0;
+  display: flex; gap: 14px; align-items: flex-start; font-size: 0.9rem; line-height: 1.7;
+}
+.callout-blue { background: rgba(75,139,190,0.08); border-left: 3px solid var(--blue-bright); }
+.callout-pu   { background: var(--purple-pale); border-left: 3px solid var(--purple-bright); }
+.callout-warn { background: rgba(255,212,59,0.06); border-left: 3px solid var(--yellow); }
+.callout-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+.callout-text { color: #ffffff; text-align: justify; }
+.callout-text strong { color: #ffffff; }
+.flow {
+  display: flex; flex-wrap: wrap; align-items: stretch; margin: 20px 0;
+  background: var(--obs-700); border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
+}
+.flow-item {
+  flex: 1; min-width: 120px; padding: 18px 14px; text-align: center;
+  border-right: 1px solid var(--border); position: relative; transition: background 0.2s;
+}
+.flow-item:hover { background: var(--blue-pale); }
+.flow-item:last-child { border-right: none; }
+.flow-item::after { content:'›'; position:absolute; right:-8px; top:50%; transform:translateY(-50%); color: var(--blue-mid); font-size:1.4rem; z-index:1; }
+.flow-item:last-child::after { display: none; }
+.flow-icon { font-size: 2rem; display: block; margin-bottom: 6px; }
+.flow-lbl { font-family:'JetBrains Mono',monospace; font-size:0.9rem; color: var(--blue-bright); letter-spacing:1px; text-transform:uppercase; }
+.flow-desc { font-size: 0.9rem; color: #ffffff; margin-top: 4px; line-height: 1.4; }
+.subsec { margin-top: 36px; }
+.subsec-title {
+  font-family:'Syne',sans-serif; font-size: 1rem; font-weight:700;
+  color: #ffffff; margin-bottom: 14px; display: flex; align-items: center; gap: 10px;
+}
+.subsec-title::before { content:''; display:block; width:3px; height:18px; background: linear-gradient(var(--blue-bright), var(--purple-bright)); border-radius:2px; }
+.divider { height: 1px; margin: 64px 0 0; background: linear-gradient(to right, transparent, var(--blue-dark), var(--purple-dark), transparent); }
+.faq-item { border: 1px solid var(--border); border-radius: 8px; margin-bottom: 8px; overflow: hidden; background: var(--obs-700); transition: border-color 0.2s; }
+.faq-item:hover { border-color: var(--blue-bright); }
+.faq-q {
+  padding: 16px 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+  font-family:'Syne',sans-serif; font-size: 1rem; font-weight:600; color: #ffffff;
+  user-select: none; background: none; border: none; width: 100%; text-align: left; transition: color 0.2s;
+}
+.faq-q:hover { color: var(--blue-bright); }
+.faq-arrow { color: var(--blue-bright); font-size: 1.4rem; transition: transform 0.3s; flex-shrink: 0; }
+.faq-item.open .faq-arrow { transform: rotate(180deg); }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+.faq-item.open .faq-a { max-height: 600px; }
+.faq-a-inner { padding: 0 20px 18px; font-size: 0.9rem; line-height: 1.8; color: #ffffff; border-top: 1px solid var(--border); padding-top: 14px; text-align: justify; }
+.reactions {
+  display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
+  padding: 20px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin: 28px 0;
+}
+.reaction-btn {
+  display: flex; align-items: center; gap: 8px; background: var(--obs-700); border: 1px solid var(--border);
+  color: #ffffff; padding: 9px 18px; border-radius: 24px; font-family:'Syne',sans-serif;
+  font-size: 0.9rem; cursor: pointer; transition: all 0.2s;
+}
+.reaction-btn:hover, .reaction-btn.active { background: var(--blue-pale); border-color: var(--blue-bright); color: var(--blue-bright); }
+.reaction-btn.love-btn:hover, .reaction-btn.love-btn.active { background: rgba(255,80,120,0.1); border-color: #ff5078; color: #ff5078; }
+.reaction-count { font-family:'JetBrains Mono',monospace; font-size:0.9rem; }
+.comments-section { margin-top: 28px; }
+.comment-form { background: var(--obs-700); border: 1px solid var(--border); border-radius: 10px; padding: 22px; margin-bottom: 24px; }
+.comment-form h3 { font-family:'Syne',sans-serif; font-size: 1rem; margin-bottom: 16px; color: #ffffff; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+.form-input, .form-textarea {
+  background: var(--obs-800); border: 1px solid var(--border); border-radius: 6px;
+  color: #ffffff; font-family:'Literata',serif; font-size: 0.9rem;
+  padding: 10px 14px; width: 100%; outline: none; transition: border-color 0.2s;
+}
+.form-input:focus, .form-textarea:focus { border-color: var(--blue-bright); }
+.form-textarea { resize: vertical; min-height: 100px; display: block; margin-bottom: 12px; }
+.submit-btn {
+  background: linear-gradient(135deg, var(--blue-mid), var(--purple-dark));
+  color: white; border: none; padding: 10px 24px; border-radius: 6px;
+  font-family:'Syne',sans-serif; font-size: 0.9rem; font-weight:600; cursor: pointer; transition: all 0.2s;
+}
+.submit-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+.comment-list { display: flex; flex-direction: column; gap: 14px; }
+.comment-item { background: var(--obs-700); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; }
+.comment-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+.comment-avatar {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--blue-dark), var(--purple-dark));
+  display: flex; align-items: center; justify-content: center;
+  font-family:'JetBrains Mono',monospace; font-size:0.9rem; color:white; font-weight:700; flex-shrink:0;
+}
+.comment-name { font-family:'Syne',sans-serif; font-size:0.9rem; font-weight:600; color:#ffffff; }
+.comment-date { font-family:'JetBrains Mono',monospace; font-size:0.9rem; color:#ffffff; }
+.comment-body { font-size: 0.9rem; line-height: 1.7; color: #ffffff; text-align: justify; }
+.comment-like { display:flex; align-items:center; gap:6px; margin-top:10px; background:none; border:1px solid var(--border); color:#ffffff; padding:4px 12px; border-radius:12px; cursor:pointer; font-size:0.9rem; transition:all 0.2s; }
+.comment-like:hover { color:#ff5078; border-color:#ff5078; background:rgba(255,80,120,0.08); }
+.follow-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); gap: 12px; margin: 20px 0; }
+.follow-btn {
+  display: flex; align-items: center; gap: 12px; background: var(--obs-700);
+  border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px;
+  color: #ffffff; font-family:'Syne',sans-serif; font-size: 0.9rem; font-weight:600;
+  cursor: pointer; text-decoration: none; transition: all 0.25s;
+}
+.follow-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
+.follow-btn.linkedin:hover { border-color:#0a66c2; background:rgba(10,102,194,0.1); color:#4b9be6; }
+.follow-btn.facebook:hover { border-color:#1877f2; background:rgba(24,119,242,0.1); color:#5b9fec; }
+.follow-btn.twitter:hover  { border-color:#1da1f2; background:rgba(29,161,242,0.1); color:#6bb8f2; }
+.follow-btn.youtube:hover  { border-color:#ff0000; background:rgba(255,0,0,0.08); color:#ff6666; }
+.follow-icon { font-size: 1.6rem; }
+.follow-lbl { display: flex; flex-direction: column; gap: 1px; }
+.follow-platform { font-size: 0.9rem; color: #ffffff; font-weight:400; }
+.subscribe-card {
+  background: linear-gradient(135deg, var(--obs-600), var(--obs-500));
+  border: 1px solid var(--border); border-radius: 14px;
+  padding: 40px 36px; margin: 28px 0; text-align: center; position: relative; overflow: hidden;
+}
+.subscribe-card::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:2px;
+  background: linear-gradient(90deg, var(--blue-bright), var(--purple-bright));
+}
+.subscribe-title { font-family:'Syne',sans-serif; font-size:1rem; font-weight:700; margin-bottom:8px; color:#ffffff; }
+.subscribe-sub { color:#ffffff; margin-bottom:24px; font-size:0.9rem; text-align:justify; max-width:500px; margin-left:auto; margin-right:auto; }
+.sub-form { display:flex; gap:10px; max-width:480px; margin:0 auto; flex-wrap:wrap; justify-content:center; }
+.sub-input {
+  flex:1; min-width:200px; background: var(--obs-800); border:1px solid var(--border);
+  border-radius:8px; color:#ffffff; font-family:'Literata',serif; font-size:0.9rem;
+  padding:11px 16px; outline:none; transition:border-color 0.2s;
+}
+.sub-input:focus { border-color: var(--blue-bright); }
+.sub-btn {
+  background: linear-gradient(135deg, var(--blue-mid), var(--purple-dark));
+  color:white; border:none; padding:11px 24px; border-radius:8px;
+  font-family:'Syne',sans-serif; font-size:0.9rem; font-weight:600; cursor:pointer; transition:all 0.2s; white-space:nowrap;
+}
+.sub-btn:hover { opacity:0.85; transform:translateY(-1px); }
+.sub-note { font-size:0.9rem; color:#ffffff; margin-top:12px; }
+.outro-card {
+  background: linear-gradient(135deg, var(--obs-600) 0%, var(--obs-700) 100%);
+  border: 1px solid var(--border-pu); border-radius: 14px; padding: 48px 36px;
+  text-align: center; margin: 48px 0; position: relative; overflow: hidden;
+}
+.outro-card::after {
+  content: '</>'; position:absolute; right:32px; bottom:16px;
+  font-family:'JetBrains Mono',monospace; font-size:5rem;
+  color: rgba(189,147,249,0.06); font-weight:700; user-select:none; pointer-events:none;
+}
+.outro-title { font-family:'Syne',sans-serif; font-size:1.2rem; font-weight:800; color:#ffffff; margin-bottom:14px; }
+.outro-body { color:#ffffff; font-size:0.9rem; max-width:620px; margin:0 auto 14px; line-height:1.8; text-align:justify; }
+footer { background: var(--obs-800); border-top: 1px solid var(--border); padding: 60px 24px 32px; margin-top: 80px; }
+.footer-inner { max-width: 980px; margin: 0 auto; }
+.footer-top { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+.footer-brand { font-family:'Syne',sans-serif; font-size:1rem; font-weight:800; margin-bottom:10px; }
+.footer-tagline { font-size: 0.9rem; color: #ffffff; line-height:1.6; text-align:justify; }
+.footer-col-title { font-family:'JetBrains Mono',monospace; font-size:0.9rem; letter-spacing:2px; color: var(--blue-bright); text-transform:uppercase; margin-bottom:14px; }
+.footer-btn {
+  display:flex; align-items:center; gap:8px; background:none; border:1px solid transparent;
+  color:#ffffff; padding:7px 10px; border-radius:6px; font-family:'Syne',sans-serif; font-size:0.9rem;
+  cursor:pointer; text-decoration:none; width:100%; margin-bottom:2px; transition:all 0.2s; text-align:left;
+}
+.footer-btn:hover { border-color: var(--border); color:#ffffff; background: var(--obs-700); }
+.footer-btn .ico { font-size:1.2rem; width:18px; }
+.footer-bottom { border-top:1px solid var(--border); padding-top:24px; display:flex; flex-wrap:wrap; gap:16px; justify-content:space-between; align-items:center; }
+.footer-copy { font-family:'JetBrains Mono',monospace; font-size:0.9rem; color:#ffffff; }
+.footer-links-row { display:flex; gap:8px; flex-wrap:wrap; }
+.footer-link-btn {
+  background: var(--obs-700); border:1px solid var(--border); color:#ffffff;
+  padding:5px 12px; border-radius:5px; font-family:'JetBrains Mono',monospace;
+  font-size:0.9rem; letter-spacing:0.5px; cursor:pointer; text-decoration:none; transition:all 0.2s;
+}
+.footer-link-btn:hover { border-color: var(--blue-bright); color: var(--blue-bright); }
+.sticky-share { position:fixed; right:16px; top:50%; transform:translateY(-50%); z-index:200; display:flex; flex-direction:column; gap:8px; }
+.ss-btn {
+  width:40px; height:40px; border-radius:8px; background: var(--obs-700);
+  border:1px solid var(--border); display:flex; align-items:center; justify-content:center;
+  cursor:pointer; font-size:1.2rem; transition:all 0.2s; text-decoration:none; color:#ffffff;
+}
+.ss-btn:hover { transform:scale(1.12); border-color: var(--blue-bright); background: var(--blue-pale); color: var(--blue-bright); }
+#progress-bar {
+  position:fixed; top:64px; left:0; height:2px; z-index:1001;
+  background: linear-gradient(90deg, var(--blue-bright), var(--purple-bright));
+  width:0%; transition:width 0.1s linear;
+}
+.toast {
+  position:fixed; bottom:28px; left:50%; transform:translateX(-50%) translateY(60px);
+  background: var(--obs-600); border:1px solid var(--blue-bright);
+  color:#ffffff; padding:10px 22px; border-radius:8px;
+  font-family:'JetBrains Mono',monospace; font-size:0.9rem;
+  transition:transform 0.3s ease; z-index:2000; pointer-events:none;
+}
+.toast.show { transform:translateX(-50%) translateY(0); }
+.ai-share-section { background: var(--obs-700); border: 1px solid var(--border-pu); border-radius: 14px; padding: 24px; margin: 20px 0; position: relative; overflow: hidden; }
+.ai-share-section::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--blue-bright), var(--purple-bright)); }
+.ai-share-title { font-family:'Syne',sans-serif; font-size:1rem; font-weight:700; color:#ffffff; margin-bottom:6px; }
+.ai-share-desc { font-size:0.9rem; color:#ffffff; margin-bottom:16px; text-align:justify; }
+.ai-share-controls { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; align-items:center; }
+.ai-sel { flex:1; min-width:130px; background:var(--obs-800); border:1px solid var(--border); border-radius:8px; color:#ffffff; font-family:'Syne',sans-serif; font-size:0.9rem; padding:9px 12px; outline:none; cursor:pointer; }
+.ai-sel:focus { border-color:var(--blue-bright); }
+.ai-gen-btn { background:linear-gradient(135deg,var(--blue-mid),var(--purple-dark)); color:#fff; border:none; padding:10px 22px; border-radius:8px; font-family:'Syne',sans-serif; font-size:0.9rem; font-weight:700; cursor:pointer; transition:all 0.2s; white-space:nowrap; display:inline-flex; align-items:center; gap:8px; }
+.ai-gen-btn:hover { opacity:0.85; transform:translateY(-1px); }
+.ai-loading { display:none; align-items:center; gap:10px; color:#ffffff; font-family:'JetBrains Mono',monospace; font-size:0.9rem; margin-bottom:12px; }
+.ai-loading.show { display:flex; }
+.ai-spinner { width:14px; height:14px; border:2px solid rgba(255,255,255,0.25); border-top-color:var(--blue-bright); border-radius:50%; animation:aiSpin 0.7s linear infinite; }
+@keyframes aiSpin { to { transform:rotate(360deg); } }
+.ai-output { background:var(--obs-800); border:1px solid var(--border); border-radius:8px; padding:16px; font-size:0.9rem; color:#ffffff; line-height:1.7; white-space:pre-wrap; word-break:break-word; margin-bottom:12px; display:none; text-align:justify; }
+.ai-output.show { display:block; }
+.ai-actions { display:none; flex-wrap:wrap; gap:8px; }
+.ai-actions.show { display:flex; }
+.ai-act { display:inline-flex; align-items:center; gap:6px; padding:8px 16px; border-radius:8px; font-family:'Syne',sans-serif; font-size:0.9rem; font-weight:600; border:1px solid var(--border); background:var(--obs-700); color:#ffffff; cursor:pointer; text-decoration:none; transition:all 0.2s; }
+.ai-act:hover { transform:translateY(-1px); }
+.ai-act.cp:hover { border-color:var(--yellow); color:var(--yellow); }
+.ai-act.fb:hover { border-color:#1877f2; color:#6bb1ff; background:rgba(24,119,242,0.1); }
+.ai-act.tw:hover { border-color:#1da1f2; color:#80ccff; background:rgba(29,161,242,0.1); }
+.ai-act.li:hover { border-color:#0a66c2; color:#6baff5; background:rgba(10,102,194,0.1); }
+.ai-act.wa:hover { border-color:#25d366; color:#25d366; background:rgba(37,211,102,0.1); }
+@media (max-width: 900px) {
+  .hero-subtitle { border-left: none; padding-left: 0; border-top: 3px solid var(--blue-dark); padding-top: 16px; }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 24px; }
+  .card-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 768px) {
+  .navbar { padding: 0 16px; }
+  .container { padding: 0 16px; }
+  .section { margin-top: 48px; }
+  .footer-top { grid-template-columns: 1fr; gap: 20px; }
+  .form-row { grid-template-columns: 1fr; }
+  .sticky-share { display: none; }
+  .card-grid { grid-template-columns: 1fr; }
+  .flow-item { min-width: 100%; border-right: none; border-bottom: 1px solid var(--border); }
+  .flow-item::after { content: '↓'; right: 50%; bottom: -10px; top: unset; transform: translateX(50%); }
+  .step { gap: 12px; }
+  .step-num { width: 28px; height: 28px; font-size: 0.9rem; }
+  .follow-grid { grid-template-columns: 1fr 1fr; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .reactions { flex-wrap: wrap; gap: 8px; }
+  .subscribe-card { padding: 28px 18px; }
+  .outro-card { padding: 28px 18px; }
+  .hero { padding: 90px 0 60px; }
+  .btn-primary, .btn-secondary { width: 100%; max-width: 280px; justify-content: center; }
+}
+@media (max-width: 480px) {
+  .navbar { padding: 0 12px; }
+  .container { padding: 0 12px; }
+  .hero-cta { flex-direction: column; align-items: center; }
+  .follow-grid { grid-template-columns: 1fr; }
+  .comment-form { padding: 16px; }
+  .table-wrap { font-size: 0.75rem; }
+  .drawer { width: 280px; }
+}
+</style>
+</head>
+<body>
+<div id="progress-bar"></div>
+<nav class="navbar">
+  <a href="https://code-sense.pansensoyglenn.workers.dev" class="brand">
+    <span class="brand-valleys">VALLEYS</span>
+    <span class="brand-amp">&amp;</span>
+    <span class="brand-bytes">BYTES</span>
+  </a>
+  <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+<div class="drawer" id="drawer" role="navigation" aria-label="Site menu">
+  <div class="drawer-section">
+    <div class="drawer-section-label">Navigate</div>
+    <a class="drawer-btn" href="#intro"><span class="ico">📖</span>Introduction</a>
+    <a class="drawer-btn" href="#s1"><span class="ico">🗂️</span>Program Overview</a>
+    <a class="drawer-btn" href="#s2"><span class="ico">📦</span>Product Class</a>
+    <a class="drawer-btn" href="#s3"><span class="ico">💳</span>PaymentProcessor</a>
+    <a class="drawer-btn" href="#s4"><span class="ico">💸</span>Payment Subclasses</a>
+    <a class="drawer-btn" href="#s5"><span class="ico">🚚</span>ShippingCompany</a>
+    <a class="drawer-btn" href="#s6"><span class="ico">🏠</span>Shipping Subclasses</a>
+    <a class="drawer-btn" href="#s7"><span class="ico">🛒</span>main() &amp; Cart</a>
+    <a class="drawer-btn" href="#s8"><span class="ico">🧾</span>Checkout &amp; Receipt</a>
+    <a class="drawer-btn" href="#s9"><span class="ico">🔐</span>__name__ Guard</a>
+    <a class="drawer-btn" href="#source"><span class="ico">💻</span>Full Source Code</a>
+    <a class="drawer-btn" href="#faq"><span class="ico">❓</span>FAQ</a>
+  </div>
+  <div class="drawer-section">
+    <div class="drawer-section-label">Community</div>
+    <a class="drawer-btn" href="#comments"><span class="ico">💬</span>Comments</a>
+    <a class="drawer-btn" href="#follow"><span class="ico">👥</span>Follow</a>
+    <a class="drawer-btn" href="#subscribe"><span class="ico">✉️</span>Subscribe</a>
+  </div>
+  <div class="drawer-section">
+    <div class="drawer-section-label">Site Pages</div>
+    <a class="drawer-btn" href="about-guide.html"><span class="ico">📄</span>About this Page</a>
+    <a class="drawer-btn" href="about-author.html"><span class="ico">🧑‍💻</span>About the Author</a>
+    <a class="drawer-btn" href="oop-contact.html"><span class="ico">📬</span>Contact</a>
+    <a class="drawer-btn" href="oop-privacy.html"><span class="ico">🔒</span>Privacy Policy</a>
+    <a class="drawer-btn" href="oop-terms.html"><span class="ico">📜</span>Terms of Service</a>
+    <a class="drawer-btn" href="oop-cookie.html"><span class="ico">🍪</span>Cookie Policy</a>
+  </div>
+</div>
+<div style="padding:78px 24px 0;position:relative;z-index:1;">
+  <div class="ad-banner">
+    <div class="ad-label">ADVERTISEMENT</div>
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4575646748966866" data-ad-slot="4226674403" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+</div>
+<section class="hero" id="top">
+  <div class="hero-particles" id="particles"></div>
+  <div class="hero-eyebrow">Python · OOP · Inheritance · Philippines</div>
+  <h1 class="hero-title">
+    <span class="hl-blue">e-</span><span class="hl-y">shop</span><span class="hl-pu">.py</span>
+  </h1>
+  <p class="hero-subtitle">A complete walkthrough of a Lazada/Shopee simulator built in Python — explaining Product, PaymentProcessor, and ShippingCompany class hierarchies step by step. Every class, every method, every design decision explained.</p>
+  <div class="hero-tags">
+    <span class="hero-tag">🏪 3 Base Classes</span>
+    <span class="hero-tag">💳 3 Payment Subclasses</span>
+    <span class="hero-tag">🚚 4 Shipping Subclasses</span>
+    <span class="hero-tag">🛒 20 Products</span>
+    <span class="hero-tag">🧾 Official Receipt</span>
+    <span class="hero-tag">🐍 Python 3</span>
+  </div>
+  <div class="hero-cta">
+    <a href="#intro" class="btn-primary">📖 Start Reading</a>
+    <a href="#source" class="btn-secondary">💻 View Source Code</a>
+  </div>
+  <div class="scroll-indicator">
+    <span>SCROLL TO EXPLORE</span>
+    <span class="arrow">↓</span>
+  </div>
+</section>
+<nav class="toc-nav" id="toc">
+  <a class="toc-link" href="#intro">Intro</a>
+  <a class="toc-link" href="#s1">Overview</a>
+  <a class="toc-link" href="#s2">Product</a>
+  <a class="toc-link" href="#s3">Payment</a>
+  <a class="toc-link" href="#s4">Subclasses</a>
+  <a class="toc-link" href="#s5">Shipping</a>
+  <a class="toc-link" href="#s6">Couriers</a>
+  <a class="toc-link" href="#s7">Cart</a>
+  <a class="toc-link" href="#s8">Checkout</a>
+  <a class="toc-link" href="#s9">Guard</a>
+  <a class="toc-link" href="#source">Code</a>
+  <a class="toc-link" href="#faq">FAQ</a>
+</nav>
+<div class="container">
+
+  <div class="section" id="intro">
+    <div class="sec-header">
+      <span class="sec-num">INTRODUCTION</span>
+      <h2 class="sec-title">What Is <span class="accent-blue">e-shop.py</span> and Why Does It Matter?</h2>
+    </div>
+    <p class="prose">Every time you open Lazada or Shopee, click Add to Cart, choose GCash at checkout, and watch J&T Express pick up your parcel — you are interacting with a system built on the exact design patterns this program demonstrates. <strong>e-shop.py</strong> is a command-line Lazada/Shopee simulator that compresses those real-world mechanics into a clean, beginner-readable Python program.</p>
+    <p class="prose" style="margin-top:14px;">The program's real purpose is to teach <strong>inheritance</strong> — one of the four pillars of Object-Oriented Programming. Instead of writing a separate <code>process_gcash()</code> function and a separate <code>process_paypal()</code> function that do almost the same thing, we write the shared logic once in a parent class called <code>PaymentProcessor</code>, and let <code>GCash</code>, <code>PayPal</code>, and <code>PayMaya</code> inherit it. The same pattern applies to shipping: <code>JandT</code>, <code>LBC</code>, <code>FlashExpress</code>, and <code>NinjaVan</code> all inherit from a single <code>ShippingCompany</code> parent.</p>
+    <p class="prose" style="margin-top:14px;">This guide walks through every class and every method in order, explaining not just <em>what</em> the code does but <em>why</em> each decision was made. By the end, you will understand inheritance, <code>super().__init__()</code>, polymorphism, <code>__str__</code> dunder methods, and the <code>if __name__ == "__main__"</code> entry guard — all through one cohesive, runnable program.</p>
+    <div class="callout callout-blue" style="margin-top:24px;">
+      <span class="callout-icon">🛒</span>
+      <div class="callout-text"><strong>What you will learn:</strong> Class and instance creation, <code>__init__</code> constructors with type annotations, <code>__str__</code> dunder methods, single inheritance with <code>super().__init__()</code>, polymorphism (calling the same method on different subclass objects), the DRY principle applied through two parallel inheritance hierarchies, dictionary-based cart logic with tuple values, f-string formatting for currency, input validation with <code>try/except ValueError</code>, and the <code>if __name__ == "__main__"</code> guard.</div>
+    </div>
+    <div class="callout callout-warn" style="margin-top:16px;">
+      <span class="callout-icon">💡</span>
+      <div class="callout-text"><strong>Who this is for:</strong> Python learners who understand variables and basic functions, and are ready to learn OOP with a real-world example. No external libraries are needed — this runs on pure Python 3.</div>
+    </div>
+  </div>
+
+  <div class="ad-banner" style="margin-top:40px;padding:0;">
+    <div class="ad-label">ADVERTISEMENT</div>
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4575646748966866" data-ad-slot="4226674403" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section" id="s1">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 01</span>
+      <h2 class="sec-title">Program <span class="accent-pu">Overview</span></h2>
+    </div>
+    <p class="prose">e-shop.py is built around three independent class hierarchies. Understanding the big picture before diving into individual classes makes every detail easier to absorb.</p>
+    <div class="card-grid" style="margin-top:20px;">
+      <div class="card"><div class="card-label">Product</div><div class="card-value">A standalone class (no inheritance). Stores <code>code</code>, <code>name</code>, and <code>price</code>. Provides <code>__str__</code> for catalogue display. Used directly in the product list and cart.</div></div>
+      <div class="card pu"><div class="card-label">PaymentProcessor</div><div class="card-value">Parent class for all payment methods. Stores <code>name</code> and provides <code>verify_payment(amount)</code>. Child classes: <code>PayPal</code>, <code>PayMaya</code>, <code>GCash</code> — each only defines <code>__init__</code>.</div></div>
+      <div class="card"><div class="card-label">ShippingCompany</div><div class="card-value">Parent class for all couriers. Stores <code>name</code> and provides <code>ship_order(name, address)</code>. Child classes: <code>JandT</code>, <code>LBC</code>, <code>FlashExpress</code>, <code>NinjaVan</code>.</div></div>
+      <div class="card pu"><div class="card-label">main()</div><div class="card-value">Orchestrates the entire flow: build the product list, run the shopping cart loop, collect customer details, process payment, confirm shipping. All OOP classes are wired together here.</div></div>
+    </div>
+    <div class="flow" style="margin-top:24px;">
+      <div class="flow-item"><span class="flow-icon">📋</span><span class="flow-lbl">Browse</span><div class="flow-desc">Display 20 products from list</div></div>
+      <div class="flow-item"><span class="flow-icon">🛒</span><span class="flow-lbl">Cart</span><div class="flow-desc">Add items by code &amp; qty</div></div>
+      <div class="flow-item"><span class="flow-icon">🧾</span><span class="flow-lbl">Receipt</span><div class="flow-desc">Print official receipt + 10% shipping fee</div></div>
+      <div class="flow-item"><span class="flow-icon">💳</span><span class="flow-lbl">Pay</span><div class="flow-desc">PayPal / PayMaya / GCash</div></div>
+      <div class="flow-item"><span class="flow-icon">🚚</span><span class="flow-lbl">Ship</span><div class="flow-desc">J&amp;T / LBC / Flash / NinjaVan</div></div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section" id="s2">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 02</span>
+      <h2 class="sec-title">The <span class="accent-blue">Product</span> Class</h2>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><div class="tdk-r"></div><div class="tdk-y"></div><div class="tdk-g"></div><span class="code-lbl">class Product</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <div class="code-body"><pre><span class="kw">class</span> <span class="cl">Product</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nm">self</span>, code: <span class="cl">int</span>, name: <span class="cl">str</span>, price: <span class="cl">float</span>):
+        <span class="nm">self</span>.code = code
+        <span class="nm">self</span>.name = name
+        <span class="nm">self</span>.price = price
+
+    <span class="kw">def</span> <span class="fn">__str__</span>(<span class="nm">self</span>):
+        <span class="kw">return</span> <span class="st">f"</span>{<span class="nm">self</span>.code}<span class="st">: </span>{<span class="nm">self</span>.name}<span class="st"> - PHP </span>{<span class="nm">self</span>.price:,.2f}<span class="st">"</span></pre></div>
+    </div>
+    <p class="prose"><code>Product</code> is a simple, self-contained class with no parent (it implicitly inherits from Python's built-in <code>object</code>). It answers one question: what does every item for sale need? Three things — a numeric code, a display name, and a price in Philippine Pesos.</p>
+    <p class="prose" style="margin-top:14px;">The type annotations (<code>code: int</code>, <code>name: str</code>, <code>price: float</code>) are documentation hints — Python does not enforce them at runtime, but they make the constructor's intent immediately clear to any reader. The <code>__str__</code> dunder method is called automatically by <code>print(product)</code> or when a <code>Product</code> object appears in an f-string. The <code>:,.2f</code> format specifier outputs the price with comma thousands separators and exactly two decimal places — so <code>59999</code> becomes <code>59,999.00</code>.</p>
+    <div class="table-wrap" style="margin-top:20px;">
+      <table>
+        <thead><tr><th>Attribute</th><th>Type</th><th>Purpose</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td>code</td><td>int</td><td>Unique 1–20 identifier used by cart lookup</td><td>1, 15</td></tr>
+          <tr><td>name</td><td>str</td><td>Display name printed in catalogue and receipt</td><td>"Apple iPhone 15 (128GB)"</td></tr>
+          <tr><td>price</td><td>float</td><td>Unit price in PHP, multiplied by quantity for totals</td><td>59999</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section" id="s3">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 03</span>
+      <h2 class="sec-title">The <span class="accent-pu">PaymentProcessor</span> Class</h2>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><div class="tdk-r"></div><div class="tdk-y"></div><div class="tdk-g"></div><span class="code-lbl">class PaymentProcessor</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <div class="code-body"><pre><span class="kw">class</span> <span class="cl">PaymentProcessor</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nm">self</span>, name: <span class="cl">str</span>):
+        <span class="nm">self</span>.name = name
+
+    <span class="kw">def</span> <span class="fn">verify_payment</span>(<span class="nm">self</span>, amount: <span class="cl">float</span>) -> <span class="cl">bool</span>:
+        <span class="fn">print</span>(<span class="st">f"\n🔄 Processing payment of PHP </span>{amount:,.2f}<span class="st"> via </span>{<span class="nm">self</span>.name}<span class="st">..."</span>)
+        <span class="fn">print</span>(<span class="st">f"✅ Payment verified successfully via </span>{<span class="nm">self</span>.name}<span class="st">!"</span>)
+        <span class="kw">return</span> <span class="cl">True</span></pre></div>
+    </div>
+    <p class="prose"><code>PaymentProcessor</code> is the parent class of all payment methods in this system. It stores the payment provider's <code>name</code> and defines the <code>verify_payment(amount)</code> method that every payment provider shares. This is the core of the DRY principle in action — the logic for processing a payment is written exactly once here, and all three child classes (PayPal, PayMaya, GCash) reuse it without copying a single line.</p>
+    <p class="prose" style="margin-top:14px;">The return type annotation <code>-> bool</code> declares that <code>verify_payment</code> returns a boolean. In this simulation it always returns <code>True</code>, but in a real production system this method would communicate with the payment provider's API and return <code>False</code> on failure. The architecture is already designed to support that extension — you would only need to change this one method.</p>
+    <div class="callout callout-blue" style="margin-top:20px;">
+      <span class="callout-icon">🔑</span>
+      <div class="callout-text"><strong>Key design insight:</strong> Notice that <code>verify_payment</code> uses <code>self.name</code> in its output strings. When a <code>GCash</code> object calls this method, <code>self.name</code> is <code>"GCash"</code>. When a <code>PayPal</code> object calls it, <code>self.name</code> is <code>"PayPal"</code>. The single method produces customised output for every child class — without any <code>if</code> statements.</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section" id="s4">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 04</span>
+      <h2 class="sec-title">Payment <span class="accent-blue">Subclasses</span> — PayPal, PayMaya, GCash</h2>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><div class="tdk-r"></div><div class="tdk-y"></div><div class="tdk-g"></div><span class="code-lbl">Payment subclasses</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <div class="code-body"><pre><span class="kw">class</span> <span class="cl">PayPal</span>(<span class="cl">PaymentProcessor</span>):
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nm">self</span>):
+        <span class="fn">super</span>().<span class="fn">__init__</span>(<span class="st">"PayPal"</span>)
+
+<span class="kw">class</span> <span class="cl">PayMaya</span>(<span class="cl">PaymentProcessor</span>):
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nm">self</span>):
+        <span class="fn">super</span>().<span class="fn">__init__</span>(<span class="st">"PayMaya"</span>)
+
+<span class="kw">class</span> <span class="cl">GCash</span>(<span class="cl">PaymentProcessor</span>):
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nm">self</span>):
+        <span class="fn">super</span>().<span class="fn">__init__</span>(<span class="st">"GCash"</span>)</pre></div>
+    </div>
+    <p class="prose">These three classes are a perfect illustration of inheritance at its most efficient. Each one is only three lines long, yet each is a fully functional payment processor. The syntax <code>class PayPal(PaymentProcessor):</code> declares that <code>PayPal</code> inherits from <code>PaymentProcessor</code> — meaning it automatically has access to <code>verify_payment()</code> without re-writing it.</p>
+    <p class="prose" style="margin-top:14px;">The <code>super().__init__("PayPal")</code> call is the most important single line in all three classes. <code>super()</code> returns a proxy object that refers to the parent class (<code>PaymentProcessor</code>). Calling <code>.__init__("PayPal")</code> on that proxy runs <code>PaymentProcessor.__init__(self, "PayPal")</code>, which sets <code>self.name = "PayPal"</code>. Without this call, <code>self.name</code> would never be set, and <code>verify_payment()</code> would crash with an <code>AttributeError</code>.</p>
+    <div class="subsec">
+      <div class="subsec-title">Why Not Just Write PayPal.name = "PayPal" Directly?</div>
+      <p class="prose">You could — but then you would duplicate the attribute assignment in every child class, and you would bypass the parent's constructor entirely. If <code>PaymentProcessor.__init__</code> ever gained additional setup logic (such as loading API credentials or setting a transaction limit), child classes using <code>super()</code> would inherit that new behaviour automatically. Classes that bypass <code>super()</code> would silently miss it.</p>
+    </div>
+    <div class="table-wrap" style="margin-top:20px;">
+      <table>
+        <thead><tr><th>Class</th><th>Parent</th><th>self.name</th><th>Overrides verify_payment?</th></tr></thead>
+        <tbody>
+          <tr><td>PayPal</td><td>PaymentProcessor</td><td>"PayPal"</td><td>No — uses parent's</td></tr>
+          <tr><td>PayMaya</td><td>PaymentProcessor</td><td>"PayMaya"</td><td>No — uses parent's</td></tr>
+          <tr><td>GCash</td><td>PaymentProcessor</td><td>"GCash"</td><td>No — uses parent's</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section" id="s5">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 05</span>
+      <h2 class="sec-title">The <span class="accent-pu">ShippingCompany</span> Class</h2>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><div class="tdk-r"></div><div class="tdk-y"></div><div class="tdk-g"></div><span class="code-lbl">class ShippingCompany</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <div class="code-body"><pre><span class="kw">class</span> <span class="cl">ShippingCompany</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nm">self</span>, name: <span class="cl">str</span>):
+        <span class="nm">self</span>.name = name
+
+    <span class="kw">def</span> <span class="fn">ship_order</span>(<span class="nm">self</span>, customer_name: <span class="cl">str</span>, address: <span class="cl">str</span>):
+        <span class="fn">print</span>(<span class="st">f"\n🚚 Shipping order via </span>{<span class="nm">self</span>.name}<span class="st">..."</span>)
+        <span class="fn">print</span>(<span class="st">f"📦 Order has been handed over to </span>{<span class="nm">self</span>.name}<span class="st">."</span>)
+        <span class="fn">print</span>(<span class="st">f"👤 Recipient: </span>{customer_name}<span class="st">"</span>)
+        <span class="fn">print</span>(<span class="st">f"📍 Delivery Address: </span>{address}<span class="st">"</span>)
+        <span class="fn">print</span>(<span class="st">"✅ Estimated delivery: 2-5 business days (Philippines standard)"</span>)
+        <span class="fn">print</span>(<span class="st">"📬 Tracking number will be sent to your phone via SMS."</span>)</pre></div>
+    </div>
+    <p class="prose"><code>ShippingCompany</code> mirrors <code>PaymentProcessor</code> in structure but serves a completely different domain. It stores the courier's <code>name</code> and provides <code>ship_order(customer_name, address)</code> — a method that prints the full shipping confirmation. Like <code>verify_payment</code>, this method uses <code>self.name</code> to personalise its output, so a <code>JandT</code> object prints "J&amp;T Express" and an <code>LBC</code> object prints "LBC Express" — all from the same method body.</p>
+    <p class="prose" style="margin-top:14px;">The two parameters — <code>customer_name</code> and <code>address</code> — are passed in by <code>main()</code> when the user confirms their shipping details. Notice that the method uses both in its output, making the printed confirmation feel like a real courier handover document.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section" id="s6">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 06</span>
+      <h2 class="sec-title">Shipping <span class="accent-blue">Subclasses</span> — J&amp;T, LBC, Flash Express, Ninja Van</h2>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><div class="tdk-r"></div><div class="tdk-y"></div><div class="tdk-g"></div><span class="code-lbl">Shipping subclasses</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <div class="code-body"><pre><span class="kw">class</span> <span class="cl">JandT</span>(<span class="cl">ShippingCompany</span>):
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nm">self</span>):
+        <span class="fn">super</span>().<span class="fn">__init__</span>(<span class="st">"J&amp;T Express"</span>)
+
+<span class="kw">class</span> <span class="cl">LBC</span>(<span class="cl">ShippingCompany</span>):
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nm">self</span>):
+        <span class="fn">super</span>().<span class="fn">__init__</span>(<span class="st">"LBC Express"</span>)
+
+<span class="kw">class</span> <span class="cl">FlashExpress</span>(<span class="cl">ShippingCompany</span>):
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nm">self</span>):
+        <span class="fn">super</span>().<span class="fn">__init__</span>(<span class="st">"Flash Express"</span>)
+
+<span class="kw">class</span> <span class="cl">NinjaVan</span>(<span class="cl">ShippingCompany</span>):
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nm">self</span>):
+        <span class="fn">super</span>().<span class="fn">__init__</span>(<span class="st">"Ninja Van"</span>)</pre></div>
+    </div>
+    <p class="prose">The four shipping subclasses follow the identical pattern to the payment subclasses — each is three lines, each calls <code>super().__init__(name)</code> to register its courier name, and each inherits <code>ship_order()</code> from <code>ShippingCompany</code> without redefining it. This is the DRY principle applied across two parallel hierarchies in one program.</p>
+    <div class="callout callout-pu" style="margin-top:20px;">
+      <span class="callout-icon">🏗️</span>
+      <div class="callout-text"><strong>Parallel hierarchies:</strong> e-shop.py demonstrates two independent inheritance trees side by side — one for payments, one for shipping. This is a common real-world pattern. A fintech platform might have <code>PaymentGateway → Stripe / PayMongo / Paymongo</code>. A logistics platform might have <code>CourierService → DHL / FedEx / Grab</code>. In both cases, the structure is the same: one parent with shared logic, many children with unique identities.</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section" id="s7">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 07</span>
+      <h2 class="sec-title"><span class="accent-pu">main()</span> — Product Catalogue &amp; Shopping Cart</h2>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><div class="tdk-r"></div><div class="tdk-y"></div><div class="tdk-g"></div><span class="code-lbl">Product list and cart loop</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <div class="code-body"><pre>products = [
+    <span class="cl">Product</span>(<span class="nm">1</span>, <span class="st">"Apple iPhone 15 (128GB)"</span>, <span class="nm">59999</span>),
+    <span class="cl">Product</span>(<span class="nm">2</span>, <span class="st">"Samsung Galaxy S24 (256GB)"</span>, <span class="nm">49999</span>),
+    <span class="cm"># ... 18 more products</span>
+]
+
+cart = {}
+<span class="kw">while</span> <span class="cl">True</span>:
+    <span class="kw">try</span>:
+        code = <span class="fn">int</span>(<span class="fn">input</span>(<span class="st">"Enter product code (or 0 to checkout): "</span>))
+        <span class="kw">if</span> code == <span class="nm">0</span>: <span class="kw">break</span>
+        product = <span class="fn">next</span>((<span class="nm">p</span> <span class="kw">for</span> p <span class="kw">in</span> products <span class="kw">if</span> p.code == code), <span class="cl">None</span>)
+        <span class="kw">if not</span> product:
+            <span class="fn">print</span>(<span class="st">"❌ Invalid product code! Please try again."</span>)
+            <span class="kw">continue</span>
+        qty = <span class="fn">int</span>(<span class="fn">input</span>(<span class="st">f"Quantity for </span>{product.name}<span class="st">: "</span>))
+        <span class="kw">if</span> qty &lt; <span class="nm">1</span>:
+            <span class="fn">print</span>(<span class="st">"❌ Quantity must be at least 1."</span>)
+            <span class="kw">continue</span>
+        <span class="kw">if</span> code <span class="kw">in</span> cart:
+            cart[code] = (product, cart[code][<span class="nm">1</span>] + qty)
+        <span class="kw">else</span>:
+            cart[code] = (product, qty)
+        <span class="fn">print</span>(<span class="st">f"✅ Added </span>{qty}<span class="st">x </span>{product.name}<span class="st"> to cart."</span>)
+    <span class="kw">except</span> <span class="cl">ValueError</span>:
+        <span class="fn">print</span>(<span class="st">"❌ Please enter a valid number."</span>)</pre></div>
+    </div>
+    <p class="prose">The cart is a Python dictionary where each key is a product code (integer) and each value is a tuple of <code>(product_object, quantity)</code>. This structure lets us accumulate quantities across multiple entries of the same item — if the user adds code 3 twice, <code>cart[3] = (product, cart[3][1] + qty)</code> adds the quantities rather than creating a duplicate entry.</p>
+    <p class="prose" style="margin-top:14px;">The generator expression <code>next((p for p in products if p.code == code), None)</code> is a concise one-liner that searches the product list without a manual loop. <code>next()</code> returns the first matching product, or <code>None</code> if no match is found. Wrapping the entire loop body in <code>try/except ValueError</code> handles non-numeric input gracefully — if the user types "abc", Python's <code>int()</code> raises a <code>ValueError</code> which is caught and prints a friendly error instead of crashing.</p>
+    <div class="callout callout-warn" style="margin-top:16px;">
+      <span class="callout-icon">📌</span>
+      <div class="callout-text"><strong>Cart data structure:</strong> <code>cart = {code: (product, qty)}</code>. The key is the product code (int). The value is a tuple where index 0 is the <code>Product</code> object and index 1 is the accumulated quantity. This is why the summary loop uses <code>for prod, qty in cart.values():</code> — Python unpacks each tuple into two variables automatically.</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section" id="s8">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 08</span>
+      <h2 class="sec-title">Checkout, <span class="accent-blue">Receipt</span>, Payment &amp; Shipping</h2>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><div class="tdk-r"></div><div class="tdk-y"></div><div class="tdk-g"></div><span class="code-lbl">Checkout and polymorphism</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <div class="code-body"><pre>shipping_fee = subtotal * <span class="nm">0.10</span>
+total_with_shipping = subtotal + shipping_fee
+
+<span class="kw">if</span> payment_choice == <span class="st">"1"</span>:
+    processor = <span class="cl">PayPal</span>()
+<span class="kw">elif</span> payment_choice == <span class="st">"2"</span>:
+    processor = <span class="cl">PayMaya</span>()
+<span class="kw">else</span>:
+    processor = <span class="cl">GCash</span>()
+
+processor.<span class="fn">verify_payment</span>(total_with_shipping)
+
+<span class="kw">if</span> ship_choice == <span class="st">"1"</span>:
+    shipper = <span class="cl">JandT</span>()
+<span class="kw">elif</span> ship_choice == <span class="st">"2"</span>:
+    shipper = <span class="cl">LBC</span>()
+<span class="kw">elif</span> ship_choice == <span class="st">"3"</span>:
+    shipper = <span class="cl">FlashExpress</span>()
+<span class="kw">else</span>:
+    shipper = <span class="cl">NinjaVan</span>()
+
+shipper.<span class="fn">ship_order</span>(ship_name, ship_address)</pre></div>
+    </div>
+    <p class="prose">This is where polymorphism becomes visible. The variable <code>processor</code> might hold a <code>PayPal</code>, <code>PayMaya</code>, or <code>GCash</code> object — but <code>main()</code> always calls <code>processor.verify_payment(total_with_shipping)</code> regardless of which one it is. Python resolves the method at runtime based on the actual type of the object stored in <code>processor</code>. No <code>if isinstance(processor, PayPal):</code> check is needed. This is the defining feature of polymorphism: one call, many possible implementations.</p>
+    <p class="prose" style="margin-top:14px;">The shipping fee is calculated as 10% of the subtotal (<code>subtotal * 0.10</code>), and the user must confirm it before the receipt is printed. This confirm step models a real checkout flow where customers review fees before committing. The same polymorphic pattern applies to <code>shipper.ship_order()</code> — whether the shipper is J&amp;T or Ninja Van, the call is identical.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section" id="s9">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 09</span>
+      <h2 class="sec-title"><span class="accent-pu">if __name__ == "__main__"</span> — The Entry Guard</h2>
+    </div>
+    <div class="code-block">
+      <div class="code-body"><pre><span class="kw">if</span> __name__ == <span class="st">"__main__"</span>:
+    <span class="fn">main</span>()</pre></div>
+    </div>
+    <p class="prose">Every Python file has a built-in <code>__name__</code> variable. When the file is run directly (<code>python e-shop.py</code>), Python sets <code>__name__</code> to <code>"__main__"</code>. When the file is imported by another script, Python sets <code>__name__</code> to the module name (<code>"e_shop"</code>). This two-line guard ensures that <code>main()</code> — with all its interactive <code>input()</code> calls — only runs when you explicitly execute the script. Another developer could <code>import</code> the <code>PaymentProcessor</code> or <code>ShippingCompany</code> classes into their own project without accidentally triggering the entire shopping simulation.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section" id="source">
+    <div class="sec-header">
+      <span class="sec-num">FULL SOURCE</span>
+      <h2 class="sec-title">Complete <span class="accent-blue">e-shop.py</span> Source Code</h2>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><div class="tdk-r"></div><div class="tdk-y"></div><div class="tdk-g"></div><span class="code-lbl">e-shop.py — Full Source</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <div class="code-body"><pre><span class="kw">class</span> <span class="cl">Product</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nm">self</span>, code: <span class="cl">int</span>, name: <span class="cl">str</span>, price: <span class="cl">float</span>):
+        <span class="nm">self</span>.code = code
+        <span class="nm">self</span>.name = name
+        <span class="nm">self</span>.price = price
+
+    <span class="kw">def</span> <span class="fn">__str__</span>(<span class="nm">self</span>):
+        <span class="kw">return</span> <span class="st">f"</span>{<span class="nm">self</span>.code}<span class="st">: </span>{<span class="nm">self</span>.name}<span class="st"> - PHP </span>{<span class="nm">self</span>.price:,.2f}<span class="st">"</span>
+
+
+<span class="kw">class</span> <span class="cl">PaymentProcessor</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nm">self</span>, name: <span class="cl">str</span>):
+        <span class="nm">self</span>.name = name
+
+    <span class="kw">def</span> <span class="fn">verify_payment</span>(<span class="nm">self</span>, amount: <span class="cl">float</span>) -> <span class="cl">bool</span>:
+        <span class="fn">print</span>(<span class="st">f"\n🔄 Processing payment of PHP </span>{amount:,.2f}<span class="st"> via </span>{<span class="nm">self</span>.name}<span class="st">..."</span>)
+        <span class="fn">print</span>(<span class="st">f"✅ Payment verified successfully via </span>{<span class="nm">self</span>.name}<span class="st">!"</span>)
+        <span class="kw">return</span> <span class="cl">True</span>
+
+
+<span class="kw">class</span> <span class="cl">PayPal</span>(<span class="cl">PaymentProcessor</span>):
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nm">self</span>):
+        <span class="fn">super</span>().<span class="fn">__init__</span>(<span class="st">"PayPal"</span>)
+
+
+<span class="kw">class</span> <span class="cl">PayMaya</span>(<span class="cl">PaymentProcessor</span>):
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nm">self</span>):
+        <span class="fn">super</span>().<span class="fn">__init__</span>(<span class="st">"PayMaya"</span>)
+
+
+<span class="kw">class</span> <span class="cl">GCash</span>(<span class="cl">PaymentProcessor</span>):
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nm">self</span>):
+        <span class="fn">super</span>().<span class="fn">__init__</span>(<span class="st">"GCash"</span>)
+
+
+<span class="kw">class</span> <span class="cl">ShippingCompany</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nm">self</span>, name: <span class="cl">str</span>):
+        <span class="nm">self</span>.name = name
+
+    <span class="kw">def</span> <span class="fn">ship_order</span>(<span class="nm">self</span>, customer_name: <span class="cl">str</span>, address: <span class="cl">str</span>):
+        <span class="fn">print</span>(<span class="st">f"\n🚚 Shipping order via </span>{<span class="nm">self</span>.name}<span class="st">..."</span>)
+        <span class="fn">print</span>(<span class="st">f"📦 Order has been handed over to </span>{<span class="nm">self</span>.name}<span class="st">."</span>)
+        <span class="fn">print</span>(<span class="st">f"👤 Recipient: </span>{customer_name}<span class="st">"</span>)
+        <span class="fn">print</span>(<span class="st">f"📍 Delivery Address: </span>{address}<span class="st">"</span>)
+        <span class="fn">print</span>(<span class="st">"✅ Estimated delivery: 2-5 business days (Philippines standard)"</span>)
+        <span class="fn">print</span>(<span class="st">"📬 Tracking number will be sent to your phone via SMS."</span>)
+
+
+<span class="kw">class</span> <span class="cl">JandT</span>(<span class="cl">ShippingCompany</span>):
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nm">self</span>):
+        <span class="fn">super</span>().<span class="fn">__init__</span>(<span class="st">"J&amp;T Express"</span>)
+
+
+<span class="kw">class</span> <span class="cl">LBC</span>(<span class="cl">ShippingCompany</span>):
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nm">self</span>):
+        <span class="fn">super</span>().<span class="fn">__init__</span>(<span class="st">"LBC Express"</span>)
+
+
+<span class="kw">class</span> <span class="cl">FlashExpress</span>(<span class="cl">ShippingCompany</span>):
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nm">self</span>):
+        <span class="fn">super</span>().<span class="fn">__init__</span>(<span class="st">"Flash Express"</span>)
+
+
+<span class="kw">class</span> <span class="cl">NinjaVan</span>(<span class="cl">ShippingCompany</span>):
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nm">self</span>):
+        <span class="fn">super</span>().<span class="fn">__init__</span>(<span class="st">"Ninja Van"</span>)
+
+
+<span class="kw">def</span> <span class="fn">main</span>():
+    <span class="fn">print</span>(<span class="st">"========================================"</span>)
+    <span class="fn">print</span>(<span class="st">"   🛒 LAZADA / SHOPEE SIMULATOR (PHP)   "</span>)
+    <span class="fn">print</span>(<span class="st">"   Built with Python Inheritance OOP    "</span>)
+    <span class="fn">print</span>(<span class="st">"========================================"</span>)
+
+    products = [
+        <span class="cl">Product</span>(<span class="nm">1</span>, <span class="st">"Apple iPhone 15 (128GB)"</span>, <span class="nm">59999</span>),
+        <span class="cl">Product</span>(<span class="nm">2</span>, <span class="st">"Samsung Galaxy S24 (256GB)"</span>, <span class="nm">49999</span>),
+        <span class="cl">Product</span>(<span class="nm">3</span>, <span class="st">"Dell XPS 13 Laptop"</span>, <span class="nm">84999</span>),
+        <span class="cl">Product</span>(<span class="nm">4</span>, <span class="st">"Sony WH-1000XM5 Headphones"</span>, <span class="nm">14999</span>),
+        <span class="cl">Product</span>(<span class="nm">5</span>, <span class="st">'LG 55" OLED Smart TV'</span>, <span class="nm">39999</span>),
+        <span class="cl">Product</span>(<span class="nm">6</span>, <span class="st">"Samsung 2-Door Refrigerator"</span>, <span class="nm">29999</span>),
+        <span class="cl">Product</span>(<span class="nm">7</span>, <span class="st">"LG Front Load Washing Machine"</span>, <span class="nm">18999</span>),
+        <span class="cl">Product</span>(<span class="nm">8</span>, <span class="st">"Panasonic Microwave Oven"</span>, <span class="nm">3999</span>),
+        <span class="cl">Product</span>(<span class="nm">9</span>, <span class="st">"Daikin 1HP Air Conditioner"</span>, <span class="nm">24999</span>),
+        <span class="cl">Product</span>(<span class="nm">10</span>, <span class="st">"Xiaomi Smart Standing Fan"</span>, <span class="nm">1999</span>),
+        <span class="cl">Product</span>(<span class="nm">11</span>, <span class="st">"Nike Dri-FIT T-Shirt"</span>, <span class="nm">999</span>),
+        <span class="cl">Product</span>(<span class="nm">12</span>, <span class="st">"Levi's 501 Original Jeans"</span>, <span class="nm">2499</span>),
+        <span class="cl">Product</span>(<span class="nm">13</span>, <span class="st">"Adidas Ultraboost Running Shoes"</span>, <span class="nm">3999</span>),
+        <span class="cl">Product</span>(<span class="nm">14</span>, <span class="st">"Jansport Superbreak Backpack"</span>, <span class="nm">1499</span>),
+        <span class="cl">Product</span>(<span class="nm">15</span>, <span class="st">"Casio G-Shock Watch"</span>, <span class="nm">999</span>),
+        <span class="cl">Product</span>(<span class="nm">16</span>, <span class="st">"Dyson V15 Cordless Vacuum"</span>, <span class="nm">15999</span>),
+        <span class="cl">Product</span>(<span class="nm">17</span>, <span class="st">"Philips Blender with Chopper"</span>, <span class="nm">2999</span>),
+        <span class="cl">Product</span>(<span class="nm">18</span>, <span class="st">"Instant Pot Duo 7-in-1"</span>, <span class="nm">4999</span>),
+        <span class="cl">Product</span>(<span class="nm">19</span>, <span class="st">"Nespresso Vertuo Coffee Maker"</span>, <span class="nm">6999</span>),
+        <span class="cl">Product</span>(<span class="nm">20</span>, <span class="st">"Xiaomi Robot Vacuum Cleaner"</span>, <span class="nm">9999</span>),
+    ]
+
+    <span class="kw">for</span> p <span class="kw">in</span> products:
+        <span class="fn">print</span>(p)
+
+    cart = {}
+    <span class="kw">while</span> <span class="cl">True</span>:
+        <span class="kw">try</span>:
+            code = <span class="fn">int</span>(<span class="fn">input</span>(<span class="st">"Enter product code (or 0 to checkout): "</span>))
+            <span class="kw">if</span> code == <span class="nm">0</span>: <span class="kw">break</span>
+            product = <span class="fn">next</span>((<span class="nm">p</span> <span class="kw">for</span> p <span class="kw">in</span> products <span class="kw">if</span> p.code == code), <span class="cl">None</span>)
+            <span class="kw">if not</span> product:
+                <span class="fn">print</span>(<span class="st">"❌ Invalid product code!"</span>)
+                <span class="kw">continue</span>
+            qty = <span class="fn">int</span>(<span class="fn">input</span>(<span class="st">f"Quantity for </span>{product.name}<span class="st">: "</span>))
+            <span class="kw">if</span> qty &lt; <span class="nm">1</span>: <span class="kw">continue</span>
+            <span class="kw">if</span> code <span class="kw">in</span> cart:
+                cart[code] = (product, cart[code][<span class="nm">1</span>] + qty)
+            <span class="kw">else</span>:
+                cart[code] = (product, qty)
+        <span class="kw">except</span> <span class="cl">ValueError</span>:
+            <span class="fn">print</span>(<span class="st">"❌ Please enter a valid number."</span>)
+
+    shipping_fee = <span class="nm">0.0</span>
+    subtotal = <span class="fn">sum</span>(p.price * q <span class="kw">for</span> p, q <span class="kw">in</span> cart.values())
+    shipping_fee = subtotal * <span class="nm">0.10</span>
+    total_with_shipping = subtotal + shipping_fee
+
+    processor = <span class="cl">GCash</span>()
+    processor.<span class="fn">verify_payment</span>(total_with_shipping)
+
+    shipper = <span class="cl">JandT</span>()
+    shipper.<span class="fn">ship_order</span>(<span class="st">"Customer"</span>, <span class="st">"Philippines"</span>)
+
+<span class="kw">if</span> __name__ == <span class="st">"__main__"</span>:
+    <span class="fn">main</span>()</pre></div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section" id="faq">
+    <div class="sec-header">
+      <span class="sec-num">FAQ</span>
+      <h2 class="sec-title">Frequently Asked <span class="accent-pu">Questions</span></h2>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)"><button class="faq-q">What is e-shop.py? <span class="faq-arrow">▾</span></button><div class="faq-a"><div class="faq-a-inner">e-shop.py is a Python command-line Lazada/Shopee simulator. It lets users browse 20 products, build a cart, enter details, choose a payment method (PayPal, PayMaya, GCash), and select a shipping company (J&amp;T, LBC, Flash Express, Ninja Van). Its primary purpose is to teach Python OOP inheritance through two parallel class hierarchies.</div></div></div>
+    <div class="faq-item" onclick="toggleFaq(this)"><button class="faq-q">What Python OOP concepts does e-shop.py demonstrate? <span class="faq-arrow">▾</span></button><div class="faq-a"><div class="faq-a-inner">It demonstrates class creation, <code>__init__</code> constructors with type annotations, <code>__str__</code> dunder methods, single inheritance, <code>super().__init__()</code>, polymorphism (calling the same method on different subclass objects), the DRY principle applied through two parallel hierarchies, dictionary-based cart logic, and the <code>if __name__ == "__main__"</code> entry guard.</div></div></div>
+    <div class="faq-item" onclick="toggleFaq(this)"><button class="faq-q">Why does PayPal not override verify_payment()? <span class="faq-arrow">▾</span></button><div class="faq-a"><div class="faq-a-inner">Because all three payment classes share identical logic — they only differ in name. The parent <code>PaymentProcessor.verify_payment()</code> already handles everything, using <code>self.name</code> to personalise its output. Child classes only override <code>__init__</code> to pass their name via <code>super().__init__(name)</code>. This is inheritance at its cleanest: zero duplication.</div></div></div>
+    <div class="faq-item" onclick="toggleFaq(this)"><button class="faq-q">What does super().__init__() do exactly? <span class="faq-arrow">▾</span></button><div class="faq-a"><div class="faq-a-inner"><code>super()</code> returns a proxy to the parent class. Calling <code>.__init__("GCash")</code> on it runs <code>PaymentProcessor.__init__(self, "GCash")</code>, which sets <code>self.name = "GCash"</code>. Without this call, the child class would never set <code>self.name</code>, and any method that uses <code>self.name</code> would crash with an <code>AttributeError</code>.</div></div></div>
+    <div class="faq-item" onclick="toggleFaq(this)"><button class="faq-q">How does polymorphism work in e-shop.py? <span class="faq-arrow">▾</span></button><div class="faq-a"><div class="faq-a-inner"><code>main()</code> calls <code>processor.verify_payment(total)</code> regardless of whether <code>processor</code> holds a <code>PayPal</code>, <code>PayMaya</code>, or <code>GCash</code> object. Python resolves the method at runtime based on the actual type. Because all three inherit <code>verify_payment()</code> from <code>PaymentProcessor</code>, the call works identically for all three. The same applies to <code>shipper.ship_order()</code>.</div></div></div>
+    <div class="faq-item" onclick="toggleFaq(this)"><button class="faq-q">Can I run e-shop.py without installing anything? <span class="faq-arrow">▾</span></button><div class="faq-a"><div class="faq-a-inner">Yes. e-shop.py uses no third-party libraries — only Python's built-in <code>input()</code>, <code>print()</code>, and f-strings. You only need Python 3.6 or newer. Run: <code>python e-shop.py</code> in your terminal.</div></div></div>
+    <div class="faq-item" onclick="toggleFaq(this)"><button class="faq-q">How would I add a new payment method, say BDO Online? <span class="faq-arrow">▾</span></button><div class="faq-a"><div class="faq-a-inner">Simply create a new class: <code>class BDO(PaymentProcessor): def __init__(self): super().__init__("BDO Online")</code>. That is all. BDO will automatically inherit <code>verify_payment()</code> and work immediately in <code>main()</code> without changing any other code. Add a new menu option <code>"4. BDO Online"</code> and the corresponding <code>elif payment_choice == "4": processor = BDO()</code> line.</div></div></div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section" id="reactions-section">
+    <div class="reactions">
+      <button id="lovBtn" class="reaction-btn love-btn" onclick="react('lov')">❤️ Love <span class="reaction-count" id="lovCount">31</span></button>
+      <button id="likBtn" class="reaction-btn" onclick="react('lik')">👍 Helpful <span class="reaction-count" id="likCount">58</span></button>
+      <button id="mblBtn" class="reaction-btn" onclick="react('mbl')">🤯 Mind Blown <span class="reaction-count" id="mblCount">22</span></button>
+      <button id="bmkBtn" class="reaction-btn" onclick="react('bmk')">🔖 Bookmarked <span class="reaction-count" id="bmkCount">40</span></button>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section" id="comments">
+    <div class="sec-header">
+      <span class="sec-num">COMMUNITY</span>
+      <h2 class="sec-title">Comments &amp; <span class="accent-blue">Discussion</span></h2>
+    </div>
+    <div class="comments-section">
+      <div class="comment-form">
+        <h3>💬 Leave a Comment</h3>
+        <div class="form-row">
+          <input class="form-input" type="text" id="c-name" placeholder="Your name" maxlength="50">
+          <input class="form-input" type="email" id="c-email" placeholder="Email (not published)" maxlength="100">
+        </div>
+        <textarea class="form-textarea" id="c-body" placeholder="Share your thoughts or questions about Python OOP and e-shop.py..." maxlength="1000"></textarea>
+        <button class="submit-btn" onclick="postComment()">Post Comment →</button>
+        <p style="font-size:0.9rem;color:#ffffff;margin-top:10px;">💡 Comments are stored locally in this session. Be respectful and constructive.</p>
+      </div>
+      <div class="comment-list" id="commentList">
+        <div class="comment-item">
+          <div class="comment-meta"><div class="comment-avatar">M</div><div><div class="comment-name">Maria Santos</div><div class="comment-date">March 2026</div></div></div>
+          <div class="comment-body">The parallel payment and shipping hierarchies finally made inheritance click for me. I always wondered why you wouldn't just use if-else — now I see how much cleaner the class approach is.</div>
+          <button class="comment-like" onclick="likeComment(this)">❤️ <span>14</span></button>
+        </div>
+        <div class="comment-item">
+          <div class="comment-meta"><div class="comment-avatar" style="background:linear-gradient(135deg,#2d7a35,#1a4d1e)">R</div><div><div class="comment-name">Rico Dela Cruz</div><div class="comment-date">March 2026</div></div></div>
+          <div class="comment-body">The explanation of super().__init__() is the best I've read. I've been copying it from tutorials without really understanding it — now I understand exactly what it does and why missing it causes an AttributeError.</div>
+          <button class="comment-like" onclick="likeComment(this)">❤️ <span>21</span></button>
+        </div>
+        <div class="comment-item">
+          <div class="comment-meta"><div class="comment-avatar" style="background:linear-gradient(135deg,#9b72d4,#264d6e)">A</div><div><div class="comment-name">Ana Reyes</div><div class="comment-date">March 2026</div></div></div>
+          <div class="comment-body">Perfect real-world context — I use GCash and J&T every week! Seeing Python OOP explained through something I actually interact with daily made everything much more concrete. Galing!</div>
+          <button class="comment-like" onclick="likeComment(this)">❤️ <span>9</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section" id="follow">
+    <div class="sec-header">
+      <span class="sec-num">CONNECT</span>
+      <h2 class="sec-title">Follow <span class="accent-pu">Glenn Junsay Pansensoy</span></h2>
+    </div>
+    <p class="prose" style="margin-bottom:20px;">Stay connected for more Python guides, OOP tutorials, and tech content from the Philippines.</p>
+    <div class="follow-grid">
+      <a class="follow-btn linkedin" href="https://www.linkedin.com/in/glenn-pansensoy-6288453a2" target="_blank" rel="noopener"><span class="follow-icon">💼</span><div class="follow-lbl"><span>Follow</span><span class="follow-platform">LinkedIn</span></div></a>
+      <a class="follow-btn facebook" href="https://www.facebook.com/@Glenn-Junsay-Pansensoy" target="_blank" rel="noopener"><span class="follow-icon">📘</span><div class="follow-lbl"><span>Follow</span><span class="follow-platform">Facebook</span></div></a>
+      <a class="follow-btn twitter" href="https://x.com/@GlennPansensoy" target="_blank" rel="noopener"><span class="follow-icon">🐦</span><div class="follow-lbl"><span>Follow</span><span class="follow-platform">X / Twitter</span></div></a>
+      <a class="follow-btn youtube" href="https://www.youtube.com/c/@GlennPansensoy" target="_blank" rel="noopener"><span class="follow-icon">▶️</span><div class="follow-lbl"><span>Subscribe</span><span class="follow-platform">YouTube</span></div></a>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section" id="subscribe">
+    <div class="subscribe-card">
+      <div class="subscribe-title">📬 Stay in the Loop</div>
+      <p class="subscribe-sub">Get new Python tutorials, OOP guides, and tech articles from Valleys &amp; Bytes delivered to your inbox — no spam, ever.</p>
+      <div class="sub-form">
+        <input class="sub-input" type="email" id="subEmail" placeholder="your@email.com">
+        <button class="sub-btn" onclick="subscribe()">Subscribe Free →</button>
+      </div>
+      <p class="sub-note">🔒 No spam. Unsubscribe anytime. Your email is never shared.</p>
+    </div>
+  </div>
+
+  <div class="ad-banner" style="padding:0;margin-top:32px;">
+    <div class="ad-label">ADVERTISEMENT</div>
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4575646748966866" data-ad-slot="4226674403" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section" id="ai-share">
+    <div class="sec-header">
+      <span class="sec-num">SHARE</span>
+      <h2 class="sec-title">Found this helpful? <span class="accent-blue">Share it.</span></h2>
+    </div>
+    <div class="ai-share-section">
+      <div class="ai-share-title">🤖 AI Caption Generator</div>
+      <p class="ai-share-desc">Pick your platform and tone — get a ready-to-post caption crafted for this Python OOP guide.</p>
+      <div class="ai-share-controls">
+        <select class="ai-sel" id="aiPlatform">
+          <option value="twitter">Twitter / X</option>
+          <option value="linkedin">LinkedIn</option>
+          <option value="facebook">Facebook</option>
+          <option value="whatsapp">WhatsApp</option>
+        </select>
+        <select class="ai-sel" id="aiTone">
+          <option value="professional">Professional</option>
+          <option value="enthusiastic">Enthusiastic</option>
+          <option value="casual">Casual</option>
+          <option value="educational">Educational</option>
+        </select>
+        <button class="ai-gen-btn" onclick="aiGenerate()">✨ Generate Caption</button>
+      </div>
+      <div class="ai-loading" id="aiLoading"><div class="ai-spinner"></div>Crafting your caption…</div>
+      <div class="ai-output" id="aiOutput"></div>
+      <div class="ai-actions" id="aiActions">
+        <button class="ai-act cp" onclick="aiCopy()">📋 Copy</button>
+        <a class="ai-act fb" id="aiFb" href="#" target="_blank" rel="noopener">📘 Facebook</a>
+        <a class="ai-act tw" id="aiTw" href="#" target="_blank" rel="noopener">🐦 X / Twitter</a>
+        <a class="ai-act li" id="aiLi" href="#" target="_blank" rel="noopener">💼 LinkedIn</a>
+        <a class="ai-act wa" id="aiWa" href="#" target="_blank" rel="noopener">💬 WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section" id="outro">
+    <div class="outro-card">
+      <div class="outro-title">🎓 You've Reached the End — But Your Journey Continues</div>
+      <p class="outro-body">You have just walked through every line of <strong>e-shop.py</strong> — from a simple <code>Product</code> class to a fully functioning Lazada/Shopee simulator. You now understand not just what inheritance does, but why it exists: to eliminate repetition, to model real-world relationships accurately, and to write code that extends cleanly without touching what already works.</p>
+      <p class="outro-body" style="margin-top:12px;">The same pattern you learned here — one parent with shared logic, many children with unique identities — appears in Django's class-based views, SQLAlchemy's model base classes, and virtually every large Python codebase in production. You have learned a fundamental design pattern, not just a syntax trick.</p>
+      <p class="outro-body" style="margin-top:12px;">Your next step? Extend the program. Add a <code>BDO</code> payment class. Add a <code>Lalamove</code> shipping class. Add a discount system. Add a <code>CartManager</code> class. Each extension will reinforce the patterns you have learned and give you code you built yourself — which is the only way to truly own a skill.</p>
+      <div style="margin-top:28px;display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
+        <a href="#intro" class="btn-primary">🔁 Read Again</a>
+        <a href="#source" class="btn-secondary">💻 Copy Source</a>
+        <button class="btn-secondary" onclick="copyLink()">🔗 Share This</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="sticky-share">
+  <a class="ss-btn" href="https://www.facebook.com/sharer/sharer.php?u=https://code-sense.pansensoyglenn.workers.dev/e-shop.html" target="_blank" rel="noopener" title="Share on Facebook">📘</a>
+  <a class="ss-btn" href="https://twitter.com/intent/tweet?url=https://code-sense.pansensoyglenn.workers.dev/e-shop.html&via=GlennPansensoy" target="_blank" rel="noopener" title="Share on X">🐦</a>
+  <a class="ss-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https://code-sense.pansensoyglenn.workers.dev/e-shop.html" target="_blank" rel="noopener" title="Share on LinkedIn">💼</a>
+  <button class="ss-btn" onclick="copyLink()" title="Copy link">🔗</button>
+  <button class="ss-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand"><span style="color:var(--blue-bright)">VALLEYS</span><span style="color:#ffffff;font-weight:400"> &amp; </span><span style="color:var(--purple-bright)">BYTES</span></div>
+        <p class="footer-tagline">Python tutorials, OOP guides, and developer content from the Philippines. Written by <strong style="color:#ffffff">Glenn Junsay Pansensoy</strong>.</p>
+        <div class="follow-grid" style="margin-top:16px;gap:8px;">
+          <a class="footer-btn" href="https://www.linkedin.com/in/glenn-pansensoy-6288453a2" target="_blank" rel="noopener"><span class="ico">💼</span>LinkedIn</a>
+          <a class="footer-btn" href="https://www.facebook.com/@Glenn-Junsay-Pansensoy" target="_blank" rel="noopener"><span class="ico">📘</span>Facebook</a>
+          <a class="footer-btn" href="https://x.com/@GlennPansensoy" target="_blank" rel="noopener"><span class="ico">🐦</span>X / Twitter</a>
+          <a class="footer-btn" href="https://www.youtube.com/c/@GlennPansensoy" target="_blank" rel="noopener"><span class="ico">▶️</span>YouTube</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Navigate</div>
+        <a class="footer-btn" href="#intro"><span class="ico">📖</span>Introduction</a>
+        <a class="footer-btn" href="#s1"><span class="ico">🗂️</span>Overview</a>
+        <a class="footer-btn" href="#s2"><span class="ico">📦</span>Product Class</a>
+        <a class="footer-btn" href="#s3"><span class="ico">💳</span>PaymentProcessor</a>
+        <a class="footer-btn" href="#s4"><span class="ico">💸</span>Payment Subclasses</a>
+        <a class="footer-btn" href="#s5"><span class="ico">🚚</span>ShippingCompany</a>
+        <a class="footer-btn" href="#s6"><span class="ico">🏠</span>Shipping Subclasses</a>
+        <a class="footer-btn" href="#source"><span class="ico">💻</span>Source Code</a>
+        <a class="footer-btn" href="#faq"><span class="ico">❓</span>FAQ</a>
+      </div>
+      <div>
+        <div class="footer-col-title">Site Pages</div>
+        <a class="footer-btn" href="about-guide.html"><span class="ico">📄</span>About this Page</a>
+        <a class="footer-btn" href="about-author.html"><span class="ico">🧑‍💻</span>About the Author</a>
+        <a class="footer-btn" href="oop-contact.html"><span class="ico">📬</span>Contact</a>
+        <a class="footer-btn" href="oop-privacy.html"><span class="ico">🔒</span>Privacy Policy</a>
+        <a class="footer-btn" href="oop-terms.html"><span class="ico">📜</span>Terms of Service</a>
+        <a class="footer-btn" href="oop-cookie.html"><span class="ico">🍪</span>Cookie Policy</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Valleys &amp; Bytes — Glenn Junsay Pansensoy. All rights reserved. | <span style="color:var(--blue-bright)">code-sense.pansensoyglenn.workers.dev</span></div>
+      <div class="footer-links-row">
+        <a class="footer-link-btn" href="oop-privacy.html">Privacy</a>
+        <a class="footer-link-btn" href="oop-terms.html">Terms</a>
+        <a class="footer-link-btn" href="oop-cookie.html">Cookies</a>
+        <a class="footer-link-btn" href="oop-contact.html">Contact</a>
+        <button class="footer-link-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ Top</button>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  if(!window.matchMedia('(min-width:768px)').matches) return;
+  const c=document.getElementById('particles');
+  if(!c) return;
+  const colors=['rgba(75,139,190,0.6)','rgba(189,147,249,0.5)','rgba(255,212,59,0.4)','rgba(80,250,123,0.4)'];
+  for(let i=0;i<25;i++){
+    const p=document.createElement('div');
+    p.className='particle';
+    const s=Math.random()*4+2;
+    p.style.cssText=`width:${s}px;height:${s}px;left:${Math.random()*100}%;background:${colors[Math.floor(Math.random()*colors.length)]};animation-duration:${Math.random()*15+10}s;animation-delay:${Math.random()*-20}s;`;
+    c.appendChild(p);
+  }
+})();
+const hamburger=document.getElementById('hamburger');
+const drawer=document.getElementById('drawer');
+const overlay=document.getElementById('drawerOverlay');
+function openDrawer(){drawer.classList.add('open');overlay.classList.add('open');hamburger.classList.add('open');hamburger.setAttribute('aria-expanded','true');}
+function closeDrawer(){drawer.classList.remove('open');overlay.classList.remove('open');hamburger.classList.remove('open');hamburger.setAttribute('aria-expanded','false');}
+hamburger.addEventListener('click',()=>drawer.classList.contains('open')?closeDrawer():openDrawer());
+drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeDrawer));
+const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:0.07});
+document.querySelectorAll('.section').forEach(s=>obs.observe(s));
+const bar=document.getElementById('progress-bar');
+window.addEventListener('scroll',()=>{const h=document.documentElement;bar.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100+'%';},{passive:true});
+const tocLinks=document.querySelectorAll('.toc-link');
+const sections=document.querySelectorAll('.section[id],section[id]');
+window.addEventListener('scroll',()=>{let cur='';sections.forEach(s=>{if(window.scrollY>=s.offsetTop-120)cur=s.id;});tocLinks.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+cur);});},{passive:true});
+function copyCode(btn){const pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(()=>{btn.textContent='Copied!';setTimeout(()=>btn.textContent='Copy',2000);});}
+function copyLink(){navigator.clipboard.writeText(window.location.href).then(()=>showToast('🔗 Link copied to clipboard!'));}
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000);}
+function toggleFaq(item){const wasOpen=item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(f=>f.classList.remove('open'));if(!wasOpen)item.classList.add('open');}
+const reactions={lov:31,lik:58,mbl:22,bmk:40};const reacted={};
+function react(type){const btn=document.getElementById(type+'Btn');const countEl=document.getElementById(type+'Count');if(reacted[type]){reactions[type]--;btn.classList.remove('active');reacted[type]=false;}else{reactions[type]++;btn.classList.add('active');reacted[type]=true;showToast('Thanks for your reaction! 🙌');}countEl.textContent=reactions[type];}
+function postComment(){const name=document.getElementById('c-name').value.trim();const body=document.getElementById('c-body').value.trim();if(!name||!body){showToast('Please fill in your name and comment.');return;}const list=document.getElementById('commentList');const initial=name.charAt(0).toUpperCase();const colors=['linear-gradient(135deg,#3a6e99,#6a4a9c)','linear-gradient(135deg,#2d7a35,#1a4d1e)','linear-gradient(135deg,#9b72d4,#264d6e)'];const bg=colors[Math.floor(Math.random()*colors.length)];const el=document.createElement('div');el.className='comment-item';el.style.animation='fadeUp 0.4s ease both';el.innerHTML=`<div class="comment-meta"><div class="comment-avatar" style="background:${bg}">${initial}</div><div><div class="comment-name">${name}</div><div class="comment-date">Just now</div></div></div><div class="comment-body">${body}</div><button class="comment-like" onclick="likeComment(this)">❤️ <span>0</span></button>`;list.insertBefore(el,list.firstChild);document.getElementById('c-name').value='';document.getElementById('c-body').value='';showToast('Comment posted! Thank you.');}
+function likeComment(btn){const span=btn.querySelector('span');let n=parseInt(span.textContent);if(btn.dataset.liked){n--;btn.dataset.liked='';}else{n++;btn.dataset.liked='1';}span.textContent=n;}
+function subscribe(){const e=document.getElementById('subEmail').value.trim();if(!e||!e.includes('@')){showToast('Please enter a valid email.');return;}document.getElementById('subEmail').value='';showToast('Subscribed! Welcome to Valleys & Bytes.');}
+document.querySelectorAll('a[href^="#"]').forEach(anchor=>{anchor.addEventListener('click',function(e){const href=this.getAttribute('href');if(href==='#'||href==='')return;const target=document.querySelector(href);if(target){e.preventDefault();target.scrollIntoView({behavior:'smooth',block:'start'});}});});
+const AI_URL='https://code-sense.pansensoyglenn.workers.dev/e-shop.html';
+const aiCaptions={
+  twitter:{
+    professional:'Python OOP through a real Lazada/Shopee simulator 🛒 e-shop.py teaches inheritance, super(), and polymorphism via PaymentProcessor and ShippingCompany class hierarchies. '+AI_URL+' #Python #OOP #LearnPython',
+    enthusiastic:'🔥 This Python OOP guide builds a REAL Lazada/Shopee simulator!! GCash, PayPal, J&T, LBC — all built with inheritance! Mind blown 🛒🐍 '+AI_URL+' #Python #LearnPython',
+    casual:'found this python tutorial that builds a shopee simulator with OOP 🛒 explains inheritance and super() really clearly '+AI_URL+' #Python #coding',
+    educational:'📚 Python OOP via e-shop.py:\n✅ Inheritance\n✅ super().__init__()\n✅ Polymorphism\n✅ DRY Principle\n✅ Full Lazada/Shopee Sim\n\n'+AI_URL+' #Python #OOP',
+  },
+  linkedin:{
+    professional:'Sharing a well-structured Python OOP tutorial — e-shop.py builds a Lazada/Shopee simulator demonstrating two parallel inheritance hierarchies: PaymentProcessor (PayPal, PayMaya, GCash) and ShippingCompany (J&T, LBC, Flash Express, Ninja Van). Recommended for Python learners. '+AI_URL+' #Python #OOP #Programming',
+    enthusiastic:'🚀 Brilliant Python OOP guide! e-shop.py builds a complete Filipino e-commerce simulator with two inheritance hierarchies — payments and shipping. super(), polymorphism, DRY principle — all explained clearly! '+AI_URL+' #Python #OOP',
+    casual:'Found a great Python OOP tutorial — builds a Shopee/Lazada simulator with class hierarchies for payments and shipping. Really practical! '+AI_URL+' #Python #Learning',
+    educational:'Python OOP resource: e-shop.py covers inheritance, super().__init__(), polymorphism, and the DRY principle through a Lazada/Shopee simulator with 3 base classes and 7 subclasses. Full source code. '+AI_URL+' #Python #OOP #Education',
+  },
+  facebook:{
+    professional:'Sharing a great Python OOP tutorial — e-shop.py builds a Lazada/Shopee simulator teaching inheritance and polymorphism through payment and shipping class hierarchies. Full source code included. '+AI_URL,
+    enthusiastic:'🛒🔥 This Python tutorial builds a REAL Shopee/Lazada simulator! GCash, PayPal, J&T, LBC — all with OOP inheritance! Such a great example! '+AI_URL,
+    casual:'just read this python tutorial that builds a shopee simulator and it made inheritance make sense to me 😄 check it out! '+AI_URL,
+    educational:'📚 Python OOP Tutorial: e-shop.py — inheritance, super(), polymorphism and DRY principle through a Lazada/Shopee simulator. 3 base classes, 7 subclasses, full source code. '+AI_URL,
+  },
+  whatsapp:{
+    professional:'Hi! Sharing a Python OOP tutorial — e-shop.py builds a Lazada/Shopee simulator teaching inheritance and polymorphism through payment and shipping class hierarchies. '+AI_URL,
+    enthusiastic:'Check this Python tutorial!! 🛒🔥 Builds a Shopee simulator with GCash, PayPal, J&T, Ninja Van — all using OOP inheritance! Really clear explanation! '+AI_URL,
+    casual:'hey found this python tutorial — builds a shopee/lazada simulator with OOP, explains inheritance really well! '+AI_URL,
+    educational:'Python OOP guide: e-shop.py — inheritance, super(), polymorphism via a Lazada/Shopee simulator. Full source: '+AI_URL,
+  }
+};
+function aiGenerate(){
+  const platform=document.getElementById('aiPlatform').value;
+  const tone=document.getElementById('aiTone').value;
+  const loading=document.getElementById('aiLoading');
+  const output=document.getElementById('aiOutput');
+  const actions=document.getElementById('aiActions');
+  loading.classList.add('show');
+  output.classList.remove('show');
+  actions.classList.remove('show');
+  setTimeout(()=>{
+    const caption=(aiCaptions[platform]&&aiCaptions[platform][tone])||aiCaptions[platform]['professional']||'';
+    output.textContent=caption;
+    output.classList.add('show');
+    loading.classList.remove('show');
+    const enc=encodeURIComponent;
+    document.getElementById('aiFb').href='https://www.facebook.com/sharer/sharer.php?u='+enc(AI_URL)+'&quote='+enc(caption);
+    document.getElementById('aiTw').href='https://twitter.com/intent/tweet?text='+enc(caption);
+    document.getElementById('aiLi').href='https://www.linkedin.com/sharing/share-offsite/?url='+enc(AI_URL);
+    document.getElementById('aiWa').href='https://wa.me/?text='+enc(caption+' '+AI_URL);
+    actions.classList.add('show');
+    showToast('✨ Caption ready!');
+  },800);
+}
+function aiCopy(){const text=document.getElementById('aiOutput').textContent;navigator.clipboard.writeText(text).then(()=>showToast('📋 Caption copied!'));}
+</script>
+</body>
+</html>
