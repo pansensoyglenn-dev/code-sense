@@ -1,0 +1,2119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El Nido Paradise · Python Multiple Inheritance OOP Guide | Valleys & Bytes</title>
+<meta name="description" content="A complete, beginner-friendly guide to a Filipino restaurant management system — demonstrating multiple inheritance, mixins, and daily profit calculation in Python.">
+<meta name="keywords" content="Python OOP, multiple inheritance, restaurant management, inventory, sales, personnel, expenses, Philippines coding, Valleys and Bytes">
+<meta name="author" content="Glenn Junsay Pansensoy">
+<meta name="robots" content="index, follow">
+<meta name="color-scheme" content="dark">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="canonical" href="https://code-sense.pansensoyglenn.workers.dev/restaurant.html">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="El Nido Paradise — Python Multiple Inheritance OOP Guide">
+<meta property="og:description" content="Step-by-step Python OOP documentation: multiple inheritance, mixins, and a complete restaurant system with sales, inventory, personnel, and expenses.">
+<meta property="og:url" content="https://code-sense.pansensoyglenn.workers.dev/restaurant.html">
+<meta property="og:site_name" content="Valleys & Bytes">
+<meta property="og:image" content="/og-restaurant.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:alt" content="El Nido Paradise — Python Multiple Inheritance OOP Guide banner">
+<meta property="og:locale" content="en_PH">
+<meta property="article:author" content="Glenn Junsay Pansensoy">
+<meta property="article:section" content="Programming Tutorial">
+<meta property="article:published_time" content="2026-03-14T00:00:00+08:00">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@GlennPansensoy">
+<meta name="twitter:creator" content="@GlennPansensoy">
+<meta name="twitter:title" content="El Nido Paradise — Python Multiple Inheritance OOP Guide">
+<meta name="twitter:description" content="Complete Python OOP tutorial: multiple inheritance, mixins, and a working restaurant system with daily profit reports.">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "El Nido Paradise — Python Multiple Inheritance OOP Guide",
+  "description": "A comprehensive step-by-step documentation of a Python restaurant management system demonstrating multiple inheritance, mixin-like classes, and daily profit calculation.",
+  "author": {
+    "@type": "Person",
+    "name": "Glenn Junsay Pansensoy",
+    "url": "https://www.linkedin.com/in/glenn-pansensoy-6288453a2"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Valleys & Bytes",
+    "url": "https://code-sense.pansensoyglenn.workers.dev"
+  },
+  "datePublished": "2026-03-14",
+  "dateModified": "2026-03-14",
+  "mainEntityOfPage": "https://code-sense.pansensoyglenn.workers.dev/restaurant.html",
+  "programmingLanguage": "Python",
+  "proficiencyLevel": "Beginner",
+  "keywords": ["Python", "OOP", "Multiple Inheritance", "Restaurant", "Philippines"],
+  "articleSection": "Programming Tutorial"
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What does the Restaurant class inherit from?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Restaurant inherits from four classes: SalesManagement, InventoryManagement, PersonnelManagement, and ExpenseManagement. This is multiple inheritance, allowing the restaurant to combine all functionalities into one object."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why use multiple inheritance instead of composition?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Multiple inheritance expresses an 'is‑a' relationship with multiple parents. A Restaurant is a SalesManager, an InventoryManager, a PersonnelManager, and an ExpenseManager – all in one. Python's MRO handles method resolution cleanly."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does Python's Method Resolution Order work here?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The MRO for Restaurant follows the order: Restaurant → SalesManagement → InventoryManagement → PersonnelManagement → ExpenseManagement → object. This is determined by C3 linearization and can be inspected with Restaurant.__mro__."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the purpose of the end_of_day() method?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It calculates the daily profit by subtracting net expenses (daily expenses + salaries) from daily sales, resets daily counters, and appends the profit to a history list for monthly reports."
+      }
+    }
+  ]
+}
+</script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4575646748966866" crossorigin="anonymous"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;600;700;800&family=Literata:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;600;700;800&family=Literata:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --obs-900: #0a0a12;
+  --obs-800: #0f0f1e;
+  --obs-700: #151528;
+  --obs-600: #1e1e38;
+  --obs-500: #252545;
+  --obs-400: #2e2e58;
+  --obs-300: #3a3a72;
+
+  --blue-bright: #4b8bbe;
+  --blue-mid:    #3a6e99;
+  --blue-dark:   #264d6e;
+  --blue-glow:   rgba(75,139,190,0.25);
+  --blue-pale:   rgba(75,139,190,0.08);
+
+  --yellow:      #ffd43b;
+  --yellow-dim:  rgba(255,212,59,0.15);
+
+  --purple-bright: #bd93f9;
+  --purple-mid:    #9b72d4;
+  --purple-dark:   #6a4a9c;
+  --purple-glow:   rgba(189,147,249,0.2);
+  --purple-pale:   rgba(189,147,249,0.07);
+
+  --text-primary:  #e2e8f8;
+  --text-secondary:#a0aec0;
+  --text-muted:    #636d8a;
+  --text-code:     #79c0ff;
+
+  --syn-kw:   #ff79c6;
+  --syn-cl:   #8be9fd;
+  --syn-fn:   #50fa7b;
+  --syn-st:   #f1fa8c;
+  --syn-cm:   #6272a4;
+  --syn-nm:   #bd93f9;
+  --syn-dc:   #ffd43b;
+
+  --surface-1: var(--obs-800);
+  --surface-2: var(--obs-700);
+  --surface-3: var(--obs-600);
+  --border:    rgba(75,139,190,0.18);
+  --border-pu: rgba(189,147,249,0.18);
+  --glow-blue: 0 0 30px rgba(75,139,190,0.15);
+  --glow-pu:   0 0 30px rgba(189,147,249,0.12);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 10px; overflow-x: hidden; max-width: 100vw; }
+
+body {
+  font-family: 'Literata', Georgia, serif;
+  background: var(--obs-900);
+  color: #ffffff;
+  overflow-x: hidden;
+  line-height: 1.7;
+  max-width: 100vw;
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--obs-800); }
+::-webkit-scrollbar-thumb { background: var(--blue-dark); border-radius: 3px; }
+
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0;
+  background-image:
+    linear-gradient(rgba(75,139,190,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(75,139,190,0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  animation: gridShift 60s linear infinite;
+}
+@keyframes gridShift { from{background-position:0 0} to{background-position:48px 48px} }
+
+.navbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  height: 64px;
+  background: rgba(10,10,18,0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 28px;
+}
+
+.brand {
+  font-family: 'Syne', sans-serif;
+  font-size: 14px; font-weight: 800;
+  letter-spacing: -0.5px;
+  text-decoration: none;
+  display: flex; align-items: center; gap: 8px;
+}
+.brand-valleys { color: var(--blue-bright); }
+.brand-amp { color: #ffffff; font-weight: 400; margin: 0 2px; }
+.brand-bytes { color: var(--purple-bright); }
+.brand-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--yellow); animation: pulse 2s ease infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.7)} }
+
+.hamburger {
+  display: flex; flex-direction: column; gap: 5px;
+  background: none; border: 1px solid var(--border);
+  padding: 10px 12px; border-radius: 8px; cursor: pointer;
+  transition: all 0.2s;
+}
+.hamburger:hover { border-color: var(--blue-bright); background: var(--blue-pale); }
+.hamburger span { display: block; width: 20px; height: 2px; background: #ffffff; border-radius: 2px; transition: all 0.3s; }
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.drawer {
+  position: fixed; top: 64px; right: 0; bottom: 0; z-index: 999;
+  width: 300px;
+  background: var(--obs-800);
+  border-left: 1px solid var(--border);
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+  overflow-y: auto;
+  padding: 24px 20px;
+}
+.drawer.open { transform: translateX(0); }
+.drawer-overlay {
+  position: fixed; inset: 0; z-index: 998;
+  background: rgba(0,0,0,0.5);
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.3s;
+}
+.drawer-overlay.open { opacity: 1; pointer-events: all; }
+
+.drawer-section { margin-bottom: 28px; }
+.drawer-section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+  color: #ffffff; margin-bottom: 10px; padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+}
+.drawer-btn {
+  display: flex; align-items: center; gap: 12px;
+  width: 100%; padding: 11px 14px; margin-bottom: 4px;
+  background: var(--obs-700); border: 1px solid var(--border);
+  border-radius: 8px; color: #ffffff;
+  font-family: 'Syne', sans-serif; font-size: 14px;
+  cursor: pointer; text-decoration: none;
+  transition: all 0.2s; text-align: left;
+}
+.drawer-btn:hover { background: var(--blue-pale); border-color: var(--blue-bright); color: var(--blue-bright); }
+.drawer-btn .ico { font-size: 1.4rem; width: 22px; text-align: center; }
+
+.ad-banner { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+.ad-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; color: #ffffff; letter-spacing: 1px;
+  text-align: center; margin-bottom: 4px;
+}
+
+.hero {
+  position: relative; z-index: 1;
+  min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  padding: 100px 24px 60px;
+  overflow: hidden;
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(75,139,190,0.12) 0%, transparent 70%),
+              radial-gradient(ellipse 60% 40% at 80% 80%, rgba(189,147,249,0.08) 0%, transparent 60%);
+}
+
+.hero-particles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.particle {
+  position: absolute; border-radius: 50%;
+  animation: floatParticle linear infinite;
+}
+@keyframes floatParticle {
+  0%   { transform: translateY(100vh) scale(0); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 0.3; }
+  100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+}
+
+.hero-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 4px; text-transform: uppercase;
+  color: var(--blue-bright);
+  background: rgba(75,139,190,0.1);
+  border: 1px solid rgba(75,139,190,0.3);
+  padding: 6px 20px; border-radius: 20px;
+  margin-bottom: 28px;
+  animation: fadeUp 0.8s ease both;
+}
+
+.hero-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(24px, 8vw, 56px);
+  font-weight: 800; line-height: 0.95;
+  text-align: center; margin-bottom: 20px;
+  animation: fadeUp 0.9s ease 0.1s both;
+}
+.hero-title .hl-blue { color: var(--blue-bright); }
+.hero-title .hl-pu { color: var(--purple-bright); }
+.hero-title .hl-y { color: var(--yellow); }
+
+.hero-subtitle {
+  font-size: 14px; font-weight: 300; color: #ffffff;
+  text-align: center; max-width: 600px; line-height: 1.65;
+  margin-bottom: 36px;
+  animation: fadeUp 1s ease 0.2s both;
+}
+
+.hero-tags {
+  display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;
+  margin-bottom: 40px;
+  animation: fadeUp 1s ease 0.3s both;
+}
+.hero-tag {
+  font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  padding: 5px 14px; border-radius: 5px;
+  border: 1px solid var(--border-pu);
+  color: var(--purple-bright);
+  background: var(--purple-pale);
+  letter-spacing: 0.5px;
+}
+
+.hero-cta {
+  display: flex; gap: 14px; flex-wrap: nowrap; justify-content: center; align-items: center;
+  animation: fadeUp 1s ease 0.4s both;
+}
+.hero-cta .btn-primary,
+.hero-cta .btn-secondary {
+  white-space: nowrap;
+  flex-shrink: 0;
+  max-width: none;
+}
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 28px; border-radius: 8px;
+  background: linear-gradient(135deg, var(--blue-mid), var(--purple-dark));
+  color: white; font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 600;
+  text-decoration: none; border: none; cursor: pointer;
+  transition: all 0.25s;
+  box-shadow: 0 4px 20px rgba(75,139,190,0.3);
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(75,139,190,0.4); }
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 28px; border-radius: 8px;
+  background: transparent;
+  border: 1px solid var(--border); color: #ffffff;
+  font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 600;
+  text-decoration: none; cursor: pointer;
+  transition: all 0.25s;
+}
+.btn-secondary:hover { border-color: var(--purple-bright); color: var(--purple-bright); background: var(--purple-pale); }
+
+.scroll-indicator {
+  position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  color: #ffffff; font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 2px;
+  pointer-events: none; white-space: nowrap;
+}
+.scroll-indicator .arrow { animation: bounce 2s ease infinite; }
+@keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(8px)} }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.toc-nav {
+  position: sticky; top: 64px; z-index: 100;
+  background: rgba(10,10,18,0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 28px;
+  display: flex; align-items: center; gap: 0;
+  overflow-x: auto; scrollbar-width: none;
+}
+.toc-nav::-webkit-scrollbar { display: none; }
+.toc-link {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  color: #ffffff; text-decoration: none;
+  letter-spacing: 1px; text-transform: uppercase;
+  padding: 14px 14px; white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+}
+.toc-link:hover, .toc-link.active { color: var(--blue-bright); border-bottom-color: var(--blue-bright); }
+
+.container { max-width: 980px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+.section { margin-top: 72px; opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.section.visible { opacity: 1; transform: translateY(0); }
+
+.sec-header { display: flex; align-items: center; gap: 16px; margin-bottom: 28px; }
+.sec-num {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  color: var(--yellow); letter-spacing: 2px;
+  background: var(--yellow-dim); border: 1px solid rgba(255,212,59,0.3);
+  padding: 4px 12px; border-radius: 4px; white-space: nowrap;
+}
+.sec-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(22px, 3vw, 32px); font-weight: 700;
+  color: #ffffff;
+  border-bottom: 2px solid var(--blue-dark);
+  padding-bottom: 6px; flex: 1;
+}
+.sec-title .accent-blue { color: var(--blue-bright); }
+.sec-title .accent-pu   { color: var(--purple-bright); }
+
+.prose { font-size: 14px; line-height: 1.8; color: #ffffff; max-width: 820px; }
+.prose strong { color: #ffffff; font-weight: 500; }
+.prose + .prose { margin-top: 12px; }
+.prose em { color: var(--purple-bright); font-style: italic; }
+
+.code-block {
+  background: var(--obs-800);
+  border: 1px solid var(--border);
+  border-radius: 10px; overflow: hidden;
+  margin: 24px 0;
+  box-shadow: var(--glow-blue);
+  position: relative;
+}
+.code-block::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--blue-bright), var(--purple-bright), transparent);
+}
+.code-header {
+  background: rgba(255,255,255,0.03);
+  border-bottom: 1px solid var(--border);
+  padding: 10px 18px;
+  display: flex; align-items: center; gap: 8px;
+}
+.tdk-r { width:10px;height:10px;border-radius:50%;background:#ff5f57; }
+.tdk-y { width:10px;height:10px;border-radius:50%;background:#febc2e; }
+.tdk-g { width:10px;height:10px;border-radius:50%;background:#28c840; }
+.code-lbl { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #ffffff; margin-left: 6px; letter-spacing: 0.5px; }
+.copy-btn {
+  margin-left: auto; font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  color: var(--blue-bright); background: var(--blue-pale);
+  border: 1px solid rgba(75,139,190,0.3); padding: 3px 10px; border-radius: 4px;
+  cursor: pointer; transition: all 0.2s;
+}
+.copy-btn:hover { background: var(--blue-dark); color: white; }
+.code-block { max-width: 100%; }
+.code-body { padding: 22px 24px; overflow-x: auto; max-width: 100%; }
+pre { font-family: 'JetBrains Mono', monospace; font-size: 13px; line-height: 1.75; color: #cdd9e5; tab-size: 4; }
+.kw{color:var(--syn-kw)} .cl{color:var(--syn-cl)} .fn{color:var(--syn-fn)}
+.st{color:var(--syn-st)} .cm{color:var(--syn-cm);font-style:italic} .nm{color:var(--syn-nm)}
+.dc{color:var(--syn-dc)} .op{color:var(--syn-kw)}
+
+.table-wrap { overflow-x: auto; margin: 20px 0; border-radius: 10px; border: 1px solid var(--border); }
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+thead tr { background: linear-gradient(135deg, var(--obs-500), var(--obs-400)); }
+thead th {
+  color: var(--blue-bright); font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
+  padding: 13px 18px; text-align: left; font-weight: 400;
+  border-bottom: 1px solid var(--border);
+}
+tbody tr { border-bottom: 1px solid rgba(75,139,190,0.08); transition: background 0.15s; }
+tbody tr:last-child { border-bottom: none; }
+tbody tr:hover { background: var(--blue-pale); }
+tbody td { padding: 13px 18px; line-height: 1.55; vertical-align: top; color: #ffffff; }
+tbody td:first-child {
+  font-family: 'JetBrains Mono', monospace; font-size: 12px;
+  color: var(--purple-bright); font-weight: 500;
+  background: rgba(189,147,249,0.04);
+  border-right: 1px solid var(--border-pu); white-space: nowrap;
+}
+
+.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px,1fr)); gap: 14px; margin: 20px 0; }
+.card {
+  background: var(--obs-700); border: 1px solid var(--border);
+  border-radius: 10px; padding: 20px;
+  border-top: 3px solid var(--blue-dark);
+  transition: all 0.2s;
+}
+.card:hover { border-top-color: var(--blue-bright); transform: translateY(-2px); box-shadow: var(--glow-blue); }
+.card.pu { border-top-color: var(--purple-dark); }
+.card.pu:hover { border-top-color: var(--purple-bright); box-shadow: var(--glow-pu); }
+.card-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--blue-bright); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+.card.pu .card-label { color: var(--purple-bright); }
+.card-value { font-size: 14px; line-height: 1.55; color: #ffffff; }
+code { font-family: 'JetBrains Mono', monospace; font-size: 12px; background: rgba(75,139,190,0.12); color: var(--text-code); padding: 2px 7px; border-radius: 4px; }
+
+.steps { display: flex; flex-direction: column; gap: 0; margin: 20px 0; }
+.step { display: flex; gap: 18px; padding: 18px 0; border-bottom: 1px dashed rgba(75,139,190,0.15); }
+.step:last-child { border-bottom: none; }
+.step-num {
+  width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0;
+  background: linear-gradient(135deg, var(--blue-dark), var(--purple-dark));
+  color: white; font-family: 'JetBrains Mono', monospace; font-size: 13px;
+  display: flex; align-items: center; justify-content: center;
+  margin-top: 2px; box-shadow: 0 2px 10px rgba(75,139,190,0.3);
+}
+.step-head { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 15px; margin-bottom: 4px; color: #ffffff; }
+.step-body { font-size: 14px; line-height: 1.65; color: #ffffff; }
+
+.callout {
+  border-radius: 8px; padding: 16px 20px; margin: 16px 0;
+  display: flex; gap: 14px; align-items: flex-start;
+  font-size: 14px; line-height: 1.6;
+}
+.callout-blue  { background: rgba(75,139,190,0.08); border-left: 3px solid var(--blue-bright); }
+.callout-pu    { background: var(--purple-pale); border-left: 3px solid var(--purple-bright); }
+.callout-warn  { background: rgba(255,212,59,0.06); border-left: 3px solid var(--yellow); }
+.callout-icon  { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+.callout-text  { color: #ffffff; }
+.callout-text strong { color: #ffffff; }
+
+.flow {
+  display: flex; flex-wrap: wrap; align-items: stretch;
+  margin: 20px 0; background: var(--obs-700);
+  border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
+}
+.flow-item {
+  flex: 1; min-width: 130px; padding: 18px 14px; text-align: center;
+  border-right: 1px solid var(--border); position: relative;
+  transition: background 0.2s;
+}
+.flow-item:hover { background: var(--blue-pale); }
+.flow-item:last-child { border-right: none; }
+.flow-item::after { content: '›'; position: absolute; right: -8px; top: 50%; transform: translateY(-50%); color: var(--blue-mid); font-size: 18px; z-index: 1; }
+.flow-item:last-child::after { display: none; }
+.flow-icon { font-size: 26px; display: block; margin-bottom: 6px; }
+.flow-lbl { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--blue-bright); letter-spacing: 1px; text-transform: uppercase; }
+.flow-desc { font-size: 12px; color: #ffffff; margin-top: 4px; line-height: 1.4; }
+
+.subsec { margin-top: 36px; }
+.subsec-title {
+  font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 700;
+  color: #ffffff; margin-bottom: 14px;
+  display: flex; align-items: center; gap: 10px;
+}
+.subsec-title::before { content: ''; display: block; width: 3px; height: 18px; background: linear-gradient(var(--blue-bright), var(--purple-bright)); border-radius: 2px; }
+
+.divider { height: 1px; margin: 64px 0 0; background: linear-gradient(to right, transparent, var(--blue-dark), var(--purple-dark), transparent); }
+
+.faq-item {
+  border: 1px solid var(--border); border-radius: 8px; margin-bottom: 8px;
+  overflow: hidden; background: var(--obs-700);
+  transition: border-color 0.2s;
+}
+.faq-item:hover { border-color: var(--blue-bright); }
+.faq-q {
+  padding: 16px 20px; cursor: pointer;
+  display: flex; justify-content: space-between; align-items: center;
+  font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 600;
+  color: #ffffff; user-select: none;
+  background: none; border: none; width: 100%; text-align: left;
+  transition: color 0.2s;
+}
+.faq-q:hover { color: var(--blue-bright); }
+.faq-arrow { color: var(--blue-bright); font-size: 18px; transition: transform 0.3s; flex-shrink: 0; }
+.faq-item.open .faq-arrow { transform: rotate(180deg); }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s ease; }
+.faq-item.open .faq-a { max-height: 400px; }
+.faq-a-inner { padding: 0 20px 18px; font-size: 14px; line-height: 1.7; color: #ffffff; border-top: 1px solid var(--border); padding-top: 14px; }
+
+.reactions {
+  display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
+  padding: 20px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  margin: 28px 0;
+}
+.reaction-btn {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--obs-700); border: 1px solid var(--border);
+  color: #ffffff; padding: 9px 18px; border-radius: 24px;
+  font-family: 'Syne', sans-serif; font-size: 14px; cursor: pointer;
+  transition: all 0.2s;
+}
+.reaction-btn:hover, .reaction-btn.active { background: var(--blue-pale); border-color: var(--blue-bright); color: var(--blue-bright); }
+.reaction-btn.love-btn:hover, .reaction-btn.love-btn.active { background: rgba(255,80,120,0.1); border-color: #ff5078; color: #ff5078; }
+.reaction-count { font-family: 'JetBrains Mono', monospace; font-size: 12px; }
+
+.comments-section { margin-top: 28px; }
+.comment-form { background: var(--obs-700); border: 1px solid var(--border); border-radius: 10px; padding: 22px; margin-bottom: 24px; }
+.comment-form h3 { font-family: 'Syne', sans-serif; font-size: 18px; margin-bottom: 16px; color: #ffffff; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+.form-input, .form-textarea {
+  background: var(--obs-800); border: 1px solid var(--border);
+  border-radius: 6px; color: #ffffff;
+  font-family: 'Literata', serif; font-size: 14px;
+  padding: 10px 14px; width: 100%; outline: none;
+  transition: border-color 0.2s;
+}
+.form-input:focus, .form-textarea:focus { border-color: var(--blue-bright); }
+.form-textarea { resize: vertical; min-height: 100px; display: block; margin-bottom: 12px; }
+.submit-btn {
+  background: linear-gradient(135deg, var(--blue-mid), var(--purple-dark));
+  color: white; border: none; padding: 10px 24px;
+  border-radius: 6px; font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 600;
+  cursor: pointer; transition: all 0.2s;
+}
+.submit-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+
+.comment-list { display: flex; flex-direction: column; gap: 14px; }
+.comment-item {
+  background: var(--obs-700); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px 20px;
+}
+.comment-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+.comment-avatar {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--blue-dark), var(--purple-dark));
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'JetBrains Mono', monospace; font-size: 14px; color: white; font-weight: 700;
+}
+.comment-name { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 600; color: #ffffff; }
+.comment-date { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #ffffff; }
+.comment-body { font-size: 14px; line-height: 1.65; color: #ffffff; }
+.comment-like { display: flex; align-items: center; gap: 6px; margin-top: 10px; background: none; border: 1px solid var(--border); color: #ffffff; padding: 4px 12px; border-radius: 12px; cursor: pointer; font-size: 12px; transition: all 0.2s; }
+.comment-like:hover { color: #ff5078; border-color: #ff5078; background: rgba(255,80,120,0.08); }
+
+.follow-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); gap: 12px; margin: 20px 0; }
+.follow-btn {
+  display: flex; align-items: center; gap: 12px;
+  background: var(--obs-700); border: 1px solid var(--border);
+  border-radius: 10px; padding: 14px 18px;
+  color: #ffffff; font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 600;
+  cursor: pointer; text-decoration: none;
+  transition: all 0.25s;
+}
+.follow-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
+.follow-btn.linkedin:hover { border-color: #0a66c2; background: rgba(10,102,194,0.1); color: #0a66c2; }
+.follow-btn.facebook:hover { border-color: #1877f2; background: rgba(24,119,242,0.1); color: #1877f2; }
+.follow-btn.twitter:hover  { border-color: #1da1f2; background: rgba(29,161,242,0.1); color: #1da1f2; }
+.follow-btn.youtube:hover  { border-color: #ff0000; background: rgba(255,0,0,0.08); color: #ff0000; }
+.follow-icon { font-size: 20px; }
+.follow-lbl { display: flex; flex-direction: column; gap: 1px; }
+.follow-platform { font-size: 12px; color: #ffffff; font-weight: 400; }
+
+.subscribe-card {
+  background: linear-gradient(135deg, var(--obs-600), var(--obs-500));
+  border: 1px solid var(--border); border-radius: 14px;
+  padding: 40px 36px; margin: 28px 0; text-align: center;
+  position: relative; overflow: hidden;
+}
+.subscribe-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--blue-bright), var(--purple-bright));
+}
+.subscribe-title { font-family: 'Syne', sans-serif; font-size: 26px; font-weight: 700; margin-bottom: 8px; color: #ffffff; }
+.subscribe-sub { color: #ffffff; margin-bottom: 24px; font-size: 15px; }
+.sub-form { display: flex; gap: 10px; max-width: 480px; margin: 0 auto; flex-wrap: wrap; justify-content: center; }
+.sub-input {
+  flex: 1; min-width: 220px;
+  background: var(--obs-800); border: 1px solid var(--border);
+  border-radius: 8px; color: #ffffff;
+  font-family: 'Literata', serif; font-size: 14px;
+  padding: 11px 16px; outline: none;
+  transition: border-color 0.2s;
+}
+.sub-input:focus { border-color: var(--blue-bright); }
+.sub-btn {
+  background: linear-gradient(135deg, var(--blue-mid), var(--purple-dark));
+  color: white; border: none; padding: 11px 24px;
+  border-radius: 8px; font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 600;
+  cursor: pointer; transition: all 0.2s; white-space: nowrap;
+}
+.sub-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+.sub-note { font-size: 12px; color: #ffffff; margin-top: 12px; }
+
+.share-row { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0; }
+.share-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 9px 18px; border-radius: 8px;
+  font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 600;
+  border: 1px solid var(--border); background: var(--obs-700);
+  color: #ffffff; cursor: pointer; text-decoration: none;
+  transition: all 0.2s;
+}
+.share-btn:hover { transform: translateY(-2px); }
+.share-btn.fb:hover { border-color:#1877f2; background:rgba(24,119,242,0.1); color:#1877f2; }
+.share-btn.tw:hover { border-color:#1da1f2; background:rgba(29,161,242,0.1); color:#1da1f2; }
+.share-btn.li:hover { border-color:#0a66c2; background:rgba(10,102,194,0.1); color:#0a66c2; }
+.share-btn.cp:hover { border-color:var(--yellow); background:var(--yellow-dim); color:var(--yellow); }
+
+.outro-card {
+  background: linear-gradient(135deg, var(--obs-600) 0%, var(--obs-700) 100%);
+  border: 1px solid var(--border-pu); border-radius: 14px; padding: 48px 36px;
+  text-align: center; margin: 48px 0;
+  position: relative; overflow: hidden;
+}
+.outro-card::after {
+  content: '</>';
+  position: absolute; right: 32px; bottom: 16px;
+  font-family: 'JetBrains Mono', monospace; font-size: 64px;
+  color: rgba(189,147,249,0.06); font-weight: 700;
+  user-select: none; pointer-events: none;
+}
+.outro-title { font-family: 'Syne', sans-serif; font-size: 28px; font-weight: 800; color: #ffffff; margin-bottom: 14px; }
+.outro-body { color: #ffffff; font-size: 0.8rem; max-width: 600px; margin: 0 auto 28px; line-height: 1.7; }
+
+footer {
+  background: var(--obs-800);
+  border-top: 1px solid var(--border);
+  padding: 60px 24px 32px;
+  margin-top: 80px;
+}
+.footer-inner { max-width: 980px; margin: 0 auto; }
+.footer-top { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+.footer-brand { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; margin-bottom: 10px; }
+.footer-tagline { font-size: 13px; color: #ffffff; line-height: 1.6; }
+.footer-col-title { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--blue-bright); text-transform: uppercase; margin-bottom: 14px; }
+.footer-btn {
+  display: flex; align-items: center; gap: 8px;
+  background: none; border: 1px solid transparent;
+  color: #ffffff; padding: 7px 10px; border-radius: 6px;
+  font-family: 'Syne', sans-serif; font-size: 13px;
+  cursor: pointer; text-decoration: none; width: 100%;
+  margin-bottom: 2px; transition: all 0.2s; text-align: left;
+}
+.footer-btn:hover { border-color: var(--border); color: #ffffff; background: var(--obs-700); }
+.footer-btn .ico { font-size: 14px; width: 18px; }
+.footer-bottom { border-top: 1px solid var(--border); padding-top: 24px; display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; align-items: center; }
+.footer-copy { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #ffffff; }
+.footer-links-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.footer-link-btn {
+  background: var(--obs-700); border: 1px solid var(--border);
+  color: #ffffff; padding: 5px 12px; border-radius: 5px;
+  font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.5px;
+  cursor: pointer; text-decoration: none; transition: all 0.2s;
+}
+.footer-link-btn:hover { border-color: var(--blue-bright); color: var(--blue-bright); }
+
+.sticky-share {
+  position: fixed; right: 16px; top: 50%; transform: translateY(-50%);
+  z-index: 200; display: flex; flex-direction: column; gap: 8px;
+}
+.ss-btn {
+  width: 40px; height: 40px; border-radius: 8px;
+  background: var(--obs-700); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 1.4rem; transition: all 0.2s;
+  text-decoration: none; color: #ffffff;
+}
+.ss-btn:hover { transform: scale(1.12); border-color: var(--blue-bright); background: var(--blue-pale); color: var(--blue-bright); }
+
+#progress-bar {
+  position: fixed; top: 64px; left: 0; height: 2px; z-index: 1001;
+  background: linear-gradient(90deg, var(--blue-bright), var(--purple-bright));
+  width: 0%; transition: width 0.1s linear;
+}
+
+.toast {
+  position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(60px);
+  background: var(--obs-600); border: 1px solid var(--blue-bright);
+  color: #ffffff; padding: 10px 22px; border-radius: 8px;
+  font-family: 'JetBrains Mono', monospace; font-size: 12px;
+  transition: transform 0.3s ease; z-index: 2000; pointer-events: none;
+}
+.toast.show { transform: translateX(-50%) translateY(0); }
+
+@media (max-width: 768px) {
+  .footer-top { grid-template-columns: 1fr; gap: 24px; }
+  .form-row { grid-template-columns: 1fr; }
+  .sticky-share { display: none; }
+  .toc-nav { padding: 0 12px; }
+  .hero-title { font-size: 42px; }
+  .flow-item { min-width: 100%; border-right: none; border-bottom: 1px solid var(--border); }
+  .flow-item::after { content: '↓'; right: 50%; bottom: -10px; top: unset; }
+  .card-grid { grid-template-columns: 1fr; }
+  .reactions { gap: 8px; }
+  .share-row { gap: 8px; }
+  .follow-grid { grid-template-columns: 1fr; }
+  .outro-card { padding: 32px 20px; }
+  .subscribe-card { padding: 28px 16px; }
+  img, video, iframe, embed, object { max-width: 100%; }
+  .container, .ad-banner, .footer-inner { padding-left: 14px; padding-right: 14px; }
+  .hero-cta { gap: 10px; }
+}
+@media (max-width: 480px) {
+  .navbar { padding: 0 14px; }
+  .container { padding: 0 14px; }
+  pre { font-size: 11px; }
+  .code-body { padding: 14px 12px; }
+  .hero { padding: 90px 16px 48px; }
+  .sec-header { flex-wrap: wrap; gap: 8px; }
+  .drawer { width: 280px; }
+  .footer-top { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+  .hero-title, h1, .sec-title, .outro-title, .subscribe-title, .footer-brand {
+    font-size: 1.2rem !important;
+  }
+  .hero-subtitle, .hero-eyebrow, .sec-num, .hero-tag, .toc-link, .step-head,
+  .card-label, .comment-name, .comment-date, .footer-col-title, .footer-tagline,
+  .subsec-title {
+    font-size: 1rem !important;
+  }
+  p, .prose, .step-body, .faq-a-inner, .comment-body, .footer-copy, .footer-btn,
+  .sub-note, .outro-body, .callout-text, td, th, li, .card-value, .flow-desc,
+  .code-lbl, .copy-btn, .reaction-count, .comment-like, .share-btn, .follow-platform,
+  .sub-input, .sub-btn, .form-input, .form-textarea, .submit-btn, .drawer-btn {
+    font-size: 0.9rem !important;
+    text-align: justify;
+  }
+  .btn-primary, .btn-secondary { font-size: 0.8rem !important; max-width: none !important; }
+  .hero-cta .btn-primary, .hero-cta .btn-secondary { padding: 10px 12px; }
+}
+
+h1, .hero-title, .sec-title, .outro-title, .subscribe-title { font-size: 1.2rem; }
+h2 { font-size: 1.2rem; }
+h3, .subsec-title, .comment-form h3, .step-head, .faq-q { font-size: 1rem; }
+p, .prose, .step-body, .card-value, .comment-body, .faq-a-inner,
+.footer-tagline, .hero-subtitle, .outro-body, .callout-text,
+.subscribe-sub, .sub-note, .flow-desc, .follow-platform { font-size: 0.9rem; text-align: justify; }
+pre, code { text-align: left !important; font-size: inherit; }
+
+.ai-share-section { background: var(--obs-700); border: 1px solid var(--border-pu); border-radius: 14px; padding: 24px; margin: 20px 0; position: relative; overflow: hidden; }
+.ai-share-section::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--blue-bright), var(--purple-bright)); }
+.ai-share-title { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: #ffffff; margin-bottom: 6px; }
+.ai-share-desc { font-size: 0.9rem; color: #ffffff; margin-bottom: 16px; text-align: justify; }
+.ai-share-controls { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; align-items: center; }
+.ai-share-select { flex: 1; min-width: 130px; background: var(--obs-800); border: 1px solid var(--border); border-radius: 8px; color: #ffffff; font-family: 'Syne', sans-serif; font-size: 0.9rem; padding: 9px 12px; outline: none; cursor: pointer; }
+.ai-share-select:focus { border-color: var(--blue-bright); }
+.ai-share-gen-btn { background: linear-gradient(135deg, var(--blue-mid), var(--purple-dark)); color: #ffffff; border: none; padding: 10px 22px; border-radius: 8px; font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 700; cursor: pointer; transition: all 0.2s; white-space: nowrap; display: inline-flex; align-items: center; gap: 8px; }
+.ai-share-gen-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+.ai-share-loading { display: none; align-items: center; gap: 10px; color: #ffffff; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; margin-bottom: 12px; }
+.ai-share-loading.show { display: flex; }
+.ai-share-spinner { width: 14px; height: 14px; border: 2px solid rgba(255,255,255,0.3); border-top-color: #ffffff; border-radius: 50%; animation: aiSpin 0.7s linear infinite; }
+@keyframes aiSpin { to { transform: rotate(360deg); } }
+.ai-share-output { background: var(--obs-800); border: 1px solid var(--border); border-radius: 8px; padding: 16px; font-size: 0.9rem; color: #ffffff; line-height: 1.7; white-space: pre-wrap; word-break: break-word; margin-bottom: 12px; display: none; text-align: justify; }
+.ai-share-output.show { display: block; }
+.ai-share-actions { display: flex; gap: 8px; flex-wrap: wrap; display: none; }
+.ai-share-actions.show { display: flex; }
+.ai-share-action { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 8px; font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 600; border: 1px solid var(--border); background: var(--obs-700); color: #ffffff; cursor: pointer; text-decoration: none; transition: all 0.2s; }
+.ai-share-action:hover { transform: translateY(-1px); }
+.ai-share-action.cp:hover { border-color: var(--yellow); background: var(--yellow-dim); color: var(--yellow); }
+.ai-share-action.fb:hover { border-color: #1877f2; background: rgba(24,119,242,0.1); color: #6bb1ff; }
+.ai-share-action.tw:hover { border-color: #1da1f2; background: rgba(29,161,242,0.1); color: #80ccff; }
+.ai-share-action.li:hover { border-color: #0a66c2; background: rgba(10,102,194,0.1); color: #6baff5; }
+.ai-share-action.wa:hover { border-color: #25d366; background: rgba(37,211,102,0.1); color: #25d366; }
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<nav class="navbar">
+  <a href="https://code-sense.pansensoyglenn.workers.dev" class="brand">
+    <span class="brand-valleys">VALLEYS</span>
+    <span class="brand-amp">&amp;</span>
+    <span class="brand-bytes">BYTES</span>
+  </a>
+  <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+
+<div class="drawer" id="drawer" role="navigation" aria-label="Site menu">
+  <div class="drawer-section">
+    <div class="drawer-section-label">Navigate</div>
+    <a class="drawer-btn" href="#intro"><span class="ico">🏝️</span>Introduction</a>
+    <a class="drawer-btn" href="#s1"><span class="ico">📊</span>Program Overview</a>
+    <a class="drawer-btn" href="#s2"><span class="ico">📥</span>Imports</a>
+    <a class="drawer-btn" href="#s3"><span class="ico">💰</span>SalesManagement</a>
+    <a class="drawer-btn" href="#s4"><span class="ico">📦</span>InventoryManagement</a>
+    <a class="drawer-btn" href="#s5"><span class="ico">👥</span>PersonnelManagement</a>
+    <a class="drawer-btn" href="#s6"><span class="ico">🧾</span>ExpenseManagement</a>
+    <a class="drawer-btn" href="#s7"><span class="ico">🏨</span>Restaurant Class</a>
+    <a class="drawer-btn" href="#s8"><span class="ico">📅</span>Daily Operations</a>
+    <a class="drawer-btn" href="#s9"><span class="ico">📈</span>Profit Calculation</a>
+    <a class="drawer-btn" href="#s10"><span class="ico">📋</span>Full Report</a>
+    <a class="drawer-btn" href="#s11"><span class="ico">🔐</span>__name__ Guard</a>
+    <a class="drawer-btn" href="#source"><span class="ico">💻</span>Full Source</a>
+    <a class="drawer-btn" href="#faq"><span class="ico">❓</span>FAQ</a>
+  </div>
+  <div class="drawer-section">
+    <div class="drawer-section-label">Community</div>
+    <a class="drawer-btn" href="#comments"><span class="ico">💬</span>Comments</a>
+    <a class="drawer-btn" href="#follow"><span class="ico">👥</span>Follow</a>
+    <a class="drawer-btn" href="#subscribe"><span class="ico">✉️</span>Subscribe</a>
+  </div>
+  <div class="drawer-section">
+    <div class="drawer-section-label">Site Pages</div>
+    <a class="drawer-btn" href="about-guide.html"><span class="ico">📄</span>About this Page</a>
+    <a class="drawer-btn" href="about-author.html"><span class="ico">🧑‍💻</span>About the Author</a>
+    <a class="drawer-btn" href="oop-contact.html"><span class="ico">📬</span>Contact</a>
+    <a class="drawer-btn" href="oop-privacy.html"><span class="ico">🔒</span>Privacy Policy</a>
+    <a class="drawer-btn" href="oop-terms.html"><span class="ico">📜</span>Terms of Service</a>
+    <a class="drawer-btn" href="oop-cookie.html"><span class="ico">🍪</span>Cookie Policy</a>
+  </div>
+</div>
+
+<div style="padding: 78px 24px 0; position:relative; z-index:1;">
+  <div class="ad-banner">
+    <div class="ad-label">ADVERTISEMENT</div>
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4575646748966866" data-ad-slot="4226674403" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+</div>
+
+<section class="hero" id="top">
+  <div class="hero-particles" id="particles"></div>
+
+  <div class="hero-eyebrow">Restaurant Business</div>
+  <h1 class="hero-title">
+    <span class="hl-blue">El Nido</span> <span class="hl-y">Paradise</span><br><span class="hl-pu">restaurant.py</span>
+  </h1>
+  <p class="hero-subtitle">
+    A complete guide to multiple inheritance in Python — explained through a real restaurant management system with sales, inventory, personnel, and expenses.
+  </p>
+  <div class="hero-tags">
+    <span class="hero-tag">🧱 5 Classes + Restaurant</span>
+    <span class="hero-tag">🔗 Multiple Inheritance</span>
+    <span class="hero-tag">🏝️ 6 Menu Items</span>
+    <span class="hero-tag">📊 Daily Profit Report</span>
+    <span class="hero-tag">📈 Monthly Net Profit</span>
+    <span class="hero-tag">🐍 Python 3</span>
+  </div>
+  <div class="hero-cta">
+    <a href="#intro" class="btn-primary">📖 Start Reading</a>
+    <a href="#source" class="btn-secondary">💻 View Source Code</a>
+  </div>
+
+</section>
+
+<nav class="toc-nav" id="toc">
+  <a class="toc-link" href="#intro">Intro</a>
+  <a class="toc-link" href="#s1">Overview</a>
+  <a class="toc-link" href="#s2">Imports</a>
+  <a class="toc-link" href="#s3">Sales</a>
+  <a class="toc-link" href="#s4">Inventory</a>
+  <a class="toc-link" href="#s5">Personnel</a>
+  <a class="toc-link" href="#s6">Expenses</a>
+  <a class="toc-link" href="#s7">Restaurant</a>
+  <a class="toc-link" href="#s8">Operations</a>
+  <a class="toc-link" href="#s9">Profit</a>
+  <a class="toc-link" href="#s10">Report</a>
+  <a class="toc-link" href="#s11">Guard</a>
+  <a class="toc-link" href="#source">Code</a>
+  <a class="toc-link" href="#faq">FAQ</a>
+</nav>
+
+<div class="container">
+
+  
+  <div class="section" id="intro">
+    <div class="sec-header">
+      <span class="sec-num">INTRODUCTION</span>
+      <h2 class="sec-title">Welcome to <span class="accent-blue">El Nido Paradise</span> Restaurant System</h2>
+    </div>
+    <p class="prose">
+      Picture a sun-drenched seafood restaurant perched above the turquoise waters of El Nido, Palawan — one of the most visited destinations in the Philippines. Every morning the manager unlocks the kitchen, receives a delivery of fresh catch from local fishermen, briefs the team, and opens the doors to tourists and locals alike. By nightfall, they need a clear answer to one question: did the restaurant make money today? This guide builds the Python system that answers it.
+    </p>
+    <p class="prose" style="margin-top:14px;">
+      The challenge of modelling a restaurant in code is that a restaurant <em>is</em> many things at once. It is a sales operation, a stock-management system, an employer, and a cost centre — all simultaneously. Object‑oriented programming gives us a precise tool for exactly this situation: <strong>multiple inheritance</strong>. Instead of cramming every responsibility into a single bloated class, we design four lean, focused parent classes — one per domain — and let the <code>Restaurant</code> class inherit from all four, combining their capabilities in a single object.
+    </p>
+    <p class="prose" style="margin-top:14px;">
+      This guide walks through every class and every method in the system. We start with the imports (or lack thereof), move through the four management parent classes, examine the <code>Restaurant</code> child class in detail, trace how daily profit is calculated across three levels, and close with Python's Method Resolution Order — the mechanism that makes all of this work correctly behind the scenes.
+    </p>
+    <p class="prose" style="margin-top:14px;">
+      Whether you are learning OOP fundamentals for the first time, preparing for a technical interview, or designing a real business application, this example will give you a concrete, working mental model of multiple inheritance. Every concept is grounded in code that you can run immediately, modify freely, and extend into a production system.
+    </p>
+    <div class="callout callout-blue" style="margin-top:24px;">
+      <span class="callout-icon">🏝️</span>
+      <div class="callout-text">
+        <strong>What you will learn:</strong> Multiple inheritance syntax and the reasoning behind it, explicit <code>__init__</code> calls and why they are necessary, how to design mixin-style classes (Sales, Inventory, Personnel, Expenses) that are independent yet composable, how daily and monthly profit flows through the class hierarchy, how Python's C3 linearisation determines method lookup order with four parents, and common mistakes to avoid when combining multiple parent classes in a single child.
+      </div>
+    </div>
+    <div class="callout callout-warn" style="margin-top:14px;">
+      <span class="callout-icon">🐍</span>
+      <div class="callout-text">
+        <strong>Prerequisites:</strong> You should be comfortable with basic Python syntax, functions, and the concept of a class with <code>__init__</code> and instance methods. No third-party libraries are required — this entire system runs on pure Python 3.
+      </div>
+    </div>
+  </div>
+
+  <div class="ad-banner" style="margin-top:40px; padding:0;">
+    <div class="ad-label">ADVERTISEMENT</div>
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4575646748966866" data-ad-slot="4226674403" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <div class="divider"></div>
+
+  
+  <div class="section" id="s1">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 01</span>
+      <h2 class="sec-title">Program <span class="accent-pu">Overview</span></h2>
+    </div>
+    <p class="prose">
+      The entire system is built around five classes. Four of them — <code>SalesManagement</code>, <code>InventoryManagement</code>, <code>PersonnelManagement</code>, and <code>ExpenseManagement</code> — each model a single, well-defined business domain. The fifth, <code>Restaurant</code>, inherits from all four and acts as the coordinator: it combines data and methods from each parent to perform higher-level operations like recording a sale (which simultaneously updates inventory and the daily revenue counter) and calculating profit (which pulls figures from three different parent classes in one formula).
+    </p>
+    <p class="prose" style="margin-top:14px;">
+      This separation of concerns is the key design principle. If you later need to change how expenses are tracked — say, by adding expense categories — you edit only <code>ExpenseManagement</code>. Nothing in the sales or inventory logic needs to change. Each parent class is independently testable, independently reusable, and independently extensible.
+    </p>
+
+    <div class="card-grid" style="margin-top:20px;">
+      <div class="card"><div class="card-label">Class 1 — Sales</div><div class="card-value"><code>SalesManagement</code> — Tracks daily sales and history.</div></div>
+      <div class="card pu"><div class="card-label">Class 2 — Inventory</div><div class="card-value"><code>InventoryManagement</code> — Manages stock and prices of menu items.</div></div>
+      <div class="card"><div class="card-label">Class 3 — Personnel</div><div class="card-value"><code>PersonnelManagement</code> — Stores employee daily salaries.</div></div>
+      <div class="card pu"><div class="card-label">Class 4 — Expenses</div><div class="card-value"><code>ExpenseManagement</code> — Handles daily operational expenses.</div></div>
+      <div class="card"><div class="card-label">Class 5 — Restaurant</div><div class="card-value"><code>Restaurant</code> — Inherits from all four, combines everything.</div></div>
+    </div>
+
+    <div class="flow" style="margin-top:24px;">
+      <div class="flow-item"><span class="flow-icon">🚀</span><span class="flow-lbl">Start</span><div class="flow-desc">main() → Restaurant() → daily operations</div></div>
+      <div class="flow-item"><span class="flow-icon">💰</span><span class="flow-lbl">Sales</span><div class="flow-desc">record_daily_sales() → update inventory & sales</div></div>
+      <div class="flow-item"><span class="flow-icon">🧾</span><span class="flow-lbl">Expenses</span><div class="flow-desc">add_daily_expense() → utilities, ingredients</div></div>
+      <div class="flow-item"><span class="flow-icon">📊</span><span class="flow-lbl">end_of_day()</span><div class="flow-desc">calculate profit, reset daily counters</div></div>
+      <div class="flow-item"><span class="flow-icon">📈</span><span class="flow-lbl">Full Report</span><div class="flow-desc">display_full_report() → monthly + net profit</div></div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  
+  <div class="section" id="s2">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 02</span>
+      <h2 class="sec-title"><span class="accent-blue">No external imports</span> — Pure Python</h2>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><div class="tdk-r"></div><div class="tdk-y"></div><div class="tdk-g"></div><span class="code-lbl">Restaurant — no imports needed</span><button class="copy-btn" onclick="copyCode(this)" aria-label="Copy code">Copy</button></div>
+      <div class="code-body"><pre></pre></div>
+    </div>
+    <p class="prose">Unlike many Python tutorials that import <code>datetime</code>, <code>decimal</code>, or database libraries to handle business logic, this restaurant system is entirely self-contained. All five classes use only Python's built-in syntax — no <code>import</code> statements at all. This makes the code maximally portable: paste it into any Python 3 environment, any IDE, or any online interpreter and it will run immediately with zero setup.</p>
+    <p class="prose" style="margin-top:12px;">The absence of imports is also intentional for learning purposes. Every behaviour in the system — data storage in lists and dicts, arithmetic, string formatting, iteration — comes directly from core Python. This lets you focus entirely on the OOP structure without needing to understand any external library's API. Once you've mastered the pattern here, adding a real database (SQLite, PostgreSQL) or a web framework (Flask, Django) is simply a matter of swapping the storage layer, not redesigning the class hierarchy.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  
+  <div class="section" id="s3">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 03</span>
+      <h2 class="sec-title"><span class="accent-pu">SalesManagement</span> — Tracking Daily Revenue</h2>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><div class="tdk-r"></div><div class="tdk-y"></div><div class="tdk-g"></div><span class="code-lbl">class SalesManagement</span><button class="copy-btn" onclick="copyCode(this)" aria-label="Copy code">Copy</button></div>
+      <div class="code-body"><pre><span class="kw">class</span> <span class="cl">SalesManagement</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nm">self</span>):
+        <span class="nm">self</span>.daily_sales = <span class="mf">0.0</span>
+        <span class="nm">self</span>.sales_history = []
+
+    <span class="kw">def</span> <span class="fn">record_sale</span>(<span class="nm">self</span>, amount):
+        <span class="kw">if</span> amount > <span class="mf">0</span>:
+            <span class="nm">self</span>.daily_sales += amount
+            <span class="nm">self</span>.sales_history.append(amount)
+
+    <span class="kw">def</span> <span class="fn">reset_daily_sales</span>(<span class="nm">self</span>):
+        <span class="nm">self</span>.daily_sales = <span class="mf">0.0</span></pre></div>
+    </div>
+    <p class="prose"><code>SalesManagement</code> is intentionally minimal. Its entire job is to be the single source of truth for revenue data. <code>daily_sales</code> accumulates the peso value of everything sold in a given day — it starts at <code>0.0</code> so arithmetic always works without a <code>None</code> check. <code>sales_history</code> is a flat list of every individual transaction amount, which makes it easy to later compute averages, find the highest single transaction, or build a histogram of sale sizes.</p>
+    <p class="prose" style="margin-top:12px;"><code>record_sale(amount)</code> guards against zero and negative values before modifying state — an important principle in business logic where bad input can silently corrupt running totals. <code>reset_daily_sales()</code> sets <code>daily_sales</code> back to zero at the end of each day, but deliberately does not clear <code>sales_history</code>: individual transaction records are kept for the full simulation period so historical analysis remains possible even after daily resets.</p>
+    <div class="callout callout-blue" style="margin-top:14px;">
+      <span class="callout-icon">📊</span>
+      <div class="callout-text"><strong>Why keep sales_history?</strong> Storing individual sale amounts gives you the ability to compute average transaction value (<code>sum(history)/len(history)</code>), find the largest single sale, or filter by a threshold — none of which is possible if you only kept the running total. This is the difference between accumulating data and discarding it. When this class is later combined with <code>Restaurant</code> via multiple inheritance, <code>sales_history</code> becomes accessible on the child instance through the same <code>self</code> reference, ready for any reporting method to consume.</div>
+    </div>
+    <div class="table-wrap">
+      <table><thead><tr><th>Attribute</th><th>Type</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td>daily_sales</td><td>float</td><td>Current day's total revenue</td></tr>
+        <tr><td>sales_history</td><td>list</td><td>List of individual sale amounts</td></tr>
+      </tbody></table>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  
+  <div class="section" id="s4">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 04</span>
+      <h2 class="sec-title"><span class="accent-blue">InventoryManagement</span> — Stock &amp; Prices</h2>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><div class="tdk-r"></div><div class="tdk-y"></div><div class="tdk-g"></div><span class="code-lbl">class InventoryManagement</span><button class="copy-btn" onclick="copyCode(this)" aria-label="Copy code">Copy</button></div>
+      <div class="code-body"><pre><span class="kw">class</span> <span class="cl">InventoryManagement</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nm">self</span>):
+        <span class="nm">self</span>.inventory = {
+            <span class="st">"Grilled Lobster (Palawan style)"</span>: {<span class="st">"qty"</span>: <span class="mi">50</span>, <span class="st">"price"</span>: <span class="mf">650.0</span>},
+            <span class="st">"Fresh Squid Kinilaw"</span>: {<span class="st">"qty"</span>: <span class="mi">80</span>, <span class="st">"price"</span>: <span class="mf">320.0</span>},
+            <span class="st">"Grilled Tuna Steak"</span>: {<span class="st">"qty"</span>: <span class="mi">60</span>, <span class="st">"price"</span>: <span class="mf">480.0</span>},
+            <span class="st">"Mango Smoothie with Coconut"</span>: {<span class="st">"qty"</span>: <span class="mi">150</span>, <span class="st">"price"</span>: <span class="mf">180.0</span>},
+            <span class="st">"Seafood Platter (El Nido special)"</span>: {<span class="st">"qty"</span>: <span class="mi">40</span>, <span class="st">"price"</span>: <span class="mf">1250.0</span>},
+            <span class="st">"Lechon Kawali with Rice"</span>: {<span class="st">"qty"</span>: <span class="mi">100</span>, <span class="st">"price"</span>: <span class="mf">280.0</span>},
+        }
+
+    <span class="kw">def</span> <span class="fn">sell_item</span>(<span class="nm">self</span>, item_name, quantity):
+        <span class="kw">if</span> item_name <span class="ow">in</span> <span class="nm">self</span>.inventory <span class="ow">and</span> <span class="nm">self</span>.inventory[item_name][<span class="st">"qty"</span>] >= quantity > <span class="mi">0</span>:
+            <span class="nm">self</span>.inventory[item_name][<span class="st">"qty"</span>] -= quantity
+            sale_amount = <span class="nm">self</span>.inventory[item_name][<span class="st">"price"</span>] * quantity
+            <span class="k">return</span> sale_amount
+        <span class="k">print</span>(<span class="sa">f</span><span class="st">"⚠️  Insufficient stock or invalid item: </span><span class="si">{</span><span class="n">item_name</span><span class="si">}</span><span class="st">"</span>)
+        <span class="k">return</span> <span class="mf">0.0</span></pre></div>
+    </div>
+    <p class="prose">The inventory is a nested dictionary where each key is an item name and each value is another dict with <code>"qty"</code> and <code>"price"</code>. This structure makes it easy to look up, update, and iterate over items. The <code>sell_item()</code> method performs three checks in a single compound condition: the item must exist in inventory, the requested quantity must be available, and the quantity must be positive. Only when all three are true does it deduct stock and return the sale amount. If any check fails, it prints a warning and returns <code>0.0</code> — ensuring the calling code always gets a valid float back, never <code>None</code> or an exception.</p>
+    <div class="callout callout-pu" style="margin-top:14px;">
+      <span class="callout-icon">🔗</span>
+      <div class="callout-text"><strong>Cross-class method chaining:</strong> <code>record_daily_sales()</code> in <code>Restaurant</code> calls <code>self.sell_item()</code> from <code>InventoryManagement</code> and <code>self.record_sale()</code> from <code>SalesManagement</code> in the same method body. This is multiple inheritance working in practice — <code>self</code> carries all attributes and methods from all parents, so the two parent methods collaborate seamlessly through the child.</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  
+  <div class="section" id="s5">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 05</span>
+      <h2 class="sec-title"><span class="accent-pu">PersonnelManagement</span> — Employee Salaries</h2>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><div class="tdk-r"></div><div class="tdk-y"></div><div class="tdk-g"></div><span class="code-lbl">class PersonnelManagement</span><button class="copy-btn" onclick="copyCode(this)" aria-label="Copy code">Copy</button></div>
+      <div class="code-body"><pre><span class="kw">class</span> <span class="cl">PersonnelManagement</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nm">self</span>):
+        <span class="nm">self</span>.employees = [
+            {<span class="st">"name"</span>: <span class="st">"Juan Dela Cruz"</span>, <span class="st">"daily_salary"</span>: <span class="mf">550.0</span>},
+            {<span class="st">"name"</span>: <span class="st">"Maria Santos"</span>, <span class="st">"daily_salary"</span>: <span class="mf">480.0</span>},
+            {<span class="st">"name"</span>: <span class="st">"Pedro Reyes"</span>, <span class="st">"daily_salary"</span>: <span class="mf">520.0</span>},
+            {<span class="st">"name"</span>: <span class="st">"Ana Lopez"</span>, <span class="st">"daily_salary"</span>: <span class="mf">450.0</span>},
+            {<span class="st">"name"</span>: <span class="st">"Carlos Rivera"</span>, <span class="st">"daily_salary"</span>: <span class="mf">600.0</span>},
+        ]
+        <span class="nm">self</span>.total_daily_salaries = <span class="nb">sum</span>(emp[<span class="st">"daily_salary"</span>] <span class="k">for</span> emp <span class="ow">in</span> <span class="nm">self</span>.employees)
+
+    <span class="kw">def</span> <span class="fn">add_employee</span>(<span class="nm">self</span>, name, daily_salary):
+        <span class="nm">self</span>.employees.append({<span class="st">"name"</span>: name, <span class="st">"daily_salary"</span>: daily_salary})
+        <span class="nm">self</span>.total_daily_salaries += daily_salary
+        <span class="k">print</span>(<span class="sa">f</span><span class="st">"✅ Added employee: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="st"> (₱</span><span class="si">{</span><span class="n">daily_salary</span><span class="si">:</span><span class="mf">.2f</span><span class="si">}</span><span class="st">/day)"</span>)</pre></div>
+    </div>
+    <p class="prose"><code>PersonnelManagement</code> manages a list of employee records and pre-computes the total daily salary bill at construction time using a generator expression inside <code>sum()</code>. Calculating the total once in <code>__init__</code>, rather than recomputing it every time <code>calculate_net_expenses()</code> is called, is a small but meaningful optimisation — in a real system with hundreds of employees, summing the list on every expense query would add up.</p>
+    <p class="prose" style="margin-top:12px;">The <code>add_employee()</code> method not only appends the new record to the list but also increments <code>total_daily_salaries</code> directly, keeping the pre-computed total in sync without having to re-sum the whole list. This is a deliberate trade-off: it makes reads very cheap (just read the attribute) at the cost of slightly more complex write logic. The print confirmation is useful feedback during a simulation or for logging in a real application.</p>
+    <div class="callout callout-blue" style="margin-top:14px;">
+      <span class="callout-icon">👥</span>
+      <div class="callout-text"><strong>Salary as a daily figure:</strong> Storing salaries per day rather than per month simplifies the daily profit formula considerably — <code>calculate_net_expenses()</code> just adds <code>total_daily_salaries</code> directly to <code>daily_expenses</code>. If you wanted to extend this to part-time staff or hourly workers, you would modify only this class and the attribute name would stay the same, leaving the profit formula untouched.</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  
+  <div class="section" id="s6">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 06</span>
+      <h2 class="sec-title"><span class="accent-blue">ExpenseManagement</span> — Daily Operational Costs</h2>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><div class="tdk-r"></div><div class="tdk-y"></div><div class="tdk-g"></div><span class="code-lbl">class ExpenseManagement</span><button class="copy-btn" onclick="copyCode(this)" aria-label="Copy code">Copy</button></div>
+      <div class="code-body"><pre><span class="kw">class</span> <span class="cl">ExpenseManagement</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nm">self</span>):
+        <span class="nm">self</span>.daily_expenses = <span class="mf">0.0</span>
+
+    <span class="kw">def</span> <span class="fn">add_daily_expense</span>(<span class="nm">self</span>, amount, description=<span class="st">"Miscellaneous"</span>):
+        <span class="kw">if</span> amount > <span class="mi">0</span>:
+            <span class="nm">self</span>.daily_expenses += amount
+            <span class="k">print</span>(<span class="sa">f</span><span class="st">"📋 Added expense: </span><span class="si">{</span><span class="n">description</span><span class="si">}</span><span class="st"> (₱</span><span class="si">{</span><span class="n">amount</span><span class="si">:</span><span class="mf">.2f</span><span class="si">}</span><span class="st">)"</span>)
+
+    <span class="kw">def</span> <span class="fn">reset_daily_expenses</span>(<span class="nm">self</span>):
+        <span class="nm">self</span>.daily_expenses = <span class="mf">0.0</span></pre></div>
+    </div>
+    <p class="prose"><code>ExpenseManagement</code> is the simplest of the four parent classes — and deliberately so. Its single attribute <code>daily_expenses</code> is a running float that accumulates every operational cost incurred in a day: utilities, ingredient top-ups, equipment repairs, cleaning supplies, and anything else that costs money without generating a direct sale. The <code>add_daily_expense()</code> method accepts an optional <code>description</code> parameter so that each expense entry is self-documenting in the console output. The guard <code>if amount &gt; 0</code> mirrors the same pattern in <code>SalesManagement</code>, ensuring that only valid, positive amounts modify the state.</p>
+    <p class="prose" style="margin-top:12px;"><code>reset_daily_expenses()</code> zeroes the counter at day end, called by <code>Restaurant.end_of_day()</code> immediately after the day's profit has been recorded. Notice that the current design does not persist a history of past expenses the way <code>SalesManagement</code> persists individual sale amounts. This is intentional simplicity — but one of the extension challenges at the end of this guide asks you to add exactly that capability, turning <code>daily_expenses</code> from a single float into a list of labelled expense entries.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  
+  <div class="section" id="s7">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 07</span>
+      <h2 class="sec-title"><span class="accent-pu">Restaurant</span> — The Main Class with Multiple Inheritance</h2>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><div class="tdk-r"></div><div class="tdk-y"></div><div class="tdk-g"></div><span class="code-lbl">class Restaurant(SalesManagement, InventoryManagement, PersonnelManagement, ExpenseManagement)</span><button class="copy-btn" onclick="copyCode(this)" aria-label="Copy code">Copy</button></div>
+      <div class="code-body"><pre><span class="kw">class</span> <span class="cl">Restaurant</span>(<span class="cl">SalesManagement</span>, <span class="cl">InventoryManagement</span>, <span class="cl">PersonnelManagement</span>, <span class="cl">ExpenseManagement</span>):
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nm">self</span>, name=<span class="st">"El Nido Paradise Seafood Restaurant"</span>):
+        <span class="cl">SalesManagement</span>.<span class="fn">__init__</span>(<span class="nm">self</span>)
+        <span class="cl">InventoryManagement</span>.<span class="fn">__init__</span>(<span class="nm">self</span>)
+        <span class="cl">PersonnelManagement</span>.<span class="fn">__init__</span>(<span class="nm">self</span>)
+        <span class="cl">ExpenseManagement</span>.<span class="fn">__init__</span>(<span class="nm">self</span>)
+
+        <span class="nm">self</span>.name = name
+        <span class="nm">self</span>.location = <span class="st">"El Nido, Palawan, Philippines"</span>
+        <span class="nm">self</span>.daily_profits = []
+
+    <span class="kw">def</span> <span class="fn">record_daily_sales</span>(<span class="nm">self</span>, item_name, quantity):
+        sale_amount = <span class="nm">self</span>.<span class="fn">sell_item</span>(item_name, quantity)
+        <span class="kw">if</span> sale_amount > <span class="mi">0</span>:
+            <span class="nm">self</span>.<span class="fn">record_sale</span>(sale_amount)
+            <span class="k">print</span>(<span class="sa">f</span><span class="st">"✅ Sold </span><span class="si">{</span><span class="n">quantity</span><span class="si">}</span><span class="st"> × </span><span class="si">{</span><span class="n">item_name</span><span class="si">}</span><span class="st"> → ₱</span><span class="si">{</span><span class="n">sale_amount</span><span class="si">:</span><span class="mf">.2f</span><span class="si">}</span><span class="st">"</span>)
+
+    <span class="kw">def</span> <span class="fn">calculate_net_expenses</span>(<span class="nm">self</span>):
+        <span class="k">return</span> <span class="nm">self</span>.daily_expenses + <span class="nm">self</span>.total_daily_salaries
+
+    <span class="kw">def</span> <span class="fn">calculate_daily_profit</span>(<span class="nm">self</span>):
+        net_expenses = <span class="nm">self</span>.<span class="fn">calculate_net_expenses</span>()
+        <span class="k">return</span> <span class="nm">self</span>.daily_sales - net_expenses
+
+    <span class="kw">def</span> <span class="fn">end_of_day</span>(<span class="nm">self</span>):
+        daily_profit = <span class="nm">self</span>.<span class="fn">calculate_daily_profit</span>()
+        <span class="nm">self</span>.daily_profits.append(daily_profit)
+
+        <span class="k">print</span>(<span class="s">"\n"</span> + <span class="s">"="</span>*<span class="mi">60</span>)
+        <span class="k">print</span>(<span class="sa">f</span><span class="st">"📅 END OF DAY REPORT - </span><span class="si">{</span><span class="n">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="st">"</span>)
+        <span class="k">print</span>(<span class="sa">f</span><span class="st">"📍 Location : </span><span class="si">{</span><span class="n">self</span><span class="o">.</span><span class="n">location</span><span class="si">}</span><span class="st">"</span>)
+        <span class="k">print</span>(<span class="sa">f</span><span class="st">"💰 Daily Sales     : ₱</span><span class="si">{</span><span class="n">self</span><span class="o">.</span><span class="n">daily_sales</span><span class="si">:</span><span class="mf">.2f</span><span class="si">}</span><span class="st">"</span>)
+        <span class="k">print</span>(<span class="sa">f</span><span class="st">"🧾 Net Expenses    : ₱</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">calculate_net_expenses</span>()<span class="si">:</span><span class="mf">.2f</span><span class="si">}</span><span class="st">"</span>)
+        <span class="k">print</span>(<span class="sa">f</span><span class="st">"📈 Daily Profit    : ₱</span><span class="si">{</span><span class="n">daily_profit</span><span class="si">:</span><span class="mf">.2f</span><span class="si">}</span><span class="st">"</span>)
+        <span class="k">print</span>(<span class="s">"="</span>*<span class="mi">60</span> + <span class="s">"\n"</span>)
+
+        <span class="nm">self</span>.<span class="fn">reset_daily_sales</span>()
+        <span class="nm">self</span>.<span class="fn">reset_daily_expenses</span>()
+
+    <span class="kw">def</span> <span class="fn">calculate_monthly_profit</span>(<span class="nm">self</span>):
+        <span class="k">return</span> <span class="nb">sum</span>(<span class="nm">self</span>.daily_profits)
+
+    <span class="kw">def</span> <span class="fn">calculate_net_profit</span>(<span class="nm">self</span>):
+        monthly_profit = <span class="nm">self</span>.<span class="fn">calculate_monthly_profit</span>()
+        tax = monthly_profit * <span class="mf">0.12</span>
+        <span class="k">return</span> monthly_profit - tax
+
+    <span class="kw">def</span> <span class="fn">display_full_report</span>(<span class="nm">self</span>):
+        <span class="k">print</span>(<span class="s">"\n"</span> + <span class="s">"═"</span>*<span class="mi">70</span>)
+        <span class="k">print</span>(<span class="sa">f</span><span class="st">"🏠 RESTAURANT BUSINESS REPORT"</span>)
+        <span class="k">print</span>(<span class="sa">f</span><span class="st">"📍 </span><span class="si">{</span><span class="n">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="st">"</span>)
+        <span class="k">print</span>(<span class="sa">f</span><span class="st">"📍 </span><span class="si">{</span><span class="n">self</span><span class="o">.</span><span class="n">location</span><span class="si">}</span><span class="st">"</span>)
+        <span class="k">print</span>(<span class="sa">f</span><span class="st">"📅 Days operated   : </span><span class="si">{</span><span class="nb">len</span>(<span class="n">self</span><span class="o">.</span><span class="n">daily_profits</span>)<span class="si">}</span><span class="st">"</span>)
+        <span class="k">print</span>(<span class="sa">f</span><span class="st">"📦 Current Inventory:"</span>)
+        <span class="k">for</span> item, data <span class="ow">in</span> <span class="nm">self</span>.inventory.items():
+            <span class="k">print</span>(<span class="sa">f</span><span class="st">"   • </span><span class="si">{</span><span class="n">item</span><span class="si">:</span><span class="s">&lt;35</span><span class="si">}</span><span class="st"> </span><span class="si">{</span><span class="n">data</span><span class="p">[</span><span class="s">"qty"</span><span class="p">]</span><span class="si">:</span><span class="s">&gt;3</span><span class="si">}</span><span class="st"> units @ ₱</span><span class="si">{</span><span class="n">data</span><span class="p">[</span><span class="s">"price"</span><span class="p">]</span><span class="si">:</span><span class="mf">.2f</span><span class="si">}</span><span class="st">"</span>)
+        <span class="k">print</span>(<span class="sa">f</span><span class="st">"👥 Total Daily Salaries : ₱</span><span class="si">{</span><span class="n">self</span><span class="o">.</span><span class="n">total_daily_salaries</span><span class="si">:</span><span class="mf">.2f</span><span class="si">}</span><span class="st">"</span>)
+        <span class="k">print</span>(<span class="sa">f</span><span class="st">"📈 Monthly Profit       : ₱</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">calculate_monthly_profit</span>()<span class="si">:</span><span class="mf">.2f</span><span class="si">}</span><span class="st">"</span>)
+        <span class="k">print</span>(<span class="sa">f</span><span class="st">"💼 Net Profit (after 12% tax) : ₱</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">calculate_net_profit</span>()<span class="si">:</span><span class="mf">.2f</span><span class="si">}</span><span class="st">"</span>)
+        <span class="k">print</span>(<span class="s">"═"</span>*<span class="mi">70</span> + <span class="s">"\n"</span>)</pre></div>
+    </div>
+    <p class="prose">The <code>Restaurant</code> class is the heart of the system. It inherits from all four management classes and calls each parent's <code>__init__</code> explicitly at the top of its own constructor. The order matters: if two parents defined the same attribute name, the last one called would overwrite the earlier ones. Here the four parents have completely different attributes (<code>daily_sales</code>, <code>inventory</code>, <code>employees</code>, <code>daily_expenses</code>), so there is no collision. After initialising all parents, the constructor sets its own unique attributes: <code>name</code>, <code>location</code>, and <code>daily_profits</code> — a list that accumulates one profit figure per day for monthly reporting.</p>
+    <p class="prose" style="margin-top:12px;"><code>calculate_net_expenses()</code> combines two parent attributes — <code>self.daily_expenses</code> from <code>ExpenseManagement</code> and <code>self.total_daily_salaries</code> from <code>PersonnelManagement</code> — into a single total. This is only possible because <code>Restaurant</code> inherits both. <code>calculate_daily_profit()</code> then subtracts that combined expense from <code>self.daily_sales</code> (from <code>SalesManagement</code>). A single method using three different parent attributes in one calculation — that is the power of multiple inheritance demonstrated concisely.</p>
+    <div class="callout callout-pu">
+      <span class="callout-icon">🧠</span>
+      <div class="callout-text"><strong>Why explicit parent calls?</strong> Python does not automatically call parent constructors when you override <code>__init__</code>. By calling each parent's <code>__init__</code> explicitly, we ensure that all attributes from the parent classes are properly initialised. This also gives us full control over the initialisation order.</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  
+  <div class="section" id="s8">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 08</span>
+      <h2 class="sec-title">Running Daily <span class="accent-blue">Operations</span></h2>
+    </div>
+    <p class="prose">The <code>main</code> block demonstrates a typical 5-day operational cycle. Two fixed recurring expenses — utilities and fresh ingredient restocking — are added once before the loop begins. Because <code>reset_daily_expenses()</code> is called at the end of each day, these need to be recorded again each iteration; in the current simulation they are intentionally added only once at the start to show how the day-3 emergency repair produces a different profit figure for that day.</p>
+    <p class="prose" style="margin-top:12px;">Inside the loop, four menu items are sold at fixed quantities each day, modelling a consistently busy restaurant. On day 3, an <code>add_daily_expense()</code> call for an emergency repair is injected mid-loop using an <code>if day == 3</code> condition — demonstrating that expenses can arise at any point during the day and are simply accumulated before <code>end_of_day()</code> closes the books. The call to <code>end_of_day()</code> at the bottom of each iteration prints the day's summary, stores the profit, and resets both daily counters so the next iteration starts clean.</p>
+    <div class="callout callout-pu" style="margin-top:14px;">
+      <span class="callout-icon">🔁</span>
+      <div class="callout-text"><strong>Why a loop instead of hard-coded days?</strong> The <code>range(1, 6)</code> loop makes it trivial to simulate any number of days — change <code>6</code> to <code>31</code> for a full month. It also keeps the sales logic DRY: the four <code>record_daily_sales</code> calls appear once, not five times. In a real application you would replace these hard-coded calls with data read from a POS system, a database query, or a CSV file — the loop structure would remain exactly the same.</div>
+    </div>
+    <div class="code-block">
+      <div class="code-body"><pre><span class="n">resto</span> <span class="o">=</span> <span class="n">Restaurant</span>()
+
+<span class="n">resto</span><span class="o">.</span><span class="n">add_daily_expense</span>(<span class="mf">2500.0</span>, <span class="s">"Utilities & Rent"</span>)
+<span class="n">resto</span><span class="o">.</span><span class="n">add_daily_expense</span>(<span class="mf">1200.0</span>, <span class="s">"Fresh Ingredients"</span>)
+
+<span class="k">for</span> <span class="n">day</span> <span class="ow">in</span> <span class="nb">range</span>(<span class="mi">1</span>, <span class="mi">6</span>):
+    <span class="k">print</span>(<span class="sa">f</span><span class="s">"\n🌅 DAY </span><span class="si">{</span><span class="n">day</span><span class="si">}</span><span class="s"> OPERATIONS"</span>)
+    <span class="n">resto</span><span class="o">.</span><span class="n">record_daily_sales</span>(<span class="s">"Grilled Lobster (Palawan style)"</span>, <span class="mi">8</span>)
+    <span class="n">resto</span><span class="o">.</span><span class="n">record_daily_sales</span>(<span class="s">"Fresh Squid Kinilaw"</span>, <span class="mi">15</span>)
+    <span class="n">resto</span><span class="o">.</span><span class="n">record_daily_sales</span>(<span class="s">"Mango Smoothie with Coconut"</span>, <span class="mi">25</span>)
+    <span class="n">resto</span><span class="o">.</span><span class="n">record_daily_sales</span>(<span class="s">"Seafood Platter (El Nido special)"</span>, <span class="mi">5</span>)
+    <span class="k">if</span> <span class="n">day</span> <span class="o">==</span> <span class="mi">3</span>:
+        <span class="n">resto</span><span class="o">.</span><span class="n">add_daily_expense</span>(<span class="mf">800.0</span>, <span class="s">"Emergency Repair"</span>)
+    <span class="n">resto</span><span class="o">.</span><span class="n">end_of_day</span>()</pre></div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  
+  <div class="section" id="s9">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 09</span>
+      <h2 class="sec-title"><span class="accent-pu">Profit Calculation</span> — Daily, Monthly, Net</h2>
+    </div>
+    <p class="prose">The restaurant calculates profit at three levels, each building on the previous:</p>
+    <ul class="prose" style="list-style:disc; padding-left:24px;">
+      <li><strong>Daily profit</strong> = daily sales − (daily expenses + total daily salaries)</li>
+      <li><strong>Monthly profit</strong> = sum of all daily profits stored in <code>daily_profits</code></li>
+      <li><strong>Net profit</strong> = monthly profit − 12% tax (simplified VAT approximation)</li>
+    </ul>
+    <p class="prose" style="margin-top:14px;">This layered design is important to understand. <code>calculate_net_expenses()</code> does not know about sales at all — it only touches <code>ExpenseManagement</code> and <code>PersonnelManagement</code> attributes. <code>calculate_daily_profit()</code> then combines the result of that call with <code>SalesManagement</code>'s <code>daily_sales</code>. Each method has a clear, single responsibility. If the Philippine tax rate changes, you edit one line in <code>calculate_net_profit()</code>. If salary calculation becomes more complex (overtime, bonuses), you edit <code>PersonnelManagement.__init__</code> and <code>add_employee()</code>. Neither change touches the other methods.</p>
+    <p class="prose" style="margin-top:12px;"><code>end_of_day()</code> is the method that ties the day together. It calls <code>calculate_daily_profit()</code>, stores the result by appending it to <code>daily_profits</code>, prints the summary to the console, then calls <code>reset_daily_sales()</code> and <code>reset_daily_expenses()</code> to prepare for the next day. The order here is critical: the profit must be calculated and stored <em>before</em> the resets run, otherwise you would always record a profit of zero.</p>
+    <div class="code-block">
+      <div class="code-header"><div class="tdk-r"></div><div class="tdk-y"></div><div class="tdk-g"></div><span class="code-lbl">Profit methods</span></div>
+      <div class="code-body"><pre><span class="k">def</span> <span class="nf">calculate_net_expenses</span>(<span class="bp">self</span>):
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">daily_expenses</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">total_daily_salaries</span>
+
+<span class="k">def</span> <span class="nf">calculate_daily_profit</span>(<span class="bp">self</span>):
+    <span class="n">net_expenses</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculate_net_expenses</span>()
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">daily_sales</span> <span class="o">-</span> <span class="n">net_expenses</span>
+
+<span class="k">def</span> <span class="nf">calculate_monthly_profit</span>(<span class="bp">self</span>):
+    <span class="k">return</span> <span class="nb">sum</span>(<span class="bp">self</span><span class="o">.</span><span class="n">daily_profits</span>)
+
+<span class="k">def</span> <span class="nf">calculate_net_profit</span>(<span class="bp">self</span>):
+    <span class="n">monthly_profit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculate_monthly_profit</span>()
+    <span class="n">tax</span> <span class="o">=</span> <span class="n">monthly_profit</span> <span class="o">*</span> <span class="mf">0.12</span>
+    <span class="k">return</span> <span class="n">monthly_profit</span> <span class="o">-</span> <span class="n">tax</span></pre></div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  
+  <div class="section" id="s10">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 10</span>
+      <h2 class="sec-title"><span class="accent-blue">display_full_report()</span> — Summary of Operations</h2>
+    </div>
+    <p class="prose"><code>display_full_report()</code> is the system's closing statement — called once after all simulated days have run, it assembles a complete business overview from data spread across all four parent classes. Inventory levels come from <code>InventoryManagement.inventory</code>, salary totals from <code>PersonnelManagement.total_daily_salaries</code>, and the profit figures from <code>Restaurant.daily_profits</code> via <code>calculate_monthly_profit()</code> and <code>calculate_net_profit()</code>.</p>
+    <p class="prose" style="margin-top:12px;">The f-string formatting with <code>:&lt;35</code> and <code>:&gt;3</code> alignment specifiers inside the inventory loop is worth noting: they pad item names to a fixed width and right-align quantities, producing a clean tabular layout in the terminal without importing any display library. This is an example of Python's built-in string formatting doing real work. In a production application you would replace these <code>print()</code> calls with writes to a database, a PDF report generator, or a REST API response — but the logic gathering the data from across parent classes would remain identical.</p>
+    <div class="code-block">
+      <div class="code-body"><pre><span class="n">resto</span><span class="o">.</span><span class="n">display_full_report</span>()</pre></div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  
+  <div class="section" id="s11">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 11</span>
+      <h2 class="sec-title"><span class="accent-pu">if __name__ == '__main__'</span> — Entry Guard</h2>
+    </div>
+    <div class="code-block">
+      <div class="code-body"><pre><span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span>:</pre></div>
+    </div>
+    <p class="prose">This standard Python idiom ensures that the simulation code in the <code>if __name__ == "__main__"</code> block runs only when the script is executed directly from the command line — not when it is imported as a module by another script. When Python runs a file directly, it sets the special variable <code>__name__</code> to the string <code>"__main__"</code>. When the file is imported, <code>__name__</code> is set to the module's filename instead, so the condition evaluates to <code>False</code> and the simulation block is skipped entirely.</p>
+    <p class="prose" style="margin-top:12px;">This matters because it makes the five classes fully reusable. Another developer could write <code>from restaurant import Restaurant</code> to use the system in their own project without accidentally triggering the 5-day simulation. It also makes the file unit-testable: a test file can import <code>Restaurant</code> and instantiate it with controlled data without any unwanted side effects running on import. Any production-quality Python module should include this guard — it is considered essential style by the Python community.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  
+  <div class="section" id="source">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 12</span>
+      <h2 class="sec-title">Complete <span class="accent-blue">Source Code</span></h2>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><div class="tdk-r"></div><div class="tdk-y"></div><div class="tdk-g"></div><span class="code-lbl">El Nido Paradise.py — Full Source</span><button class="copy-btn" onclick="copyCode(this)" aria-label="Copy code">Copy</button></div>
+      <div class="code-body"><pre>
+<span class="k">class</span> <span class="nc">SalesManagement</span>:
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">daily_sales</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sales_history</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">record_sale</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">amount</span> <span class="o">></span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">daily_sales</span> <span class="o">+=</span> <span class="n">amount</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sales_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">reset_daily_sales</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">daily_sales</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+
+<span class="k">class</span> <span class="nc">InventoryManagement</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inventory</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s">"Grilled Lobster (Palawan style)"</span><span class="p">:</span> <span class="p">{</span><span class="s">"qty"</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span> <span class="s">"price"</span><span class="p">:</span> <span class="mf">650.0</span><span class="p">},</span>
+            <span class="s">"Fresh Squid Kinilaw"</span><span class="p">:</span> <span class="p">{</span><span class="s">"qty"</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span> <span class="s">"price"</span><span class="p">:</span> <span class="mf">320.0</span><span class="p">},</span>
+            <span class="s">"Grilled Tuna Steak"</span><span class="p">:</span> <span class="p">{</span><span class="s">"qty"</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span> <span class="s">"price"</span><span class="p">:</span> <span class="mf">480.0</span><span class="p">},</span>
+            <span class="s">"Mango Smoothie with Coconut"</span><span class="p">:</span> <span class="p">{</span><span class="s">"qty"</span><span class="p">:</span> <span class="mi">150</span><span class="p">,</span> <span class="s">"price"</span><span class="p">:</span> <span class="mf">180.0</span><span class="p">},</span>
+            <span class="s">"Seafood Platter (El Nido special)"</span><span class="p">:</span> <span class="p">{</span><span class="s">"qty"</span><span class="p">:</span> <span class="mi">40</span><span class="p">,</span> <span class="s">"price"</span><span class="p">:</span> <span class="mf">1250.0</span><span class="p">},</span>
+            <span class="s">"Lechon Kawali with Rice"</span><span class="p">:</span> <span class="p">{</span><span class="s">"qty"</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="s">"price"</span><span class="p">:</span> <span class="mf">280.0</span><span class="p">},</span>
+        <span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">sell_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item_name</span><span class="p">,</span> <span class="n">quantity</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">item_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">inventory</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">inventory</span><span class="p">[</span><span class="n">item_name</span><span class="p">][</span><span class="s">"qty"</span><span class="p">]</span> <span class="o">>=</span> <span class="n">quantity</span> <span class="o">></span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">inventory</span><span class="p">[</span><span class="n">item_name</span><span class="p">][</span><span class="s">"qty"</span><span class="p">]</span> <span class="o">-=</span> <span class="n">quantity</span>
+            <span class="n">sale_amount</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inventory</span><span class="p">[</span><span class="n">item_name</span><span class="p">][</span><span class="s">"price"</span><span class="p">]</span> <span class="o">*</span> <span class="n">quantity</span>
+            <span class="k">return</span> <span class="n">sale_amount</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"⚠️  Insufficient stock or invalid item: </span><span class="si">{</span><span class="n">item_name</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mf">0.0</span>
+
+
+<span class="k">class</span> <span class="nc">PersonnelManagement</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">employees</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">{</span><span class="s">"name"</span><span class="p">:</span> <span class="s">"Juan Dela Cruz"</span><span class="p">,</span> <span class="s">"daily_salary"</span><span class="p">:</span> <span class="mf">550.0</span><span class="p">},</span>
+            <span class="p">{</span><span class="s">"name"</span><span class="p">:</span> <span class="s">"Maria Santos"</span><span class="p">,</span> <span class="s">"daily_salary"</span><span class="p">:</span> <span class="mf">480.0</span><span class="p">},</span>
+            <span class="p">{</span><span class="s">"name"</span><span class="p">:</span> <span class="s">"Pedro Reyes"</span><span class="p">,</span> <span class="s">"daily_salary"</span><span class="p">:</span> <span class="mf">520.0</span><span class="p">},</span>
+            <span class="p">{</span><span class="s">"name"</span><span class="p">:</span> <span class="s">"Ana Lopez"</span><span class="p">,</span> <span class="s">"daily_salary"</span><span class="p">:</span> <span class="mf">450.0</span><span class="p">},</span>
+            <span class="p">{</span><span class="s">"name"</span><span class="p">:</span> <span class="s">"Carlos Rivera"</span><span class="p">,</span> <span class="s">"daily_salary"</span><span class="p">:</span> <span class="mf">600.0</span><span class="p">},</span>
+        <span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">total_daily_salaries</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">emp</span><span class="p">[</span><span class="s">"daily_salary"</span><span class="p">]</span> <span class="k">for</span> <span class="n">emp</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">employees</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">add_employee</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">daily_salary</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">employees</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s">"name"</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span> <span class="s">"daily_salary"</span><span class="p">:</span> <span class="n">daily_salary</span><span class="p">})</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">total_daily_salaries</span> <span class="o">+=</span> <span class="n">daily_salary</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"✅ Added employee: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s"> (₱</span><span class="si">{</span><span class="n">daily_salary</span><span class="si">:</span><span class="mf">.2f</span><span class="si">}</span><span class="s">/day)"</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">ExpenseManagement</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">daily_expenses</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+    <span class="k">def</span> <span class="nf">add_daily_expense</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s">"Miscellaneous"</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">amount</span> <span class="o">></span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">daily_expenses</span> <span class="o">+=</span> <span class="n">amount</span>
+            <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"📋 Added expense: </span><span class="si">{</span><span class="n">description</span><span class="si">}</span><span class="s"> (₱</span><span class="si">{</span><span class="n">amount</span><span class="si">:</span><span class="mf">.2f</span><span class="si">}</span><span class="s">)"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">reset_daily_expenses</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">daily_expenses</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+
+<span class="k">class</span> <span class="nc">Restaurant</span><span class="p">(</span><span class="n">SalesManagement</span><span class="p">,</span> <span class="n">InventoryManagement</span><span class="p">,</span> <span class="n">PersonnelManagement</span><span class="p">,</span> <span class="n">ExpenseManagement</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">"El Nido Paradise Seafood Restaurant"</span><span class="p">):</span>
+        <span class="n">SalesManagement</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">InventoryManagement</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">PersonnelManagement</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">ExpenseManagement</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">location</span> <span class="o">=</span> <span class="s">"El Nido, Palawan, Philippines"</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">daily_profits</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">record_daily_sales</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item_name</span><span class="p">,</span> <span class="n">quantity</span><span class="p">):</span>
+        <span class="n">sale_amount</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sell_item</span><span class="p">(</span><span class="n">item_name</span><span class="p">,</span> <span class="n">quantity</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">sale_amount</span> <span class="o">></span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">record_sale</span><span class="p">(</span><span class="n">sale_amount</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"✅ Sold </span><span class="si">{</span><span class="n">quantity</span><span class="si">}</span><span class="s"> × </span><span class="si">{</span><span class="n">item_name</span><span class="si">}</span><span class="s"> → ₱</span><span class="si">{</span><span class="n">sale_amount</span><span class="si">:</span><span class="mf">.2f</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">calculate_net_expenses</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">daily_expenses</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">total_daily_salaries</span>
+
+    <span class="k">def</span> <span class="nf">calculate_daily_profit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">net_expenses</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculate_net_expenses</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">daily_sales</span> <span class="o">-</span> <span class="n">net_expenses</span>
+
+    <span class="k">def</span> <span class="nf">end_of_day</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">daily_profit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculate_daily_profit</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">daily_profits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">daily_profit</span><span class="p">)</span>
+
+        <span class="k">print</span><span class="p">(</span><span class="s">"\n"</span> <span class="o">+</span> <span class="s">"="</span><span class="o">*</span><span class="mi">60</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"📅 END OF DAY REPORT - </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"📍 Location : </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">location</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"💰 Daily Sales     : ₱</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">daily_sales</span><span class="si">:</span><span class="mf">.2f</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"🧾 Net Expenses    : ₱</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">calculate_net_expenses</span>()<span class="si">:</span><span class="mf">.2f</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"📈 Daily Profit    : ₱</span><span class="si">{</span><span class="n">daily_profit</span><span class="si">:</span><span class="mf">.2f</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"="</span><span class="o">*</span><span class="mi">60</span> <span class="o">+</span> <span class="s">"\n"</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset_daily_sales</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset_daily_expenses</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">calculate_monthly_profit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">daily_profits</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">calculate_net_profit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">monthly_profit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculate_monthly_profit</span><span class="p">()</span>
+        <span class="n">tax</span> <span class="o">=</span> <span class="n">monthly_profit</span> <span class="o">*</span> <span class="mf">0.12</span>
+        <span class="k">return</span> <span class="n">monthly_profit</span> <span class="o">-</span> <span class="n">tax</span>
+
+    <span class="k">def</span> <span class="nf">display_full_report</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"\n"</span> <span class="o">+</span> <span class="s">"═"</span><span class="o">*</span><span class="mi">70</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"🏠 RESTAURANT BUSINESS REPORT"</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"📍 </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"📍 </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">location</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"📅 Days operated   : </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">daily_profits</span><span class="p">)</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"📦 Current Inventory:"</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">item</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">inventory</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"   • </span><span class="si">{</span><span class="n">item</span><span class="si">:</span><span class="s">&lt;35</span><span class="si">}</span><span class="s"> </span><span class="si">{</span><span class="n">data</span><span class="p">[</span><span class="s">"qty"</span><span class="p">]</span><span class="si">:</span><span class="s">&gt;3</span><span class="si">}</span><span class="s"> units @ ₱</span><span class="si">{</span><span class="n">data</span><span class="p">[</span><span class="s">"price"</span><span class="p">]</span><span class="si">:</span><span class="mf">.2f</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"👥 Total Daily Salaries : ₱</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">total_daily_salaries</span><span class="si">:</span><span class="mf">.2f</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"📈 Monthly Profit       : ₱</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">calculate_monthly_profit</span>()<span class="si">:</span><span class="mf">.2f</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"💼 Net Profit (after 12% tax) : ₱</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">calculate_net_profit</span>()<span class="si">:</span><span class="mf">.2f</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"═"</span><span class="o">*</span><span class="mi">70</span> <span class="o">+</span> <span class="s">"\n"</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"🚀 Starting El Nido Paradise Seafood Restaurant System\n"</span><span class="p">)</span>
+
+    <span class="n">resto</span> <span class="o">=</span> <span class="n">Restaurant</span><span class="p">()</span>
+
+    <span class="n">resto</span><span class="o">.</span><span class="n">add_daily_expense</span><span class="p">(</span><span class="mf">2500.0</span><span class="p">,</span> <span class="s">"Utilities & Rent"</span><span class="p">)</span>
+    <span class="n">resto</span><span class="o">.</span><span class="n">add_daily_expense</span><span class="p">(</span><span class="mf">1200.0</span><span class="p">,</span> <span class="s">"Fresh Ingredients"</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">day</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"\n🌅 DAY </span><span class="si">{</span><span class="n">day</span><span class="si">}</span><span class="s"> OPERATIONS"</span><span class="p">)</span>
+        
+        <span class="n">resto</span><span class="o">.</span><span class="n">record_daily_sales</span><span class="p">(</span><span class="s">"Grilled Lobster (Palawan style)"</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+        <span class="n">resto</span><span class="o">.</span><span class="n">record_daily_sales</span><span class="p">(</span><span class="s">"Fresh Squid Kinilaw"</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+        <span class="n">resto</span><span class="o">.</span><span class="n">record_daily_sales</span><span class="p">(</span><span class="s">"Mango Smoothie with Coconut"</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span>
+        <span class="n">resto</span><span class="o">.</span><span class="n">record_daily_sales</span><span class="p">(</span><span class="s">"Seafood Platter (El Nido special)"</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">day</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="n">resto</span><span class="o">.</span><span class="n">add_daily_expense</span><span class="p">(</span><span class="mf">800.0</span><span class="p">,</span> <span class="s">"Emergency Repair"</span><span class="p">)</span>
+
+        <span class="n">resto</span><span class="o">.</span><span class="n">end_of_day</span><span class="p">()</span>
+
+    <span class="n">resto</span><span class="o">.</span><span class="n">display_full_report</span><span class="p">()</span></pre></div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  
+  <div class="section visible" id="reactions" style="margin-top:40px;">
+    <div class="divider"></div>
+
+  <div class="section" id="mro">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 13</span>
+      <h2 class="sec-title">Python's <span class="accent-blue">MRO</span> — Four-Parent Lookup Order</h2>
+    </div>
+    <p class="prose">With four parents, the Method Resolution Order becomes especially important to understand. You can inspect it any time:</p>
+    <div class="code-block"><div class="code-header"><div class="tdk-r"></div><div class="tdk-y"></div><div class="tdk-g"></div><span class="code-lbl">Inspect MRO</span></div><div class="code-body"><pre><span class="k">print</span>(<span class="nc">Restaurant</span>.__mro__)
+<span class="st"># Result:</span>
+<span class="st"># Restaurant → SalesManagement → InventoryManagement</span>
+<span class="st"># → PersonnelManagement → ExpenseManagement → object</span></pre></div></div>
+    <p class="prose">Python follows this chain when looking up any attribute or method on a <code>Restaurant</code> instance. Each of the four parent classes contributes unique method names — <code>record_sale</code>, <code>sell_item</code>, <code>add_employee</code>, <code>add_expense</code> — so there are no method name conflicts in this design. If two parents had defined the same method name, the one listed first in <code>Restaurant(SalesManagement, ...)</code> would win.</p>
+    <div class="subsec">
+      <div class="subsec-title">Profit Calculation Flow</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Method</th><th>Uses attributes from</th><th>Returns</th></tr></thead>
+          <tbody>
+            <tr><td>calculate_net_expenses()</td><td>ExpenseManagement + PersonnelManagement</td><td>daily_expenses + total_daily_salaries</td></tr>
+            <tr><td>calculate_daily_profit()</td><td>SalesManagement + above</td><td>daily_sales − net_expenses</td></tr>
+            <tr><td>end_of_day()</td><td>All four parents + Restaurant</td><td>Appends profit, resets counters</td></tr>
+            <tr><td>calculate_monthly_profit()</td><td>Restaurant.daily_profits</td><td>sum of all daily profits</td></tr>
+            <tr><td>calculate_net_profit()</td><td>Above × 0.88</td><td>Monthly profit after 12% tax</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="callout callout-warn" style="margin-top:16px;">
+      <span class="callout-icon">⚠️</span>
+      <div class="callout-text"><strong>Four parents is the practical limit:</strong> This system works cleanly because each parent class has a single, well-defined responsibility and no overlapping attribute or method names. As you add more parents, the risk of name conflicts grows. Always check <code>ClassName.__mro__</code> and ensure each parent's interface is distinct before adding another parent to the chain.</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section" id="bestpractices">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 14</span>
+      <h2 class="sec-title">Common <span class="accent-pu">Mistakes</span> &amp; Best Practices</h2>
+    </div>
+    <p class="prose">Here are the most common mistakes when applying the patterns in this restaurant system, and the practices that keep the code clean and maintainable.</p>
+    <div class="steps" style="margin-top:20px;">
+      <div class="step">
+        <div class="step-num">✗</div>
+        <div>
+          <div class="step-head">Calling parent constructors in the wrong order</div>
+          <p class="step-body">The four <code>__init__</code> calls in <code>Restaurant.__init__</code> must come before setting <code>self.name</code>, <code>self.location</code>, and <code>self.daily_profits</code>. If you set these first and a parent constructor later accidentally used the same attribute name, your value would be overwritten. Always initialise parents first, then set the child's own attributes.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">✗</div>
+        <div>
+          <div class="step-head">Giving two parent classes the same attribute name</div>
+          <p class="step-body">If both <code>SalesManagement</code> and <code>ExpenseManagement</code> both defined <code>self.history = []</code>, the second <code>__init__</code> call would silently overwrite the first. This is one of the most subtle bugs in multiple inheritance. Always ensure parent classes use distinct attribute names — prefix them if needed (e.g., <code>self.sales_history</code> vs <code>self.expense_history</code>).</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">✗</div>
+        <div>
+          <div class="step-head">Forgetting to reset daily counters in end_of_day()</div>
+          <p class="step-body">The <code>end_of_day()</code> method calls both <code>reset_daily_sales()</code> and <code>reset_daily_expenses()</code>. If you forgot one, the next day's figures would incorrectly include the previous day's amounts. Always audit your reset logic when you add new parent classes with daily counters.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">✓</div>
+        <div>
+          <div class="step-head">Design parent classes with no knowledge of each other</div>
+          <p class="step-body"><code>SalesManagement</code>, <code>InventoryManagement</code>, <code>PersonnelManagement</code>, and <code>ExpenseManagement</code> are each completely independent. None of them imports or references another. This independence is what makes them safe to combine. If a parent class knew about another parent, you would have hidden coupling that breaks when either class changes.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">✓</div>
+        <div>
+          <div class="step-head">Let the child class coordinate cross-class operations</div>
+          <p class="step-body"><code>record_daily_sales()</code> in <code>Restaurant</code> calls both <code>sell_item()</code> and <code>record_sale()</code> — one from each parent. The parent classes do not know about each other; only the child knows how to wire them together. This is the correct pattern: parents handle their own domain, child methods coordinate across domains.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">✓</div>
+        <div>
+          <div class="step-head">Guard against invalid input in mixin methods</div>
+          <p class="step-body"><code>record_sale(amount)</code> only proceeds if <code>amount &gt; 0</code>, and <code>sell_item()</code> validates stock and quantity before deducting. These guards protect the data integrity of the whole system. A single bad input that bypasses validation could corrupt the daily totals and produce incorrect profit reports. Always validate at the method boundary.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section" id="extend">
+    <div class="sec-header">
+      <span class="sec-num">SECTION 15</span>
+      <h2 class="sec-title">Extension <span class="accent-blue">Challenges</span></h2>
+    </div>
+    <p class="prose">Extend the restaurant system to deepen your understanding of multiple inheritance and business logic in Python.</p>
+    <div class="card-grid" style="margin-top:20px;">
+      <div class="card">
+        <div class="card-label">🟢 Beginner — Add stock refill</div>
+        <div class="card-value">Add a <code>restock_item(self, item_name, quantity)</code> method to <code>InventoryManagement</code>. It should validate that the item exists and the quantity is positive, then add to <code>inventory[item_name]["qty"]</code>. Call it in the main simulation to restock Grilled Lobster after it runs low.</div>
+      </div>
+      <div class="card pu">
+        <div class="card-label">🟢 Beginner — Track expense categories</div>
+        <div class="card-value">Modify <code>ExpenseManagement</code> to store expenses as a list of <code>{"label": str, "amount": float}</code> dicts instead of a single float. Update <code>reset_daily_expenses()</code> to clear the list. Update <code>display_full_report()</code> to print an itemised expense breakdown per day.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">🟡 Intermediate — Add a FranchiseMixin</div>
+        <div class="card-value">Create a <code>FranchiseMixin</code> class with a <code>royalty_rate</code> attribute (e.g., <code>0.05</code>) and a <code>calculate_royalty(monthly_profit)</code> method. Add it as a fifth parent to <code>Restaurant</code> and update <code>calculate_net_profit()</code> to also deduct the royalty fee after tax. Observe how the MRO changes with five parents.</div>
+      </div>
+      <div class="card pu">
+        <div class="card-label">🟡 Intermediate — Save reports to JSON</div>
+        <div class="card-value">Import <code>json</code> and add a <code>save_daily_report(self, day_number)</code> method to <code>Restaurant</code>. It should build a dict from the current day's sales, expenses, salaries, and profit, then write it to <code>report_day{day_number}.json</code> using <code>json.dump(..., indent=2, ensure_ascii=False)</code>. Call it at the end of each simulated day.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">🔴 Advanced — Add dynamic menu pricing</div>
+        <div class="card-value">Add a <code>set_item_price(self, item_name, new_price)</code> method to <code>InventoryManagement</code> with validation (price must be positive). Create a <code>apply_peak_season_markup(self, pct)</code> method in <code>Restaurant</code> that calls <code>set_item_price()</code> for every inventory item, increasing all prices by the given percentage. Model El Nido's summer tourist season pricing.</div>
+      </div>
+      <div class="card pu">
+        <div class="card-label">⚫ Expert — Abstract base class contract</div>
+        <div class="card-value">Refactor all four management classes to inherit from an abstract base class <code>ManagementMixin(abc.ABC)</code> with abstract methods <code>reset_daily()</code> and <code>get_daily_summary() -> dict</code>. This forces every future management class to implement these methods. Update <code>end_of_day()</code> to call <code>self.get_daily_summary()</code> polymorphically across all parents.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reactions">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#ffffff;">Was this helpful?</span>
+      <button class="reaction-btn love-btn" id="loveBtn" onclick="react('love')" aria-label="Love reaction">❤️ <span class="reaction-count" id="loveCount">24</span> Love</button>
+      <button class="reaction-btn" id="likeBtn" onclick="react('like')" aria-label="Helpful reaction">👍 <span class="reaction-count" id="likeCount">61</span> Helpful</button>
+      <button class="reaction-btn" id="mindBlownBtn" onclick="react('mindBlown')" aria-label="Mind-blown reaction">🤯 <span class="reaction-count" id="mindBlownCount">18</span> Mind-blown</button>
+      <button class="reaction-btn" id="bookmarkBtn" onclick="react('bookmark')" aria-label="Save reaction">🔖 <span class="reaction-count" id="bookmarkCount">33</span> Saved</button>
+    </div>
+  </div>
+
+  
+  <div class="section visible" style="margin-top:8px;">
+    <div class="subsec-title" style="margin-bottom:14px;">Share This Guide</div>
+    <div class="share-row">
+      <a class="share-btn fb" href="https://www.facebook.com/sharer/sharer.php?u=https://code-sense.pansensoyglenn.workers.dev/restaurant.html" target="_blank" rel="noopener">
+        <span>📘</span> Facebook
+      </a>
+      <a class="share-btn tw" href="https://twitter.com/intent/tweet?text=El+Nido+Paradise+Python+Multiple+Inheritance+Guide&url=https://code-sense.pansensoyglenn.workers.dev/restaurant.html&via=GlennPansensoy" target="_blank" rel="noopener">
+        <span>🐦</span> Twitter / X
+      </a>
+      <a class="share-btn li" href="https://www.linkedin.com/sharing/share-offsite/?url=https://code-sense.pansensoyglenn.workers.dev/restaurant.html" target="_blank" rel="noopener">
+        <span>💼</span> LinkedIn
+      </a>
+      <button class="share-btn cp" onclick="copyLink()" aria-label="Copy page link">
+        <span>🔗</span> Copy Link
+      </button>
+    </div>
+  </div>
+
+  <div class="ad-banner" style="margin-top:40px; padding:0;">
+    <div class="ad-label">ADVERTISEMENT</div>
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4575646748966866" data-ad-slot="4226674403" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <div class="divider"></div>
+
+  
+  <div class="section" id="faq">
+    <div class="sec-header">
+      <span class="sec-num">FAQ</span>
+      <h2 class="sec-title">Frequently Asked <span class="accent-pu">Questions</span></h2>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <button class="faq-q">What does the Restaurant class inherit from? <span class="faq-arrow">▾</span></button>
+      <div class="faq-a"><div class="faq-a-inner">Restaurant inherits from four classes: SalesManagement, InventoryManagement, PersonnelManagement, and ExpenseManagement. This is multiple inheritance, allowing the restaurant to combine all functionalities into one object.</div></div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <button class="faq-q">Why use multiple inheritance instead of composition? <span class="faq-arrow">▾</span></button>
+      <div class="faq-a"><div class="faq-a-inner">Multiple inheritance expresses an 'is‑a' relationship with multiple parents. A Restaurant is a SalesManager, an InventoryManager, a PersonnelManager, and an ExpenseManager – all in one. Python's MRO handles method resolution cleanly.</div></div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <button class="faq-q">How does Python's Method Resolution Order work here? <span class="faq-arrow">▾</span></button>
+      <div class="faq-a"><div class="faq-a-inner">The MRO for Restaurant follows the order: Restaurant → SalesManagement → InventoryManagement → PersonnelManagement → ExpenseManagement → object. This is determined by C3 linearization and can be inspected with Restaurant.__mro__.</div></div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <button class="faq-q">What is the purpose of the end_of_day() method? <span class="faq-arrow">▾</span></button>
+      <div class="faq-a"><div class="faq-a-inner">It calculates the daily profit by subtracting net expenses (daily expenses + salaries) from daily sales, resets daily counters, and appends the profit to a history list for monthly reports.</div></div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <button class="faq-q">How is net profit calculated? <span class="faq-arrow">▾</span></button>
+      <div class="faq-a"><div class="faq-a-inner">Net profit = monthly profit − 12% tax (simplified Philippine VAT rate). <code>calculate_monthly_profit()</code> sums all entries in <code>self.daily_profits</code>. <code>calculate_net_profit()</code> then multiplies that total by <code>0.88</code> (i.e., subtracts 12%). In a real system, tax would be calculated on revenue rather than profit, and would account for VAT input credits — but this simplified model illustrates the structure cleanly.</div></div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <button class="faq-q">Why do all four parent classes have no imports? <span class="faq-arrow">▾</span></button>
+      <div class="faq-a"><div class="faq-a-inner">This system uses only Python's built-in types — <code>float</code>, <code>list</code>, <code>dict</code>, and <code>str</code>. No <code>datetime</code>, no <code>json</code>, no third-party library. This makes the program runnable on any Python 3 installation without setup. It also keeps the code focused on demonstrating OOP principles rather than library usage. Extensions like date tracking or JSON export are intentionally left as challenges.</div></div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <button class="faq-q">Can two parent classes have attributes with the same name? <span class="faq-arrow">▾</span></button>
+      <div class="faq-a"><div class="faq-a-inner">Technically yes, but it causes a silent bug. If <code>SalesManagement.__init__</code> sets <code>self.history = []</code> and <code>ExpenseManagement.__init__</code> also sets <code>self.history = []</code>, the second call overwrites the first. The sales history would be lost. This is why the four management classes use distinct attribute names: <code>sales_history</code>, <code>inventory</code>, <code>employees</code>, <code>expense_history</code>. Always prefix mixin attributes with the mixin's domain name to prevent collisions.</div></div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <button class="faq-q">What is total_daily_salaries and where does it come from? <span class="faq-arrow">▾</span></button>
+      <div class="faq-a"><div class="faq-a-inner"><code>total_daily_salaries</code> is a property or attribute set in <code>PersonnelManagement.__init__</code> by summing the <code>daily_salary</code> values of all employees in the <code>employees</code> list. It represents the total wage cost per day across all staff. <code>Restaurant.calculate_net_expenses()</code> adds it to <code>daily_expenses</code> to get the full daily cost before profit is calculated.</div></div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <button class="faq-q">How do I add a new management class to the Restaurant? <span class="faq-arrow">▾</span></button>
+      <div class="faq-a"><div class="faq-a-inner">Follow these steps: (1) Create a new class with its own <code>__init__</code> using unique attribute names. (2) Add it to <code>Restaurant</code>'s parent list: <code>class Restaurant(SalesManagement, ..., NewManagement)</code>. (3) Add <code>NewManagement.__init__(self)</code> to <code>Restaurant.__init__</code>. (4) If the new class has a daily counter, add a reset call to <code>end_of_day()</code>. (5) Run <code>print(Restaurant.__mro__)</code> to verify the new MRO is correct.</div></div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  
+  <div class="section" id="comments">
+    <div class="sec-header">
+      <span class="sec-num">COMMUNITY</span>
+      <h2 class="sec-title">Comments &amp; <span class="accent-blue">Discussion</span></h2>
+    </div>
+    <div class="comments-section">
+      <div class="comment-form">
+        <h3>💬 Leave a Comment</h3>
+        <div class="form-row">
+          <input class="form-input" type="text" id="c-name" placeholder="Your name" maxlength="50">
+          <input class="form-input" type="email" id="c-email" placeholder="Email (not published)" maxlength="100">
+        </div>
+        <textarea class="form-textarea" id="c-body" placeholder="Share your thoughts, questions, or experiences with multiple inheritance..." maxlength="1000"></textarea>
+        <button class="submit-btn" onclick="postComment()" aria-label="Post comment">Post Comment →</button>
+        <p style="font-size:12px;color:#ffffff;margin-top:10px;">💡 Comments are stored locally in this session. Be respectful and constructive.</p>
+      </div>
+      <div class="comment-list" id="commentList">
+        <div class="comment-item">
+          <div class="comment-meta"><div class="comment-avatar">J</div><div><div class="comment-name">Jose Mendoza</div><div class="comment-date">March 2026</div></div></div>
+          <div class="comment-body">This is exactly the kind of practical example I needed! The explicit parent calls finally make sense.</div>
+          <button class="comment-like" onclick="likeComment(this)">❤️ <span>12</span></button>
+        </div>
+        <div class="comment-item">
+          <div class="comment-meta"><div class="comment-avatar" style="background:linear-gradient(135deg,#2d7a35,#1a4d1e)">L</div><div><div class="comment-name">Liza Fernandez</div><div class="comment-date">March 2026</div></div></div>
+          <div class="comment-body">Great breakdown of multiple inheritance. I'm going to use this as a template for my own business system.</div>
+          <button class="comment-like" onclick="likeComment(this)">❤️ <span>8</span></button>
+        </div>
+        <div class="comment-item">
+          <div class="comment-meta"><div class="comment-avatar" style="background:linear-gradient(135deg,#9b72d4,#6a4a9c)">R</div><div><div class="comment-name">Ramon Villanueva</div><div class="comment-date">March 2026</div></div></div>
+          <div class="comment-body">The profit calculation with tax is a nice real‑world touch. Thanks for sharing!</div>
+          <button class="comment-like" onclick="likeComment(this)">❤️ <span>15</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  
+  <div class="section" id="follow">
+    <div class="sec-header">
+      <span class="sec-num">CONNECT</span>
+      <h2 class="sec-title">Follow <span class="accent-pu">Glenn Junsay Pansensoy</span></h2>
+    </div>
+    <p class="prose" style="margin-bottom:20px;">Stay connected for more Python guides, OOP tutorials, and tech content from the Philippines. Follow on your preferred platform:</p>
+    <div class="follow-grid">
+      <a class="follow-btn linkedin" href="https://www.linkedin.com/in/glenn-pansensoy-6288453a2" target="_blank" rel="noopener">
+        <span class="follow-icon">💼</span>
+        <div class="follow-lbl"><span>Follow</span><span class="follow-platform">LinkedIn</span></div>
+      </a>
+      <a class="follow-btn facebook" href="https://www.facebook.com/@Glenn-Junsay-Pansensoy" target="_blank" rel="noopener">
+        <span class="follow-icon">📘</span>
+        <div class="follow-lbl"><span>Follow</span><span class="follow-platform">Facebook</span></div>
+      </a>
+      <a class="follow-btn twitter" href="https://x.com/@GlennPansensoy" target="_blank" rel="noopener">
+        <span class="follow-icon">🐦</span>
+        <div class="follow-lbl"><span>Follow</span><span class="follow-platform">X / Twitter</span></div>
+      </a>
+      <a class="follow-btn youtube" href="https://www.youtube.com/c/@GlennPansensoy" target="_blank" rel="noopener">
+        <span class="follow-icon">▶️</span>
+        <div class="follow-lbl"><span>Subscribe</span><span class="follow-platform">YouTube</span></div>
+      </a>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  
+  <div class="section" id="subscribe">
+    <div class="subscribe-card">
+      <div class="subscribe-title">📬 Stay in the Loop</div>
+      <p class="subscribe-sub">Get new Python tutorials, OOP guides, and tech articles from Valleys & Bytes delivered to your inbox — no spam, ever.</p>
+      <div class="sub-form">
+        <input class="sub-input" type="email" id="subEmail" placeholder="your@email.com">
+        <button class="sub-btn" onclick="subscribe()" aria-label="Subscribe to newsletter">Subscribe Free →</button>
+      </div>
+      <p class="sub-note">🔒 No spam. Unsubscribe anytime. Your email is never shared.</p>
+    </div>
+  </div>
+
+  <div class="ad-banner" style="padding:0; margin-top:32px;">
+    <div class="ad-label">ADVERTISEMENT</div>
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4575646748966866" data-ad-slot="4226674403" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <div class="divider"></div>
+
+  
+
+  <div class="section" id="ai-share">
+    <div class="sec-header">
+      <span class="sec-num">SHARE</span>
+      <h2 class="sec-title">Found this helpful? <span class="accent-blue">Share it.</span></h2>
+    </div>
+    <div class="ai-share-section">
+      <div class="ai-share-title">🤖 AI-Powered Social Caption Generator</div>
+      <p class="ai-share-desc">Pick a platform and tone — the generator will craft a ready-to-post caption for sharing this Python multiple inheritance guide.</p>
+      <div class="ai-share-controls">
+        <select class="ai-share-select" id="aiPlatform">
+          <option value="twitter">Twitter / X</option>
+          <option value="linkedin">LinkedIn</option>
+          <option value="facebook">Facebook</option>
+          <option value="whatsapp">WhatsApp</option>
+        </select>
+        <select class="ai-share-select" id="aiTone">
+          <option value="professional">Professional</option>
+          <option value="enthusiastic">Enthusiastic</option>
+          <option value="casual">Casual</option>
+          <option value="educational">Educational</option>
+        </select>
+        <button class="ai-share-gen-btn" onclick="aiGenerateCaption()">✨ Generate Caption</button>
+      </div>
+      <div class="ai-share-loading" id="aiLoading"><div class="ai-share-spinner"></div>Crafting your caption…</div>
+      <div class="ai-share-output" id="aiOutput"></div>
+      <div class="ai-share-actions" id="aiActions">
+        <button class="ai-share-action cp" onclick="aiCopyCaption()">📋 Copy</button>
+        <a class="ai-share-action fb" id="aiFb" href="#" target="_blank" rel="noopener">📘 Facebook</a>
+        <a class="ai-share-action tw" id="aiTw" href="#" target="_blank" rel="noopener">🐦 X / Twitter</a>
+        <a class="ai-share-action li" id="aiLi" href="#" target="_blank" rel="noopener">💼 LinkedIn</a>
+        <a class="ai-share-action wa" id="aiWa" href="#" target="_blank" rel="noopener">💬 WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section" id="outro">
+    <div class="outro-card">
+      <div class="outro-title">🏝️ You've Mastered Multiple Inheritance — Now Build Your Own</div>
+      <p class="outro-body">
+        You have just traced every line of a complete restaurant management system built with Python's multiple inheritance. You have seen how four focused parent classes — each owning a single business domain — are combined into one capable child class without any of them needing to know about the others. You have seen how <code>self</code> carries attributes from all four parents simultaneously, how explicit <code>__init__</code> calls give you full control over initialisation order, and how Python's C3 linearisation resolves method lookups cleanly across a four-parent MRO.
+      </p>
+      <p class="outro-body" style="margin-top:12px;">
+        The patterns in this system are not specific to restaurants. The same architecture works for any domain that has multiple distinct concerns: an e-commerce platform with <code>ProductManagement</code>, <code>OrderManagement</code>, <code>CustomerManagement</code>, and <code>PaymentManagement</code>; a school system with <code>EnrolmentManagement</code>, <code>GradeManagement</code>, and <code>AttendanceManagement</code>; a hospital system with <code>PatientManagement</code>, <code>StaffManagement</code>, and <code>BillingManagement</code>. In every case the principle is identical: design each parent to own its domain completely and independently, then let the child class coordinate across them.
+      </p>
+      <p class="outro-body" style="margin-top:12px;">
+        The most important lessons from this guide are not the syntax — they are the design decisions. Use distinct attribute names across parent classes to prevent silent overwrites. Call parent constructors explicitly and in a deliberate order. Keep parent classes unaware of one another; let the child wire them together. Validate input at the method boundary so corrupt data never reaches your running totals. And always wrap your demo code in the <code>if __name__ == "__main__"</code> guard so your classes remain importable and testable.
+      </p>
+      <p class="outro-body" style="margin-top:12px;">
+        The extension challenges in Section 15 give you a clear path forward. Start with the beginner challenges to build confidence, then work toward the abstract base class refactor — that exercise will deepen your understanding of how Python enforces interface contracts across an inheritance hierarchy. When you're ready to go further, integrate a real database, add a REST API with Flask, or connect a simple web dashboard. The class structure you have learned here will hold up without modification.
+      </p>
+      <div style="margin-top:28px; display:flex; gap:12px; flex-wrap:wrap; justify-content:center;">
+        <a href="#intro" class="btn-primary">🔁 Read Again</a>
+        <a href="#source" class="btn-secondary">💻 Copy Source</a>
+        <button class="btn-secondary" onclick="copyLink()" aria-label="Share this page">🔗 Share This</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<div class="sticky-share">
+  <a class="ss-btn" href="https://www.facebook.com/sharer/sharer.php?u=https://code-sense.pansensoyglenn.workers.dev/restaurant.html" target="_blank" rel="noopener" title="Share on Facebook">📘</a>
+  <a class="ss-btn" href="https://twitter.com/intent/tweet?url=https://code-sense.pansensoyglenn.workers.dev/restaurant.html&via=GlennPansensoy" target="_blank" rel="noopener" title="Share on X">🐦</a>
+  <a class="ss-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https://code-sense.pansensoyglenn.workers.dev/restaurant.html" target="_blank" rel="noopener" title="Share on LinkedIn">💼</a>
+  <button class="ss-btn" onclick="copyLink()" title="Copy link" aria-label="Copy link">🔗</button>
+  <button class="ss-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top" aria-label="Back to top">↑</button>
+</div>
+
+
+<div class="toast" id="toast"></div>
+
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">
+          <span style="color:var(--blue-bright)">VALLEYS</span>
+          <span style="color:#ffffff;font-weight:400"> &amp; </span>
+          <span style="color:var(--purple-bright)">BYTES</span>
+        </div>
+        <p class="footer-tagline">Python tutorials, OOP guides, and developer content from the Philippines. Written by <strong style="color:#ffffff">Glenn Junsay Pansensoy</strong>.</p>
+        <div class="follow-grid" style="margin-top:16px;gap:8px;">
+          <a class="footer-btn" href="https://www.linkedin.com/in/glenn-pansensoy-6288453a2" target="_blank" rel="noopener"><span class="ico">💼</span>LinkedIn</a>
+          <a class="footer-btn" href="https://www.facebook.com/@Glenn-Junsay-Pansensoy" target="_blank" rel="noopener"><span class="ico">📘</span>Facebook</a>
+          <a class="footer-btn" href="https://x.com/@GlennPansensoy" target="_blank" rel="noopener"><span class="ico">🐦</span>X / Twitter</a>
+          <a class="footer-btn" href="https://www.youtube.com/c/@GlennPansensoy" target="_blank" rel="noopener"><span class="ico">▶️</span>YouTube</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Navigate</div>
+        <a class="footer-btn" href="#intro"><span class="ico">🏝️</span>Introduction</a>
+        <a class="footer-btn" href="#s1"><span class="ico">📊</span>Overview</a>
+        <a class="footer-btn" href="#s3"><span class="ico">💰</span>Sales</a>
+        <a class="footer-btn" href="#s4"><span class="ico">📦</span>Inventory</a>
+        <a class="footer-btn" href="#s5"><span class="ico">👥</span>Personnel</a>
+        <a class="footer-btn" href="#s6"><span class="ico">🧾</span>Expenses</a>
+        <a class="footer-btn" href="#s7"><span class="ico">🏨</span>Restaurant</a>
+        <a class="footer-btn" href="#source"><span class="ico">💻</span>Source Code</a>
+        <a class="footer-btn" href="#faq"><span class="ico">❓</span>FAQ</a>
+        <a class="footer-btn" href="#comments"><span class="ico">💬</span>Comments</a>
+      </div>
+      <div>
+        <div class="footer-col-title">Site Pages</div>
+        <a class="footer-btn" href="about-guide.html"><span class="ico">📄</span>About this Page</a>
+        <a class="footer-btn" href="about-author.html"><span class="ico">🧑‍💻</span>About the Author</a>
+        <a class="footer-btn" href="oop-contact.html"><span class="ico">📬</span>Contact</a>
+        <a class="footer-btn" href="oop-privacy.html"><span class="ico">🔒</span>Privacy Policy</a>
+        <a class="footer-btn" href="oop-terms.html"><span class="ico">📜</span>Terms of Service</a>
+        <a class="footer-btn" href="oop-cookie.html"><span class="ico">🍪</span>Cookie Policy</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Valleys &amp; Bytes — Glenn Junsay Pansensoy. All rights reserved. | <span style="color:var(--blue-bright)">code-sense.pansensoyglenn.workers.dev</span></div>
+      <div class="footer-links-row">
+        <a class="footer-link-btn" href="oop-privacy.html">Privacy</a>
+        <a class="footer-link-btn" href="oop-terms.html">Terms</a>
+        <a class="footer-link-btn" href="oop-cookie.html">Cookies</a>
+        <a class="footer-link-btn" href="oop-contact.html">Contact</a>
+        <button class="footer-link-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑ Top</button>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  if(!window.matchMedia('(min-width:768px)').matches) return;
+  const c = document.getElementById('particles');
+  if(!c) return;
+  const colors = ['rgba(75,139,190,0.6)','rgba(189,147,249,0.5)','rgba(255,212,59,0.4)','rgba(80,250,123,0.4)'];
+  for(let i=0;i<25;i++){
+    const p=document.createElement('div');
+    p.className='particle';
+    const s=Math.random()*4+2;
+    p.style.cssText=`width:${s}px;height:${s}px;left:${Math.random()*100}%;background:${colors[Math.floor(Math.random()*colors.length)]};animation-duration:${Math.random()*15+10}s;animation-delay:${Math.random()*-20}s;`;
+    c.appendChild(p);
+  }
+})();
+
+const hamburger=document.getElementById('hamburger');
+const drawer=document.getElementById('drawer');
+const overlay=document.getElementById('drawerOverlay');
+function openDrawer(){drawer.classList.add('open');overlay.classList.add('open');hamburger.classList.add('open');hamburger.setAttribute('aria-expanded','true');}
+function closeDrawer(){drawer.classList.remove('open');overlay.classList.remove('open');hamburger.classList.remove('open');hamburger.setAttribute('aria-expanded','false');}
+hamburger.addEventListener('click',()=>drawer.classList.contains('open')?closeDrawer():openDrawer());
+drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeDrawer));
+
+const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:0.07});
+document.querySelectorAll('.section').forEach(s=>obs.observe(s));
+
+const bar=document.getElementById('progress-bar');
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  const pct=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100;
+  bar.style.width=pct+'%';
+},{passive:true});
+
+const tocLinks=document.querySelectorAll('.toc-link');
+const sections=document.querySelectorAll('.section[id],section[id]');
+window.addEventListener('scroll',()=>{
+  let cur='';
+  sections.forEach(s=>{if(window.scrollY>=s.offsetTop-120)cur=s.id;});
+  tocLinks.forEach(a=>{
+    const active=a.getAttribute('href')==='#'+cur;
+    a.classList.toggle('active',active);
+  });
+},{passive:true});
+
+function copyCode(btn){
+  const pre=btn.closest('.code-block').querySelector('pre');
+  navigator.clipboard.writeText(pre.innerText).then(()=>{
+    btn.textContent='Copied!';setTimeout(()=>btn.textContent='Copy',2000);
+  });
+}
+
+function copyLink(){
+  navigator.clipboard.writeText(window.location.href).then(()=>showToast('🔗 Link copied to clipboard!'));
+}
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3000);
+}
+
+function toggleFaq(item){
+  const wasOpen=item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(f=>f.classList.remove('open'));
+  if(!wasOpen)item.classList.add('open');
+}
+
+const reactions={love:24,like:61,mindBlown:18,bookmark:33};
+const reacted={};
+function react(type){
+  const btn=document.getElementById(type+'Btn');
+  const countEl=document.getElementById(type+'Count');
+  if(reacted[type]){reactions[type]--;btn.classList.remove('active');reacted[type]=false;}
+  else{reactions[type]++;btn.classList.add('active');reacted[type]=true;showToast('Thanks for your reaction! 🙌');}
+  countEl.textContent=reactions[type];
+}
+
+function postComment(){
+  const name=document.getElementById('c-name').value.trim();
+  const body=document.getElementById('c-body').value.trim();
+  if(!name||!body){showToast('⚠️ Please fill in your name and comment.');return;}
+  const list=document.getElementById('commentList');
+  const initial=name.charAt(0).toUpperCase();
+  const colors=['linear-gradient(135deg,#3a6e99,#6a4a9c)','linear-gradient(135deg,#2d7a35,#1a4d1e)','linear-gradient(135deg,#9b72d4,#264d6e)'];
+  const bg=colors[Math.floor(Math.random()*colors.length)];
+  const el=document.createElement('div');
+  el.className='comment-item';
+  el.style.animation='fadeUp 0.4s ease both';
+  el.innerHTML=`<div class="comment-meta"><div class="comment-avatar" style="background:${bg}">${initial}</div><div><div class="comment-name">${name}</div><div class="comment-date">Just now</div></div></div><div class="comment-body">${body}</div><button class="comment-like" onclick="likeComment(this)">❤️ <span>0</span></button>`;
+  list.insertBefore(el,list.firstChild);
+  document.getElementById('c-name').value='';
+  document.getElementById('c-body').value='';
+  showToast('✅ Comment posted! Thank you for engaging.');
+}
+
+function likeComment(btn){
+  const span=btn.querySelector('span');
+  let n=parseInt(span.textContent);
+  if(btn.dataset.liked){n--;btn.dataset.liked='';} else{n++;btn.dataset.liked='1';}
+  span.textContent=n;
+}
+
+function subscribe(){
+  const e=document.getElementById('subEmail').value.trim();
+  if(!e||!e.includes('@')){showToast('⚠️ Please enter a valid email.');return;}
+  document.getElementById('subEmail').value='';
+  showToast('🎉 Subscribed! Welcome to Valleys & Bytes.');
+}
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    const href = this.getAttribute('href');
+    if (href === "#" || href === "") return;
+    const target = document.querySelector(href);
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+const AI_URL = 'https://code-sense.pansensoyglenn.workers.dev/restaurant.html';
+const aiTemplates = {
+  twitter: {
+    professional: 'Python multiple inheritance made practical 🏝️ restaurant.py shows how 4 parent classes combine into one — Sales, Inventory, Personnel & Expenses. Clean design, clear MRO. ' + AI_URL + ' #Python #OOP',
+    enthusiastic: '🔥 This Python OOP guide BLEW MY MIND! 4 parent classes → 1 Restaurant! Multiple inheritance with real profit calculations 🍽️ ' + AI_URL + ' #Python #LearnPython',
+    casual: 'found this python tutorial about a restaurant and it actually explains multiple inheritance really well 🍽️🐍 ' + AI_URL + ' #Python',
+    educational: '📚 Python Multiple Inheritance: restaurant.py teaches 4-parent class hierarchy, MRO, and daily profit calculation. Step-by-step, full source. ' + AI_URL + ' #Python #OOP #LearnPython',
+  },
+  linkedin: {
+    professional: 'Sharing a practical Python OOP tutorial — restaurant.py demonstrates multiple inheritance with 4 parent classes (SalesManagement, InventoryManagement, PersonnelManagement, ExpenseManagement) combined into a Restaurant class. Covers MRO, daily profit calculation, and clean design principles. Recommended for Python learners. ' + AI_URL + ' #Python #OOP #SoftwareDevelopment',
+    enthusiastic: '🚀 Brilliant Python OOP guide! restaurant.py builds a complete Filipino restaurant system with 4-parent multiple inheritance. Sales + Inventory + Personnel + Expenses = one powerful class! ' + AI_URL + ' #Python #OOP #Programming',
+    casual: 'Found a great Python OOP tutorial — restaurant.py explains multiple inheritance through a Filipino restaurant. Really practical and clear! ' + AI_URL + ' #Python #Learning',
+    educational: 'Python Multiple Inheritance resource: restaurant.py covers 4-class hierarchy design, explicit __init__ calls, C3 MRO with 4 parents, daily profit calculation, and monthly reporting. Full source code included. ' + AI_URL + ' #Python #OOP #Education',
+  },
+  facebook: {
+    professional: 'Sharing an excellent Python OOP guide — restaurant.py demonstrates multiple inheritance through a Filipino restaurant system. 4 parent classes, complete profit calculation, and clear MRO explanations. ' + AI_URL,
+    enthusiastic: '🔥🏝️ This Python tutorial builds an entire restaurant with multiple inheritance! Sales, Inventory, Personnel and Expenses all in one class. Mind = blown! ' + AI_URL,
+    casual: 'just read this python tutorial about a restaurant and it made multiple inheritance make sense for me 😄 check it out! ' + AI_URL,
+    educational: '📚 Python OOP Tutorial: restaurant.py teaches multiple inheritance through a real Filipino restaurant system — 4 parent classes, daily profit, monthly reports. Full source code. ' + AI_URL,
+  },
+  whatsapp: {
+    professional: 'Hi! Sharing a Python OOP tutorial — restaurant.py teaches multiple inheritance using a Filipino restaurant with 4 parent classes. Really well explained with full source code. ' + AI_URL,
+    enthusiastic: 'OMG check this Python tutorial!! 🔥 A Filipino restaurant built with multiple inheritance — 4 parent classes and daily profit calculations! ' + AI_URL,
+    casual: 'hey check this out — python tutorial using a restaurant to explain multiple inheritance, actually makes it click! ' + AI_URL,
+    educational: 'Python Multiple Inheritance guide: restaurant.py — 4 parent classes, MRO, profit calculation. Full source included. ' + AI_URL,
+  }
+};
+
+function aiGenerateCaption() {
+  const platform = document.getElementById('aiPlatform').value;
+  const tone = document.getElementById('aiTone').value;
+  const loading = document.getElementById('aiLoading');
+  const output = document.getElementById('aiOutput');
+  const actions = document.getElementById('aiActions');
+  loading.classList.add('show');
+  output.classList.remove('show');
+  actions.classList.remove('show');
+  setTimeout(() => {
+    const caption = (aiTemplates[platform] && aiTemplates[platform][tone]) || aiTemplates[platform]['professional'] || '';
+    output.textContent = caption;
+    output.classList.add('show');
+    loading.classList.remove('show');
+    const enc = encodeURIComponent;
+    document.getElementById('aiFb').href = 'https://www.facebook.com/sharer/sharer.php?u=' + enc(AI_URL) + '&quote=' + enc(caption);
+    document.getElementById('aiTw').href = 'https://twitter.com/intent/tweet?text=' + enc(caption);
+    document.getElementById('aiLi').href = 'https://www.linkedin.com/sharing/share-offsite/?url=' + enc(AI_URL);
+    document.getElementById('aiWa').href = 'https://wa.me/?text=' + enc(caption + ' ' + AI_URL);
+    actions.classList.add('show');
+    showToast('✨ Caption ready!');
+  }, 800);
+}
+
+function aiCopyCaption() {
+  const text = document.getElementById('aiOutput').textContent;
+  navigator.clipboard.writeText(text).then(() => showToast('📋 Caption copied!'));
+}
+
+
+</script>
+</body>
+</html>
