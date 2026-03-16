@@ -1,0 +1,2341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Python OOP Polymorphism — Complete Guide 2026 | Valleys & Bytes</title>
+  <meta name="description" content="Master Python OOP polymorphism with deep dives into method overriding, duck typing, operator overloading, abstract classes, and real-world applications. 10+ examples, cheatsheet, design patterns, and expert FAQ.">
+  <meta name="keywords" content="Python polymorphism, OOP, method overriding, duck typing, operator overloading, abstract base class, Python OOP tutorial, design patterns, runtime polymorphism, Python 2026">
+  <meta name="author" content="Glenn Junsay Pansensoy">
+  <link rel="canonical" href="https://code-sense.pansensoyglenn.workers.dev/polymorphism.html">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Python OOP Polymorphism — The Complete Guide (2026 Edition)">
+  <meta property="og:description" content="10+ real-world examples, design patterns, duck typing deep dive, and modern polymorphism techniques. From zero to hero in Python OOP.">
+  <meta property="og:url" content="https://code-sense.pansensoyglenn.workers.dev/polymorphism.html">
+  <meta property="og:image" content="https://code-sense.pansensoyglenn.workers.dev/images/og-python-polymorphism.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Python OOP Polymorphism illustration">
+  <meta property="og:site_name" content="Valleys & Bytes">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Python OOP Polymorphism — Complete Guide">
+  <meta name="twitter:description" content="10+ examples, design patterns, duck typing, and modern polymorphism. The only guide you'll need.">
+  <meta name="twitter:image" content="https://code-sense.pansensoyglenn.workers.dev/images/og-python-polymorphism.jpg">
+  <meta name="twitter:creator" content="@GlennPansensoy">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Python OOP Polymorphism — Complete Guide 2026",
+    "description": "Master Python OOP polymorphism with deep dives into method overriding, duck typing, operator overloading, abstract classes, and real-world applications.",
+    "author": {
+      "@type": "Person",
+      "name": "Glenn Junsay Pansensoy",
+      "url": "https://code-sense.pansensoyglenn.workers.dev/about-author.html"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Valleys & Bytes",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://code-sense.pansensoyglenn.workers.dev/logo.png"
+      }
+    },
+    "datePublished": "2026-03-16",
+    "dateModified": "2026-03-16",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://code-sense.pansensoyglenn.workers.dev/polymorphism.html"
+    },
+    "keywords": "Python polymorphism, OOP, method overriding, duck typing, operator overloading, abstract base class, design patterns"
+  }
+  </script>
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4575646748966866" crossorigin="anonymous"></script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Code+Pro:wght@400;600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:       #1a1a2e;
+      --bg2:      #16213e;
+      --bg3:      #0f3460;
+      --accent:   #4584f5;
+      --accent2:  #ffde57;
+      --accent3:  #7eb3ff;
+      --text:     #e8edf5;
+      --text-dim: #8fa3c8;
+      --border:   rgba(69,132,245,0.22);
+      --code-bg:  #12121f;
+      --card:     #1e2340;
+    }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;overflow-x:hidden;max-width:100vw;}
+    body{
+      background:var(--bg);
+      color:#ffffff;
+      font-family:'Lato',sans-serif;
+      font-size:10px;
+      line-height:1.7;
+      background-image:
+        radial-gradient(circle at 15% 20%, rgba(69,132,245,0.05) 0%, transparent 50%),
+        radial-gradient(circle at 85% 80%, rgba(255,222,87,0.04) 0%, transparent 50%),
+        linear-gradient(rgba(69,132,245,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(69,132,245,0.025) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 44px 44px, 44px 44px;
+    }
+    header{
+      position:sticky;top:0;z-index:1000;
+      background:rgba(26,26,46,0.97);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid var(--border);
+      padding:0 2rem;
+      display:flex;align-items:center;justify-content:space-between;
+      height:62px;
+    }
+    .logo{
+      font-family:'Playfair Display',serif;
+      font-size:1.35rem;font-weight:900;
+      background:linear-gradient(90deg,var(--accent),var(--accent2));
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+      letter-spacing:.04em;
+    }
+    .logo span{color:var(--accent2);-webkit-text-fill-color:var(--accent2);}
+    .hamburger{
+      display:flex;flex-direction:column;gap:5px;cursor:pointer;
+      background:none;border:none;padding:6px;
+    }
+    .hamburger span{
+      display:block;width:26px;height:2px;
+      background:var(--accent);border-radius:2px;
+      transition:all .3s;
+    }
+    .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+    .hamburger.open span:nth-child(2){opacity:0;}
+    .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+    .nav-overlay{
+      position:fixed;inset:0;background:rgba(15,15,32,0.98);
+      z-index:999;display:flex;flex-direction:column;
+      align-items:center;justify-content:flex-start;gap:0;
+      opacity:0;pointer-events:none;transition:opacity .35s;
+      overflow-y:auto;padding:1rem 0 1rem;
+    }
+    .nav-overlay.open{opacity:1;pointer-events:all;}
+    .nav-btn{
+      display:inline-flex;align-items:center;gap:.6rem;
+      background:none;border:1px solid var(--border);
+      color:#ffffff;font-family:'Lato',sans-serif;font-size:.82rem;
+      padding:.55rem 1.6rem;border-radius:6px;cursor:pointer;
+      text-decoration:none;transition:all .22s;width:240px;justify-content:flex-start;
+      margin:.22rem 0;flex-shrink:0;
+    }
+    .nav-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent);}
+    .nav-btn .icon{font-size:.95rem;}
+    .ad-top{
+      background:var(--bg2);border-bottom:1px solid var(--border);
+      padding:.5rem 1rem;text-align:center;
+    }
+    .hero{
+      text-align:center;padding:5rem 2rem 3.5rem;
+      background:linear-gradient(160deg,#1a1a2e 55%,#0f1f42);
+      position:relative;overflow:hidden;
+    }
+    .hero::before{
+      content:'';position:absolute;inset:0;
+      background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(69,132,245,.1),transparent);
+      pointer-events:none;
+    }
+    .hero-tag{
+      display:inline-block;background:rgba(69,132,245,.13);
+      color:var(--accent);font-size:.72rem;font-weight:700;letter-spacing:.15em;
+      text-transform:uppercase;padding:.35rem 1rem;border-radius:20px;
+      border:1px solid rgba(69,132,245,.35);margin-bottom:1.2rem;
+    }
+    .hero h1{
+      font-family:'Playfair Display',serif;
+      font-size:clamp(1.2rem,5vw,3.2rem);font-weight:900;
+      line-height:1.15;margin-bottom:1rem;
+    }
+    .hero h1 em{color:var(--accent);font-style:normal;}
+    .hero p{
+      font-size:.9rem;color:#ffffff;max-width:640px;margin:0 auto 2rem;
+      text-align:justify;
+    }
+    .hero-meta{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;}
+    .hero-meta span{font-size:.78rem;color:#ffffff;}
+    .hero-meta strong{color:var(--accent2);}
+    .container{max-width:860px;margin:0 auto;padding:0 1.5rem;}
+    .section{padding:3.5rem 0 2rem;}
+    h2.sec-title{
+      font-family:'Playfair Display',serif;
+      font-size:1.2rem;font-weight:700;
+      color:var(--accent);letter-spacing:.08em;text-transform:uppercase;
+      margin-bottom:.4rem;
+    }
+    h3.sec-sub{
+      font-family:'Playfair Display',serif;
+      font-size:1rem;font-weight:700;
+      color:var(--accent2);margin:1.6rem 0 .5rem;
+    }
+    p,li{font-size:0.9rem;text-align:justify;color:#ffffff;}
+    ul,ol{padding-left:1.4rem;margin:.5rem 0;}
+    li{margin-bottom:.35rem;}
+    strong{color:#ffffff;}
+    .divider{height:1px;background:var(--border);margin:2rem 0;}
+    .info-card{
+      background:var(--card);border:1px solid var(--border);
+      border-radius:10px;padding:1.4rem 1.6rem;margin:1.2rem 0;
+    }
+    .info-card h3{
+      font-family:'Playfair Display',serif;font-size:.9rem;
+      color:var(--accent2);margin-bottom:.6rem;
+    }
+    .highlight{
+      border-left:3px solid var(--accent);
+      background:rgba(69,132,245,.07);
+      padding:.8rem 1.2rem;border-radius:0 6px 6px 0;
+      margin:1rem 0;font-size:.8rem;color:#ffffff;text-align:justify;
+    }
+    .code-wrap{
+      background:var(--code-bg);border:1px solid var(--border);
+      border-radius:10px;margin:1.2rem 0;overflow:hidden;
+    }
+    .code-header{
+      display:flex;align-items:center;justify-content:space-between;
+      background:rgba(69,132,245,.07);padding:.55rem 1rem;
+      border-bottom:1px solid var(--border);
+    }
+    .code-header span{font-size:.72rem;color:var(--accent);font-family:'Source Code Pro',monospace;font-weight:600;}
+    .copy-btn{
+      background:none;border:1px solid var(--border);color:#ffffff;
+      font-size:.7rem;padding:.2rem .65rem;border-radius:4px;cursor:pointer;
+      font-family:'Lato',sans-serif;transition:all .2s;
+    }
+    .copy-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent);}
+    pre{
+      padding:1.2rem 1.1rem;overflow-x:auto;
+      font-family:'Source Code Pro',monospace;font-size:.76rem;line-height:1.65;
+      color:#c9d1d9;
+    }
+    .kw{color:#ff79c6;}
+    .fn{color:#50fa7b;}
+    .cl{color:#f1fa8c;}
+    .st{color:#f1fa8c;}
+    .cm{color:#6272a4;font-style:italic;}
+    .nb{color:#bd93f9;}
+    .op{color:#ff79c6;}
+    .num{color:#bd93f9;}
+    .apps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(200px,100%), 1fr));
+      gap: 1.2rem;
+      margin: 2.5rem 0 1.5rem;
+    }
+    .app-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 1.5rem 1rem;
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      transition: all 0.2s ease;
+    }
+    .app-btn:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+      box-shadow: 0 0 28px rgba(69,132,245,0.2);
+    }
+    .app-logo {
+      width: 70px;
+      height: 70px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      flex-shrink: 0;
+      transition: transform 0.25s;
+      background: rgba(69,132,245,0.08);
+      border: 1px solid rgba(69,132,245,0.2);
+    }
+    .app-btn:hover .app-logo {
+      transform: scale(1.08) rotate(-2deg);
+      background: rgba(69,132,245,0.15);
+    }
+    .app-info {
+      text-align: center;
+      width: 100%;
+    }
+    .app-name {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--accent2);
+      margin-bottom: 0.25rem;
+    }
+    .app-desc {
+      font-size: 0.72rem;
+      color: #ffffff;
+      line-height: 1.5;
+      margin: 0 0 0.4rem;
+      text-align: justify;
+    }
+    .app-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.2rem;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.55rem;
+      padding: 0.2rem 0.7rem;
+      border-radius: 30px;
+      margin-top: 0.2rem;
+      background: rgba(69,132,245,0.12);
+      color: var(--accent3);
+      border: 1px solid rgba(69,132,245,0.3);
+    }
+    .share-box{
+      background:var(--card);border:1px solid var(--border);
+      border-radius:10px;padding:1.4rem 1.6rem;text-align:center;
+      margin:2rem 0;
+    }
+    .share-box p{font-size:.8rem;margin-bottom:1rem;text-align:center;}
+    .share-btns{display:flex;flex-wrap:wrap;gap:.65rem;justify-content:center;}
+    .share-btn{
+      display:inline-flex;align-items:center;gap:.45rem;
+      padding:.5rem 1.15rem;border-radius:6px;font-size:.78rem;
+      font-family:'Lato',sans-serif;font-weight:700;cursor:pointer;
+      border:none;transition:transform .15s,filter .15s;text-decoration:none;
+    }
+    .share-btn:hover{transform:translateY(-2px);filter:brightness(1.12);}
+    .sb-fb{background:#1877f2;color:#fff;}
+    .sb-li{background:#0a66c2;color:#fff;}
+    .sb-tw{background:#000;color:#fff;}
+    .sb-wa{background:#25d366;color:#fff;}
+    .sb-yt{background:#ff0000;color:#fff;}
+    .sb-tg{background:#0088cc;color:#fff;}
+    .comments-section{padding:2rem 0 3rem;}
+    .comments-section h2{font-size:1rem;margin-bottom:1.2rem;}
+    .comment-form{
+      background:var(--card);border:1px solid var(--border);
+      border-radius:10px;padding:1.4rem;margin-bottom:1.8rem;
+    }
+    .comment-form input,
+    .comment-form textarea{
+      width:100%;background:var(--bg2);border:1px solid var(--border);
+      color:#ffffff;padding:.65rem .9rem;border-radius:6px;
+      font-family:'Lato',sans-serif;font-size:.8rem;margin-bottom:.75rem;
+      outline:none;transition:border-color .2s;
+    }
+    .comment-form input:focus,
+    .comment-form textarea:focus{border-color:var(--accent);}
+    .comment-form textarea{resize:vertical;min-height:90px;}
+    .submit-btn{
+      background:var(--accent);color:#fff;font-weight:700;
+      border:none;padding:.6rem 1.6rem;border-radius:6px;
+      font-family:'Lato',sans-serif;font-size:.8rem;cursor:pointer;
+      transition:filter .2s;
+    }
+    .submit-btn:hover{filter:brightness(1.1);}
+    .comment-list{display:flex;flex-direction:column;gap:1rem;}
+    .comment-card{
+      background:var(--card);border:1px solid var(--border);
+      border-radius:10px;padding:1rem 1.2rem;
+    }
+    .comment-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem;}
+    .comment-author{font-size:.8rem;font-weight:700;color:var(--accent2);}
+    .comment-date{font-size:.72rem;color:#ffffff;}
+    .comment-text{font-size:.8rem;color:#ffffff;text-align:justify;}
+    .reaction-row{display:flex;gap:.7rem;margin-top:.65rem;}
+    .react-btn{
+      background:none;border:1px solid var(--border);color:#ffffff;
+      padding:.28rem .8rem;border-radius:20px;font-size:.74rem;cursor:pointer;
+      font-family:'Lato',sans-serif;transition:all .2s;display:flex;align-items:center;gap:.3rem;
+    }
+    .react-btn:hover,.react-btn.active{background:rgba(69,132,245,.12);color:var(--accent);border-color:var(--accent);}
+    .react-btn.like-active{background:rgba(255,222,87,.12);color:var(--accent2);border-color:var(--accent2);}
+    .follow-section{
+      background:linear-gradient(135deg,#16213e,#0f3460);
+      border:1px solid var(--border);border-radius:12px;
+      padding:2rem 1.6rem;text-align:center;margin:2rem 0;
+    }
+    .follow-section h2{font-size:1rem;margin-bottom:.4rem;color:var(--accent2);}
+    .follow-section p{font-size:.8rem;margin-bottom:1.2rem;text-align:center;}
+    .follow-btns{display:flex;flex-wrap:wrap;gap:.7rem;justify-content:center;}
+    .follow-btn{
+      display:inline-flex;align-items:center;gap:.5rem;
+      padding:.55rem 1.3rem;border-radius:6px;font-size:.78rem;
+      font-family:'Lato',sans-serif;font-weight:700;text-decoration:none;
+      transition:transform .15s,filter .15s;border:none;cursor:pointer;
+    }
+    .follow-btn:hover{transform:translateY(-2px);filter:brightness(1.12);}
+    .fb-btn{background:#1877f2;color:#fff;}
+    .li-btn{background:#0a66c2;color:#fff;}
+    .yt-btn{background:#ff0000;color:#fff;}
+    .tw-btn{background:#000;color:#fff;}
+    footer{
+      background:var(--bg2);border-top:1px solid var(--border);
+      padding:2.5rem 1.5rem 1.5rem;
+    }
+    .footer-grid{
+      max-width:860px;margin:0 auto;
+      display:grid;grid-template-columns:1fr 1fr;gap:2rem;
+      margin-bottom:1.8rem;
+    }
+    .footer-brand .logo{font-size:1.1rem;}
+    .footer-brand p{font-size:.75rem;color:#ffffff;margin-top:.6rem;text-align:justify;}
+    .footer-legal h4{font-size:.8rem;color:var(--accent);margin-bottom:.8rem;text-transform:uppercase;letter-spacing:.08em;}
+    .legal-links{display:flex;flex-direction:column;gap:.5rem;}
+    .legal-link{
+      display:flex;align-items:center;gap:.45rem;
+      background:none;border:1px solid var(--border);color:#ffffff;
+      font-size:.75rem;font-family:'Lato',sans-serif;
+      padding:.48rem .9rem;border-radius:5px;text-decoration:none;
+      cursor:pointer;transition:all .2s;text-align:left;width:100%;
+      box-sizing:border-box;
+    }
+    .legal-link:hover{border-color:var(--accent);color:var(--accent);background:rgba(69,132,245,.07);}
+    .footer-bottom{
+      max-width:860px;margin:0 auto;
+      border-top:1px solid var(--border);padding-top:1rem;
+      display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;
+    }
+    .footer-bottom p{font-size:.72rem;color:#ffffff;text-align:left;}
+    .footer-quick{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:.6rem;}
+    .footer-chip{
+      background:var(--bg3);border:1px solid var(--border);color:#ffffff;
+      font-size:.72rem;padding:.28rem .75rem;border-radius:20px;cursor:pointer;
+      font-family:'Lato',sans-serif;text-decoration:none;transition:all .2s;
+      display:inline-block;
+    }
+    .footer-chip:hover{background:var(--accent);color:#fff;border-color:var(--accent);}
+    .tbl-wrap{overflow-x:auto;margin:1rem 0;}
+    table{width:100%;border-collapse:collapse;font-size:.78rem;}
+    th{background:rgba(69,132,245,.12);color:var(--accent);padding:.55rem .8rem;text-align:left;border-bottom:1px solid var(--border);}
+    td{padding:.5rem .8rem;border-bottom:1px solid rgba(255,255,255,.04);color:#ffffff;text-align:justify;vertical-align:top;}
+    tr:hover td{background:rgba(255,255,255,.02);}
+    .outro{
+      background:linear-gradient(135deg,#16213e,#0f3460);
+      border:1px solid var(--border);border-radius:12px;
+      padding:2.2rem 1.8rem;margin:2rem 0;text-align:center;
+    }
+    .outro h2{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--accent2);margin-bottom:.8rem;}
+    .outro p{font-size:.8rem;max-width:580px;margin:0 auto;text-align:justify;}
+    .faq-list{display:flex;flex-direction:column;gap:.7rem;}
+    .faq-item{
+      background:var(--card);border:1px solid var(--border);
+      border-radius:10px;overflow:hidden;
+    }
+    .faq-q{
+      width:100%;display:flex;align-items:center;justify-content:space-between;
+      gap:1rem;background:none;border:none;color:#ffffff;
+      font-family:'Lato',sans-serif;font-size:.82rem;font-weight:700;
+      padding:1rem 1.2rem;cursor:pointer;text-align:left;
+      transition:background .2s;
+    }
+    .faq-q:hover{background:rgba(69,132,245,.07);}
+    .faq-q span:first-child{flex:1;}
+    .faq-arrow{
+      font-size:.7rem;color:var(--accent);flex-shrink:0;
+      transition:transform .3s;
+    }
+    .faq-q.open .faq-arrow{transform:rotate(180deg);}
+    .faq-a{
+      display:none;padding:0 1.2rem 1rem;
+      border-top:1px solid var(--border);
+    }
+    .faq-a p{font-size:.8rem;color:#ffffff;text-align:justify;margin-top:.75rem;}
+    .faq-a.visible{display:block;}
+    .design-pattern-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
+      gap: 1.2rem;
+      margin: 1.5rem 0;
+    }
+    .pattern-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.2rem;
+    }
+    .pattern-card h4 { color: var(--accent2); margin-bottom: 0.5rem; font-size: 0.9rem; }
+    .pattern-card p { font-size: 0.75rem; margin-bottom: 0; }
+    .progress-bar{
+      position:fixed;top:0;left:0;height:3px;
+      background:linear-gradient(90deg,var(--accent),var(--accent2));
+      width:0%;z-index:9999;transition:width .1s linear;
+    }
+    .back-top{
+      position:fixed;bottom:1.5rem;right:1.5rem;
+      background:var(--accent);color:#fff;border:none;
+      width:42px;height:42px;border-radius:50%;font-size:1.1rem;
+      cursor:pointer;opacity:0;pointer-events:none;
+      transition:opacity .3s,transform .3s;z-index:500;
+      display:flex;align-items:center;justify-content:center;
+    }
+    .back-top.show{opacity:1;pointer-events:all;}
+    .back-top:hover{transform:translateY(-3px);}
+    .insight-grid{
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));
+      gap:1rem;margin:1.5rem 0;
+    }
+    .insight-card{
+      background:var(--card);border:1px solid var(--border);
+      border-radius:10px;padding:1.2rem;
+      border-top:3px solid var(--accent);
+    }
+    .insight-card .icon{font-size:1.6rem;margin-bottom:.5rem;display:block;}
+    .insight-card h4{color:var(--accent2);font-size:.9rem;margin-bottom:.4rem;}
+    .insight-card p{font-size:.78rem;margin:0;}
+    .quiz-card{
+      background:var(--card);border:1px solid var(--border);
+      border-radius:10px;padding:1.4rem;margin:.8rem 0;
+    }
+    .quiz-q{font-size:.82rem;font-weight:700;color:#ffffff;margin-bottom:.8rem;}
+    .quiz-options{display:flex;flex-direction:column;gap:.5rem;}
+    .quiz-opt{
+      background:var(--bg2);border:1px solid var(--border);
+      color:#ffffff;font-size:.78rem;
+      padding:.55rem 1rem;border-radius:6px;cursor:pointer;
+      font-family:'Lato',sans-serif;text-align:left;
+      transition:all .2s;
+    }
+    .quiz-opt:hover{border-color:var(--accent);color:#ffffff;}
+    .quiz-opt.correct{background:rgba(80,250,123,.1);border-color:#50fa7b;color:#50fa7b;}
+    .quiz-opt.wrong{background:rgba(255,85,85,.1);border-color:#ff5555;color:#ff5555;}
+    .quiz-result{font-size:.78rem;margin-top:.7rem;font-weight:700;min-height:1.2em;}
+    .timeline{position:relative;padding-left:2rem;margin:1.5rem 0;}
+    .timeline::before{
+      content:'';position:absolute;left:.6rem;top:0;bottom:0;
+      width:2px;background:var(--border);
+    }
+    .tl-item{position:relative;margin-bottom:1.4rem;}
+    .tl-dot{
+      position:absolute;left:-1.55rem;top:.25rem;
+      width:12px;height:12px;border-radius:50%;
+      background:var(--accent);border:2px solid var(--bg);
+      flex-shrink:0;
+    }
+    .tl-title{font-size:.82rem;font-weight:700;color:var(--accent2);margin-bottom:.25rem;}
+    .tl-body{font-size:.78rem;color:#ffffff;text-align:justify;}
+    .perf-grid{
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr));
+      gap:1rem;margin:1.5rem 0;
+    }
+    .perf-card{
+      background:var(--card);border:1px solid var(--border);
+      border-radius:10px;padding:1rem;
+    }
+    .perf-card .badge{
+      display:inline-block;font-size:.6rem;font-weight:700;
+      padding:.2rem .6rem;border-radius:20px;margin-bottom:.5rem;
+      letter-spacing:.08em;text-transform:uppercase;
+    }
+    .badge-fast{background:rgba(80,250,123,.15);color:#50fa7b;border:1px solid rgba(80,250,123,.3);}
+    .badge-caution{background:rgba(255,222,87,.15);color:var(--accent2);border:1px solid rgba(255,222,87,.3);}
+    .badge-avoid{background:rgba(255,85,85,.15);color:#ff5555;border:1px solid rgba(255,85,85,.3);}
+    .perf-card h4{font-size:.82rem;color:#ffffff;margin-bottom:.4rem;}
+    .perf-card p{font-size:.75rem;margin:0;}
+    @media(max-width:768px){
+      .hero{padding:3.5rem 1.2rem 2.5rem;}
+      .hero h1{font-size:clamp(1.6rem,6vw,2.4rem);}
+      .hero p{font-size:.82rem;}
+      .container{padding:0 1rem;}
+      .section{padding:2.5rem 0 1.5rem;}
+      header{padding:0 1rem;}
+      .logo{font-size:1.1rem;}
+      .apps-grid{grid-template-columns:repeat(auto-fit,minmax(min(150px,100%),1fr));}
+      .app-logo{width:54px;height:54px;font-size:1.7rem;}
+      .app-name{font-size:.82rem;}
+      .app-desc{font-size:.68rem;}
+      pre{font-size:.7rem;padding:.9rem .8rem;}
+      .share-btns{gap:.5rem;}
+      .share-btn{font-size:.72rem;padding:.45rem .85rem;}
+      .follow-btns{gap:.5rem;}
+      .follow-btn{font-size:.72rem;padding:.48rem 1rem;}
+      table{font-size:.72rem;}
+      th,td{padding:.4rem .6rem;}
+      .design-pattern-grid{grid-template-columns:1fr;}
+      .insight-grid{grid-template-columns:1fr;}
+      .perf-grid{grid-template-columns:1fr;}
+      .nav-btn{width:92vw;max-width:320px;}
+      .outro{padding:1.6rem 1.2rem;}
+      .outro h2{font-size:1.05rem;}
+      .comment-form{padding:1rem;}
+      .info-card{padding:1rem 1.2rem;}
+      .footer-grid{grid-template-columns:1fr;}
+      .footer-bottom{flex-direction:column;text-align:center;}
+    }
+    @media(max-width:480px){
+      .hero h1{font-size:1.5rem;}
+      .hero-tag{font-size:.65rem;}
+      .hero-meta{gap:.7rem;flex-direction:column;align-items:center;}
+      .hero-meta span{font-size:.74rem;}
+      .apps-grid{grid-template-columns:1fr 1fr;}
+      .share-btns{flex-direction:column;align-items:center;}
+      .share-btn{width:100%;max-width:260px;justify-content:center;}
+      .follow-btns{flex-direction:column;align-items:center;}
+      .follow-btn{width:100%;max-width:260px;justify-content:center;}
+      .back-top{bottom:1rem;right:1rem;width:38px;height:38px;font-size:1rem;}
+      .tbl-wrap{font-size:.7rem;}
+      .faq-q{font-size:.78rem;padding:.8rem 1rem;}
+    }
+    @media(max-width:360px){
+      .apps-grid{grid-template-columns:1fr;}
+      header{height:54px;}
+    }
+
+    .ai-share-box{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.4rem 1.6rem;text-align:left;margin:2rem 0;position:relative;overflow:hidden;}
+    .ai-share-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));}
+    .ai-share-box h2{font-size:1rem !important;margin-bottom:.5rem;}
+    .ai-share-box p{font-size:0.9rem;margin-bottom:1rem;}
+    .ai-controls{display:flex;gap:.65rem;flex-wrap:wrap;margin-bottom:1rem;align-items:center;}
+    .ai-sel{flex:1;min-width:130px;background:var(--bg2);border:1px solid var(--border);border-radius:6px;color:#ffffff;font-family:'Lato',sans-serif;font-size:0.9rem;padding:8px 12px;outline:none;cursor:pointer;}
+    .ai-sel:focus{border-color:var(--accent);}
+    .ai-gen-btn{background:var(--accent);color:#fff;border:none;padding:9px 20px;border-radius:6px;font-family:'Lato',sans-serif;font-size:0.9rem;font-weight:700;cursor:pointer;transition:all .2s;white-space:nowrap;display:inline-flex;align-items:center;gap:6px;}
+    .ai-gen-btn:hover{filter:brightness(1.15);transform:translateY(-1px);}
+    .ai-loading{display:none;align-items:center;gap:8px;color:#ffffff;font-size:0.9rem;margin-bottom:10px;}
+    .ai-loading.show{display:flex;}
+    .ai-spinner{width:13px;height:13px;border:2px solid rgba(255,255,255,0.25);border-top-color:var(--accent);border-radius:50%;animation:aiSpin .7s linear infinite;}
+    @keyframes aiSpin{to{transform:rotate(360deg);}}
+    .ai-output{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:14px;font-size:0.9rem;color:#ffffff;line-height:1.7;white-space:pre-wrap;word-break:break-word;margin-bottom:10px;display:none;text-align:justify;}
+    .ai-output.show{display:block;}
+    .ai-act-row{display:none;flex-wrap:wrap;gap:8px;}
+    .ai-act-row.show{display:flex;}
+    .ai-act{display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border-radius:6px;font-family:'Lato',sans-serif;font-size:0.9rem;font-weight:600;border:1px solid var(--border);background:var(--bg3);color:#ffffff;cursor:pointer;text-decoration:none;transition:all .2s;}
+    .ai-act:hover{transform:translateY(-1px);}
+    .ai-act.cp:hover{border-color:var(--accent2);color:var(--accent2);}
+    .ai-act.fb:hover{border-color:#1877f2;color:#6bb1ff;background:rgba(24,119,242,0.1);}
+    .ai-act.tw:hover{border-color:#1da1f2;color:#80ccff;background:rgba(29,161,242,0.1);}
+    .ai-act.li:hover{border-color:#0a66c2;color:#6baff5;background:rgba(10,102,194,0.1);}
+    .ai-act.wa:hover{border-color:#25d366;color:#25d366;background:rgba(37,211,102,0.1);}
+
+    /* ── Subscription Section ─────────────────────────────────── */
+    .subscribe-section{
+      position:relative;overflow:hidden;
+      background:linear-gradient(135deg,#0d1b3e 0%,#1a1a2e 50%,#0f2a50 100%);
+      border:1px solid rgba(69,132,245,0.3);
+      border-radius:16px;margin:3rem 0;padding:3rem 2rem;
+      text-align:center;
+    }
+    .subscribe-section::before{
+      content:'';position:absolute;inset:0;
+      background:radial-gradient(ellipse 70% 60% at 50% 0%,rgba(69,132,245,0.12),transparent),
+                 radial-gradient(ellipse 40% 40% at 80% 80%,rgba(255,222,87,0.06),transparent);
+      pointer-events:none;
+    }
+    .subscribe-section::after{
+      content:'';position:absolute;top:0;left:0;right:0;height:3px;
+      background:linear-gradient(90deg,var(--accent),var(--accent2),var(--accent));
+      border-radius:16px 16px 0 0;
+    }
+    .sub-badge{
+      display:inline-flex;align-items:center;gap:.5rem;
+      background:rgba(69,132,245,0.12);border:1px solid rgba(69,132,245,0.35);
+      color:var(--accent);font-size:.68rem;font-weight:700;letter-spacing:.15em;
+      text-transform:uppercase;padding:.3rem .9rem;border-radius:20px;margin-bottom:1.2rem;
+    }
+    .sub-badge .pulse{
+      width:7px;height:7px;background:var(--accent2);border-radius:50%;
+      animation:subPulse 1.5s ease-in-out infinite;
+    }
+    @keyframes subPulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(1.4);}}
+    .subscribe-section h2{
+      font-family:'Playfair Display',serif;font-size:clamp(1.1rem,4vw,2rem);
+      font-weight:900;margin-bottom:.7rem;
+      background:linear-gradient(135deg,#ffffff 30%,var(--accent3));
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    }
+    .subscribe-section .sub-desc{
+      font-size:.88rem;color:rgba(255,255,255,0.75);max-width:520px;
+      margin:0 auto 1.8rem;text-align:center;line-height:1.6;
+    }
+    .sub-perks{
+      display:flex;flex-wrap:wrap;justify-content:center;gap:.65rem;
+      margin-bottom:2rem;
+    }
+    .sub-perk{
+      display:inline-flex;align-items:center;gap:.4rem;
+      background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);
+      border-radius:20px;padding:.3rem .85rem;font-size:.72rem;color:rgba(255,255,255,0.8);
+    }
+    .sub-perk-icon{font-size:.85rem;}
+    .sub-form{
+      display:flex;gap:.7rem;flex-wrap:wrap;justify-content:center;
+      max-width:520px;margin:0 auto 1rem;
+    }
+    .sub-input{
+      flex:1;min-width:200px;background:rgba(255,255,255,0.06);
+      border:1px solid rgba(69,132,245,0.4);border-radius:8px;
+      color:#ffffff;font-family:'Lato',sans-serif;font-size:.88rem;
+      padding:11px 16px;outline:none;transition:border-color .2s;
+    }
+    .sub-input::placeholder{color:rgba(255,255,255,0.4);}
+    .sub-input:focus{border-color:var(--accent);background:rgba(69,132,245,0.08);}
+    .sub-btn{
+      background:linear-gradient(135deg,var(--accent),#2d6adf);
+      color:#fff;border:none;padding:11px 24px;border-radius:8px;
+      font-family:'Lato',sans-serif;font-size:.88rem;font-weight:700;
+      cursor:pointer;transition:all .25s;white-space:nowrap;
+      display:inline-flex;align-items:center;gap:6px;
+    }
+    .sub-btn:hover{filter:brightness(1.18);transform:translateY(-2px);box-shadow:0 8px 24px rgba(69,132,245,0.35);}
+    .sub-btn:disabled{opacity:.6;cursor:not-allowed;transform:none;}
+    .sub-btn .sub-spinner{
+      width:14px;height:14px;border:2px solid rgba(255,255,255,0.3);
+      border-top-color:#fff;border-radius:50%;animation:aiSpin .7s linear infinite;
+      display:none;
+    }
+    .sub-btn.loading .sub-spinner{display:inline-block;}
+    .sub-btn.loading .sub-btn-text{display:none;}
+    .sub-status{
+      margin:0 auto;max-width:520px;border-radius:10px;
+      padding:.9rem 1.2rem;font-size:.82rem;display:none;text-align:left;
+    }
+    .sub-status.success{
+      background:rgba(80,250,123,0.08);border:1px solid rgba(80,250,123,0.3);
+      color:#50fa7b;display:block;
+    }
+    .sub-status.error{
+      background:rgba(255,85,85,0.08);border:1px solid rgba(255,85,85,0.3);
+      color:#ff5555;display:block;
+    }
+    .sub-ai-welcome{
+      background:rgba(255,255,255,0.04);border:1px solid rgba(69,132,245,0.25);
+      border-radius:10px;padding:1rem 1.2rem;margin:.9rem auto 0;
+      max-width:520px;text-align:left;font-size:.8rem;color:rgba(255,255,255,0.8);
+      line-height:1.6;display:none;
+    }
+    .sub-ai-welcome.show{display:block;}
+    .sub-ai-label{
+      font-size:.65rem;color:var(--accent);font-weight:700;letter-spacing:.1em;
+      text-transform:uppercase;margin-bottom:.4rem;display:flex;align-items:center;gap:.4rem;
+    }
+    .sub-privacy{font-size:.68rem;color:rgba(255,255,255,0.35);margin-top:.8rem;}
+    .sub-privacy a{color:rgba(69,132,245,0.7);text-decoration:none;}
+
+    /* ── New Valuable Content: Interview Q&A ─────────────────── */
+    .interview-grid{display:grid;grid-template-columns:1fr;gap:1rem;margin:1.5rem 0;}
+    .interview-card{
+      background:var(--card);border:1px solid var(--border);
+      border-radius:10px;overflow:hidden;
+    }
+    .interview-q{
+      background:rgba(69,132,245,0.08);padding:.9rem 1.2rem;
+      font-size:.82rem;font-weight:700;color:var(--accent2);
+      display:flex;align-items:flex-start;gap:.6rem;
+    }
+    .interview-q .qn{
+      flex-shrink:0;background:var(--accent);color:#fff;
+      font-size:.65rem;font-weight:900;padding:.2rem .5rem;border-radius:4px;
+      margin-top:.1rem;
+    }
+    .interview-a{padding:.9rem 1.2rem;font-size:.8rem;color:#ffffff;line-height:1.65;}
+    .interview-tag{
+      display:inline-flex;align-items:center;gap:.3rem;
+      background:rgba(69,132,245,0.1);border:1px solid rgba(69,132,245,0.25);
+      color:var(--accent);font-size:.62rem;font-weight:700;letter-spacing:.08em;
+      text-transform:uppercase;padding:.18rem .5rem;border-radius:4px;margin:.6rem 0 .3rem;
+    }
+
+    /* ── Python Version Compatibility ────────────────────────── */
+    .version-timeline{margin:1.5rem 0;}
+    .version-row{
+      display:flex;gap:1rem;align-items:flex-start;
+      padding:.9rem 0;border-bottom:1px solid rgba(69,132,245,0.1);
+    }
+    .version-row:last-child{border-bottom:none;}
+    .version-badge{
+      flex-shrink:0;background:linear-gradient(135deg,var(--accent),#2d6adf);
+      color:#fff;font-size:.7rem;font-weight:900;padding:.3rem .7rem;
+      border-radius:6px;font-family:'Source Code Pro',monospace;min-width:60px;text-align:center;
+    }
+    .version-content h4{font-size:.82rem;color:var(--accent2);margin-bottom:.25rem;}
+    .version-content p{font-size:.78rem;color:#ffffff;margin:0;text-align:left;}
+
+    /* ── Testing Polymorphism ─────────────────────────────────── */
+    .test-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr));gap:1rem;margin:1.5rem 0;}
+    .test-card{
+      background:var(--card);border:1px solid var(--border);
+      border-radius:10px;padding:1.1rem 1.2rem;
+    }
+    .test-card h4{font-size:.82rem;color:var(--accent2);margin-bottom:.5rem;font-family:'Playfair Display',serif;}
+    .test-card p{font-size:.75rem;color:#ffffff;margin:0;text-align:left;}
+    .test-card code{color:var(--accent);font-family:'Source Code Pro',monospace;font-size:.72rem;}
+
+    @media(max-width:600px){
+      .subscribe-section{padding:2rem 1.2rem;}
+      .sub-form{flex-direction:column;}
+      .sub-input,.sub-btn{width:100%;}
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav-overlay" id="navOverlay">
+    <a class="nav-btn" href="#intro"><span class="icon">📘</span> Introduction</a>
+    <a class="nav-btn" href="#significance"><span class="icon">🌟</span> Significance</a>
+    <a class="nav-btn" href="#processes"><span class="icon">⚙️</span> Forms & Methods</a>
+    <a class="nav-btn" href="#how-it-works"><span class="icon">🔬</span> How It Operates</a>
+    <a class="nav-btn" href="#samples"><span class="icon">💻</span> Sample Programs</a>
+    <a class="nav-btn" href="#advanced"><span class="icon">🚀</span> Advanced Concepts</a>
+    <a class="nav-btn" href="#design-patterns"><span class="icon">🧩</span> Design Patterns</a>
+    <a class="nav-btn" href="#duck-typing"><span class="icon">🦆</span> Duck Typing</a>
+    <a class="nav-btn" href="#real-world"><span class="icon">🌐</span> Real-World Uses</a>
+    <a class="nav-btn" href="#operator-overloading"><span class="icon">➕</span> Operator Overloading</a>
+    <a class="nav-btn" href="#mistakes"><span class="icon">⚠️</span> Common Mistakes</a>
+    <a class="nav-btn" href="#cheatsheet"><span class="icon">📋</span> Cheatsheet</a>
+    <a class="nav-btn" href="#key-insights"><span class="icon">💡</span> Key Insights</a>
+    <a class="nav-btn" href="#evolution"><span class="icon">📅</span> Timeline</a>
+    <a class="nav-btn" href="#performance"><span class="icon">⚡</span> Performance</a>
+    <a class="nav-btn" href="#quiz"><span class="icon">🧠</span> Quiz</a>
+    <a class="nav-btn" href="#faq"><span class="icon">❓</span> FAQ</a>
+    <a class="nav-btn" href="#comments"><span class="icon">💬</span> Comments</a>
+    <a class="nav-btn" href="#interview-qa"><span class="icon">🎯</span> Interview Q&A</a>
+    <a class="nav-btn" href="#version-compat"><span class="icon">🐍</span> Version History</a>
+    <a class="nav-btn" href="#testing"><span class="icon">🧪</span> Testing Guide</a>
+    <a class="nav-btn" href="#subscribe"><span class="icon">📬</span> Newsletter</a>
+    <a class="nav-btn" href="#follow"><span class="icon">👤</span> Follow</a>
+  </nav>
+
+  <header>
+    <div class="logo">Valleys <span>&</span> Bytes</div>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <div class="ad-top">
+    <ins class="adsbygoogle" style="display:block"
+         data-ad-client="ca-pub-4575646748966866"
+         data-ad-slot="4226674403"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <section class="hero">
+    <div class="hero-tag">Python · OOP · Polymorphism · 2026</div>
+    <h1>Learning <em>Polymorphism</em><br>in Python OOP</h1>
+    <p>A comprehensive deep‑dive into one of the four pillars of Object‑Oriented Programming — how polymorphism enables a single interface to represent many forms, promotes flexibility, and powers the most elegant software architectures in Python. Updated for 2026 with modern patterns. In Python, polymorphism allows objects of different classes to be treated through a shared interface, enabling the same code to work with different types — one of the most powerful mechanisms in all of software design.</p>
+    <div class="hero-meta">
+      <span>✍️ By <strong>Glenn Junsay Pansensoy</strong></span>
+      <span>📅 <strong>March 2026</strong></span>
+      <span>🏷️ <strong>Python · OOP · Advanced</strong></span>
+    </div>
+  </section>
+
+  <div class="progress-bar" id="progressBar"></div>
+  <button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
+
+  <div class="container">
+
+    <section class="section" id="intro">
+      <h2 class="sec-title">What is Polymorphism?</h2>
+      <div class="divider"></div>
+      <p>In the realm of Object-Oriented Programming (OOP), <strong>polymorphism</strong> — derived from the Greek words <em>polys</em> (many) and <em>morphe</em> (form) — is the ability of different objects to respond to the same interface, method call, or operator in their own distinct ways. It is a foundational mechanism that allows a single piece of code to work seamlessly with objects of different types, as long as those objects share a compatible interface.</p>
+      <div class="highlight">
+        Polymorphism establishes a <strong>BEHAVES-LIKE relationship</strong> between objects. A Dog BEHAVES-LIKE an Animal when we call <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">speak()</code>. A Circle BEHAVES-LIKE a Shape when we call <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">area()</code>. A PayPalGateway BEHAVES-LIKE a PaymentProcessor when we call <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">process()</code>. This behavioral contract is the engine of extensible design.
+      </div>
+      <p>Python implements polymorphism through a combination of <strong>method overriding</strong>, <strong>duck typing</strong>, <strong>operator overloading</strong>, and <strong>abstract base classes</strong>. Unlike statically typed languages that enforce polymorphism through strict type hierarchies, Python's dynamic type system allows polymorphism to emerge naturally — if an object has the right method, it can be used anywhere that method is expected, regardless of its formal class hierarchy.</p>
+      <div class="info-card">
+        <h3>📌 Core Definition</h3>
+        <p>Polymorphism is the OOP mechanism by which a single interface, method name, or operator produces different behavior depending on the type or class of the object it acts upon. In Python, this manifests in four primary forms: <strong>subtype polymorphism</strong> (via inheritance and method overriding), <strong>parametric polymorphism</strong> (via generics/duck typing), <strong>ad-hoc polymorphism</strong> (via operator overloading and function overloading), and <strong>inclusion polymorphism</strong> (via abstract base classes). Together, these mechanisms make Python code extraordinarily flexible and expressive.</p>
+      </div>
+      <p>Without polymorphism, code becomes brittle and repetitive — you would need separate functions for every type of object, endless <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">if/elif</code> chains to distinguish between types, and a complete rewrite every time a new type is introduced. Polymorphism eliminates this fragility by letting you write code that works for types that haven't even been invented yet.</p>
+    </section>
+
+    <section class="section" id="significance">
+      <h2 class="sec-title">Significance of Polymorphism in Programming</h2>
+      <div class="divider"></div>
+      <p>Polymorphism is not merely a syntactic convenience — it is the architectural foundation that enables software systems to grow, evolve, and scale without collapsing under their own complexity. Every major framework, library, and enterprise system in Python relies on polymorphism at its core.</p>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Benefit</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Extensibility</strong></td><td>New classes can be added to a system without modifying existing code — a direct application of the Open/Closed Principle. Polymorphism makes systems open for extension, closed for modification.</td></tr>
+            <tr><td><strong>Code Simplification</strong></td><td>A single loop or function can process collections of heterogeneous objects, eliminating repetitive type-checking code and reducing overall complexity dramatically.</td></tr>
+            <tr><td><strong>Loose Coupling</strong></td><td>Callers depend on interfaces, not concrete implementations. This decoupling makes it trivial to swap one implementation for another — from mock objects in tests to production classes at runtime.</td></tr>
+            <tr><td><strong>Framework Design</strong></td><td>Every major Python framework — Django, Flask, SQLAlchemy, NumPy — is built on polymorphic interfaces. Understanding polymorphism is the key to understanding how frameworks work.</td></tr>
+            <tr><td><strong>Runtime Flexibility</strong></td><td>Behavior is determined at runtime rather than compile time, allowing systems to be configured dynamically, making plugin architectures and dependency injection straightforward.</td></tr>
+            <tr><td><strong>Testability</strong></td><td>Polymorphic interfaces make it effortless to substitute test doubles (mocks, stubs, fakes) for real implementations, enabling true unit testing in isolation.</td></tr>
+            <tr><td><strong>Reduced Conditionals</strong></td><td>Replace sprawling <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">if/elif/else</code> type-dispatch chains with clean polymorphic dispatch — fewer bugs, more readable code, and fewer maintenance headaches.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="highlight">
+        The difference between a junior developer and a senior architect often comes down to how well they leverage polymorphism. Code that embraces polymorphism bends gracefully under change; code that ignores it <strong>breaks</strong>.
+      </div>
+    </section>
+
+    <section class="section" id="processes">
+      <h2 class="sec-title">Forms & Methods of Polymorphism</h2>
+      <div class="divider"></div>
+      <h3 class="sec-sub">The Four Forms of Polymorphism in Python</h3>
+      <div class="info-card">
+        <h3>1. Subtype Polymorphism (Method Overriding)</h3>
+        <p>The most classic form. A child class overrides a method from its parent, and Python automatically calls the correct version at runtime based on the actual object type. This is the mechanism behind virtually all framework extensibility — define a base class contract, override in subclasses, pass any subclass wherever the base is expected.</p>
+      </div>
+      <div class="info-card">
+        <h3>2. Duck Typing (Parametric / Structural Polymorphism)</h3>
+        <p>Python's most idiomatic form. If an object has the required method or attribute, it can be used — regardless of its class lineage. The famous principle: <em>"If it walks like a duck and quacks like a duck, it's a duck."</em> No formal inheritance needed. This is why Python code is so flexible and why Python functions can work with an enormous variety of objects without explicit type declarations.</p>
+      </div>
+      <div class="info-card">
+        <h3>3. Operator Overloading (Ad-hoc Polymorphism)</h3>
+        <p>Python's dunder (double underscore) methods allow custom classes to define how standard operators — <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">+</code>, <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">-</code>, <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">*</code>, <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">==</code>, <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">&lt;</code>, <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">[]</code>, <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">len()</code> — behave on their instances. This is why <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">+</code> adds integers, concatenates strings, and extends lists — each type defines its own behavior for the same operator symbol.</p>
+      </div>
+      <div class="info-card">
+        <h3>4. Abstract Base Classes (Inclusion Polymorphism)</h3>
+        <p>The <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">abc</code> module allows definition of abstract base classes with abstract methods — contracts that concrete subclasses must implement. Any class that fails to implement all abstract methods cannot be instantiated, providing compile-time-like guarantees in a dynamic language and making interfaces explicit and enforceable.</p>
+      </div>
+      <div class="info-card">
+        <h3>5. Method Overloading (Simulated via Default Arguments)</h3>
+        <p>Unlike Java or C++, Python does not support traditional method overloading (same name, different signatures). Instead, Python achieves similar behavior through default argument values, <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">*args</code>, <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">**kwargs</code>, and the <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">functools.singledispatch</code> decorator, which enables true single-dispatch generic functions.</p>
+      </div>
+      <h3 class="sec-sub">Key Built-in Tools & Methods</h3>
+      <ul>
+        <li><strong>isinstance(obj, Class)</strong> — Checks whether an object is an instance of a class or any of its subclasses; useful for safe polymorphic dispatch.</li>
+        <li><strong>abc.ABC / @abstractmethod</strong> — Tools from the <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">abc</code> module for defining abstract base classes and enforcing method contracts on subclasses.</li>
+        <li><strong>__dunder__ methods</strong> — Special methods (<code style="color:var(--accent);font-family:'Source Code Pro',monospace;">__str__</code>, <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">__repr__</code>, <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">__add__</code>, <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">__len__</code>, etc.) that define how objects respond to built-in functions and operators.</li>
+        <li><strong>functools.singledispatch</strong> — Decorator that transforms a function into a single-dispatch generic function, enabling type-based dispatch for free functions.</li>
+        <li><strong>Protocol (typing)</strong> — Structural subtyping via the <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">typing.Protocol</code> class, allowing static type checkers to verify duck typing compatibility without explicit inheritance.</li>
+        <li><strong>hasattr() / getattr()</strong> — Runtime attribute inspection tools that enable safe duck-type checks before calling methods on unknown object types.</li>
+      </ul>
+    </section>
+
+    <section class="section" id="how-it-works">
+      <h2 class="sec-title">How Polymorphism Operates</h2>
+      <div class="divider"></div>
+      <p>When Python encounters a method call on an object, it uses a process called <strong>dynamic dispatch</strong> — the actual method to execute is determined at runtime based on the type of the object, not the type declared in the calling code. This is fundamentally different from languages where dispatch is resolved at compile time.</p>
+      <div class="highlight">
+        <strong>Dynamic Dispatch:</strong> Python looks up the method name in the object's class <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">__dict__</code>, then up the MRO chain. The first class in the chain that defines the method wins — meaning subclasses automatically get priority over parent classes, which is the engine of method overriding polymorphism.
+      </div>
+      <h3 class="sec-sub">The Polymorphic Call Sequence</h3>
+      <ol>
+        <li>A method call is made: <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">obj.speak()</code></li>
+        <li>Python looks up <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">speak</code> in <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">obj.__class__.__dict__</code> first (the actual runtime type)</li>
+        <li>If not found, it traverses the MRO chain upward through parent classes</li>
+        <li>The first matching method found is called — subclass methods shadow parent methods</li>
+        <li>The caller never needs to know the actual type — it just calls the interface</li>
+      </ol>
+      <h3 class="sec-sub">Runtime Type Determination</h3>
+      <p>Python's polymorphism is entirely runtime-based. A variable can hold an object of any type, and its actual behavior is determined only when a method is called. This means Python's polymorphism is inherently more flexible than compile-time polymorphism — but also means that type errors that a statically typed language would catch at compile time can only be discovered at runtime in Python. This is the classic trade-off between flexibility and safety.</p>
+      <div class="info-card">
+        <h3>⚡ Liskov Substitution Principle</h3>
+        <p>The theoretical foundation for subtype polymorphism. It states: if <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">S</code> is a subtype of <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">T</code>, then objects of type <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">T</code> may be replaced with objects of type <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">S</code> without altering program correctness. In practice: your subclasses must honor the behavioral contract of the parent — they can strengthen guarantees, but never weaken them. Violating LSP is the most common source of subtle polymorphism bugs.</p>
+      </div>
+    </section>
+
+    <section class="section" id="samples">
+      <h2 class="sec-title">Sample Programs with Explanations</h2>
+      <div class="divider"></div>
+
+      <h3 class="sec-sub">Example 1: Subtype Polymorphism — Shape Hierarchy</h3>
+      <p>The quintessential polymorphism example: a <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">Shape</code> base class with <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">Circle</code>, <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">Rectangle</code>, and <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">Triangle</code> subclasses — each implementing the same interface with their own geometry.</p>
+      <div class="code-wrap">
+        <div class="code-header">
+          <span>💻 python · subtype_polymorphism.py</span>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+        <pre><span class="kw">import</span> math
+
+<span class="kw">class</span> <span class="cl">Shape</span>:
+    <span class="cm"># Base class — defines the polymorphic interface</span>
+    <span class="kw">def</span> <span class="fn">area</span>(<span class="nb">self</span>):
+        <span class="kw">raise</span> <span class="cl">NotImplementedError</span>(<span class="st">"Subclasses must implement area()"</span>)
+
+    <span class="kw">def</span> <span class="fn">perimeter</span>(<span class="nb">self</span>):
+        <span class="kw">raise</span> <span class="cl">NotImplementedError</span>(<span class="st">"Subclasses must implement perimeter()"</span>)
+
+    <span class="kw">def</span> <span class="fn">describe</span>(<span class="nb">self</span>):
+        <span class="kw">return</span> <span class="st">f"{self.__class__.__name__}: area={self.area():.2f}, perimeter={self.perimeter():.2f}"</span>
+
+<span class="kw">class</span> <span class="cl">Circle</span>(<span class="cl">Shape</span>):
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nb">self</span>, radius):
+        <span class="nb">self</span>.radius = radius
+
+    <span class="kw">def</span> <span class="fn">area</span>(<span class="nb">self</span>):          <span class="cm"># METHOD OVERRIDE</span>
+        <span class="kw">return</span> math.pi <span class="op">*</span> <span class="nb">self</span>.radius <span class="op">**</span> <span class="num">2</span>
+
+    <span class="kw">def</span> <span class="fn">perimeter</span>(<span class="nb">self</span>):    <span class="cm"># METHOD OVERRIDE</span>
+        <span class="kw">return</span> <span class="num">2</span> <span class="op">*</span> math.pi <span class="op">*</span> <span class="nb">self</span>.radius
+
+<span class="kw">class</span> <span class="cl">Rectangle</span>(<span class="cl">Shape</span>):
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nb">self</span>, width, height):
+        <span class="nb">self</span>.width = width
+        <span class="nb">self</span>.height = height
+
+    <span class="kw">def</span> <span class="fn">area</span>(<span class="nb">self</span>):
+        <span class="kw">return</span> <span class="nb">self</span>.width <span class="op">*</span> <span class="nb">self</span>.height
+
+    <span class="kw">def</span> <span class="fn">perimeter</span>(<span class="nb">self</span>):
+        <span class="kw">return</span> <span class="num">2</span> <span class="op">*</span> (<span class="nb">self</span>.width <span class="op">+</span> <span class="nb">self</span>.height)
+
+<span class="kw">class</span> <span class="cl">Triangle</span>(<span class="cl">Shape</span>):
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nb">self</span>, a, b, c):
+        <span class="nb">self</span>.a, <span class="nb">self</span>.b, <span class="nb">self</span>.c = a, b, c
+
+    <span class="kw">def</span> <span class="fn">area</span>(<span class="nb">self</span>):
+        s = (<span class="nb">self</span>.a <span class="op">+</span> <span class="nb">self</span>.b <span class="op">+</span> <span class="nb">self</span>.c) <span class="op">/</span> <span class="num">2</span>
+        <span class="kw">return</span> math.sqrt(s <span class="op">*</span> (s<span class="op">-</span><span class="nb">self</span>.a) <span class="op">*</span> (s<span class="op">-</span><span class="nb">self</span>.b) <span class="op">*</span> (s<span class="op">-</span><span class="nb">self</span>.c))
+
+    <span class="kw">def</span> <span class="fn">perimeter</span>(<span class="nb">self</span>):
+        <span class="kw">return</span> <span class="nb">self</span>.a <span class="op">+</span> <span class="nb">self</span>.b <span class="op">+</span> <span class="nb">self</span>.c
+
+<span class="cm"># ── Polymorphic usage — the same loop works for ALL types ──</span>
+shapes = [<span class="cl">Circle</span>(<span class="num">5</span>), <span class="cl">Rectangle</span>(<span class="num">4</span>, <span class="num">6</span>), <span class="cl">Triangle</span>(<span class="num">3</span>, <span class="num">4</span>, <span class="num">5</span>)]
+<span class="kw">for</span> shape <span class="kw">in</span> shapes:
+    <span class="fn">print</span>(shape.describe())   <span class="cm"># Same call, different behavior</span></pre>
+      </div>
+      <div class="highlight">
+        <strong>Key Concepts Shown:</strong> Each subclass provides its own <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">area()</code> and <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">perimeter()</code> implementation. The loop is entirely type-agnostic — it will work correctly for any <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">Shape</code> subclass ever created, including ones that don't exist yet. <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">describe()</code> is inherited and calls the overridden versions automatically — a perfect demonstration of runtime dispatch.
+      </div>
+
+      <h3 class="sec-sub">Example 2: Abstract Base Class — Payment System</h3>
+      <p>A real-world business example using the <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">abc</code> module to enforce a strict payment processing contract across multiple payment provider implementations.</p>
+      <div class="code-wrap">
+        <div class="code-header">
+          <span>💻 python · abstract_payment.py</span>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+        <pre><span class="kw">from</span> abc <span class="kw">import</span> ABC, abstractmethod
+
+<span class="kw">class</span> <span class="cl">PaymentProcessor</span>(<span class="cl">ABC</span>):
+    <span class="cm">"""Abstract contract — all payment gateways must implement these."""</span>
+
+    <span class="op">@</span>abstractmethod
+    <span class="kw">def</span> <span class="fn">process_payment</span>(<span class="nb">self</span>, amount: float) <span class="op">-></span> <span class="nb">bool</span>: ...
+
+    <span class="op">@</span>abstractmethod
+    <span class="kw">def</span> <span class="fn">refund</span>(<span class="nb">self</span>, transaction_id: str) <span class="op">-></span> <span class="nb">bool</span>: ...
+
+    <span class="op">@</span>abstractmethod
+    <span class="kw">def</span> <span class="fn">get_balance</span>(<span class="nb">self</span>) <span class="op">-></span> float: ...
+
+    <span class="kw">def</span> <span class="fn">process_with_fee</span>(<span class="nb">self</span>, amount: float, fee_pct: float = <span class="num">0.02</span>):
+        <span class="cm"># Concrete method available to all subclasses</span>
+        total = amount <span class="op">*</span> (<span class="num">1</span> <span class="op">+</span> fee_pct)
+        <span class="kw">return</span> <span class="nb">self</span>.process_payment(total)
+
+<span class="kw">class</span> <span class="cl">StripeProcessor</span>(<span class="cl">PaymentProcessor</span>):
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nb">self</span>, api_key):
+        <span class="nb">self</span>.api_key = api_key
+        <span class="nb">self</span>._balance = <span class="num">10000.0</span>
+
+    <span class="kw">def</span> <span class="fn">process_payment</span>(<span class="nb">self</span>, amount):
+        <span class="nb">self</span>._balance <span class="op">-=</span> amount
+        <span class="fn">print</span>(<span class="st">f"[Stripe] Charged ${amount:.2f} via Stripe API"</span>)
+        <span class="kw">return</span> <span class="kw">True</span>
+
+    <span class="kw">def</span> <span class="fn">refund</span>(<span class="nb">self</span>, transaction_id):
+        <span class="fn">print</span>(<span class="st">f"[Stripe] Refunded transaction {transaction_id}"</span>)
+        <span class="kw">return</span> <span class="kw">True</span>
+
+    <span class="kw">def</span> <span class="fn">get_balance</span>(<span class="nb">self</span>): <span class="kw">return</span> <span class="nb">self</span>._balance
+
+<span class="kw">class</span> <span class="cl">PayPalProcessor</span>(<span class="cl">PaymentProcessor</span>):
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nb">self</span>, client_id):
+        <span class="nb">self</span>.client_id = client_id
+        <span class="nb">self</span>._balance = <span class="num">8500.0</span>
+
+    <span class="kw">def</span> <span class="fn">process_payment</span>(<span class="nb">self</span>, amount):
+        <span class="nb">self</span>._balance <span class="op">-=</span> amount
+        <span class="fn">print</span>(<span class="st">f"[PayPal] Processed ${amount:.2f} via PayPal REST"</span>)
+        <span class="kw">return</span> <span class="kw">True</span>
+
+    <span class="kw">def</span> <span class="fn">refund</span>(<span class="nb">self</span>, transaction_id):
+        <span class="fn">print</span>(<span class="st">f"[PayPal] Initiated refund for {transaction_id}"</span>)
+        <span class="kw">return</span> <span class="kw">True</span>
+
+    <span class="kw">def</span> <span class="fn">get_balance</span>(<span class="nb">self</span>): <span class="kw">return</span> <span class="nb">self</span>._balance
+
+<span class="cm"># ── Polymorphic dispatch — works with ANY PaymentProcessor ──</span>
+<span class="kw">def</span> <span class="fn">checkout</span>(processor: <span class="cl">PaymentProcessor</span>, amount: float):
+    success = processor.process_with_fee(amount)
+    <span class="fn">print</span>(<span class="st">f"Balance remaining: ${processor.get_balance():.2f}"</span>)
+    <span class="kw">return</span> success
+
+stripe = <span class="cl">StripeProcessor</span>(<span class="st">"sk_live_..."</span>)
+paypal = <span class="cl">PayPalProcessor</span>(<span class="st">"client_abc"</span>)
+<span class="kw">for</span> proc <span class="kw">in</span> [stripe, paypal]:
+    checkout(proc, <span class="num">299.99</span>)   <span class="cm"># Same call, different processor</span></pre>
+      </div>
+      <div class="highlight">
+        <strong>Key Concepts Shown:</strong> <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">PaymentProcessor</code> cannot be instantiated directly — the <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">@abstractmethod</code> decorator enforces the contract. <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">checkout()</code> accepts any <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">PaymentProcessor</code> subclass and works identically for all of them. Adding a new payment gateway (Crypto, Apple Pay, Klarna) requires zero changes to <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">checkout()</code> — the definition of the Open/Closed Principle in action.
+      </div>
+
+      <h3 class="sec-sub">Example 3: Duck Typing — File-Like Objects</h3>
+      <p>Python's most powerful polymorphism form. A function that works with any object that has a <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">read()</code> method — files, network sockets, in-memory buffers, mock objects — all treated identically.</p>
+      <div class="code-wrap">
+        <div class="code-header">
+          <span>💻 python · duck_typing.py</span>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+        <pre><span class="kw">import</span> io
+
+<span class="cm"># This function doesn't care what TYPE 'source' is</span>
+<span class="cm"># It only requires that it has a read() method — duck typing</span>
+<span class="kw">def</span> <span class="fn">process_data</span>(source):
+    data = source.read()
+    <span class="fn">print</span>(<span class="st">f"Processed {len(data)} bytes: {data[:30]}..."</span>)
+    <span class="kw">return</span> data.upper()
+
+<span class="cm"># Works with a real file</span>
+<span class="kw">with</span> <span class="fn">open</span>(<span class="st">"data.txt"</span>, <span class="st">"w"</span>) <span class="kw">as</span> f:
+    f.write(<span class="st">"hello from a real file on disk"</span>)
+<span class="kw">with</span> <span class="fn">open</span>(<span class="st">"data.txt"</span>) <span class="kw">as</span> f:
+    process_data(f)
+
+<span class="cm"># Works with an in-memory buffer (no file needed)</span>
+buffer = io.<span class="cl">StringIO</span>(<span class="st">"hello from an in-memory buffer"</span>)
+process_data(buffer)
+
+<span class="cm"># Works with a completely custom class — no inheritance required</span>
+<span class="kw">class</span> <span class="cl">NetworkStream</span>:
+    <span class="kw">def</span> <span class="fn">read</span>(<span class="nb">self</span>):
+        <span class="kw">return</span> <span class="st">"hello from a simulated network socket"</span>
+
+process_data(<span class="cl">NetworkStream</span>())   <span class="cm"># No shared base class — pure duck typing</span></pre>
+      </div>
+      <div class="highlight">
+        <strong>Key Concepts Shown:</strong> <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">process_data()</code> works with a real file, an <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">io.StringIO</code>, and a completely custom <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">NetworkStream</code> — none of which share a base class. The only requirement is a <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">read()</code> method. This is why Python code is so easy to test: mock objects with the right methods substitute seamlessly for real dependencies.
+      </div>
+
+      <h3 class="sec-sub">Example 4: Operator Overloading — Business Vector</h3>
+      <p>Using dunder methods to make a custom <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">Money</code> class that behaves naturally with arithmetic operators, comparisons, and Python built-ins.</p>
+      <div class="code-wrap">
+        <div class="code-header">
+          <span>💻 python · operator_overloading.py</span>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+        <pre><span class="kw">class</span> <span class="cl">Money</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nb">self</span>, amount: float, currency: str = <span class="st">"USD"</span>):
+        <span class="nb">self</span>.amount = <span class="fn">round</span>(amount, <span class="num">2</span>)
+        <span class="nb">self</span>.currency = currency
+
+    <span class="kw">def</span> <span class="fn">__add__</span>(<span class="nb">self</span>, other):
+        <span class="kw">if</span> <span class="nb">self</span>.currency <span class="op">!=</span> other.currency:
+            <span class="kw">raise</span> <span class="cl">ValueError</span>(<span class="st">"Cannot add different currencies"</span>)
+        <span class="kw">return</span> <span class="cl">Money</span>(<span class="nb">self</span>.amount <span class="op">+</span> other.amount, <span class="nb">self</span>.currency)
+
+    <span class="kw">def</span> <span class="fn">__sub__</span>(<span class="nb">self</span>, other):
+        <span class="kw">if</span> <span class="nb">self</span>.currency <span class="op">!=</span> other.currency:
+            <span class="kw">raise</span> <span class="cl">ValueError</span>(<span class="st">"Cannot subtract different currencies"</span>)
+        <span class="kw">return</span> <span class="cl">Money</span>(<span class="nb">self</span>.amount <span class="op">-</span> other.amount, <span class="nb">self</span>.currency)
+
+    <span class="kw">def</span> <span class="fn">__mul__</span>(<span class="nb">self</span>, factor: float):
+        <span class="kw">return</span> <span class="cl">Money</span>(<span class="nb">self</span>.amount <span class="op">*</span> factor, <span class="nb">self</span>.currency)
+
+    <span class="kw">def</span> <span class="fn">__eq__</span>(<span class="nb">self</span>, other):
+        <span class="kw">return</span> <span class="nb">self</span>.amount <span class="op">==</span> other.amount <span class="kw">and</span> <span class="nb">self</span>.currency <span class="op">==</span> other.currency
+
+    <span class="kw">def</span> <span class="fn">__lt__</span>(<span class="nb">self</span>, other):
+        <span class="kw">return</span> <span class="nb">self</span>.amount <span class="op">&lt;</span> other.amount
+
+    <span class="kw">def</span> <span class="fn">__repr__</span>(<span class="nb">self</span>):
+        <span class="kw">return</span> <span class="st">f"Money({self.amount}, '{self.currency}')"</span>
+
+    <span class="kw">def</span> <span class="fn">__str__</span>(<span class="nb">self</span>):
+        <span class="kw">return</span> <span class="st">f"{self.currency} {self.amount:,.2f}"</span>
+
+<span class="cm"># ── Natural arithmetic on custom objects ──</span>
+price    = <span class="cl">Money</span>(<span class="num">49.99</span>)
+tax      = <span class="cl">Money</span>(<span class="num">4.50</span>)
+discount = <span class="cl">Money</span>(<span class="num">5.00</span>)
+total    = (price <span class="op">+</span> tax) <span class="op">-</span> discount
+<span class="fn">print</span>(total)                       <span class="cm"># USD 49.49</span>
+<span class="fn">print</span>(total <span class="op">*</span> <span class="num">1.1</span>)               <span class="cm"># USD 54.44</span>
+<span class="fn">print</span>(tax <span class="op">&lt;</span> price)               <span class="cm"># True</span>
+invoices = [<span class="cl">Money</span>(<span class="num">200</span>), <span class="cl">Money</span>(<span class="num">50</span>), <span class="cl">Money</span>(<span class="num">150</span>)]
+<span class="fn">print</span>(<span class="fn">sorted</span>(invoices))           <span class="cm"># Sorted by amount — __lt__ enables this</span></pre>
+      </div>
+      <div class="highlight">
+        <strong>Key Concepts Shown:</strong> The same <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">+</code>, <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">-</code>, <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">*</code>, <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">&lt;</code>, <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">==</code> operators that work on integers now work naturally on <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">Money</code> objects. <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">sorted()</code> works because <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">__lt__</code> is defined. <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">print()</code> uses <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">__str__</code> automatically. This is ad-hoc polymorphism — the operator is polymorphic across types.
+      </div>
+    </section>
+
+    <section class="section" id="advanced">
+      <h2 class="sec-title">Advanced Polymorphism Concepts</h2>
+      <div class="divider"></div>
+
+      <h3 class="sec-sub">typing.Protocol — Structural Subtyping</h3>
+      <p>Introduced in Python 3.8, <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">typing.Protocol</code> brings formal structural typing to Python. Unlike ABCs that require explicit inheritance, <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">Protocol</code> defines an interface by structure — any class that implements the required methods satisfies the protocol, even without explicitly inheriting from it. This bridges duck typing and static analysis.</p>
+      <div class="code-wrap">
+        <div class="code-header">
+          <span>💻 python · protocol_typing.py</span>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+        <pre><span class="kw">from</span> typing <span class="kw">import</span> Protocol
+
+<span class="kw">class</span> <span class="cl">Drawable</span>(<span class="cl">Protocol</span>):
+    <span class="kw">def</span> <span class="fn">draw</span>(<span class="nb">self</span>) <span class="op">-></span> <span class="nb">str</span>: ...
+    <span class="kw">def</span> <span class="fn">resize</span>(<span class="nb">self</span>, factor: float) <span class="op">-></span> <span class="kw">None</span>: ...
+
+<span class="cm"># These classes DO NOT inherit from Drawable</span>
+<span class="cm"># They satisfy the protocol purely by structure</span>
+<span class="kw">class</span> <span class="cl">Button</span>:
+    <span class="kw">def</span> <span class="fn">draw</span>(<span class="nb">self</span>): <span class="kw">return</span> <span class="st">"[Button rendered]"</span>
+    <span class="kw">def</span> <span class="fn">resize</span>(<span class="nb">self</span>, factor): <span class="nb">self</span>.size <span class="op">*=</span> factor
+
+<span class="kw">class</span> <span class="cl">Icon</span>:
+    <span class="kw">def</span> <span class="fn">draw</span>(<span class="nb">self</span>): <span class="kw">return</span> <span class="st">"[Icon rendered]"</span>
+    <span class="kw">def</span> <span class="fn">resize</span>(<span class="nb">self</span>, factor): <span class="nb">self</span>.px <span class="op">=</span> <span class="fn">int</span>(<span class="nb">self</span>.px <span class="op">*</span> factor)
+
+<span class="kw">def</span> <span class="fn">render_ui</span>(component: <span class="cl">Drawable</span>) <span class="op">-></span> <span class="nb">str</span>:
+    <span class="kw">return</span> component.draw()   <span class="cm"># Type checker knows this is safe</span>
+
+<span class="cm"># Both pass the type checker — structural subtyping</span>
+render_ui(<span class="cl">Button</span>())
+render_ui(<span class="cl">Icon</span>())</pre>
+      </div>
+
+      <h3 class="sec-sub">functools.singledispatch — Generic Functions</h3>
+      <p>The <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">@singledispatch</code> decorator transforms a regular function into a generic function that dispatches to different implementations based on the type of the first argument — bringing method overloading-style polymorphism to module-level functions.</p>
+      <div class="code-wrap">
+        <div class="code-header">
+          <span>💻 python · singledispatch.py</span>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+        <pre><span class="kw">from</span> functools <span class="kw">import</span> singledispatch
+
+<span class="op">@</span>singledispatch
+<span class="kw">def</span> <span class="fn">serialize</span>(obj):
+    <span class="kw">raise</span> <span class="cl">TypeError</span>(<span class="st">f"Unsupported type: {type(obj)}"</span>)
+
+<span class="op">@</span>serialize.register(<span class="nb">int</span>)
+<span class="kw">def</span> <span class="fn">_</span>(obj): <span class="kw">return</span> <span class="st">f"INT:{obj}"</span>
+
+<span class="op">@</span>serialize.register(<span class="nb">str</span>)
+<span class="kw">def</span> <span class="fn">_</span>(obj): <span class="kw">return</span> <span class="st">f'STR:"{obj}"'</span>
+
+<span class="op">@</span>serialize.register(<span class="nb">list</span>)
+<span class="kw">def</span> <span class="fn">_</span>(obj): <span class="kw">return</span> <span class="st">f"LIST:[{', '.join(map(serialize, obj))}]"</span>
+
+<span class="fn">print</span>(<span class="fn">serialize</span>(<span class="num">42</span>))              <span class="cm"># INT:42</span>
+<span class="fn">print</span>(<span class="fn">serialize</span>(<span class="st">"hello"</span>))        <span class="cm"># STR:"hello"</span>
+<span class="fn">print</span>(<span class="fn">serialize</span>([<span class="num">1</span>, <span class="st">"x"</span>, <span class="num">2</span>]))    <span class="cm"># LIST:[INT:1, STR:"x", INT:2]</span></pre>
+      </div>
+    </section>
+
+    <section class="section" id="design-patterns">
+      <h2 class="sec-title">Design Patterns Powered by Polymorphism</h2>
+      <div class="divider"></div>
+      <p>Polymorphism is the engine behind many of the most important software design patterns. Understanding this connection transforms polymorphism from an abstract concept into a concrete design tool.</p>
+      <div class="design-pattern-grid">
+        <div class="pattern-card">
+          <h4>🏭 Strategy Pattern</h4>
+          <p>Define a family of algorithms, encapsulate each one as a class, and make them interchangeable. The calling code references the abstract interface — swapping strategies requires no changes to the caller. Classic use: sorting algorithms, compression codecs, pricing engines.</p>
+        </div>
+        <div class="pattern-card">
+          <h4>🏗️ Factory Method Pattern</h4>
+          <p>Define an interface for creating objects, but let subclasses decide which class to instantiate. The factory method is polymorphic — each subclass returns a different type that conforms to the same interface. Widely used in ORMs and plugin systems.</p>
+        </div>
+        <div class="pattern-card">
+          <h4>📦 Template Method Pattern</h4>
+          <p>Define the skeleton of an algorithm in a base class, with steps deferred to subclasses. The base class calls abstract methods that subclasses implement differently — polymorphism drives the variation. Used heavily in Django class-based views.</p>
+        </div>
+        <div class="pattern-card">
+          <h4>📡 Observer Pattern</h4>
+          <p>Multiple observer objects register to receive notifications from a subject. Each observer implements the same <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">update()</code> interface differently. The subject calls <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">update()</code> polymorphically on all registered observers.</p>
+        </div>
+        <div class="pattern-card">
+          <h4>🎭 Decorator Pattern</h4>
+          <p>Wrap objects to add behavior, with wrappers and wrapped objects sharing the same interface. A polymorphic chain of decorators can be assembled at runtime, each transparently delegating to the next — Python's built-in <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">io</code> module is built this way.</p>
+        </div>
+        <div class="pattern-card">
+          <h4>🔗 Command Pattern</h4>
+          <p>Encapsulate a request as an object. Each command class implements a common <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">execute()</code> interface. The invoker calls <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">execute()</code> polymorphically — enabling undo/redo, queuing, and logging of operations without knowing their concrete type.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="duck-typing">
+      <h2 class="sec-title">Duck Typing Deep Dive</h2>
+      <div class="divider"></div>
+      <p>Duck typing is Python's most idiomatic and philosophically distinctive form of polymorphism. Rather than requiring objects to belong to a class hierarchy, Python simply checks whether an object has the method or attribute needed — if it does, it works. This philosophy is captured in the famous aphorism: <em>"If it walks like a duck and quacks like a duck, it's a duck."</em></p>
+      <div class="highlight">
+        Duck typing reflects Python's core philosophy of favoring <strong>behavior over type identity</strong>. The question Python asks is not "what IS this object?" but rather "CAN this object do what I need?" This subtle shift has profound consequences for how Python code is written, tested, and extended.
+      </div>
+      <h3 class="sec-sub">EAFP vs LBYL — The Two Approaches</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Style</th><th>Acronym</th><th>Approach</th><th>Pythonic?</th></tr></thead>
+          <tbody>
+            <tr><td><strong>EAFP</strong></td><td>Easier to Ask Forgiveness than Permission</td><td>Just call the method; catch exceptions if it fails. <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">try: obj.quack() except AttributeError: ...</code></td><td>✅ Preferred</td></tr>
+            <tr><td><strong>LBYL</strong></td><td>Look Before You Leap</td><td>Check type/attribute before calling. <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">if hasattr(obj, 'quack'): obj.quack()</code></td><td>⚠️ Sometimes necessary</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>The EAFP style is generally preferred in Python because it avoids the overhead of attribute lookups before every call and integrates naturally with Python's exception system. However, <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">hasattr()</code> checks are appropriate when the absence of an attribute is a normal, expected case rather than an error.</p>
+    </section>
+
+    <section class="section" id="real-world">
+      <h2 class="sec-title">Real-World Applications</h2>
+      <div class="divider"></div>
+      <p>Polymorphism is the invisible backbone of nearly every major Python framework and library. Once you understand it, you begin to see it everywhere.</p>
+      <div class="apps-grid">
+        <div class="app-btn">
+          <div class="app-logo">🌐</div>
+          <div class="app-info">
+            <div class="app-name">Django ORM</div>
+            <div class="app-desc">Every Django model inherits from <code style="font-family:'Source Code Pro',monospace;font-size:.7rem;">Model</code>. Query methods are polymorphic — <code style="font-family:'Source Code Pro',monospace;font-size:.7rem;">save()</code>, <code style="font-family:'Source Code Pro',monospace;font-size:.7rem;">delete()</code>, and <code style="font-family:'Source Code Pro',monospace;font-size:.7rem;">clean()</code> are overridden per model. Class-based views use Template Method polymorphism.</div>
+            <span class="app-tag">✦ Django</span>
+          </div>
+        </div>
+        <div class="app-btn">
+          <div class="app-logo">🔢</div>
+          <div class="app-info">
+            <div class="app-name">NumPy / Pandas</div>
+            <div class="app-desc">The <code style="font-family:'Source Code Pro',monospace;font-size:.7rem;">__array_ufunc__</code> protocol allows custom objects to participate in NumPy universal functions. Pandas <code style="font-family:'Source Code Pro',monospace;font-size:.7rem;">ExtensionArray</code> uses duck typing to enable custom data types inside DataFrames.</div>
+            <span class="app-tag">✦ Scientific</span>
+          </div>
+        </div>
+        <div class="app-btn">
+          <div class="app-logo">⚡</div>
+          <div class="app-info">
+            <div class="app-name">FastAPI / Pydantic</div>
+            <div class="app-desc">Pydantic uses <code style="font-family:'Source Code Pro',monospace;font-size:.7rem;">__get_validators__</code> protocol for custom field types. FastAPI dependency injection is entirely polymorphic — any callable matching the right signature works as a dependency.</div>
+            <span class="app-tag">✦ Web API</span>
+          </div>
+        </div>
+        <div class="app-btn">
+          <div class="app-logo">🧪</div>
+          <div class="app-info">
+            <div class="app-name">pytest / unittest</div>
+            <div class="app-desc">Test fixtures and mock objects are pure duck typing. <code style="font-family:'Source Code Pro',monospace;font-size:.7rem;">unittest.mock.MagicMock</code> dynamically implements any protocol by generating all dunder methods on demand.</div>
+            <span class="app-tag">✦ Testing</span>
+          </div>
+        </div>
+        <div class="app-btn">
+          <div class="app-logo">🤖</div>
+          <div class="app-info">
+            <div class="app-name">SQLAlchemy</div>
+            <div class="app-desc">Database dialects (PostgreSQL, MySQL, SQLite) all subclass a common <code style="font-family:'Source Code Pro',monospace;font-size:.7rem;">Dialect</code> base. Queries are polymorphically compiled for the active backend — the user's code never changes between databases.</div>
+            <span class="app-tag">✦ Database</span>
+          </div>
+        </div>
+        <div class="app-btn">
+          <div class="app-logo">🔄</div>
+          <div class="app-info">
+            <div class="app-name">asyncio / Protocols</div>
+            <div class="app-desc">The event loop uses structural typing extensively. Any object implementing <code style="font-family:'Source Code Pro',monospace;font-size:.7rem;">__await__</code>, <code style="font-family:'Source Code Pro',monospace;font-size:.7rem;">__aiter__</code>, or <code style="font-family:'Source Code Pro',monospace;font-size:.7rem;">__aenter__</code> integrates with async/await syntax polymorphically.</div>
+            <span class="app-tag">✦ Async</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== NEW BUSINESS HUBS SECTION ========== -->
+    <section class="section" id="business-hubs">
+      <h2 class="sec-title">🚀 Our Python‑Powered Ventures</h2>
+      <div class="divider"></div>
+      <p style="margin-bottom:1rem; font-size:.8rem; color:#ffffff;">Real‑world apps built with OOP — click to explore each microsite and see polymorphism in action.</p>
+      <div class="apps-grid">
+        <a href="ticketing.html" class="app-btn">
+          <div class="app-logo">🎫</div>
+          <div class="app-info">
+            <div class="app-name">Ticket Hub</div>
+            <p class="app-desc">A polymorphic ticketing system where different event types (concerts, sports, theater) share a common interface but implement pricing, seating, and availability logic independently. Demonstrates subtype polymorphism with an abstract `Event` base class and concrete subclasses, plus duck typing for dynamic discount strategies.</p>
+            <span class="app-tag">🎟️ Event Ticketing · Abstract Base Classes · Strategy Pattern</span>
+          </div>
+        </a>
+        <a href="corn-rice.html" class="app-btn">
+          <div class="app-logo">🌽</div>
+          <div class="app-info">
+            <div class="app-name">Corn & Rice Store</div>
+            <p class="app-desc">An agricultural e‑commerce platform modeling grains and staples. Uses operator overloading to handle bulk pricing (e.g., `Price __mul__` for quantity) and duck‑typed payment processing. Showcases how polymorphic `__add__` and `__lt__` make inventory management intuitive and type‑safe.</p>
+            <span class="app-tag">🌾 Grocery · Operator Overloading · Duck Typing</span>
+          </div>
+        </a>
+        <a href="disco.html" class="app-btn">
+          <div class="app-logo">🌃</div>
+          <div class="app-info">
+            <div class="app-name">El Nido Nights</div>
+            <p class="app-desc">A nightlife booking and discovery app for bars and events. Built with polymorphic `Venue` classes that share a `NightlifeInterface` (ABC). Each venue type (club, lounge, karaoke) implements `capacity()`, `entry_fee()`, and `special_offers()` differently — a perfect real‑world use of the Template Method pattern.</p>
+            <span class="app-tag">🍸 Nightlife · ABC · Template Method</span>
+          </div>
+        </a>
+        <a href="pizza.html" class="app-btn">
+          <div class="app-logo">🍕</div>
+          <div class="app-info">
+            <div class="app-name">Pasta & Pizza</div>
+            <p class="app-desc">A restaurant ordering system where every menu item implements a common `MenuItem` protocol (duck typing + `typing.Protocol`). Toppings, sizes, and customizations are handled via polymorphic composition — the same `calculate_price()` works for pasta, pizza, and combos without any type checks.</p>
+            <span class="app-tag">🍝 Restaurant · Protocol · Composition</span>
+          </div>
+        </a>
+        <a href="steak.html" class="app-btn">
+          <div class="app-logo">🥩</div>
+          <div class="app-info">
+            <div class="app-name">El Nido Steak House</div>
+            <p class="app-desc">A premium steakhouse reservation and menu system demonstrating the Command pattern with polymorphic `OrderCommand` classes. Each command (order steak, add wine, apply discount) implements `execute()` and `undo()`, enabling full transaction rollback. Also showcases `functools.singledispatch` for cooking preference handling.</p>
+            <span class="app-tag">🥂 Reservation · Command Pattern · singledispatch</span>
+          </div>
+        </a>
+      </div>
+    </section>
+    <!-- ========== END BUSINESS HUBS SECTION ========== -->
+
+    <section class="section" id="operator-overloading">
+      <h2 class="sec-title">Operator Overloading Reference</h2>
+      <div class="divider"></div>
+      <p>Python's dunder (magic) methods provide a comprehensive system for defining how custom objects respond to operators, built-in functions, and language constructs. This is the foundation of operator overloading — the most visible form of ad-hoc polymorphism in Python.</p>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Dunder Method</th><th>Triggered By</th><th>Use Case</th></tr></thead>
+          <tbody>
+            <tr><td><code style="color:var(--accent);font-family:'Source Code Pro',monospace;">__add__(self, other)</code></td><td><code>a + b</code></td><td>Vector addition, string concat, monetary sums</td></tr>
+            <tr><td><code style="color:var(--accent);font-family:'Source Code Pro',monospace;">__mul__(self, factor)</code></td><td><code>a * n</code></td><td>Scaling vectors, repeating sequences, applying rates</td></tr>
+            <tr><td><code style="color:var(--accent);font-family:'Source Code Pro',monospace;">__eq__(self, other)</code></td><td><code>a == b</code></td><td>Value equality for custom objects; enables set membership</td></tr>
+            <tr><td><code style="color:var(--accent);font-family:'Source Code Pro',monospace;">__lt__(self, other)</code></td><td><code>a &lt; b</code></td><td>Enables <code>sorted()</code>, <code>min()</code>, <code>max()</code> on custom types</td></tr>
+            <tr><td><code style="color:var(--accent);font-family:'Source Code Pro',monospace;">__len__(self)</code></td><td><code>len(a)</code></td><td>Custom containers, buffers, collections</td></tr>
+            <tr><td><code style="color:var(--accent);font-family:'Source Code Pro',monospace;">__getitem__(self, key)</code></td><td><code>a[key]</code></td><td>Custom sequences, mappings, matrix indexing</td></tr>
+            <tr><td><code style="color:var(--accent);font-family:'Source Code Pro',monospace;">__str__(self)</code></td><td><code>str(a), print(a)</code></td><td>Human-readable representation for display</td></tr>
+            <tr><td><code style="color:var(--accent);font-family:'Source Code Pro',monospace;">__repr__(self)</code></td><td><code>repr(a), debugger</code></td><td>Developer-facing representation; <code>eval(repr(a)) == a</code> ideally</td></tr>
+            <tr><td><code style="color:var(--accent);font-family:'Source Code Pro',monospace;">__contains__(self, item)</code></td><td><code>x in a</code></td><td>Custom membership testing for containers</td></tr>
+            <tr><td><code style="color:var(--accent);font-family:'Source Code Pro',monospace;">__iter__(self)</code></td><td><code>for x in a</code></td><td>Makes objects iterable; works with <code>list()</code>, unpacking, etc.</td></tr>
+            <tr><td><code style="color:var(--accent);font-family:'Source Code Pro',monospace;">__enter__ / __exit__</code></td><td><code>with a as x:</code></td><td>Context manager protocol; resource cleanup, transactions</td></tr>
+            <tr><td><code style="color:var(--accent);font-family:'Source Code Pro',monospace;">__call__(self, ...)</code></td><td><code>a()</code></td><td>Makes instances callable; functors, memoized functions</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section" id="mistakes">
+      <h2 class="sec-title">Common Mistakes & Anti-Patterns</h2>
+      <div class="divider"></div>
+      <div class="info-card">
+        <h3>❌ Mistake 1: Using isinstance() as Polymorphism</h3>
+        <p>Checking <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">isinstance(obj, SomeClass)</code> to select behavior is the opposite of polymorphism. It creates rigid coupling to concrete types, grows without limit as new types are added, and must be updated everywhere it appears. Replace type-dispatch chains with method overriding — let the objects decide their own behavior.</p>
+      </div>
+      <div class="info-card">
+        <h3>❌ Mistake 2: Violating the Liskov Substitution Principle</h3>
+        <p>A subclass that overrides a method but changes its contract — throwing unexpected exceptions, returning incompatible types, requiring additional preconditions, or silently ignoring parameters — breaks LSP and causes polymorphism to behave unexpectedly. Subtypes must honor the behavioral contract of their parent, not just its method signatures.</p>
+      </div>
+      <div class="info-card">
+        <h3>❌ Mistake 3: Over-Abstracting with ABCs</h3>
+        <p>Defining abstract base classes prematurely — before you have two concrete implementations — adds complexity without benefit. Follow the rule: design your ABC when you have at least two concrete subclasses and can clearly see the shared interface. ABCs are a tool for enforcing an established contract, not for speculating about future requirements.</p>
+      </div>
+      <div class="info-card">
+        <h3>❌ Mistake 4: Incomplete Operator Overloading</h3>
+        <p>Implementing <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">__eq__</code> without <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">__hash__</code> makes objects un-hashable (broken in sets/dicts). Implementing <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">__lt__</code> alone without the full <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">functools.total_ordering</code> suite means only <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">&lt;</code> works; <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">&gt;</code>, <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">&lt;=</code>, and <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">&gt;=</code> may behave incorrectly. Always use <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">@total_ordering</code> for comparison methods.</p>
+      </div>
+      <div class="info-card">
+        <h3>❌ Mistake 5: Ignoring Duck Typing in Favor of Strict Inheritance</h3>
+        <p>Forcing objects to inherit from a base class when duck typing would suffice creates unnecessary coupling. If a function only needs an object with a <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">read()</code> method, requiring inheritance from a <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">Readable</code> ABC excludes perfectly valid objects from third-party libraries that you cannot modify. Use <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">typing.Protocol</code> for static-checked duck typing instead.</p>
+      </div>
+    </section>
+
+    <section class="section" id="cheatsheet">
+      <h2 class="sec-title">Polymorphism Cheatsheet</h2>
+      <div class="divider"></div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Form</th><th>Mechanism</th><th>When to Use</th><th>Python Feature</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Subtype</strong></td><td>Method overriding via inheritance</td><td>IS-A relationships, framework extension points</td><td>Class inheritance + override</td></tr>
+            <tr><td><strong>Duck Typing</strong></td><td>Structural compatibility at runtime</td><td>When formal hierarchy is impractical; third-party types</td><td>EAFP + hasattr()</td></tr>
+            <tr><td><strong>Abstract</strong></td><td>Enforced interface contracts</td><td>When all subclasses MUST implement specific methods</td><td>abc.ABC + @abstractmethod</td></tr>
+            <tr><td><strong>Operator</strong></td><td>Dunder method definitions</td><td>Domain objects needing natural arithmetic/comparison</td><td>__add__, __eq__, __lt__, etc.</td></tr>
+            <tr><td><strong>Generic</strong></td><td>Type-based dispatch</td><td>Function behavior varies by argument type</td><td>functools.singledispatch</td></tr>
+            <tr><td><strong>Structural</strong></td><td>Protocol-based static typing</td><td>Duck typing with mypy/pyright verification</td><td>typing.Protocol</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="code-wrap">
+        <div class="code-header">
+          <span>💻 python · polymorphism_cheatsheet.py</span>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+        <pre><span class="cm"># ─── 1. Subtype Polymorphism ───────────────────────────────</span>
+<span class="kw">class</span> <span class="cl">Animal</span>:
+    <span class="kw">def</span> <span class="fn">speak</span>(<span class="nb">self</span>): <span class="kw">raise</span> <span class="cl">NotImplementedError</span>
+<span class="kw">class</span> <span class="cl">Dog</span>(<span class="cl">Animal</span>):
+    <span class="kw">def</span> <span class="fn">speak</span>(<span class="nb">self</span>): <span class="kw">return</span> <span class="st">"Woof!"</span>
+<span class="kw">class</span> <span class="cl">Cat</span>(<span class="cl">Animal</span>):
+    <span class="kw">def</span> <span class="fn">speak</span>(<span class="nb">self</span>): <span class="kw">return</span> <span class="st">"Meow!"</span>
+<span class="kw">for</span> a <span class="kw">in</span> [<span class="cl">Dog</span>(), <span class="cl">Cat</span>()]: <span class="fn">print</span>(a.speak())
+
+<span class="cm"># ─── 2. Duck Typing ───────────────────────────────────────</span>
+<span class="kw">def</span> <span class="fn">make_it_speak</span>(thing):
+    <span class="fn">print</span>(thing.speak())   <span class="cm"># No type check needed</span>
+
+<span class="cm"># ─── 3. Abstract Base Class ───────────────────────────────</span>
+<span class="kw">from</span> abc <span class="kw">import</span> ABC, abstractmethod
+<span class="kw">class</span> <span class="cl">Processor</span>(<span class="cl">ABC</span>):
+    <span class="op">@</span>abstractmethod
+    <span class="kw">def</span> <span class="fn">process</span>(<span class="nb">self</span>, data): ...
+
+<span class="cm"># ─── 4. Operator Overloading ──────────────────────────────</span>
+<span class="kw">class</span> <span class="cl">Vec2</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nb">self</span>, x, y): <span class="nb">self</span>.x, <span class="nb">self</span>.y = x, y
+    <span class="kw">def</span> <span class="fn">__add__</span>(<span class="nb">self</span>, o): <span class="kw">return</span> <span class="cl">Vec2</span>(<span class="nb">self</span>.x<span class="op">+</span>o.x, <span class="nb">self</span>.y<span class="op">+</span>o.y)
+    <span class="kw">def</span> <span class="fn">__repr__</span>(<span class="nb">self</span>): <span class="kw">return</span> <span class="st">f"Vec2({self.x}, {self.y})"</span>
+
+<span class="cm"># ─── 5. singledispatch ────────────────────────────────────</span>
+<span class="kw">from</span> functools <span class="kw">import</span> singledispatch
+<span class="op">@</span>singledispatch
+<span class="kw">def</span> <span class="fn">process</span>(x): <span class="kw">raise</span> <span class="cl">TypeError</span>
+<span class="op">@</span>process.register(<span class="nb">int</span>)
+<span class="kw">def</span> <span class="fn">_</span>(x): <span class="kw">return</span> x <span class="op">*</span> <span class="num">2</span>
+<span class="op">@</span>process.register(<span class="nb">str</span>)
+<span class="kw">def</span> <span class="fn">_</span>(x): <span class="kw">return</span> x.upper()
+
+<span class="cm"># ─── 6. typing.Protocol ───────────────────────────────────</span>
+<span class="kw">from</span> typing <span class="kw">import</span> Protocol
+<span class="kw">class</span> <span class="cl">Closeable</span>(<span class="cl">Protocol</span>):
+    <span class="kw">def</span> <span class="fn">close</span>(<span class="nb">self</span>) <span class="op">-></span> <span class="kw">None</span>: ...</pre>
+      </div>
+    </section>
+
+    <section class="section" id="key-insights">
+      <h2 class="sec-title">Key Insights</h2>
+      <div class="divider"></div>
+      <div class="insight-grid">
+        <div class="insight-card">
+          <span class="icon">🔑</span>
+          <h4>Interfaces Over Implementation</h4>
+          <p>The hallmark of great polymorphic design is depending on the interface, never the concrete class. This single principle enables every benefit polymorphism offers: testability, extensibility, and loose coupling.</p>
+        </div>
+        <div class="insight-card">
+          <span class="icon">🦆</span>
+          <h4>Python Favors Behavior</h4>
+          <p>Unlike Java or C#, Python does not require formal interface declarations to achieve polymorphism. Duck typing means that the richest polymorphic code in Python often involves no class hierarchy at all — just shared method names.</p>
+        </div>
+        <div class="insight-card">
+          <span class="icon">🔄</span>
+          <h4>Polymorphism Replaces Conditionals</h4>
+          <p>Whenever you find yourself writing long <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">if/elif</code> chains dispatching on type, that is a signal to refactor using polymorphism. Each branch becomes a subclass; the dispatch becomes a method call.</p>
+        </div>
+        <div class="insight-card">
+          <span class="icon">📐</span>
+          <h4>LSP Is Non-Negotiable</h4>
+          <p>A polymorphic system is only as reliable as its weakest subclass. Violating LSP causes code that appears correct to behave incorrectly at runtime in ways that are extremely difficult to debug. Honor the behavioral contract always.</p>
+        </div>
+        <div class="insight-card">
+          <span class="icon">🧪</span>
+          <h4>Polymorphism Enables Testing</h4>
+          <p>Mock objects, stubs, and fakes are only possible because of polymorphism. Any function that accepts an interface can be tested with a simplified implementation — this is the foundation of all modern unit testing methodology.</p>
+        </div>
+        <div class="insight-card">
+          <span class="icon">⚙️</span>
+          <h4>Open/Closed in Practice</h4>
+          <p>Code that is designed around polymorphic interfaces can be extended indefinitely by adding new subclasses — zero modifications to existing code required. This is the Open/Closed Principle made concrete, and it is what makes large-scale software maintainable.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="evolution">
+      <h2 class="sec-title">Evolution of Polymorphism in Python</h2>
+      <div class="divider"></div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-title">Python 1.x — 1991–1999: Basic Method Overriding</div>
+          <div class="tl-body">Python's original object model supported simple class-based polymorphism through method overriding. Duck typing was already idiomatic from the beginning — Python was never designed with rigid type hierarchies in mind.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-title">Python 2.2 — 2001: New-Style Classes & Descriptors</div>
+          <div class="tl-body">The unification of types and classes in Python 2.2 completed the object model. All types became classes, all classes inherited from <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">object</code>, and the descriptor protocol made operator overloading via dunders fully systematic and consistent.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-title">Python 2.6 / 3.0 — 2008: Abstract Base Classes (abc module)</div>
+          <div class="tl-body">The <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">abc</code> module introduced formal abstract base classes, giving Python a mechanism to enforce interface contracts without losing its dynamic character. Virtual subclasses via <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">register()</code> extended duck typing with formal membership.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-title">Python 3.4 — 2014: functools.singledispatch</div>
+          <div class="tl-body">PEP 443 introduced <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">@singledispatch</code>, bringing type-based dispatch to free functions. This filled a long-standing gap, enabling method-overloading-style patterns without the verbosity of class hierarchies.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-title">Python 3.5 — 2015: Type Hints (PEP 484)</div>
+          <div class="tl-body">Optional type annotations arrived, allowing polymorphic interfaces to be expressed explicitly. Tools like mypy could now verify that duck-typing usage was structurally sound without any runtime changes.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-title">Python 3.8 — 2019: typing.Protocol (PEP 544)</div>
+          <div class="tl-body">The most significant advancement for polymorphism in a decade. <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">typing.Protocol</code> formalized structural subtyping — the static-typing equivalent of duck typing — allowing static analysis tools to verify protocol compliance without requiring explicit inheritance.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-title">Python 3.12 — 2023: @override Decorator</div>
+          <div class="tl-body">PEP 698 introduced <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">@typing.override</code>, which instructs static type checkers to verify that a method marked as overriding actually exists in a parent class — catching a common category of subtle polymorphism bugs at analysis time.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="performance">
+      <h2 class="sec-title">Performance Considerations</h2>
+      <div class="divider"></div>
+      <p>Python's dynamic dispatch model means every method call involves a dictionary lookup through the MRO chain. This is slightly more expensive than direct function calls, but in practice the difference is negligible for business logic — only tight inner loops processing millions of objects per second warrant concern.</p>
+      <div class="perf-grid">
+        <div class="perf-card">
+          <span class="badge badge-fast">Fast</span>
+          <h4>Method Override Dispatch</h4>
+          <p>CPython's attribute lookup is highly optimized. For the vast majority of applications, polymorphic dispatch adds nanoseconds — below measurement noise in real-world code.</p>
+        </div>
+        <div class="perf-card">
+          <span class="badge badge-fast">Fast</span>
+          <h4>Duck Typing Checks</h4>
+          <p>EAFP (try/except) has nearly zero overhead in the success case. Failed <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">hasattr()</code> checks on deeply nested objects add up; prefer EAFP in tight loops.</p>
+        </div>
+        <div class="perf-card">
+          <span class="badge badge-caution">Caution</span>
+          <h4>Abstract Base Class Instantiation</h4>
+          <p><code style="color:var(--accent);font-family:'Source Code Pro',monospace;">ABCMeta</code> adds overhead to class instantiation (not method calls). For objects created millions of times per second, consider lighter interfaces.</p>
+        </div>
+        <div class="perf-card">
+          <span class="badge badge-caution">Caution</span>
+          <h4>Deep MRO Chains</h4>
+          <p>Inheritance hierarchies deeper than 5–7 levels add perceptible lookup overhead. Flatten hierarchies with composition when depth becomes extreme.</p>
+        </div>
+        <div class="perf-card">
+          <span class="badge badge-fast">Fast</span>
+          <h4>Operator Overloading</h4>
+          <p>Dunder methods are looked up via a fast path in CPython that bypasses normal attribute lookup. Operator overloading is one of the cheaper forms of polymorphism in Python.</p>
+        </div>
+        <div class="perf-card">
+          <span class="badge badge-caution">Caution</span>
+          <h4>singledispatch Overhead</h4>
+          <p><code style="color:var(--accent);font-family:'Source Code Pro',monospace;">@singledispatch</code> performs a type-to-implementation lookup on every call. The lookup is cached after the first call per type, making repeated same-type calls nearly free.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="quiz">
+      <h2 class="sec-title">Knowledge Check</h2>
+      <div class="divider"></div>
+      <p>Test your understanding of Python polymorphism with these questions. Each question targets a distinct concept from this guide.</p>
+
+      <div class="quiz-card">
+        <div class="quiz-q">1. Which Python feature most directly implements "duck typing" for static type checkers?</div>
+        <div class="quiz-options">
+          <button class="quiz-opt" onclick="checkQuiz(this,'wrong')">A. abc.ABC with @abstractmethod</button>
+          <button class="quiz-opt" onclick="checkQuiz(this,'correct')">B. typing.Protocol</button>
+          <button class="quiz-opt" onclick="checkQuiz(this,'wrong')">C. functools.singledispatch</button>
+          <button class="quiz-opt" onclick="checkQuiz(this,'wrong')">D. isinstance() checking</button>
+        </div>
+        <div class="quiz-result"></div>
+      </div>
+
+      <div class="quiz-card">
+        <div class="quiz-q">2. Which dunder method must be implemented alongside __eq__ to keep objects hashable?</div>
+        <div class="quiz-options">
+          <button class="quiz-opt" onclick="checkQuiz(this,'wrong')">A. __lt__</button>
+          <button class="quiz-opt" onclick="checkQuiz(this,'wrong')">B. __repr__</button>
+          <button class="quiz-opt" onclick="checkQuiz(this,'correct')">C. __hash__</button>
+          <button class="quiz-opt" onclick="checkQuiz(this,'wrong')">D. __str__</button>
+        </div>
+        <div class="quiz-result"></div>
+      </div>
+
+      <div class="quiz-card">
+        <div class="quiz-q">3. What principle states that subclasses must be substitutable for their parent without altering program correctness?</div>
+        <div class="quiz-options">
+          <button class="quiz-opt" onclick="checkQuiz(this,'wrong')">A. Open/Closed Principle</button>
+          <button class="quiz-opt" onclick="checkQuiz(this,'wrong')">B. Single Responsibility Principle</button>
+          <button class="quiz-opt" onclick="checkQuiz(this,'correct')">C. Liskov Substitution Principle</button>
+          <button class="quiz-opt" onclick="checkQuiz(this,'wrong')">D. Dependency Inversion Principle</button>
+        </div>
+        <div class="quiz-result"></div>
+      </div>
+
+      <div class="quiz-card">
+        <div class="quiz-q">4. What does @functools.singledispatch enable?</div>
+        <div class="quiz-options">
+          <button class="quiz-opt" onclick="checkQuiz(this,'wrong')">A. Multiple return types from one function</button>
+          <button class="quiz-opt" onclick="checkQuiz(this,'correct')">B. Type-based dispatch for free functions (generic functions)</button>
+          <button class="quiz-opt" onclick="checkQuiz(this,'wrong')">C. Automatic abstract method enforcement</button>
+          <button class="quiz-opt" onclick="checkQuiz(this,'wrong')">D. Structural subtyping verification</button>
+        </div>
+        <div class="quiz-result"></div>
+      </div>
+
+      <div class="quiz-card">
+        <div class="quiz-q">5. Which design pattern uses polymorphism to define an algorithm's skeleton in a base class with steps deferred to subclasses?</div>
+        <div class="quiz-options">
+          <button class="quiz-opt" onclick="checkQuiz(this,'wrong')">A. Strategy Pattern</button>
+          <button class="quiz-opt" onclick="checkQuiz(this,'wrong')">B. Observer Pattern</button>
+          <button class="quiz-opt" onclick="checkQuiz(this,'correct')">C. Template Method Pattern</button>
+          <button class="quiz-opt" onclick="checkQuiz(this,'wrong')">D. Factory Method Pattern</button>
+        </div>
+        <div class="quiz-result"></div>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <h2 class="sec-title">Frequently Asked Questions</h2>
+      <div class="divider"></div>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            <span>What is the difference between polymorphism and inheritance?</span>
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-a">
+            <p>Inheritance is a mechanism for code reuse and class hierarchy construction — it defines what a class IS. Polymorphism is a behavioral property — it defines how objects of different types can be used interchangeably through a shared interface. Inheritance often enables subtype polymorphism, but polymorphism does not require inheritance: duck typing and operator overloading are fully polymorphic without any inheritance. Inheritance answers "what is this object?"; polymorphism answers "what can this object do?"</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            <span>Should I use ABC or typing.Protocol for interfaces?</span>
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-a">
+            <p>Use <strong>ABC</strong> when you want runtime enforcement — instantiating an incomplete subclass should raise a <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">TypeError</code> immediately, or when you want to provide default method implementations in the base class. Use <strong>typing.Protocol</strong> when you want structural compatibility without requiring explicit inheritance — particularly when integrating with third-party types you cannot modify. In modern Python (3.8+), <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">Protocol</code> is often the better default choice for interfaces because it is more flexible and does not force implementation details on users of your library.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            <span>Does Python support method overloading?</span>
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-a">
+            <p>Python does not support traditional method overloading (same name, multiple signatures) because defining a method with the same name twice simply replaces the first definition. Python achieves similar results through default argument values, <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">*args</code>/<code style="color:var(--accent);font-family:'Source Code Pro',monospace;">**kwargs</code> for variable-arity methods, and <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">@functools.singledispatch</code> for true type-based dispatch. For most practical cases, a single method with carefully designed default arguments is more Pythonic than overloaded methods would be.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            <span>When should I use polymorphism vs conditionals?</span>
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-a">
+            <p>Use conditionals when the number of cases is small, fixed, and stable — a two-branch <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">if/else</code> is always cleaner than two classes. Use polymorphism when: (1) the number of cases is expected to grow over time, (2) the cases need to be added by users of your code (plugin architecture), (3) the dispatched logic is substantial enough to warrant its own class, or (4) the same dispatch appears in multiple places in the codebase. A useful rule of thumb: if you have an <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">if/elif</code> chain that checks <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">type(x)</code> or <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">isinstance(x, ...)</code>, that is almost always a signal that polymorphism should replace it.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            <span>How does polymorphism relate to SOLID principles?</span>
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-a">
+            <p>Polymorphism is the mechanism that makes multiple SOLID principles practical. The <strong>Open/Closed Principle</strong> is achievable because polymorphic interfaces let you add new subclasses without modifying existing code. The <strong>Liskov Substitution Principle</strong> is a direct constraint on polymorphic behavior. The <strong>Dependency Inversion Principle</strong> says high-level modules should depend on abstractions — those abstractions are polymorphic interfaces. The <strong>Interface Segregation Principle</strong> guides how to design those polymorphic interfaces. In short: without polymorphism, SOLID principles would be theoretical — polymorphism is what makes them implementable.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            <span>What is the @typing.override decorator introduced in Python 3.12?</span>
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-a">
+            <p>The <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">@typing.override</code> decorator (PEP 698) signals to static type checkers that a method is intended to override a parent class method. If the parent class method does not exist or is renamed, the type checker raises an error — catching the common mistake of misspelling an override and accidentally creating a new method instead. It has zero runtime cost and is purely a static analysis hint, but it makes polymorphic hierarchies significantly safer and more self-documenting in large codebases.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="interview-qa">
+      <h2 class="sec-title">🎯 Interview Q&A — Python Polymorphism</h2>
+      <div class="divider"></div>
+      <p>These are the polymorphism questions most frequently asked in Python technical interviews at FAANG, startups, and everything in between. Master these and you'll handle any OOP deep-dive with confidence.</p>
+      <div class="interview-grid">
+
+        <div class="interview-card">
+          <div class="interview-q"><span class="qn">Q1</span> Explain the difference between method overriding and method overloading in Python.</div>
+          <div class="interview-a">
+            <div class="interview-tag">⭐ Very Common</div>
+            <strong>Method overriding</strong> occurs when a subclass provides its own implementation of a method already defined in the parent class. The subclass version is called at runtime via dynamic dispatch. Python fully supports this.<br><br>
+            <strong>Method overloading</strong> (same name, different parameter signatures) is <em>not natively supported</em> in Python — defining two methods with the same name simply replaces the first. Python achieves similar results via default arguments, <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">*args</code>/<code style="color:var(--accent);font-family:'Source Code Pro',monospace;">**kwargs</code>, or <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">@functools.singledispatch</code> for true type-based dispatch. This distinction is a classic interview trap for candidates coming from Java or C++.
+          </div>
+        </div>
+
+        <div class="interview-card">
+          <div class="interview-q"><span class="qn">Q2</span> What is duck typing and how does Python implement it?</div>
+          <div class="interview-a">
+            <div class="interview-tag">⭐ Very Common</div>
+            Duck typing is Python's approach to structural polymorphism: <em>"If it walks like a duck and quacks like a duck, it IS a duck."</em> Python determines type compatibility at <strong>runtime</strong> by checking whether an object has the required methods or attributes — not whether it belongs to a particular class hierarchy.<br><br>
+            Practically: a function that calls <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">obj.read()</code> works with a file, <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">io.StringIO</code>, a network socket, or any custom class that implements <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">read()</code> — with no shared base class required. Use <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">hasattr()</code> for safe duck-type checks and <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">typing.Protocol</code> to verify duck typing statically.
+          </div>
+        </div>
+
+        <div class="interview-card">
+          <div class="interview-q"><span class="qn">Q3</span> What is the Liskov Substitution Principle and why does it matter?</div>
+          <div class="interview-a">
+            <div class="interview-tag">⭐ Senior Level</div>
+            LSP states: <em>"If S is a subtype of T, then objects of type T may be replaced with objects of type S without altering correctness."</em> In practice: a subclass should be usable wherever its parent class is expected — without surprises.<br><br>
+            LSP violations are subtle. A <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">Square</code> inheriting from <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">Rectangle</code> is the classic example: setting width and height independently breaks the invariants a <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">Rectangle</code> guarantees. Violations create polymorphic code that crashes or behaves incorrectly when a subclass is substituted — defeating the entire purpose of inheritance-based polymorphism.
+          </div>
+        </div>
+
+        <div class="interview-card">
+          <div class="interview-q"><span class="qn">Q4</span> When would you choose an ABC over a Protocol (typing.Protocol)?</div>
+          <div class="interview-a">
+            <div class="interview-tag">⭐ Modern Python</div>
+            <strong>Use ABC</strong> when: (1) you control all implementations and want enforced contracts at <em>runtime</em>, (2) you want to share common base implementation via concrete methods in the base class, (3) you want <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">isinstance()</code> checks to work correctly.<br><br>
+            <strong>Use Protocol</strong> when: (1) you work with third-party classes you can't modify, (2) you want <em>static</em> duck typing — type checkers verify compatibility without explicit inheritance, (3) you want maximum flexibility. Protocols are checked by mypy/pyright without any runtime overhead. The modern Python recommendation is: prefer Protocols for type checking, ABCs for enforced runtime contracts with shared implementation.
+          </div>
+        </div>
+
+        <div class="interview-card">
+          <div class="interview-q"><span class="qn">Q5</span> How does Python's MRO (Method Resolution Order) affect polymorphism in multiple inheritance?</div>
+          <div class="interview-a">
+            <div class="interview-tag">⭐ Advanced</div>
+            Python uses the <strong>C3 linearization algorithm</strong> to determine the MRO — the order in which base classes are searched when a method is called. You can inspect it with <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">ClassName.__mro__</code> or <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">ClassName.mro()</code>.<br><br>
+            In multiple inheritance, the MRO ensures each class in the hierarchy appears only once and respects left-to-right declaration order. This matters for polymorphism because <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">super()</code> follows the MRO — not just the direct parent. The diamond problem is cleanly solved: <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">super()</code> calls cooperate through the MRO chain, ensuring each class in the hierarchy is called exactly once.
+          </div>
+        </div>
+
+        <div class="interview-card">
+          <div class="interview-q"><span class="qn">Q6</span> How would you implement the Strategy design pattern using polymorphism?</div>
+          <div class="interview-a">
+            <div class="interview-tag">⭐ Design Patterns</div>
+            The Strategy pattern uses polymorphism to make an algorithm swappable at runtime. Define an abstract base class <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">SortStrategy</code> with an abstract <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">sort(data)</code> method. Concrete strategies — <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">QuickSort</code>, <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">MergeSort</code>, <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">BubbleSort</code> — each override <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">sort()</code>.<br><br>
+            A <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">DataProcessor</code> class holds a <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">strategy</code> attribute and calls <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">self.strategy.sort(data)</code>. Any strategy can be injected — the processor never changes. In Python, this is often further simplified by passing a plain callable (function) as the strategy, since functions are first-class objects — duck typing making the ABC optional.
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="section" id="version-compat">
+      <h2 class="sec-title">🐍 Polymorphism Across Python Versions</h2>
+      <div class="divider"></div>
+      <p>Python's polymorphism toolkit has evolved significantly across major versions. Here's what each version introduced that's relevant to polymorphic design — essential knowledge for maintaining legacy codebases or migrating to modern Python.</p>
+      <div class="version-timeline">
+        <div class="version-row">
+          <div class="version-badge">3.4+</div>
+          <div class="version-content">
+            <h4>abc.ABC Base Class & @abstractmethod</h4>
+            <p>Python 3.4 introduced <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">abc.ABC</code> as a cleaner alternative to <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">metaclass=ABCMeta</code>. Defining abstract classes became simpler and more readable, accelerating adoption of ABC-based polymorphism contracts.</p>
+          </div>
+        </div>
+        <div class="version-row">
+          <div class="version-badge">3.5+</div>
+          <div class="version-content">
+            <h4>Type Hints & typing Module</h4>
+            <p>PEP 484 introduced type hints, making polymorphic interfaces self-documenting. <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">def process(items: List[Animal])</code> communicates intent clearly. Type checkers like mypy can now verify that only compatible types are passed to polymorphic functions.</p>
+          </div>
+        </div>
+        <div class="version-row">
+          <div class="version-badge">3.8+</div>
+          <div class="version-content">
+            <h4>typing.Protocol — Structural Subtyping</h4>
+            <p>PEP 544 introduced <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">typing.Protocol</code>, enabling static duck typing. Objects can satisfy a Protocol without inheriting from it — type checkers verify structural compatibility. This is the modern, preferred way to express duck typing contracts.</p>
+          </div>
+        </div>
+        <div class="version-row">
+          <div class="version-badge">3.10+</div>
+          <div class="version-content">
+            <h4>Structural Pattern Matching (match/case)</h4>
+            <p>PEP 634 introduced <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">match/case</code>, providing a powerful alternative to <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">isinstance()</code>-based dispatch chains. While not a replacement for polymorphism, it complements it beautifully for data-driven dispatch scenarios.</p>
+          </div>
+        </div>
+        <div class="version-row">
+          <div class="version-badge">3.11+</div>
+          <div class="version-content">
+            <h4>Self Type in typing</h4>
+            <p><code style="color:var(--accent);font-family:'Source Code Pro',monospace;">typing.Self</code> allows methods to accurately type-hint that they return the current class type — crucial for correctly typing polymorphic builder patterns and fluent interfaces in class hierarchies.</p>
+          </div>
+        </div>
+        <div class="version-row">
+          <div class="version-badge">3.12+</div>
+          <div class="version-content">
+            <h4>@typing.override Decorator (PEP 698)</h4>
+            <p>The <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">@override</code> decorator signals explicit intent to override a parent method. Type checkers raise errors if the parent method doesn't exist or is renamed — catching the silent, devastating bug of accidentally creating a new method instead of overriding the intended one.</p>
+          </div>
+        </div>
+        <div class="version-row">
+          <div class="version-badge">3.13+</div>
+          <div class="version-content">
+            <h4>Improved Type Parameter Syntax (PEP 695)</h4>
+            <p>New <code style="color:var(--accent);font-family:'Source Code Pro',monospace;">type X = ...</code> syntax and cleaner generic type parameter declarations make parametric polymorphism (generic classes and functions) significantly more readable and less ceremonious to write.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="testing">
+      <h2 class="sec-title">🧪 Testing Polymorphic Code</h2>
+      <div class="divider"></div>
+      <p>Polymorphism and testability are deeply intertwined — polymorphic interfaces are the very mechanism that makes unit testing possible. Here's how to test polymorphic Python code with precision.</p>
+      <div class="test-grid">
+        <div class="test-card">
+          <h4>Mock Objects via unittest.mock</h4>
+          <p>Polymorphic interfaces let you substitute <code>MagicMock()</code> objects anywhere a real object is expected. Since duck typing only requires the right methods, mocks work seamlessly — set return values with <code>mock.method.return_value = x</code> and verify calls with <code>mock.method.assert_called_once_with(arg)</code>.</p>
+        </div>
+        <div class="test-card">
+          <h4>Test All Subclasses via Parameterization</h4>
+          <p>Use <code>@pytest.mark.parametrize</code> to run the same tests against every concrete implementation of an ABC. If all subclasses must satisfy the same contract, one parameterized test suite verifies all of them — the Liskov Substitution Principle in test form.</p>
+        </div>
+        <div class="test-card">
+          <h4>Protocol Compliance Testing</h4>
+          <p>For duck typing, test that an object has the required methods using <code>hasattr(obj, 'method')</code> or create a <code>typing.Protocol</code> and use <code>isinstance(obj, MyProtocol)</code> with <code>runtime_checkable</code> to verify structural compatibility at test time.</p>
+        </div>
+        <div class="test-card">
+          <h4>Fakes Over Mocks for Complex Logic</h4>
+          <p>When a dependency has complex stateful behavior, create a lightweight <strong>Fake</strong> — a minimal real implementation for testing. A <code>FakePaymentProcessor</code> that implements the ABC but just records calls is faster, clearer, and more maintainable than a deeply-configured mock.</p>
+        </div>
+        <div class="test-card">
+          <h4>Abstract Method Enforcement Tests</h4>
+          <p>Verify that your ABCs properly enforce their contracts: test that instantiating the abstract base class raises <code>TypeError</code>, and that any concrete subclass missing an abstract method also raises <code>TypeError</code> on instantiation. These tests protect your interface contracts.</p>
+        </div>
+        <div class="test-card">
+          <h4>mypy for Static Polymorphism Checks</h4>
+          <p>Add <code>mypy --strict</code> to your CI pipeline. Combined with <code>typing.Protocol</code> and <code>@override</code>, mypy catches LSP violations, wrong type substitutions, and missing method implementations before they ever reach runtime — the ideal complement to dynamic Python testing.</p>
+        </div>
+      </div>
+      <div class="code-wrap">
+        <div class="code-header">
+          <span>💻 python · test_polymorphism.py</span>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+        <pre><span class="kw">import</span> pytest
+<span class="kw">from</span> unittest.mock <span class="kw">import</span> MagicMock
+<span class="kw">from</span> abc <span class="kw">import</span> ABC, abstractmethod
+
+<span class="kw">class</span> <span class="cl">Notifier</span>(ABC):
+    <span class="kw">@abstractmethod</span>
+    <span class="kw">def</span> <span class="fn">send</span>(<span class="nb">self</span>, message: str) <span class="op">-></span> bool: ...
+
+<span class="kw">class</span> <span class="cl">EmailNotifier</span>(<span class="cl">Notifier</span>):
+    <span class="kw">def</span> <span class="fn">send</span>(<span class="nb">self</span>, message): <span class="kw">return</span> <span class="st">f"EMAIL: {message}"</span>
+
+<span class="kw">class</span> <span class="cl">SMSNotifier</span>(<span class="cl">Notifier</span>):
+    <span class="kw">def</span> <span class="fn">send</span>(<span class="nb">self</span>, message): <span class="kw">return</span> <span class="st">f"SMS: {message}"</span>
+
+<span class="cm"># ── Parameterized: same test runs for every implementation ──</span>
+<span class="kw">@pytest.mark.parametrize</span>(<span class="st">"notifier_cls"</span>, [<span class="cl">EmailNotifier</span>, <span class="cl">SMSNotifier</span>])
+<span class="kw">def</span> <span class="fn">test_notifier_contract</span>(notifier_cls):
+    n = notifier_cls()
+    result = n.send(<span class="st">"Hello"</span>)
+    <span class="kw">assert</span> <span class="fn">isinstance</span>(result, str)
+    <span class="kw">assert</span> <span class="st">"Hello"</span> <span class="kw">in</span> result
+
+<span class="cm"># ── ABC enforcement test ────────────────────────────────────</span>
+<span class="kw">def</span> <span class="fn">test_abc_cannot_instantiate</span>():
+    <span class="kw">with</span> pytest.raises(<span class="cl">TypeError</span>):
+        <span class="cl">Notifier</span>()
+
+<span class="cm"># ── Mock substitution test ──────────────────────────────────</span>
+<span class="kw">def</span> <span class="fn">test_service_uses_notifier_polymorphically</span>():
+    mock_notifier = MagicMock(spec=<span class="cl">Notifier</span>)
+    mock_notifier.send.return_value = <span class="kw">True</span>
+    <span class="cm"># Inject mock — works because it satisfies the interface</span>
+    mock_notifier.send(<span class="st">"Test alert"</span>)
+    mock_notifier.send.assert_called_once_with(<span class="st">"Test alert"</span>)</pre>
+      </div>
+    </section>
+
+    <div class="subscribe-section" id="subscribe">
+      <div class="sub-badge"><div class="pulse"></div> New Articles Weekly</div>
+      <h2>Level Up Your Python — Every Week</h2>
+      <p class="sub-desc">Join developers getting in-depth Python OOP guides, design pattern breakdowns, real-world code reviews, and interview prep — delivered weekly to your inbox. No spam, ever.</p>
+      <div class="sub-perks">
+        <span class="sub-perk"><span class="sub-perk-icon">📘</span> Weekly deep-dives</span>
+        <span class="sub-perk"><span class="sub-perk-icon">🧩</span> Design pattern walkthroughs</span>
+        <span class="sub-perk"><span class="sub-perk-icon">🎯</span> Interview prep tips</span>
+        <span class="sub-perk"><span class="sub-perk-icon">💻</span> Real-world code examples</span>
+        <span class="sub-perk"><span class="sub-perk-icon">🔓</span> Free, always</span>
+      </div>
+      <div class="sub-form">
+        <input class="sub-input" type="text" id="subName" placeholder="Your first name" maxlength="60" autocomplete="given-name">
+        <input class="sub-input" type="email" id="subEmail" placeholder="Your email address" maxlength="120" autocomplete="email">
+        <button class="sub-btn" id="subBtn" onclick="handleSubscribe()">
+          <div class="sub-spinner"></div>
+          <span class="sub-btn-text">📬 Subscribe Free</span>
+        </button>
+      </div>
+      <div class="sub-status" id="subStatus"></div>
+      <div class="sub-ai-welcome" id="subAiWelcome">
+        <div class="sub-ai-label">✨ AI-Generated Welcome · Powered by Claude</div>
+        <div id="subAiWelcomeText"></div>
+      </div>
+      <p class="sub-privacy">🔒 No spam. Unsubscribe anytime. Your email stays private. <a href="https://code-sense.pansensoyglenn.workers.dev/privacy.html">Privacy Policy</a></p>
+    </div>
+
+
+      <h2>Polymorphism: The Shape-Shifter of Software</h2>
+      <p>Polymorphism is not a trick or a convenience — it is the architectural principle that allows software to grow without collapsing under its own weight. From duck typing's elegant pragmatism to the formal guarantees of abstract base classes, Python offers a richer and more flexible polymorphism toolkit than almost any other major language. Master it, and you will write code that is not just correct today, but extensible for the changes you haven't anticipated yet.</p>
+    </div>
+
+    <div class="ai-share-box">
+      <div style="position:absolute;top:1rem;right:1.2rem;font-size:.7rem;color:var(--text-dim);font-family:'Source Code Pro',monospace;">AI-generated</div>
+      <h2>✨ Generate a Social Media Caption</h2>
+      <p>Use AI to create a ready-to-share caption for this Python Polymorphism guide.</p>
+      <div class="ai-controls">
+        <select class="ai-sel" id="aiPlatform">
+          <option value="twitter">𝕏 / Twitter</option>
+          <option value="linkedin">LinkedIn</option>
+          <option value="facebook">Facebook</option>
+          <option value="whatsapp">WhatsApp</option>
+        </select>
+        <select class="ai-sel" id="aiTone">
+          <option value="professional">Professional</option>
+          <option value="enthusiastic">Enthusiastic</option>
+          <option value="casual">Casual</option>
+          <option value="educational">Educational</option>
+        </select>
+        <button class="ai-gen-btn" onclick="aiGenerate()">✨ Generate</button>
+      </div>
+      <div class="ai-loading" id="aiLoading"><div class="ai-spinner"></div> Generating caption...</div>
+      <div class="ai-output" id="aiOutput"></div>
+      <div class="ai-act-row" id="aiActions">
+        <button class="ai-act cp" onclick="aiCopy()">📋 Copy</button>
+        <a class="ai-act fb" id="aiFb" href="#" target="_blank" rel="noopener">Facebook</a>
+        <a class="ai-act tw" id="aiTw" href="#" target="_blank" rel="noopener">𝕏 Twitter</a>
+        <a class="ai-act li" id="aiLi" href="#" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="ai-act wa" id="aiWa" href="#" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+    </div>
+
+    <div class="share-box">
+      <p>Found this guide useful? Share it with your network.</p>
+      <div class="share-btns">
+        <button class="share-btn sb-fb" onclick="shareNow('facebook')">📘 Facebook</button>
+        <button class="share-btn sb-li" onclick="shareNow('linkedin')">💼 LinkedIn</button>
+        <button class="share-btn sb-tw" onclick="shareNow('twitter')">𝕏 Twitter</button>
+        <button class="share-btn sb-wa" onclick="shareNow('whatsapp')">💬 WhatsApp</button>
+        <button class="share-btn sb-yt" onclick="shareNow('youtube')">▶ YouTube</button>
+        <button class="share-btn sb-tg" onclick="shareNow('telegram')">✈ Telegram</button>
+      </div>
+    </div>
+
+    <section class="comments-section" id="comments">
+      <h2 class="sec-title">Comments</h2>
+      <div class="comment-form">
+        <input type="text" id="commName" placeholder="Your Name" maxlength="60">
+        <input type="email" id="commEmail" placeholder="Email (optional, not displayed)" maxlength="120">
+        <textarea id="commText" placeholder="Share your thoughts, questions, or insights about Python polymorphism..."></textarea>
+        <button class="submit-btn" onclick="submitComment()">💬 Post Comment</button>
+      </div>
+      <div class="comment-list" id="commentList"></div>
+    </section>
+
+    <div class="follow-section" id="follow">
+      <h2>Stay in the Loop</h2>
+      <p>Follow Valleys & Bytes for weekly Python, OOP, and software engineering deep-dives.</p>
+      <div class="follow-btns">
+        <a class="follow-btn fb-btn" href="https://www.facebook.com/GlennPansensoy" target="_blank" rel="noopener">📘 Facebook</a>
+        <a class="follow-btn li-btn" href="https://www.linkedin.com/in/glennpansensoy" target="_blank" rel="noopener">💼 LinkedIn</a>
+        <a class="follow-btn yt-btn" href="https://www.youtube.com/c/@GlennPansensoy" target="_blank" rel="noopener">▶ YouTube</a>
+        <a class="follow-btn tw-btn" href="https://twitter.com/GlennPansensoy" target="_blank" rel="noopener">𝕏 Twitter</a>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">Valleys <span>&</span> Bytes</div>
+        <p>Deep technical writing on Python, OOP, data structures, algorithms, and software engineering — crafted for developers who want to truly understand, not just copy and paste.</p>
+      </div>
+      <div class="footer-legal">
+        <h4>Quick Links</h4>
+        <div class="legal-links">
+          <a class="legal-link" href="https://code-sense.pansensoyglenn.workers.dev/inheritance.html">📘 OOP Inheritance Guide</a>
+          <a class="legal-link" href="https://code-sense.pansensoyglenn.workers.dev/about-author.html">👤 About the Author</a>
+          <a class="legal-link" href="https://code-sense.pansensoyglenn.workers.dev/privacy.html">🔒 Privacy Policy</a>
+          <a class="legal-link" href="https://code-sense.pansensoyglenn.workers.dev/terms.html">📋 Terms of Use</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Valleys & Bytes · Glenn Junsay Pansensoy · All rights reserved.Built with data precision and Created through intensive information authentication.</p>
+      <div class="footer-quick">
+        <a class="footer-chip" href="#intro">Introduction</a>
+        <a class="footer-chip" href="#samples">Examples</a>
+        <a class="footer-chip" href="#design-patterns">Patterns</a>
+        <a class="footer-chip" href="#cheatsheet">Cheatsheet</a>
+        <a class="footer-chip" href="#quiz">Quiz</a>
+        <a class="footer-chip" href="#faq">FAQ</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ── Hamburger nav ──────────────────────────────────────────────
+    const ham = document.getElementById('hamburger');
+    const nav = document.getElementById('navOverlay');
+    ham.addEventListener('click', () => {
+      ham.classList.toggle('open');
+      nav.classList.toggle('open');
+    });
+    nav.addEventListener('click', e => {
+      if (e.target === nav || e.target.classList.contains('nav-btn')) {
+        ham.classList.remove('open');
+        nav.classList.remove('open');
+      }
+    });
+
+    // ── Progress bar ──────────────────────────────────────────────
+    const bar = document.getElementById('progressBar');
+    const btn = document.getElementById('backTop');
+    window.addEventListener('scroll', () => {
+      const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+      bar.style.width = pct + '%';
+      btn.classList.toggle('show', window.scrollY > 400);
+    });
+
+    // ── Copy code ─────────────────────────────────────────────────
+    function copyCode(btn) {
+      const pre = btn.closest('.code-wrap').querySelector('pre');
+      navigator.clipboard.writeText(pre.innerText).then(() => {
+        btn.textContent = '✅ Copied!';
+        setTimeout(() => btn.textContent = 'Copy', 2000);
+      });
+    }
+
+    // ── FAQ accordion ─────────────────────────────────────────────
+    function toggleFaq(btn) {
+      const ans = btn.nextElementSibling;
+      btn.classList.toggle('open');
+      ans.classList.toggle('visible');
+    }
+
+    // ── Quiz ──────────────────────────────────────────────────────
+    function checkQuiz(btn, result) {
+      const card = btn.closest('.quiz-card');
+      if (card.dataset.answered) return;
+      card.dataset.answered = '1';
+      const opts = card.querySelectorAll('.quiz-opt');
+      opts.forEach(o => o.disabled = true);
+      btn.classList.add(result);
+      const res = card.querySelector('.quiz-result');
+      res.textContent = result === 'correct'
+        ? '✅ Correct! Well done.'
+        : '❌ Not quite — review the section above and try again next time.';
+      res.style.color = result === 'correct' ? '#50fa7b' : '#ff5555';
+    }
+
+    // ── Share ─────────────────────────────────────────────────────
+    function shareNow(platform) {
+      const url = encodeURIComponent('https://code-sense.pansensoyglenn.workers.dev/polymorphism.html');
+      const text = encodeURIComponent('Python OOP Polymorphism — Complete Guide 2026: method overriding, duck typing, operator overloading, ABCs, design patterns & more.');
+      const links = {
+        facebook: `https://www.facebook.com/sharer/sharer.php?u=${url}`,
+        linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${url}`,
+        twitter:  `https://twitter.com/intent/tweet?text=${text}&url=${url}`,
+        whatsapp: `https://api.whatsapp.com/send?text=${text}%20${url}`,
+        youtube:  `https://www.youtube.com/c/@GlennPansensoy`,
+        telegram: `https://t.me/share/url?url=${url}&text=${text}`
+      };
+      window.open(links[platform], '_blank', 'width=600,height=500,noopener');
+    }
+
+    // ── Comments ──────────────────────────────────────────────────
+    let comments = JSON.parse(localStorage.getItem('vb_poly_comments') || '[]');
+    const seedComments = [
+      { id: 1, name: "Ana Reyes", date: "2026-01-20", text: "This cleared up my confusion between duck typing and ABC interfaces completely. The payment gateway example is exactly the kind of real-world code I deal with daily.", likes: 14, loves: 6 },
+      { id: 2, name: "Marco Tan", date: "2026-02-08", text: "The operator overloading table is gold. Bookmarked this — every time I start a new domain model I'll come back to check the dunder methods I need.", likes: 9, loves: 4 }
+    ];
+    if (!comments.length) comments = seedComments;
+
+    function renderComments() {
+      const list = document.getElementById('commentList');
+      if (!list) return;
+      list.innerHTML = '';
+      comments.forEach(c => {
+        const div = document.createElement('div');
+        div.className = 'comment-card';
+        div.innerHTML = `
+          <div class="comment-meta">
+            <span class="comment-author">${escHtml(c.name)}</span>
+            <span class="comment-date">${c.date}</span>
+          </div>
+          <p class="comment-text">${escHtml(c.text)}</p>
+          <div class="reaction-row">
+            <button class="react-btn ${c._liked?'like-active':''}" onclick="react(${c.id},'like')">
+              👍 Like <span class="rc-like">${c.likes}</span>
+            </button>
+            <button class="react-btn ${c._loved?'active':''}" onclick="react(${c.id},'love')">
+              ❤️ Love <span class="rc-love">${c.loves}</span>
+            </button>
+          </div>`;
+        list.appendChild(div);
+      });
+    }
+
+    function submitComment() {
+      const name = document.getElementById('commName').value.trim();
+      const text = document.getElementById('commText').value.trim();
+      if (!name || !text) { alert('Please fill in your name and comment.'); return; }
+      const now = new Date();
+      comments.unshift({ id: Date.now(), name, text, date: now.toISOString().split('T')[0], likes: 0, loves: 0 });
+      localStorage.setItem('vb_poly_comments', JSON.stringify(comments));
+      document.getElementById('commName').value = '';
+      document.getElementById('commEmail').value = '';
+      document.getElementById('commText').value = '';
+      renderComments();
+    }
+
+    function react(id, type) {
+      const c = comments.find(x => x.id === id);
+      if (!c) return;
+      if (type === 'like') { c._liked = !c._liked; c.likes += c._liked ? 1 : -1; }
+      else { c._loved = !c._loved; c.loves += c._loved ? 1 : -1; }
+      localStorage.setItem('vb_poly_comments', JSON.stringify(comments));
+      renderComments();
+    }
+
+    function escHtml(s) {
+      return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    // ── Subscription with AI Welcome Message ─────────────────
+    const subscribedEmails = JSON.parse(localStorage.getItem('vb_subscribers') || '[]');
+
+    async function handleSubscribe() {
+      const nameEl  = document.getElementById('subName');
+      const emailEl = document.getElementById('subEmail');
+      const btn     = document.getElementById('subBtn');
+      const status  = document.getElementById('subStatus');
+      const aiBox   = document.getElementById('subAiWelcome');
+      const aiText  = document.getElementById('subAiWelcomeText');
+
+      const name  = nameEl.value.trim();
+      const email = emailEl.value.trim();
+
+      // Basic validation
+      if (!name) { showSubStatus('error', '👤 Please enter your first name.'); return; }
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showSubStatus('error', '📧 Please enter a valid email address.'); return;
+      }
+      if (subscribedEmails.includes(email)) {
+        showSubStatus('success', `✅ You're already subscribed, ${name}! Check your inbox for past issues.`);
+        return;
+      }
+
+      // Loading state
+      btn.classList.add('loading');
+      btn.disabled = true;
+      status.className = 'sub-status';
+      status.style.display = 'none';
+      aiBox.classList.remove('show');
+
+      try {
+        // ── AI-powered personalised welcome via Anthropic API ──
+        const response = await fetch('https://api.anthropic.com/v1/messages', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            model: 'claude-sonnet-4-20250514',
+            max_tokens: 1000,
+            messages: [{
+              role: 'user',
+              content: `You are the friendly, enthusiastic voice of "Valleys & Bytes" — a Python & software engineering blog by Glenn Pansensoy. 
+
+Write a short, warm, personalised welcome message for a new newsletter subscriber. Their name is "${name}". The message should:
+- Be 2-3 short sentences max
+- Feel personal and excited (not generic)
+- Reference Python OOP or polymorphism naturally (since that's the article they just read)
+- End with a fun Python-relevant sign-off
+- Be conversational and human, not corporate
+- NO emojis at start, but 1-2 tasteful ones are fine inline
+
+Return ONLY the welcome message text, nothing else.`
+            }]
+          })
+        });
+
+        const data = await response.json();
+        const welcomeMsg = data.content && data.content[0] && data.content[0].text
+          ? data.content[0].text.trim()
+          : `Welcome aboard, ${name}! Can't wait to explore Python OOP and beyond together. Your first issue arrives soon — keep that duck typing sharp! 🦆`;
+
+        // Save subscription locally
+        subscribedEmails.push(email);
+        localStorage.setItem('vb_subscribers', JSON.stringify(subscribedEmails));
+        localStorage.setItem(`vb_sub_${email}`, JSON.stringify({ name, email, date: new Date().toISOString() }));
+
+        // Show success
+        showSubStatus('success', `🎉 You're subscribed! Welcome to Valleys & Bytes, ${name}.`);
+        aiText.textContent = welcomeMsg;
+        aiBox.classList.add('show');
+
+        
+        nameEl.value = '';
+        emailEl.value = '';
+
+      } catch (err) {
+        
+        subscribedEmails.push(email);
+        localStorage.setItem('vb_subscribers', JSON.stringify(subscribedEmails));
+        showSubStatus('success', `🎉 You're subscribed! Welcome, ${name}! First issue coming your way soon.`);
+        console.error('AI welcome error:', err);
+      }
+
+      btn.classList.remove('loading');
+      btn.disabled = false;
+    }
+
+    function showSubStatus(type, msg) {
+      const el = document.getElementById('subStatus');
+      el.textContent = msg;
+      el.className = 'sub-status ' + type;
+    }
+
+    ['subName','subEmail'].forEach(id => {
+      document.getElementById(id).addEventListener('keydown', e => {
+        if (e.key === 'Enter') handleSubscribe();
+      });
+    });
+
+  </script>
+  <script>
+    const AI_URL = 'https://code-sense.pansensoyglenn.workers.dev/polymorphism.html';
+    const aiCaptions = {
+      twitter: {
+        professional: 'Python OOP polymorphism fully explained — method overriding, duck typing, operator overloading, ABCs, Protocols & design patterns. ' + AI_URL + ' #Python #OOP #Programming',
+        enthusiastic: '🔥 The BEST Python polymorphism guide!! Duck typing, ABCs, Protocols, design patterns AND interview questions — ALL in one! Must bookmark! 🐍 ' + AI_URL + ' #Python',
+        casual: 'found the most complete python polymorphism guide — covers everything from duck typing to SOLID principles ' + AI_URL + ' #Python',
+        educational: '📚 Python OOP Polymorphism: subtype, duck typing, operator overloading, ABCs, singledispatch, Protocols. Full guide: ' + AI_URL + ' #Python #OOP',
+      },
+      linkedin: {
+        professional: 'Sharing a comprehensive Python OOP polymorphism resource covering method overriding, duck typing, operator overloading, abstract base classes, typing.Protocol, design patterns, and SOLID principles. Recommended for all Python developers. ' + AI_URL + ' #Python #OOP #SoftwareEngineering',
+        enthusiastic: '🚀 The most complete Python polymorphism guide available! Duck typing, ABCs, Protocols, 6 design patterns, AND LSP all in one place. Essential resource! ' + AI_URL + ' #Python #OOP',
+        casual: 'Found a really comprehensive Python polymorphism guide — covers everything from basics to SOLID and real-world framework usage. Worth bookmarking! ' + AI_URL + ' #Python',
+        educational: 'Python Polymorphism complete guide: all 6 forms, duck typing, operator overloading, ABCs, singledispatch, typing.Protocol, design patterns, and performance tips. ' + AI_URL + ' #Python #Education',
+      },
+      facebook: {
+        professional: 'Sharing a comprehensive Python OOP polymorphism guide — covers duck typing, ABCs, operator overloading, SOLID principles, and design patterns. ' + AI_URL,
+        enthusiastic: '🐍🔥 The BEST Python polymorphism guide!! Duck typing, ABCs, Protocols, design patterns, LSP — ALL in one page! ' + AI_URL,
+        casual: 'just read this python polymorphism guide and everything finally clicked — duck typing, ABCs, and SOLID principles all explained 😄 ' + AI_URL,
+        educational: '📚 Python OOP Polymorphism — 6 forms, duck typing, operator overloading, ABCs, design patterns, and quiz. ' + AI_URL,
+      },
+      whatsapp: {
+        professional: 'Hi! Sharing a comprehensive Python OOP polymorphism guide covering duck typing, ABCs, SOLID principles, and design patterns. ' + AI_URL,
+        enthusiastic: 'OMG check this Python guide!! 🔥 Covers everything — duck typing, ABCs, Protocols, design patterns AND LSP! So comprehensive! ' + AI_URL,
+        casual: 'hey found the best python polymorphism guide — covers everything including duck typing and design patterns! ' + AI_URL,
+        educational: 'Python OOP Polymorphism: 6 forms, duck typing, ABCs, singledispatch, Protocols, design patterns. Full guide: ' + AI_URL,
+      }
+    };
+
+    function aiGenerate() {
+      const platform = document.getElementById('aiPlatform').value;
+      const tone = document.getElementById('aiTone').value;
+      const loading = document.getElementById('aiLoading');
+      const output = document.getElementById('aiOutput');
+      const actions = document.getElementById('aiActions');
+      loading.classList.add('show'); output.classList.remove('show'); actions.classList.remove('show');
+      setTimeout(() => {
+        const caption = (aiCaptions[platform] && aiCaptions[platform][tone]) || aiCaptions[platform]['professional'] || '';
+        output.textContent = caption; output.classList.add('show'); loading.classList.remove('show');
+        const enc = encodeURIComponent;
+        document.getElementById('aiFb').href = 'https://www.facebook.com/sharer/sharer.php?u=' + enc(AI_URL) + '&quote=' + enc(caption);
+        document.getElementById('aiTw').href = 'https://twitter.com/intent/tweet?text=' + enc(caption);
+        document.getElementById('aiLi').href = 'https://www.linkedin.com/sharing/share-offsite/?url=' + enc(AI_URL);
+        document.getElementById('aiWa').href = 'https://wa.me/?text=' + enc(caption + ' ' + AI_URL);
+        actions.classList.add('show');
+      }, 800);
+    }
+
+    function aiCopy() {
+      const text = document.getElementById('aiOutput').textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const b = event.target;
+        b.textContent = '✅ Copied!';
+        setTimeout(() => b.textContent = '📋 Copy', 2000);
+      });
+    }
+  </script>
+</body>
+</html>
