@@ -3,8 +3,17 @@
     "public": ".",
     "ignore": [
       "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
+      "**/.*"
+    ],
+    "rewrites": [
+      {
+        "source": "/code-sense/**",
+        "destination": "/code-sense/index.html"
+      },
+      {
+        "source": "/articles/**",
+        "destination": "/articles/index.html"
+      }
     ]
   }
 }
